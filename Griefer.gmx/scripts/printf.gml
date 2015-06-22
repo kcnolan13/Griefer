@@ -1,0 +1,15 @@
+///printf(string)
+var str = argument0
+str = str+" :: "+string(object_get_name(object_index))
+
+if (true)
+{
+    printf_external(str)
+    if net_manager.show_cout
+    {
+        if string_length(net_manager.cout_str) > net_manager.cout_maxchars
+            net_manager.cout_str = string_copy(net_manager.cout_str,string_length(str),string_length(net_manager.cout_str)-string_length(str))
+        
+        net_manager.cout_str += str+chr(13)+chr(10)
+    }
+}

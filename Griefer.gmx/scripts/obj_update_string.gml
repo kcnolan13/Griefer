@@ -1,0 +1,7 @@
+///obj_update_string(obj,variable,flag)
+obj = argument0
+variable = argument1
+flag = argument2
+
+with (net_manager) {if show_trans_rate transmissions++}
+objUpdateString(obj.object_index,objVarRead(obj,"uniqueId"),variable,objVarRead(obj,variable),flag)

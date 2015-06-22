@@ -1,0 +1,155 @@
+///regen_cedits(FL_CEDITS or FL_NORMAL)
+var fl = argument0
+
+printf("::: REGENERATING CEDITS")
+
+if instance_exists(modal_controls) and object_index != modal_controls
+{
+    with modal_controls
+        regen_cedits(fl)
+}
+else
+{
+    labels[0] = "blah"
+    cnames[0] = "blah"
+    
+    //make local copy of global control names (for no reason)
+    for (var i=0; i<getLength(global.cactions); i++)
+    {
+        labels[i] = get_caction_name(i)
+        cnames[i] = get_input_name(global.cvals[i])
+    }
+    
+    var bdelay = 1
+    var binc = 2
+    
+    w = 72*4
+    h = 72
+    hspacer = w+36
+    yoff = top-(h+12)+72
+    xoff = 40+x_adder//64*4
+    
+    //THE RESTORE DEFAULTS BUTTON
+    if fl = FL_NORMAL
+    {
+        blah = instance_create(left+width*4/5+hspacer+xoff,yoff,bn_restore_defaults)
+        blah.width = w
+        blah.height = h
+        blah.depth = depth-1
+        blah.birth_delay = bdelay
+        blah.hue = 20
+        blah.sat = 0
+        blah.val = 30
+        
+        blah.color = make_colour_hsv(blah.hue,blah.sat,blah.val)
+        blah.active_color = make_colour_hsv(blah.hue,blah.sat*3,blah.val*1.25)
+        
+        blah.text_halign = fa_left
+        blah.text_xoff = 72+5
+        blah.image = icon_settings
+        
+        bdelay += binc
+        
+        //USE KEYBOARD BUTTON
+        blah = instance_create(left+width*4/5-hspacer+xoff,yoff,bn_use_keyboard)
+        blah.width = w
+        blah.height = h
+        blah.depth = depth-1
+        blah.birth_delay = bdelay
+        blah.hue = 20
+        blah.sat = 0
+        blah.val = 30
+        blah.color = make_colour_hsv(blah.hue,blah.sat,blah.val)
+        blah.active_color = make_colour_hsv(blah.hue,blah.sat*3,blah.val*1.25)
+        blah.text_halign = fa_left
+        blah.text_xoff = 72+5
+        blah.image = icon_settings
+        
+        bdelay += binc
+        
+        //USE GAMEPAD BUTTON
+        blah = instance_create(left+width*4/5+xoff,yoff,bn_use_gamepad)
+        blah.width = w
+        blah.height = h
+        blah.depth = depth-1
+        blah.birth_delay = bdelay
+        blah.hue = 20
+        blah.sat = 0
+        blah.val = 30
+        blah.color = make_colour_hsv(blah.hue,blah.sat,blah.val)
+        blah.active_color = make_colour_hsv(blah.hue,blah.sat*3,blah.val*1.25)
+        blah.text_halign = fa_left
+        blah.text_xoff = 72+5
+        blah.image = icon_settings
+        
+        bdelay += binc
+    }    
+    
+    var lwidth = 64*3.5
+    var lheight = 64*0.5
+    var ewidth = lwidth*0.65
+    var eheight = lheight
+    
+    var xst = left+width/4+lwidth+x_adder
+    var yst_original = top+header_height+64*3+lheight+y_adder
+    var yst = yst_original
+    var hspacer = 64
+    var vspacer = 16
+    var len = getLength(labels)
+    
+    for (var i=0; i<len; i++)
+    {
+        //don't show swap sticks unless gamepad is plugged in
+        if not global.using_gamepad and i=len-1
+            break
+            
+        bdelay += binc
+        
+        //if fl = FL_NORMAL
+        {
+            //create the label
+            ID = instance_create(xst,yst-6,bn_clabel)
+            ID.width = lwidth
+            ID.height = lheight
+            ID.text = labels[i]
+            ID.birth_delay = bdelay
+            ID.depth = depth-1
+            ID.text_halign = fa_right
+            ID.text_valign = fa_center
+        }
+        
+        //create the edit field
+        ID2 = instance_create(xst+lwidth/2+hspacer,yst,bn_cedit)
+        ID2.width = ewidth
+        ID2.height = eheight
+        ID2.text = cnames[i]
+        ID2.birth_delay = bdelay
+        ID2.depth = depth-1
+        ID2.label_name = labels[i]
+        ID2.using_gamepad = global.using_gamepad
+        ID2.myLabel = ID
+        ID.myCedit = ID2
+        
+        if i = C_LOOK_SENS
+        {
+            ID2.is_sens = true
+            ID2.sens_val = global.cvals[C_LOOK_SENS]
+            ID2.sens_low = global.match_cursor_speed_low
+            ID2.sens_high = global.match_cursor_speed_high
+        } else if i = C_MOUSE_SENS
+        {
+            ID2.is_sens = true
+            ID2.sens_val = global.cvals[C_MOUSE_SENS]
+            ID2.sens_low = global.cursor_speed_low
+            ID2.sens_high = global.cursor_speed_high
+        }
+        
+        yst += (lheight+vspacer)
+        
+        if i = floor((len-1)/2)
+        {
+            xst += width/2-64
+            yst = yst_original
+        }
+    }
+}
