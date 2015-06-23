@@ -10,6 +10,8 @@ with net_manager
         printf("ERROR: cannot sync my_doll: does not exist")
         return false
     }
+
+    my_doll.alarm[2] = 1
     
     //grab the first sprite from each armory ds list
     var_strs[0] = "helmet"

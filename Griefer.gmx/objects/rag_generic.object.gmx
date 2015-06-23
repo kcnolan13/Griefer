@@ -156,10 +156,22 @@ else
 for (var i=0; i&lt;getLength(joint_xs); i++)
 {
     aoff = 0
-    if object_index = rag_torso and life &gt; room_speed/2
+    strength_mult = 1
+    blood_parts = 1
+    if object_index = rag_torso
     {
+        if life &gt; room_speed/2 and (is_bound[0] or i &gt; 0)
+        {
         //spray everywhere
         aoff = random_range(-20,20)
+        }
+        else if i=0 and not is_bound[0]
+        {
+            aoff = 0
+            strength_mult = 4
+            blood_parts = 2
+            bleed_time += 0.75
+        }
     }
     else
     {
@@ -174,15 +186,18 @@ for (var i=0; i&lt;getLength(joint_xs); i++)
 
     if not is_bound[i] and bleed_time
     {
-        bleed_time --
-        ID = instance_create(x+jxs[i],y+jys[i],blood_particle)
-        ID.dir = point_direction(x,y,joint_xs[i],joint_ys[i])+image_angle+aoff
-        ID.blend = blood_color
-        var spd = bleed_strength
+        repeat(blood_parts)
         {
-            ID.spd = spd
-            ID.hsp = trigx(spd,ID.dir)
-            ID.vsp = trigy(spd,ID.dir)
+            bleed_time --
+            ID = instance_create(x+jxs[i],y+jys[i],blood_particle)
+            ID.dir = point_direction(x,y,joint_xs[i],joint_ys[i])+image_angle+aoff
+            ID.blend = blood_color
+            var spd = bleed_strength*strength_mult
+            {
+                ID.spd = spd
+                ID.hsp = trigx(spd,ID.dir)
+                ID.vsp = trigy(spd,ID.dir)
+            }
         }
     }
 }

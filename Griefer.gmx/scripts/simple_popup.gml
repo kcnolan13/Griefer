@@ -9,12 +9,12 @@ var body = argument1
     ID.depth = -100
     ID.fade_delay = room_speed*2
     ID.birth_delay = 2
-    ID.color = c_black
+    ID.color = c_ltgray
     ID.halign = fa_center
     ID.valign = fa_center
     ID.text = body
-    ID.text_color = c_white
+    ID.text_color = c_black
     ID.header_text = header
     ID.header_text_color = c_lime
-
+    ID.header_color = c_gray
 }

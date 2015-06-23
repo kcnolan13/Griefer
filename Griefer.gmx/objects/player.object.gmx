@@ -71,7 +71,7 @@ debug_counter = 0
 alarm[1] = room_speed*5
 bparts_ready = false
 
-varWrite("blood_color",make_colour_hsv(random(255),255,200))
+varWrite("blood_color",global.blood_color)//make_colour_hsv(random(255),255,200))
 
 varWrite("match_kills_previous",0)
 varWrite("match_deaths_previous",0)
@@ -221,6 +221,12 @@ printf("player created")
           <argument>
             <kind>1</kind>
             <string>///become controllable if local
+if is_bot(id)
+{
+    //SYNC MOD VARS
+    sync_mod_vars()
+}
+
 if is_my_avatar(id)
 {
     if instance_exists(net_manager.my_doll)
@@ -240,6 +246,9 @@ if is_my_avatar(id)
     y = varRead("myY")
     obj_update_real(id,"myX",FL_NORMAL)
     obj_update_real(id,"myY",FL_NORMAL)
+    
+    //SYNC MOD VARS
+    sync_mod_vars()
     
     //tell everyone else your initial stats
     obj_update_real(id,"match_kills",FL_NORMAL)

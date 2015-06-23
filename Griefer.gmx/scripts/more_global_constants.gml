@@ -11,6 +11,9 @@ control_constants()
 //MAP AESTHETIC DEFINITIONS
 map_constants()
 
+//mod constants
+mod_constants()
+
 //graphical settings
 global.limb_limit = 10
 global.dead_limit = 3
@@ -21,6 +24,14 @@ global.fhead_wbar = 64
 global.fhead_hbar = 24
 global.fhead_font = fnt_title_small//fnt_hud_big
 global.player_popup_alpha = 0.75
+
+//POPUPS
+global.popup_width = 266
+global.popup_body_height = 64
+global.popup_title_height = 64
+global.popup_height = global.popup_title_height+global.popup_body_height
+global.popup_txt_pad = 5
+global.popup_alpha = 0.85
 
 //SCORE TABLE
 score_constants()

@@ -32,5 +32,5 @@ else
 draw_popup(xdraw, ydraw, "", rank_name, "", globrank, rank_color, 1)
 
 //now just need to draw his player tag in the right spot
-draw_namerank(objVarRead(av,"pName"),rank,left+6,top+6,1,c_white) //left and top is set in draw_popup
+draw_namerank(objVarRead(av,"pName"),rank,pleft+6,ptop+6,1,c_white) //left and top is set in draw_popup
 draw_set_alpha(1)

@@ -236,11 +236,11 @@ for (var i=0; i<num_slots; i++)
                     if not contemplating_scrap
                     {   
                         drawing_cache_popup = true
-                        draw_popup_with_drawer(x,y,name,global.name_rarity[rarity]+" "+lookup_limb_type_name(limb_type),"",global.cache_description,color,1)
+                        draw_popup_with_drawer(x,y,name,global.name_rarity[rarity]+" "+lookup_limb_type_name(limb_type),"",global.cache_description,color,1,icon)
                     } else {
                         drawing_cache_popup = true
                         draw_bpart_slot_disabled(x, y, 1)
-                        draw_popup_with_drawer(x, y, "Scrap Gear", "", "", "Right-Click To Delete Forever", c_red,1)
+                        draw_popup_with_drawer(x, y, "Scrap Gear", "", "", "Right-Click To Delete Forever", c_red,1,icon)
                     }
                 } else drawing_cache_popup = false
             } else 

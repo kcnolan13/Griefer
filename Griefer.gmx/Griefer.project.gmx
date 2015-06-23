@@ -114,6 +114,7 @@
         <sprite>sprites\spr_eva_helmet</sprite>
         <sprite>sprites\spr_basic_helmet</sprite>
         <sprite>sprites\spr_boxer_helmet</sprite>
+        <sprite>sprites\spr_rvisor2_helmet</sprite>
         <sprite>sprites\spr_scanner_helmet</sprite>
         <sprite>sprites\spr_breather_helmet</sprite>
         <sprite>sprites\spr_exgol_helmet</sprite>
@@ -129,7 +130,6 @@
         <sprite>sprites\spr_emile_helmet</sprite>
         <sprite>sprites\spr_hound_helmet</sprite>
         <sprite>sprites\spr_hound2_helmet</sprite>
-        <sprite>sprites\spr_rvisor2_helmet</sprite>
         <sprite>sprites\spr_pvisor2_helmet</sprite>
         <sprite>sprites\spr_roman_helmet</sprite>
         <sprite>sprites\spr_smallvisor_helmet</sprite>
@@ -688,8 +688,22 @@
   <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\populate_bpart_knowledge_base.gml</script>
+    <scripts name="mods">
+      <script>scripts\reset_mod_defaults.gml</script>
+      <script>scripts\sync_mod_vars.gml</script>
+      <script>scripts\bpart_mod_index.gml</script>
+      <script>scripts\bpart_mod_var.gml</script>
+      <script>scripts\bpart_mod_val.gml</script>
+      <script>scripts\create_popup_surfaces.gml</script>
+      <script>scripts\create_splat_surface.gml</script>
+      <script>scripts\free_splat_surface.gml</script>
+      <script>scripts\free_popup_surfaces.gml</script>
+      <script>scripts\draw_splats.gml</script>
+    </scripts>
     <scripts name="constants">
       <script>scripts\control_constants.gml</script>
+      <script>scripts\splat_constants.gml</script>
+      <script>scripts\mod_constants.gml</script>
       <script>scripts\physics_constants.gml</script>
       <script>scripts\create_master_bparts_map.gml</script>
       <script>scripts\more_global_constants.gml</script>
@@ -1337,6 +1351,7 @@
     <font>fonts\fnt_hud_big</font>
     <font>fonts\fnt_splashscreen</font>
     <font>fonts\fnt_promoted</font>
+    <font>fonts\fnt_mod</font>
     <font>fonts\fnt_play</font>
     <font>fonts\fnt_cout</font>
   </fonts>
@@ -1676,7 +1691,8 @@
       <room>rooms\map_placeholder2</room>
     </rooms>
   </rooms>
-  <constants number="95">
+  <constants number="94">
+    <constant name="GARBAGE">-69.69</constant>
     <constant name="FORCE_SPLOSION">30</constant>
     <constant name="RAG_FOOTR">12</constant>
     <constant name="RAG_FOOTL">11</constant>
@@ -1727,8 +1743,6 @@
     <constant name="SPBUG">0</constant>
     <constant name="PBUG">1</constant>
     <constant name="NO_HANDLE">-69</constant>
-    <constant name="GM_build_date">42177.1702678241</constant>
-    <constant name="GM_version">'1.0.0.52'</constant>
     <constant name="GEAR_CLONE">0</constant>
     <constant name="GEAR_STEAL">1</constant>
     <constant name="VIEW_SCALE">1.05</constant>

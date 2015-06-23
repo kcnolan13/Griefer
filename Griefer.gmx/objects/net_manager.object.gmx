@@ -27,6 +27,8 @@
             <kind>1</kind>
             <string>///initialization
 
+seed = 30
+
 xp_before = 0
 rank_before = 0
 
@@ -2683,14 +2685,14 @@ if (room = rm_menu or room = rm_lobby) and string(menu_mode) = "armory" and inst
                     {
                         popup_alpha = lerp(popup_alpha,1,popup_lerp)
                         if other.id.armory_disabled[i] = false
-                            draw_popup_with_drawer(x,y,name,string(global.name_rarity[rarity])+" "+lookup_limb_type_name(limb_type),source,compute_body_text_override(id),color,1)
+                            draw_popup_with_drawer(x,y,name,string(global.name_rarity[rarity])+" "+lookup_limb_type_name(limb_type),source,compute_body_text_override(id),color,1,icon)
                         else with other.id
                         {
                             if ds_list_size(handle) &gt; 1
                             {
                                 //printf("ds list size is: "+ds_list_size(handle))
                                 with first_bpart
-                                    draw_popup_with_drawer(x,y,"Right-Click to Enable","","","",c_dkgray,1)
+                                    draw_popup_with_drawer(x,y,"Right-Click to Enable","","","",c_dkgray,1,icon)
                             }
                         }
                     }
@@ -3358,6 +3360,46 @@ test_complete_counter = 0
             <kind>1</kind>
             <string>///toggle show_cout
 show_cout ^= 1
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="46">
+      <action>
+        <libid>1</libid>
+        <id>425</id>
+        <kind>4</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///randomize splat
+seed++
+simple_popup(string(seed),string(seed))
+splat_constants(seed)
 </string>
           </argument>
         </arguments>

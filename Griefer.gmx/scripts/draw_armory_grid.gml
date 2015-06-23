@@ -109,10 +109,10 @@ for (var i=0; i<3; i++)
                         popup_alpha = lerp(popup_alpha,1,popup_lerp)
                         if not contemplating_scrap
                         {   
-                            draw_popup_with_drawer(x,y,name,global.name_rarity[rarity]+" "+lookup_limb_type_name(limb_type),source,compute_body_text_override(id),color,1)//was popup alpha
+                            draw_popup_with_drawer(x,y,name,global.name_rarity[rarity]+" "+lookup_limb_type_name(limb_type),source,compute_body_text_override(id),color,1,icon)//was popup alpha
                         } else {
                             draw_bpart_slot_disabled(x, y, 1)
-                            draw_popup_with_drawer(x, y, "Scrap Gear", "", "", "Right-Click To Delete Forever", c_red,1) //was popup alpha
+                            draw_popup_with_drawer(x, y, "Scrap Gear", "", "", "Right-Click To Delete Forever", c_red,1,icon) //was popup alpha
                         }
                     }
                 } else hovering = 0
