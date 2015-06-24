@@ -1,27 +1,4 @@
 ///glr_lightsimple_create(sprite, subimg, x, y, color, alpha, intensity)
-var spr = argument0
-var ind = argument1
-var xi = argument2
-var yi = argument3
-var col = argument4
-var alpha = argument5
-var intens = argument6
-
-{
-    ID = instance_create(xi,yi,kLight)
-    ID.sprite = spr
-    ID.color = col
-    ID.alpha = alpha
-    ID.intensity = intens
-}
-
-return ID
-
-//
-//
-//OLD SHIT
-//
-//
 
 var l = ds_list_create();
 

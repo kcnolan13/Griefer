@@ -53,7 +53,7 @@ for (var i=0; i<num_bots; i++)
         
             var sameprob = same_armor_probability
             if j=0
-                sameprob = sameprob/4
+                sameprob = sameprob/6
         
             if random(1) < sameprob and j < 8
                 new_limb = armor_set_limb(armor_set,global.bpart_limb_types[j]) 

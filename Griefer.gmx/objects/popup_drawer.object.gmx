@@ -179,9 +179,10 @@ if draw_it
         draw_set_alpha(1)
         draw_sinbad = true
         draw_popup(0, 0, dat_title, subtitle, source, body_text_override, color, alph)
+        col = c_white
         if bpart_mod_var(icon_ref) = "blood_color"
         {
-            var col = bpart_mod_val(icon_ref)
+            col = bpart_mod_val(icon_ref)
             draw_set_color(c_white)
             //draw some blood to the popup surface.... also draw the fancy text
             draw_splats(global.popup_width-40,40,0.6,col,1)
@@ -195,6 +196,8 @@ if draw_it
         
         var txt = global.mod_descriptions[mod_ind]
         var txt_col = c_white
+            if col = global.blood_white
+                txt_col = c_black
         var txt_scale = 1*global.notification_scale
         var txt_rot = -45
         var toff = 32

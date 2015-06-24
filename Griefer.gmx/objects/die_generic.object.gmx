@@ -109,7 +109,7 @@ if not created_rag and varRead("can_die")
         rag_exclusions[RAG_HEAD] = true
     } else
     {
-        rag_force = 12
+        rag_force = 14
     }
     
     //override rag force sometimes

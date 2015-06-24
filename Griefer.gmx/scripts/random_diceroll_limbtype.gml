@@ -23,8 +23,8 @@ while (bpart_lookup(rando_spr,global.BPART_LIMB_TYPE) != limb_type and counta < 
     else
     {
         rando_spr = floor(random_range(ind1, ind2))
-        if random(1) < 1.1-varRead("rank")/array_length_1d(global.rank_names)
-            rando_spr = spr_none
+        /*if random(1) < 1.1-varRead("rank")/array_length_1d(global.rank_names)
+            rando_spr = spr_none*/
         
         break
     }

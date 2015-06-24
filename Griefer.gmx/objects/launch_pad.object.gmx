@@ -135,8 +135,8 @@ for (var i=0; i&lt;instance_number(rag_generic); i++)
         
         //printf("launch_angle REAL = "+launch_angle)
         
-        dude.forx = trigx(20,launch_angle)
-        dude.fory = trigy(20,launch_angle)
+        dude.forx = trigx(10,launch_angle)
+        dude.fory = trigy(10,launch_angle)
         
         with dude
         {

@@ -57,7 +57,7 @@ side = FL_LEFT
 
 
 //blood constants
-bleed_time = random_range(2*room_speed,4*room_speed)
+bleed_time = random_range(4*room_speed,8*room_speed)
 bleed_strength_delay = bleed_time*2/3
 bleed_strength_dec = 0.25
 bleed_strength = random_range(16,18)
@@ -150,27 +150,31 @@ if bleed_strength_delay
 else
 {
     bleed_strength -= bleed_strength_dec
+    if bleed_strength &lt; 1
+        bleed_strength = 1
 }
 
 //BLEED
 for (var i=0; i&lt;getLength(joint_xs); i++)
 {
-    aoff = 0
+    aoff = 3
     strength_mult = 1
     blood_parts = 1
+    dir_override = false
     if object_index = rag_torso
     {
         if life &gt; room_speed/2 and (is_bound[0] or i &gt; 0)
         {
-        //spray everywhere
-        aoff = random_range(-20,20)
+            //spray everywhere
+            aoff = random_range(-20,20)
         }
         else if i=0 and not is_bound[0]
         {
-            aoff = 0
-            strength_mult = 4
-            blood_parts = 2
-            bleed_time += 0.75
+            aoff = 2
+            strength_mult = 3.5
+            blood_parts = 3
+            bleed_time += 0.9
+            dir_override = 90
         }
     }
     else
@@ -190,7 +194,10 @@ for (var i=0; i&lt;getLength(joint_xs); i++)
         {
             bleed_time --
             ID = instance_create(x+jxs[i],y+jys[i],blood_particle)
-            ID.dir = point_direction(x,y,joint_xs[i],joint_ys[i])+image_angle+aoff
+            if not dir_override
+                ID.dir = point_direction(x,y,joint_xs[i],joint_ys[i])+image_angle+aoff
+            else
+                ID.dir = dir_override+image_angle+aoff
             ID.blend = blood_color
             var spd = bleed_strength*strength_mult
             {
