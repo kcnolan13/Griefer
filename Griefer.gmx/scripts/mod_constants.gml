@@ -1,6 +1,8 @@
 //make entries for default mod values
 global.blood_color = c_red
 
+global.moffset = 8
+
 var i = 0
 global.mod_limbvars[i] = "helmet0"
 global.mod_limbs[i] = spr_cursed_helmet
@@ -11,7 +13,8 @@ i++
 global.mod_limbvars[i] = "helmet0"
 global.mod_limbs[i] = spr_bee_helmet
 global.mod_vars[i] = "blood_color"
-global.mod_vals[i] = make_colour_hsv(  53   *255/360,    100    *255/100,  100   *255/100)
+global.blood_yellow = make_colour_hsv(  59   *255/360,    100    *255/100,  100   *255/100)
+global.mod_vals[i] = global.blood_yellow
 global.mod_descriptions[i] = "Bleeds   Yellow"
 i++
 global.mod_limbvars[i] = "helmet0"
@@ -59,26 +62,26 @@ i++
 global.mod_limbvars[i] = "helmet0"
 global.mod_limbs[i] = spr_pvisor2_helmet
 global.mod_vars[i] = "blood_color"
-global.mod_vals[i] = make_colour_hsv(  124   *255/360,    100    *255/100,  100   *255/100)
+global.mod_vals[i] = make_colour_hsv(  140   *255/360,    100    *255/100,  100   *255/100)
 global.mod_descriptions[i] = "Bleeds   Green"
 i++
 global.mod_limbvars[i] = "helmet0"
 global.mod_limbs[i] = spr_mantel_helmet
 global.mod_vars[i] = "blood_color"
-global.mod_vals[i] = make_colour_hsv(  48   *255/360,    100    *255/100,  100   *255/100)
+global.mod_vals[i] = global.blood_yellow
 global.mod_descriptions[i] = "Bleeds   Yellow"
-i++
+/*i++
 global.mod_limbvars[i] = "helmet0"
 global.mod_limbs[i] = spr_smallvisor2_helmet
-global.mod_vars[i] = "blood_color"
-global.mod_vals[i] = make_colour_hsv(  0   *255/360,    0    *255/100,  100   *255/100)
-global.mod_descriptions[i] = "Bleeds   White"
+global.mod_vars[i] = "blood_color"*/
+global.blood_white = make_colour_hsv(  0   *255/360,    0    *255/100,  100   *255/100)
+/*global.mod_vals[i] = global.blood_white
+global.mod_descriptions[i] = "Bleeds   White"*/
 i++
 global.mod_limbvars[i] = "helmet0"
 global.mod_limbs[i] = spr_grenadier_helmet
 global.mod_vars[i] = "blood_color"
-global.blood_white = make_colour_hsv(  220   *255/360,    100    *255/100,  100   *255/100)
-global.mod_vals[i] = global.blood_white
+global.mod_vals[i] = make_colour_hsv(  220   *255/360,    100    *255/100,  100   *255/100)
 global.mod_descriptions[i] = "Bleeds   Blue"
 
 //the stupid splat constants

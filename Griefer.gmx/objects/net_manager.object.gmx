@@ -2675,7 +2675,7 @@ if (room = rm_menu or room = rm_lobby) and string(menu_mode) = "armory" and inst
             
             draw_set_alpha(1)
             draw_bpart_slot_complete(first_bpart, first_bpart.x, first_bpart.y, 1)
-            
+            draw_mod_notification(first_bpart.x+64-global.moffset,first_bpart.y+global.moffset,first_bpart.icon)
             with first_bpart
             {
                 if instance_place(x,y,cursor) and not other.id.grid_drawn

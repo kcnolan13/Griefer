@@ -432,6 +432,7 @@ if room = rm_menu or room = rm_lobby
         {
             draw_notification(1,x-off+global.noffset*txt_scale,y-off+global.noffset*txt_scale,txt_scale,color_complete,1)
         }
+        draw_mod_notification(x+72-global.moffset,y+global.moffset,icon)
         
         if cursor.x &gt;= x and cursor.y &gt;= y and cursor.x &lt;= bbox_right and cursor.y &lt;= bbox_bottom
             and not challenge_manager.challenge_showing_popup
@@ -467,7 +468,7 @@ if room = rm_menu or room = rm_lobby
             draw_popup_challenge(cursor.x, cursor.y, name, desc, icon, color_complete, 1)
             
             //determine whether to use the surface or not
-            if completed
+            //if completed
             {
                 mod_ind = bpart_mod_index(icon)
                 with popup_drawer
@@ -500,8 +501,8 @@ if room = rm_menu or room = rm_lobby
                         
                         var t = global.mod_descriptions[mod_ind]
                         var tcol = c_white
-                            if col = global.blood_white 
-                            tcol = c_black
+                            if do_fancy_text_black(col)
+                                tcol = c_black
                         var tscale = 1*global.notification_scale
                         var trot = -45
                         var toff = 32

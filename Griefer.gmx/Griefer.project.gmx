@@ -689,6 +689,7 @@
   <scripts name="scripts">
     <script>scripts\populate_bpart_knowledge_base.gml</script>
     <scripts name="mods">
+      <script>scripts\mod_constants.gml</script>
       <script>scripts\reset_mod_defaults.gml</script>
       <script>scripts\sync_mod_vars.gml</script>
       <script>scripts\bpart_mod_index.gml</script>
@@ -699,11 +700,13 @@
       <script>scripts\free_splat_surface.gml</script>
       <script>scripts\free_popup_surfaces.gml</script>
       <script>scripts\draw_splats.gml</script>
+      <script>scripts\draw_splat_notification.gml</script>
+      <script>scripts\draw_mod_notification.gml</script>
+      <script>scripts\do_fancy_text_black.gml</script>
     </scripts>
     <scripts name="constants">
       <script>scripts\control_constants.gml</script>
       <script>scripts\splat_constants.gml</script>
-      <script>scripts\mod_constants.gml</script>
       <script>scripts\physics_constants.gml</script>
       <script>scripts\create_master_bparts_map.gml</script>
       <script>scripts\more_global_constants.gml</script>
@@ -936,27 +939,6 @@
         <script>scripts\instantiate_bpart.gml</script>
         <script>scripts\instantiate_all_bparts.gml</script>
       </scripts>
-      <scripts name="draw">
-        <script>scripts\compute_body_text_override.gml</script>
-        <script>scripts\draw_player_popup.gml</script>
-        <script>scripts\draw_armory_grid.gml</script>
-        <script>scripts\draw_prop_grid.gml</script>
-        <script>scripts\draw_armory_cache.gml</script>
-        <script>scripts\draw_bpart_icon.gml</script>
-        <script>scripts\draw_bpart_icon_ext.gml</script>
-        <script>scripts\draw_bpart_slot.gml</script>
-        <script>scripts\draw_bpart_slot_ext.gml</script>
-        <script>scripts\draw_bpart_slot_complete.gml</script>
-        <script>scripts\draw_bpart_slot_complete_ext.gml</script>
-        <script>scripts\draw_bpart_slot_empty.gml</script>
-        <script>scripts\draw_bpart_slot_empty_ext.gml</script>
-        <script>scripts\draw_bpart_slot_disabled.gml</script>
-        <script>scripts\draw_bpart_slot_disabled_ext.gml</script>
-        <script>scripts\draw_popup_with_drawer.gml</script>
-        <script>scripts\draw_popup.gml</script>
-        <script>scripts\draw_lotsteal_slot_thinking.gml</script>
-        <script>scripts\draw_win_popup_centered.gml</script>
-      </scripts>
       <scripts name="armory">
         <script>scripts\sync_my_doll.gml</script>
         <script>scripts\net_man_armory_list_index.gml</script>
@@ -1019,6 +1001,27 @@
         <script>scripts\draw_sub_table.gml</script>
         <script>scripts\draw_table_row.gml</script>
         <script>scripts\team_kill_total.gml</script>
+      </scripts>
+      <scripts name="meta draw">
+        <script>scripts\draw_armory_grid.gml</script>
+        <script>scripts\draw_prop_grid.gml</script>
+        <script>scripts\draw_armory_cache.gml</script>
+        <script>scripts\compute_body_text_override.gml</script>
+        <script>scripts\draw_player_popup.gml</script>
+        <script>scripts\draw_bpart_icon.gml</script>
+        <script>scripts\draw_bpart_icon_ext.gml</script>
+        <script>scripts\draw_bpart_slot.gml</script>
+        <script>scripts\draw_bpart_slot_ext.gml</script>
+        <script>scripts\draw_bpart_slot_complete.gml</script>
+        <script>scripts\draw_bpart_slot_complete_ext.gml</script>
+        <script>scripts\draw_bpart_slot_empty.gml</script>
+        <script>scripts\draw_bpart_slot_empty_ext.gml</script>
+        <script>scripts\draw_bpart_slot_disabled.gml</script>
+        <script>scripts\draw_bpart_slot_disabled_ext.gml</script>
+        <script>scripts\draw_popup_with_drawer.gml</script>
+        <script>scripts\draw_popup.gml</script>
+        <script>scripts\draw_lotsteal_slot_thinking.gml</script>
+        <script>scripts\draw_win_popup_centered.gml</script>
       </scripts>
       <script>scripts\draw_limb.gml</script>
       <script>scripts\convert_spr_none_to_drawable.gml</script>
@@ -1161,7 +1164,6 @@
       </scripts>
       <scripts name="Lights">
         <script>scripts\glr_light_create.gml</script>
-        <script>scripts\kyle_light_create.gml</script>
         <script>scripts\glr_light_destroy.gml</script>
         <script>scripts\glr_light_destroy_all.gml</script>
         <script>scripts\glr_light_refresh.gml</script>
@@ -1323,6 +1325,10 @@
       <script>scripts\average3.gml</script>
       <script>scripts\average4.gml</script>
       <script>scripts\menmode.gml</script>
+    </scripts>
+    <scripts name="kyle's lighting engine">
+      <script>scripts\kyle_light_create.gml</script>
+      <script>scripts\kyle_light_get_count.gml</script>
     </scripts>
   </scripts>
   <shaders name="shaders">

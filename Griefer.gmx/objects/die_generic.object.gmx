@@ -3,7 +3,7 @@
   <spriteName>spr_player_die</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-9</depth>
+  <depth>-88</depth>
   <persistent>0</persistent>
   <parentName>character_generic</parentName>
   <maskName>&lt;undefined&gt;</maskName>

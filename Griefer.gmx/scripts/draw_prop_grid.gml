@@ -89,6 +89,7 @@ for (var i=0; i<NUM_PROPS-1; i++)
             
         bpart.y = ys//+i*(sl+padding)
         draw_bpart_slot_complete(bpart, bpart.x, bpart.y, alpha)
+        draw_mod_notification(bpart.x+64-global.moffset,bpart.y+global.moffset,bpart.icon)
         //printf("drew prop @ "+bpart.x+", "+bpart.y)
         with bpart
         {

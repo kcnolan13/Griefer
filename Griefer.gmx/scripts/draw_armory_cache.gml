@@ -212,13 +212,8 @@ for (var i=0; i<num_slots; i++)
         if bpart.new
         {
             draw_notification(1,bpart.x+global.noffset,bpart.y+global.noffset,1,bpart.color,1)
-            /*draw_set_color(bpart.col_new)
-            draw_set_halign(fa_center)
-            draw_set_valign(fa_center)
-            draw_set_font(fnt_hud_big)
-            draw_text(bpart.x+net_manager.armory_sl/2, bpart.y, bpart.txt_new)
-            draw_set_color(c_white)*/
         }
+        draw_mod_notification(bpart.x+64-global.moffset,bpart.y+global.moffset,bpart.icon)
         
         with bpart
         {

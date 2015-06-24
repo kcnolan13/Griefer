@@ -1,4 +1,5 @@
 ///rag_apply_sever_impulse(rag_obj,force,force_direction)
+
 var rag = argument0
 var f = argument1
 var fdir = argument2

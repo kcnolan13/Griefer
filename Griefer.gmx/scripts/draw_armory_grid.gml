@@ -95,6 +95,7 @@ for (var i=0; i<3; i++)
             bpart.x = xs+j*(sl+padding)
             bpart.y = ys+i*(sl+padding)
             draw_bpart_slot_complete(bpart, bpart.x, bpart.y, alpha)
+            draw_mod_notification(bpart.x+64-global.moffset,bpart.y+global.moffset,bpart.icon)
             with bpart
             {
                 if instance_place(x,y,cursor) and not other.id.popup_drawn

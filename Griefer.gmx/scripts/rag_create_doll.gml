@@ -7,7 +7,7 @@ var frac_prob = argument0
 var force = argument1
 var fdir = argument2
 
-var sever_force = force/25
+var sever_force = force/30
 
 animation_die()
 varWrite("animation_index",0)
