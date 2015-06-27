@@ -1604,7 +1604,7 @@
         <object>objects\bn_armory</object>
         <object>objects\bn_challenges</object>
         <object>objects\bn_leaderboards</object>
-        <object>objects\bn_friends</object>
+        <object>objects\bn_stats</object>
         <object>objects\bn_settings</object>
         <object>objects\bn_logout</object>
         <object>objects\bn_randomize</object>
@@ -1697,7 +1697,7 @@
       <room>rooms\map_placeholder2</room>
     </rooms>
   </rooms>
-  <constants number="94">
+  <constants number="95">
     <constant name="GARBAGE">-69.69</constant>
     <constant name="FORCE_SPLOSION">30</constant>
     <constant name="RAG_FOOTR">12</constant>
@@ -1782,6 +1782,7 @@
     <constant name="FL_KEYBOARD">19</constant>
     <constant name="FL_GAMEPAD">20</constant>
     <constant name="FL_CEDITS">21</constant>
+    <constant name="FL_COMPETITIVE">22</constant>
     <constant name="DIST_INTERACT">128</constant>
     <constant name="PLAYER_SCALE">1.25</constant>
     <constant name="BOUNCE_MINSPEED">8</constant>

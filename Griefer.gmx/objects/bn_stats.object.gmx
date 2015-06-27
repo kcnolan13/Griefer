@@ -28,8 +28,8 @@
             <string>///inherit and specify new label
 event_inherited()
 
-label = "Friends"
-text = "Friends"
+label = "Stats"
+text = "Stats"
 
 active = false
 </string>
@@ -56,7 +56,7 @@ active = false
             <kind>1</kind>
             <string>event_inherited()
 
-if net_manager.menu_mode = "friends"
+if net_manager.menu_mode = "stats"
     active = true
 else
 {
@@ -90,6 +90,15 @@ if exit_child
 {
     exit_child = false
     exit
+}
+
+if active = false
+{
+    active = true
+    net_manager.menu_mode = "stats"
+}
+else {
+    active = false
 }
 </string>
           </argument>

@@ -7,7 +7,7 @@ reset_mod_defaults()
 for (var i=0; i<len; i++)
 {
     //apply mod var changes
-    if varRead(global.mod_limbvars[i]) = global.mod_limbs[i]
+    if real(varRead(global.mod_limbvars[i])) = global.mod_limbs[i]
     {
         //sync the mod var
         varWrite(global.mod_vars[i],global.mod_vals[i])

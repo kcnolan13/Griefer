@@ -145,7 +145,7 @@ if net_manager.menu_mode != "lottery_steal" and not instance_exists(bn_tab) and 
     tabs[0] = bn_play_tab
     tabs[1] = bn_armory
     tabs[2] = bn_challenges
-    tabs[3] = bn_friends
+    tabs[3] = bn_stats
     tabs[4] = bn_settings
     tabs[5] = bn_logout
     

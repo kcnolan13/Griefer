@@ -1261,6 +1261,22 @@ if room = rm_lobby
                 }
             break
             
+            case "stats":
+                if is_my_avatar(ID)
+                {
+                    objVarWrite(ID,"dude_y",room_height*1.75/3-64)
+                    objVarWrite(ID,"dude_x",room_width*1/9)
+                }
+                else
+                {
+                    objVarWrite(ID,"dude_y",lobby_dude_y)
+                    if ID.x &lt; room_width/2
+                        objVarWrite(ID,"dude_x",-64*5)
+                    else
+                        objVarWrite(ID,"dude_x",room_width+64*5)
+                }
+            break
+            
             case "lottery_steal":
                 if not is_my_avatar(ID)
                     objVarWrite(ID,"dude_y",0-64*10)
@@ -1331,6 +1347,11 @@ if room = rm_menu or room = rm_lobby
         break
         
         case "challenges":
+            dude_x = room_width*1/9
+            dude_y = room_height*1.75/3-64
+        break
+        
+        case "stats":
             dude_x = room_width*1/9
             dude_y = room_height*1.75/3-64
         break
