@@ -1,0 +1,14 @@
+﻿Build started 5/2/2015 5:53:43 PM.
+     1>Project "C:\Users\Kyle\Documents\GitHub\GriefPlusPlus\GriefPlusPlus\GriefPlusPlus.vcxproj" on node 2 (Build target(s)).
+     1>Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Kyle\Documents\GitHub\GriefPlusPlus\GriefPlusPlus\Debug\GriefPlusPlus.exe" /INCREMENTAL /NOLOGO /LIBPATH:C:\boost boost.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Kyle\Documents\GitHub\GriefPlusPlus\GriefPlusPlus\Debug\GriefPlusPlus.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Kyle\Documents\GitHub\GriefPlusPlus\GriefPlusPlus\Debug\GriefPlusPlus.lib" /MACHINE:X86 Debug\main.obj
+         Debug\sio_client_impl.obj
+         Debug\sio_packet.obj
+         Debug\sio_client.obj
+         Debug\sio_socket.obj
+         GriefPlusPlus.vcxproj -> C:\Users\Kyle\Documents\GitHub\GriefPlusPlus\GriefPlusPlus\Debug\GriefPlusPlus.exe
+     1>Done Building Project "C:\Users\Kyle\Documents\GitHub\GriefPlusPlus\GriefPlusPlus\GriefPlusPlus.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:02.46
