@@ -29,7 +29,7 @@
 event_inherited()
 
 
-bleed_time = 30
+bleed_time = 45
 blood_parts = 20
 bxoff = 5
 byoff = 5
@@ -177,7 +177,7 @@ if bleed_time
         }
     }
     bleed_time--
-    bleed_strength = average4(20,bleed_strength,bleed_strength,bleed_strength)
+    bleed_strength = average4(22,bleed_strength,bleed_strength,bleed_strength)
 }
 
 counter++

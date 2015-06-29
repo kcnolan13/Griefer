@@ -27,6 +27,7 @@
             <kind>1</kind>
             <string>txt = ""
 birth_delay = 0
+extra_delay = 0
 image = spr_none
 fnt = fnt_hud_big
 growth = 0.0025
@@ -203,6 +204,13 @@ if stick_2view and stuck_yet
           <argument>
             <kind>1</kind>
             <string>///grow/fade
+if extra_delay &gt; 0
+{
+    extra_delay --
+    visible = false
+    exit
+}  
+ 
 if birth_delay &gt; 0
 {
     birth_delay --
@@ -211,7 +219,7 @@ if birth_delay &gt; 0
         for (var i=0; i&lt;instance_number(action_word); i++)
         {
             aw = instance_find(action_word,i)
-            if aw.group_id != group_id and aw.visible and aw.alpha &gt; 0.55
+            if aw.group_id != group_id and aw.visible and aw.alpha &gt; 0.1 and (string_count("Kill",aw.txt) &gt; 0 or string_count("Assist",aw.txt) &gt; 0)
             {
                 //don't come in until you're ready
                 birth_delay = 2
