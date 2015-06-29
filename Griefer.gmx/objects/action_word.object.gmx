@@ -31,13 +31,17 @@ image = spr_none
 fnt = fnt_hud_big
 growth = 0.0025
 scale = 2
-fade_time = 45
+fade_time = 2.5*room_speed
 fade_delay = 0
 alpha = 1
 col = global.action_word_color
 vmov = -1
 draw_x = 0
-draw_y = -1/4*view_hview
+draw_y = -1/6*view_hview
+
+vsep = 25
+
+group_id = random_range(0,1000000)
 
 popped_in = false
 pop_sound = snd_none
@@ -59,7 +63,7 @@ init_as_promoted = false
 
 alarm[0] = 1
 
-halign = fa_center
+halign = fa_left
 valign = fa_bottom
 </string>
           </argument>
@@ -93,19 +97,20 @@ if init_as_promoted
     alpha = 0
     fade_time = 15
 }
-
+/*
 if is_string(txt) and not drawing_namerank and not drawing_slot and image=spr_none
 {
     for (var i=0; i&lt;instance_number(action_word); i++)
     {
         ID = instance_find(action_word,i)
-        draw_y -= 48*i
+        
+        if ID.group_id = group_id
+            draw_y -= 10*i
+            
         if ID.id = id
-        {   
             break
-        }
     }
-}
+}*/
 </string>
           </argument>
         </arguments>
@@ -201,6 +206,18 @@ if stick_2view and stuck_yet
 if birth_delay &gt; 0
 {
     birth_delay --
+    if not birth_delay
+    {
+        for (var i=0; i&lt;instance_number(action_word); i++)
+        {
+            aw = instance_find(action_word,i)
+            if aw.group_id != group_id and aw.visible and aw.alpha &gt; 0.55
+            {
+                //don't come in until you're ready
+                birth_delay = 2
+            }
+        }
+    }
     visible = false
     exit
 }

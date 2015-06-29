@@ -1,5 +1,5 @@
 //SCORE TABLE
-global.table_width = 72*7
+global.table_width = 72*8.5
 global.txt_fields_start = global.table_width*2/5
 global.row_height = 72*1/2-4
 global.row_vsep = 0

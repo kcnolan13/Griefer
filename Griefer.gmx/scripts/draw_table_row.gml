@@ -1,4 +1,4 @@
-///draw_table_row(x, y, color, text_color, life_flag, player_name, player_rank, kills, deaths, KDR, assists)
+///draw_table_row(x, y, color, text_color, life_flag, player_name, player_rank, points, kills, deaths, KDR, assists)
 
 //useing 1 for alive, 0 for dead, and -1 for no alive/dead image
 
@@ -9,10 +9,11 @@ var txt_col = argument3
 var life_flag = argument4
 var pname = argument5
 var prank = argument6
-var kills = argument7
-var deaths = argument8
-var kdr = argument9
-var assists = argument10
+var points = argument7
+var kills = argument8
+var deaths = argument9
+var kdr = argument10
+var assists = argument11
 
 var txt_alpha = 1//lerp(global.table_alpha,1,0.5)
 
@@ -41,10 +42,11 @@ if pname != "" and prank != -99
 //draw the text fields passed to this row
 if prank != -99
 {
-    txt_fields[0] = string(kills)
-    txt_fields[1] = string(deaths)
-    txt_fields[2] = string(kdr)
-    txt_fields[3] = string(assists)
+    txt_fields[0] = string(points)
+    txt_fields[1] = string(kills)
+    txt_fields[2] = string(deaths)
+    txt_fields[3] = string(kdr)
+    txt_fields[4] = string(assists)
     var dx = xdraw+global.txt_fields_start
     var x_incr = (global.table_width-global.txt_fields_start)/array_length_1d(txt_fields)
     for (var k=0; k<array_length_1d(txt_fields); k++)

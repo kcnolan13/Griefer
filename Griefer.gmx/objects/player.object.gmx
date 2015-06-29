@@ -76,6 +76,7 @@ varWrite("blood_color",global.blood_color)//make_colour_hsv(random(255),255,200)
 varWrite("match_kills_previous",0)
 varWrite("match_deaths_previous",0)
 varWrite("match_assists_previous",0)
+varWrite("match_points_previous",0)
 
 varWrite("bot",false)
 varWrite("alive",false)
@@ -166,9 +167,11 @@ varWrite("shoulder0","")
 varWrite("forearm0","")
 
 //initial stats (just declared here, which doesn't actually do anything anyway)
+varWrite("points",0)
 varWrite("kills",0)
 varWrite("deaths",0)
 varWrite("assists",0)
+varWrite("match_points",0)
 varWrite("match_kills",0)
 varWrite("match_deaths",0)
 varWrite("match_assists",0)
@@ -254,6 +257,7 @@ if is_my_avatar(id)
     obj_update_real(id,"match_kills",FL_NORMAL)
     obj_update_real(id,"match_deaths",FL_NORMAL)
     obj_update_real(id,"match_assists",FL_NORMAL)
+    obj_update_real(id,"match_points",FL_NORMAL)
     
     //sync with local avatar (who should already know this stuff
     if varRead("kills") &lt; 0
@@ -305,6 +309,7 @@ if not varRead("trigger_update_ignore")
 //update match_kills_previous @ 8 Hz
 if net_manager.room_counter % room_speed/8 = 0
 {
+    varWrite("match_points_previous",varRead("match_points"))
     varWrite("match_kills_previous",varRead("match_kills"))
     varWrite("match_deaths_previous",varRead("match_deaths"))
     varWrite("match_assists_previous",varRead("match_assists"))
@@ -814,7 +819,6 @@ if weapon_switch_delay
     weapon_switch_delay--
     
 
-
 //if alive_counter % room_speed = 0 and net_manager.local_player = id
 //    printf("hp = "+varRead("hp"))
     
@@ -912,8 +916,10 @@ if (varRead("get_assist") &gt; 0) and (net_manager.local_player = id or master_o
 {
     varSub("get_assist",1)
     varAdd("match_assists",1)
+    varAdd("match_points",POINTS_ASSIST)
     varAdd("assists",1)
     obj_update_real(id,"match_assits",FL_NORMAL)
+    obj_update_real(id,"match_points",FL_NORMAL)
     
     with challenge_manager
     {
@@ -930,12 +936,11 @@ if (varRead("get_assist") &gt; 0) and (net_manager.local_player = id or master_o
     
     if not is_bot(id)
     {
-        boom_boom_pow("+1 Assist",global.action_word_color)
+        boom_delay = compute_boom_delay()
+        boom = boom_boom_pow("+"+string(POINTS_ASSIST)+" Assist",global.action_word_color)
+        boom.birth_delay = boom_delay
         add_xp(XP_ASSIST,true,true,false)
-        if not net_manager.bot_match
-        {
-            stat_update_real("assists",varRead("assists"),FL_NORMAL)
-        }
+        stat_update_real("assists",varRead("assists"),stat_manager.stat_flag)
     }
 }
 
@@ -1737,7 +1742,7 @@ for (var i=0; i&lt;instance_number(bullet_generic); i++)
                         {
                             printf("bullet kill from_player was not a bot --&gt; you get a kill")
                             //increment local player's kills
-                            if not net_manager.bot_match
+                            //if not net_manager.bot_match
                                 objVarAdd(net_manager.local_player,"kills",1)
                             
                             objVarAdd(net_manager.local_player,"match_kills",1)
@@ -1746,8 +1751,7 @@ for (var i=0; i&lt;instance_number(bullet_generic); i++)
                             
                             //send local player's kills to server and datBullet.id clients
                             obj_update_real(net_manager.local_player,"match_kills",FL_NORMAL)
-                            if not net_manager.bot_match
-                                stat_update_real("kills",objVarRead(net_manager.local_player,"kills"),FL_NORMAL)
+                            stat_update_real("kills",objVarRead(net_manager.local_player,"kills"),stat_manager.stat_flag)
                         }
                         else
                         {

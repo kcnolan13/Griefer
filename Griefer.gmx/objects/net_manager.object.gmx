@@ -150,9 +150,9 @@ tied_bot_match = false
 audio_listener_position(0,0,0)
 
 //create sortable player grids. to be used like ---&gt;  kills, avatar_obj
-team_all = ds_grid_create(2,instance_number(avatar))
-team0 = ds_grid_create(2,floor(instance_number(avatar)/2))
-team1 = ds_grid_create(2,ceil(instance_number(avatar)/2))
+team_all = ds_grid_create(3,instance_number(avatar))
+team0 = ds_grid_create(3,floor(instance_number(avatar)/2))
+team1 = ds_grid_create(3,ceil(instance_number(avatar)/2))
 previous_room = room
 disable_scores = false
 
@@ -308,6 +308,7 @@ instance_create(x,y,hit_indicator)
 instance_create(x,y,fx)
 instance_create(x,y,popup_drawer)
 instance_create(x,y,challenge_manager)
+instance_create(x,y,stat_manager)
 
 netvars = ds_map_create()
 varWrite("pName","player")
@@ -515,8 +516,9 @@ if varRead("game_mode") = "tdm"
             printf("")
             printf("")
             //printf("added "+objVarRead(ID,"pName")+"to team at y="+added_t0)
-            ds_grid_set(team0,0,added_t0,0)
-            ds_grid_set(team0,1,added_t0,ID)
+            ds_grid_set(team0,0,added_t0,0) //match_kills
+            ds_grid_set(team0,1,added_t0,ID) //avatar ids
+            ds_grid_set(team0,2,added_t0,0) //match_points
             added_t0++
         }
         else if get_team(ID) = 1
@@ -526,6 +528,7 @@ if varRead("game_mode") = "tdm"
             //printf("added "+objVarRead(ID,"pName")+"to team 1 at y="+added_t1)
             ds_grid_set(team1,0,added_t1,0)
             ds_grid_set(team1,1,added_t1,ID)
+            ds_grid_set(team1,2,added_t1,0)
             added_t1++
         }
     }
@@ -539,6 +542,7 @@ else
         ID = instance_find(avatar,i)
         ds_grid_set(team_all,0,added,0)
         ds_grid_set(team_all,1,added,ID)
+        ds_grid_set(team_all,2,added,0)
         added++
     }
 }
@@ -1787,7 +1791,7 @@ sort_worthy = false
 for (var i=0; i&lt;instance_number(player); i++)
 {
     var ID = instance_find(player,i)
-    if objVarRead(ID, "match_kills_previous") != objVarRead(ID,"match_kills") or objVarRead(ID, "match_deaths_previous") != objVarRead(ID,"match_deaths") or objVarRead(ID, "match_assists_previous") != objVarRead(ID,"match_assists")
+    if objVarRead(ID, "match_points_previous") != objVarRead(ID,"match_points") or objVarRead(ID, "match_kills_previous") != objVarRead(ID,"match_kills") or objVarRead(ID, "match_deaths_previous") != objVarRead(ID,"match_deaths") or objVarRead(ID, "match_assists_previous") != objVarRead(ID,"match_assists")
     {
         if DEBUG
             printf("sortworthy!")
@@ -1798,7 +1802,6 @@ for (var i=0; i&lt;instance_number(player); i++)
 
 if in_match() and room_counter%(room_speed/2) = 0 and sort_worthy and not disable_scores
 {
-    printf("SORTING avatars by match_kills")
 
     //pull in the match kills for each avatar (which you need to sync from his player)
     for (var i=0; i&lt;instance_number(player); i++)
@@ -1819,14 +1822,13 @@ if in_match() and room_counter%(room_speed/2) = 0 and sort_worthy and not disabl
         }
         
         mkills = objVarRead(pID,"match_kills")
+        mpoints = objVarRead(pID,"match_points")
         mdeaths = objVarRead(pID,"match_deaths")
         masses = objVarRead(pID,"match_assists")
         avRank = objVarRead(pID,"rank")
         
         //printf("read player's stats")
-        
-        //printf(objVarRead(avID,"pName")+"'s avatar getting mkills = "+mkills+", mdeaths="+mdeaths+", masses="+masses)
-        
+        objVarWrite(avID,"match_points",mpoints)
         objVarWrite(avID,"match_kills",mkills)
         objVarWrite(avID,"match_deaths",mdeaths)
         objVarWrite(avID,"match_assists",masses)
@@ -1844,14 +1846,19 @@ if in_match() and room_counter%(room_speed/2) = 0 and sort_worthy and not disabl
         else dat_team_do = team_all
         
         //we now know what grid this player belongs on --&gt; find his avatar ID and update match kills
-        if ds_grid_value_disk_exists(dat_team_do,0,0,2*ds_grid_height(dat_team_do),avID)
+        if ds_grid_value_disk_exists(dat_team_do,2,0,2*ds_grid_height(dat_team_do),avID)
         {
-            //get the y value for this avatar in the grid
+            //SET POINTS IN SCORE TABLE GRID
+            av_gridy = ds_grid_value_disk_y(dat_team_do,2,0, 2*ds_grid_height(dat_team_do), avID)
+            if not ds_grid_value_x(dat_team_do,2,av_gridy,0,av_gridy,mpoints)
+            {
+                ds_grid_set(dat_team_do,2,av_gridy,mpoints)
+            }
+            //SET KILLS IN SCORE TABLE GRID
             av_gridy = ds_grid_value_disk_y(dat_team_do,0,0, 2*ds_grid_height(dat_team_do), avID)
             if not ds_grid_value_x(dat_team_do,0,av_gridy,0,av_gridy,mkills)
             {
                 ds_grid_set(dat_team_do,0,av_gridy,mkills)
-                //printf("added kills="+mkills+" at grid x=0, y="+av_gridy)
             }
         }
         else 
@@ -1864,17 +1871,17 @@ if in_match() and room_counter%(room_speed/2) = 0 and sort_worthy and not disabl
     //sort all non-empty player grids
     if ds_grid_height(team0) &gt; 0
     {
-        ds_grid_sort(team0, 0, false)
+        ds_grid_sort(team0, 2, false)
     }
     
     if ds_grid_height(team1) &gt; 0
     {
-        ds_grid_sort(team1, 0, false)
+        ds_grid_sort(team1, 2, false)
     }
     
     if ds_grid_height(team_all) &gt; 0
     {
-        ds_grid_sort(team_all, 0, false)
+        ds_grid_sort(team_all, 2, false)
     }
     
 }

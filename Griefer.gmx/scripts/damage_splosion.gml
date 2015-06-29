@@ -178,7 +178,7 @@ var kill_force = FL_NO_FORCE
                         
                         //increment local player's kills
                         obj_update_real(net_manager.local_player,"match_kills",FL_NORMAL)
-                        stat_update_real("kills",objVarRead(net_manager.local_player,"kills"),FL_NORMAL)   
+                        stat_update_real("kills",objVarRead(net_manager.local_player,"kills"),stat_manager.stat_flag)   
                         
                         //tell whatever player this is to die on his machine
                         if object_index = splosion_ink or object_index = splosion_flame
@@ -200,7 +200,7 @@ var kill_force = FL_NO_FORCE
                                 objVarSub(net_manager.local_player,"kills",1)
                                 objVarSub(net_manager.local_player,"match_kills",1)
                                 obj_update_real(net_manager.local_player,"match_kills",FL_NORMAL)
-                                stat_update_real("kills",objVarRead(net_manager.local_player,"kills"),FL_NORMAL) 
+                                stat_update_real("kills",objVarRead(net_manager.local_player,"kills"),stat_manager.stat_flag) 
                             }  
                         } else
                         {

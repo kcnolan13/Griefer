@@ -28,6 +28,14 @@
             <string>///properties
 event_inherited()
 
+
+bleed_time = 30
+blood_parts = 20
+bxoff = 5
+byoff = 5
+blood_color = c_purple
+bleed_strength = 90
+
 initialize_physics()
 
 audio(snd_ink,2)
@@ -151,6 +159,26 @@ event_inherited()
           <argument>
             <kind>1</kind>
             <string>///do physics and make particles
+
+if bleed_time
+{
+    repeat(blood_parts)
+    {
+        dx = random_range(-1*bxoff,bxoff)
+        dy = random_range(-1*byoff,byoff)
+        bld = instance_create(x+dx,y+dy,blood_particle)
+        bld.dir = random_range(0,360)
+        bld.blend = blood_color
+        var spd = bleed_strength
+        {
+            bld.spd = spd
+            bld.hsp = trigx(spd,bld.dir)
+            bld.vsp = trigy(spd,bld.dir)
+        }
+    }
+    bleed_time--
+    bleed_strength = average4(20,bleed_strength,bleed_strength,bleed_strength)
+}
 
 counter++
 

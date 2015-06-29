@@ -11,10 +11,63 @@ if objVarRead(net_manager,"end_match_coming")
     return false
 }
 
+point_total = POINTS_KILL
+if death_type = "die_headshot"
+    point_total += POINTS_HEADSHOT
+if death_type = "die_splosion" or death_type = "die_shotgun"
+    point_total += POINTS_GIB
+
+if killer = net_manager.local_player or net_manager.bot_match
+    objVarAdd(killer,"match_points",point_total)
+
 if dead_homes != net_manager.local_player and killer = net_manager.local_player
 {
     audio_play_sound(snd_kill,1,false)
-    boom_boom_pow("+1 Kill",global.action_word_color)
+    boom_delay = compute_boom_delay()
+    boom_group = random_range(0,1000000)
+    
+    ID = boom_boom_pow("+"+string(point_total)+"",c_yellow)
+    ID.scale = 1.8
+    ID.birth_delay = boom_delay
+    ID.group_id = boom_group
+    
+    //award points
+    ID = boom_boom_pow("+"+string(POINTS_KILL)+" Kill",global.action_word_color)
+    ID.fnt = fnt_hud
+    ID.birth_delay = boom_delay
+    ID.group_id = boom_group
+    ID.draw_y -= ID.vsep
+    
+    switch(death_type)
+    {
+        case "die_headshot":
+            ID = boom_boom_pow("+"+string(POINTS_HEADSHOT)+" Headshot",global.action_word_color)
+            ID.fnt = fnt_hud
+            ID.birth_delay = boom_delay
+            ID.group_id = boom_group
+            ID.draw_y -= ID.vsep*2
+            varAdd("match_points",POINTS_HEADSHOT)
+        break
+        
+        case "die_splosion":
+            ID = boom_boom_pow("+"+string(POINTS_GIB)+" Dismembered",global.action_word_color)
+            ID.fnt = fnt_hud
+            ID.birth_delay = boom_delay
+            ID.group_id = boom_group
+            ID.draw_y -= ID.vsep*2
+            varAdd("match_points",POINTS_GIB)
+        break
+        
+        case "die_shotgun":
+            ID = boom_boom_pow("+"+string(POINTS_GIB)+" Dismembered",global.action_word_color)
+            ID.fnt = fnt_hud
+            ID.birth_delay = boom_delay
+            ID.group_id = boom_group
+            ID.draw_y -= ID.vsep*2
+            varAdd("match_points",POINTS_GIB)
+        break
+    }
+    
     //keep track of kills for challenges
     with challenge_manager {
         string_kills ++

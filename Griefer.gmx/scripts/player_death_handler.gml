@@ -49,7 +49,7 @@ if is_bot(id)
 obj_update_real(id,"match_deaths",update_flag)
 
 if not is_bot(id)
-    stat_update_real("deaths",varRead("deaths"),FL_NORMAL)
+    stat_update_real("deaths",varRead("deaths"),stat_manager.stat_flag)
 
 varWrite("die",false)
 varWrite("die_headshot",false)

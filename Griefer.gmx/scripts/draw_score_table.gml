@@ -5,7 +5,7 @@ ydraw = argument1       //this is not var'd, so subroutines will change its valu
 //printf("drawing score table @ "+xdraw+", "+ydraw)
 //draw the match header
 draw_set_font(global.table_font)
-draw_table_row(xdraw, ydraw, global.table_header_color, global.table_font_color, 1, "CARNAGE REPORT               "+string(game_mode_name(objVarRead(net_manager,"game_mode")))+" on "+string(net_manager.map_previous), -99, "", "", "", "")
+draw_table_row(xdraw, ydraw, global.table_header_color, global.table_font_color, 1, "CARNAGE REPORT               "+string(game_mode_name(objVarRead(net_manager,"game_mode")))+" on "+string(net_manager.map_previous), -99, "","", "", "", "")
 
 //draw how many kills you need and the little symbol
 var scl = 0.325
@@ -45,9 +45,7 @@ if objVarRead(net_manager,"game_mode") = "tdm"
     if score_grid_valid(draw_first)
         draw_sub_table(xdraw, ydraw, draw_first) //hopefully this will change ydraw as it goes
             
-    draw_set_valign(fa_middle)
-    draw_text(xdraw_orig+10,ydraw_orig+global.row_height/2,total0)
-     
+    draw_lives(xdraw_orig+10,ydraw_orig+global.row_height/2,1,fa_left,net_manager.kill_limit - total1)  
     
     ydraw += 0.5*global.table_header_vsep
     
@@ -57,8 +55,7 @@ if objVarRead(net_manager,"game_mode") = "tdm"
     if score_grid_valid(draw_second)
         draw_sub_table(xdraw, ydraw, draw_second)
         
-    draw_set_valign(fa_middle)
-    draw_text(xdraw_orig+10,ydraw_orig+global.row_height/2,total1)
+    draw_lives(xdraw_orig+10,ydraw_orig+global.row_height/2,1,fa_left,net_manager.kill_limit - total0)  
 }
 else
 {

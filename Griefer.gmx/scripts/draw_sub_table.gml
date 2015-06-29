@@ -4,7 +4,7 @@ ydraw = argument1
 var pgrid = argument2
 
 //draw the row with the lables across the top
-draw_table_row(xdraw, ydraw, global.table_label_color, global.table_font_color, 1, "", 0, "Kills", "Deaths", "KDR", "Assists")
+draw_table_row(xdraw, ydraw, global.table_label_color, global.table_font_color, 1, "", 0, "Points", "Kills", "Deaths", "KDR", "Assists")
 ydraw += global.row_height+global.row_vsep
 
 for (var i=0; i<ds_grid_height(pgrid); i++)
@@ -26,6 +26,8 @@ for (var i=0; i<ds_grid_height(pgrid); i++)
         var kdr = ks/ds
     else
         var kdr = ks
+        
+    var pts = objVarRead(av,"match_points")
         
     var ass = objVarRead(av,"match_assists")
     
@@ -55,6 +57,6 @@ for (var i=0; i<ds_grid_height(pgrid); i++)
         bg_color = c_black
 
     //DRAW THE ACTUAL TABLE ROW
-    draw_table_row(xdraw, ydraw, bgcolor, global.table_font_color, alive, objVarRead(av,"pName"), objVarRead(av,"rank"), ks, ds, kdr, ass)
+    draw_table_row(xdraw, ydraw, bgcolor, global.table_font_color, alive, objVarRead(av,"pName"), objVarRead(av,"rank"), pts, ks, ds, kdr, ass)
     ydraw += global.row_height+global.row_vsep
 }

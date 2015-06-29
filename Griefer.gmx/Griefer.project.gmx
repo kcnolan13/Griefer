@@ -520,6 +520,7 @@
       <sprite>sprites\sprite399</sprite>
       <sprite>sprites\icon_challenges</sprite>
       <sprite>sprites\icon_challenges_original</sprite>
+      <sprite>sprites\icon_lives</sprite>
       <sprite>sprites\icon_friends</sprite>
       <sprite>sprites\sprite401</sprite>
       <sprite>sprites\icon_armory</sprite>
@@ -985,13 +986,13 @@
       <scripts name="not as important">
         <script>scripts\instance_create_net.gml</script>
       </scripts>
+      <script>scripts\get_netstat_pnum.gml</script>
     </scripts>
     <scripts name="stats">
       <script>scripts\sort_players.gml</script>
       <script>scripts\get_stat_pname.gml</script>
       <script>scripts\get_netstat_pname.gml</script>
       <script>scripts\get_stat_pnum.gml</script>
-      <script>scripts\get_netstat_pnum.gml</script>
       <script>scripts\write_stat_pname.gml</script>
       <script>scripts\write_stat_pnum.gml</script>
     </scripts>
@@ -1043,6 +1044,7 @@
       <script>scripts\draw_flash_compensate.gml</script>
       <script>scripts\draw_notification.gml</script>
       <script>scripts\draw_kill_limit.gml</script>
+      <script>scripts\draw_lives.gml</script>
       <script>scripts\simple_popup.gml</script>
     </scripts>
     <scripts name="net_utils">
@@ -1298,6 +1300,7 @@
       <script>scripts\free_level_surfaces.gml</script>
       <script>scripts\regen_lighting_surfaces.gml</script>
       <script>scripts\free_lighting_surfaces.gml</script>
+      <script>scripts\compute_boom_delay.gml</script>
     </scripts>
     <scripts name="matchmaking">
       <script>scripts\leave_matchmaking.gml</script>
@@ -1369,6 +1372,7 @@
     </objects>
     <objects name="VITALS">
       <object>objects\input_manager</object>
+      <object>objects\stat_manager</object>
       <object>objects\challenge_manager</object>
       <object>objects\challenge_generic</object>
       <object>objects\character_generic</object>
@@ -1697,7 +1701,11 @@
       <room>rooms\map_placeholder2</room>
     </rooms>
   </rooms>
-  <constants number="95">
+  <constants number="99">
+    <constant name="POINTS_ASSIST">50</constant>
+    <constant name="POINTS_GIB">25</constant>
+    <constant name="POINTS_KILL">100</constant>
+    <constant name="POINTS_HEADSHOT">25</constant>
     <constant name="GARBAGE">-69.69</constant>
     <constant name="FORCE_SPLOSION">30</constant>
     <constant name="RAG_FOOTR">12</constant>

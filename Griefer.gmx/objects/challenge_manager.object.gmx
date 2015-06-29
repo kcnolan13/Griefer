@@ -169,6 +169,7 @@ smg_kills = 0
 //kills
 match_kills = 0
 spree_kills = 0
+match_points = 0
 
 //gnasher prop
 shotgun_gib_timer = 0
@@ -474,6 +475,7 @@ if string_counter &gt; 0
             <string>///challenge vars that reset with match start
 
 //kills
+match_points = 0
 match_kills = 0
 match_assists = 0
 spree_assists = 0

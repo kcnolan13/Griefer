@@ -282,12 +282,14 @@ if ( room = rm_menu or room = rm_lobby) and visible = false and net_manager.room
 //sync match stats with local players
 if not is_bot(id) and instance_exists(net_manager.local_player) and in_match() and net_manager.room_counter &gt; room_speed*2 and varRead("pName") = objVarRead(net_manager,"pName")
 {
+    varWrite("match_points",objVarRead(net_manager.local_player,"match_points"))
     varWrite("match_kills",objVarRead(net_manager.local_player,"match_kills"))
     varWrite("match_deaths",objVarRead(net_manager.local_player,"match_deaths"))
     varWrite("match_assists",objVarRead(net_manager.local_player,"match_assists"))
     //send these at 4 Hz, no need for 30 Hz
     if nth_frame(10)
-    {
+    {  
+        obj_update_real(id,"match_points",FL_NORMAL)
         obj_update_real(id,"match_kills",FL_NORMAL)
         obj_update_real(id,"match_deaths",FL_NORMAL)
         obj_update_real(id,"match_assists",FL_NORMAL)
@@ -299,6 +301,7 @@ if not is_bot(id) and instance_exists(net_manager.local_player) and in_match() a
 
 if is_bot(id) and instance_exists(my_bot) and in_match() and net_manager.room_counter &gt; room_speed*2
 {
+    syncVarFrom(my_bot,"match_points")
     syncVarFrom(my_bot,"match_kills")
     syncVarFrom(my_bot,"match_deaths")
     syncVarFrom(my_bot,"match_assists")
@@ -639,8 +642,15 @@ event_inherited()
 visible = false
 varWrite("visible",false)
 
-if not in_match()
+if in_match()
+{
+    varWrite("match_points",0)
+    varWrite("points",0)
+}
+else
+{
     alarm[0] = room_speed
+}
     
 if room = rm_menu
 {
