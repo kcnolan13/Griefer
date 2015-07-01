@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cd /home/kyle/www/html/kServer
+cd /home/kyle/www/html/Griefer/GriefNode
 
 case "$(pidof node | wc -w)" in
 
