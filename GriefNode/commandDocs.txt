@@ -1,0 +1,15 @@
+	
+sudo apt-get install libapache2-mod-proxy-html
+
+add to apache2.conf:
+
+LoadModule  proxy_module         /usr/lib/apache2/modules/mod_proxy.so
+LoadModule  proxy_http_module    /usr/lib/apache2/modules/mod_proxy_http.so
+LoadModule  headers_module       /usr/lib/apache2/modules/mod_headers.so
+LoadModule  deflate_module       /usr/lib/apache2/modules/mod_deflate.so
+
+ProxyPass /node/  http://localhost:8000/
+
+
+
+create table users (username text, password VARCHAR(32), rank real, wins real, losses real, headshots real, sprees real, kills real, deaths real, hat1 real, hat2 real, hat3 real, helmet1 real, helmet2 real, helmet3 real, torso1 real, torso2 real, torso3 real, shoulder1 real, shoulder2 real, shoulder3 real, forearm1 real, forearm2 real, forearm3 real, leg1 real, leg2 real, leg3 real, shin1 real, shin2 real, shin3 real, feet1 real, feet2 real, feet3 real);
