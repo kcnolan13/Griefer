@@ -3,6 +3,8 @@ xscale = argument0
 yscale = argument1
 var ang = argument2
 
+scale = scale/2
+
 if object_index != rag_forearm and object_index != rag_shoulder
 {
     if xscale = -1
@@ -60,6 +62,8 @@ for (var i=0; i<getLength(joint_xs); i++)
     joint_dirs[i] = point_direction(0,0,joint_xs[i],joint_ys[i])
     
 }
+
+scale = scale*2
 
 rag_sort_clockwise()
 image_angoff = ang

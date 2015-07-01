@@ -938,6 +938,8 @@ if (varRead("get_assist") &gt; 0) and (net_manager.local_player = id or master_o
     {
         boom_delay = compute_boom_delay()
         boom = boom_boom_pow("+"+string(POINTS_ASSIST)+" Assist",global.action_word_color)
+        boom.fnt = fnt_boom
+        boom.scale = 1.25
         boom.birth_delay = boom_delay
         add_xp(XP_ASSIST,true,true,false)
         stat_update_real("assists",varRead("assists"),stat_manager.stat_flag)

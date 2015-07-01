@@ -38,6 +38,7 @@ backspace_counter = 0
 backspace_hold_delay = 10
 backspace_delay = backspace_hold_delay
 tab_delay = 0
+auto_started = false
 </string>
           </argument>
         </arguments>
@@ -242,7 +243,7 @@ draw_set_halign(fa_left)
 draw_set_valign(fa_center)
 
 draw_set_color(c_white)
-draw_text(x,y+sprite_get_height(sprite_index)/2,input_string+str_cursor)
+draw_text(x,y+sprite_get_height(sprite_index)/2,string(input_string)+string(str_cursor))
 draw_set_color(c_white)
 draw_text(x,y-sprite_get_height(sprite_index)/2,label)
 </string>
@@ -268,6 +269,23 @@ draw_text(x,y-sprite_get_height(sprite_index)/2,label)
           <argument>
             <kind>1</kind>
             <string>///add text
+
+if not input_active and bn_login_user.field_username = id and not auto_started
+{
+    auto_started = true
+    if not audio_is_playing(snd_click) and not input_active
+    audio_play_sound(snd_click,3,false)
+
+    input_active = true
+    str_cursor = "|"
+
+    if instantClear = true
+    {
+        instantClear = true
+        input_string = ""
+    }
+}
+
 if input_active=true
 {
     if instantClear = true

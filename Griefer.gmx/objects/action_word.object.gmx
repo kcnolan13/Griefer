@@ -98,6 +98,11 @@ if init_as_promoted
     alpha = 0
     fade_time = 15
 }
+
+if fnt = fnt_boom
+{
+    scale = scale/2
+}
 /*
 if is_string(txt) and not drawing_namerank and not drawing_slot and image=spr_none
 {
@@ -320,9 +325,9 @@ if is_string(txt)
     if txt != "" and not drawing_namerank
     {
         if not stuck_yet
-            draw_text_ext_transformed(view_xview+view_wview/2+draw_x,view_yview+view_hview/2+draw_y,txt,0,200,scale,scale,0)
+            draw_text_ext_transformed(view_xview+view_wview/2+draw_x,view_yview+view_hview/2+draw_y,txt,0,400,scale,scale,0)
         else
-            draw_text_ext_transformed(draw_x,draw_y,txt,0,200,scale,scale,0)
+            draw_text_ext_transformed(draw_x,draw_y,txt,0,400,scale,scale,0)
     }
     
 }

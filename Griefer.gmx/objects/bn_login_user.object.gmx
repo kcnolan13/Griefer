@@ -28,6 +28,8 @@
             <string>///inherit and specify new label
 event_inherited()
 
+forced_enter = false
+
 alert = ""
 alert_alpha = 0
 alert_fade = 0.05
@@ -103,6 +105,7 @@ field_username.input_string = generate_name(0)
           <argument>
             <kind>1</kind>
             <string>///ysweep
+
 if global.using_gamepad 
 {
     if gamepad_button_check_pressed(global.devno,global.cvals[C_JUMP]) 
@@ -197,8 +200,9 @@ event_inherited()
             <kind>1</kind>
             <string>if clicked exit
 
-if instance_place(x,y,cursor)
+if instance_place(x,y,cursor) or forced_enter
 {
+    forced_enter = false
     clicked = 2
     printf("MAKING LOGIN ATTEMPT: "+field_username.input_string+" : "+field_password.input_string)
     if !instance_exists(processing)
@@ -295,7 +299,8 @@ event_inherited()
             <kind>1</kind>
             <string>///perform left press
 printf("pressed enter")
-event_perform(ev_mouse,ev_left_press)
+forced_enter = true
+event_perform(ev_mouse,ev_global_left_press)
 </string>
           </argument>
         </arguments>

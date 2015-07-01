@@ -23,41 +23,45 @@ if killer = net_manager.local_player or net_manager.bot_match
 if dead_homes != net_manager.local_player and killer = net_manager.local_player
 {
     audio_play_sound(snd_kill,1,false)
-    delay_spacer = 8
+    delay_spacer = 2
     boom_delay = compute_boom_delay()
     boom_group = random_range(0,1000000)
+    boom_scale = 0.75
     
     switch(death_type)
     {
         case "die_headshot":
             ID = boom_boom_pow("+"+string(POINTS_HEADSHOT)+" Headshot",global.action_word_color)
-            ID.fnt = fnt_hud
+            ID.fnt = fnt_boom
             ID.extra_delay = boom_delay
             ID.birth_delay = 1
             ID.group_id = boom_group
             ID.draw_y -= ID.vsep*2
+            ID.scale = boom_scale
             boom_delay += delay_spacer/2
             varAdd("match_points",POINTS_HEADSHOT)
         break
         
         case "die_splosion":
             ID = boom_boom_pow("+"+string(POINTS_GIB)+" Dismembered",global.action_word_color)
-            ID.fnt = fnt_hud
+            ID.fnt = fnt_boom
             ID.extra_delay = boom_delay
             ID.birth_delay = 1
             ID.group_id = boom_group
             ID.draw_y -= ID.vsep*2
+            ID.scale = boom_scale
             boom_delay += delay_spacer/2
             varAdd("match_points",POINTS_GIB)
         break
         
         case "die_shotgun":
             ID = boom_boom_pow("+"+string(POINTS_GIB)+" Dismembered",global.action_word_color)
-            ID.fnt = fnt_hud
+            ID.fnt = fnt_boom
             ID.extra_delay = boom_delay
             ID.birth_delay = 1
             ID.group_id = boom_group
             ID.draw_y -= ID.vsep*2
+            ID.scale = boom_scale
             boom_delay += delay_spacer/2
             varAdd("match_points",POINTS_GIB)
         break
@@ -65,14 +69,16 @@ if dead_homes != net_manager.local_player and killer = net_manager.local_player
     
     //award points
     ID = boom_boom_pow("+"+string(POINTS_KILL)+" Kill",global.action_word_color)
-    ID.fnt = fnt_hud
+    ID.fnt = fnt_boom
+    ID.scale = boom_scale
     ID.extra_delay = boom_delay
     ID.birth_delay = 1
     ID.group_id = boom_group
     ID.draw_y -= ID.vsep
     boom_delay += delay_spacer
     
-    ID = boom_boom_pow("+"+string(point_total)+"",c_yellow)
+    ID = boom_boom_pow("+"+string(point_total)+"",global.boom_total_color)
+    ID.fnt = fnt_boom
     ID.scale = 2
     ID.extra_delay = boom_delay
     ID.birth_delay = 1

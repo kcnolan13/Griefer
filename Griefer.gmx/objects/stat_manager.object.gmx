@@ -29,6 +29,29 @@
 stat_flag = FL_NORMAL
 
 netvars = ds_map_create()
+
+tabs[0] = "Competitive"
+tabs[1] = "Bot Mode"
+tabs[2] = "Leaderboards"
+
+stat_tab = tabs[0]
+
+
+//working copy of YOUR stats to be displayed on the stats page
+varWrite("ppl",0)
+varWrite("kdr",0)
+varWrite("wl",0)
+varWrite("kills",0)
+varWrite("deaths",0)
+varWrite("assists",0)
+varWrite("wins",0)
+varWrite("losses",0)
+varWrite("kill_streak",0)
+varWrite("win_streak",0)
+varWrite("global_rank",0)
+varWrite("rank",0)
+varWrite("xp",0)
+varWrite("time",0)
 </string>
           </argument>
         </arguments>
@@ -55,6 +78,153 @@ netvars = ds_map_create()
 
 if in_match() and net_manager.bot_match
     stat_flag = FL_BOT
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>605</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>manage stat page modals</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///manage stat tabs ---&gt; MUST BE FIRST IN STEP TO EXIT PROPERLY
+if in_match() exit
+
+if net_manager.menu_mode = "stats"
+{
+    if not instance_exists(bn_stat_tab)
+    {
+        
+        
+        w = 64*3
+        h = 64*1
+        
+        birth_delay = 1
+        hue = 255
+        sat = 0
+        val = 0
+        
+        left = room_width/2-w/2-10
+        if instance_exists(bn_stats)
+        {
+            left = bn_stats.left+bn_stats.width/2-w/2-10
+        }
+        top = 64*2.4-4
+        
+        for (var i=0; i&lt;3; i++)
+        {
+            ID = instance_create(left,top,bn_stat_tab)
+            ID.width = w
+            ID.height = h
+            ID.birth_delay = birth_delay
+            
+            ID.color = make_colour_hsv(hue,sat,val)
+            ID.active_color = make_colour_hsv(148*255/360,91*255/100,51*255/100)
+            
+            ID.text_halign = fa_left
+            ID.text_xoff = 72+5
+            ID.image = icon_settings
+            ID.stat_tab = tabs[i]
+            ID.text = ID.stat_tab
+            
+            if stat_tab = tabs[i]
+                ID.active = true
+            
+            birth_delay += 10
+            
+            left += w+10
+        }
+    }
+}
+else //not in stats mode
+{
+    if instance_exists(bn_stat_tab)
+        with bn_stat_tab fade_out = true
+}
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///manage stat modals
+if net_manager.menu_mode = "stats"
+{
+    switch (stat_tab)
+    {
+        //competitive
+        case "Competitive":
+            fade_modal(modal_table)
+        break
+        
+        //bot mode
+        case "Bot Mode":
+            fade_modal(modal_table)
+        break
+        
+        //leaderboards
+        case "Leaderboards":
+            if not instance_exists(modal_table)
+            {
+                leaderboards = instance_create(room_width*1/2,room_height*1/2+96,modal_table)
+                sendMessageReal("get_global_stats",FL_NORMAL)
+            }
+        break
+    }
+}
+else //not in stats mode
+{
+    fade_modal(modal_table)
+}
+
 </string>
           </argument>
         </arguments>

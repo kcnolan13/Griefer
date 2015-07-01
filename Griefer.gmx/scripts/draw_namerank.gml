@@ -6,6 +6,8 @@ var draw_y = argument3
 var scale = argument4
 var color = argument5
 
+name = capwords(name)
+
 draw_player_rank(rank, draw_x, draw_y, scale)
 
 draw_set_color(color)

@@ -26,6 +26,8 @@ void bind_events(socket::ptr &socket)
 	{
 		_lock.lock();
 
+		//console("::: pkg!");
+
 		//process all contained messages
 		if (data->get_flag() == message::flag_array)
 		{
@@ -43,6 +45,7 @@ void bind_events(socket::ptr &socket)
 					else if (msgName == "bigMessage")
 					{
 						processBigMessage(msg);
+						//console("::: bigMessage in pkg!");
 					}
 					else if (msgName == "objUpdate") {
 						processObjUpdate(msg);

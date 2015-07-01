@@ -47,6 +47,40 @@ while (bigMessagesWaiting() and wait_counter < 500000)
                     global.cvals[real(genVal1)] = real(genVal2)
             }
         break
+        
+        case "personal_stat":
+            var player_name = string(genVal1)
+            var stat_name = string(genVal2)
+            var stat_val = genVal3
+            printf("::: RECEIVED Personal Stat: "+string(player_name)+" -- "+string(stat_name)+" = "+string(stat_val))
+            //write directly to stat_manager
+            objVarWrite(stat_manager,stat_name,stat_val)
+        break
+        
+        case "global_stat":
+            var player_name = string(genVal1)
+            var stat_name = string(genVal2)
+            var stat_val = genVal3
+            printf("::: RECEIVED Global Stat: "+string(player_name)+" -- "+string(stat_name)+" = "+string(stat_val))
+            insert_global_stat(player_name,stat_name,stat_val)
+        break
+        
+        case "leaderboard_dimensions":
+            var rows = real(genVal1)
+            var cols = real(genVal2)
+            printf("::: RECEIVED leaderboard dimensions: "+string(rows)+" X "+string(cols))
+            if instance_exists(modal_table)
+            {
+                modal_table.rows = rows+1 //to make room for the header
+                modal_table.cols = cols//+1 //because player + rank are split in grid
+                with modal_table
+                    event_perform(ev_step,ev_step_normal)
+            }
+            else
+            {
+                printf("ERROR: cannot set leaderboard dims ... modal_table does not exist")
+            }
+        break
     }
         
 }

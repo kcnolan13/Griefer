@@ -96,6 +96,9 @@ if active = false
 {
     active = true
     net_manager.menu_mode = "stats"
+    //request personal stats
+    sendMessageReal("get_personal_stats",FL_NORMAL)
+    printf("::: sent personal stats request")
 }
 else {
     active = false

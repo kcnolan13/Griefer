@@ -24,7 +24,7 @@ if not computed_winloss and string(varRead("winning_pName")) != ""
         //go up a rank
         varWrite("match_flag",FL_WIN)
         
-        if not bot_match
+        //if not bot_match
         {
             mega_stat_update("wins",varRead("wins")+1)
         }
@@ -59,7 +59,7 @@ if not computed_winloss and string(varRead("winning_pName")) != ""
                 }
             }
             
-            if rank_changed and not bot_match
+            if rank_changed //and not bot_match
             {
                 mega_stat_update("losses",varRead("losses")+1)
             }

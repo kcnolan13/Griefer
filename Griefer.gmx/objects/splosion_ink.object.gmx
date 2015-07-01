@@ -29,12 +29,13 @@
 event_inherited()
 
 
-bleed_time = 45
-blood_parts = 20
+bleed_time = 75
+blood_parts = 8
 bxoff = 5
 byoff = 5
 blood_color = c_purple
 bleed_strength = 90
+bleed_lerp = 0.1
 
 initialize_physics()
 
@@ -177,7 +178,7 @@ if bleed_time
         }
     }
     bleed_time--
-    bleed_strength = average4(22,bleed_strength,bleed_strength,bleed_strength)
+    bleed_strength = lerp(bleed_strength,22,bleed_lerp)
 }
 
 counter++

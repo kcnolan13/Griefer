@@ -17,3 +17,6 @@ global.team_all_color = make_colour_rgb(80,80,80)
 global.you0_color = make_colour_rgb(40,40,100)
 global.you1_color = make_colour_rgb(100,40,40)
 global.you_all_color = make_colour_rgb(130,130,130)
+
+
+global.boom_total_color = c_yellow//make_colour_hsv(219*255/360,27*255/100,100*255/100)

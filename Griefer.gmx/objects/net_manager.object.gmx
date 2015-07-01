@@ -407,6 +407,42 @@ win_countdown = 0
       </action>
       <action>
         <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///create the xp bar
+instance_create(x,y,xp_bar)
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>425</id>
+        <kind>4</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+      </action>
+      <action>
+        <libid>1</libid>
         <id>305</id>
         <kind>0</kind>
         <userelative>0</userelative>
@@ -434,28 +470,6 @@ win_countdown = 0
           <argument>
             <kind>4</kind>
             <string>0</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///create the xp bar
-instance_create(x,y,xp_bar)
-</string>
           </argument>
         </arguments>
       </action>
@@ -1266,7 +1280,7 @@ if room = rm_lobby
             break
             
             case "stats":
-                if is_my_avatar(ID)
+                if is_my_avatar(ID) and stat_manager.stat_tab != stat_manager.tabs[2]
                 {
                     objVarWrite(ID,"dude_y",room_height*1.75/3-64)
                     objVarWrite(ID,"dude_x",room_width*1/9)
@@ -1356,8 +1370,16 @@ if room = rm_menu or room = rm_lobby
         break
         
         case "stats":
-            dude_x = room_width*1/9
-            dude_y = room_height*1.75/3-64
+            if stat_manager.stat_tab != stat_manager.tabs[2]
+            {
+                dude_x = room_width*1/9
+                dude_y = room_height*1.75/3-64
+            }
+            else
+            {
+                dude_x = -8*64
+                dude_y = room_height*1.75/3-64
+            }
         break
         
         case "settings":
@@ -1846,16 +1868,16 @@ if in_match() and room_counter%(room_speed/2) = 0 and sort_worthy and not disabl
         else dat_team_do = team_all
         
         //we now know what grid this player belongs on --&gt; find his avatar ID and update match kills
-        if ds_grid_value_disk_exists(dat_team_do,2,0,2*ds_grid_height(dat_team_do),avID)
+        if ds_grid_value_disk_exists(dat_team_do,1,0,2*ds_grid_height(dat_team_do),avID)
         {
             //SET POINTS IN SCORE TABLE GRID
-            av_gridy = ds_grid_value_disk_y(dat_team_do,2,0, 2*ds_grid_height(dat_team_do), avID)
-            if not ds_grid_value_x(dat_team_do,2,av_gridy,0,av_gridy,mpoints)
+            av_gridy = ds_grid_value_disk_y(dat_team_do,1,0, 2*ds_grid_height(dat_team_do), avID)
+            if not ds_grid_value_x(dat_team_do,2,av_gridy,2,av_gridy,mpoints)
             {
                 ds_grid_set(dat_team_do,2,av_gridy,mpoints)
             }
             //SET KILLS IN SCORE TABLE GRID
-            av_gridy = ds_grid_value_disk_y(dat_team_do,0,0, 2*ds_grid_height(dat_team_do), avID)
+            av_gridy = ds_grid_value_disk_y(dat_team_do,1,0, 2*ds_grid_height(dat_team_do), avID)
             if not ds_grid_value_x(dat_team_do,0,av_gridy,0,av_gridy,mkills)
             {
                 ds_grid_set(dat_team_do,0,av_gridy,mkills)
@@ -1863,7 +1885,7 @@ if in_match() and room_counter%(room_speed/2) = 0 and sort_worthy and not disabl
         }
         else 
         {
-            //printf("ERROR: unable to find avatar id "+avID+" for player "+objVarRead(avID,"pName")+" in the team grid")
+            printf("ERROR: TEAM GRID: unable to find avatar id "+avID+" for player "+objVarRead(avID,"pName")+" in the team grid")
             return false
         }
     }
@@ -1881,7 +1903,7 @@ if in_match() and room_counter%(room_speed/2) = 0 and sort_worthy and not disabl
     
     if ds_grid_height(team_all) &gt; 0
     {
-        ds_grid_sort(team_all, 2, false)
+        ds_grid_sort(team_all, 0, false)
     }
     
 }
