@@ -26,15 +26,22 @@
           <argument>
             <kind>1</kind>
             <string>event_inherited()
+
+cursor_depressed = false
+mouse_lasty = 0
+cursor_sens = 10
+
 label = "button"+string(id)
 active = false
 clicked = false
 is_sens = false
 snap_2view = true
-width = global.table_width*2+64*2
+width = global.table_width*2//+64*2
 height = view_hview*1/2+64
 row_height = global.row_height
 row_vsep = global.row_vsep+2
+
+first_sort = false
 
 bn_top = NO_HANDLE
 bn_bottom = NO_HANDLE
@@ -57,7 +64,7 @@ alpha_highlight = 1
 scale_die = 1
 scale_highlighted = 1
 
-rows_used = 0
+rows_used = -1
 
 s_thresh = 96
 s_index = 0
@@ -67,6 +74,19 @@ halign = fa_center
 valign = fa_center
 
 grid = NO_HANDLE
+grid_header = NO_HANDLE
+
+
+s_left = 0//left+width+10
+s_width = 0//32
+s_right = 0//s_left+s_width
+s_top = 0//top+64
+s_bottom = 0//top+height-64
+s_height = 0//s_bottom - s_top
+s_curs_height = 0//lerp(height/(row_height*s_index_max),1,0.3)*s_height
+s_curs_percent = 0//s_index/s_index_max
+s_curs_top = 0//s_top+s_curs_percent*(s_height-s_curs_height)
+s_curs_bottom = 0//s_curs_top+s_curs_height
 </string>
           </argument>
         </arguments>
@@ -93,6 +113,9 @@ grid = NO_HANDLE
 
 if ds_exists(grid,ds_type_grid)
     ds_grid_destroy(grid)
+    
+if ds_exists(grid_header,ds_type_grid)
+    ds_grid_destroy(grid_header)
 </string>
           </argument>
         </arguments>
@@ -147,31 +170,55 @@ event_inherited()
 
 if cols &lt; 0 or rows &lt; 0 exit
 
+if not first_sort and ds_exists(grid,ds_type_grid)
+{
+    var pname = ds_grid_get(grid,0,ds_grid_height(grid)-1)
+    
+    //default sort by xp when ready
+    if is_string(pname) and string_length(pname) &gt; 0
+    {
+        first_sort = true
+        ds_grid_sort(grid,2,false)
+    }
+}
+
 //CREATE THE GRID WHEN YOU HAVE THE TECHNOLOGY!!
 if grid = NO_HANDLE
 {
+    modal_aligns()
+    
     grid = ds_grid_create(cols,rows)
-    s_index_max = rows*row_height - height
-    bn_top = instance_create(left+width+48,top+32,bn_tbottom)
+    grid_header = ds_grid_create(cols,1)
+    s_index_max = (rows+2)*row_height - height
+    bn_top = instance_create(left+width+32+10,top+32,bn_tbottom)
     bn_top.parent_table = id
-    bn_bottom = instance_create(left+width+48,top+height-32,bn_tbottom)
+    bn_bottom = instance_create(left+width+32+10,top+height+6,bn_tbottom)
     bn_bottom.parent_table = id
+    bn_bottom.img_index = 1
+    bn_bottom.is_top = false
     
     //NOW WOULD BE THE TIME TO OBTAIN COLUMN NAMES
-    ds_grid_add(grid,0,0,"username")
-    ds_grid_add(grid,1,0,"rank")
-    ds_grid_add(grid,2,0,"xp")
-    ds_grid_add(grid,3,0,"ppl")
-    ds_grid_add(grid,4,0,"kdr")
-    ds_grid_add(grid,5,0,"wl")
-    ds_grid_add(grid,6,0,"time")
-    ds_grid_add(grid,7,0,"kills")
-    ds_grid_add(grid,8,0,"deaths")
-    ds_grid_add(grid,9,0,"assists")
-    ds_grid_add(grid,10,0,"wins")
-    ds_grid_add(grid,11,0,"losses")
-    ds_grid_add(grid,12,0,"kill_streak")
-    ds_grid_add(grid,13,0,"win_streak")
+    ds_grid_add(grid_header,0,0,"username")
+    ds_grid_add(grid_header,1,0,"rank")
+    ds_grid_add(grid_header,2,0,"xp")
+    ds_grid_add(grid_header,3,0,"ppl")
+    ds_grid_add(grid_header,4,0,"kdr")
+    ds_grid_add(grid_header,5,0,"wl")
+    ds_grid_add(grid_header,6,0,"time")
+    ds_grid_add(grid_header,7,0,"kills")
+    ds_grid_add(grid_header,8,0,"deaths")
+    ds_grid_add(grid_header,9,0,"assists")
+    ds_grid_add(grid_header,10,0,"wins")
+    ds_grid_add(grid_header,11,0,"losses")
+    ds_grid_add(grid_header,12,0,"kill_streak")
+    ds_grid_add(grid_header,13,0,"win_streak")
+    
+    //create ascending array
+    for (var i=0; i&lt;14; i++)
+    {
+        ascending[i] = true
+    }
+    
 }
 
 if global.using_gamepad 
@@ -180,6 +227,12 @@ if global.using_gamepad
     or gamepad_button_check_pressed(global.devno,global.cvals[C_SHOOT])
     {
         event_perform(ev_mouse,ev_global_left_press)
+    }
+    
+    if gamepad_button_check_released(global.devno,global.cvals[C_JUMP]) 
+    or gamepad_button_check_released(global.devno,global.cvals[C_SHOOT])
+    {
+        event_perform(ev_mouse,ev_global_left_release)
     }
     
     if gamepad_button_check(global.devno,global.cvals[C_JUMP]) 
@@ -191,6 +244,90 @@ if global.using_gamepad
 
 if clicked
     clicked --
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="56">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///release stupid cursor
+
+cursor_depressed = false
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="53">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if not modal_highlighted(id) and not rect_highlighted(s_left,s_top,s_right,s_bottom)
+{
+    exit_child = true
+    exit
+}
+
+if clicked exit
+    clicked = 2
+
+//SORT GRID BY COLUMNS
+col_high = sort_col_highlighted()
+if col_high &gt; -1 and ds_exists(grid,ds_type_grid)
+{
+    ds_grid_sort(grid,col_high,ascending[col_high])
+    ascending[col_high] ^= 1
+    //print_ds_grid(grid)
+    s_index = 0
+    audio_play_sound(snd_click,2,false)
+}
+
+if not cursor_depressed and rect_highlighted(s_left,s_curs_top,s_right,s_curs_bottom)
+{
+    audio_play_sound(snd_click,2,false)
+    cursor_depressed = true
+    mouse_lasty = cursor.y
+}
+else if not cursor_depressed and rect_highlighted(s_left,s_top,s_right,s_bottom)
+{
+    audio_play_sound(snd_click,2,false)
+    
+    //clicks in the general scroll region
+    if cursor.y &gt; s_curs_bottom
+        s_index += cursor_sens*8
+    
+    if cursor.y &lt; s_curs_top
+        s_index -= cursor_sens*8
+}
 </string>
           </argument>
         </arguments>
@@ -240,38 +377,27 @@ if ds_exists(grid,ds_type_grid)
           <argument>
             <kind>1</kind>
             <string>///draw the stuff
-if birth_delay &gt; 0 or cols &lt; 0 or rows &lt; 0
+if birth_delay &gt; 0 or cols &lt; 0 or rows &lt; 0 or s_index_max &lt; 1 or row_height &lt; 1
     exit
 
 draw_set_alpha(alpha)
 
-left = x
-top = y
-
-if halign = fa_center
-    left -= width*scale/2
-if halign = fa_right
-    left -= width*scale/2
-    
-if valign = fa_center
-    top -= height*scale/2
-if valign = fa_bottom
-    top -= height*scale/2
+modal_aligns()
 
 //DRAW THE GRID
 
 //always draw header
 ydraw = top
-draw_modal_row(left,ydraw,header_color,header_text_color,alpha,0)
+draw_modal_row(left,ydraw,header_color,header_text_color,alpha,0,grid_header)
 
 ydraw += row_height*1.5
 
-var ist = round_nearest(s_index,row_height)/row_height+1
+var ist = round_nearest(s_index,row_height)/row_height
 
 //all the rows
 for (var i=ist; i&lt;ds_grid_height(grid); i++)
 {
-    draw_modal_row(left,ydraw,color,text_color,alpha,i)
+    draw_modal_row(left,ydraw,color,text_color,alpha,i,grid)
     ydraw += row_height+row_vsep
     
     if ydraw - top &gt; height
@@ -279,17 +405,61 @@ for (var i=ist; i&lt;ds_grid_height(grid); i++)
 }
 
 //SCROLL AROUND
-if modal_highlighted(id)
+if modal_highlighted(id) and cursor.y &gt; top+row_height+8
 {
     if abs(cursor.y-top) &lt; s_thresh and s_index &gt; 0
-        s_index -= 5
+        s_index -= cursor_sens*2
         
     if abs(ydraw-cursor.y) &lt; s_thresh and s_index &lt; s_index_max
-        s_index += 5
+        s_index += cursor_sens*2
+}
+
+if cursor_depressed
+{
+    ydif = cursor.y - mouse_lasty
+    mouse_lasty = cursor.y
+    
+    s_index += ydif*(1+s_curs_percent)
+}
+
+if mouse_wheel_up()
+{
+    s_index -= cursor_sens*3
+} else if mouse_wheel_down()
+{
+    s_index += cursor_sens*3
 }
 
 //keep scroll area within bounds
 s_index = constrict(s_index,0,s_index_max)
+
+//draw scroll bar
+s_left = left+width+10
+s_width = 32
+s_right = s_left+s_width
+s_top = top+64
+s_bottom = top+height-64+10
+s_height = s_bottom - s_top
+s_curs_height = lerp(height/max(1,(row_height*s_index_max)),1,0.3)*s_height
+s_curs_percent = s_index/max(1,s_index_max)
+s_curs_top = s_top+s_curs_percent*(s_height-s_curs_height)
+s_curs_bottom = s_curs_top+s_curs_height
+
+//draw border
+draw_set_color(c_dkgray)
+draw_rectangle(s_left,s_top,s_right,s_bottom,false)
+
+//draw cursor
+if rect_highlighted(s_left,s_curs_top,s_right,s_curs_bottom) or cursor_depressed
+    draw_set_color(c_ltgray)
+else
+    draw_set_color(c_gray)
+
+draw_rectangle(s_left,s_curs_top,s_right,s_curs_bottom,false)
+
+
+
+//printf("::: s_left="+string(s_left)+", s_curs_top="+string(s_curs_top)+", s_right="+string(s_right)+", s_curs_bottom="+string(s_curs_bottom))
 </string>
           </argument>
         </arguments>

@@ -11,7 +11,7 @@ if not instance_exists(modal_table)
 
 m = instance_find(modal_table,0)
 
-if not ds_exists(m.grid,ds_type_grid)
+if not ds_exists(m.grid,ds_type_grid) or not ds_exists(m.grid_header,ds_type_grid)
 {
     printf("ERROR: cannot insert_global_stat ... modal table's grid does not exist")
     return false
@@ -34,9 +34,9 @@ else
 }
 
 //find the column for this stat to insert into
-if ds_grid_value_disk_exists(m.grid,2,0,gwidth,stat)
+if ds_grid_value_disk_exists(m.grid_header,2,0,gwidth,stat)
 {
-    col = ds_grid_value_disk_x(m.grid,2,0,gwidth,stat)
+    col = ds_grid_value_disk_x(m.grid_header,2,0,gwidth,stat)
 }
 else
 {

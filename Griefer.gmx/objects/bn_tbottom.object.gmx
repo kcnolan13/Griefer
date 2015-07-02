@@ -27,10 +27,13 @@
             <kind>1</kind>
             <string>///inherit and define properties
 event_inherited()
-text = "Some Text"
+text = ""
 alpha_max = 0.75
 halign = fa_center
 valign = fa_center
+
+image = icon_tbottom
+img_index = 0
 
 is_top = true
 
@@ -43,8 +46,8 @@ sat = 0
 val = 0
 notif_scale = 1.25
 snap_2view = true//false
-width = 64
-height = 64
+width = 32
+height = 32
 
 parent_table = NO_HANDLE
 </string>
@@ -70,12 +73,6 @@ parent_table = NO_HANDLE
           <argument>
             <kind>1</kind>
             <string>///adjust for aligns
-if object_index != bn_postmatch and object_index != bn_postmatch_done
-{
-    x += width/2
-    y += height/2
-} 
-else
 {
     if halign = fa_center
         x -= width/2

@@ -535,6 +535,7 @@
       <sprite>sprites\sprite405</sprite>
       <sprite>sprites\icon_postmatch</sprite>
       <sprite>sprites\sprite406</sprite>
+      <sprite>sprites\icon_tbottom</sprite>
     </sprites>
     <sprite>sprites\spr_1pixel</sprite>
     <sprite>sprites\sprite393</sprite>
@@ -1027,6 +1028,7 @@
       </scripts>
       <scripts name="modal_table">
         <script>scripts\draw_modal_row.gml</script>
+        <script>scripts\sort_col_highlighted.gml</script>
       </scripts>
       <script>scripts\draw_limb.gml</script>
       <script>scripts\convert_spr_none_to_drawable.gml</script>
@@ -1338,6 +1340,8 @@
       <script>scripts\capfirst.gml</script>
       <script>scripts\capwords.gml</script>
       <script>scripts\capwords_super.gml</script>
+      <script>scripts\rect_highlighted.gml</script>
+      <script>scripts\modal_aligns.gml</script>
     </scripts>
     <scripts name="kyle's lighting engine">
       <script>scripts\kyle_light_create.gml</script>

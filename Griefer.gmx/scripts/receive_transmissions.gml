@@ -71,7 +71,7 @@ while (bigMessagesWaiting() and wait_counter < 500000)
             printf("::: RECEIVED leaderboard dimensions: "+string(rows)+" X "+string(cols))
             if instance_exists(modal_table)
             {
-                modal_table.rows = rows+1 //to make room for the header
+                modal_table.rows = rows //to make room for the header
                 modal_table.cols = cols//+1 //because player + rank are split in grid
                 with modal_table
                     event_perform(ev_step,ev_step_normal)
