@@ -40,6 +40,13 @@ active_color = c_gray
 highlightable = true
 surface = NO_HANDLE
 
+//modal meter stuff
+meter_percent = 0
+meter_val = 0
+meter_desc = 0
+meter_col_out = c_blue
+meter_col_in = c_aqua
+
 img_index = -1
 
 drew_left = 0
@@ -301,6 +308,12 @@ draw_set_alpha(alpha)
 
 left = x
 top = y
+
+if object_index = modal_meter
+{
+    draw_stat_meter(x,y,meter_val,meter_desc,meter_col_out,meter_col_in,scale,meter_percent)
+    exit
+}
 
 if halign = fa_center
     left -= width*scale/2

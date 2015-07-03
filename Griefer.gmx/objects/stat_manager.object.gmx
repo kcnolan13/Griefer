@@ -36,22 +36,55 @@ tabs[2] = "Leaderboards"
 
 stat_tab = tabs[0]
 
-
 //working copy of YOUR stats to be displayed on the stats page
-varWrite("ppl",0)
-varWrite("kdr",0)
-varWrite("wl",0)
-varWrite("kills",0)
-varWrite("deaths",0)
-varWrite("assists",0)
-varWrite("wins",0)
-varWrite("losses",0)
-varWrite("kill_streak",0)
-varWrite("win_streak",0)
-varWrite("global_rank",0)
-varWrite("rank",0)
-varWrite("xp",0)
-varWrite("time",0)
+varWrite("ppl",-1)
+varWrite("kdr",-1)
+varWrite("wl",-1)
+varWrite("kills",-1)
+varWrite("deaths",-1)
+varWrite("assists",-1)
+varWrite("wins",-1)
+varWrite("losses",-1)
+varWrite("kill_streak",-1)
+varWrite("win_streak",-1)
+varWrite("global_rank",-1)
+varWrite("rank",-1)
+varWrite("xp",-1)
+varWrite("time",-1)
+
+ppl_max = POINTS_KILL*10
+
+//meters
+meters[METER_KDR] = NO_HANDLE
+meters[METER_WL] = NO_HANDLE
+meters[METER_PPL] = NO_HANDLE
+meters[METER_RANK] = NO_HANDLE
+
+meter_stats[METER_KDR] = "kdr"
+meter_stats[METER_WL] = "wl"
+meter_stats[METER_PPL] = "ppl"
+meter_stats[METER_RANK] = "rank"
+
+meter_col_outs[METER_KDR] = web_hsv(0,100,100)
+meter_col_outs[METER_WL] = web_hsv(207,100,100)
+meter_col_outs[METER_PPL] = web_hsv(149,100,100)
+meter_col_outs[METER_RANK] = web_hsv(0,0,0)
+
+meter_col_ins[METER_KDR] = web_hsv(0,100,100)
+meter_col_ins[METER_WL] = web_hsv(207,100,100)
+meter_col_ins[METER_PPL] = web_hsv(149,100,100)
+meter_col_ins[METER_RANK] = web_hsv(0,0,0)
+
+meter_descs[METER_KDR] = "KDR"
+meter_descs[METER_WL] = "W/L"
+meter_descs[METER_PPL] = "PPL"
+meter_descs[METER_RANK] = "Rank"
+
+meter_radius = 64*3
+meter_swath = 110
+meter_ang_i = 90+meter_swath/2
+meter_ang_f = 90-meter_swath/2
+meter_ang_dif = abs(meter_ang_i - meter_ang_f)
 </string>
           </argument>
         </arguments>
@@ -138,11 +171,13 @@ if net_manager.menu_mode = "stats"
         val = 0
         
         left = room_width/2-w/2-10
-        if instance_exists(bn_stats)
+        if instance_exists(bn_logout)
         {
-            left = bn_stats.left+bn_stats.width/2-w/2-10
+            var l = bn_logout.left+bn_logout.width+5
+            var dest = lerp(l,room_width,0.5)
+            left = dest+w/2//bn_stats.left+bn_stats.width/2-w/2-10
         }
-        top = 64*2.4-4
+        top = 10+h//64*2.4-4
         
         for (var i=0; i&lt;3; i++)
         {
@@ -165,7 +200,7 @@ if net_manager.menu_mode = "stats"
             
             birth_delay += 10
             
-            left += w+10
+            top += h+10
         }
     }
 }
@@ -195,7 +230,7 @@ else //not in stats mode
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///manage stat modals
+            <string>///manage stat modals + meters
 if net_manager.menu_mode = "stats"
 {
     switch (stat_tab)
@@ -203,11 +238,13 @@ if net_manager.menu_mode = "stats"
         //competitive
         case "Competitive":
             fade_modal(modal_table)
+            manage_meters()
         break
         
         //bot mode
         case "Bot Mode":
             fade_modal(modal_table)
+            manage_meters()
         break
         
         //leaderboards
@@ -223,6 +260,11 @@ if net_manager.menu_mode = "stats"
 else //not in stats mode
 {
     fade_modal(modal_table)
+    for (var i=0; i&lt;getLength(meters); i++)
+    {
+        fade_modal(meters[i])
+        meters[i] = NO_HANDLE
+    }
 }
 
 </string>

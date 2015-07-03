@@ -7,15 +7,16 @@ if not m.visible or not m.highlightable return false
 var xpos = cursor.x
 var ypos = cursor.y
 
-if global.using_gamepad
+if m.object_index = modal_meter
 {
-    xpos = cursor.x
-    ypos = cursor.y
+    if point_distance(m.x,m.y,xpos,ypos) < m.radius
+        return true
+    else return false
 }
-
-if xpos >= m.left and ypos >= m.top and xpos <= m.left+m.width*m.scale and ypos <= m.top+m.height*m.scale
+else
 {
-    return true
+    if xpos >= m.left and ypos >= m.top and xpos <= m.left+m.width*m.scale and ypos <= m.top+m.height*m.scale
+    {
+        return true
+    } else return false
 }
-
-return false

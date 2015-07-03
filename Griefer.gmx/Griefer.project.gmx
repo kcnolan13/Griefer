@@ -997,6 +997,8 @@
       <script>scripts\write_stat_pname.gml</script>
       <script>scripts\write_stat_pnum.gml</script>
       <script>scripts\insert_global_stat.gml</script>
+      <script>scripts\draw_stat_meter.gml</script>
+      <script>scripts\manage_meters.gml</script>
     </scripts>
     <scripts name="draw">
       <scripts name="score_table">
@@ -1052,6 +1054,7 @@
       <script>scripts\draw_kill_limit.gml</script>
       <script>scripts\draw_lives.gml</script>
       <script>scripts\simple_popup.gml</script>
+      <script>scripts\web_hsv.gml</script>
     </scripts>
     <scripts name="net_utils">
       <script>scripts\find_player.gml</script>
@@ -1375,6 +1378,7 @@
     <font>fonts\fnt_boom</font>
     <font>fonts\fnt_splashscreen</font>
     <font>fonts\fnt_promoted</font>
+    <font>fonts\fnt_meter</font>
     <font>fonts\fnt_mod</font>
     <font>fonts\fnt_play</font>
     <font>fonts\fnt_cout</font>
@@ -1615,7 +1619,7 @@
       <object>objects\cursor_shotgun</object>
       <object>objects\cursor_placeholder2</object>
     </objects>
-    <objects name="buttons">
+    <objects name="GUI">
       <objects name="main_menu">
         <object>objects\bn_play</object>
         <object>objects\bn_tab</object>
@@ -1661,6 +1665,7 @@
       </objects>
       <object>objects\modal_button</object>
       <object>objects\modal_table</object>
+      <object>objects\modal_meter</object>
       <object>objects\toggle_button_generic</object>
       <object>objects\button_generic</object>
     </objects>
@@ -1721,7 +1726,11 @@
       <room>rooms\map_placeholder2</room>
     </rooms>
   </rooms>
-  <constants number="99">
+  <constants number="103">
+    <constant name="METER_RANK">0</constant>
+    <constant name="METER_PPL">1</constant>
+    <constant name="METER_WL">3</constant>
+    <constant name="METER_KDR">2</constant>
     <constant name="POINTS_ASSIST">50</constant>
     <constant name="POINTS_GIB">10</constant>
     <constant name="POINTS_KILL">100</constant>

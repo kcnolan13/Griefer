@@ -26,6 +26,8 @@
           <argument>
             <kind>1</kind>
             <string>///initialization
+draw_set_swf_aa_level(1)
+draw_enable_swf_aa(true)
 
 seed = 30
 
@@ -1282,8 +1284,8 @@ if room = rm_lobby
             case "stats":
                 if is_my_avatar(ID) and stat_manager.stat_tab != stat_manager.tabs[2]
                 {
-                    objVarWrite(ID,"dude_y",room_height*1.75/3-64)
-                    objVarWrite(ID,"dude_x",room_width*1/9)
+                    objVarWrite(ID,"dude_y",room_height*1.75/3-32)
+                    objVarWrite(ID,"dude_x",room_width*1/5)
                 }
                 else
                 {
@@ -1372,8 +1374,8 @@ if room = rm_menu or room = rm_lobby
         case "stats":
             if stat_manager.stat_tab != stat_manager.tabs[2]
             {
-                dude_x = room_width*1/9
-                dude_y = room_height*1.75/3-64
+                dude_x = room_width*1/5
+                dude_y = room_height*1.75/3-32
             }
             else
             {
@@ -3000,7 +3002,7 @@ menu_mode = string(menu_mode)
 for (var i=0; i&lt;instance_number(avatar); i++)
 {
     ID = instance_find(avatar,i)
-    if ID.visible and menu_mode != "armory" and real(objVarRead(ID,"pName")) != BAD_READ
+    if ID.visible and menu_mode != "armory" and menu_mode != "stats" and real(objVarRead(ID,"pName")) != BAD_READ
     {
         if room = rm_menu
         {
@@ -3011,8 +3013,9 @@ for (var i=0; i&lt;instance_number(avatar); i++)
         }
         else var yoff = 64*3.2-30
         
+        var xoff = 16*string_length(string(objVarRead(ID,"pName")))/2
         draw_set_alpha(1)
-        draw_namerank(objVarRead(ID,"pName"), objVarRead(ID,"rank"), ID.x-64*1,ID.y - yoff, 1, c_black)
+        draw_namerank(objVarRead(ID,"pName"), objVarRead(ID,"rank"), ID.x - xoff,ID.y - yoff, 1, c_black)
         //draw_text(ID.x,ID.y - 64*3,objVarRead(ID,"pName"))
         
         if DEBUG
@@ -3409,7 +3412,9 @@ test_complete_counter = 0
           <argument>
             <kind>1</kind>
             <string>///toggle show_cout
-show_cout ^= 1
+//show_cout ^= 1
+
+draw_set_swf_aa_level(draw_get_swf_aa_level() ^ 1)
 </string>
           </argument>
         </arguments>

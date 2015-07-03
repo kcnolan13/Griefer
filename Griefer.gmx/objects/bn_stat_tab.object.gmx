@@ -148,7 +148,11 @@ with bn_stat_tab
 //highlight this one
 active = true
 
-stat_manager.stat_tab = stat_tab
+if stat_manager.stat_tab != stat_tab
+{
+    stat_manager.stat_tab = stat_tab
+    fade_modal(modal_meter)
+}
 
 //global stats request
 if stat_tab = stat_manager.tabs[2]

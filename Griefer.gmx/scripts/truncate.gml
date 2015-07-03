@@ -1,6 +1,6 @@
 ///truncate(number,decimal_places)
-var number = argument0
-var decimal_places = argument1
+var number = real(argument0)
+var decimal_places = real(argument1)
 if number >= 0
     return round(number*power(10,decimal_places))/power(10,decimal_places)
 else
