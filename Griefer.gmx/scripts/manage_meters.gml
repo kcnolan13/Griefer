@@ -41,35 +41,41 @@ for (var i=0; i<getLength(meters); i++)
     
     if instance_exists(met)
     {
-        //keep each meter up-to-date with stats
-        if i = METER_KDR
+        if not met.fade_out
         {
-            met.meter_val = truncate(varRead("kdr"),2)
-            if varRead("kills") > 0
-                met.meter_actual_percent = varRead("kills") / (varRead("kills")+varRead("deaths"))
-            else    
-                met.meter_actual_percent = 0
-        }
-        else if i = METER_WL
-        {
-            met.meter_val = truncate(varRead("wl"),2)
-            if varRead("wins") > 0 or varRead("losses") > 0
-                met.meter_actual_percent = varRead("wins") / (varRead("wins")+varRead("losses"))
-            else    
-                met.meter_actual_percent = 0
-        }
-        else if i = METER_PPL
-        {
-            met.meter_val = truncate(varRead("ppl"),2)
-            met.meter_actual_percent = varRead("ppl") / ppl_max
-        }
-        else if i = METER_RANK
-        {
-            met.meter_val = varRead("rank")
-            if global.num_ranks > -1 and varRead("rank") > -1
-                met.meter_actual_percent = varRead("rank")/global.num_ranks
-            else    
-                met.meter_actual_percent = 0
+            //keep each meter up-to-date with stats
+            if i = METER_KDR
+            {
+                met.meter_val = truncate(varRead("kdr"),2)
+                met.meter_val_places = 2
+                if varRead("kills") > 0
+                    met.meter_actual_percent = varRead("kills") / (varRead("kills")+varRead("deaths"))
+                else    
+                    met.meter_actual_percent = 0
+            }
+            else if i = METER_WL
+            {
+                met.meter_val = truncate(varRead("wl"),2)
+                met.meter_val_places = 2
+                if varRead("wins") > 0 or varRead("losses") > 0
+                    met.meter_actual_percent = varRead("wins") / (varRead("wins")+varRead("losses"))
+                else    
+                    met.meter_actual_percent = 0
+            }
+            else if i = METER_PPL
+            {
+                met.meter_val_places = 0
+                met.meter_val = truncate(varRead("ppl"),0)
+                met.meter_actual_percent = varRead("ppl") / ppl_max
+            }
+            else if i = METER_RANK
+            {
+                met.meter_val = varRead("rank")
+                if global.num_ranks > -1 and varRead("rank") > -1
+                    met.meter_actual_percent = varRead("rank")/global.num_ranks
+                else    
+                    met.meter_actual_percent = 0
+            }
         }
     }
     else

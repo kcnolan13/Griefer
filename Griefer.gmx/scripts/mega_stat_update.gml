@@ -19,7 +19,7 @@ if not instance_exists(net_manager.my_doll)
 if instance_exists(net_manager.my_doll)
     objVarWrite(net_manager.my_doll,stat,val)
     
-stat_update_real(stat,val,FL_NORMAL)
+stat_update_real(stat,val,stat_manager.stat_flag)
 
 if (in_match() or room = rm_lobby)
 {

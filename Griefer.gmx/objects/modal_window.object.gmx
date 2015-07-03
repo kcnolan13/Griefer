@@ -41,11 +41,13 @@ highlightable = true
 surface = NO_HANDLE
 
 //modal meter stuff
+meter_backing_percent = 0
 meter_percent = 0
 meter_val = 0
 meter_desc = 0
 meter_col_out = c_blue
 meter_col_in = c_aqua
+meter_val_places = 0
 
 img_index = -1
 
@@ -311,7 +313,14 @@ top = y
 
 if object_index = modal_meter
 {
-    draw_stat_meter(x,y,meter_val,meter_desc,meter_col_out,meter_col_in,scale,meter_percent)
+    var datVal = meter_val
+    if meter_val_places &gt; 0 and meter_val mod 1 = 0
+    {
+        datVal = string(meter_val)+"."
+        for (var i=0; i&lt;meter_val_places; i++)
+            datVal += "0"
+    }
+    draw_stat_meter(x,y,datVal,meter_desc,meter_col_out,meter_col_in,scale,meter_backing_percent,meter_percent)
     exit
 }
 

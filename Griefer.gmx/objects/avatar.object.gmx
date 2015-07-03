@@ -295,6 +295,7 @@ if not is_bot(id) and instance_exists(net_manager.local_player) and in_match() a
         obj_update_real(id,"match_assists",FL_NORMAL)
         //obj_update_real(id,"match_rank",FL_NORMAL)
     }
+    varWrite("points",objVarRead(net_manager.local_player,"points"))
     varWrite("kills",objVarRead(net_manager.local_player,"kills"))
     varWrite("deaths",objVarRead(net_manager.local_player,"deaths"))
 }
@@ -307,6 +308,7 @@ if is_bot(id) and instance_exists(my_bot) and in_match() and net_manager.room_co
     syncVarFrom(my_bot,"match_assists")
     syncVarFrom(my_bot,"kills")
     syncVarFrom(my_bot,"deaths")
+    syncVarFrom(my_bot,"points")
 }
 
 //NO LOITERING!!

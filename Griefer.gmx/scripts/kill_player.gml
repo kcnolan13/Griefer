@@ -18,7 +18,10 @@ if death_type = "die_splosion" or death_type = "die_shotgun"
     point_total += POINTS_GIB
 
 if killer = net_manager.local_player or net_manager.bot_match
+{
     objVarAdd(killer,"match_points",point_total)
+    objVarAdd(killer,"points",point_total)
+}
 
 if dead_homes != net_manager.local_player and killer = net_manager.local_player
 {
@@ -27,6 +30,16 @@ if dead_homes != net_manager.local_player and killer = net_manager.local_player
     boom_delay = compute_boom_delay()
     boom_group = random_range(0,1000000)
     boom_scale = 0.75
+    
+    //UPDATE POINTS IN DB
+    stat_update_real("points",objVarRead(killer,"points"),stat_manager.stat_flag)
+    
+    //UPDATE KILL_STREAK POTENTIALLY
+    spree = challenge_manager.spree_kills
+    spree += varRead("rollover_kstreak")
+    
+    if spree > varRead("kill_streak")
+        stat_update_real("kill_streak",spree,stat_manager.stat_flag)
     
     switch(death_type)
     {
@@ -39,7 +52,7 @@ if dead_homes != net_manager.local_player and killer = net_manager.local_player
             ID.draw_y -= ID.vsep*2
             ID.scale = boom_scale
             boom_delay += delay_spacer/2
-            varAdd("match_points",POINTS_HEADSHOT)
+            //varAdd("match_points",POINTS_HEADSHOT)
         break
         
         case "die_splosion":
@@ -51,7 +64,7 @@ if dead_homes != net_manager.local_player and killer = net_manager.local_player
             ID.draw_y -= ID.vsep*2
             ID.scale = boom_scale
             boom_delay += delay_spacer/2
-            varAdd("match_points",POINTS_GIB)
+            //varAdd("match_points",POINTS_GIB)
         break
         
         case "die_shotgun":
@@ -63,7 +76,7 @@ if dead_homes != net_manager.local_player and killer = net_manager.local_player
             ID.draw_y -= ID.vsep*2
             ID.scale = boom_scale
             boom_delay += delay_spacer/2
-            varAdd("match_points",POINTS_GIB)
+            //varAdd("match_points",POINTS_GIB)
         break
     }
     

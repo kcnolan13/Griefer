@@ -990,6 +990,8 @@
       <script>scripts\get_netstat_pnum.gml</script>
     </scripts>
     <scripts name="stats">
+      <script>scripts\draw_stat_meter.gml</script>
+      <script>scripts\manage_meters.gml</script>
       <script>scripts\sort_players.gml</script>
       <script>scripts\get_stat_pname.gml</script>
       <script>scripts\get_netstat_pname.gml</script>
@@ -997,8 +999,7 @@
       <script>scripts\write_stat_pname.gml</script>
       <script>scripts\write_stat_pnum.gml</script>
       <script>scripts\insert_global_stat.gml</script>
-      <script>scripts\draw_stat_meter.gml</script>
-      <script>scripts\manage_meters.gml</script>
+      <script>scripts\request_personal_stats.gml</script>
     </scripts>
     <scripts name="draw">
       <scripts name="score_table">
@@ -1088,6 +1089,7 @@
       <script>scripts\truncate.gml</script>
       <script>scripts\num2string_digits.gml</script>
       <script>scripts\nth_frame.gml</script>
+      <script>scripts\dif.gml</script>
     </scripts>
     <scripts name="player">
       <script>scripts\framely_view_adjust.gml</script>
@@ -1312,11 +1314,12 @@
       <script>scripts\compute_boom_delay.gml</script>
     </scripts>
     <scripts name="matchmaking">
+      <script>scripts\compute_winloss.gml</script>
+      <script>scripts\match_end_stat_updates.gml</script>
       <script>scripts\leave_matchmaking.gml</script>
       <script>scripts\start_matchmaking.gml</script>
       <script>scripts\game_mode_name.gml</script>
       <script>scripts\in_match.gml</script>
-      <script>scripts\compute_winloss.gml</script>
       <script>scripts\get_player_limit.gml</script>
     </scripts>
     <scripts name="general utilities">

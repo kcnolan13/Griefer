@@ -53,6 +53,10 @@ while (bigMessagesWaiting() and wait_counter < 500000)
             var stat_name = string(genVal2)
             var stat_val = genVal3
             printf("::: RECEIVED Personal Stat: "+string(player_name)+" -- "+string(stat_name)+" = "+string(stat_val))
+            if not objVarRead(stat_manager,stat_name+"_valid")
+            {
+                objVarWrite(stat_manager,stat_name+"_valid",true)
+            }
             //write directly to stat_manager
             objVarWrite(stat_manager,stat_name,stat_val)
         break

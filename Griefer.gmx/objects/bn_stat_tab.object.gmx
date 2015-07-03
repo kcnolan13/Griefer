@@ -165,17 +165,16 @@ if stat_tab = stat_manager.tabs[2]
 //competitive stats request
 if stat_tab = stat_manager.tabs[0]
 {
-    //request global stats
-    sendMessageReal("get_personal_stats",FL_NORMAL)
-    printf("::: sent personal stats request")
+    //request stats
+    request_personal_stats(FL_NORMAL)
+    
 }
 
 //bot stats request
 if stat_tab = stat_manager.tabs[1]
 {
-    //request global stats
-    sendMessageReal("get_personal_stats",FL_BOT)
-    printf("::: sent personal bot_stats request")
+    //request stats
+    request_personal_stats(FL_BOT)
 }
 </string>
           </argument>

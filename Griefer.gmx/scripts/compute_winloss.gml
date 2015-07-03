@@ -1,4 +1,15 @@
 ///compute_winloss()
+
+//kill streak rollover
+var guy = net_manager.local_player
+if instance_exists(guy)
+{
+    with (guy)
+    {
+            stat_update_real("rollover_kstreak",challenge_manager.spree_kills+varRead("rollover_kstreak"),stat_manager.stat_flag)
+    }
+}
+
 if not computed_winloss and string(varRead("winning_pName")) != ""
 {
     var winnah = find_player_by_pname(varRead("winning_pName"))
@@ -18,6 +29,25 @@ if not computed_winloss and string(varRead("winning_pName")) != ""
     if net_manager.local_player = winnah or is_local_teammate(winnah)
     {
         //YOU WON!
+        
+        //UPDATE WIN_STREAK POTENTIALLY
+        
+        if instance_exists(guy)
+        {
+            with guy
+            {
+                varAdd("wins",1)
+                
+                spree = 1
+                spree += varRead("rollover_wstreak")
+                    
+                stat_update_real("rollover_wstreak",spree,stat_manager.stat_flag)
+                    
+                if spree > varRead("win_streak")
+                    stat_update_real("win_streak",spree,stat_manager.stat_flag)
+            }
+        }
+        
         printf("")
         printf("YOU WON!")
         printf("")
@@ -35,8 +65,19 @@ if not computed_winloss and string(varRead("winning_pName")) != ""
         printf("")
         printf("YOU LOST!")
         printf("")
+        
         //go down a rank
         varWrite("match_flag",FL_LOSS)
+        
+        //UPDATE WIN_STREAK POTENTIALLY
+        if instance_exists(guy)
+        {
+            with guy
+            {
+                stat_update_real("rollover_wstreak",0,stat_manager.stat_flag)
+                varAdd("losses",1)
+            }
+        }
         
         rank_changed = true
         
@@ -82,3 +123,6 @@ if not computed_winloss and string(varRead("winning_pName")) != ""
     printf("")
     printf("")
 }
+
+//MATCH END STAT UPDATES
+match_end_stat_updates()

@@ -51,6 +51,21 @@ varWrite("global_rank",-1)
 varWrite("rank",-1)
 varWrite("xp",-1)
 varWrite("time",-1)
+varWrite("points",-1)
+
+//used for kdr, wl, ppl computations
+varWrite("kdr_history","")
+varWrite("ppl_history","")
+varWrite("win_history","")
+varWrite("kills_valid",false)
+varWrite("deaths_valid",false)
+varWrite("assists_valid",false)
+varWrite("wins_valid",false)
+varWrite("losses_valid",false)
+varWrite("points_valid",false)
+update_kdr = false
+update_wl = false
+update_ppl = false
 
 ppl_max = POINTS_KILL*10
 
@@ -80,8 +95,8 @@ meter_descs[METER_WL] = "W/L"
 meter_descs[METER_PPL] = "PPL"
 meter_descs[METER_RANK] = "Rank"
 
-meter_radius = 64*3
-meter_swath = 110
+meter_radius = 64*3.5
+meter_swath = 135
 meter_ang_i = 90+meter_swath/2
 meter_ang_f = 90-meter_swath/2
 meter_ang_dif = abs(meter_ang_i - meter_ang_f)
@@ -271,6 +286,80 @@ else //not in stats mode
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///update kdr, wl, ppl sometimes
+
+if update_kdr and varRead("kills_valid") and varRead("deaths_valid")
+{
+    update_kdr = false
+    var kdr = truncate(varRead("kills")/max(1,varRead("deaths")),2)
+    stat_update_real("kdr",kdr,stat_flag)
+    varWrite("kdr",kdr)
+}
+
+if update_wl and varRead("wins_valid") and varRead("losses_valid")
+{
+    update_wl = false
+    var wl = truncate(varRead("wins")/max(1,varRead("losses")),2)
+    stat_update_real("wl",wl,stat_flag)
+    varWrite("wl",wl)
+}
+
+if update_ppl and varRead("points_valid") and varRead("deaths_valid")
+{
+    update_ppl = false
+    var ppl = truncate(varRead("points")/max(1,varRead("deaths")),2)
+    stat_update_real("ppl",ppl,stat_flag)
+    varWrite("ppl",ppl)
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="5">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///match end stat updates
+
+/* this is done in compute_winloss now
+if in_match()
+{
+    match_end_stat_updates()
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="7" enumb="4">
       <action>
@@ -294,7 +383,6 @@ else //not in stats mode
 //set stat_flag
 stat_flag = FL_NORMAL
 alarm[0] = 3
-
 </string>
           </argument>
         </arguments>

@@ -177,9 +177,14 @@ varWrite("match_deaths",0)
 varWrite("match_assists",0)
 varWrite("match_rank",0)
 varWrite("get_assist",0)
+varWrite("kill_streak",0)
+varWrite("win_streak",0)
+varWrite("rollover_kstreak",false)
+varWrite("rollover_wstreak",false)
 
 varWrite("killer","")
 varWrite("assister","")
+
 /*varWrite("i_rank",0)
 varWrite("i_wins",0)
 varWrite("i_losses",0)
@@ -260,6 +265,8 @@ if is_my_avatar(id)
     obj_update_real(id,"match_points",FL_NORMAL)
     
     //sync with local avatar (who should already know this stuff
+    if varRead("points") &lt; 0
+        varWrite("points",objVarRead(net_manager,"points"))
     if varRead("kills") &lt; 0
         varWrite("kills",objVarRead(net_manager,"kills"))
     if varRead("deaths") &lt; 0

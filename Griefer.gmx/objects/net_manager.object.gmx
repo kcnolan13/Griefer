@@ -1937,17 +1937,6 @@ computed_winloss = false
 previous_room = room
 audio_stop_sound(snd_flashed)
 
-if instance_exists(local_player)
-{
-    //varWrite("rank",objVarRead(local_player,"rank"))
-    //varWrite("wins",objVarRead(local_player,"wins"))
-    //varWrite("losses",objVarRead(local_player,"losses"))
-    //varWrite("headshots",objVarRead(local_player,"headshots"))
-    //varWrite("kills",objVarRead(local_player,"kills"))
-    //varWrite("deaths",objVarRead(local_player,"deaths"))
-    //varWrite("sprees",objVarRead(local_player,"sprees"))
-}
-
 show_scores = 0
 saving_armor = 0
 saving_armor_reboot = false
@@ -2421,7 +2410,7 @@ if varRead("end_match_coming")
     
 }
 
-if room = rm_lobby and came_from_match and menu_mode != "lottery_steal" and menu_mode != "armory" and menu_mode != "challenges" and menu_mode != "settings"
+if room = rm_lobby and came_from_match and menu_mode != "lottery_steal" and menu_mode != "armory" and menu_mode != "challenges" and menu_mode != "settings" and menu_mode != "stats"
 {
     if not disable_scores
         draw_score_table(view_xview+armory_ysep, view_yview+64+armory_ysep+12)

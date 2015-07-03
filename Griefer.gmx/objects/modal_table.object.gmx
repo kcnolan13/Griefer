@@ -189,7 +189,7 @@ if grid = NO_HANDLE
     
     grid = ds_grid_create(cols,rows)
     grid_header = ds_grid_create(cols,1)
-    s_index_max = (rows+2)*row_height - height
+    s_index_max = max(1,(rows+2)*row_height - height)
     bn_top = instance_create(left+width+32+10,top+32,bn_tbottom)
     bn_top.parent_table = id
     bn_bottom = instance_create(left+width+32+10,top+height+6,bn_tbottom)
@@ -377,8 +377,15 @@ if ds_exists(grid,ds_type_grid)
           <argument>
             <kind>1</kind>
             <string>///draw the stuff
+
+if ds_exists(grid,ds_type_grid) and nth_frame(30)
+    print_ds_grid(grid)
+
 if birth_delay &gt; 0 or cols &lt; 0 or rows &lt; 0 or s_index_max &lt; 1 or row_height &lt; 1
+{
+    printf(":::WARNING: can't draw modal_table")
     exit
+}
 
 draw_set_alpha(alpha)
 
@@ -441,6 +448,7 @@ s_top = top+64
 s_bottom = top+height-64+10
 s_height = s_bottom - s_top
 s_curs_height = lerp(height/max(1,(row_height*s_index_max)),1,0.3)*s_height
+s_curs_height = constrict(s_curs_height,0,s_height)
 s_curs_percent = s_index/max(1,s_index_max)
 s_curs_top = s_top+s_curs_percent*(s_height-s_curs_height)
 s_curs_bottom = s_curs_top+s_curs_height
