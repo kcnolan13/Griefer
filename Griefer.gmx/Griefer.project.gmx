@@ -522,6 +522,7 @@
       <sprite>sprites\icon_challenges_original</sprite>
       <sprite>sprites\icon_lives</sprite>
       <sprite>sprites\icon_friends</sprite>
+      <sprite>sprites\icon_friends_small</sprite>
       <sprite>sprites\sprite401</sprite>
       <sprite>sprites\icon_armory</sprite>
       <sprite>sprites\sprite402</sprite>
@@ -990,6 +991,7 @@
       <script>scripts\get_netstat_pnum.gml</script>
     </scripts>
     <scripts name="stats">
+      <script>scripts\draw_stat_history_chart.gml</script>
       <script>scripts\draw_stat_meter.gml</script>
       <script>scripts\manage_meters.gml</script>
       <script>scripts\sort_players.gml</script>
@@ -1090,6 +1092,9 @@
       <script>scripts\num2string_digits.gml</script>
       <script>scripts\nth_frame.gml</script>
       <script>scripts\dif.gml</script>
+      <script>scripts\getLength.gml</script>
+      <script>scripts\getMax.gml</script>
+      <script>scripts\getMin.gml</script>
     </scripts>
     <scripts name="player">
       <script>scripts\framely_view_adjust.gml</script>
@@ -1336,7 +1341,6 @@
       <script>scripts\print_ds_map.gml</script>
       <script>scripts\scale_canvas.gml</script>
       <script>scripts\recompute_xp_vars.gml</script>
-      <script>scripts\getLength.gml</script>
       <script>scripts\average2.gml</script>
       <script>scripts\average3.gml</script>
       <script>scripts\average4.gml</script>
@@ -1373,6 +1377,7 @@
     <font>fonts\fnt_title</font>
     <font>fonts\fnt_title_small</font>
     <font>fonts\fnt_hud</font>
+    <font>fonts\fnt_hud_small</font>
     <fonts name="Glare">
       <font>fonts\font_glare2</font>
       <font>fonts\font_glare</font>
@@ -1385,6 +1390,8 @@
     <font>fonts\fnt_mod</font>
     <font>fonts\fnt_play</font>
     <font>fonts\fnt_cout</font>
+    <font>fonts\fnt_pstats</font>
+    <font>fonts\fnt_pstats_title</font>
   </fonts>
   <objects name="objects">
     <objects name="DONT MOVE ME">
@@ -1665,10 +1672,12 @@
       <objects name="stats">
         <object>objects\bn_tbottom</object>
         <object>objects\bn_stat_tab</object>
+        <object>objects\bn_slabel</object>
       </objects>
       <object>objects\modal_button</object>
       <object>objects\modal_table</object>
       <object>objects\modal_meter</object>
+      <object>objects\modal_stat_history</object>
       <object>objects\toggle_button_generic</object>
       <object>objects\button_generic</object>
     </objects>
@@ -1729,7 +1738,15 @@
       <room>rooms\map_placeholder2</room>
     </rooms>
   </rooms>
-  <constants number="103">
+  <constants number="111">
+    <constant name="PSTAT_TIME">7</constant>
+    <constant name="PSTAT_WIN_STREAK">6</constant>
+    <constant name="PSTAT_KILL_STREAK">5</constant>
+    <constant name="PSTAT_ASSISTS">4</constant>
+    <constant name="PSTAT_LOSSES">3</constant>
+    <constant name="PSTAT_WINS">2</constant>
+    <constant name="PSTAT_DEATHS">1</constant>
+    <constant name="PSTAT_KILLS">0</constant>
     <constant name="METER_RANK">0</constant>
     <constant name="METER_PPL">1</constant>
     <constant name="METER_WL">3</constant>

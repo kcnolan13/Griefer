@@ -36,7 +36,7 @@ if dead_homes != net_manager.local_player and killer = net_manager.local_player
     
     //UPDATE KILL_STREAK POTENTIALLY
     spree = challenge_manager.spree_kills
-    spree += varRead("rollover_kstreak")
+    spree += max(0,varRead("rollover_kstreak"))
     
     if spree > varRead("kill_streak")
         stat_update_real("kill_streak",spree,stat_manager.stat_flag)

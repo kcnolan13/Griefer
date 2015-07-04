@@ -27,12 +27,13 @@
             <kind>1</kind>
             <string>///inherit and define properties
 event_inherited()
-text = "Some Text"
-alpha_max = 0.75
+text = ""
+alpha = 0
+alpha_max = 0
+alpha_highlight = 0
 halign = fa_center
 valign = fa_center
-
-is_top = true
+font = fnt_hud_big
 
 alarm[0] = 1
 
@@ -42,12 +43,6 @@ hue = 0
 sat = 0
 val = 0
 notif_scale = 1.25
-snap_2view = true//false
-width = 64*3
-height = 64*2
-
-stat_tab = "Competitive"
-text = stat_tab
 </string>
           </argument>
         </arguments>
@@ -71,13 +66,7 @@ text = stat_tab
           <argument>
             <kind>1</kind>
             <string>///adjust for aligns
-
-    if halign = fa_center
-        x -= width/2
-    if valign = fa_center
-        y -= height/2
-
-text = stat_tab
+modal_aligns()
 </string>
           </argument>
         </arguments>
@@ -103,9 +92,6 @@ text = stat_tab
             <string>///no double clicking
 event_inherited()
 label = text
-
-if net_manager.menu_mode != "stats"
-    fade_out = true
 </string>
           </argument>
         </arguments>
@@ -136,47 +122,10 @@ if not modal_highlighted(id)
 }
 
 if clicked exit
-    clicked = 5
+    clicked = 2
 
-printf("clicked: "+label)
-audio_play_sound(snd_click,2,false)
-
-//unhighlight the others
-with bn_stat_tab
-    active = false
-    
-//highlight this one
-active = true
-
-if stat_manager.stat_tab != stat_tab
-{
-    stat_manager.stat_tab = stat_tab
-    fade_modal(modal_meter)
-    fade_modal(bn_slabel)
-}
-
-//global stats request
-if stat_tab = stat_manager.tabs[2]
-{
-    //request global stats
-    //sendMessageStr("get_global_stats",FL_NORMAL)
-    //now done from stat_manager
-}
-
-//competitive stats request
-if stat_tab = stat_manager.tabs[0]
-{
-    //request stats
-    request_personal_stats(FL_NORMAL)
-    
-}
-
-//bot stats request
-if stat_tab = stat_manager.tabs[1]
-{
-    //request stats
-    request_personal_stats(FL_BOT)
-}
+//printf("clicked: "+label)
+//audio_play_sound(snd_click,2,false)
 </string>
           </argument>
         </arguments>

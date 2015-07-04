@@ -8,13 +8,13 @@ if not instance_exists(guy)
 }
 
 
-var kdr = objVarRead(guy,"kills") / max(1,objVarRead(guy,"deaths"))
+var kdr = objVarRead(guy,"match_kills") / max(1,objVarRead(guy,"match_deaths"))
 kdr = truncate(real(kdr),2)
 
-var wl = objVarRead(net_manager,"wins") / max(1,objVarRead(net_manager,"losses"))
+var wl = objVarRead(guy,"wins") - objVarRead(guy,"losses")
 wl = truncate(real(wl),2)
 
-var ppl = objVarRead(guy,"points") / max(1,objVarRead(guy,"deaths"))
+var ppl = objVarRead(guy,"match_points") / max(1,objVarRead(guy,"match_deaths"))
 ppl = truncate(real(ppl),2)
 
 printf("::: calculated ppl: "+string(ppl)+", guy's points: "+string(objVarRead(guy,"points")))

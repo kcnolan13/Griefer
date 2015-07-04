@@ -12,8 +12,14 @@ if getLength(meters) < 1
     printf("ERROR: manage_meters cannot seem to locate meters array")
 }
 
-var bdelay = 10
-var birthmas = 10
+if not instance_exists(history_chart)
+{
+    history_chart = instance_create(room_width*2/3,room_height*1/5,modal_stat_history)
+    history_chart.birth_delay = 20
+}
+
+var bdelay = 3
+var birthmas = 3
 
 for (var i=0; i<getLength(meters); i++)
 {
@@ -46,7 +52,8 @@ for (var i=0; i<getLength(meters); i++)
             //keep each meter up-to-date with stats
             if i = METER_KDR
             {
-                met.meter_val = truncate(varRead("kdr"),2)
+                varWrite("kdr",truncate(varRead("kdr"),2))
+                met.meter_val = varRead("kdr")
                 met.meter_val_places = 2
                 if varRead("kills") > 0
                     met.meter_actual_percent = varRead("kills") / (varRead("kills")+varRead("deaths"))
@@ -55,6 +62,7 @@ for (var i=0; i<getLength(meters); i++)
             }
             else if i = METER_WL
             {
+                varWrite("wl",truncate(varRead("wl"),2))
                 met.meter_val = truncate(varRead("wl"),2)
                 met.meter_val_places = 2
                 if varRead("wins") > 0 or varRead("losses") > 0
@@ -85,3 +93,76 @@ for (var i=0; i<getLength(meters); i++)
     }
     
 }
+
+var xst = room_width*1/2
+var yst = 72+64
+var xsep = 128
+var ysep = 40
+
+var w = 64*3
+var h = 36
+
+bdelay = bdelay
+birthmas = birthmas
+
+//recreate title
+if not instance_exists(pstat_title)
+{
+    tit = instance_create(xst+xsep/2,yst,bn_slabel)
+    pstat_title = tit
+    
+    if stat_tab = tabs[0]
+        tit.text = "Competitive   Stats"
+    else
+        tit.text = "Bot   Mode   Stats"
+        
+    tit.width = 64*8
+    tit.height = 64
+    tit.font = fnt_pstats_title
+    tit.birth_delay = 2
+    tit.text_color = c_dkgray
+    yst += ysep*1.75
+}
+
+for (var i=0; i<getLength(pstats); i++)
+{
+    if not instance_exists(pstat_labels[i])
+    {
+        lab = instance_create(xst,yst,bn_slabel)
+        lab.text = capwords_super(pstats[i])+":"
+        printf("::: lab text: "+string(lab.text))
+        lab.text_color = c_dkgray
+        lab.width = w
+        lab.height = h
+        lab.label = lab.text
+        lab.birth_delay = bdelay
+        lab.font = fnt_pstats
+        bdelay += birthmas
+        pstat_labels[i] = lab
+    }
+    
+    if not instance_exists(pstat_vals[i])
+    {
+        val = instance_create(xst+xsep,yst,bn_slabel)
+        val.text = string(varRead(pstats[i]))
+        printf("::: val text: "+string(val.text))
+        val.text_color = c_black
+        val.width = w
+        val.height = h
+        val.label = val.text
+        val.font = fnt_pstats
+        val.birth_delay = bdelay
+        bdelay += birthmas
+        pstat_vals[i] = val
+    }
+    
+    yst += ysep
+    val = pstat_vals[i]
+    //keep vals up-to-date
+    if instance_exists(val)
+    {
+        val.text = string(varRead(pstats[i]))
+        val.label = val.text   
+    }
+}
+

@@ -4,6 +4,8 @@ var show_progress = argument1
 var show_bbp = argument2
 var blah = argument3
 
+amt = truncate(amt,0)
+
 if net_manager.bot_match and string(blah) != "no scaling"
     amt *= BOT_XP_SCALER
 objVarAdd(net_manager,"xp",amt)

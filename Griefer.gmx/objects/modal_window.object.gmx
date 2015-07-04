@@ -49,6 +49,24 @@ meter_col_out = c_blue
 meter_col_in = c_aqua
 meter_val_places = 0
 
+//modal stat history stuff
+col_pos = c_aqua
+col_neg = c_red
+y_thresh = 1
+history_string = ""
+record_count = 5
+
+histories[0] = ""
+histories[1] = ""
+histories[2] = ""
+history_labels[0] = "Kill Death Ratio"
+history_labels[1] = "Points Per Life"
+history_labels[2] = "Win-Loss Spread"
+records[0] = 5
+records[1] = 25
+records[2] = 100
+
+
 img_index = -1
 
 drew_left = 0
@@ -79,7 +97,7 @@ text = ""
 text_color = c_white
 text_alpha_override = true
 text_halign = fa_center
-text_valign = fa_center
+text_valign = fa_middle
 text_xoff = 0
 text_yoff = 0
 
@@ -222,6 +240,10 @@ if fade_delay
 if birth_delay &gt; 0
 {
     birth_delay --
+    
+    if fade_out
+        instance_destroy()
+    
     exit
 }
 
@@ -324,6 +346,12 @@ if object_index = modal_meter
     exit
 }
 
+if object_index = modal_stat_history
+{
+    draw_stat_history_chart(x,y,scale,col_pos,col_neg,y_threshold,history_string,record_count)
+    exit
+}
+
 if halign = fa_center
     left -= width*scale/2
 if halign = fa_right
@@ -364,7 +392,7 @@ if not surface_exists(surface)
         draw_set_font(font)
         draw_set_color(text_color)
         draw_set_halign(fa_center)
-        draw_set_valign(fa_center)
+        draw_set_valign(fa_middle)
         
         var xpos = left+width*scale/2
         var ypos = top+height*scale/2

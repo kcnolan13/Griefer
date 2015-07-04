@@ -36,6 +36,9 @@ tabs[2] = "Leaderboards"
 
 stat_tab = tabs[0]
 
+//history chart
+history_chart = NO_HANDLE
+
 //working copy of YOUR stats to be displayed on the stats page
 varWrite("ppl",-1)
 varWrite("kdr",-1)
@@ -52,6 +55,34 @@ varWrite("rank",-1)
 varWrite("xp",-1)
 varWrite("time",-1)
 varWrite("points",-1)
+
+//arrays for YOUR personal stat labels
+pstats[PSTAT_KILLS] = "kills"
+pstats[PSTAT_DEATHS] = "deaths"
+pstats[PSTAT_ASSISTS] = "assists"
+pstats[PSTAT_WINS] = "wins"
+pstats[PSTAT_LOSSES] = "losses"
+pstats[PSTAT_KILL_STREAK] = "kill_streak"
+pstats[PSTAT_WIN_STREAK] = "win_streak"
+pstats[PSTAT_TIME] = "time"
+
+len = getLength(pstats)
+
+pstat_labels[len-1] = -5
+
+for (var i=0; i&lt;len; i++)
+{
+    pstat_labels[i] = NO_HANDLE
+}
+
+pstat_vals[len-1] = -5
+for (var i=0; i&lt;len; i++)
+{
+    pstat_vals[i] = NO_HANDLE
+}
+
+pstat_title = NO_HANDLE
+leaderboards_title = NO_HANDLE
 
 //used for kdr, wl, ppl computations
 varWrite("kdr_history","")
@@ -177,22 +208,22 @@ if net_manager.menu_mode = "stats"
     {
         
         
-        w = 64*3
-        h = 64*1
+        w = 64*2.1
+        h = 72
         
         birth_delay = 1
         hue = 255
         sat = 0
         val = 0
-        
+        top = 10+h
         left = room_width/2-w/2-10
         if instance_exists(bn_logout)
         {
-            var l = bn_logout.left+bn_logout.width+5
-            var dest = lerp(l,room_width,0.5)
-            left = dest+w/2//bn_stats.left+bn_stats.width/2-w/2-10
+            var l = bn_logout.left+bn_logout.width+5+10
+            var dest = l//lerp(l,room_width,0.5)
+            left = dest+w//bn_stats.left+bn_stats.width/2-w/2-10
+            top = bn_logout.height/2+5+h/2
         }
-        top = 10+h//64*2.4-4
         
         for (var i=0; i&lt;3; i++)
         {
@@ -205,17 +236,19 @@ if net_manager.menu_mode = "stats"
             ID.active_color = make_colour_hsv(148*255/360,91*255/100,51*255/100)
             
             ID.text_halign = fa_left
-            ID.text_xoff = 72+5
-            ID.image = icon_settings
+            ID.text_xoff = 36+5
+            ID.image = icon_friends_small
             ID.stat_tab = tabs[i]
             ID.text = ID.stat_tab
+            ID.text_yoff = -2
+            ID.font = fnt_hud_small
             
             if stat_tab = tabs[i]
                 ID.active = true
             
             birth_delay += 10
             
-            top += h+10
+            left += w+10
         }
     }
 }
@@ -253,12 +286,24 @@ if net_manager.menu_mode = "stats"
         //competitive
         case "Competitive":
             fade_modal(modal_table)
+            if instance_exists(leaderboards_title)
+            {
+                fade_modal(leaderboards_title)
+                leaderboards_title = NO_HANDLE
+            }
+            
             manage_meters()
         break
         
         //bot mode
         case "Bot Mode":
             fade_modal(modal_table)
+            if instance_exists(leaderboards_title)
+            {
+                fade_modal(leaderboards_title)
+                leaderboards_title = NO_HANDLE
+            }
+            
             manage_meters()
         break
         
@@ -269,12 +314,44 @@ if net_manager.menu_mode = "stats"
                 leaderboards = instance_create(room_width*1/2,room_height*1/2+96,modal_table)
                 sendMessageReal("get_global_stats",FL_NORMAL)
             }
+            
+            if not instance_exists(leaderboards_title)
+            {
+                //recreate title
+                tit = instance_create(room_width/2,room_height*1/5,bn_slabel)
+                leaderboards_title = tit
+                tit.text = "Worldwide   Competitive   Leaderboards"
+                tit.width = 64*17
+                tit.height = 64
+                tit.font = fnt_pstats_title
+                tit.birth_delay = 10
+                tit.text_color = c_dkgray
+            }
         break
     }
 }
 else //not in stats mode
 {
     fade_modal(modal_table)
+    fade_modal(bn_slabel)
+    fade_modal(modal_stat_history)
+    
+    history_chart = NO_HANDLE
+    pstat_title = NO_HANDLE
+    leaderboards_title = NO_HANDLE
+    
+    for (var i=0; i&lt;getLength(pstat_labels[i]); i++)
+    {
+        fade_modal(pstat_labels[i])
+        pstat_labels[i] = NO_HANDLE
+    }
+    
+    for (var i=0; i&lt;getLength(pstat_vals[i]); i++)
+    {
+        fade_modal(pstat_vals[i])
+        pstat_vals[i] = NO_HANDLE
+    }
+    
     for (var i=0; i&lt;getLength(meters); i++)
     {
         fade_modal(meters[i])
