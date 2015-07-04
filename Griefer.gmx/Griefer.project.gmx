@@ -1095,6 +1095,7 @@
       <script>scripts\getLength.gml</script>
       <script>scripts\getMax.gml</script>
       <script>scripts\getMin.gml</script>
+      <script>scripts\time_ms_2string.gml</script>
     </scripts>
     <scripts name="player">
       <script>scripts\framely_view_adjust.gml</script>

@@ -30,14 +30,23 @@ stat_flag = FL_NORMAL
 
 netvars = ds_map_create()
 
+time_match_start = 0
+time_match = 0
+time_match_end = 0
+time_match_total = 0
+
 tabs[0] = "Competitive"
 tabs[1] = "Bot Mode"
 tabs[2] = "Leaderboards"
 
 stat_tab = tabs[0]
 
+wiped = false
+
 //history chart
 history_chart = NO_HANDLE
+history_chart_width = 64*7
+history_chart_height = 64*5
 
 //working copy of YOUR stats to be displayed on the stats page
 varWrite("ppl",-1)
@@ -200,13 +209,12 @@ if in_match() and net_manager.bot_match
           <argument>
             <kind>1</kind>
             <string>///manage stat tabs ---&gt; MUST BE FIRST IN STEP TO EXIT PROPERLY
-if in_match() exit
+if in_match() or room = rm_login exit
 
 if net_manager.menu_mode = "stats"
 {
     if not instance_exists(bn_stat_tab)
     {
-        
         
         w = 64*2.1
         h = 72
@@ -281,6 +289,7 @@ else //not in stats mode
             <string>///manage stat modals + meters
 if net_manager.menu_mode = "stats"
 {
+    wiped = false
     switch (stat_tab)
     {
         //competitive
@@ -330,8 +339,10 @@ if net_manager.menu_mode = "stats"
         break
     }
 }
-else //not in stats mode
+else if not wiped//not in stats mode
 {
+    wiped = true
+    
     fade_modal(modal_table)
     fade_modal(bn_slabel)
     fade_modal(modal_stat_history)
@@ -460,6 +471,11 @@ if in_match()
 //set stat_flag
 stat_flag = FL_NORMAL
 alarm[0] = 3
+
+if in_match()
+{
+    time_match_start = current_time
+}   
 </string>
           </argument>
         </arguments>

@@ -15,7 +15,7 @@ var wl = objVarRead(guy,"wins") - objVarRead(guy,"losses")
 wl = truncate(real(wl),2)
 
 var ppl = objVarRead(guy,"match_points") / max(1,objVarRead(guy,"match_deaths"))
-ppl = truncate(real(ppl),2)
+ppl = truncate(real(ppl),0)
 
 printf("::: calculated ppl: "+string(ppl)+", guy's points: "+string(objVarRead(guy,"points")))
 
@@ -25,6 +25,15 @@ stat_update_real("ppl",ppl,stat_manager.stat_flag)
 stat_update_string("kdr_history",string(kdr),stat_manager.stat_flag)
 stat_update_string("win_history",string(wl),stat_manager.stat_flag)
 stat_update_string("ppl_history",string(ppl),stat_manager.stat_flag)
+
+with stat_manager
+{
+    time_match_end = current_time
+    time_match_total = time_match_end - time_match_start
+}
+
+var time_played = objVarRead(guy,"time")+stat_manager.time_match_total
+stat_update_string("time",time_played,stat_manager.stat_flag)
 
 update_kdr = true
 update_wl = true

@@ -2,21 +2,15 @@
 var drawx = argument0
 var drawy = argument1
 var scale = argument2
-var col_pos = argument3
-var col_neg = argument4
+var col_pos_deprecated = argument3
+var col_neg_deprecated = argument4
 var y_thresh = argument5
 var hist = argument6
 var recnum = argument7
 
-var col_bg = c_dkgray
-var col_axes = c_ltgray
-var point_rad = 5*scale
-var drop_color = c_gray
-var drop_color_highlighted = c_ltgray
-
 //get bg rect dims
-var left = x
-var top = y
+left = x
+top = y
 
 if halign = fa_center
     left -= width*scale/2
@@ -24,8 +18,8 @@ if halign = fa_center
 if valign = fa_center or valign = fa_middle
     top -= width*scale/2
     
-var right = left+width*scale
-var bottom = top+height*scale
+right = left+width*scale
+bottom = top+height*scale
 
 var h = max(1,abs(bottom - top))
 var w = max(1,abs(right - left))
@@ -35,7 +29,7 @@ draw_set_color(col_bg)
 draw_rectangle(left,top,right,bottom,false)
 
 //draw title
-var title_height = h/5
+var title_height = h/6
 
 //history label box dims
 var lab_width = w/3
@@ -54,7 +48,7 @@ var rc_height = title_height*2/3
 var rc_spacer = abs(title_height-rc_height)
 var rc_left = right-rc_spacer-rc_width
 var rc_right = right-rc_spacer
-var rctop = top+title_height/2-rc_height/2
+var rc_top = top+title_height/2-rc_height/2
 var rc_bottom = top+title_height/2+rc_height/2
 var rc_xmid = rc_left+rc_width/2
 var rc_ymid = rc_top+rc_height/2
@@ -62,24 +56,32 @@ var rc_ymid = rc_top+rc_height/2
 //graph dims
 var graph_spacer = 5*scale
 var graph_xextra = 32*scale
+var graph_yextra = 32*scale
 var graph_left = left+graph_spacer+graph_xextra
-var graph_right = right-graph_spacer
+var graph_right = right-graph_spacer-graph_xextra
 var graph_top = top+title_height+graph_spacer
-var graph_bottom = bottom-graph_spacer
+var graph_bottom = bottom-graph_spacer-graph_yextra
 var graph_width = max(1,abs(graph_right - graph_left))
 var graph_height = max(1,abs(graph_bottom - graph_top))
 var graph_ymid = graph_top + graph_height/2
 
+var nodata = true
+
 //parse graph data
 if recalculate
 {
+    xs = 0
+    ys = 0
+    draw_ys = 0
     xs[0] = 0
     ys[0] = 0
     draw_ys[0] = 0
     
     var i = 0
+    nodata = true
     while (string_pos(",",hist))
     {
+        nodata = false
         var pos = string_pos(",",hist)
         var strval = string_copy(hist,1,pos-1)
         //bash hist's head
@@ -89,7 +91,8 @@ if recalculate
             hist = ""
         xs[i] = i
         ys[i] = real(strval)
-        printf("::: next histval: "+strval)
+        draw_ys[i] = ys[i]
+        //printf("::: next histval: "+strval)
         i++
         
         //stop reading in data to the arrays if record count met
@@ -105,109 +108,131 @@ if recalculate
     
     var ymax = getMax(ys)
     var ymin = getMin(ys)
-    var prescaler = abs(max(ymax,ymin))/(grid_height/2)
-    
+    var prescaler = abs(ymax)/(graph_height/2)
+    //printf(":::ymax = "+string(ymax)+", ymin = "+string(ymin)+", prescaler="+string(prescaler))
     //normalize data to fit graph height
     for (var i=0; i<getLength(draw_ys); i++)
     {
-        draw_ys[i] = prescaler*draw_ys[i]
+        if draw_ys[i] >= 0
+            draw_ys[i] = draw_ys[i]/max(0.000001,prescaler)
+        else
+            draw_ys[i] = graph_height/2*(draw_ys[i])
     }
 }
 
 //draw graph axes
-draw_set_color(col_axes)
-draw_rectangle(graph_left,graph_top,graph_right,graph_bottom,true)
+var alph = draw_get_alpha()
+draw_set_alpha(alph*axes_alpha_scaler)
 
+draw_set_color(col_axes)
+for (var i=0; i<axis_line_width; i++)
+{
+    draw_rectangle(graph_left-i,graph_top-i,graph_right+i,graph_bottom+i,true)
+}
 //center line
-draw_line(graph_left,graph_ymid,graph_right,graph_ymid)
+draw_line_width(graph_left,graph_ymid,graph_right,graph_ymid,div_line_width)
 
 //major y divs
 var pointnum = getLength(draw_ys)
 var divnum = max(pointnum,5)
-var divw = grid_width/(divnum-1)
+var divw = graph_width/(divnum-1)
 
+var counta = 0
 for (var i=0; i<divnum; i++)
 {
-    draw_line(graph_left+i*divw,graph_top,graph_left+i*divw,graph_bottom)
+    counta++
+    if pointnum > 10 and pointnum < 30 and counta > 3 counta = 0
+    else if pointnum > 25 and pointnum < 105 and counta > 7 counta = 0
+    if pointnum < 10 or counta = 1
+        draw_line_width(graph_left+i*divw,graph_top,graph_left+i*divw,graph_bottom,div_line_width)
 }
 
-//draw points, lines, and data labels
-for (var i=0; i<pointnum; i++)
-{
-    var dat_color = col_neg
-    if draw_ys[i] >= 0 dat_color = col_neg
-    
-    draw_set_color(dat_color)
-    
-    var point_drawx = graph_left+i*divw
-    var point_drawy = graph_ymid+draw_ys[i]
-    
-    var point_original_value = ys[i]
-    
-    //draw line between point and next point
-    if i < pointnum-1
-    {
-        var next_point_drawx = graph_left+(i+1)*divw
-        var next_point_drawy = graph_ymid+draw_ys[i+1]
-        
-        var final_point_drawx = 0
-        var final_point_drawy = 0
-        var crossed = false
-        
-        if sign(draw_ys[i+1]) != sign(draw_ys[i])
-        {
-            //line crosses horizontal axis -- split into two
-            crossed = true
-            final_point_drawx = next_point_drawx
-            final_point_drawy = next_point_drawy
-            
-            //next point goes to the crossing at 0
-            next_point_drawy = 0
+draw_set_alpha(alph)
 
-            var dy = final_point_drawy - point_drawy
-            var dx = divw
-            var b = point_drawy
+//draw points, lines, and data labels
+if not nodata
+{
+    var counta = 0
+    for (var i=0; i<pointnum; i++)
+    {
+        var dat_color = col_neg
+        if draw_ys[i] >= 0 dat_color = col_pos
+        
+        draw_set_color(dat_color)
+        
+        var point_drawx = graph_left+i*divw
+        var point_drawy = graph_ymid-draw_ys[i]
+        
+        var point_original_value = ys[i]
+        
+        //draw line between point and next point
+        if i < pointnum-1
+        {
+            var next_point_drawx = graph_left+(i+1)*divw
+            var next_point_drawy = graph_ymid-draw_ys[i+1]
             
-            next_point_drawx = -1*dx/dy*b
+            var final_point_drawx = 0
+            var final_point_drawy = 0
+            var crossed = false
+            
+            if (draw_ys[i+1] < 0 and draw_ys[i] >= 0) or (draw_ys[i+1] >= 0 and draw_ys[i] < 0)
+            {
+                //line crosses horizontal axis -- split into two
+                crossed = true
+                final_point_drawx = next_point_drawx
+                final_point_drawy = next_point_drawy
+                
+                //next point goes to the crossing at 0
+                next_point_drawy = graph_ymid
+    
+                var dy = final_point_drawy-point_drawy
+                var dx = final_point_drawx-point_drawx
+                var m = dy/dx
+                next_point_drawx = point_drawx + (graph_ymid-point_drawy)/m
+            }
+            
+            //draw the lines as needed
+            var alph = draw_get_alpha()
+            draw_set_alpha(alph*line_alpha_scaler)
+                draw_line_width(point_drawx,point_drawy,next_point_drawx,next_point_drawy,line_width)
+                
+                if crossed
+                {
+                    if draw_get_colour() = col_neg
+                        draw_set_colour(col_pos)
+                    else draw_set_color(col_neg)
+                    draw_line_width(next_point_drawx,next_point_drawy,final_point_drawx,final_point_drawy,line_width)
+                }
+            draw_set_alpha(alph)
         }
         
-        //draw the lines as needed
-        var alph = draw_get_alpha()
-        draw_set_alpha(alph/3)
-            draw_line(point_drawx,point_drawy,next_point_drawx,next_point_drawy)
-            
-            if crossed
-            {
-                if draw_get_colour() = col_neg
-                    draw_set_colour(col_pos)
-                else draw_set_color(col_neg)
-                draw_line(next_point_drawx,next_point_drawy,final_point_drawx,final_point_drawy)
-            }
-        draw_set_alpha(alph)
+        //draw the current point
+        draw_set_color(dat_color)
+        draw_circle(point_drawx,point_drawy,point_rad,false)
+        
+        //draw the data label
+        draw_set_color(c_white)
+        draw_set_font(fnt_hud)
+        draw_set_halign(fa_center)
+        draw_set_valign(fa_top)
+        counta++
+        if pointnum > 10 and pointnum < 30 and counta > 3 counta = 0
+        else if pointnum > 25 and pointnum < 105 and counta > 7 counta = 0
+        if pointnum < 10 or counta = 1
+            draw_text_transformed(point_drawx,graph_bottom+5*scale,string(point_original_value),scale,scale,0)
     }
-    
-    //draw the current point
-    draw_set_color(dat_color)
-    draw_circle(point_drawx,point_drawy,point_rad,false)
-    
-    //draw the data label
-    draw_set_color(c_white)
-    draw_set_font(fnt_hud)
-    draw_set_halign(fa_center)
-    draw_set_valign(fa_top)
-    draw_text_transformed(point_drawx,gri_bottom+5*scale,string(point_original_value),scale,scale,0)
 }
 
 //draw +
 draw_set_color(col_pos)
-draw_set_font(fnt_hud_big)
+draw_set_font(fnt_meter)
 draw_set_halign(fa_center)
 draw_set_valign(fa_middle)
-draw_text_transformed(grid_left+grid_xextra/2+grid_spacer,grid_ymid-grid_xextra/2,"+",scale,scale,0)
+draw_text_transformed(left+graph_xextra/2,graph_ymid-graph_xextra/2,"+",scale,scale,0)
 
 //draw -
 draw_set_color(col_neg)
-draw_text_transformed(grid_left+grid_xextra/2+grid_spacer,grid_ymid+grid_xextra/2,"-",scale,scale,0)
+draw_text_transformed(left+graph_xextra/2,graph_ymid+graph_xextra/2,"-",scale,scale,0)
 
 var num_labs = getLength(history_labels)
 var num_rcs = getLength(records)
@@ -222,7 +247,7 @@ var lab_drop_bottom = lab_top+num_labs*lab_height
 var rc_drop_left = rc_left
 var rc_drop_top = rc_top
 var rc_drop_right = rc_right
-var rc_drop_bottom = rc_bottom+num_rcs*rc_height
+var rc_drop_bottom = rc_top+num_rcs*rc_height
 
 //draw stat label dropdown
 if rect_highlighted(lab_left,lab_top,lab_right,lab_bottom)
@@ -230,7 +255,7 @@ if rect_highlighted(lab_left,lab_top,lab_right,lab_bottom)
 if rect_highlighted(rc_left,rc_top,rc_right,rc_bottom)
     rc_highlighted = true
     
-draw_set_font(fnt_hud_big)
+draw_set_font(fnt_hud)
 draw_set_halign(fa_center)
 draw_set_valign(fa_middle)
     
@@ -240,6 +265,8 @@ if lab_highlighted
     {
         //draw the dropdown bg
         draw_set_color(drop_color)
+        var alph = draw_get_alpha()
+        draw_set_alpha(alph*drop_alpha_scaler)
         draw_rectangle(lab_drop_left,lab_drop_top,lab_drop_right,lab_drop_bottom,false)
         //draw each of the options and interact
         for (var i=0; i<num_labs; i++)
@@ -257,6 +284,8 @@ if lab_highlighted
                     history_string = histories[i]
                     history_label = history_labels[i]
                     y_threshold = y_thresholds[i]
+                    col_pos = col_poses[i]
+                    col_neg = col_negs[i]
                     lab_highlighted = false
                     audio(snd_click,1)
                 }
@@ -268,8 +297,10 @@ if lab_highlighted
         
             //draw text
             draw_set_color(c_white)
+            draw_set_alpha(alph)
             draw_text_transformed(lab_xmid,drop_top+lab_height/2,history_labels[i],scale,scale,0)
         }
+        draw_set_alpha(alph)
     }
     else lab_highlighted = false
 }
@@ -286,7 +317,9 @@ if rc_highlighted
     {
         //draw the dropdown bg
         draw_set_color(drop_color)
-        draw_rectangle(lab_drop_left,lab_drop_top,lab_drop_right,lab_drop_bottom,false)
+        var alph = draw_get_alpha()
+        draw_set_alpha(alph*drop_alpha_scaler)
+        draw_rectangle(rc_drop_left,rc_drop_top,rc_drop_right,rc_drop_bottom,false)
         //draw each of the options and interact
         for (var i=0; i<num_rcs; i++)
         {
@@ -309,11 +342,12 @@ if rc_highlighted
                 draw_set_color(drop_color_highlighted)
                 draw_rectangle(drop_left,drop_top,drop_right,drop_bottom,false)
             }
-        
+            draw_set_alpha(alph)
             //draw text
             draw_set_color(c_white)
             draw_text_transformed(rc_xmid,drop_top+rc_height/2,"Last "+string(records[i])+" Games",scale,scale,0)
         }
+        draw_set_alpha(alph)
     }
     else rc_highlighted = false
 }
@@ -321,5 +355,5 @@ else
 {
     //draw simple text
     draw_set_color(c_white)
-    draw_text_transformed(lab_xmid,lab_ymid,"Last "+string(recnum)+" Games",scale,scale,0)
+    draw_text_transformed(rc_xmid,rc_ymid,"Last "+string(recnum)+" Games",scale,scale,0)
 }

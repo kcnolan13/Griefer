@@ -153,6 +153,7 @@ if stat_manager.stat_tab != stat_tab
     stat_manager.stat_tab = stat_tab
     fade_modal(modal_meter)
     fade_modal(bn_slabel)
+    fade_modal(modal_stat_history)
 }
 
 //global stats request

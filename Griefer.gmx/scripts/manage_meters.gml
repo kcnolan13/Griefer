@@ -12,9 +12,9 @@ if getLength(meters) < 1
     printf("ERROR: manage_meters cannot seem to locate meters array")
 }
 
-if not instance_exists(history_chart)
+if not instance_exists(history_chart) and instance_exists(pstat_title)
 {
-    history_chart = instance_create(room_width*2/3,room_height*1/5,modal_stat_history)
+    history_chart = instance_create(pstat_title.x+64*2.25+history_chart_width/2,pstat_title.y+64*2+12+history_chart_height/2,modal_stat_history)
     history_chart.birth_delay = 20
 }
 
@@ -103,12 +103,12 @@ var w = 64*3
 var h = 36
 
 bdelay = bdelay
-birthmas = birthmas
+birthmas = 1
 
 //recreate title
 if not instance_exists(pstat_title)
 {
-    tit = instance_create(xst+xsep/2,yst,bn_slabel)
+    tit = instance_create(xst+xsep/2,yst-24,bn_slabel)
     pstat_title = tit
     
     if stat_tab = tabs[0]
@@ -128,8 +128,14 @@ for (var i=0; i<getLength(pstats); i++)
 {
     if not instance_exists(pstat_labels[i])
     {
-        lab = instance_create(xst,yst,bn_slabel)
+        lab = instance_create(xst-48,yst,bn_slabel)
         lab.text = capwords_super(pstats[i])+":"
+        
+        if pstats[i] = "time"
+        {
+            lab.text = "Time Played:"
+        }
+        
         printf("::: lab text: "+string(lab.text))
         lab.text_color = c_dkgray
         lab.width = w
@@ -144,8 +150,13 @@ for (var i=0; i<getLength(pstats); i++)
     if not instance_exists(pstat_vals[i])
     {
         val = instance_create(xst+xsep,yst,bn_slabel)
-        val.text = string(varRead(pstats[i]))
+        
+        strval = string(varRead(pstats[i]))
+        if pstats[i] = "time"
+            strval = time_ms_2string(real(varRead("time")))
+        val.text = strval
         printf("::: val text: "+string(val.text))
+        
         val.text_color = c_black
         val.width = w
         val.height = h
@@ -161,7 +172,10 @@ for (var i=0; i<getLength(pstats); i++)
     //keep vals up-to-date
     if instance_exists(val)
     {
-        val.text = string(varRead(pstats[i]))
+        strval = string(varRead(pstats[i]))
+        if pstats[i] = "time"
+            strval = time_ms_2string(real(varRead("time")))
+        val.text = strval
         val.label = val.text   
     }
 }
