@@ -82,20 +82,28 @@ var current_alpha = draw_get_alpha()
 draw_set_alpha(current_alpha/5)
 {
     draw_set_color(col_in)
-    for (var i=0; i<getLength(backing_meter_xs)-1; i++)
+    var len = getLength(backing_meter_xs)-1
+    for (var i=0; i<len; i++)
     {
         draw_line_width(backing_meter_xs[i],backing_meter_ys[i],backing_meter_xs[i+1],backing_meter_ys[i+1],bar_width/2)
+        if i < len-1
+            draw_line_width(backing_meter_xs[i],backing_meter_ys[i],backing_meter_xs[i+2],backing_meter_ys[i+2],bar_width/2)
     }
 }
 draw_set_alpha(current_alpha)
 
 //draw filled bar
 {
+    //draw_set_blend_mode(bm_add)
     draw_set_color(col_in)
-    for (var i=0; i<getLength(actual_meter_xs)-1; i++)
+    var len = getLength(actual_meter_xs)-1
+    for (var i=0; i<len; i++)
     {
         draw_line_width(actual_meter_xs[i],actual_meter_ys[i],actual_meter_xs[i+1],actual_meter_ys[i+1],bar_width)
+        if i < len-1
+            draw_line_width(actual_meter_xs[i],actual_meter_ys[i],actual_meter_xs[i+2],actual_meter_ys[i+2],bar_width)
     }
+    //draw_set_blend_mode(bm_normal)
 }
 
 //draw the value

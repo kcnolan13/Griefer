@@ -78,6 +78,11 @@ if recalculate
     draw_ys[0] = 0
     
     var i = 0
+    var data_ind = recnum-1
+    
+    if string_count(",",hist) < recnum
+        data_ind = string_count(",",hist)-1
+    
     nodata = true
     while (string_pos(",",hist))
     {
@@ -89,11 +94,12 @@ if recalculate
             hist = string_copy(hist,pos+1,string_length(hist)-pos)
         else
             hist = ""
-        xs[i] = i
-        ys[i] = real(strval)
-        draw_ys[i] = ys[i]
+        xs[data_ind] = i
+        ys[data_ind] = real(strval)
+        draw_ys[data_ind] = ys[data_ind]
         //printf("::: next histval: "+strval)
         i++
+        data_ind --
         
         //stop reading in data to the arrays if record count met
         if (i = recnum)
@@ -108,15 +114,15 @@ if recalculate
     
     var ymax = getMax(ys)
     var ymin = getMin(ys)
-    var prescaler = abs(ymax)/(graph_height/2)
+    var prescaler = abs(max(ymax,ymin))/(graph_height/2)
     //printf(":::ymax = "+string(ymax)+", ymin = "+string(ymin)+", prescaler="+string(prescaler))
     //normalize data to fit graph height
     for (var i=0; i<getLength(draw_ys); i++)
     {
-        if draw_ys[i] >= 0
+        if draw_ys[i] >= 0 or history_label = history_labels[2]
             draw_ys[i] = draw_ys[i]/max(0.000001,prescaler)
         else
-            draw_ys[i] = graph_height/2*(draw_ys[i])
+            draw_ys[i] = graph_height/2*(draw_ys[i])/abs(y_thresh)
     }
 }
 
@@ -141,8 +147,9 @@ var counta = 0
 for (var i=0; i<divnum; i++)
 {
     counta++
-    if pointnum > 10 and pointnum < 30 and counta > 3 counta = 0
-    else if pointnum > 25 and pointnum < 105 and counta > 7 counta = 0
+    if pointnum >= 10 and pointnum < 30 and counta > 3 counta = 0
+    else if pointnum >= 30 and pointnum < 60 and counta > 5 counta = 0
+    else if pointnum >= 60 and pointnum < 105 and counta > 10 counta = 0
     if pointnum < 10 or counta = 1
         draw_line_width(graph_left+i*divw,graph_top,graph_left+i*divw,graph_bottom,div_line_width)
 }
@@ -216,8 +223,9 @@ if not nodata
         draw_set_halign(fa_center)
         draw_set_valign(fa_top)
         counta++
-        if pointnum > 10 and pointnum < 30 and counta > 3 counta = 0
-        else if pointnum > 25 and pointnum < 105 and counta > 7 counta = 0
+        if pointnum >= 10 and pointnum < 30 and counta > 3 counta = 0
+        else if pointnum >= 30 and pointnum < 60 and counta > 5 counta = 0
+        else if pointnum >= 60 and pointnum < 105 and counta > 10 counta = 0
         if pointnum < 10 or counta = 1
             draw_text_transformed(point_drawx,graph_bottom+5*scale,string(point_original_value),scale,scale,0)
     }
@@ -296,7 +304,7 @@ if lab_highlighted
             }
         
             //draw text
-            draw_set_color(c_white)
+            draw_set_color(col_poses[i])
             draw_set_alpha(alph)
             draw_text_transformed(lab_xmid,drop_top+lab_height/2,history_labels[i],scale,scale,0)
         }
@@ -307,7 +315,7 @@ if lab_highlighted
 else
 {
     //draw simple text
-    draw_set_color(c_white)
+    draw_set_color(col_pos)
     draw_text_transformed(lab_xmid,lab_ymid,history_label,scale,scale,0)
 }
 

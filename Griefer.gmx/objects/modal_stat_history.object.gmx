@@ -67,8 +67,11 @@ y_thresholds[0] = 1
 y_thresholds[1] = POINTS_KILL
 y_thresholds[2] = 0
 records[0] = 5
-records[1] = 25
-records[2] = 100
+records[1] = 10
+records[2] = 25
+records[3] = 50
+records[4] = 100
+
 col_poses[0] = stat_manager.meter_col_ins[METER_WL]
 col_poses[1] = stat_manager.meter_col_ins[METER_PPL]
 col_poses[2] = web_hsv(267,100,100)
