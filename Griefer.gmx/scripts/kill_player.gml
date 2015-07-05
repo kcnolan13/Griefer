@@ -1,14 +1,29 @@
-///kill_player(player_obj,death_type,killer,hit_dir,hit_force)
+///kill_player(player_obj,death_type,killer,hit_dir,hit_force,instrument_of_death,acc_autocomplete)
 var dead_homes = argument0
 var death_type = argument1
 var killer = argument2
 var hit_dir = argument3
 var hit_force = argument4
+var instrument_of_death = argument5
+var acc_autocomplete = argument6
 
 if objVarRead(net_manager,"end_match_coming")
 {
     printf("NOTICE: can't kill player -- end match coming")
     return false
+}
+
+if instrument_of_death = spr_none
+{
+    printf(":::WARNING: kill_player passed unknown instrument of death")
+}
+else
+{
+    //get force for this instrument of death when dying normally
+    if death_type != "die_headshot" and death_type != "die_splosion" and death_type != "die_shotgun"
+    {
+        hit_force = weapon_spr_hitforce(instrument_of_death)
+    }
 }
 
 point_total = POINTS_KILL
@@ -31,6 +46,10 @@ if dead_homes != net_manager.local_player and killer = net_manager.local_player
     boom_group = random_range(0,1000000)
     boom_scale = 0.75
     
+    //for stick kills and such
+    if acc_name_autocomplete != ""
+        complete_accolade(acc_name_autocomplete)
+    
     //UPDATE POINTS IN DB
     stat_update_real("points",objVarRead(killer,"points"),stat_manager.stat_flag)
     
@@ -44,6 +63,13 @@ if dead_homes != net_manager.local_player and killer = net_manager.local_player
     switch(death_type)
     {
         case "die_headshot":
+            with challenge_manager
+            {
+                spree_headshots ++
+                if spree_headshots = 3 complete_accolade("3heads") else if spree_headshots = 6 complete_accolade("6heads")
+                else if spree_headshots = 9 complete_accolade("9heads") else if spree_headshots = 12 complete_accolade("12heads")
+            }
+            
             ID = boom_boom_pow("+"+string(POINTS_HEADSHOT)+" Headshot",global.action_word_color)
             ID.fnt = fnt_boom
             ID.extra_delay = boom_delay
@@ -56,6 +82,13 @@ if dead_homes != net_manager.local_player and killer = net_manager.local_player
         break
         
         case "die_splosion":
+            with challenge_manager
+            {
+                spree_gibs ++
+                if spree_gibs = 3 complete_accolade("3gibs") else if spree_gibs = 6 complete_accolade("6gibs")
+                else if spree_gibs = 9 complete_accolade("9gibs") else if spree_gibs = 12 complete_accolade("12gibs")
+            }
+            
             ID = boom_boom_pow("+"+string(POINTS_GIB)+" Dismembered",global.action_word_color)
             ID.fnt = fnt_boom
             ID.extra_delay = boom_delay
@@ -68,6 +101,13 @@ if dead_homes != net_manager.local_player and killer = net_manager.local_player
         break
         
         case "die_shotgun":
+            with challenge_manager
+            {
+                spree_gibs ++
+                if spree_gibs = 3 complete_accolade("3gibs") else if spree_gibs = 6 complete_accolade("6gibs")
+                else if spree_gibs = 9 complete_accolade("9gibs") else if spree_gibs = 12 complete_accolade("12gibs")
+            }
+            
             ID = boom_boom_pow("+"+string(POINTS_GIB)+" Dismembered",global.action_word_color)
             ID.fnt = fnt_boom
             ID.extra_delay = boom_delay
@@ -103,6 +143,27 @@ if dead_homes != net_manager.local_player and killer = net_manager.local_player
         string_counter = string_counter_max
         match_kills ++
         spree_kills ++
+        
+        if ninja_time > 0
+            untouched_kills ++
+            
+        //can't touch dis
+        if untouched_kills >= acc_data("cant_touch_dis",COL_NEEDED)
+        {
+            complete_accolade("cant_touch_dis")
+            untouched_kills = 0
+        }
+        
+        //kill streak accolades
+        if spree_kills = 3 complete_accolade("3ks") else if spree_kills = 5 complete_accolade("5ks")
+        else if spree_kills = 10 complete_accolade("10ks") else if spree_kills = 15 complete_accolade("15ks")
+        else if spree_kills = 20 complete_accolade("20ks") else if spree_kills = 25 complete_accolade("25ks")
+        else if spree_kills > 25 spree_kills = 0
+        
+        //dub/trip kills
+        if string_kills = 2 complete_accolade("dub_kill")
+        else if string_kills = 3 complete_accolade("trip_kill")
+        else if string_kills > 3 string_kills = 0
         
         if spree_kills >= assassin_spree_needed and not challenge_is_complete(global.ass_name)
             complete_challenge(global.ass_name)

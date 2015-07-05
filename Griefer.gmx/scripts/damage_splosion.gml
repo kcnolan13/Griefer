@@ -2,6 +2,15 @@
 if objVarRead(net_manager,"end_match_coming") return false
 
 var kill_force = FL_NO_FORCE
+var acc_autocomplete = ""
+
+if is_stick_kill
+    acc_autocomplete = "stick_kill"
+    
+if object_index = splosion_ink
+    acc_autocomplete = "ink_kill"
+else if object_index = splosion_flame or object_index = splosion_flame_instant
+    acc_autocomplete = "flame_kill"
 
 {
         //if DEBUG
@@ -93,8 +102,32 @@ var kill_force = FL_NO_FORCE
             if object_index = splosion_flashbang
             {
                 if dat_playa != net_manager.local_player and dmg > 50 and from_player = net_manager.local_player
-                    challenge_manager.flashes++
+                {   
+                    //award points for flash
+                    award_points = ceil(POINTS_FLASH*dmg/100)
+                    ID = boom_boom_pow("+"+string(award_points)+" Stun",global.action_word_color)
+                    ID.fnt = fnt_boom
+                    ID.birth_delay = 2
+                    ID.draw_y -= ID.vsep*2
+                    ID.scale = boom_scale
+            
+                    //award xp for flash
+                    award_xp = ceil(XP_FLASH*dmg/100)
+                    add_xp(award_xp,true,true,false)
                     
+                    with challenge_manager
+                    {
+                        spree_flashes++
+                        flashes++
+                        if spree_flashes >= acc_data("flash_bandicoot",COL_NEEDED)
+                        {
+                            spree_flashes = 0
+                            complete_accolade("flash_bandicoot")
+                        }
+                    }
+                }
+                
+                
                 objVarSub(dat_playa,"flash_hp",dmg)
                 obj_sendval_real(dat_playa,"flash_hp",dmg,FL_DECREMENT)
             }
@@ -184,7 +217,7 @@ var kill_force = FL_NO_FORCE
                         if object_index = splosion_ink or object_index = splosion_flame
                             kill_force = 0
                             
-                        kill_player(dat_playa,death_type, from_player,hit_dir,kill_force)
+                        kill_player(dat_playa,death_type, from_player,hit_dir,kill_force,find_instrument_of_death(object_index),acc_autocomplete)
                     }
                     else
                     {
@@ -216,7 +249,7 @@ var kill_force = FL_NO_FORCE
                         if object_index = splosion_ink or object_index = splosion_flame
                             kill_force = 0
                             
-                        kill_player(dat_playa, death_type, from_player,hit_dir,kill_force)
+                        kill_player(dat_playa, death_type, from_player,hit_dir,kill_force,find_instrument_of_death(object_index),acc_autocomplete)
                     }
                 }
             }

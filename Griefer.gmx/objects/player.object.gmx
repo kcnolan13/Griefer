@@ -845,28 +845,35 @@ if net_manager.local_player = id
         with challenge_manager
         {
             ninja_time = 0
+            untouched_kills = 0
         }
     } else
     {
         with challenge_manager
         {
             ninja_time++
-            if ninja_time &gt; ninja_time_needed and not challenge_is_complete(global.ninja_name)
+            if ninja_time &gt; acc_data("ninja",COL_NEEDED)
             {
-                complete_challenge(global.ninja_name)
+                complete_accolade("ninja")
+                ninja_time = 1
+                
+                if acc_data("ninja",COL_TOTAL) &gt;= ninjas_needed and not challenge_is_complete(global.ninja_name)
+                {
+                    complete_challenge(global.ninja_name)
+                }
             }
         }
     }
     if varRead("hp") &lt; 25
     {
         near_death = true
-    } else if varRead("hp") &gt; 50 and near_death
+    } else if varRead("hp") &gt; 90 and near_death
     {
         near_death = false
         with challenge_manager
         {
-            near_death_xps++
-            if near_death_xps &gt;= near_deaths_needed and not challenge_is_complete(global.muscle)
+            complete_accolade("survivor")
+            if acc_data("survivor",COL_TOTAL) &gt;= near_deaths_needed and not challenge_is_complete(global.muscle)
             {
                 complete_challenge(global.muscle_name)
             }
@@ -932,6 +939,11 @@ if (varRead("get_assist") &gt; 0) and (net_manager.local_player = id or master_o
     {
         match_assists++
         spree_assists++
+        
+        if spree_assists = 3
+            complete_accolade("3ass")
+        else if spree_assists = 5
+            complete_accolade("5ass")
         
         if match_assists &gt;= santa_assists and not challenge_is_complete("Santa Hat")
             complete_challenge("Santa Hat")
@@ -1770,7 +1782,7 @@ for (var i=0; i&lt;instance_number(bullet_generic); i++)
                         }
                         
                         //actually kill the homie
-                        kill_player(id,death_type,from_player,objVarRead(datBullet.id,"direction"),FL_NO_FORCE)
+                        kill_player(id,death_type,from_player,objVarRead(datBullet.id,"direction"),FL_NO_FORCE,find_instrument_of_death(datBullet.object_index),"")
                     }
                     
                     

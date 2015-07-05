@@ -423,29 +423,33 @@
     <sprites name="weapons">
       <sprite>sprites\spr_none</sprite>
       <sprite>sprites\spr_weapon_placeholder1</sprite>
+      <sprite>sprites\spr_flame</sprite>
+      <sprite>sprites\spr_ink</sprite>
+      <sprite>sprites\spr_snare</sprite>
+      <sprite>sprites\spr_smoke</sprite>
+      <sprite>sprites\spr_flashbang</sprite>
+      <sprite>sprites\spr_no_hitforce</sprite>
       <sprite>sprites\spr_pistol</sprite>
       <sprite>sprites\spr_carbine</sprite>
       <sprite>sprites\spr_rifle</sprite>
-      <sprite>sprites\spr_shotgun</sprite>
-      <sprite>sprites\spr_frag</sprite>
-      <sprite>sprites\spr_flashbang</sprite>
-      <sprite>sprites\spr_snare</sprite>
-      <sprite>sprites\spr_flame</sprite>
-      <sprite>sprites\spr_smoke</sprite>
-      <sprite>sprites\spr_sticky</sprite>
-      <sprite>sprites\spr_ink</sprite>
-      <sprite>sprites\spr_lmg</sprite>
+      <sprite>sprites\spr_tickler</sprite>
       <sprite>sprites\spr_smg</sprite>
+      <sprite>sprites\spr_minor_hitforce</sprite>
+      <sprite>sprites\spr_sticky</sprite>
+      <sprite>sprites\spr_lmg</sprite>
       <sprite>sprites\spr_longshot</sprite>
       <sprite>sprites\spr_vulcan</sprite>
       <sprite>sprites\spr_torque</sprite>
-      <sprite>sprites\spr_tickler</sprite>
       <sprite>sprites\spr_thumper</sprite>
       <sprite>sprites\spr_boltok</sprite>
-      <sprite>sprites\spr_boom</sprite>
-      <sprite>sprites\spr_rocket</sprite>
+      <sprite>sprites\spr_shotgun</sprite>
       <sprite>sprites\spr_stomper</sprite>
+      <sprite>sprites\spr_major_hitforce</sprite>
+      <sprite>sprites\spr_boom</sprite>
+      <sprite>sprites\spr_frag</sprite>
+      <sprite>sprites\spr_rocket</sprite>
       <sprite>sprites\spr_double</sprite>
+      <sprite>sprites\spr_redonk_hitforce</sprite>
       <sprite>sprites\spr_weapon_placeholder2</sprite>
     </sprites>
     <sprites name="hud">
@@ -994,6 +998,7 @@
       <script>scripts\get_netstat_pnum.gml</script>
     </scripts>
     <scripts name="accolades">
+      <script>scripts\complete_accolade.gml</script>
       <script>scripts\request_accolades.gml</script>
       <script>scripts\draw_accolade.gml</script>
       <script>scripts\init_grid_row.gml</script>
@@ -1001,12 +1006,12 @@
       <script>scripts\acc_data.gml</script>
       <script>scripts\acc_row_data.gml</script>
       <script>scripts\clear_accolade_totals.gml</script>
-      <script>scripts\complete_accolade.gml</script>
       <script>scripts\accolade_update_real.gml</script>
       <script>scripts\create_accolade.gml</script>
       <script>scripts\create_accolade_grid.gml</script>
       <script>scripts\accolades_received.gml</script>
       <script>scripts\update_scrollable_accolade_grid.gml</script>
+      <script>scripts\match_end_accolades.gml</script>
     </scripts>
     <scripts name="stats">
       <script>scripts\draw_stat_history_chart.gml</script>
@@ -1088,6 +1093,9 @@
       <script>scripts\is_team_leader.gml</script>
       <script>scripts\abort_match.gml</script>
       <script>scripts\nearest_enemy.gml</script>
+      <script>scripts\myPlayer.gml</script>
+      <script>scripts\myAvatar.gml</script>
+      <script>scripts\playerName.gml</script>
     </scripts>
     <scripts name="animations">
       <script>scripts\sync_poses_and_animations.gml</script>
@@ -1159,6 +1167,7 @@
       <script>scripts\hit_block.gml</script>
       <script>scripts\hit_bounce_target.gml</script>
       <script>scripts\damage_splosion.gml</script>
+      <script>scripts\find_instrument_of_death.gml</script>
     </scripts>
     <scripts name="hud">
       <script>scripts\draw_weapon_wheel.gml</script>
@@ -1323,6 +1332,7 @@
       <script>scripts\sticky_stuck.gml</script>
       <script>scripts\torque_charging.gml</script>
       <script>scripts\play_stick_sound.gml</script>
+      <script>scripts\weapon_spr_hitforce.gml</script>
     </scripts>
     <scripts name="fx">
       <script>scripts\build_solid_profile.gml</script>
@@ -1652,6 +1662,7 @@
       <object>objects\cursor_placeholder2</object>
     </objects>
     <objects name="GUI">
+      <object>objects\modal_button</object>
       <objects name="main_menu">
         <object>objects\bn_play</object>
         <object>objects\bn_tab</object>
@@ -1695,11 +1706,10 @@
         <object>objects\bn_tbottom</object>
         <object>objects\bn_stat_tab</object>
         <object>objects\bn_slabel</object>
+        <object>objects\modal_stat_history</object>
+        <object>objects\modal_meter</object>
+        <object>objects\modal_table</object>
       </objects>
-      <object>objects\modal_button</object>
-      <object>objects\modal_table</object>
-      <object>objects\modal_meter</object>
-      <object>objects\modal_stat_history</object>
       <object>objects\toggle_button_generic</object>
       <object>objects\button_generic</object>
     </objects>
@@ -1760,8 +1770,16 @@
       <room>rooms\map_placeholder2</room>
     </rooms>
   </rooms>
-  <constants number="121">
+  <constants number="129">
+    <constant name="FORCE_REDONK">22</constant>
+    <constant name="FORCE_MAJOR">14</constant>
+    <constant name="FORCE_MINOR">6</constant>
+    <constant name="FORCE_NONE">0</constant>
+    <constant name="XP_FLASH">75</constant>
+    <constant name="POINTS_FLASH">75</constant>
     <constant name="ACC_XP_SCALER">2</constant>
+    <constant name="COL_SOUND">8</constant>
+    <constant name="COL_NEEDED">7</constant>
     <constant name="COL_TOTAL">6</constant>
     <constant name="COL_MATCH_TOTAL">5</constant>
     <constant name="COL_POINTS">4</constant>

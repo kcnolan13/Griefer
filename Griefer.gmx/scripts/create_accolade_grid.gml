@@ -92,8 +92,8 @@ var dbug = false
     var row_xst = l
     var row_yst = row1_y
     
-    var bdelay = 5
-    var birthmas = 5
+    var bdelay = 15
+    var birthmas = 2
     
     for (var i=0; i<len; i++)
     {   

@@ -24,3 +24,5 @@ create_accolade(xst+xoff,yst,name,COL_MATCH_TOTAL)
 
 //get xp for the accolade
 add_xp(acc_data(name,COL_POINTS)*ACC_XP_SCALER,true,true,false)
+
+audio(acc_data(name,COL_SOUND),1)

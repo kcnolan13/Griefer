@@ -177,6 +177,11 @@ if varRead("local")
             }
             
             ID = instance_create_for_everyone(varRead("myX"),varRead("myY"),splosion)
+            if sticky and stuck
+            {
+                ID.is_stick_kill = true
+                printf("::: tossable_generic called for a stick_kill!")
+            }
             objVarWrite(ID,"senderId",varRead("senderId"))
             objVarWrite(ID,"local",true)
             obj_update_real(ID,"senderId",FL_NORMAL)

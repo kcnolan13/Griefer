@@ -44,6 +44,7 @@ global.challenge_grid_width = 10
 //ASSOCIATIVE DATA STRUCTURE --&gt; CHALLENGE NAME AND OBJECT ID
 global.ds_challenges = ds_map_create()
 
+
 //CHALLENGE VARIABLES
 string_counter = 0
 string_counter_max = room_speed
@@ -61,7 +62,7 @@ santa_assists = 6
 iron_assists = 4
 
 //ninja
-ninja_time_needed = 60*room_speed
+ninjas_needed = 5
 ninja_time = 0
 
 //muscle
@@ -473,6 +474,12 @@ if string_counter &gt; 0
           <argument>
             <kind>1</kind>
             <string>///challenge vars that reset with match start
+
+//accolade vars
+spree_headshots = 0
+spree_gibs = 0
+spree_flashes = 0
+untouched_kills = 0
 
 //kills
 match_points = 0

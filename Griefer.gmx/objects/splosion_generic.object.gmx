@@ -29,6 +29,8 @@
 netvars = NO_HANDLE
 event_inherited()
 
+is_stick_kill = false
+
 //DAMAGE
 radius = 360
 varWrite("falloff_x1",radius/4)

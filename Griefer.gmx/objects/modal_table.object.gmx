@@ -378,8 +378,8 @@ if ds_exists(grid,ds_type_grid)
             <kind>1</kind>
             <string>///draw the stuff
 
-if ds_exists(grid,ds_type_grid) and nth_frame(30)
-    print_ds_grid(grid)
+//if ds_exists(grid,ds_type_grid) and nth_frame(30)
+  //  print_ds_grid(grid)
 
 if birth_delay &gt; 0 or cols &lt; 0 or rows &lt; 0 or s_index_max &lt; 1 or row_height &lt; 1
 {
