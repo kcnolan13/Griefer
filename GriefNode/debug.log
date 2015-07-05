@@ -1,36 +1,2460 @@
 create table users (username VARCHAR(20), password VARCHAR(32), hat0 TEXT, helmet0 TEXT, torso0 TEXT, shoulder0 TEXT, forearm0 TEXT, leg0 TEXT, shin0 TEXT, foot0 TEXT, prop0 TEXT, hat1 TEXT, helmet1 TEXT, torso1 TEXT, shoulder1 TEXT, forearm1 TEXT, leg1 TEXT, shin1 TEXT, foot1 TEXT, prop1 TEXT, hat2 TEXT, helmet2 TEXT, torso2 TEXT, shoulder2 TEXT, forearm2 TEXT, leg2 TEXT, shin2 TEXT, foot2 TEXT, prop2 TEXT, hat3 TEXT, helmet3 TEXT, torso3 TEXT, shoulder3 TEXT, forearm3 TEXT, leg3 TEXT, shin3 TEXT, foot3 TEXT, prop3 TEXT, hat4 TEXT, helmet4 TEXT, torso4 TEXT, shoulder4 TEXT, forearm4 TEXT, leg4 TEXT, shin4 TEXT, foot4 TEXT, prop4 TEXT, hat5 TEXT, helmet5 TEXT, torso5 TEXT, shoulder5 TEXT, forearm5 TEXT, leg5 TEXT, shin5 TEXT, foot5 TEXT, prop5 TEXT, hat6 TEXT, helmet6 TEXT, torso6 TEXT, shoulder6 TEXT, forearm6 TEXT, leg6 TEXT, shin6 TEXT, foot6 TEXT, prop6 TEXT, hat7 TEXT, helmet7 TEXT, torso7 TEXT, shoulder7 TEXT, forearm7 TEXT, leg7 TEXT, shin7 TEXT, foot7 TEXT, prop7 TEXT, hat8 TEXT, helmet8 TEXT, torso8 TEXT, shoulder8 TEXT, forearm8 TEXT, leg8 TEXT, shin8 TEXT, foot8 TEXT, prop8 TEXT, hat9 TEXT, helmet9 TEXT, torso9 TEXT, shoulder9 TEXT, forearm9 TEXT, leg9 TEXT, shin9 TEXT, foot9 TEXT, prop9 TEXT, hat10 TEXT, helmet10 TEXT, torso10 TEXT, shoulder10 TEXT, forearm10 TEXT, leg10 TEXT, shin10 TEXT, foot10 TEXT, prop10 TEXT, hat11 TEXT, helmet11 TEXT, torso11 TEXT, shoulder11 TEXT, forearm11 TEXT, leg11 TEXT, shin11 TEXT, foot11 TEXT, prop11 TEXT, hat12 TEXT, helmet12 TEXT, torso12 TEXT, shoulder12 TEXT, forearm12 TEXT, leg12 TEXT, shin12 TEXT, foot12 TEXT, prop12 TEXT);
 HASHED kyle ---> 3307367
 listening on *:8080
-CONNECTED to griefer database, as id: 379
+CONNECTED to griefer database, as id: 409
 SYNCHRONIZING PLAYERS CONNECTED
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+
+Received JSON Test
+original message: {"val1": 52}
+string JSON detected
+val1 = 52
+[ { name: 'generalMessage', msg: 'greetings', val: 99 },
+  { name: 'generalMessage', msg: 'blah', val: 'plaza' },
+  'stringBean' ]
+received authentication request:
+{"username": "kyle", "password": "abc123"}
+SELECT * from users WHERE username='kyle' AND password=MD5('abc123')
+done with password query
+bad password for user: kyle
+authUname Does Not Exist
+sending first user: kyle
+
+
+incoming new username: 'kyle' : kyle
+
+
+user create:
+INSERT INTO users (username,password,hat0,helmet0,torso0,shoulder0,forearm0,leg0,shin0,foot0,prop0,hat1,helmet1,torso1,shoulder1,forearm1,leg1,shin1,foot1,prop1,hat2,helmet2,torso2,shoulder2,forearm2,leg2,shin2,foot2,prop2,hat3,helmet3,torso3,shoulder3,forearm3,leg3,shin3,foot3,prop3,hat4,helmet4,torso4,shoulder4,forearm4,leg4,shin4,foot4,prop4,hat5,helmet5,torso5,shoulder5,forearm5,leg5,shin5,foot5,prop5,hat6,helmet6,torso6,shoulder6,forearm6,leg6,shin6,foot6,prop6,hat7,helmet7,torso7,shoulder7,forearm7,leg7,shin7,foot7,prop7,hat8,helmet8,torso8,shoulder8,forearm8,leg8,shin8,foot8,prop8,hat9,helmet9,torso9,shoulder9,forearm9,leg9,shin9,foot9,prop9,hat10,helmet10,torso10,shoulder10,forearm10,leg10,shin10,foot10,prop10,hat11,helmet11,torso11,shoulder11,forearm11,leg11,shin11,foot11,prop11,hat12,helmet12,torso12,shoulder12,forearm12,leg12,shin12,foot12,prop12) VALUES ('kyle', MD5('abc123'), '0013_new-user','0009_new-user','0010_new-user','0014_new-user','0015_new-user','0011_new-user','0012_new-user','0016_new-user','0017_new-user','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty')
+
+
+user create:
+INSERT INTO stats (username, rank,xp,ppl,kdr,wl,time,points,kills,deaths,assists,wins,losses,kill_streak,win_streak,rollover_kstreak,rollover_wstreak,global_rank,kdr_history,ppl_history,win_history) VALUES ('kyle', 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+
+
+user create:
+INSERT INTO bot_stats (username, bot_rank,ppl,kdr,wl,points,kills,deaths,assists,wins,losses,kill_streak,win_streak,rollover_kstreak,rollover_wstreak,kdr_history,ppl_history,win_history) VALUES ('kyle', 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+
+
+user create:
+INSERT INTO accolades (username, dub_kill,trip_kill,stick_kill,flash_bandicoot,flame_kill,ink_kill,cant_touch_dis,mvp,highest_kd,10kd,ninja,survivor,3ass,5ass,3gibs,6gibs,9gibs,12gibs,3heads,6heads,9heads,12heads,3ks,5ks,10ks,15ks,20ks,25ks) VALUES ('kyle', 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+
+
+user create:
+INSERT INTO bot_accolades (username, dub_kill,trip_kill,stick_kill,flash_bandicoot,flame_kill,ink_kill,cant_touch_dis,mvp,highest_kd,10kd,ninja,survivor,3ass,5ass,3gibs,6gibs,9gibs,12gibs,3heads,6heads,9heads,12heads,3ks,5ks,10ks,15ks,20ks,25ks) VALUES ('kyle', 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+
+
+keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('kyle', 'Move Left', 0, 65, 0)
+
+
+keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('kyle', 'Move Right', 1, 68, 0)
+
+
+keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('kyle', 'Jump', 2, 87, 0)
+
+
+keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('kyle', 'Crouch', 3, 83, 0)
+
+
+keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('kyle', 'Evade', 4, 16, 0)
+
+
+keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('kyle', 'Previous Weapon', 5, 81, 0)
+
+
+keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('kyle', 'Next Weapon', 6, 69, 0)
+
+
+keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('kyle', 'Quickselect Sidearm', 7, 32, 0)
+
+
+keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('kyle', 'Pick Up Weapon', 8, 32, 0)
+
+
+keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('kyle', 'Reload', 9, 82, 0)
+
+
+keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('kyle', 'Shoot', 10, 1, 0)
+
+
+keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('kyle', 'Quicktoss Grenade', 11, 2, 0)
+
+
+keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('kyle', 'Select Primary', 12, 49, 0)
+
+
+keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('kyle', 'Select Secondary', 13, 50, 0)
+
+
+keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('kyle', 'Select Sidearm', 14, 51, 0)
+
+
+keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('kyle', 'Select Grenades', 15, 52, 0)
+
+
+keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('kyle', 'Drop Weapon', 16, 88, 0)
+
+
+keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('kyle', 'Mouse Sensitivity', 17, 1, 0)
+
+
+keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('kyle', 'Look Sensitivity', 18, 1, 0)
+
+
+keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('kyle', 'Swap Sticks', 19, 0, 0)
+
+
+gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('kyle', 'Move Left', 0, 32785, 1)
+
+
+gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('kyle', 'Move Right', 1, 32785, 1)
+
+
+gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('kyle', 'Jump', 2, 32769, 1)
+
+
+gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('kyle', 'Crouch', 3, 32770, 1)
+
+
+gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('kyle', 'Evade', 4, 32775, 1)
+
+
+gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('kyle', 'Previous Weapon', 5, 32779, 1)
+
+
+gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('kyle', 'Next Weapon', 6, 32780, 1)
+
+
+gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('kyle', 'Quickselect Sidearm', 7, 32772, 1)
+
+
+gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('kyle', 'Pick Up Weapon', 8, 32771, 1)
+
+
+gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('kyle', 'Reload', 9, 32773, 1)
+
+
+gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('kyle', 'Shoot', 10, 32776, 1)
+
+
+gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('kyle', 'Quicktoss Grenade', 11, 32774, 1)
+
+
+gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('kyle', 'Select Primary', 12, 32784, 1)
+
+
+gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('kyle', 'Select Secondary', 13, 32783, 1)
+
+
+gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('kyle', 'Select Sidearm', 14, 32782, 1)
+
+
+gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('kyle', 'Select Grenades', 15, 32781, 1)
+
+
+gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('kyle', 'Drop Weapon', 16, 32777, 1)
+
+
+gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('kyle', 'Mouse Sensitivity', 17, 55, 1)
+
+
+gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('kyle', 'Look Sensitivity', 18, 95, 1)
+
+
+gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('kyle', 'Swap Sticks', 19, 0, 1)
+
+
+kyle: no_mode, main_menu
+sending kyle stats to local net manager
+
+
+
+
+
+
+
+Socket Groups:
+
+	main_menu: kyle
+	tdm_lobby: 
+	tdm1: 
+	tdm2: 
+	tdm3: 
+	tdm4: 
+	tdm5: 
+	tdm6: 
+	tdm7: 
+	tdm8: 
+	ffa_lobby: 
+	ffa1: 
+	ffa2: 
+	ffa3: 
+	ffa4: 
+	ffa5: 
+	ffa6: 
+	ffa7: 
+	ffa8: 
+	versus_lobby: 
+	versus1: 
+	versus2: 
+	versus3: 
+	versus4: 
+	versus5: 
+	versus6: 
+	versus7: 
+	versus8: 
+	bot_tdm_lobby: 
+	bot_tdm1: 
+	bot_tdm2: 
+	bot_tdm3: 
+	bot_tdm4: 
+	bot_tdm5: 
+	bot_tdm6: 
+	bot_tdm7: 
+	bot_tdm8: 
+	bot_ffa_lobby: 
+	bot_ffa1: 
+	bot_ffa2: 
+	bot_ffa3: 
+	bot_ffa4: 
+	bot_ffa5: 
+	bot_ffa6: 
+	bot_ffa7: 
+	bot_ffa8: 
+	bot_versus_lobby: 
+	bot_versus1: 
+	bot_versus2: 
+	bot_versus3: 
+	bot_versus4: 
+	bot_versus5: 
+	bot_versus6: 
+	bot_versus7: 
+	bot_versus8: 
+
+
+Players Online: 1
+Playing TDM: 0
+Playing FFA: 0
+Playing Verus: 0
+Playing Bot_Verus: 0
+Playing Bot_Ffa: 0
+Playing Bot_Tdm: 0
+
+
+
+
+
+
 SYNCHRONIZING PLAYERS CONNECTED
-Kyle :: null :: null :: null :: null :: null :: null :: null :: 
-Blah :: null :: null :: null :: null :: null :: null :: null :: 
-Count Doku :: null :: null :: null :: null :: null :: null :: null :: 
-Beavis :: null :: null :: null :: null :: null :: null :: null :: 
-ron swanson :: null :: null :: null :: null :: null :: null :: null :: 
-Juiced Wookie :: null :: null :: null :: null :: null :: null :: null :: 
-Sargent Taxes Donkey :: null :: null :: null :: null :: null :: null :: null :: 
-Hashtag Droop :: null :: null :: null :: null :: null :: null :: null :: 
- Donkey Mushrooms :: null :: null :: null :: null :: null :: null :: null :: 
-Elderly Pirate Squad :: null :: null :: null :: null :: null :: null :: null :: 
-Habitual Bandit :: null :: null :: null :: null :: null :: null :: null :: 
-Prince Unicorn :: null :: null :: null :: null :: null :: null :: null :: 
- Hot Dog Trash-Man :: null :: null :: null :: null :: null :: null :: null :: 
-Bunch of Chewbaccas :: null :: null :: null :: null :: null :: null :: null :: 
- Cocoon Goat :: null :: null :: null :: null :: null :: null :: null :: 
-Touch Librarian Monk :: null :: null :: null :: null :: null :: null :: null :: 
-Filthy Mac Daddy :: null :: null :: null :: null :: null :: null :: null :: 
-Top-Notch Hog :: null :: null :: null :: null :: null :: null :: null :: 
-Killer Lizard :: null :: null :: null :: null :: null :: null :: null :: 
-Sexting Biker Gang :: null :: null :: null :: null :: null :: null :: null :: 
-swamp ass :: null :: null :: null :: null :: null :: null :: null :: 
+Sock: kyle, Obj: 0, uId: -1, ffa_players_online = 0, fl: 0
+Sock: kyle, Obj: 0, uId: -1, versus_players_online = 0, fl: 0
+Sock: kyle, Obj: 0, uId: -1, tdm_players_online = 0, fl: 0
+Sock: kyle, Obj: 0, uId: -1, bot_versus_players_online = 0, fl: 0
+Sock: kyle, Obj: 0, uId: -1, bot_ffa_players_online = 0, fl: 0
+Sock: kyle, Obj: 0, uId: -1, bot_tdm_players_online = 0, fl: 0
+Sock: kyle, Obj: 0, uId: -1, players_online = 1, fl: 0
+sendingkyle challenge stats
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'rank',
+  val: 0,
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'xp',
+  val: 0,
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'global_rank',
+  val: 0,
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'wins',
+  val: 0,
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'losses',
+  val: 0,
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'kills',
+  val: 0,
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'deaths',
+  val: 0,
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'assists',
+  val: 0,
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'hat0',
+  val: '0013_new-user',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'helmet0',
+  val: '0009_new-user',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'torso0',
+  val: '0010_new-user',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'shoulder0',
+  val: '0014_new-user',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'forearm0',
+  val: '0015_new-user',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'leg0',
+  val: '0011_new-user',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'shin0',
+  val: '0012_new-user',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'foot0',
+  val: '0016_new-user',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'prop0',
+  val: '0017_new-user',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'hat1',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'helmet1',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'torso1',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'shoulder1',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'forearm1',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'leg1',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'shin1',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'foot1',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'prop1',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'hat2',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'helmet2',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'torso2',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'shoulder2',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'forearm2',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'leg2',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'shin2',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'foot2',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'prop2',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'hat3',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'helmet3',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'torso3',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'shoulder3',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'forearm3',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'leg3',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'shin3',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'foot3',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'prop3',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'hat4',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'helmet4',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'torso4',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'shoulder4',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'forearm4',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'leg4',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'shin4',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'foot4',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'prop4',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'hat5',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'helmet5',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'torso5',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'shoulder5',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'forearm5',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'leg5',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'shin5',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'foot5',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'prop5',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'hat6',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'helmet6',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'torso6',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'shoulder6',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'forearm6',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'leg6',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'shin6',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'foot6',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'prop6',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'hat7',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'helmet7',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'torso7',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'shoulder7',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'forearm7',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'leg7',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'shin7',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'foot7',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'prop7',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'hat8',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'helmet8',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'torso8',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'shoulder8',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'forearm8',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'leg8',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'shin8',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'foot8',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'prop8',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'hat9',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'helmet9',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'torso9',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'shoulder9',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'forearm9',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'leg9',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'shin9',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'foot9',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'prop9',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'hat10',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'helmet10',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'torso10',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'shoulder10',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'forearm10',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'leg10',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'shin10',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'foot10',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'prop10',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'hat11',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'helmet11',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'torso11',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'shoulder11',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'forearm11',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'leg11',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'shin11',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'foot11',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'prop11',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'hat12',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'helmet12',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'torso12',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'shoulder12',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'forearm12',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'leg12',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'shin12',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'foot12',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'prop12',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'rank',
+  val: 0,
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'xp',
+  val: 0,
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'global_rank',
+  val: 0,
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'wins',
+  val: 0,
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'losses',
+  val: 0,
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'kills',
+  val: 0,
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'deaths',
+  val: 0,
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'assists',
+  val: 0,
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'hat0',
+  val: '0013_new-user',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'helmet0',
+  val: '0009_new-user',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'torso0',
+  val: '0010_new-user',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'shoulder0',
+  val: '0014_new-user',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'forearm0',
+  val: '0015_new-user',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'leg0',
+  val: '0011_new-user',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'shin0',
+  val: '0012_new-user',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'foot0',
+  val: '0016_new-user',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'prop0',
+  val: '0017_new-user',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'hat1',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'helmet1',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'torso1',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'shoulder1',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'forearm1',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'leg1',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'shin1',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'foot1',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'prop1',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'hat2',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'helmet2',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'torso2',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'shoulder2',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'forearm2',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'leg2',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'shin2',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'foot2',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'prop2',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'hat3',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'helmet3',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'torso3',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'shoulder3',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'forearm3',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'leg3',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'shin3',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'foot3',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'prop3',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'hat4',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'helmet4',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'torso4',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'shoulder4',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'forearm4',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'leg4',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'shin4',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'foot4',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'prop4',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'hat5',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'helmet5',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'torso5',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'shoulder5',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'forearm5',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'leg5',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'shin5',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'foot5',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'prop5',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'hat6',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'helmet6',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'torso6',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'shoulder6',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'forearm6',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'leg6',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'shin6',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'foot6',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'prop6',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'hat7',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'helmet7',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'torso7',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'shoulder7',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'forearm7',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'leg7',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'shin7',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'foot7',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'prop7',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'hat8',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'helmet8',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'torso8',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'shoulder8',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'forearm8',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'leg8',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'shin8',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'foot8',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'prop8',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'hat9',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'helmet9',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'torso9',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'shoulder9',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'forearm9',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'leg9',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'shin9',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'foot9',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'prop9',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'hat10',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'helmet10',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'torso10',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'shoulder10',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'forearm10',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'leg10',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'shin10',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'foot10',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'prop10',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'hat11',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'helmet11',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'torso11',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'shoulder11',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'forearm11',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'leg11',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'shin11',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'foot11',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'prop11',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'hat12',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'helmet12',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'torso12',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'shoulder12',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'forearm12',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'leg12',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'shin12',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'foot12',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:-52',
+  object_index: 2,
+  uniqueId: -52,
+  netvar: 'prop12',
+  val: '9999_empty',
+  flag: 0 }
+{ name: 'bigMessage',
+  msg: 'control_map',
+  val1: 0,
+  val2: 65,
+  val3: 0 }
+{ name: 'bigMessage',
+  msg: 'control_map',
+  val1: 1,
+  val2: 68,
+  val3: 0 }
+{ name: 'bigMessage',
+  msg: 'control_map',
+  val1: 2,
+  val2: 87,
+  val3: 0 }
+{ name: 'bigMessage',
+  msg: 'control_map',
+  val1: 3,
+  val2: 83,
+  val3: 0 }
+{ name: 'bigMessage',
+  msg: 'control_map',
+  val1: 4,
+  val2: 16,
+  val3: 0 }
+{ name: 'bigMessage',
+  msg: 'control_map',
+  val1: 5,
+  val2: 81,
+  val3: 0 }
+{ name: 'bigMessage',
+  msg: 'control_map',
+  val1: 6,
+  val2: 69,
+  val3: 0 }
+{ name: 'bigMessage',
+  msg: 'control_map',
+  val1: 7,
+  val2: 32,
+  val3: 0 }
+{ name: 'bigMessage',
+  msg: 'control_map',
+  val1: 8,
+  val2: 32,
+  val3: 0 }
+{ name: 'bigMessage',
+  msg: 'control_map',
+  val1: 9,
+  val2: 82,
+  val3: 0 }
+{ name: 'bigMessage',
+  msg: 'control_map',
+  val1: 10,
+  val2: 1,
+  val3: 0 }
+{ name: 'bigMessage',
+  msg: 'control_map',
+  val1: 11,
+  val2: 2,
+  val3: 0 }
+{ name: 'bigMessage',
+  msg: 'control_map',
+  val1: 12,
+  val2: 49,
+  val3: 0 }
+{ name: 'bigMessage',
+  msg: 'control_map',
+  val1: 13,
+  val2: 50,
+  val3: 0 }
+{ name: 'bigMessage',
+  msg: 'control_map',
+  val1: 14,
+  val2: 51,
+  val3: 0 }
+{ name: 'bigMessage',
+  msg: 'control_map',
+  val1: 15,
+  val2: 52,
+  val3: 0 }
+{ name: 'bigMessage',
+  msg: 'control_map',
+  val1: 16,
+  val2: 88,
+  val3: 0 }
+{ name: 'bigMessage',
+  msg: 'control_map',
+  val1: 17,
+  val2: 1,
+  val3: 0 }
+{ name: 'bigMessage',
+  msg: 'control_map',
+  val1: 18,
+  val2: 1,
+  val3: 0 }
+{ name: 'bigMessage',
+  msg: 'control_map',
+  val1: 19,
+  val2: 0,
+  val3: 0 }
+{ name: 'bigMessage',
+  msg: 'control_map',
+  val1: 0,
+  val2: 32785,
+  val3: 1 }
+{ name: 'bigMessage',
+  msg: 'control_map',
+  val1: 1,
+  val2: 32785,
+  val3: 1 }
+{ name: 'bigMessage',
+  msg: 'control_map',
+  val1: 2,
+  val2: 32769,
+  val3: 1 }
+{ name: 'bigMessage',
+  msg: 'control_map',
+  val1: 3,
+  val2: 32770,
+  val3: 1 }
+{ name: 'bigMessage',
+  msg: 'control_map',
+  val1: 4,
+  val2: 32775,
+  val3: 1 }
+{ name: 'bigMessage',
+  msg: 'control_map',
+  val1: 5,
+  val2: 32779,
+  val3: 1 }
+{ name: 'bigMessage',
+  msg: 'control_map',
+  val1: 6,
+  val2: 32780,
+  val3: 1 }
+{ name: 'bigMessage',
+  msg: 'control_map',
+  val1: 7,
+  val2: 32772,
+  val3: 1 }
+{ name: 'bigMessage',
+  msg: 'control_map',
+  val1: 8,
+  val2: 32771,
+  val3: 1 }
+{ name: 'bigMessage',
+  msg: 'control_map',
+  val1: 9,
+  val2: 32773,
+  val3: 1 }
+{ name: 'bigMessage',
+  msg: 'control_map',
+  val1: 10,
+  val2: 32776,
+  val3: 1 }
+{ name: 'bigMessage',
+  msg: 'control_map',
+  val1: 11,
+  val2: 32774,
+  val3: 1 }
+{ name: 'bigMessage',
+  msg: 'control_map',
+  val1: 12,
+  val2: 32784,
+  val3: 1 }
+{ name: 'bigMessage',
+  msg: 'control_map',
+  val1: 13,
+  val2: 32783,
+  val3: 1 }
+{ name: 'bigMessage',
+  msg: 'control_map',
+  val1: 14,
+  val2: 32782,
+  val3: 1 }
+{ name: 'bigMessage',
+  msg: 'control_map',
+  val1: 15,
+  val2: 32781,
+  val3: 1 }
+{ name: 'bigMessage',
+  msg: 'control_map',
+  val1: 16,
+  val2: 32777,
+  val3: 1 }
+{ name: 'bigMessage',
+  msg: 'control_map',
+  val1: 17,
+  val2: 55,
+  val3: 1 }
+{ name: 'bigMessage',
+  msg: 'control_map',
+  val1: 18,
+  val2: 95,
+  val3: 1 }
+{ name: 'bigMessage',
+  msg: 'control_map',
+  val1: 19,
+  val2: 0,
+  val3: 1 }
+UPDATE stats SET xp = '0' WHERE username='kyle'
+UPDATE stats SET rank = '0' WHERE username='kyle'
+SYNCHRONIZING PLAYERS CONNECTED
+Sock: kyle, Obj: 0, uId: -1, ffa_players_online = 0, fl: 0
+Sock: kyle, Obj: 0, uId: -1, versus_players_online = 0, fl: 0
+Sock: kyle, Obj: 0, uId: -1, tdm_players_online = 0, fl: 0
+Sock: kyle, Obj: 0, uId: -1, bot_versus_players_online = 0, fl: 0
+Sock: kyle, Obj: 0, uId: -1, bot_ffa_players_online = 0, fl: 0
+Sock: kyle, Obj: 0, uId: -1, bot_tdm_players_online = 0, fl: 0
+Sock: kyle, Obj: 0, uId: -1, players_online = 1, fl: 0
+kyle :: null :: null :: null :: null :: null :: null :: null :: 
+ > griefer_stats_raw.txt
+SYNCHRONIZING PLAYERS CONNECTED
+Sock: kyle, Obj: 0, uId: -1, ffa_players_online = 0, fl: 0
+Sock: kyle, Obj: 0, uId: -1, versus_players_online = 0, fl: 0
+Sock: kyle, Obj: 0, uId: -1, tdm_players_online = 0, fl: 0
+Sock: kyle, Obj: 0, uId: -1, bot_versus_players_online = 0, fl: 0
+Sock: kyle, Obj: 0, uId: -1, bot_ffa_players_online = 0, fl: 0
+Sock: kyle, Obj: 0, uId: -1, bot_tdm_players_online = 0, fl: 0
+Sock: kyle, Obj: 0, uId: -1, players_online = 1, fl: 0
+SYNCHRONIZING PLAYERS CONNECTED
+Sock: kyle, Obj: 0, uId: -1, ffa_players_online = 0, fl: 0
+Sock: kyle, Obj: 0, uId: -1, versus_players_online = 0, fl: 0
+Sock: kyle, Obj: 0, uId: -1, tdm_players_online = 0, fl: 0
+Sock: kyle, Obj: 0, uId: -1, bot_versus_players_online = 0, fl: 0
+Sock: kyle, Obj: 0, uId: -1, bot_ffa_players_online = 0, fl: 0
+Sock: kyle, Obj: 0, uId: -1, bot_tdm_players_online = 0, fl: 0
+Sock: kyle, Obj: 0, uId: -1, players_online = 1, fl: 0
+John Doe: disconnected
+deleting John Doe's socket
+
+
+
+
+
+
+
+Socket Groups:
+
+	main_menu: 
+	tdm_lobby: 
+	tdm1: 
+	tdm2: 
+	tdm3: 
+	tdm4: 
+	tdm5: 
+	tdm6: 
+	tdm7: 
+	tdm8: 
+	ffa_lobby: 
+	ffa1: 
+	ffa2: 
+	ffa3: 
+	ffa4: 
+	ffa5: 
+	ffa6: 
+	ffa7: 
+	ffa8: 
+	versus_lobby: 
+	versus1: 
+	versus2: 
+	versus3: 
+	versus4: 
+	versus5: 
+	versus6: 
+	versus7: 
+	versus8: 
+	bot_tdm_lobby: 
+	bot_tdm1: 
+	bot_tdm2: 
+	bot_tdm3: 
+	bot_tdm4: 
+	bot_tdm5: 
+	bot_tdm6: 
+	bot_tdm7: 
+	bot_tdm8: 
+	bot_ffa_lobby: 
+	bot_ffa1: 
+	bot_ffa2: 
+	bot_ffa3: 
+	bot_ffa4: 
+	bot_ffa5: 
+	bot_ffa6: 
+	bot_ffa7: 
+	bot_ffa8: 
+	bot_versus_lobby: 
+	bot_versus1: 
+	bot_versus2: 
+	bot_versus3: 
+	bot_versus4: 
+	bot_versus5: 
+	bot_versus6: 
+	bot_versus7: 
+	bot_versus8: 
+
+
+Players Online: 0
+Playing TDM: 0
+Playing FFA: 0
+Playing Verus: 0
+Playing Bot_Verus: 0
+Playing Bot_Ffa: 0
+Playing Bot_Tdm: 0
+
+
+
+
+
+
+SYNCHRONIZING PLAYERS CONNECTED
+kyle: disconnected
+deleting kyle's socket
+
+
+
+
+
+
+
+Socket Groups:
+
+	main_menu: 
+	tdm_lobby: 
+	tdm1: 
+	tdm2: 
+	tdm3: 
+	tdm4: 
+	tdm5: 
+	tdm6: 
+	tdm7: 
+	tdm8: 
+	ffa_lobby: 
+	ffa1: 
+	ffa2: 
+	ffa3: 
+	ffa4: 
+	ffa5: 
+	ffa6: 
+	ffa7: 
+	ffa8: 
+	versus_lobby: 
+	versus1: 
+	versus2: 
+	versus3: 
+	versus4: 
+	versus5: 
+	versus6: 
+	versus7: 
+	versus8: 
+	bot_tdm_lobby: 
+	bot_tdm1: 
+	bot_tdm2: 
+	bot_tdm3: 
+	bot_tdm4: 
+	bot_tdm5: 
+	bot_tdm6: 
+	bot_tdm7: 
+	bot_tdm8: 
+	bot_ffa_lobby: 
+	bot_ffa1: 
+	bot_ffa2: 
+	bot_ffa3: 
+	bot_ffa4: 
+	bot_ffa5: 
+	bot_ffa6: 
+	bot_ffa7: 
+	bot_ffa8: 
+	bot_versus_lobby: 
+	bot_versus1: 
+	bot_versus2: 
+	bot_versus3: 
+	bot_versus4: 
+	bot_versus5: 
+	bot_versus6: 
+	bot_versus7: 
+	bot_versus8: 
+
+
+Players Online: 0
+Playing TDM: 0
+Playing FFA: 0
+Playing Verus: 0
+Playing Bot_Verus: 0
+Playing Bot_Ffa: 0
+Playing Bot_Tdm: 0
+
+
+
+
+
+
+SYNCHRONIZING PLAYERS CONNECTED
+
+
+Log File Size: 0.053008 MegaBytes
+
+
+SYNCHRONIZING PLAYERS CONNECTED
+
+
+
+------------------------
+RECOMPUTING ALL GLOBAL RANKS
+------------------------
+
+kyle :: null :: null :: null :: null :: null :: null :: null :: 
  > griefer_stats_raw.txt
 SYNCHRONIZING PLAYERS CONNECTED
 SYNCHRONIZING PLAYERS CONNECTED
-
-
-Log File Size: 0.003406 MegaBytes
-
-
 SYNCHRONIZING PLAYERS CONNECTED

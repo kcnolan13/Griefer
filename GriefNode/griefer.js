@@ -7,6 +7,7 @@ var FL_SQL = 9;
 var FL_BOT = 15;
 var FL_MULTIPLE = 2;
 var FL_COMPETITIVE = 22;
+var FL_WIPE = "DeleteEveryDamnNoGoodUngratefulPlayer"
 
 
 var num_game_rooms = 8;
@@ -41,6 +42,10 @@ var clients = [];
 var players = []; //not sure what this is for anymore
 var rooms = [];
 
+//WIPE DB AS DESIRED
+var kill_users = [];
+//kill_users.push(FL_WIPE);
+
 //default 'main_menu' group ----> all room objects in the rooms array should have these properties
 rooms.push( {
 	groupName: "main_menu",
@@ -48,7 +53,6 @@ rooms.push( {
 	maxPlayers: "-1",
 	minPlayers: "-1"
 })
-
 
 //---- STARTUP SEQUENCE ----//
 
@@ -97,11 +101,22 @@ console.log(statement);
 //create table friends (username VARCHAR(20), friend VARCHAR(20));
 //create table challenges (username VARCHAR(20), challenge_name text);
 //create table controls (username VARCHAR(20), control_name text, control_index real, control_code real, using_gamepad real);
-//create table stats (username VARCHAR(20), rank real, xp real, ppl real, kdr real, wl real, time real, kills real, deaths real, assists real, wins real, losses real, kill_streak real, win_streak real, global_rank real)
-//create table bot_stats (username VARCHAR(20), bot_rank real, ppl real, kdr real, wl real, kills real, deaths real, assists real, wins real, losses real, kill_streak real, win_streak real)
+//create table stats (username VARCHAR(20), rank real, xp real, ppl real, kdr real, wl real, time real, points real, kills real, deaths real, assists real, wins real, losses real, kill_streak real, win_streak real, rollover_kstreak real, rollover_wstreak real, global_rank real, kdr_history text, ppl_history text, win_history text);
+//create table bot_stats (username VARCHAR(20), bot_rank real, ppl real, kdr real, wl real, points real, kills real, deaths real, assists real, wins real, losses real, kill_streak real, win_streak real, rollover_kstreak real, rollover_wstreak real, kdr_history text, ppl_history text, win_history text);
+//create table accolades (username VARCHAR (20), dub_kill real, trip_kill real, stick_kill real, flash_bandicoot real, flame_kill real, ink_kill real, cant_touch_dis real, mvp real, highest_kd real, 10kd real, ninja real, survivor real, 3ass real, 5ass real, 3gibs real, 6gibs real, 9gibs real, 12gibs real, 3heads real, 6heads real, 9heads real, 12heads real, 3ks real, 5ks real, 10ks real, 15ks real, 20ks real, 25ks real);
+//create table bot_accolades (username VARCHAR (20), dub_kill real, trip_kill real, stick_kill real, flash_bandicoot real, flame_kill real, ink_kill real, cant_touch_dis real, mvp real, highest_kd real, 10kd real, ninja real, survivor real, 3ass real, 5ass real, 3gibs real, 6gibs real, 9gibs real, 12gibs real, 3heads real, 6heads real, 9heads real, 12heads real, 3ks real, 5ks real, 10ks real, 15ks real, 20ks real, 25ks real);
+//update bot_stats set kdr_history = '1.75,5,3.50,2.50,1.67,3.33,5,3.33,1,0.5,10,2.2,1.98,0.2,0.3,0.4,4,0,0,0,2,3,4,5,6,7,2,6,7,11,6,4,1' where username='kyle'
+//update bot_stats set ppl_history = '188,532,418,262,218,465,542,390,150,200,350,150,510,125,112,100,110,190,210,50,20,10,0,0,90,99,125,150,160,110,110,96,98,45,87,356,567,225,260' where username='kyle'
+//update bot_stats set win_history = '11,10,9,8,7,6,5,4,1,2,3,4,3,2,1,0,-1,0,-1,-2,-3,-4,-3,-2,-3,-2,-1,0,0,0,0,1,1,2,3,4,5,6,7,8' where username='kyle'
+stats = ['rank','xp','ppl','kdr','wl','time','points','kills','deaths','assists','wins','losses','kill_streak','win_streak', 'rollover_kstreak', 'rollover_wstreak', 'global_rank','kdr_history','ppl_history','win_history']
+bot_stats = ['bot_rank','ppl','kdr','wl','points','kills','deaths','assists','wins','losses','kill_streak','win_streak', 'rollover_kstreak', 'rollover_wstreak', 'kdr_history','ppl_history','win_history']
+accolades = ['dub_kill','trip_kill','stick_kill','flash_bandicoot','flame_kill','ink_kill','cant_touch_dis','mvp','highest_kd','10kd','ninja','survivor','3ass','5ass','3gibs','6gibs','9gibs','12gibs','3heads','6heads','9heads','12heads','3ks','5ks','10ks','15ks','20ks','25ks'];
 
-stats = ['rank','xp','ppl','kdr','wl','time','kills','deaths','assists','wins','losses','kill_streak','win_streak','global_rank']
-bot_stats = ['bot_rank','ppl','kdr','wl','kills','deaths','assists','wins','losses','kill_streak','win_streak']
+accolades_init = []
+for (var i=0; i<accolades.length; i++)
+{
+	accolades_init.push('0');
+}
 
 stats_init = []
 for (var i=0; i<stats.length; i++)
@@ -139,6 +154,10 @@ dbConnection.on('error', function(err) {
   console.log(err.code); // 'ER_BAD_DB_ERROR'
 });
 
+for (var i=0; i<kill_users.length; i++)
+{	
+	userDelete(kill_users[i]);
+}
 
 //create 3 game socket groups and 1 lobby socket group for each game mode
 for (var i=0; i<6; i++)
@@ -499,10 +518,32 @@ io.on('connection', function(socket){
   socket.on('stat_update', function(datMessage) {
   	datMessage = ensureJSON(datMessage);
   	var term = datMessage.netvar;
-  	if (datMessage.flag ==FL_SQL)
+  	if (term.indexOf("history") != -1)
+  	{
+  		appendHistoryStat(socket,term,datMessage.val,datMessage.flag);
+  	}
+  	else if (datMessage.flag ==FL_SQL)
+  	{
   		updateStat(socket.myPlayer.pName, term, datMessage.val, FL_SQL);
+  	}
   	else
+  	{
   		updateStat(socket.myPlayer.pName, term, datMessage.val, datMessage.flag);
+  	}
+  });
+
+  //---- EXPLICIT ACCOLADE UPDATE ----//
+  socket.on('accolade_update', function(datMessage) {
+  	datMessage = ensureJSON(datMessage);
+  	var term = datMessage.netvar;
+  	if (datMessage.flag ==FL_SQL)
+  	{
+  		updateAccolade(socket.myPlayer.pName, term, datMessage.val, FL_SQL);
+  	}
+  	else
+  	{
+  		updateAccolade(socket.myPlayer.pName, term, datMessage.val, datMessage.flag);
+  	}
   });
 
   socket.on('other_player_stat_update', function(datMessage) {
@@ -547,7 +588,6 @@ io.on('connection', function(socket){
   		return true;
   	}
 
-
   	//---- FORWARD ON TO OTHER CLIENTS ----//
   	//console.log('obj_update: manual');
   	socket.broadcast.to(socket.myPlayer.room).emit('obj_update', datMessage);
@@ -555,7 +595,7 @@ io.on('connection', function(socket){
 	  //---- POSSIBLY UPDATE A DATABASE STAT ----//
 	  for (var i=0; i<stats.length; i++)
 	  {
-	  	if (term==stats[i])
+	  	if (term==stats[i] && 1==0)
 	  	{
 			updateStat(socket.myPlayer.pName, term, datMessage.val, FL_NORMAL);
 	  	}
@@ -860,6 +900,33 @@ function updateStat(username, stat, value, flag)
 	});
 }
 
+function updateAccolade(username, accolade, value, flag)
+{
+	var statement;
+
+	var table = "accolades"
+
+	if (flag==FL_BOT)
+		table = "bot_accolades"
+	statement = "UPDATE "+table+" SET "+accolade+" = '"+value+"' WHERE username="+dbConnection.escape(username);
+
+	if (flag==FL_SQL)
+		statement = accolade;
+
+	console.log(statement);
+
+	dbConnection.query(statement, function (err, rows) {
+
+		//log any errors
+		if (err)
+			console.log(err);
+		else {
+			return true;
+		}
+		return false;
+	});
+}
+
 
 function userExists(username, callback)
 {
@@ -966,6 +1033,19 @@ function alreadyLoggedIn(username, callback)
 	callback(res);
 }
 
+function userDelete(username)
+{
+	var tables = ['users','stats','bot_stats','challenges','controls'];
+	for (var i=0; i<tables.length; i++)
+	{
+		var where = " where username='"+username+"'";
+		if (username == FL_WIPE)
+			where = ""
+		var statement = "delete from "+tables[i]+where
+		execute(statement)
+	}
+}
+
 function userCreate(socket, username, password)
 {
 	//compose the query
@@ -1018,7 +1098,14 @@ function userCreate(socket, username, password)
 	execute(statement);
 
 	//accolades
+	statement = "INSERT INTO accolades ("+"username, "+accolades+") VALUES ("+dbConnection.escape(username)+', '+accolades_init+')';
+	console.log("user create:\n"+statement+"\n\n");
+	execute(statement);
 
+	//bot accolades
+	statement = "INSERT INTO bot_accolades ("+"username, "+accolades+") VALUES ("+dbConnection.escape(username)+', '+accolades_init+')';
+	console.log("user create:\n"+statement+"\n\n");
+	execute(statement);
 
 
 	//MAKE ENTRIES IN CONTROL DEFAULTS
@@ -1120,12 +1207,74 @@ function sendPermaChallenges(socket)
 	});
 }
 
+function appendHistoryStat(socket,stat,val,flag)
+{
+	//this really appends to the FRONT
+
+	var theDude = socket.myPlayer;
+	var username = socket.myPlayer.pName;
+
+	var history_max = 100
+	
+	var table = "bot_stats"
+
+	if (flag != FL_BOT)
+		table = "stats"
+
+	var select = "SELECT "+stat+" from "+table+" where username='"+username+"'";
+
+	dbConnection.query(select, function(err,rows) {
+
+			//log any errors
+			if (err)
+				console.log(err);
+
+			var hist = rows[0][stat];
+
+			//append the new val to the history string
+			if (hist.length < 2 && hist.indexOf(",") == -1)
+			{
+				//this is the first entry, so wipe out what was in there and add a comma
+				if (typeof val != "string")
+				{
+					console.log('WARNING: casting history stat update val to string')
+					val = toString(val)
+				}
+
+				hist = ''
+			}
+			else
+			{
+				//figure out how many entries there
+				var entries = hist.split(",").length
+
+				//lop its tail if too many
+				if (entries > history_max -1)
+				{
+					hist = hist.substring(0,hist.lastIndexOf(","))
+				}
+			}
+
+			//append our new value
+			hist = val+","+hist
+
+			//now update back into database
+			var update = "UPDATE "+table+" set "+stat+"='"+hist+"' where username='"+username+"'";
+			console.log(update);
+
+			execute(update);
+
+	});
+
+}
+
 function getPersonalStats(socket,flag)
 {
 	var theDude = socket.myPlayer;
 	var username = socket.myPlayer.pName;
-	var pstats = ['ppl','kdr','wl','kills','deaths','assists','wins','losses','kill_streak','win_streak'];
+	var pstats = ['ppl','kdr','wl','points','kills','deaths','assists','wins','losses','kill_streak','win_streak','kdr_history','ppl_history','win_history'];
 	var table = "bot_stats";
+
 	if (flag != FL_BOT)
 	{
 		pstats.push('rank');
@@ -1341,7 +1490,7 @@ function sendCompletePlayerStats(socket, gameRoom, objIndex, broadcast_only)
 		stat_table = "bot_stats"
 
 
-	var columns = ['stats.rank','stats.xp','stats.global_rank',stat_table+'.wins',stat_table+'.losses',stat_table+'.kills',stat_table+'.deaths',stat_table+'.assists'];
+	var columns = ['stats.rank','stats.xp','stats.global_rank',stat_table+'.points',stat_table+'.wins',stat_table+'.losses',stat_table+'.kills',stat_table+'.deaths',stat_table+'.assists',stat_table+'.kill_streak',stat_table+'.win_streak',stat_table+'.rollover_kstreak',stat_table+'.rollover_wstreak'];
 
 	var parts = ['users.hat','users.helmet','users.torso','users.shoulder','users.forearm','users.leg','users.shin','users.foot','users.prop'];
 
