@@ -538,6 +538,9 @@
       <sprite>sprites\sprite406</sprite>
       <sprite>sprites\icon_tbottom</sprite>
     </sprites>
+    <sprites name="accolades">
+      <sprite>sprites\acc_dub_kill</sprite>
+    </sprites>
     <sprite>sprites\spr_1pixel</sprite>
     <sprite>sprites\sprite393</sprite>
     <sprite>sprites\sprite392</sprite>
@@ -990,6 +993,21 @@
       </scripts>
       <script>scripts\get_netstat_pnum.gml</script>
     </scripts>
+    <scripts name="accolades">
+      <script>scripts\request_accolades.gml</script>
+      <script>scripts\draw_accolade.gml</script>
+      <script>scripts\init_grid_row.gml</script>
+      <script>scripts\update_accolade_total.gml</script>
+      <script>scripts\acc_data.gml</script>
+      <script>scripts\acc_row_data.gml</script>
+      <script>scripts\clear_accolade_totals.gml</script>
+      <script>scripts\complete_accolade.gml</script>
+      <script>scripts\accolade_update_real.gml</script>
+      <script>scripts\create_accolade.gml</script>
+      <script>scripts\create_accolade_grid.gml</script>
+      <script>scripts\accolades_received.gml</script>
+      <script>scripts\update_scrollable_accolade_grid.gml</script>
+    </scripts>
     <scripts name="stats">
       <script>scripts\draw_stat_history_chart.gml</script>
       <script>scripts\draw_stat_meter.gml</script>
@@ -1327,6 +1345,7 @@
       <script>scripts\game_mode_name.gml</script>
       <script>scripts\in_match.gml</script>
       <script>scripts\get_player_limit.gml</script>
+      <script>scripts\match_ending.gml</script>
     </scripts>
     <scripts name="general utilities">
       <script>scripts\keep_view_in_bounds.gml</script>
@@ -1403,11 +1422,12 @@
     <objects name="VITALS">
       <object>objects\input_manager</object>
       <object>objects\stat_manager</object>
+      <object>objects\accolade_manager</object>
       <object>objects\challenge_manager</object>
-      <object>objects\challenge_generic</object>
       <object>objects\character_generic</object>
       <object>objects\xp_bar</object>
-      <object>objects\modal_window</object>
+      <object>objects\challenge_generic</object>
+      <object>objects\accolade_generic</object>
       <object>objects\bpart_generic</object>
       <object>objects\popup_drawer</object>
       <object>objects\background_drawer</object>
@@ -1428,6 +1448,7 @@
       <object>objects\col_generic</object>
       <object>objects\ambient_generic</object>
       <object>objects\kLight</object>
+      <object>objects\modal_window</object>
     </objects>
     <objects name="weapons">
       <object>objects\weapon_placeholder1</object>
@@ -1739,7 +1760,17 @@
       <room>rooms\map_placeholder2</room>
     </rooms>
   </rooms>
-  <constants number="111">
+  <constants number="121">
+    <constant name="ACC_XP_SCALER">2</constant>
+    <constant name="COL_TOTAL">6</constant>
+    <constant name="COL_MATCH_TOTAL">5</constant>
+    <constant name="COL_POINTS">4</constant>
+    <constant name="COL_IMAGE">3</constant>
+    <constant name="COL_DESCR">2</constant>
+    <constant name="COL_TEXT">1</constant>
+    <constant name="COL_NAME">0</constant>
+    <constant name="MATCH_TOTAL">1</constant>
+    <constant name="TOTAL">0</constant>
     <constant name="PSTAT_TIME">7</constant>
     <constant name="PSTAT_WIN_STREAK">6</constant>
     <constant name="PSTAT_KILL_STREAK">5</constant>

@@ -154,6 +154,7 @@ if stat_manager.stat_tab != stat_tab
     fade_modal(modal_meter)
     fade_modal(bn_slabel)
     fade_modal(modal_stat_history)
+    fade_modal(accolade_generic)
 }
 
 //global stats request
@@ -167,16 +168,17 @@ if stat_tab = stat_manager.tabs[2]
 //competitive stats request
 if stat_tab = stat_manager.tabs[0]
 {
-    //request stats
+    //request stats + accolades
     request_personal_stats(FL_NORMAL)
-    
+    request_accolades(FL_NORMAL)
 }
 
 //bot stats request
 if stat_tab = stat_manager.tabs[1]
 {
-    //request stats
+    //request stats + accolades
     request_personal_stats(FL_BOT)
+    request_accolades(FL_BOT)
 }
 </string>
           </argument>

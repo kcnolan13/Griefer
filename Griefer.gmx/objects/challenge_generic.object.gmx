@@ -249,7 +249,7 @@ if in_match() and popup_show
     col_id = collision_rectangle(bbox_left,bbox_top,bbox_right,bbox_bottom,challenge_generic,false,true)
     if instance_exists(col_id) and id &lt; col_id.id
     {
-        popup_yoff -= (bbox_bottom-bbox_top)*spacer
+        popup_yoff -= (bbox_bottom-bbox_top)+spacer
     }
     
     if sweep_counter

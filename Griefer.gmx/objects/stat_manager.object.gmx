@@ -262,8 +262,7 @@ if net_manager.menu_mode = "stats"
 }
 else //not in stats mode
 {
-    if instance_exists(bn_stat_tab)
-        with bn_stat_tab fade_out = true
+    fade_modal(bn_stat_tab)
 }
 
 </string>

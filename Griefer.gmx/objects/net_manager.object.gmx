@@ -311,6 +311,7 @@ instance_create(x,y,fx)
 instance_create(x,y,popup_drawer)
 instance_create(x,y,challenge_manager)
 instance_create(x,y,stat_manager)
+instance_create(x,y,accolade_manager)
 
 netvars = ds_map_create()
 varWrite("pName","player")

@@ -40,7 +40,7 @@ if draw_normal
     //average with 1 --> they should generally be more opaque than they have been in the past
     alpha = average3(alpha,1,1)
     
-    if net_manager.menu_mode = "armory" //or (net_manager.av_popup != noone and y > room_height/2)
+    if menmode() = "armory" or menmode() = "stats" //or (net_manager.av_popup != noone and y > room_height/2)
     {
         draw_x = cursor.x
         if draw_x < room_width/2

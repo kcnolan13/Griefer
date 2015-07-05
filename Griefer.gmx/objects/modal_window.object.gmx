@@ -40,6 +40,10 @@ active_color = c_gray
 highlightable = true
 surface = NO_HANDLE
 
+hover_delay = 10
+hover_counter = 0
+show_popup = false
+
 //modal meter stuff
 meter_backing_percent = 0
 meter_percent = 0
@@ -228,6 +232,13 @@ if snapped
             <string>///all dat ish
 counter ++
 
+if snap_2view = true and snapped = false and counter &gt; 1
+{
+    snapped = true
+    view_xoff = x - view_xview
+    view_yoff = y - view_yview
+}
+
 if fade_delay
 {
     fade_delay --
@@ -245,13 +256,6 @@ if birth_delay &gt; 0
         instance_destroy()
     
     exit
-}
-
-if snap_2view = true and snapped = false and counter &gt; 1
-{
-    snapped = true
-    view_xoff = x - view_xview
-    view_yoff = y - view_yview
 }
 
 if snapped
@@ -285,6 +289,10 @@ if fade_out = true and popped_in
 
 if modal_highlighted(id)
 {
+    hover_counter ++
+    if hover_counter &gt; hover_delay
+        show_popup = true
+        
     scale = lerp(scale,scale_highlighted,scale_lerp)
     if not fade_out
     {
@@ -293,6 +301,8 @@ if modal_highlighted(id)
 }
 else
 {
+    hover_counter = 0
+    show_popup = false
     scale = lerp(scale,1,scale_lerp)
     if not fade_out
     {
@@ -361,6 +371,13 @@ if valign = fa_center
     top -= height*scale/2
 if valign = fa_bottom
     top -= height*scale/2
+    
+if object_index = accolade_generic
+{
+    draw_set_alpha(alpha*alpha_scroll_scaler)
+    draw_accolade()
+    exit
+}
 
 if not surface_exists(surface)
 {   
