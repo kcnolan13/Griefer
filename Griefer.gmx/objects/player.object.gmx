@@ -852,8 +852,9 @@ if net_manager.local_player = id
         with challenge_manager
         {
             ninja_time++
-            if ninja_time &gt; acc_data("ninja",COL_NEEDED)
+            if ninja_time &gt; acc_data("ninja",COL_NEEDED)*room_speed
             {
+                printf("::: ninja acc completed -- data in col_needed was: "+string(acc_data("ninja",COL_NEEDED)))
                 complete_accolade("ninja")
                 ninja_time = 1
                 
@@ -866,7 +867,10 @@ if net_manager.local_player = id
     }
     if varRead("hp") &lt; 25
     {
-        near_death = true
+        if varRead("alive") and alive_counter &gt; 10
+            near_death = true
+        else
+            near_death = false
     } else if varRead("hp") &gt; 90 and near_death
     {
         near_death = false
@@ -935,6 +939,7 @@ if (varRead("get_assist") &gt; 0) and (net_manager.local_player = id or master_o
     obj_update_real(id,"match_assits",FL_NORMAL)
     obj_update_real(id,"match_points",FL_NORMAL)
     
+    if myPlayer().id = id
     with challenge_manager
     {
         match_assists++
@@ -945,11 +950,11 @@ if (varRead("get_assist") &gt; 0) and (net_manager.local_player = id or master_o
         else if spree_assists = 5
             complete_accolade("5ass")
         
-        if match_assists &gt;= santa_assists and not challenge_is_complete("Santa Hat")
-            complete_challenge("Santa Hat")
+        //if match_assists &gt;= santa_assists and not challenge_is_complete("Santa Hat")
+          //  complete_challenge("Santa Hat")
             
-        if match_assists &gt;= iron_assists and not challenge_is_complete("Iron")
-            complete_challenge("Iron")
+        //if match_assists &gt;= iron_assists and not challenge_is_complete("Iron")
+          //  complete_challenge("Iron")
         
     }   
     

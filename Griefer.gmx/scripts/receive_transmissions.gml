@@ -49,12 +49,12 @@ while (bigMessagesWaiting() and wait_counter < 500000)
         break
         
         case "accolade":
-            var acc_name = string(genVal1)
+            var dat_acc_name = string(genVal1)
             var acc_val = genVal2
             var nada = genVal3
             
-            printf("::: RECEIVED Accolade: "+string(acc_name)+" = "+string(acc_val))
-            update_accolade_total(string(acc_name),acc_val,TOTAL,false)
+            printf("::: RECEIVED Accolade: "+string(dat_acc_name)+" = "+string(acc_val))
+            update_accolade_total(string(dat_acc_name),acc_val,TOTAL,false)
         break
         
         case "personal_stat":
@@ -141,7 +141,7 @@ while (genMessagesWaiting() and wait_counter < 500000)
             lock_armory = true
             if instance_exists(bn_play_tab)
                 bn_play_tab.active = true
-            net_manager.menu_mode = "play"
+            net_manager.menu_mode = "lobby"
         break
         
         case "goto_lobby":

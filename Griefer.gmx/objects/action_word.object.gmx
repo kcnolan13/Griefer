@@ -40,6 +40,8 @@ vmov = -1
 draw_x = 0
 draw_y = -1/6*view_hview
 
+is_xp = false
+
 vsep = 25
 
 group_id = random_range(0,1000000)

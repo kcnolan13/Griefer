@@ -111,6 +111,8 @@ counter++
 printf("smoke splosion!")
 if counter = 2 and find_player(varRead("senderId")) = net_manager.local_player
 {
+    //update smoke totals
+    increment_weapon_accolade("spr_smoke")
     challenge_manager.smokes ++
     printf("challenge smokes = "+string(challenge_manager.smokes))
 }

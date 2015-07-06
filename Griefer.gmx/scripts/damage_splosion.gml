@@ -109,7 +109,10 @@ else if object_index = splosion_flame or object_index = splosion_flame_instant
                     ID.fnt = fnt_boom
                     ID.birth_delay = 2
                     ID.draw_y -= ID.vsep*2
-                    ID.scale = boom_scale
+                    ID.scale = 1
+                    
+                    //update flash totals
+                    increment_weapon_accolade("spr_flashbang")
             
                     //award xp for flash
                     award_xp = ceil(XP_FLASH*dmg/100)
@@ -189,12 +192,12 @@ else if object_index = splosion_flame or object_index = splosion_flame_instant
                         {
                             challenge_manager.frag_kills++
                             
-                            if challenge_manager.frag_kills >= challenge_manager.frag_kills_needed
+                           /* if challenge_manager.frag_kills >= challenge_manager.frag_kills_needed
                                 with challenge_manager
                                 {
                                     if not challenge_is_complete(global.frag)
                                         complete_challenge(global.frag)
-                                }
+                                }*/
                         }
                     }
                     

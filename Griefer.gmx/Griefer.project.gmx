@@ -1012,6 +1012,10 @@
       <script>scripts\accolades_received.gml</script>
       <script>scripts\update_scrollable_accolade_grid.gml</script>
       <script>scripts\match_end_accolades.gml</script>
+      <script>scripts\acc_name.gml</script>
+      <script>scripts\increment_weapon_accolade.gml</script>
+      <script>scripts\acc_chal_needed.gml</script>
+      <script>scripts\update_acc_chal_needed.gml</script>
     </scripts>
     <scripts name="stats">
       <script>scripts\draw_stat_history_chart.gml</script>
@@ -1770,7 +1774,7 @@
       <room>rooms\map_placeholder2</room>
     </rooms>
   </rooms>
-  <constants number="129">
+  <constants number="131">
     <constant name="FORCE_REDONK">22</constant>
     <constant name="FORCE_MAJOR">14</constant>
     <constant name="FORCE_MINOR">6</constant>
@@ -1778,7 +1782,9 @@
     <constant name="XP_FLASH">75</constant>
     <constant name="POINTS_FLASH">75</constant>
     <constant name="ACC_XP_SCALER">2</constant>
-    <constant name="COL_SOUND">8</constant>
+    <constant name="COL_SOUND">10</constant>
+    <constant name="COL_STAT_FLAG">9</constant>
+    <constant name="COL_CHAL_NEEDED">8</constant>
     <constant name="COL_NEEDED">7</constant>
     <constant name="COL_TOTAL">6</constant>
     <constant name="COL_MATCH_TOTAL">5</constant>

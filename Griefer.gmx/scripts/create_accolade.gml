@@ -18,9 +18,6 @@ datAcc = instance_create(spawnx,spawny,accolade_generic)
     datAcc.birth_delay = 2
     datAcc.width = sprite_get_width(acc_dub_kill)
     datAcc.height = datAcc.width
-    
-    with datAcc
-        modal_aligns()
 }
 
 return datAcc

@@ -38,9 +38,15 @@ completed = false
 challenge_index = 0
 new = false
 
+auto_frame_offset = ceil(random_range(1,4))
+
+progress_varname = ""
+progress = 0
+progress_max = 0
+
 xp = 250
 
-spacer = 4
+spacer = 2
 shown_completed = false
 tripped_end_match = false
 color_incomplete = global.challenge_color_incomplete
@@ -197,6 +203,42 @@ if in_match() and popup_show
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///challenge auto completion
+
+if progress_varname != "" and nth_frame(auto_frame_offset) //reduce frames checked to save performance a bit
+{
+    progress = acc_data(progress_varname,COL_TOTAL)
+    progress_max = acc_data(progress_varname,COL_CHAL_NEEDED)
+    
+    if progress &gt; progress_max or completed
+        progress = progress_max
+        
+    if progress &gt;= progress_max and not challenge_is_complete(name) and progress_max &gt; 0
+    {
+        printf("::: auto completing challenge: "+string(name))
+        complete_challenge(name)
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///show it when you complete a challenge
 if global.using_gamepad 
 {
@@ -249,7 +291,7 @@ if in_match() and popup_show
     col_id = collision_rectangle(bbox_left,bbox_top,bbox_right,bbox_bottom,challenge_generic,false,true)
     if instance_exists(col_id) and id &lt; col_id.id
     {
-        popup_yoff -= (bbox_bottom-bbox_top)+spacer
+        popup_yoff -= (bbox_bottom-bbox_top)*spacer
     }
     
     if sweep_counter
@@ -435,7 +477,7 @@ if room = rm_menu or room = rm_lobby
         draw_mod_notification(x+72-global.moffset,y+global.moffset,icon)
         
         if cursor.x &gt;= x and cursor.y &gt;= y and cursor.x &lt;= bbox_right and cursor.y &lt;= bbox_bottom
-            and not challenge_manager.challenge_showing_popup
+            //and not challenge_manager.challenge_showing_popup
         {
             hovering = true
         }
@@ -465,7 +507,7 @@ if room = rm_menu or room = rm_lobby
                 }
             }
             
-            draw_popup_challenge(cursor.x, cursor.y, name, desc, icon, color_complete, 1)
+            draw_popup_challenge(cursor.x, cursor.y, name, "", desc, icon, color_complete, 1)
             
             //determine whether to use the surface or not
             //if completed
@@ -539,7 +581,7 @@ if in_match() and popup_show and not is_progression
     if net_manager.match_countdown
         y = view_yview+view_hview-global.challenge_popup_height+popup_yoff_original-completed_num*spacer*(bbox_bottom-bbox_top)
         
-    draw_popup_challenge(x, y, name, description, icon, color, popup_alpha)
+    draw_popup_challenge(x, y, name, "", description, icon, color, popup_alpha)
 }
 </string>
           </argument>

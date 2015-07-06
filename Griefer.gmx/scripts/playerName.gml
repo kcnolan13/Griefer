@@ -1,2 +1,2 @@
 ///playerName(player_obj)
-return objVarRead(player_obj,"pName")
+return objVarRead(argument0,"pName")

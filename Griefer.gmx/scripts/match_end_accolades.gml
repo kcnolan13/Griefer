@@ -18,7 +18,7 @@ var completed = false
     for (var i=0; i<instance_number(player); i++)
     {
         plyr = instance_find(player,i)
-        var cand = objVarRead(plyr,"match_kills")/objVarRead(plyr,"match_deaths")
+        var cand = objVarRead(plyr,"match_kills")/max(1,objVarRead(plyr,"match_deaths"))
         if cand > maxkdr
         {
             tied = false
@@ -41,7 +41,7 @@ var completed = false
     //MVP
     //find the person with the most points in the match
     grids[0] = 0
-    if string_count("tdm",net_manager.game_mode) > 0
+    if string_count("tdm",objVarRead(net_manager,"game_mode")) > 0
     {
         grids[0] = net_manager.team0
         grids[1] = net_manager.team1

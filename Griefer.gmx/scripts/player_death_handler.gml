@@ -27,6 +27,7 @@ if is_my_avatar(id)
         life_longshot_headshots = 0
         match_deaths++
         near_death_xps = 0
+        near_death = false
         if match_deaths >= underwear_deaths and not challenge_is_complete(global.underwear_name)
             complete_challenge(global.underwear_name)
     }

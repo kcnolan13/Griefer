@@ -6,6 +6,13 @@ var update_server = argument3
 
 var col_num = 0
 
+var stat_fl = acc_data(name,COL_STAT_FLAG)
+if stat_fl != FL_NORMAL and stat_manager.stat_flag != stat_fl
+{
+    printf(":::WARNING: "+string(name)+" bailing out of update_accolade_total -- stat flag mismatch")
+    return false
+}
+
 if flag = MATCH_TOTAL
     col_num = COL_MATCH_TOTAL
 else if flag = TOTAL

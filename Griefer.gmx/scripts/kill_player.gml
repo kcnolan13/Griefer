@@ -46,9 +46,18 @@ if dead_homes != net_manager.local_player and killer = net_manager.local_player
     boom_group = random_range(0,1000000)
     boom_scale = 0.75
     
+    if instrument_of_death != spr_none
+    {
+        //update permanent kill totals for this weapon
+        var spr = sprite_get_name(instrument_of_death)
+        var curr_val = acc_data(spr,COL_TOTAL)
+        printf(":::updating permanent kill total for weapon: "+string(spr))
+        update_accolade_total(spr,curr_val+1,TOTAL,true)
+    }
+    
     //for stick kills and such
-    if acc_name_autocomplete != ""
-        complete_accolade(acc_name_autocomplete)
+    if acc_autocomplete != ""
+        complete_accolade(acc_autocomplete)
     
     //UPDATE POINTS IN DB
     stat_update_real("points",objVarRead(killer,"points"),stat_manager.stat_flag)
@@ -165,7 +174,7 @@ if dead_homes != net_manager.local_player and killer = net_manager.local_player
         else if string_kills = 3 complete_accolade("trip_kill")
         else if string_kills > 3 string_kills = 0
         
-        if spree_kills >= assassin_spree_needed and not challenge_is_complete(global.ass_name)
+        /*if spree_kills >= assassin_spree_needed and not challenge_is_complete(global.ass_name)
             complete_challenge(global.ass_name)
         
         if spree_kills >= bhunch_kills and not challenge_is_complete("Hell Hound")
@@ -184,7 +193,7 @@ if dead_homes != net_manager.local_player and killer = net_manager.local_player
             complete_challenge("Hound Helmet")
             
         if string_kills >= fanatic_kills and not challenge_is_complete("Fanatic Helmet")
-            complete_challenge("Fanatic Helmet")
+            complete_challenge("Fanatic Helmet")*/
     }
 }
 

@@ -1,4 +1,4 @@
-///draw_popup_challenge(x, y, title, subtitle, icon, color, alpha)
+///draw_popup_challenge(x, y, title, subtitle, description, icon, color, alpha)
 
 //2 frame delay on other.id challenge popups (after this is gone)
 challenge_manager.challenge_showing_popup = 1
@@ -7,9 +7,10 @@ var draw_x = argument0
 var draw_y = argument1
 var dat_title = argument2
 var subtitle = argument3
-var icon = argument4
-var color = argument5
-var alpha = argument6
+var descr = argument4
+var icon = argument5
+var color = argument6
+var alpha = argument7
 
 var height = global.challenge_popup_height 
 var width = global.challenge_popup_width
@@ -81,7 +82,11 @@ draw_text_ext(left+net_manager.armory_ysep*3.3+net_manager.armory_sl+txt_pad+10,
 draw_set_font(fnt_hud)
 draw_set_valign(fa_top)
 draw_set_color(c_white)
-draw_text_ext(left+net_manager.armory_ysep*3.3+net_manager.armory_sl+txt_pad+10,top+height/2+txt_pad+5,subtitle, 24, width-145)
+if progress_varname != "" subtitle = string(progress)+" / "+string(progress_max)
+    draw_text_ext(left+net_manager.armory_ysep*3.3+net_manager.armory_sl+txt_pad+10,top+32+txt_pad+5,subtitle, 24, width-145)
+draw_set_color(c_white)
+//draw description
+draw_text_ext(left+net_manager.armory_ysep*3.3+net_manager.armory_sl+txt_pad+10,top+height/2+txt_pad+5,descr, 24, width-145)
 draw_set_valign(fa_top)
 
 draw_set_alpha(1)

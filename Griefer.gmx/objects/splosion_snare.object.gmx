@@ -183,7 +183,11 @@ if varRead("local")
                 if objVarRead(dat_playa,"speed_multiplier") = 1
                 {
                     if dat_playa != net_manager.local_player and find_player(varRead("senderId")) = net_manager.local_player
+                    {
                         challenge_manager.snare_kills ++
+                        //update snare totals
+                        increment_weapon_accolade("spr_snare")
+                    }
                 }
             
                 objVarWrite(dat_playa,"speed_multiplier",speed_multiplier)

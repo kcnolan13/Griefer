@@ -18,9 +18,13 @@ update_accolade_total(name,curr_total+1,TOTAL,true)
 //create the accolade thing
 var xst = view_xview+accolade_manager.match_xoff
 var yst = view_yview+accolade_manager.match_yoff
-var sep = accolade_manager.match_hsep
+var sep = accolade_manager.match_hsep+accolade_manager.acc_width
+
 var xoff = sep*instance_number(accolade_generic)
-create_accolade(xst+xoff,yst,name,COL_MATCH_TOTAL)
+if not match_ending()
+datAcc = create_accolade(xst+xoff,yst,name,COL_MATCH_TOTAL)
+//if match_ending()
+  //  datAcc.fade_delay = room_speed*1
 
 //get xp for the accolade
 add_xp(acc_data(name,COL_POINTS)*ACC_XP_SCALER,true,true,false)

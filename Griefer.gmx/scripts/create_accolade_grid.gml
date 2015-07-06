@@ -56,14 +56,14 @@ var dbug = false
     var lenh = ds_grid_height(grid)
     if len != lenh
     {
-        printf("ERROR: create_accolade_grid dimension disagreement len = "+string(len)+", lenh = "+string(lenh))
-        return false
+        printf(":::WARNING: create_accolade_grid dimension disagreement len = "+string(len)+", lenh = "+string(lenh))
+        //return false
     }
     
     var num_2create = 0
     
     //figure out how many accolades will be created
-    for (var i=0; i<len; i++)
+    for (var i=0; i<min(len,accolade_manager.evil_row_num); i++)
     {
         if acc_row_data(i,col_total) > 0
             num_2create ++
@@ -95,7 +95,7 @@ var dbug = false
     var bdelay = 15
     var birthmas = 2
     
-    for (var i=0; i<len; i++)
+    for (var i=0; i<min(len,accolade_manager.evil_row_num); i++)
     {   
         if acc_row_data(i,col_total) > 0
         {
@@ -136,7 +136,10 @@ var dbug = false
     }
     
     //sindex = 0 is grid_xmid! remember that...
-    accolade_manager.sindex_max = instance_find(accolade_generic,instance_number(accolade_generic)-1).x - accolade_manager.grid_xmid
-    accolade_manager.sindex_min = -1*sindex_max
+    if instance_exists(accolade_generic)
+    {
+        accolade_manager.sindex_max = instance_find(accolade_generic,instance_number(accolade_generic)-1).x - accolade_manager.grid_xmid
+        accolade_manager.sindex_min = -1*sindex_max
+    }
     
 }

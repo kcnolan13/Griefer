@@ -166,6 +166,8 @@ meter_ang_dif = abs(meter_ang_i - meter_ang_f)
 
 if in_match() and net_manager.bot_match
     stat_flag = FL_BOT
+else
+    stat_flag = FL_COMPETITIVE
 </string>
           </argument>
         </arguments>

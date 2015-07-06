@@ -3,8 +3,10 @@
 
 //only draw when you actually have one
 if number < 1
+{
+    printf(":::WARNING: "+string(text)+" bailing on accolade draw because you have none")
     return false
-    
+}
 var sprite_offset = sprite_get_width(image)/2
 var xdraw = left+sprite_offset
 var ydraw = top+sprite_offset

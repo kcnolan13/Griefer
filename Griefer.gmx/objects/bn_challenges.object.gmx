@@ -94,6 +94,7 @@ if exit_child
 
 if active = false
 {
+    request_accolades(FL_NORMAL)
     active = true
     net_manager.menu_mode = "challenges"
 }
