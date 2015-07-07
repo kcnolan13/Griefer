@@ -43,6 +43,9 @@ else
                 draw_rectangle(bpart_x+1,bpart_y+1,bpart_x+1+net_manager.armory_sl*scale-2,bpart_y+1+net_manager.armory_sl*scale-2,true)
                 draw_sprite_ext(bpart_obj.icon_incomplete,-1,xorig-square_xmid/2,yorig-square_ymid/2,scale,scale,0,c_white,dalph)
                 draw_set_alpha(1)
+                
+                //draw progress bar
+                draw_challenge_unlock_bar(bpart_x+net_manager.armory_sl*scale/2,bpart_y+net_manager.armory_sl*3/4*scale,scale,bpart_obj.progress,bpart_obj.progress_max)
             }
         }
     }

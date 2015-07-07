@@ -81,7 +81,7 @@ if net_manager.menu_mode = "play" and not instance_exists(bn_play_modal) and not
     vspacer = 32
     
     ID = instance_create(left,top,bn_play_modal)
-    ID.text = "Play Against People"
+    ID.text = global.cmode
     ID.color = make_colour_hsv(255*3/4,75,75)
     ID.width = width
     ID.height = height

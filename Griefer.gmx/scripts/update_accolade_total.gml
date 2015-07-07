@@ -1,34 +1,37 @@
-///update_accolade_total(name, val, flag, update_server)
+///update_accolade_total(name, val, col, update_server)
 var name = argument0
 var val = argument1
-var flag = argument2
+var col_num = argument2
 var update_server = argument3
 
-var col_num = 0
+var stat_fl = FL_COMPETITIVE
 
-var stat_fl = acc_data(name,COL_STAT_FLAG)
-if stat_fl != FL_NORMAL and stat_manager.stat_flag != stat_fl
+if col_num = FL_NORMAL or col_num = FL_COMPETITIVE or col_num = COL_TOTAL
 {
-    printf(":::WARNING: "+string(name)+" bailing out of update_accolade_total -- stat flag mismatch")
-    return false
-}
-
-if flag = MATCH_TOTAL
-    col_num = COL_MATCH_TOTAL
-else if flag = TOTAL
-{
+    stat_fl = FL_COMPETITIVE
     col_num = COL_TOTAL
-    if update_server
-    {
-        //send update to server
-        printf("::: updating accolade: "+string(name)+" = "+string(val))
-        accolade_update_real(name,val,stat_manager.stat_flag)
-    }
+}
+if col_num = COL_BOT_TOTAL or col_num = FL_BOT
+{
+    stat_fl = FL_BOT
+    col_num = COL_BOT_TOTAL
+}
+if col_num = MATCH_TOTAL
+{
+    col_num = COL_MATCH_TOTAL
 }
 
-if not col_num
+if update_server
 {
-    printf("ERROR: neither TOTAL nor MATCH_TOTAL passed as flag to update_accolade_total")
+    //send update to server
+    printf("::: updating accolade: "+string(name)+" = "+string(val))
+    if col_num
+    accolade_update_real(name,val,stat_fl)
+}
+    
+if col_num != COL_MATCH_TOTAL and col_num != COL_TOTAL and col_num != COL_BOT_TOTAL
+{
+    printf("ERROR: bad col_num passed to update_accolade_total")
     return false
 }
 

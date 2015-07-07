@@ -45,9 +45,6 @@ if not is_bot(id) and not double_spawn_counter and  not respawn_counter and (vis
         //constrain maximum y offset to 1
         if abs(view_yoffset)>1 
         view_yoffset = sign(view_yoffset)
-        
-   printf("::: view_xview = "+string(view_xview))
-   printf("::: view_yview = "+string(view_yview))
     
     // add up to 1/3 of the view's height/width depending on offset percentages
     xtest = floor(x+16-floor(view_wview/2)+floor(view_xoffset*view_wview*1/3*view_scaler))

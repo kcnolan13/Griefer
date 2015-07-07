@@ -12,7 +12,7 @@ var len = ds_grid_height(grid)
 
 for (var i=0; i<len; i++)
 {
-    if acc_row_data(i,COL_TOTAL) > 0
+    if acc_row_data(i,COL_TOTAL) > 0 or acc_row_data(i,COL_BOT_TOTAL) > 0
         return true
 }
 

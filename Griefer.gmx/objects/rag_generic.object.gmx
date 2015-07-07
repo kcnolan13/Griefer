@@ -286,8 +286,11 @@ if instance_place(x,y,bullet_generic) and not bullet_pushed
             <kind>1</kind>
             <string>///physics draw debug
 
-draw_sprite_ext(sprite_index,image_index,x,y,scale*xscale,scale*yscale,image_angle+image_angoff,image_blend,image_alpha)
-
+if sprite_exists(sprite_index)
+    draw_sprite_ext(sprite_index,image_index,x,y,scale*xscale,scale*yscale,image_angle+image_angoff,image_blend,image_alpha)
+else
+    printf("ERROR: rag_generic trying to draw nonexistent sprite: "+string(sprite_index))
+    
 if not in_match()
 {
     draw_set_color(c_lime)

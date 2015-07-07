@@ -53,8 +53,8 @@ sindex_min = 0
 sindex_max = 0
 sspeed = 12
 
-//accolade grid ---&gt; | name | text | description | image | points | match_total | total | needed | challenge_needed | challenge_stat_flag | sound
-grid = ds_grid_create(11,num_accolades+91-65+1)
+//accolade grid ---&gt; | name | text | description | image | points | match_total | competitive_total | bot_mode_total | needed | challenge_needed | challenge_stat_flag | sound
+grid = ds_grid_create(12,num_accolades+91-65+1)
 
 var row_num = 0
 init_grid_row('dub_kill','Double Kill','2 Kills Back-to-Back',acc_dub_kill,35,2,99,FL_NORMAL,snd_promoted,row_num) row_num++
@@ -67,7 +67,7 @@ init_grid_row('cant_touch_dis',"Can't Touch Dis",'3 Kills Taking No Damage',acc_
 init_grid_row('mvp','MVP','Most Points in Match',acc_dub_kill,35,0,99,FL_NORMAL,snd_promoted,row_num) row_num++
 init_grid_row('highest_kd','Highest KDR','Highest Kill/Death Ratio in Match',acc_dub_kill,35,0,99,FL_NORMAL,snd_promoted,row_num) row_num++
 init_grid_row('10kd','Smooth Operator','10+ Kills, No Deaths',acc_dub_kill,35,10,99,FL_NORMAL,snd_promoted,row_num) row_num++
-init_grid_row('ninja','Ninja','Survive for 60 Seconds Without Taking Damage',acc_dub_kill,35,60,99,FL_NORMAL,snd_promoted,row_num) row_num++
+init_grid_row('ninja','Ninja','Survive for 60 Seconds Without Taking Damage',acc_dub_kill,35,60,5,FL_NORMAL,snd_promoted,row_num) row_num++
 init_grid_row('survivor','Survivor','Survive a Near-Death-Experience',acc_dub_kill,35,0,99,FL_NORMAL,snd_promoted,row_num) row_num++
 init_grid_row('3ass','Assistant','3 Assists Without Dying',acc_dub_kill,35,3,99,FL_NORMAL,snd_promoted,row_num) row_num++
 init_grid_row('5ass','Team Player','5 Assists Without Dying',acc_dub_kill,35,5,99,FL_NORMAL,snd_promoted,row_num) row_num++
@@ -150,6 +150,32 @@ if ds_exists(grid,ds_type_grid)
     <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///print grid to screen sometimes
+
+if nth_frame(5*room_speed)
+{
+    print_ds_grid(grid)
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
         <id>605</id>
         <kind>0</kind>
         <userelative>0</userelative>
@@ -191,8 +217,8 @@ if in_match() and match_ending() and not spawned_grid
     {
         match_end_accs = true
         //note that this function actually awards the accolades as needed
-        if match_end_accolades()
-            spawn_grid_delay = 1*room_speed
+        match_end_accolades()
+        spawn_grid_delay = 1*room_speed
     }
     
     if spawn_grid_delay &gt; 0
@@ -203,7 +229,9 @@ if in_match() and match_ending() and not spawned_grid
     {
         spawned_grid = true
         printf("::: creating match end accolade grid")
-        create_accolade_grid(view_xview+match_xoff,view_yview+64,view_xview+match_xoff+acc_width*3+match_hsep*2,view_yview+view_hview,fa_center,fa_center,5,COL_MATCH_TOTAL)
+        with accolade_generic instance_destroy()
+        
+        create_accolade_grid(view_xview+match_xoff,view_yview+match_yoff,view_xview+match_xoff+acc_width*4+match_hsep*2,view_yview+view_hview,fa_left,fa_center,5,COL_MATCH_TOTAL)
     }
 }
 </string>
@@ -266,7 +294,10 @@ if not in_match() and room != rm_login
                 if accolades_received() and not spawned_grid
                 {
                     spawned_grid = true
-                    create_accolade_grid(grid_left,grid_ymid,room_width+64*2,room_height,fa_center,fa_center,32,COL_TOTAL)
+                    var col = COL_TOTAL
+                    if stat_manager.stat_tab = stat_manager.tabs[1]
+                       col =  COL_BOT_TOTAL
+                    create_accolade_grid(grid_left,grid_ymid,room_width+64*2,room_height,fa_center,fa_center,32,col)
                 }
                 
                 //update that stupid scrollable grid

@@ -28,7 +28,7 @@
             <string>///inherit and define properties
 event_inherited()
 play_bots = true
-text = "Play Against Bots"
+text = global.bmode
 alpha_max = 0.75
 halign = fa_center
 valign = fa_center

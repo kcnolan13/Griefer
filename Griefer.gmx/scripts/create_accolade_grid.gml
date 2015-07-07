@@ -13,7 +13,7 @@ var h = abs(b - t)
 var xmid = l+w/2
 var ymid = t+h/2
 
-var dbug = false
+var dbug = true
 
 {
     if dbug printf("::: creating accolade grid")
@@ -39,7 +39,7 @@ var dbug = false
     var vsep = accolade_manager.grid_vsep
     var acc_width = accolade_manager.acc_width
     
-    if col_total != COL_TOTAL and col_total != COL_MATCH_TOTAL
+    if col_total != COL_TOTAL and col_total != COL_MATCH_TOTAL and col_total != COL_BOT_TOTAL
     {
         printf("ERROR: bad col_total passed to create_accolade_grid: "+string(col_total))
         return false
@@ -74,7 +74,7 @@ var dbug = false
     //figure out how many rows there need to be
     var num_rows = ceil((acc_width+hsep)*num_2create / w)
     var num_per_row = floor(w/(acc_width+hsep))
-    var row_height = acc_width/2+6
+    var row_height = acc_width/2+12
     var row1_y = t
     
     if dbug printf("::: num_rows="+string(num_rows)+", num_per_row="+string(num_per_row))

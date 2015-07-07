@@ -29,7 +29,9 @@
 completed_num = 0
 is_progression = false
 is_challenge = true
-is_weapon = false
+is_competitive = false
+is_bot_mode = false
+
 name = "challenge_generic"
 description = "do nothing... to noone..."
 disabled = false
@@ -207,7 +209,13 @@ if in_match() and popup_show
 
 if progress_varname != "" and nth_frame(auto_frame_offset) //reduce frames checked to save performance a bit
 {
-    progress = acc_data(progress_varname,COL_TOTAL)
+    if is_competitive
+        progress = acc_data(progress_varname,COL_TOTAL)
+    else if is_bot_mode
+        progress = acc_data(progress_varname,COL_BOT_TOTAL)
+    else if is_challenge
+        progress = acc_data(progress_varname,COL_TOTAL) + acc_data(progress_varname,COL_BOT_TOTAL)
+    
     progress_max = acc_data(progress_varname,COL_CHAL_NEEDED)
     
     if progress &gt; progress_max or completed
@@ -297,7 +305,7 @@ if in_match() and popup_show
     if sweep_counter
         sweep_counter --
         
-    if not sweep_counter
+    if not sweep_counter and not match_ending()
     {
         popup_xoff += popup_hsp
         popup_yoff += popup_vsp
@@ -433,6 +441,9 @@ if not in_match() and net_manager.menu_mode = "challenges" and completed
 popup_show = false
 completed_num = 0
 global.challenges_this_match = 0
+
+if in_match() and completed
+    shown_completed = true
 </string>
           </argument>
         </arguments>

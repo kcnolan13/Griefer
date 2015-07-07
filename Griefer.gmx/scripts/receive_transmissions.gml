@@ -51,10 +51,10 @@ while (bigMessagesWaiting() and wait_counter < 500000)
         case "accolade":
             var dat_acc_name = string(genVal1)
             var acc_val = genVal2
-            var nada = genVal3
+            var stat_fl = genVal3
             
             printf("::: RECEIVED Accolade: "+string(dat_acc_name)+" = "+string(acc_val))
-            update_accolade_total(string(dat_acc_name),acc_val,TOTAL,false)
+            update_accolade_total(string(dat_acc_name),acc_val,stat_fl,false)
         break
         
         case "personal_stat":

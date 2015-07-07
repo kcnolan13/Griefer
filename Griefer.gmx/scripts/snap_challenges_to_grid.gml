@@ -4,10 +4,12 @@ var fl = argument0
 var xst = global.challenge_grid_xstart
 var yst = global.challenge_grid_ystart
 
-if fl=FL_CHALLENGES
+if fl = FL_COMPETITIVE
+    yst += comp_yoff
+else if fl=FL_BOT
+    yst += bot_yoff
+else if fl=FL_CHALLENGES
     yst += chal_yoff
-else if fl=FL_WEAPONS
-    yst += wep_yoff
 
 for (var i=0; i<instance_number(challenge_generic); i++)
 {
@@ -26,9 +28,9 @@ for (var i=0; i<instance_number(challenge_generic); i++)
     
     //skip certain challenges by grouping (progression-based or not)
     if cID.is_progression and fl != FL_PROGRESSION continue
-    if cID.is_weapon and fl != FL_WEAPONS continue
+    if cID.is_bot_mode and fl != FL_BOT continue
     if cID.is_challenge and fl != FL_CHALLENGES continue
-
+    if cID.is_competitive and fl != FL_COMPETITIVE continue
     
     //now snap snap snap yo fingas
     cID.x = xst

@@ -17,6 +17,35 @@ var width = global.challenge_popup_width
 var txt_pad = 5
 var icon_pad = 20
 
+//INTERCEPT DAT DESCRIPTION and do things to it..
+if string_count("Click",descr) < 1
+{
+    if is_bot_mode
+    {
+        descr += " in "+global.bmode
+    }
+    else if is_competitive
+    {
+        descr += " in "+global.cmode
+    }
+    if progress_varname != ""
+    {
+        var d = acc_data(progress_varname,COL_DESCR)
+        if d != "descr"
+            descr += " ... ("+d+")"
+    }
+}
+var width_less = 0
+var height_less = 0
+
+//extra height to the popup if descr is too long
+if string_length(descr) > 50
+{
+    width += 64
+    width_less = 64
+}
+    
+
 if not in_match()
 {
     draw_x = cursor.x
@@ -56,6 +85,7 @@ else
     top = draw_y
     bottom = top+height
 }
+
 //draw title rectangle
 draw_set_color(color)
 draw_set_alpha(0.95)
@@ -73,7 +103,7 @@ draw_set_alpha(alpha)
 
 //draw the icon
 //draw_bpart_icon_ext(icon, left+13, top+10, icon_scale, alpha)
-draw_bpart_slot_complete_ext(id, left+icon_pad, top+icon_pad, ((bottom-top)-2*icon_pad)/72, alpha)
+draw_bpart_slot_complete_ext(id, left+icon_pad, top+icon_pad, ((height-height_less)-2*icon_pad)/72, alpha)
     
 draw_set_font(fnt_hud_big)
 draw_set_halign(fa_left)

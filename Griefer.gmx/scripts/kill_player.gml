@@ -50,9 +50,9 @@ if dead_homes != net_manager.local_player and killer = net_manager.local_player
     {
         //update permanent kill totals for this weapon
         var spr = sprite_get_name(instrument_of_death)
-        var curr_val = acc_data(spr,COL_TOTAL)
+        var curr_val = acc_total(spr)
         printf(":::updating permanent kill total for weapon: "+string(spr))
-        update_accolade_total(spr,curr_val+1,TOTAL,true)
+        update_accolade_total(spr,curr_val+1,stat_manager.stat_flag,true)
     }
     
     //for stick kills and such

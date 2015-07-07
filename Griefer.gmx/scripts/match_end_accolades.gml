@@ -39,37 +39,28 @@ var completed = false
     }
 
     //MVP
-    //find the person with the most points in the match
-    grids[0] = 0
-    if string_count("tdm",objVarRead(net_manager,"game_mode")) > 0
-    {
-        grids[0] = net_manager.team0
-        grids[1] = net_manager.team1
-    } else grids[0] = net_manager.team_all
-    
     var maxpoints = 0
-    maxpname = ""
-    tied = false
-    for (var i=0; i<getLength(grids); i++)
+    var maxpname = ""
+    var tied = false
+    for (var i=0; i<instance_number(player); i++)
     {
-        for (var j=0; j<ds_grid_height(grids[i]); j++)
+        plyr = instance_find(player,i)
+        var cand = objVarRead(plyr,"match_points")
+        if cand > maxpoints
         {
-            var cand = ds_grid_get(grids[i],2,j)
-            if cand > maxpoints
-            {
-                tied = false
-                maxpoints = cand
-                maxpname = ds_grid_get(grids[i],1,j)
-            } else if cand = maxpoints
-            {
-                tied = true
-            }
+            tied = false
+            maxpoints = cand
+            maxpname = playerName(plyr)
+        }
+        else if cand = maxpoints
+        {
+            tied = true
         }
     }
     
     if not tied and playerName(myPlayer()) = maxpname
     {
-        //MVP, BABY!
+        //HIGHEST KDR, BABY!
         complete_accolade("mvp")
         completed = true
     }

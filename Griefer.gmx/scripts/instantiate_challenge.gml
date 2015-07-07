@@ -12,12 +12,6 @@ var description = argument2
     cID.challenge_index = global.challenge_index
     global.challenge_index++
     
-    if cID.icon > spr_weapon_placeholder1 and cID.icon < spr_weapon_placeholder2
-    {
-        cID.is_weapon = true
-        cID.is_challenge = false
-    }
-    
     cID.icon_scale = min(0.05,real(bpart_lookup(icon, global.BPART_SCALE)))
     ds_map_add(global.ds_challenges,name,cID)
     printf("added challenge: "+name+"   :   "+description)

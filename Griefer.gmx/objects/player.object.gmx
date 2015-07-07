@@ -854,14 +854,14 @@ if net_manager.local_player = id
             ninja_time++
             if ninja_time &gt; acc_data("ninja",COL_NEEDED)*room_speed
             {
-                printf("::: ninja acc completed -- data in col_needed was: "+string(acc_data("ninja",COL_NEEDED)))
+                //printf("::: ninja acc completed -- data in col_needed was: "+string(acc_data("ninja",COL_NEEDED)))
                 complete_accolade("ninja")
                 ninja_time = 1
                 
-                if acc_data("ninja",COL_TOTAL) &gt;= ninjas_needed and not challenge_is_complete(global.ninja_name)
+                /*if acc_data("ninja",COL_TOTAL) &gt;= ninjas_needed and not challenge_is_complete(global.ninja_name)
                 {
                     complete_challenge(global.ninja_name)
-                }
+                }*/
             }
         }
     }
@@ -877,10 +877,10 @@ if net_manager.local_player = id
         with challenge_manager
         {
             complete_accolade("survivor")
-            if acc_data("survivor",COL_TOTAL) &gt;= near_deaths_needed and not challenge_is_complete(global.muscle)
+            /*if acc_data("survivor",COL_TOTAL) &gt;= near_deaths_needed and not challenge_is_complete(global.muscle)
             {
                 complete_challenge(global.muscle_name)
-            }
+            }*/
         }
     }
     
