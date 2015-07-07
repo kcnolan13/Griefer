@@ -76,7 +76,15 @@ if popped_in
     if dif(meter_percent,1) &lt; 0.01
         meter_percent = 1
     else
-        meter_percent = lerp(meter_percent,meter_actual_percent,meter_lerp)
+    {
+        var cand_percent = lerp(meter_percent,meter_actual_percent,meter_lerp)
+        if dif(meter_percent, cand_percent) &gt; 0.025
+            meter_percent = cand_percent
+        else
+            meter_percent += 0.025
+            
+        meter_percent = constrict(meter_percent,0,meter_actual_percent)
+    }
     
     if dif(meter_backing_percent,1) &lt; 0.01
         meter_backing_percent = 1

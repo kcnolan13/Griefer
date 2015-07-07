@@ -22,8 +22,8 @@ var desc_scale = 0.5*scale
 var ang_i = 90
 var ang_f = ang_i-actual_percent_full*360
 var ang_dif = abs(ang_f mod 360 - ang_i mod 360)
-var ang_res = 1
-var ang_steps = ang_dif/ang_res
+var ang_res = 10
+var ang_steps = ceil(ang_dif/ang_res)
 var ang_working = ang_i
 
 //calculate points for the inner bar

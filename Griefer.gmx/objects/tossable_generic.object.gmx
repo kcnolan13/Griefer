@@ -33,6 +33,11 @@ audio_scaler = 0
 bounces = 0
 spd = 0
 
+hsp = 0
+vsp = 0
+grav = 0
+dir = 0
+
 //depth = -25
 fakedirection = random_range(0,360)
 rotation = sign(fakedirection)
