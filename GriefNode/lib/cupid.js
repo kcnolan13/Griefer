@@ -26,6 +26,27 @@ rooms.push( {
 	minPlayers: "-1"
 });
 
+//this basically makes player objects
+var player = function(){
+	this.pName = "John Doe";
+	this.gameMode = "no_mode"; //can be ffa, tdm, or versus
+	this.room = "no_room";
+	this.uniqueId = -1;
+	this.uniqueMatchId = -51;
+	this.nextMapNum = -54;
+}
+exports.player = player
+
+//this basically makes room objects
+var room = function(groupName, modeName, maxPlayers, minPlayers) {
+	this.groupName = groupName;
+	this.modeName = modeName;
+	this.maxPlayers = maxPlayers;
+	this.minPlayers = minPlayers;
+	this.joinable = false;
+}
+exports.room = room
+
 //define game mode constants as vars in these global objects
 var tdm = new room("tdm", "tdm", 4, 2);
 var ffa = new room("ffa", "ffa", 4, 2);
@@ -42,26 +63,6 @@ var getConn = setInterval(function(){
 		clearInterval(getConn);
 	}
 	},100);
-
-
-//this basically makes player objects
-function player(){
-	this.pName = "John Doe";
-	this.gameMode = "no_mode"; //can be ffa, tdm, or versus
-	this.room = "no_room";
-	this.uniqueId = -1;
-	this.uniqueMatchId = -51;
-	this.nextMapNum = -54;
-}
-
-//this basically makes room objects
-function room(groupName, modeName, maxPlayers, minPlayers) {
-	this.groupName = groupName;
-	this.modeName = modeName;
-	this.maxPlayers = maxPlayers;
-	this.minPlayers = minPlayers;
-	this.joinable = false;
-}
 
 
 //EXPORTS

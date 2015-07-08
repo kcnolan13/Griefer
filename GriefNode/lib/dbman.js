@@ -488,7 +488,7 @@ var sendPermaChallenges = function(socket)
 			for (var i=0; i<rows.length; i++)
 			{
 				var challenge_name = rows[i]["challenge_name"];
-				var msg = genMessage("perma_challenge",challenge_name);
+				var msg = composer.genMessage("perma_challenge",challenge_name);
 				log.log(SQL,msg);
 				socket.emit("general_message",msg);
 			}
@@ -530,7 +530,7 @@ var sendAccolades = function(socket, flag, retransmit)
 			{
 				var acc_name = accolades[i];
 				var acc_val = rows[0][accolades[i]];
-				var msg = bigMessage("accolade",acc_name,acc_val,flag);
+				var msg = composer.bigMessage("accolade",acc_name,acc_val,flag);
 				log.log(SQL,msg);
 				pkgDude.messages.push(msg);
 			}
@@ -574,7 +574,7 @@ var getPersonalStats = function(socket,flag)
 				{
 					var stat_val = rows[i][pstats[j]];
 
-					var msg = bigMessage("personal_stat",username,pstats[j],stat_val);
+					var msg = composer.bigMessage("personal_stat",username,pstats[j],stat_val);
 					pkgDude.messages.push(msg);
 				}
 			}
@@ -613,7 +613,7 @@ function getGlobalStats(socket)
 				log.log(SQL,err);
 
 			var user_count = rows[0]["count(*)"];
-			var msg = bigMessage("leaderboard_dimensions",user_count,pstats.length,0);
+			var msg = composer.bigMessage("leaderboard_dimensions",user_count,pstats.length,0);
 			log.log(SQL,msg);
 			pkgDude.messages.push(msg);
 
@@ -632,7 +632,7 @@ function getGlobalStats(socket)
 						{
 							var stat_val = rows[i][pstats[j]];
 
-							var msg = bigMessage("global_stat",rows[i]['username'],pstats[j],stat_val);
+							var msg = composer.bigMessage("global_stat",rows[i]['username'],pstats[j],stat_val);
 							
 							pkgDude.messages.push(msg);
 						}
@@ -664,7 +664,7 @@ var sendControlMaps = function(socket)
 				var control_code = rows[i]["control_code"];
 				var using_gamepad = rows[i]["using_gamepad"];
 
-				var msg = bigMessage("control_map",control_index,control_code,using_gamepad);
+				var msg = composer.bigMessage("control_map",control_index,control_code,using_gamepad);
 				log.log(SQL,msg);
 				socket.emit("big_message",msg);
 			}
@@ -731,7 +731,7 @@ var sendNetManPlayerStats = function(socket, objIndex, uniqueId)
 				if (param=="rank")
 				{
 					//get him his starting global rank
-					recomputeGlobalRank(theDude.pName,socket,result);
+					//recomputeGlobalRank(theDude.pName,socket,result);
 				}
 
 				//log.log(SQL,"rows[0]["+param+"] = "+result);

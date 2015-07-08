@@ -49,7 +49,7 @@ io.on('connection', function(socket){
 
 	//initialize a web-socket Connection to the client
 	log.log(STD,'NEW CLIENT');
-	socket.myPlayer = new player();
+	socket.myPlayer = new cupid.player();
 	clients.push(socket);
 
 
@@ -64,9 +64,9 @@ io.on('connection', function(socket){
 		socket.myPlayer.room = 'main_menu';
 		socket.join(socket.myPlayer.room);
 
-		log.log(STD,printPlayer(socket.myPlayer));
+		log.log(STD,composer.printPlayer(socket.myPlayer));
 
-		eachSocket.broadcast.to(socket.myPlayer.room).emit('new_player_in_group', socket.myPlayer);
+		socket.broadcast.to(socket.myPlayer.room).emit('new_player_in_group', socket.myPlayer);
 
 		//give player his info, and let others in his group know he connected
 		socket.emit('heres_your_player_info', socket.myPlayer);
@@ -86,15 +86,15 @@ io.on('connection', function(socket){
 	  		dbman.sendNetManPlayerStats(socket,netManObjIndex, default_netman_uniqueId);
 
 	  		//create the local avatar
-	  		cupid.objCreate(avatarObjIndex,default_avatar_uniqueId,Math.random()*1024,Math.random()*768);
+	  		cupid.objCreate(socket,avatarObjIndex,default_avatar_uniqueId,Math.random()*1024,Math.random()*768);
 			cupid.objUpdate(socket,avatarObjIndex,default_avatar_uniqueId,"pName",socket.myPlayer.pName,0);
 	
 			//send complete AVATAR statistics
 			dbman.sendNetManPlayerStats(socket, avatarObjIndex, default_avatar_uniqueId);
 
 			//sync connected players for everyone... cause why not
-			showSocketGroups();
-			syncPlayersConnected();
+			cupid.showSocketGroups();
+			cupid.syncPlayersConnected();
 
   	}, 35, socket);
 
@@ -176,7 +176,7 @@ io.on('connection', function(socket){
 
   //---- BIG MESSAGES ----//
   socket.on('big_message', function(message) {
-  	message = ensureJSON(message);
+  	message = composer.ensureJSON(message);
 
   	if (message.msg=="control_map")
   	{
@@ -193,16 +193,16 @@ io.on('connection', function(socket){
   	if (message.msg == "accolade_update")
   	{
   		if (message.val3 == FL_SQL)
-  			updateAccolade(socket.myPlayer.pName, message.val1, message.val2, FL_SQL);
+  			dbman.updateAccolade(socket.myPlayer.pName, message.val1, message.val2, FL_SQL);
   		else
-  			updateAccolade(socket.myPlayer.pName, message.val1, message.val2, message.val3);
+  			dbman.updateAccolade(socket.myPlayer.pName, message.val1, message.val2, message.val3);
   	}
 
   	});
 
   //---- GENERAL MESSAGES ----//
   socket.on('general_message', function(message) {
-  	message = ensureJSON(message);
+  	message = composer.ensureJSON(message);
   	if (message.msg=="end_match")
   	{
   		//forward the message
@@ -213,7 +213,7 @@ io.on('connection', function(socket){
   		//configure the next match after a short delay
   		setTimeout(function(playerSubGroup, gameRoom) {
   			cupid.configure_match(playerSubGroup, gameRoom, lobby_wait_time);
-  		},2000,socketsInRoom(socket.myPlayer.room),socket.myPlayer.room);
+  		},2000,cupid.socketsInRoom(socket.myPlayer.room),socket.myPlayer.room);
 
 	}
 	else if (message.msg =="ping")
@@ -257,7 +257,7 @@ io.on('connection', function(socket){
 
   //---- CREATE USER REQUEST ----//
   socket.on('create_user', function(datMessage) {
-  	datMessage = ensureJSON(datMessage);
+  	datMessage = composer.ensureJSON(datMessage);
 
   	var message = {
   		name: "generalMessage",
@@ -284,7 +284,7 @@ io.on('connection', function(socket){
   	log.log(STD,"received authentication request:");
   	log.log(STD,datMessage);
 
-  	datMessage = ensureJSON(datMessage);
+  	datMessage = composer.ensureJSON(datMessage);
 
   	var message = {
   		name: "generalMessage",
@@ -323,7 +323,7 @@ io.on('connection', function(socket){
 
   //---- EXPLICIT STAT UPDATE ----//
   socket.on('stat_update', function(datMessage) {
-  	datMessage = ensureJSON(datMessage);
+  	datMessage = composer.ensureJSON(datMessage);
   	var term = datMessage.netvar;
   	if (term.indexOf("history") != -1)
   	{
@@ -346,7 +346,7 @@ io.on('connection', function(socket){
 
   //---- TRANSPORT KCLIENT MESSAGES TO OTHER CLIENTS ----//
   socket.on('obj_update', function(datMessage) {
-  	datMessage = ensureJSON(datMessage);
+  	datMessage = composer.ensureJSON(datMessage);
   	//intercept hats_Fd
   	var term = datMessage.netvar;
   	if (term=="hats_Fd")
@@ -367,9 +367,9 @@ io.on('connection', function(socket){
   	socket.broadcast.to(socket.myPlayer.room).emit('obj_update', datMessage);
 
 	  //---- POSSIBLY UPDATE A DATABASE STAT ----//
-	  for (var i=0; i<stats.length; i++)
+	  for (var i=0; i<dbman.stats.length; i++)
 	  {
-	  	if (term==stats[i] && 1==0)
+	  	if (term==dbman.stats[i] && 1==0)
 	  	{
 			dbman.updateStat(socket.myPlayer.pName, term, datMessage.val, FL_NORMAL);
 	  	}
@@ -377,13 +377,13 @@ io.on('connection', function(socket){
   });
 
   socket.on('obj_create', function(datMessage) {
-  	datMessage = ensureJSON(datMessage);
+  	datMessage = composer.ensureJSON(datMessage);
   	//log.log(STD,'obj_create: manual');
   	socket.broadcast.to(socket.myPlayer.room).emit('obj_create', datMessage);
   });
 
   socket.on('pkg', function(datPkg) {
-  	datPkg = ensureJSON(datPkg);
+  	datPkg = composer.ensureJSON(datPkg);
   	//log.log(STD,'dat package do: '+JSON.stringify(datPkg));
   	socket.broadcast.to(socket.myPlayer.room).emit('pkg', datPkg);
   });
