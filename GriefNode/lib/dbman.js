@@ -171,7 +171,6 @@ exports.updateStat = updateStat
 var updateAccolade = function(username, accolade, value, flag)
 {
 	var statement;
-
 	var table = "accolades"
 
 	if (flag==FL_BOT)
@@ -215,7 +214,6 @@ var userExists = function(username, callback)
 		}
 
 		callback(result);
-
 	});
 
 	return result;
@@ -418,9 +416,7 @@ var appendHistoryStat = function(socket,stat,val,flag)
 	//this really "appends" to the FRONT
 	var theDude = socket.myPlayer;
 	var username = socket.myPlayer.pName;
-
 	var history_max = 100
-	
 	var table = "bot_stats"
 
 	if (flag != FL_BOT)
@@ -696,7 +692,6 @@ var sendNetManPlayerStats = function(socket, objIndex, uniqueId)
 			columns.push(parts[j]+i);
 	}
 
-
 	//create package for this player to receive all his stats
 	var pkgDude = new composer.createPkg();
 
@@ -710,50 +705,31 @@ var sendNetManPlayerStats = function(socket, objIndex, uniqueId)
 			statement += ", ";
 	}
 	statement += " FROM users join stats on users.username=stats.username where users.username="+conn.escape(theDude.pName);
+	//log.log(SQL,statement);
 
-		//log.log(SQL,statement);
+	//perform the query, obtain results, and send off to the local player
+	conn.query(statement, function(err,rows) {
 
-		//perform the query, obtain results, and send off to the local player
-		conn.query(statement, function(err,rows) {
+		//log any errors
+		if (err)
+			log.log(SQL,err);
 
-			//log any errors
-			if (err)
-				log.log(SQL,err);
+		//construct all the object updates and add to package
+		for (var j=0; j<columns.length; j++)
+		{
+			var param = columns[j].substring(columns[j].indexOf('.')+1,columns[j].length);
+			var result = rows[0][param];
 
-			//log.log(SQL,"%j",rows[0]);
+			var message = composer.objUpdate(objIndex, uniqueId, param, result, FL_NORMAL);
+			log.log(SQL,message);
+			pkgDude.messages.push(message);
+		}
+		
+		//send package
+		//log.log(SQL,pkgDude);
+		socket.emit('pkg', pkgDude.messages);
 
-			//construct all the object updates and add to package
-			for (var j=0; j<columns.length; j++)
-			{
-				var param = columns[j].substring(columns[j].indexOf('.')+1,columns[j].length);
-				var result = rows[0][param];
-
-				if (param=="rank")
-				{
-					//get him his starting global rank
-					//recomputeGlobalRank(theDude.pName,socket,result);
-				}
-
-				//log.log(SQL,"rows[0]["+param+"] = "+result);
-
-				var message = {
-				name: "objUpdate",
-				oid_string: objIndex.toString()+":"+uniqueId.toString(),
-				object_index: objIndex,
-				uniqueId: uniqueId,
-				netvar: param,
-				val: result,
-				flag: 0
-				};
-				log.log(SQL,message);
-				pkgDude.messages.push(message);
-			}
-			
-			//send package
-			//log.log(SQL,pkgDude);
-			socket.emit('pkg', pkgDude.messages);
-
-		});
+	});
 }
 exports.sendNetManPlayerStats = sendNetManPlayerStats
 
@@ -766,9 +742,7 @@ var sendCompletePlayerStats = function(socket, gameRoom, objIndex, broadcast_onl
 	if (gameRoom.indexOf("bot")>-1)
 		stat_table = "bot_stats"
 
-
 	var columns = ['stats.rank','stats.xp','stats.global_rank',stat_table+'.points',stat_table+'.wins',stat_table+'.losses',stat_table+'.kills',stat_table+'.deaths',stat_table+'.assists',stat_table+'.kill_streak',stat_table+'.win_streak',stat_table+'.rollover_kstreak',stat_table+'.rollover_wstreak'];
-
 	var parts = ['users.hat','users.helmet','users.torso','users.shoulder','users.forearm','users.leg','users.shin','users.foot','users.prop'];
 
 	for (var i=0; i<NUM_BPARTS; i++)
@@ -789,7 +763,6 @@ var sendCompletePlayerStats = function(socket, gameRoom, objIndex, broadcast_onl
 	}
 
 	statement += " FROM users join stats on users.username=stats.username join bot_stats on users.username=bot_stats.username where users.username="+conn.escape(theDude.pName);
-
 	log.log(SQL,"complete query: "+statement);
 
 	conn.query(statement, function(err,rows) {
@@ -806,19 +779,9 @@ var sendCompletePlayerStats = function(socket, gameRoom, objIndex, broadcast_onl
 			var param = columns[j].substring(columns[j].indexOf('.')+1,columns[j].length);
 			var result = rows[0][param];
 
-			var message = {
-				name: "objUpdate",
-				oid_string: objIndex.toString()+":"+theDude.uniqueId.toString(),
-				object_index: objIndex,
-				uniqueId: theDude.uniqueId,
-				netvar: param,
-				val: result,
-				flag: 0
-			};
-
+			var message = composer.objUpdate(objIndex,theDude.uniqueId,param,result,0);
 			//only send to the one dude
 			pkgDude.messages.push(message);
-
 		}
 
 		//SEND THE PACKAGE 

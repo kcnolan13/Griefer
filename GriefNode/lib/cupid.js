@@ -151,7 +151,7 @@ exports.showSocketGroups = function(){
 	numBotFfa = 0;
 	numBotTdm = 0;
 
-	log.log(CUPID,"\n\n\n\n\n\n\nSocket Groups:\n");
+	log.log(CUPID,"\n\nSocket Groups:\n");
 	for (var i=0; i<rooms.length; i++)
 	{
 		var sockets = [];
@@ -186,7 +186,7 @@ exports.showSocketGroups = function(){
 		log.log(CUPID,"\t"+rooms[i].groupName+": "+playerNames);
 	}
 	log.log(CUPID,"\n\nPlayers Online: "+numSockets+"\nPlaying TDM: "+numTdm+"\nPlaying FFA: "+numFfa+"\nPlaying Verus: "+numVersus+"\nPlaying Bot_Verus: "+numBot+"\nPlaying Bot_Ffa: "+numBotFfa+"\nPlaying Bot_Tdm: "+numBotTdm+"\n\n");
-	log.log(CUPID,"\n\n\n");
+	log.log(CUPID,"\n");
 }
 
 exports.syncPlayersConnected = function(){
@@ -215,7 +215,6 @@ function check_match_expired(playerSubGroup, uniqueMatchId, gameRoom)
 	//make sure match is still valid
 	for (var i=0; i<playerSubGroup.length; i++)
 	{
-		
 		//abort this operation if none of the players are in this room anymore
 		if (playerSubGroup[i])
 		{
@@ -236,13 +235,10 @@ function check_match_expired(playerSubGroup, uniqueMatchId, gameRoom)
 	}
 }
 
-
 var sort_uniqueIds = function(room, interval_handle)
 {
 	var playas = [];
 	playas = socketsInRoom(room.groupName);
-
-	//log.log(CUPID,'..sorting uniqueIds for '+room.groupName);
 
 	if (playas.length == 0)
 	{
@@ -257,19 +253,8 @@ var sort_uniqueIds = function(room, interval_handle)
 		if (playas[i].myPlayer.uniqueId != i)
 		{
 			log.log(CUPID,"Reassigning uniqueId: "+playas[i].myPlayer.pName+" : "+i);
-			
-			var message = {
-				name: "objUpdate",
-				oid_string: avatarObjIndex.toString()+":"+playas[i].myPlayer.uniqueId.toString(),
-				object_index: avatarObjIndex,
-				uniqueId: playas[i].myPlayer.uniqueId,
-				netvar: "uniqueId",
-				val: i, //multiplied by room speed!
-				flag: FL_NORMAL
-			}
-
+			var message = composer.objUpdate(avatarObjIndex,playas[i].myPlayer.uniqueId,"uniqueId",i,FL_NORMAL);
 			playas[i].myPlayer.uniqueId = i;
-
 			playas[i].emit('obj_update',message);
 		}
 	}
@@ -301,7 +286,6 @@ function find_joinable_game_room(starting_room_offset, mode_name, playerSubGroup
 				return datRoom;
 			}
 		}
-
 		i++;
 		if (i<rooms.length)
 			datRoom = rooms[i];
@@ -309,7 +293,6 @@ function find_joinable_game_room(starting_room_offset, mode_name, playerSubGroup
 	}
 	return false;
 }
-
 
 var room_with_name = function(roomName)
 {
@@ -320,7 +303,6 @@ var room_with_name = function(roomName)
 			return rooms[i];
 		}
 	}	
-
 	return false;
 }
 exports.room_with_name = room_with_name
@@ -338,16 +320,9 @@ exports.player_in_array = player_in_array
 
 var force_sync_doll = function(socket)
 {
-	var msg = {
-				name: "generalMessage",
-				msg: "force_sync_doll",
-				val: 0
-			};
-
-	socket.emit("general_message",msg);
+	genMessage(socket,"force_sync_doll",FL_NORMAL);
 }
 exports.force_sync_doll = force_sync_doll
-
 
 
 var configure_match = function(playerSubGroup, gameRoom, wait_time) {
@@ -367,30 +342,13 @@ var configure_match = function(playerSubGroup, gameRoom, wait_time) {
 		eachSocket.myPlayer.nextMapNum = mapNum;
 	}
 
-
 	setTimeout(function() {
 		//update next_map
-		var message = {
-				name: "objUpdate",
-				oid_string: netManObjIndex.toString()+":"+default_netman_uniqueId.toString(),
-				object_index: netManObjIndex,
-				uniqueId: default_netman_uniqueId,
-				netvar: "next_map",
-				val: mapNum,
-				flag: 0
-		}
+		var message = composer.objUpdate(netManObjIndex,default_netman_uniqueId,"next_map",mapNum,FL_NORMAL);
 		io.to(gameRoom).emit('obj_update',message);
 
 		//update lobby wait time
-		var message = {
-				name: "objUpdate",
-				oid_string: netManObjIndex.toString()+":"+default_netman_uniqueId.toString(),
-				object_index: netManObjIndex,
-				uniqueId: default_netman_uniqueId,
-				netvar: "lobby_wait_time",
-				val: Math.ceil((wait_time-1000)/1000*30), //multiplied by room speed!
-				flag: 0
-		}
+		var message = composer.objUpdate(netManObjIndex,default_netman_uniqueId,"lobby_wait_time",Math.ceil((wait_time-1000)/1000*30),FL_NORMAL);
 		io.to(gameRoom).emit('obj_update',message);
 	},1000);
 
@@ -399,8 +357,7 @@ var configure_match = function(playerSubGroup, gameRoom, wait_time) {
 		sort_uniqueIds(room_with_name(gameRoom), id_shuffler);
 	},1000,gameRoom);
 	
-
-	//send save and quit armory message with plenty of time left over (3 seconds)
+	//send save and quit armory message with plenty of time left over (10 seconds)
 	setTimeout(function(playerSubGroup, uniqueMatchId, gameRoom, id_shuffler) {
 		
 		log.log(CUPID,"id_shuffler = "+id_shuffler);
@@ -416,43 +373,34 @@ var configure_match = function(playerSubGroup, gameRoom, wait_time) {
 			return false;
 		}
 
-		var blah = {
-			name: "generalMessage",
-			msg: "lock_armory",
-			val: 0
-		};
+		var blah = composer.genMessage("lock_armory",0);
 		log.log(CUPID,blah.name+" : "+blah.msg+" : "+blah.val);
 		io.to(gameRoom).emit('general_message',blah);
 
 		//make lobby no longer joinable
 		room_with_name(gameRoom).joinable = false;
 
-	}, wait_time-5000, playerSubGroup, dat_num, gameRoom, id_shuffler);
+	}, wait_time-10000, playerSubGroup, dat_num, gameRoom, id_shuffler);
 
 	//THIS IS A NEW LOBBY --> GET READY AND SET TO MAX WAIT TIME
 	setTimeout(function(playerSubGroup, gameRoom, mapNum, uniqueMatchId) {
 		//now that everyone is in the right game socket group and lobby wait time is over, let's trigger the game maker match to start
-		//pick a random map from 1 --> num_maps
-
+		
 		//playerSubGroup should be recomputed since people might have joined
 		log.log(CUPID,"recomputing playerSubGroup to be inclusive of newly joined players");
 		playerSubGroup = socketsInRoom(gameRoom);
 		log.log(CUPID,"new playerSubGroup: "+playerSubGroup.length+" players");
 		
+		//BAIL OUT IF MATCH HAS EXPIRED
 		if (check_match_expired(playerSubGroup,uniqueMatchId, gameRoom))
 		{
 			log.log(CUPID,"ABORTING --> this match has expired");
 			return false;
 		}
-
 		log.log(CUPID,"selected map number:  "+mapNum);
 
 		//make everyone go to the map
-		var firstMsg = {
-			name: "generalMessage",
-			msg: "goto_map",
-			val: mapNum
-		};
+		var firstMsg = composer.genMessage("goto_map",mapNum);
 		log.log(CUPID,firstMsg.name+" : "+firstMsg.msg+" : "+firstMsg.val);
 		io.to(gameRoom).emit('general_message',firstMsg);
 
@@ -462,39 +410,17 @@ var configure_match = function(playerSubGroup, gameRoom, wait_time) {
 			for (var s=0; s<playerSubGroup.length; s++)
 			{
 				var eachSocket = playerSubGroup[s];
-
 				eachSocket.myPlayer.timeoutHandle = null;
 
 				//construct player object with all known attributes of socket
-
-				var message = {
-					name: "objCreate",
-					object_index: playerObjIndex,
-					uniqueId: eachSocket.myPlayer.uniqueId,
-					myX: Math.random()*1024,
-					myY: Math.random()*768
-				};
-
-				//s will now be the uniqueId of this socket's player for the duration of the match
-				//eachSocket.myPlayer.uniqueId = s;
-
+				var message = composer.objCreate(playerObjIndex,eachSocket.myPlayer.uniqueId,Math.random()*1024,Math.random()*768)
 				io.to(gameRoom).emit('obj_create',message);
 
-				message = {
-					name: "objUpdate",
-					oid_string: playerObjIndex.toString()+":"+eachSocket.myPlayer.uniqueId.toString(),
-					object_index: playerObjIndex,
-					uniqueId: eachSocket.myPlayer.uniqueId,
-					netvar: "pName",
-					val: eachSocket.myPlayer.pName,
-					flag: 0
-				}
-
+				message = composer.objUpdate(playerObjIndex,eachSocket.myPlayer.uniqueId,"pName",eachSocket.myPlayer.pName,0);
 				io.to(gameRoom).emit('obj_update',message);
 
 				//send complete player statistics to everyone
 				dbman.sendCompletePlayerStats(eachSocket, gameRoom, playerObjIndex, false);
-
 			}
 
 		}, 10, playerSubGroup, gameRoom);
@@ -505,7 +431,6 @@ exports.configure_match = configure_match
 
 var join_match = function(playerSubGroup, gameRoom)
 {
-
 	//JOIN THIS MATCH!!
 	log.log(CUPID,"found joinable preexisting match for "+playerSubGroup.length+" new players");
 	log.log(CUPID,"attempting to join room: "+gameRoom);
@@ -517,12 +442,8 @@ var join_match = function(playerSubGroup, gameRoom)
 	log.log(CUPID,"bringing "+playerSubGroup.length+" players to game room: "+gameRoom);
 
 	//make everyone go to the lobby -- where stuff is going to get real
-			var firstMsg = {
-				name: "generalMessage",
-				msg: "goto_lobby",
-				val: 0
-			};
-			log.log(CUPID,firstMsg.name+" : "+firstMsg.msg+" : "+firstMsg.val);
+	var firstMsg = composer.genMessage("goto_lobby",0);
+	log.log(CUPID,firstMsg.name+" : "+firstMsg.msg+" : "+firstMsg.val);
 
 	//migrate all players in the subgroup to the empty game room
 	for (var s=0; s<playerSubGroup.length; s++)
@@ -556,39 +477,15 @@ var join_match = function(playerSubGroup, gameRoom)
 				var eachSocket = playerSubGroup[s];
 
 				//CREATE THIS AVATAR FOR EVERYONE (EXCEPT LOCAL PLAYER)
-				var message = {
-					name: "objCreate",
-					object_index: avatarObjIndex,
-					uniqueId: eachSocket.myPlayer.uniqueId,	//already established by sort_uniqueIds
-					myX: Math.random()*1024,
-					myY: Math.random()*0
-				};
-
+				var message = composer.objCreate(avatarObjIndex,eachSocket.myPlayer.uniqueId,Math.random()*1024,Math.random()*0);
 				eachSocket.broadcast.to(gameRoom).emit('obj_create',message);
 
-				message = {
-					name: "objUpdate",
-					oid_string: avatarObjIndex.toString()+":"+eachSocket.myPlayer.uniqueId.toString(),
-					object_index: avatarObjIndex,
-					uniqueId: eachSocket.myPlayer.uniqueId,
-					netvar: "pName",
-					val: eachSocket.myPlayer.pName,
-					flag: 0
-				}
+				message = composer.objUpdate(avatarObjIndex,eachSocket.myPlayer.uniqueId,"pName",eachSocket.myPlayer.pName,0);
 				io.to(gameRoom).emit('obj_update',message);
 
 				//update the avatar's uniqueId locally
 				var datStr = composer.hash_string(eachSocket.myPlayer.pName);
-
-				message = {
-					name: "objUpdate",
-					oid_string: avatarObjIndex.toString()+":"+datStr.toString(),
-					object_index: avatarObjIndex,
-					uniqueId: eachSocket.myPlayer.pName,
-					netvar: "uniqueId",
-					val: eachSocket.myPlayer.uniqueId, 	//wanted to be s
-					flag: 0
-				}
+				message = composer.objUpdate(avatarObjIndex,datStr,"uniqueId",eachSocket.myPlayer.uniqueId,0);
 				eachSocket.emit('obj_update',message);
 
 				//send complete AVATAR statistics to everyone
@@ -608,7 +505,6 @@ var join_match = function(playerSubGroup, gameRoom)
 					{
 						
 						var eachSocket = playerSubGroup[k];
-
 						log.log(CUPID,"\t\t..for "+eachSocket.myPlayer.pName);
 
 						if (eachSocket.myPlayer.pName==somePlayer.myPlayer.pName)
@@ -624,27 +520,11 @@ var join_match = function(playerSubGroup, gameRoom)
 						}
 
 						//this is not a new player, so create his avatar for this new player
-						var message = {
-							name: "objCreate",
-							object_index: avatarObjIndex,
-							uniqueId: somePlayer.myPlayer.uniqueId,
-							myX: Math.random()*1024,
-							myY: Math.random()*0
-						};
-
+						var message = composer.objCreate(avatarObjIndex,somePlayer.myPlayer.uniqueId,Math.random()*1024,Math.random()*0)
 						log.log(CUPID,"\t\t\temitted create");
-
 						eachSocket.emit('obj_create',message);
 
-						message = {
-							name: "objUpdate",
-							oid_string: avatarObjIndex.toString()+":"+somePlayer.myPlayer.uniqueId.toString(),
-							object_index: avatarObjIndex,
-							uniqueId: somePlayer.myPlayer.uniqueId,
-							netvar: "pName",
-							val: somePlayer.myPlayer.pName,
-							flag: 0
-						}
+						message = composer.objUpdate(avatarObjIndex,somePlayer.myPlayer.uniqueId,"pName",somePlayer.myPlayer.pName,0);
 						eachSocket.emit('obj_update',message);
 					}
 
@@ -662,15 +542,7 @@ var join_match = function(playerSubGroup, gameRoom)
 	//update that stuff that was set for everyone else in match_configure
 	setTimeout(function(p1) {
 			//update next_map
-			var message = {
-					name: "objUpdate",
-					oid_string: netManObjIndex.toString()+":"+default_netman_uniqueId.toString(),
-					object_index: netManObjIndex,
-					uniqueId: default_netman_uniqueId,
-					netvar: "next_map",
-					val: p1.myPlayer.nextMapNum,
-					flag: 0
-			}
+			var message = composer.objUpdate(netManObjIndex,default_netman_uniqueId,"next_map",p1.myPlayer.nextMapNum,0);
 			io.to(gameRoom).emit('obj_update',message);
 		},1000, p1);
 
@@ -759,11 +631,7 @@ var makeMatches = function(){
 								}
 
 								//make everyone go to the lobby -- where stuff is going to get real
-								var firstMsg = {
-									name: "generalMessage",
-									msg: "goto_lobby",
-									val: 0
-								};
+								var firstMsg = composer.genMessage("goto_lobby",FL_NORMAL);
 								log.log(CUPID,firstMsg.name+" : "+firstMsg.msg+" : "+firstMsg.val);
 								io.to(gameRoom).emit('general_message',firstMsg);
 
@@ -776,45 +644,21 @@ var makeMatches = function(){
 											var eachSocket = playerSubGroup[s];
 
 											//CREATE THIS AVATAR FOR EVERYONE (EXCEPT LOCAL PLAYER)
-											var message = {
-												name: "objCreate",
-												object_index: avatarObjIndex,
-												uniqueId: s,
-												myX: Math.random()*1024,
-												myY: Math.random()*0
-											};
+											var message = composer.objCreate(avatarObjIndex,s,Math.random()*1024,Math.random()*0)
 
 											//s will now be the uniqueId of this socket's player for the duration of the match
 											eachSocket.myPlayer.uniqueId = s;
-
 											eachSocket.broadcast.to(gameRoom).emit('obj_create',message);
 
-											message = {
-												name: "objUpdate",
-												oid_string: avatarObjIndex.toString()+":"+s.toString(),
-												object_index: avatarObjIndex,
-												uniqueId: s,
-												netvar: "pName",
-												val: eachSocket.myPlayer.pName,
-												flag: 0
-											}
+											message = composer.objUpdate(avatarObjIndex,s,"pName",eachSocket.myPlayer.pName,FL_NORMAL);
 											io.to(gameRoom).emit('obj_update',message);
 
 											//update the avatar's uniqueId locally
-											message = {
-												name: "objUpdate",
-												oid_string: avatarObjIndex.toString()+":"+default_avatar_uniqueId.toString(),
-												object_index: avatarObjIndex,
-												uniqueId: default_avatar_uniqueId,
-												netvar: "uniqueId",
-												val: s,
-												flag: 0
-											}
+											message = composer.objUpdate(avatarObjIndex,default_avatar_uniqueId,"uniqueId",s,FL_NORMAL);
 											eachSocket.emit('obj_update',message);
 
 											//send complete AVATAR statistics to everyone
 											dbman.sendCompletePlayerStats(eachSocket, gameRoom, avatarObjIndex, true);
-
 										}
 
 									}, 10, playerSubGroup, gameRoom);

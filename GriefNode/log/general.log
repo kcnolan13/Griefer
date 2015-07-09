@@ -18,149 +18,12 @@ kyle: no_mode, main_menu
 sending kyle stats to local net manager
 sendingkyle challenge stats
 kyle moving to: bot_ffa_lobby
-kyle Leaving Matchmaking
-PING!
-pong . . .
-
-
-Received JSON Test
-original message: {"val1": 52}
-string JSON detected
-val1 = 52
-[ { name: 'generalMessage', msg: 'greetings', val: 99 },
-  { name: 'generalMessage', msg: 'blah', val: 'plaza' },
-  'stringBean' ]
-received authentication request:
-{"username": "kyle", "password": "abc123"}
-correct password
-login failure: kyle
-received authentication request:
-{"username": "kyle", "password": "abc123"}
-correct password
-login failure: kyle
-received authentication request:
-{"username": "blah", "password": "abc123"}
-blah: bot_ffa, main_menu
-sending blah stats to local net manager
-sendingblah challenge stats
-blah: disconnected
-deleting blah's socket
-PING!
-pong . . .
-
-
-Received JSON Test
-original message: {"val1": 52}
-string JSON detected
-val1 = 52
-[ { name: 'generalMessage', msg: 'greetings', val: 99 },
-  { name: 'generalMessage', msg: 'blah', val: 'plaza' },
-  'stringBean' ]
-received authentication request:
-{"username": "kyle", "password": "abc123"}
-correct password
-unique login for: kyle
-kyle: bot_ffa, main_menu
-sending kyle stats to local net manager
-sendingkyle challenge stats
-kyle moving to: versus_lobby
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-
-Received JSON Test
-original message: {"val1": 52}
-string JSON detected
-val1 = 52
-[ { name: 'generalMessage', msg: 'greetings', val: 99 },
-  { name: 'generalMessage', msg: 'blah', val: 'plaza' },
-  'stringBean' ]
-received authentication request:
-{"username": "marcel", "password": "abc123"}
-marcel: no_mode, main_menu
-sending marcel stats to local net manager
-sendingmarcel challenge stats
-marcel moving to: bot_ffa_lobby
-kyle Leaving Matchmaking
-kyle moving to: ffa_lobby
-marcel Leaving Matchmaking
-adding perma challenge: Neophyte I
-adding perma challenge: Mortar
-adding perma challenge: Recruit I
-adding perma challenge: Mincer
-adding perma challenge: Provocator I
-adding perma challenge: Double Barrel
-adding perma challenge: The Son-Of-A
-adding perma challenge: Contender I
-marcel: disconnected
-deleting marcel's socket
-PING!
-pong . . .
-
-
-Received JSON Test
-original message: {"val1": 52}
-string JSON detected
-val1 = 52
-[ { name: 'generalMessage', msg: 'greetings', val: 99 },
-  { name: 'generalMessage', msg: 'blah', val: 'plaza' },
-  'stringBean' ]
-received authentication request:
-{"username": "marcel", "password": "abc123"}
-correct password
-unique login for: marcel
-marcel: bot_ffa, main_menu
-sending marcel stats to local net manager
-sendingmarcel challenge stats
-kyle Leaving Matchmaking
-kyle moving to: versus_lobby
-kyle Leaving Matchmaking
-kyle moving to: ffa_lobby
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-
-Received JSON Test
-original message: {"val1": 52}
-string JSON detected
-val1 = 52
-[ { name: 'generalMessage', msg: 'greetings', val: 99 },
-  { name: 'generalMessage', msg: 'blah', val: 'plaza' },
-  'stringBean' ]
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-
-Received JSON Test
-original message: {"val1": 52}
-string JSON detected
-val1 = 52
-[ { name: 'generalMessage', msg: 'greetings', val: 99 },
-  { name: 'generalMessage', msg: 'blah', val: 'plaza' },
-  'stringBean' ]
 John Doe: disconnected
 deleting John Doe's socket
-marcel: disconnected
-deleting marcel's socket
-received authentication request:
-{"username": "marcel", "password": "abc123"}
-correct password
-unique login for: marcel
-marcel: no_mode, main_menu
-sending marcel stats to local net manager
-sendingmarcel challenge stats
-kyle Leaving Matchmaking
-kyle moving to: ffa_lobby
-marcel moving to: ffa_lobby
-kyle Leaving Matchmaking
 kyle: disconnected
 deleting kyle's socket
+NEW CLIENT
+NEW CLIENT
 PING!
 pong . . .
 
@@ -172,99 +35,16 @@ val1 = 52
 [ { name: 'generalMessage', msg: 'greetings', val: 99 },
   { name: 'generalMessage', msg: 'blah', val: 'plaza' },
   'stringBean' ]
-John Doe: disconnected
-deleting John Doe's socket
-marcel: disconnected
-deleting marcel's socket
 received authentication request:
 {"username": "kyle", "password": "abc123"}
 correct password
 unique login for: kyle
-kyle: ffa, main_menu
+kyle: no_mode, main_menu
 sending kyle stats to local net manager
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-
-Received JSON Test
-original message: {"val1": 52}
-string JSON detected
-val1 = 52
-[ { name: 'generalMessage', msg: 'greetings', val: 99 },
-  { name: 'generalMessage', msg: 'blah', val: 'plaza' },
-  'stringBean' ]
 sendingkyle challenge stats
-received authentication request:
-{"username": "marcel", "password": "abc123"}
-correct password
-unique login for: marcel
-marcel: no_mode, main_menu
-sending marcel stats to local net manager
 kyle moving to: bot_ffa_lobby
-sendingmarcel challenge stats
-kyle Leaving Matchmaking
-marcel moving to: ffa_lobby
-kyle moving to: ffa_lobby
+adding perma challenge: Underwear
 John Doe: disconnected
 deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-adding perma challenge: Mincer
-adding perma challenge: Neophyte I
-adding perma challenge: Recruit I
-adding perma challenge: Lobotomizer
-adding perma challenge: Brawler I
-adding perma challenge: Swol
-adding perma challenge: Underwear
-adding perma challenge: Underwear
-adding perma challenge: Snare
-adding perma challenge: Provocator I
-adding perma challenge: Warrior I
-adding perma challenge: Flashbang
-adding perma challenge: Mortar
-adding perma challenge: Contender I
-adding perma challenge: Flashbang
-adding perma challenge: Brawler I
-adding perma challenge: Juggernaut I
-adding perma challenge: Thumper
-adding perma challenge: Warrior I
-adding perma challenge: Incendiary
-adding perma challenge: Champion I
-kyle Leaving Matchmaking
-marcel Leaving Matchmaking
-marcel: disconnected
-deleting marcel's socket
-PING!
-pong . . .
-
-
-Received JSON Test
-original message: {"val1": 52}
-string JSON detected
-val1 = 52
-[ { name: 'generalMessage', msg: 'greetings', val: 99 },
-  { name: 'generalMessage', msg: 'blah', val: 'plaza' },
-  'stringBean' ]
 kyle: disconnected
 deleting kyle's socket
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-PING!
-pong . . .
-
-
-Received JSON Test
-original message: {"val1": 52}
-string JSON detected
-val1 = 52
-[ { name: 'generalMessage', msg: 'greetings', val: 99 },
-  { name: 'generalMessage', msg: 'blah', val: 'plaza' },
-  'stringBean' ]
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
