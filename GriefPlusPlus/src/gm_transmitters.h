@@ -49,4 +49,6 @@ GMEXPORT const double createUser(char * username, char *password);
 GMEXPORT const double logIn(char * username);
 GMEXPORT const double logOut();
 
+GMEXPORT const double setGppDebug(double value);
+
 #endif // __GM_TRANSMITTERS_H__

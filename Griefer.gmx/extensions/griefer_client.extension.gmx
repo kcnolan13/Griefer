@@ -544,6 +544,17 @@
             <arg>2</arg>
           </args>
         </function>
+        <function>
+          <name>setGppDebug</name>
+          <externalName>setGppDebug</externalName>
+          <kind>12</kind>
+          <help>setGppDebug(bool)</help>
+          <returnType>2</returnType>
+          <argCount>1</argCount>
+          <args>
+            <arg>2</arg>
+          </args>
+        </function>
       </functions>
       <constants/>
     </file>

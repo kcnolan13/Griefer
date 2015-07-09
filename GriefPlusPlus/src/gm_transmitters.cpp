@@ -212,3 +212,15 @@ GMEXPORT const double logOut()
 	//h.close();
 	//current_socket->~socket();
 }
+
+GMEXPORT const double setGppDebug(double value)
+{
+	if (value != 0)
+	{
+		debug = true;
+	}
+	else {
+		debug = false;
+	}
+	return 1;
+}

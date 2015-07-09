@@ -149,7 +149,7 @@ void bind_events(socket::ptr &socket)
 	socket->on("general_message", [&](string const& name, message::ptr const& data, bool isAck, message::ptr &ack_resp)
 	{
 		_lock.lock();
-		//console("new genMessage: "+getMapString(data,"msg"));
+		console("new genMessage: "+getMapString(data,"msg"));
 		processGeneralMessage(data);
 		_lock.unlock();
 	});
@@ -157,7 +157,7 @@ void bind_events(socket::ptr &socket)
 	socket->on("big_message", [&](string const& name, message::ptr const& data, bool isAck, message::ptr &ack_resp)
 	{
 		_lock.lock();
-		//console("new genMessage: "+getMapString(data,"msg"));
+		console("new bigMessage: "+getMapString(data,"msg"));
 		processBigMessage(data);
 		_lock.unlock();
 	});

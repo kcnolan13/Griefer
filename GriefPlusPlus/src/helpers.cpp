@@ -7,6 +7,7 @@
 
 string retString = "blah";
 bool integrityCheck = false;
+bool debug = false;
 
 genVal::genVal()
 {
@@ -31,7 +32,7 @@ genVal::genVal(double dubVal)
 
 void console(string output)
 {
-	if ((output.find("{Osefsdf}:") != string::npos) || (output.find(":::") != string::npos) || (output.find("llJSON") != string::npos) || (output.find("ERROR") != string::npos) || (output.find("error") != string::npos))
+	if (debug || ((output.find("{Osefsdf}:") != string::npos) || (output.find(":::") != string::npos) || (output.find("llJSON") != string::npos) || (output.find("ERROR") != string::npos) || (output.find("error") != string::npos)))
 		cout << output << endl;
 }
 

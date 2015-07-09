@@ -34,6 +34,7 @@ using namespace sio;
 using namespace std;
 
 extern string retString;
+extern bool debug;
 extern bool integrityCheck;
 
 class genVal

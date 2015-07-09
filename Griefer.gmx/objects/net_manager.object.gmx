@@ -28,6 +28,7 @@
             <string>///initialization
 draw_set_swf_aa_level(1)
 draw_enable_swf_aa(true)
+setGppDebug(0)
 
 seed = 30
 
