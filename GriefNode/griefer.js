@@ -8,6 +8,7 @@ var netManObjIndex = global.netManObjIndex; var lobby_wait_time = global.lobby_w
 var default_netman_uniqueId = global.default_netman_uniqueId; var numTdm = global.numTdm; var numFfa = global.numFfa; var numVersus = global.numVersus;
 var	numMenu = global.numMenu; var numBot = global.numBot; var numSockets = global.numSockets; var numBotFfa = global.numBotFfa; var numBotTdm = global.numBotTdm;
 var NUM_BPARTS = global.NUM_BPARTS; var NUM_STATS = global.NUM_STATS; var clients = global.clients; var rooms = global.rooms;
+var SOCKETS = "sock"
 
 var conn;
 
@@ -40,7 +41,7 @@ cupid.setIo(io);
 cupid.initGameRooms();
 
 //set logging intervals
-setInterval(cupid.showSocketGroups,1000);
+setInterval(cupid.manageSockets,1000);
 setInterval(cupid.syncPlayersConnected,4*5010);
 setInterval(cupid.makeMatches,5000);
 
@@ -58,6 +59,8 @@ io.on('connection', function(socket){
 
 		//create a player object to house all data needed for this socket/player
 		socket.myPlayer.pName = pName;
+		socket.myPlayer.uniqueId = composer.hash_string(pName);
+		socket.myPlayer.pNum = -1;
 		socket.myPlayer.timeoutHandle = null;
 
 		//join the main_menu group --> aka no matchmaking currently happening
@@ -86,20 +89,19 @@ io.on('connection', function(socket){
 	  		dbman.sendNetManPlayerStats(socket,netManObjIndex, default_netman_uniqueId);
 
 	  		//create the local avatar
-	  		cupid.objCreate(socket,avatarObjIndex,default_avatar_uniqueId,Math.random()*1024,Math.random()*768);
-			cupid.objUpdate(socket,avatarObjIndex,default_avatar_uniqueId,"pName",socket.myPlayer.pName,0);
+	  		cupid.objCreate(socket,avatarObjIndex,socket.myPlayer.uniqueId,Math.random()*1024,Math.random()*768);
+			cupid.objUpdate(socket,avatarObjIndex,socket.myPlayer.uniqueId,"pName",socket.myPlayer.pName,0);
 	
 			//send complete AVATAR statistics
-			dbman.sendNetManPlayerStats(socket, avatarObjIndex, default_avatar_uniqueId);
+			dbman.sendNetManPlayerStats(socket, avatarObjIndex, socket.myPlayer.uniqueId);
 
 			//sync connected players for everyone... cause why not
-			cupid.showSocketGroups();
+			cupid.manageSockets();
 			cupid.syncPlayersConnected();
 
   	}, 35, socket);
 
   });
-
 
   //---- START MATCHMAKING ----//
   socket.on('start_matchmaking',function(gameMode){
@@ -126,9 +128,10 @@ io.on('connection', function(socket){
 	  	socket.leave(socket.myPlayer.room);
 	  	socket.myPlayer.room = "main_menu";
 	  	socket.join('main_menu');
+
+	  	//if this is a party, promote some other player to party leader
   	}
   });
-
 
   //---- A PLAYER DISCONNECTS FROM THE SERVER ----//
   socket.on('disconnect', function() {
@@ -145,7 +148,7 @@ io.on('connection', function(socket){
   	delete socket; 
 
   	//sync connected players for everyone... cause why not
-	cupid.showSocketGroups();
+	cupid.manageSockets();
 	cupid.syncPlayersConnected();
 
   });
@@ -176,29 +179,75 @@ io.on('connection', function(socket){
 
   //---- BIG MESSAGES ----//
   socket.on('big_message', function(message) {
-  	message = composer.ensureJSON(message);
+	  	message = composer.ensureJSON(message);
 
-  	if (message.msg=="control_map")
-  	{
-  		//example usage
-  		var statement = "UPDATE controls set control_code="+message.val2+" WHERE username='"+socket.myPlayer.pName+"' AND control_index="+message.val1+" AND using_gamepad="+message.val3;
-  		log.log(STD,"USER-DEFINED CONTROL MAPPING:\n"+statement+"\n\n");
-		conn.query(statement, function(err,rows) {
-			//log any errors
-			if (err)
-				log.log(STD,err);
-		});
-  	}
+	  	if (message.msg=="control_map")
+	  	{
+	  		//example usage
+	  		var statement = "UPDATE controls set control_code="+message.val2+" WHERE username='"+socket.myPlayer.pName+"' AND control_index="+message.val1+" AND using_gamepad="+message.val3;
+	  		log.log(STD,"USER-DEFINED CONTROL MAPPING:\n"+statement+"\n\n");
+			conn.query(statement, function(err,rows) {
+				//log any errors
+				if (err)
+					log.log(STD,err);
+			});
+	  	}
 
-  	if (message.msg == "accolade_update")
-  	{
-  		if (message.val3 == FL_SQL)
-  			dbman.updateAccolade(socket.myPlayer.pName, message.val1, message.val2, FL_SQL);
-  		else
-  			dbman.updateAccolade(socket.myPlayer.pName, message.val1, message.val2, message.val3);
-  	}
+	  	if (message.msg == "accolade_update")
+	  	{
+	  		if (message.val3 == FL_SQL)
+	  			dbman.updateAccolade(socket.myPlayer.pName, message.val1, message.val2, FL_SQL);
+	  		else
+	  			dbman.updateAccolade(socket.myPlayer.pName, message.val1, message.val2, message.val3);
+	  	}
 
-  	});
+	  	if (message.msg == "start_party")
+	  	{
+	  		var mode = message.msg.val1;
+	  		var groupName = "party"+"_"+socket.myPlayer.uniqueId;
+	  		var roomType = cupid.roomOfType(mode);
+	  		var newRoom = new cupid.room(groupName, mode, roomType.maxPlayers, roomType.minPlayers);
+	  		rooms.push(newRoom);
+
+	  		newRoom.joinable = false;
+	  		newRoom.party = true;
+	  		
+	  		socket.leave(socket.myPlayer.room);
+	  		socket.myPlayer.room = groupName;
+	  		socket.join(groupName);
+
+	  		var firstMsg = composer.genMessage("goto_lobby",FL_NORMAL);
+			log.log(CUPID,firstMsg.name+" : "+firstMsg.msg+" : "+firstMsg.val);
+			socket.emit('general_message',firstMsg);
+	  	}
+
+	  	if (message.msg == "start_match")
+	  	{
+	  		var obj_room = cupid.room_with_name(socket.myPlayer.room);
+	  		var socks = cupid.socketsInRoom(socket.myPlayer.room); //uses room name
+	  		cupid.configure_match(socks,socket.myPlayer.room,30000);
+	  	}
+
+	  	if (message.msg = "join_party")
+	  	{
+	  		var groupName = message.msg.val1;
+	  		if (cupid.partyExpired(groupName) == false)
+	  		{
+	  			socket.leave(socket.myPlayer.room);
+		  		socket.myPlayer.room = groupName;
+		  		socket.join(groupName);
+
+		  		var firstMsg = composer.genMessage("goto_lobby",FL_NORMAL);
+				log.log(CUPID,firstMsg.name+" : "+firstMsg.msg+" : "+firstMsg.val);
+				socket.emit('general_message',firstMsg);
+	  		}
+	  		else
+	  		{
+	  			cupid.genMessage(socket,"party_expired",FL_NORMAL);
+	  		}
+	  	}
+
+	});
 
   //---- GENERAL MESSAGES ----//
   socket.on('general_message', function(message) {
@@ -249,7 +298,7 @@ io.on('connection', function(socket){
 
 	if (message.msg == "syncPlayersConnected")
 	{
-		cupid.showSocketGroups();
+		cupid.manageSockets();
 		cupid.syncPlayersConnected();
 	}
 

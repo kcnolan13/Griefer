@@ -12,16 +12,32 @@ val1 = 52
 [ { name: 'generalMessage', msg: 'greetings', val: 99 },
   { name: 'generalMessage', msg: 'blah', val: 'plaza' },
   'stringBean' ]
-received authentication request:
-{"username": "kyle", "password": "abc123"}
-kyle: no_mode, main_menu
-sending kyle stats to local net manager
-sendingkyle challenge stats
-kyle moving to: bot_ffa_lobby
-John Doe: disconnected
-deleting John Doe's socket
-kyle: disconnected
-deleting kyle's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+
+Received JSON Test
+original message: {"val1": 52}
+string JSON detected
+val1 = 52
+[ { name: 'generalMessage', msg: 'greetings', val: 99 },
+  { name: 'generalMessage', msg: 'blah', val: 'plaza' },
+  'stringBean' ]
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+
+Received JSON Test
+original message: {"val1": 52}
+string JSON detected
+val1 = 52
+[ { name: 'generalMessage', msg: 'greetings', val: 99 },
+  { name: 'generalMessage', msg: 'blah', val: 'plaza' },
+  'stringBean' ]
 NEW CLIENT
 NEW CLIENT
 PING!
@@ -37,14 +53,50 @@ val1 = 52
   'stringBean' ]
 received authentication request:
 {"username": "kyle", "password": "abc123"}
-correct password
-unique login for: kyle
+HASHED kyle ---> 3307367
 kyle: no_mode, main_menu
 sending kyle stats to local net manager
 sendingkyle challenge stats
-kyle moving to: bot_ffa_lobby
-adding perma challenge: Underwear
+received authentication request:
+{"username": "balls", "password": "abc123"}
+HASHED balls ---> 93502036
+balls: no_mode, main_menu
+sending balls stats to local net manager
+sendingballs challenge stats
+balls moving to: tdm_lobby
+received authentication request:
+{"username": "butt", "password": "abc123"}
+HASHED butt ---> 3035667
+butt: no_mode, main_menu
+sending butt stats to local net manager
+sendingbutt challenge stats
+received authentication request:
+{"username": "face", "password": "abc123"}
+HASHED face ---> 3135069
+face: no_mode, main_menu
+sending face stats to local net manager
+sendingface challenge stats
+face moving to: tdm_lobby
+butt moving to: tdm_lobby
+kyle moving to: versus_lobby
+kyle Leaving Matchmaking
+kyle moving to: tdm_lobby
+adding perma challenge: Mincer
+adding perma challenge: Neophyte I
 John Doe: disconnected
 deleting John Doe's socket
 kyle: disconnected
 deleting kyle's socket
+John Doe: disconnected
+deleting John Doe's socket
+face: disconnected
+deleting face's socket
+John Doe: disconnected
+deleting John Doe's socket
+butt: disconnected
+deleting butt's socket
+balls Leaving Matchmaking
+John Doe: disconnected
+deleting John Doe's socket
+balls: disconnected
+deleting balls's socket
