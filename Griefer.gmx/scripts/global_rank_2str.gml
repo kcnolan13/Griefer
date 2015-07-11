@@ -31,6 +31,6 @@ switch (last_dig)
 if global_rank = 12 or global_rank = 11 or global_rank = 13
     str = string(global_rank)+"th"
 
-str += " in the World"
+//str += " in the World"
 
 return str

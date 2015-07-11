@@ -308,6 +308,13 @@ if net_manager.menu_mode = "stats"
                 }
                 manage_meters()
             }
+            else
+            {
+                if instance_exists(pstat_title)
+                {
+                    printf("ERROR: pstat_title exists but grav not ready ... help...")
+                }
+            }
         break
         
         //bot mode
@@ -349,33 +356,7 @@ if net_manager.menu_mode = "stats"
 }
 else if not wiped//not in stats mode
 {
-    wiped = true
-    
-    fade_modal(modal_table)
-    fade_modal(bn_slabel)
-    fade_modal(modal_stat_history)
-    
-    history_chart = NO_HANDLE
-    pstat_title = NO_HANDLE
-    leaderboards_title = NO_HANDLE
-    
-    for (var i=0; i&lt;getLength(pstat_labels[i]); i++)
-    {
-        fade_modal(pstat_labels[i])
-        pstat_labels[i] = NO_HANDLE
-    }
-    
-    for (var i=0; i&lt;getLength(pstat_vals[i]); i++)
-    {
-        fade_modal(pstat_vals[i])
-        pstat_vals[i] = NO_HANDLE
-    }
-    
-    for (var i=0; i&lt;getLength(meters); i++)
-    {
-        fade_modal(meters[i])
-        meters[i] = NO_HANDLE
-    }
+    wipe_stat_modals()
 }
 
 </string>

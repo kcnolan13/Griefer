@@ -1970,8 +1970,11 @@ wheel_up()
             <string>///draw me and my name
 if not bparts_ready exit
 
-draw_text(x,y-140,"uniqueId: "+string(varRead("uniqueId")))
-draw_text(x,y-100,"pNum: "+string(varRead("pNum")))
+if net_manager.show_cout
+{
+    draw_text(x,y-140,"uniqueId: "+string(varRead("uniqueId")))
+    draw_text(x,y-100,"pNum: "+string(varRead("pNum")))
+}
 
 event_inherited()
 

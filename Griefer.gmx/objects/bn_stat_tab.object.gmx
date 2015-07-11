@@ -150,6 +150,7 @@ active = true
 
 if stat_manager.stat_tab != stat_tab
 {
+    wipe_stat_modals()
     stat_manager.stat_tab = stat_tab
     fade_modal(modal_meter)
     fade_modal(bn_slabel)

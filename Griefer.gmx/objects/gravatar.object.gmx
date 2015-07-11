@@ -47,6 +47,7 @@ mouse_wheel_delay_max = 2
 
 varWrite("rank",0)
 varWrite("global_rank",9000)
+varWrite("controllable",true)
 
 //bparts
 bparts_all_init()
@@ -227,8 +228,6 @@ if room = rm_menu or room = rm_lobby
     if menmode() != "stats" or stat_manager.stat_tab = stat_manager.tabs[2]
     {
         varWrite("dude_x",-800)
-        if string(varRead("helmet0")) != ""
-            gravatar_wipe(id)
     }
 }
 
@@ -414,6 +413,8 @@ if real(varRead("prop0")) &gt; 0 and room = rm_menu or room = rm_lobby
             <string>///go invisible if in a match
 event_inherited()
 
+gravatar_wipe(id)
+
 if in_match()
 {
     visible = false
@@ -448,17 +449,17 @@ else
             <kind>1</kind>
             <string>///debug
     
-//if net_manager.show_cout
+if net_manager.show_cout
 {
 
     draw_text(x,y-230,"uniqueId: "+string(varRead("uniqueId")))
     draw_text(x,y-200,string(varRead("pName"))+" ["+string(varRead("pNum"))+"]")
     if net_manager.show_cout or room = rm_lobby and rtime() &lt; room_speed*3
         printf("::: GRAVATAR "+string(varRead("pName"))+": uniqueId = "+string(varRead("uniqueId"))+", pNum = "+string(varRead("pNum"))+", x="+string(x)+", y="+string(y))
-    
+}
+
     if not in_match()
         event_inherited()
-}
 </string>
           </argument>
         </arguments>

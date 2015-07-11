@@ -200,21 +200,22 @@ if grid = NO_HANDLE
     //NOW WOULD BE THE TIME TO OBTAIN COLUMN NAMES
     ds_grid_add(grid_header,0,0,"username")
     ds_grid_add(grid_header,1,0,"rank")
-    ds_grid_add(grid_header,2,0,"xp")
-    ds_grid_add(grid_header,3,0,"ppl")
-    ds_grid_add(grid_header,4,0,"kdr")
-    ds_grid_add(grid_header,5,0,"wl")
-    ds_grid_add(grid_header,6,0,"time")
-    ds_grid_add(grid_header,7,0,"kills")
-    ds_grid_add(grid_header,8,0,"deaths")
+    ds_grid_add(grid_header,2,0,"true_skill")
+    ds_grid_add(grid_header,3,0,"xp")
+    ds_grid_add(grid_header,4,0,"ppl")
+    ds_grid_add(grid_header,5,0,"kdr")
+    ds_grid_add(grid_header,6,0,"wl")
+    ds_grid_add(grid_header,7,0,"time")
+    ds_grid_add(grid_header,8,0,"kills")
+    //ds_grid_add(grid_header,8,0,"deaths")
     ds_grid_add(grid_header,9,0,"assists")
     ds_grid_add(grid_header,10,0,"wins")
-    ds_grid_add(grid_header,11,0,"losses")
-    ds_grid_add(grid_header,12,0,"kill_streak")
-    ds_grid_add(grid_header,13,0,"win_streak")
+    //ds_grid_add(grid_header,11,0,"losses")
+    ds_grid_add(grid_header,11,0,"kill_streak")
+    ds_grid_add(grid_header,12,0,"win_streak")
     
     //create ascending array
-    for (var i=0; i&lt;14; i++)
+    for (var i=0; i&lt;ds_grid_width(grid); i++)
     {
         ascending[i] = true
     }

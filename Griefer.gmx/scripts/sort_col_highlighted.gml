@@ -6,6 +6,12 @@ var cright = cleft+x_incr
 var ctop = top
 var cbottom = top+row_height
 
+//player column
+if rect_highlighted(left,ctop,cleft,cbottom)
+{
+    return 0
+}
+
 for (var i=2; i<cols; i++)
 {
     if rect_highlighted(cleft,ctop,cright,cbottom)

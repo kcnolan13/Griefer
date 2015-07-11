@@ -465,7 +465,7 @@ instance_create(x,y,xp_bar)
         <arguments>
           <argument>
             <kind>14</kind>
-            <timeline>auto_login</timeline>
+            <timeline>-100</timeline>
           </argument>
           <argument>
             <kind>0</kind>
@@ -1228,6 +1228,8 @@ if room = rm_lobby
     {
         if i = num_players
         {
+            if menmode() != "stats" continue
+            
             ID = stat_gravatar
             if not instance_exists(stat_gravatar)
             {
@@ -1244,7 +1246,6 @@ if room = rm_lobby
         //avatar popups and scale lerping
         if av_popup != noone or not collision_rectangle(ID.x-curscale*av_xbd, ID.y-curscale*av_ybd, ID.x+curscale*av_xbd, ID.y+curscale*av_ybd, cursor, false, false)
         {
-        
             if menu_mode != "armory" or not is_my_avatar(ID)
                 objVarWrite(ID,"animation_scale",lerp(objVarRead(ID,"animation_scale"),av_scale_lobby,0.1))
             else
@@ -1694,7 +1695,7 @@ if instance_number(player) &gt; 0 and room_counter &gt; 10*room_speed
         
         if (match_countdown = 0)
         {
-            sendMessageReal("end_match",1)
+            sendMessageReal("end_match",stat_manager.stat_flag)
             room_goto(rm_lobby)
         }
     } else if not varRead("end_match_coming") and (varRead("game_mode") != "tdm" or instance_exists(local_player) and (is_team_leader(local_player) or bot_match)) {
@@ -3049,11 +3050,9 @@ for (var i=0; i&lt;instance_number(avatar); i++)
                 //show his stats!
                 net_manager.menu_mode = "stats"
                 //request personal stats
+                stat_manager.stat_tab = stat_manager.tabs[0]
                 var fl = FL_NORMAL
-                if stat_manager.stat_tab = stat_manager.tabs[1]
-                    fl = FL_BOT
-                if instance_exists(stat_gravatar)
-                    gravatar_wipe(stat_gravatar)
+                gravatar_wipe(stat_gravatar)
                 stat_manager.grav_ready = false
                 stat_manager.grav_name = objVarRead(ID,"pName")
                 printf("::: requesting gravatar stats for "+string(stat_manager.grav_name))

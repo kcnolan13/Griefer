@@ -567,7 +567,7 @@ if (varRead("animation") != "die_headshot")
     
     //hat
     var helm = varRead("helmet0") 
-    if not is_hatless(helm)
+    if not is_hatless(helm) and string(helm) != "" and real(helm) != spr_helmet_none
         draw_limb("hat0",hat_drawx,hat_drawy,hat_drawr)
 }
 

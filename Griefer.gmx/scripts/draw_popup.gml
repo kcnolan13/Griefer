@@ -17,6 +17,12 @@ var txt_pad = global.popup_txt_pad
 var draw_normal = true
 var alpha_scaler = 1
 
+var hash_count = string_count("#",body_text_override)
+
+{
+    body_height += 3*hash_count
+}
+
 if object_index = popup_drawer
 {
     if draw_sinbad
@@ -104,12 +110,15 @@ draw_set_valign(fa_bottom)
 draw_text(pleft+txt_pad,ptop+title_height-txt_pad,subtitle)
 draw_set_valign(fa_top)
 
+tbody_voff = 12
+tbody_voff -= 1*hash_count
+
 //figure out source and draw it
 if string_length(body_text_override) < 1
 {
     if source = global.src_lotto
     {
-        draw_text(pleft+txt_pad,ptop+title_height+txt_pad,source)
+        draw_text(pleft+txt_pad,ptop+title_height+txt_pad+tbody_voff,source)
     } else if source = global.src_challenge
     {
         draw_text(pleft+txt_pad,ptop+title_height+txt_pad*2,"Challenge Gear!")
@@ -122,7 +131,7 @@ if string_length(body_text_override) < 1
 }
 else
 {
-    draw_text_ext(pleft+txt_pad,ptop+title_height+12+txt_pad,body_text_override,txt_pad,(pleft-pright))
+    draw_text_ext(pleft+txt_pad,ptop+title_height+tbody_voff+txt_pad,body_text_override,txt_pad,(pleft-pright))
 }
 
 draw_set_alpha(1)

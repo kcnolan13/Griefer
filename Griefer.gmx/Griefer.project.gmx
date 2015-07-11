@@ -1034,6 +1034,7 @@
       <script>scripts\insert_global_stat.gml</script>
       <script>scripts\request_personal_stats.gml</script>
       <script>scripts\gravatar_wipe.gml</script>
+      <script>scripts\wipe_stat_modals.gml</script>
     </scripts>
     <scripts name="draw">
       <scripts name="score_table">

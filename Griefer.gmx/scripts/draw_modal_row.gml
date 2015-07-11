@@ -53,7 +53,6 @@ if dgrid != grid_header
 }
 else
 {
-    draw_text(xdraw+5, txt_y, "Player")
     if dgrid = grid_header
     {
         //column highlighting
@@ -61,10 +60,19 @@ else
         if col_high > -1
         {
             draw_set_color(c_gray)
-            draw_rectangle(dx+x_incr*(col_high-2),ydraw,dx+x_incr*(col_high-1),ydraw+row_height,false)
+            if col_high > 1
+            {
+                draw_rectangle(dx+x_incr*(col_high-2),ydraw,dx+x_incr*(col_high-1),ydraw+row_height,false)
+            }
+            else
+            {
+                //it's the player name column
+                draw_rectangle(xdraw,ydraw,dx,ydraw+row_height,false)
+            }
             draw_set_color(txt_col)
         }
     }
+    draw_text(xdraw+5, txt_y, "Player")
 }
 
 for (var k=kst; k < ds_grid_width(dgrid); k++)

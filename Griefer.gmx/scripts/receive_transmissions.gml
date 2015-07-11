@@ -306,8 +306,8 @@ while (objUpdatesWaiting() and wait_counter < 1000)
         printf("payload is real: "+string(val))
     }
     
-    if netvar = "pNum"
-        printf(":::obj_update for "+oid_str+" ( "+string(obj_index)+" : "+string(unique_id)+" ) ... "+string(netvar)+" = "+string(val))
+    if netvar = "pNum" or netvar = "true_skill" or netvar = "global_rank"
+        printf("::: IMPORTANT UPDATE for "+oid_str+" ( "+string(obj_index)+" : "+string(unique_id)+" ) ... "+string(netvar)+" = "+string(val))
     
     printf("{O}: reading objUpdate flag")
     flag = readObjUpdateFlag()
@@ -333,7 +333,7 @@ while (objUpdatesWaiting() and wait_counter < 1000)
                 griefer_restart()
             }*/
             if DEBUG
-                printf("PUSH BACK: update: "+string(obj_index)+", id="+unique_id+", "+netvar+", "+val)
+                printf("::: PUSH BACK: update: "+string(obj_index)+", id="+string(unique_id)+", "+string(netvar)+", "+string(val))
            
              if (strVal)
                 objPushBackString(obj_index,unique_id,netvar,val,flag)

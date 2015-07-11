@@ -1,11 +1,11 @@
 ///manage_meters()
-if not instance_exists(net_manager.my_doll)
+if not instance_exists(net_manager.stat_gravatar)
 {
-    printf("ERROR: manage_meters cannot find local player")
+    printf("ERROR: manage_meters cannot find stat_gravatar")
     return false
 }
 
-var guy = net_manager.my_doll
+var guy = net_manager.stat_gravatar
 
 if getLength(meters) < 1
 {
@@ -121,8 +121,9 @@ if not instance_exists(pstat_title)
     tit.font = fnt_pstats_title
     tit.birth_delay = 2
     tit.text_color = c_dkgray
-    yst += ysep*1.75
 }
+
+yst += ysep*1.75
 
 for (var i=0; i<getLength(pstats); i++)
 {
@@ -179,4 +180,3 @@ for (var i=0; i<getLength(pstats); i++)
         val.label = val.text   
     }
 }
-

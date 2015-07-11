@@ -51,9 +51,11 @@ varWrite("gear_to_lose",false)
 varWrite("gear_to_steal",false)
 varWrite("stolen_gear_source",global.src_empty)
 varWrite("lost_gear_source",global.src_empty)
+varWrite("uniqueId",-52)
+varWrite("true_skill",-1)
+varWrite("global_rank",-1)
 
 varWrite("rank",0)
-varWrite("global_rank",9000)
 
 //bparts
 bparts_all_init()
@@ -438,6 +440,8 @@ if room = rm_lobby and net_manager.room_counter &gt; room_speed
         if nth_frame(5) obj_pname_update_real(id,"active_weapon_prescaler",FL_NORMAL)
         if nth_frame(5) obj_pname_update_real(id,"animation_xscale",FL_NORMAL)
         if nth_frame(5) obj_pname_update_real(id,"arm_pose",FL_NORMAL)
+        if nth_frame(5) obj_pname_update_real(id,"true_skill",FL_NORMAL)
+        if nth_frame(5) obj_pname_update_real(id,"global_rank",FL_NORMAL)
     }
 
 }
@@ -690,7 +694,7 @@ else
     
 if room = rm_menu
 {
-    varWrite("uniqueId",-52)
+    //varWrite("uniqueId",-52)
     y = -64*5
     x = room_width*4/5
 }
@@ -779,13 +783,8 @@ if is_bot(id) and room = rm_lobby
             <string>///debug
 //if varRead("player_quit") exit
 //printf("dude_x = "+string(varRead("dude_x"))+", dude_y = "+string(varRead("dude_y"))+", x = "+string(x)+", y = "+string(y))
-if net_manager.room_counter % room_speed = 0 and SUPER_DEBUG
-    printf("drawing uniqueId: "+varRead("uniqueId")+" @ "+x+", "+y)
-
-    if not is_bot(id) and DEBUG
-    draw_text(x,y-200,"bot_rank: "+varRead("bot_rank"))
     
-//if net_manager.show_cout
+if net_manager.show_cout
 {
     //draw_text(x,y-290,"global_rank: "+varRead("global_rank"))
     //draw_text(x,y-260,"rank: "+varRead("rank"))
