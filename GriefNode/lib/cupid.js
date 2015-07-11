@@ -100,9 +100,26 @@ exports.bigMessage = bigMessage
 var socketsInRoom = function(roomName) {
 	namespace = "/";
 	var theSockets = [];
-	for (var socketId in io.nsps[namespace].adapter.rooms[roomName]) {
-		if (io.sockets.connected[socketId]!=undefined) //was myPlayer.pName
-	    	theSockets.push(io.sockets.connected[socketId]);
+	var roomsweep = [];
+	if (roomName=="all")
+	{
+		for (var i=0; i<rooms.length; i++)
+		{
+			roomsweep.push(rooms[i].groupName);
+		}
+	}
+	else
+	{
+		roomsweep.push(roomName);
+	}
+
+	for (var i=0; i<roomsweep.length; i++)
+	{
+		var datRoom = roomsweep[i];
+		for (var socketId in io.nsps[namespace].adapter.rooms[datRoom]) {
+			if (io.sockets.connected[socketId]!=undefined) //was myPlayer.pName
+		    	theSockets.push(io.sockets.connected[socketId]);
+		}
 	}
 
 return theSockets;

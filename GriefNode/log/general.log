@@ -1,5 +1,50 @@
 listening on *:8080
 NEW CLIENT
+PING!
+pong . . .
+
+
+Received JSON Test
+original message: {"val1": 52}
+string JSON detected
+val1 = 52
+[ { name: 'generalMessage', msg: 'greetings', val: 99 },
+  { name: 'generalMessage', msg: 'blah', val: 'plaza' },
+  'stringBean' ]
+NEW CLIENT
+received authentication request:
+{"username": "kyle", "password": "abc123"}
+HASHED kyle ---> 3307367
+kyle: no_mode, main_menu
+sending kyle stats to local net manager
+sending kyle challenge stats
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1
+HASHED kyle ---> 3307367
+updating kyle's local avatar: true_skill=0, global_rank = 1
+{ name: 'objUpdate',
+  oid_string: '2:3307367',
+  object_index: 2,
+  uniqueId: 3307367,
+  netvar: 'true_skill',
+  val: 0,
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:3307367',
+  object_index: 2,
+  uniqueId: 3307367,
+  netvar: 'global_rank',
+  val: 1,
+  flag: 0 }
+John Doe: disconnected
+deleting John Doe's socket
+kyle: disconnected
+deleting kyle's socket
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1
+NEW CLIENT
 NEW CLIENT
 PING!
 pong . . .
@@ -14,10 +59,30 @@ val1 = 52
   'stringBean' ]
 received authentication request:
 {"username": "kyle", "password": "abc123"}
+correct password
+unique login for: kyle
 HASHED kyle ---> 3307367
 kyle: no_mode, main_menu
 sending kyle stats to local net manager
-sendingkyle challenge stats
+sending kyle challenge stats
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1
+HASHED kyle ---> 3307367
+updating kyle's local avatar: true_skill=0, global_rank = 1
+{ name: 'objUpdate',
+  oid_string: '2:3307367',
+  object_index: 2,
+  uniqueId: 3307367,
+  netvar: 'true_skill',
+  val: 0,
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:3307367',
+  object_index: 2,
+  uniqueId: 3307367,
+  netvar: 'global_rank',
+  val: 1,
+  flag: 0 }
 John Doe: disconnected
 deleting John Doe's socket
 kyle: disconnected
@@ -42,11 +107,193 @@ unique login for: kyle
 HASHED kyle ---> 3307367
 kyle: no_mode, main_menu
 sending kyle stats to local net manager
-sendingkyle challenge stats
+sending kyle challenge stats
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1
+HASHED kyle ---> 3307367
+updating kyle's local avatar: true_skill=0, global_rank = 1
+{ name: 'objUpdate',
+  oid_string: '2:3307367',
+  object_index: 2,
+  uniqueId: 3307367,
+  netvar: 'true_skill',
+  val: 0,
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:3307367',
+  object_index: 2,
+  uniqueId: 3307367,
+  netvar: 'global_rank',
+  val: 1,
+  flag: 0 }
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1
+HASHED kyle ---> 3307367
+updating kyle's local avatar: true_skill=0, global_rank = 1
+{ name: 'objUpdate',
+  oid_string: '2:3307367',
+  object_index: 2,
+  uniqueId: 3307367,
+  netvar: 'true_skill',
+  val: 0,
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:3307367',
+  object_index: 2,
+  uniqueId: 3307367,
+  netvar: 'global_rank',
+  val: 1,
+  flag: 0 }
 John Doe: disconnected
 deleting John Doe's socket
 kyle: disconnected
 deleting kyle's socket
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+
+Received JSON Test
+original message: {"val1": 52}
+string JSON detected
+val1 = 52
+[ { name: 'generalMessage', msg: 'greetings', val: 99 },
+  { name: 'generalMessage', msg: 'blah', val: 'plaza' },
+  'stringBean' ]
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1
+received authentication request:
+{"username": "kyle", "password": "abc123"}
+correct password
+unique login for: kyle
+HASHED kyle ---> 3307367
+kyle: no_mode, main_menu
+sending kyle stats to local net manager
+sending kyle challenge stats
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1
+HASHED kyle ---> 3307367
+updating kyle's local avatar: true_skill=0, global_rank = 1
+{ name: 'objUpdate',
+  oid_string: '2:3307367',
+  object_index: 2,
+  uniqueId: 3307367,
+  netvar: 'true_skill',
+  val: 0,
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:3307367',
+  object_index: 2,
+  uniqueId: 3307367,
+  netvar: 'global_rank',
+  val: 1,
+  flag: 0 }
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1
+HASHED kyle ---> 3307367
+updating kyle's local avatar: true_skill=0, global_rank = 1
+{ name: 'objUpdate',
+  oid_string: '2:3307367',
+  object_index: 2,
+  uniqueId: 3307367,
+  netvar: 'true_skill',
+  val: 0,
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:3307367',
+  object_index: 2,
+  uniqueId: 3307367,
+  netvar: 'global_rank',
+  val: 1,
+  flag: 0 }
+kyle: disconnected
+deleting kyle's socket
+PING!
+pong . . .
+
+
+Received JSON Test
+original message: {"val1": 52}
+string JSON detected
+val1 = 52
+[ { name: 'generalMessage', msg: 'greetings', val: 99 },
+  { name: 'generalMessage', msg: 'blah', val: 'plaza' },
+  'stringBean' ]
+received authentication request:
+{"username": "kyle", "password": "abc123"}
+correct password
+unique login for: kyle
+HASHED kyle ---> 3307367
+kyle: no_mode, main_menu
+sending kyle stats to local net manager
+sending kyle challenge stats
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1
+HASHED kyle ---> 3307367
+updating kyle's local avatar: true_skill=0, global_rank = 1
+{ name: 'objUpdate',
+  oid_string: '2:3307367',
+  object_index: 2,
+  uniqueId: 3307367,
+  netvar: 'true_skill',
+  val: 0,
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:3307367',
+  object_index: 2,
+  uniqueId: 3307367,
+  netvar: 'global_rank',
+  val: 1,
+  flag: 0 }
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1
+HASHED kyle ---> 3307367
+updating kyle's local avatar: true_skill=0, global_rank = 1
+{ name: 'objUpdate',
+  oid_string: '2:3307367',
+  object_index: 2,
+  uniqueId: 3307367,
+  netvar: 'true_skill',
+  val: 0,
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:3307367',
+  object_index: 2,
+  uniqueId: 3307367,
+  netvar: 'global_rank',
+  val: 1,
+  flag: 0 }
+John Doe: disconnected
+deleting John Doe's socket
+kyle: disconnected
+deleting kyle's socket
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1
 NEW CLIENT
 NEW CLIENT
 PING!
@@ -67,11 +314,37 @@ unique login for: kyle
 HASHED kyle ---> 3307367
 kyle: no_mode, main_menu
 sending kyle stats to local net manager
-sendingkyle challenge stats
+sending kyle challenge stats
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1
+HASHED kyle ---> 3307367
+updating kyle's local avatar: true_skill=0, global_rank = 1
+{ name: 'objUpdate',
+  oid_string: '2:3307367',
+  object_index: 2,
+  uniqueId: 3307367,
+  netvar: 'true_skill',
+  val: 0,
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:3307367',
+  object_index: 2,
+  uniqueId: 3307367,
+  netvar: 'global_rank',
+  val: 1,
+  flag: 0 }
 John Doe: disconnected
 deleting John Doe's socket
 kyle: disconnected
 deleting kyle's socket
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1
 NEW CLIENT
 NEW CLIENT
 PING!
@@ -92,11 +365,31 @@ unique login for: kyle
 HASHED kyle ---> 3307367
 kyle: no_mode, main_menu
 sending kyle stats to local net manager
-sendingkyle challenge stats
+sending kyle challenge stats
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1
+HASHED kyle ---> 3307367
+updating kyle's local avatar: true_skill=0, global_rank = 1
+{ name: 'objUpdate',
+  oid_string: '2:3307367',
+  object_index: 2,
+  uniqueId: 3307367,
+  netvar: 'true_skill',
+  val: 0,
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:3307367',
+  object_index: 2,
+  uniqueId: 3307367,
+  netvar: 'global_rank',
+  val: 1,
+  flag: 0 }
 John Doe: disconnected
 deleting John Doe's socket
 kyle: disconnected
 deleting kyle's socket
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1
 NEW CLIENT
 NEW CLIENT
 PING!
@@ -117,11 +410,73 @@ unique login for: kyle
 HASHED kyle ---> 3307367
 kyle: no_mode, main_menu
 sending kyle stats to local net manager
-sendingkyle challenge stats
+sending kyle challenge stats
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1
+HASHED kyle ---> 3307367
+updating kyle's local avatar: true_skill=0, global_rank = 1
+{ name: 'objUpdate',
+  oid_string: '2:3307367',
+  object_index: 2,
+  uniqueId: 3307367,
+  netvar: 'true_skill',
+  val: 0,
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:3307367',
+  object_index: 2,
+  uniqueId: 3307367,
+  netvar: 'global_rank',
+  val: 1,
+  flag: 0 }
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1
+HASHED kyle ---> 3307367
+updating kyle's local avatar: true_skill=0, global_rank = 1
+{ name: 'objUpdate',
+  oid_string: '2:3307367',
+  object_index: 2,
+  uniqueId: 3307367,
+  netvar: 'true_skill',
+  val: 0,
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:3307367',
+  object_index: 2,
+  uniqueId: 3307367,
+  netvar: 'global_rank',
+  val: 1,
+  flag: 0 }
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1
+HASHED kyle ---> 3307367
+updating kyle's local avatar: true_skill=0, global_rank = 1
+{ name: 'objUpdate',
+  oid_string: '2:3307367',
+  object_index: 2,
+  uniqueId: 3307367,
+  netvar: 'true_skill',
+  val: 0,
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:3307367',
+  object_index: 2,
+  uniqueId: 3307367,
+  netvar: 'global_rank',
+  val: 1,
+  flag: 0 }
 John Doe: disconnected
 deleting John Doe's socket
 kyle: disconnected
 deleting kyle's socket
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1
 NEW CLIENT
 NEW CLIENT
 PING!
@@ -142,58 +497,46 @@ unique login for: kyle
 HASHED kyle ---> 3307367
 kyle: no_mode, main_menu
 sending kyle stats to local net manager
-sendingkyle challenge stats
-John Doe: disconnected
-deleting John Doe's socket
-kyle: disconnected
-deleting kyle's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-
-Received JSON Test
-original message: {"val1": 52}
-string JSON detected
-val1 = 52
-[ { name: 'generalMessage', msg: 'greetings', val: 99 },
-  { name: 'generalMessage', msg: 'blah', val: 'plaza' },
-  'stringBean' ]
-received authentication request:
-{"username": "kyle", "password": "abc123"}
-correct password
-unique login for: kyle
+sending kyle challenge stats
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1
 HASHED kyle ---> 3307367
-kyle: no_mode, main_menu
-sending kyle stats to local net manager
-sendingkyle challenge stats
-John Doe: disconnected
-deleting John Doe's socket
-kyle: disconnected
-deleting kyle's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-
-Received JSON Test
-original message: {"val1": 52}
-string JSON detected
-val1 = 52
-[ { name: 'generalMessage', msg: 'greetings', val: 99 },
-  { name: 'generalMessage', msg: 'blah', val: 'plaza' },
-  'stringBean' ]
-received authentication request:
-{"username": "kyle", "password": "abc123"}
-correct password
-unique login for: kyle
+updating kyle's local avatar: true_skill=0, global_rank = 1
+{ name: 'objUpdate',
+  oid_string: '2:3307367',
+  object_index: 2,
+  uniqueId: 3307367,
+  netvar: 'true_skill',
+  val: 0,
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:3307367',
+  object_index: 2,
+  uniqueId: 3307367,
+  netvar: 'global_rank',
+  val: 1,
+  flag: 0 }
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1
 HASHED kyle ---> 3307367
-kyle: no_mode, main_menu
-sending kyle stats to local net manager
-sendingkyle challenge stats
+updating kyle's local avatar: true_skill=0, global_rank = 1
+{ name: 'objUpdate',
+  oid_string: '2:3307367',
+  object_index: 2,
+  uniqueId: 3307367,
+  netvar: 'true_skill',
+  val: 0,
+  flag: 0 }
+{ name: 'objUpdate',
+  oid_string: '2:3307367',
+  object_index: 2,
+  uniqueId: 3307367,
+  netvar: 'global_rank',
+  val: 1,
+  flag: 0 }
 John Doe: disconnected
 deleting John Doe's socket
 kyle: disconnected
 deleting kyle's socket
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1

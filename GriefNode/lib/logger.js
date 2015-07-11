@@ -19,12 +19,14 @@ var CUPID = "cupid"
 var STD = "std"
 var CRITICAL = "err"
 var SOCKETS = "sock"
+var VERBOSE = "verbose"
 
 var log_std = fs.createWriteStream(__dirname + '/../log/general.log', {flags : 'w'});
-var log_cupid = fs.createWriteStream(__dirname + '/../log/matchmaking.log', {flags : 'w'});
+var log_cupid = fs.createWriteStream(__dirname + '/../log/cupid.log', {flags : 'w'});
 var log_critical = fs.createWriteStream(__dirname + '/../log/critical.log', {flags : 'w'});
 var log_sockets = fs.createWriteStream(__dirname+ '/../log/sockets.log', {flags : 'w'});
 var log_sql = fs.createWriteStream(__dirname + '/../log/sql.log', {flags : 'w'});
+var log_verbose = fs.createWriteStream(__dirname + '/../log/verbose.log', {flags : 'w'});
 var log_stdout = process.stdout;
 
 exports.log = function(flag,text) { 
@@ -38,6 +40,8 @@ exports.log = function(flag,text) {
 		log_std.write(util.format(text) + '\n');
 	else if (flag == SOCKETS)
 		log_sockets.write(util.format(text) + '\n');
+	else if (flag == VERBOSE)
+		log_verbose.write(util.format(text) + '\n');
 	else
 		log_stdout.write(util.format(text) + '\n');
 };
@@ -52,13 +56,23 @@ var std_cleaner = setInterval(function() {
 	}
 }, 100000);
 
-var cupid_cleaner = setInterval(function() {
-	var stats = fs.statSync(__dirname + '/../log/matchmaking.log');
+var verbose_cleaner = setInterval(function() {
+	var stats = fs.statSync(__dirname + '/../log/verbose.log');
 	var fsize_mb = stats["size"]/1000000.0;
 	//console.log("\n\nLog File Size: "+fsize_mb+" MegaBytes\n\n");
 	if (fsize_mb > 5)
 	{
-		log_cupid = fs.createWriteStream(__dirname + '/../log/matchmaking.log', {flags : 'w'});
+		log_std = fs.createWriteStream(__dirname + '/../log/verbose.log', {flags : 'w'});
+	}
+}, 100000);
+
+var cupid_cleaner = setInterval(function() {
+	var stats = fs.statSync(__dirname + '/../log/cupid.log');
+	var fsize_mb = stats["size"]/1000000.0;
+	//console.log("\n\nLog File Size: "+fsize_mb+" MegaBytes\n\n");
+	if (fsize_mb > 5)
+	{
+		log_cupid = fs.createWriteStream(__dirname + '/../log/cupid.log', {flags : 'w'});
 	}
 }, 101000);
 

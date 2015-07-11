@@ -40,3 +40,13 @@ global.NUM_STATS = 13
 global.clients = [];
 global.rooms = [];
 global.conn_ready = false;
+
+var exists = function(maybeObj)
+{
+	if (typeof maybeObj != "undefined") 
+	{
+  		return true
+	} 
+	else return false
+}
+exports.exists = exists;

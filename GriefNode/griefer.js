@@ -41,6 +41,7 @@ cupid.setIo(io);
 cupid.initGameRooms();
 
 //set logging intervals
+setInterval(dbman.rankPlayers,60000);
 setInterval(cupid.manageSockets,1000);
 setInterval(cupid.syncPlayersConnected,4*5010);
 setInterval(cupid.makeMatches,5000);
@@ -51,8 +52,7 @@ io.on('connection', function(socket){
 	//initialize a web-socket Connection to the client
 	log.log(STD,'NEW CLIENT');
 	socket.myPlayer = new cupid.player();
-	clients.push(socket);
-
+	global.clients.push(socket);
 
 	//---- A PLAYER LOGS IN TO THE SERVER ----//
 	socket.on('login_player',function(pName) {
@@ -62,6 +62,7 @@ io.on('connection', function(socket){
 		socket.myPlayer.uniqueId = composer.hash_string(pName);
 		socket.myPlayer.pNum = -1;
 		socket.myPlayer.timeoutHandle = null;
+
 
 		//join the main_menu group --> aka no matchmaking currently happening
 		socket.myPlayer.room = 'main_menu';
@@ -77,7 +78,7 @@ io.on('connection', function(socket){
 
 		//send challenge data + control maps after 500 ms second delay
 		setTimeout(function(socket) {
-			log.log(STD,"sending"+socket.myPlayer.pName+" challenge stats");
+			log.log(STD,"sending "+socket.myPlayer.pName+" challenge stats");
 			dbman.sendPermaChallenges(socket);
 			dbman.sendControlMaps(socket);
 		}, 500, socket);
@@ -135,7 +136,7 @@ io.on('connection', function(socket){
 
   //---- A PLAYER DISCONNECTS FROM THE SERVER ----//
   socket.on('disconnect', function() {
-  	clients.splice(clients.indexOf(socket),1);
+  	global.clients.splice(global.clients.indexOf(socket),1);
   	log.log(STD,socket.myPlayer.pName+": disconnected");
   	socket.broadcast.to(socket.myPlayer.room).emit('disconnected_player_from_server', socket.myPlayer);
 	socket.myPlayer.uniqueMatchId = -51;
@@ -186,11 +187,7 @@ io.on('connection', function(socket){
 	  		//example usage
 	  		var statement = "UPDATE controls set control_code="+message.val2+" WHERE username='"+socket.myPlayer.pName+"' AND control_index="+message.val1+" AND using_gamepad="+message.val3;
 	  		log.log(STD,"USER-DEFINED CONTROL MAPPING:\n"+statement+"\n\n");
-			conn.query(statement, function(err,rows) {
-				//log any errors
-				if (err)
-					log.log(STD,err);
-			});
+			dbman.esecute(statement);
 	  	}
 	  	else if (message.msg == "accolade_update")
 	  	{
@@ -217,8 +214,10 @@ io.on('connection', function(socket){
   	{
   		//forward the message
   		socket.broadcast.to(socket.myPlayer.room).emit('general_message',message);
-  		//socket.broadcast.to(socket.myPlayer.room).emit('cancel_matchmaking',"blah");
-  		//socket.emit('cancel_matchmaking',"blah");
+
+  		//trigger a player re-ranking
+  		if (message.val != FL_BOT)
+  			setTimeout(function() {dgman.rankPlayers()},5000);
 
   		//configure the next match after a short delay
   		setTimeout(function(playerSubGroup, gameRoom) {
@@ -255,30 +254,6 @@ io.on('connection', function(socket){
 		cupid.syncPlayersConnected();
 	}
 
-  });
-
-  //---- CREATE USER REQUEST ----//
-  socket.on('create_user', function(datMessage) {
-  	datMessage = composer.ensureJSON(datMessage);
-
-  	var message = {
-  		name: "generalMessage",
-  		msg: "user_create_result",
-  		val: false
-  	};
-
-  	dbman.userExists(datMessage.username, function (result) {
-  		if (result) {
-  			socket.emit('general_message',message);
-  			log.log(STD,'sending user exists');
-  		} else
-  		{
-  			log.log(STD,'sending first user');
-	  		dbman.userCreate(socket, datMessage.username, datMessage.password);
-	  		message.val = 1;
-	  		socket.emit('general_message',message);
-  		}
-  	});
   });
 
   //---- LOG IN REQUEST ----//
@@ -346,26 +321,18 @@ io.on('connection', function(socket){
   	dbman.updateStat(datMessage.pname, term, datMessage.val, datMessage.flag);
   });
 
-  //---- TRANSPORT KCLIENT MESSAGES TO OTHER CLIENTS ----//
+  //---- TRANSPORT GRIEFPLUSPLUS MESSAGES TO OTHER CLIENTS ----//
   socket.on('obj_update', function(datMessage) {
   	datMessage = composer.ensureJSON(datMessage);
-  	//intercept hats_Fd
+  	
+  	//intercept netvar for preprocessing
   	var term = datMessage.netvar;
-  	if (term=="hats_Fd")
-  	{
-  		//sendHatStats(socket,default_netman_uniqueId,netManObjIndex)
-  		return true;
-  	}
 
-  	//log.log(STD,"obj_update from "+socket.myPlayer.pName+" : "+JSON.stringify(datMessage));
-
-  	if (term=="compute_global_rank")
-  	{
+  	//deprecated messages
+  	if (term=="hats_Fd" || term=="compute_global_rank")
   		return true;
-  	}
 
   	//---- FORWARD ON TO OTHER CLIENTS ----//
-  	//log.log(STD,'obj_update: manual');
   	socket.broadcast.to(socket.myPlayer.room).emit('obj_update', datMessage);
 
 	  //---- POSSIBLY UPDATE A DATABASE STAT ----//

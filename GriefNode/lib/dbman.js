@@ -19,8 +19,9 @@ var fs = require('fs');
 var log = require('./logger.js');
 var util = require('util');
 var composer = require('./composer.js');
+var cupid = require('./cupid.js');
 
-var stats = ['rank','xp','ppl','kdr','wl','time','points','kills','deaths','assists','wins','losses','kill_streak','win_streak', 'rollover_kstreak', 'rollover_wstreak', 'global_rank','kdr_history','ppl_history','win_history']
+var stats = ['rank','true_skill','xp','ppl','kdr','wl','time','points','kills','deaths','assists','wins','losses','kill_streak','win_streak', 'rollover_kstreak', 'rollover_wstreak', 'global_rank','kdr_history','ppl_history','win_history']
 var bot_stats = ['bot_rank','ppl','kdr','wl','points','kills','deaths','assists','wins','losses','kill_streak','win_streak', 'rollover_kstreak', 'rollover_wstreak', 'kdr_history','ppl_history','win_history']
 var accolades = ['dub_kill','trip_kill','stick_kill','flash_bandicoot','flame_kill','ink_kill','cant_touch_dis','mvp','highest_kd','10kd','ninja','survivor','3ass','5ass','3gibs','6gibs','9gibs','12gibs','3heads','6heads','9heads','12heads','3ks','5ks','10ks','15ks','20ks','25ks','spr_flame','spr_ink','spr_snare','spr_smoke','spr_flashbang','spr_pistol','spr_carbine','spr_rifle','spr_tickler','spr_smg','spr_sticky','spr_lmg','spr_longshot','spr_vulcan','spr_torque','spr_thumper','spr_boltok','spr_shotgun','spr_stomper','spr_boom','spr_frag','spr_rocket','spr_double','spr_wep1','spr_wep2','spr_wep3','spr_wep4'];
 
@@ -76,7 +77,7 @@ log.log(SQL,statement);
 //create table friends (username VARCHAR(20), friend VARCHAR(20));
 //create table challenges (username VARCHAR(20), challenge_name text);
 //create table controls (username VARCHAR(20), control_name text, control_index real, control_code real, using_gamepad real);
-//create table stats (username VARCHAR(20), rank real, xp real, ppl real, kdr real, wl real, time real, points real, kills real, deaths real, assists real, wins real, losses real, kill_streak real, win_streak real, rollover_kstreak real, rollover_wstreak real, global_rank real, kdr_history text, ppl_history text, win_history text);
+//create table stats (username VARCHAR(20), rank real, true_skill real, xp real, ppl real, kdr real, wl real, time real, points real, kills real, deaths real, assists real, wins real, losses real, kill_streak real, win_streak real, rollover_kstreak real, rollover_wstreak real, global_rank real, kdr_history text, ppl_history text, win_history text);
 //create table bot_stats (username VARCHAR(20), bot_rank real, ppl real, kdr real, wl real, points real, kills real, deaths real, assists real, wins real, losses real, kill_streak real, win_streak real, rollover_kstreak real, rollover_wstreak real, kdr_history text, ppl_history text, win_history text);
 //create table accolades (username VARCHAR (20), dub_kill real, trip_kill real, stick_kill real, flash_bandicoot real, flame_kill real, ink_kill real, cant_touch_dis real, mvp real, highest_kd real, 10kd real, ninja real, survivor real, 3ass real, 5ass real, 3gibs real, 6gibs real, 9gibs real, 12gibs real, 3heads real, 6heads real, 9heads real, 12heads real, 3ks real, 5ks real, 10ks real, 15ks real, 20ks real, 25ks real
 //, spr_flame real, spr_ink real, spr_snare real, spr_smoke real, spr_flashbang real, spr_pistol real, spr_carbine real, spr_rifle real, spr_tickler real, spr_smg real, spr_sticky real, spr_lmg real, spr_longshot real, spr_vulcan real, spr_torque real, spr_thumper real, spr_boltok real, spr_shotgun real, spr_stomper real, spr_boom real, spr_frag real, spr_rocket real, spr_double real, spr_wep1 real, spr_wep2 real, spr_wep3 real, spr_wep4 real);
@@ -86,7 +87,6 @@ log.log(SQL,statement);
 //update bot_stats set ppl_history = '188,532,418,262,218,465,542,390,150,200,350,150,510,125,112,100,110,190,210,50,20,10,0,0,90,99,125,150,160,110,110,96,98,45,87,356,567,225,260' where username='kyle'
 //update bot_stats set win_history = '11,10,9,8,7,6,5,4,1,2,3,4,3,2,1,0,-1,0,-1,-2,-3,-4,-3,-2,-3,-2,-1,0,0,0,0,1,1,2,3,4,5,6,7,8' where username='kyle'
 //update bot_accolades set dub_kill=3,trip_kill=2,flash_bandicoot=1,flame_kill=5,survivor=8,3ass=1,6gibs=2,3heads=1,6heads=2,3ks=4,5ks=2,10ks=1,15ks=1 where username='kyle';
-
 
 //exports
 exports.connect = function(connectMe, callback)
@@ -234,6 +234,12 @@ var correctPassword = function(socket, username, password, callback)
 	conn.query(statement, function (err, rows) {
 
 		//log.log(SQL,"rows.length = "+rows.length);
+		if (!rows)
+		{
+			log.log(CRITICAL,"correctPassword return no rows!")
+			cupid.genMessage(socket,"user_create_result",0);
+		}
+
 		log.log(SQL,"done with password query");
 		result = rows.length;
 
@@ -241,6 +247,10 @@ var correctPassword = function(socket, username, password, callback)
 		{
 			log.log(SQL,"good password for user: "+username);
 			result = 1;
+
+			//trigger player re-ranking
+  			setTimeout(rankPlayers,2000);
+
 			callback(result);
 		} else {
 			log.log(SQL,"bad password for user: "+username);
@@ -269,12 +279,10 @@ var authUnameExists = function(socket, username, password, callback)
 				log.log(SQL,"authUname Does Not Exist");
 				result = 2;
 
-				var message = {
-				  		name: "generalMessage",
-				  		msg: "user_create_result",
-				  		val: 0
-				  	};
+				//trigger player re-ranking
+  				setTimeout(rankPlayers,2000);
 
+				var message = composer.genMessage("user_create_result",0);
 			  	log.log(SQL,'sending first user: '+username);
 		  		userCreate(socket, username, password);
 		  		message.val = 1;
@@ -289,9 +297,9 @@ var alreadyLoggedIn = function(username, callback)
 {
 	var res = false;
 
-	for (var i=0; i<clients.length; i++)
+	for (var i=0; i<global.clients.length; i++)
 	{
-		if (clients[i].myPlayer.pName == username)
+		if (global.clients[i].myPlayer.pName == username)
 		{
 			log.log(SQL,"MULTIPLE LOGINS detected for: "+username);
 			res = true;
@@ -486,7 +494,7 @@ var sendPermaChallenges = function(socket)
 			{
 				var challenge_name = rows[i]["challenge_name"];
 				var msg = composer.genMessage("perma_challenge",challenge_name);
-				log.log(SQL,msg);
+				log.log("verbose",msg);
 				socket.emit("general_message",msg);
 			}
 	});
@@ -527,14 +535,14 @@ var getGravatarAccolades = function(socket, username, flag, retransmit)
 				var acc_name = accolades[i];
 				var acc_val = rows[0][accolades[i]];
 				var msg = composer.bigMessage("accolade",acc_name,acc_val,flag);
-				log.log(SQL,msg);
+				log.log("verbose",msg);
 				pkgDude.messages.push(msg);
 			}
 
 
 
 			socket.emit('pkg',pkgDude.messages);
-			log.log(SQL,pkgDude.messages);
+			log.log("verbose",pkgDude.messages);
 	});
 }
 exports.getGravatarAccolades = getGravatarAccolades
@@ -563,7 +571,7 @@ var getGravatarOutfit = function(socket, username, flag)
 		if (i<columns.length-1)
 			statement += ", ";
 	}
-	statement += " FROM users join stats on users.username=stats.username where users.username="+conn.escape(theDude.pName);
+	statement += " FROM users join stats on users.username=stats.username where users.username="+conn.escape(username);
 	log.log(SQL,statement);
 
 	//perform the query, obtain results, and send off to the local player
@@ -580,7 +588,7 @@ var getGravatarOutfit = function(socket, username, flag)
 			var result = rows[0][param];
 
 			var message = composer.objUpdate(gravatarObjIndex, uniqueId, param, result, FL_NORMAL);
-			log.log(SQL,message);
+			log.log("verbose",message);
 			pkgDude.messages.push(message);
 		}
 		
@@ -629,7 +637,7 @@ var getGravatarStats = function(socket, username, flag)
 			}
 
 		socket.emit('pkg',pkgDude.messages);
-		log.log(SQL,pkgDude.messages);
+		log.log("verbose",pkgDude.messages);
 
 		//now get the outfit
 		getGravatarOutfit(socket, username, flag);
@@ -638,19 +646,137 @@ var getGravatarStats = function(socket, username, flag)
 }
 exports.getGravatarStats = getGravatarStats
 
+var tskillComparator = function(a,b) {
+	if (a[1] > b[1]) return -1;
+	if (a[1] < b[1]) return 1;
+	return 0;
+}
+
+var rankPlayers = function() {
+	var players = [];
+
+	//var pnames = []; index0
+	//var tskills = []; index1
+	//var global_rank = []; index2
+
+	log.log(SQL, "\nRecalculating TRUE SKILL + GLOBAL RANKINGS");
+
+	//currently trying tskill = floor(ppl * average(wl,1))
+	var statement = "SELECT username,ppl,wl from stats"
+	conn.query(statement, function(err,rows) {
+
+		//log any errors
+		if (err)
+			log.log(SQL,err);
+
+		if (!rows)
+		{
+			log.log(CRICICAL,"ERROR: rankPlayers got no rows back!");
+			return false
+		}
+
+		for (var i=0; i<rows.length; i++)
+		{
+			var player = [];
+			var username = rows[i]['username'];
+			var ppl = rows[i]['ppl'];
+			var wl = rows[i]['wl'];
+			var grank = 0;
+			var tskill = Math.floor(ppl * (wl+1)/2);
+			log.log(STD, "Calculated "+username+"'s True Skill: "+tskill);
+
+			player.push(username);
+			player.push(tskill);
+			player.push(grank);
+
+			players.push(player);
+		}
+
+		//sort by trueskill
+		if (players.length > 0)
+		{
+			players.sort(tskillComparator);
+		}
+		else
+		{
+			log.log(CRITICAL,"rankPlayers has 0 players length");
+			return false
+		}
+
+		//compute global ranks
+		var grank = 1;
+		for (var i=0; i<players.length; i++)
+		{
+			if (i > 0)
+			{
+				if (players[i-1][1] > players[i][1])
+					grank ++;
+			}
+
+			players[i][2] = grank;
+			log.log(STD, "Calculated "+players[i][0]+"'s Global Rank: "+grank);
+
+			//update db with results
+			var statement = "UPDATE stats set true_skill="+players[i][1]+", global_rank="+players[i][2]+" WHERE username='"+players[i][0]+"'";
+			log.log(SQL,statement);
+			execute(statement);
+
+			//update all connected clients
+			global.clients = cupid.socketsInRoom("all");
+			for (var j=0; j<global.clients.length; j++)
+			{
+				var sock = global.clients[j];
+				if (globals.exists(sock.myPlayer))
+				{
+					if (sock.myPlayer.pName == players[i][0])
+					{
+						if (globals.exists(sock.myPlayer.room) == true)
+						{
+							var manual_uid = composer.hash_string(sock.myPlayer.pName);
+							if (sock.myPlayer.room != "")
+							{
+								log.log(STD,"updating "+sock.myPlayer.pName+"'s local avatar: true_skill="+players[i][1]+", global_rank = "+players[i][2]);
+								//update the local avatar with his new trueskill / global_rank
+								var upd = composer.objUpdate(avatarObjIndex,manual_uid,"true_skill",players[i][1],FL_NORMAL);
+								log.log(STD,upd);
+								sock.emit('obj_update',upd);
+								
+								upd = composer.objUpdate(avatarObjIndex,manual_uid,"global_rank",players[i][2],FL_NORMAL);
+								log.log(STD,upd);
+								sock.emit('obj_update',upd);
+							}
+							else
+							{
+								log.log(CRITICAL,"WARNING: "+sock.myPlayer.pName+" is still at room=''");
+							}
+						}
+						else
+						{
+							log.log(CRITICAL,"WARNING: rankPlayers -- sock.myPlayer.room does not exist: \n"+sock)
+						}
+					}
+					else
+					{
+						log.log(CRITICAL,"warning: rankPlayers -- bad player name: "+sock.myPlayer.pName);
+					}
+				}
+				else
+				{
+					log.log(CRITICAL,"WARNING: rankPlayers -- sock.myPlayer does not exist: \n"+sock)
+				}
+			}
+		}
+	});
+
+}
+exports.rankPlayers = rankPlayers;
+
 var getGlobalStats = function(socket)
 {
 	var theDude = socket.myPlayer;
 	var username = socket.myPlayer.pName;
-	var pstats = ['username','ppl','kdr','wl','kills','deaths','assists','wins','losses','kill_streak','win_streak'];
-	var table = "bot_stats";
-
-	{
-		pstats.push('rank');
-		pstats.push('xp');
-		pstats.push('time');
-		table = "stats";
-	}
+	var pstats = ['username','rank','true_skill','xp','time','ppl','kdr','wl','kills','deaths','assists','wins','losses','kill_streak','win_streak'];
+	var table = "stats";
 
 	//send the leaderboard dimensions
 	var statement2 = "SELECT count(*) from users";
@@ -666,7 +792,7 @@ var getGlobalStats = function(socket)
 
 			var user_count = rows[0]["count(*)"];
 			var msg = composer.bigMessage("leaderboard_dimensions",user_count,pstats.length,0);
-			log.log(SQL,msg);
+			log.log("verbose",msg);
 			pkgDude.messages.push(msg);
 
 			//selecting everyone's!
@@ -691,7 +817,7 @@ var getGlobalStats = function(socket)
 					}
 
 					socket.emit('pkg',pkgDude.messages);
-					log.log(SQL,pkgDude.messages);
+					log.log("verbose",pkgDude.messages);
 			});
 	});
 }
@@ -718,7 +844,7 @@ var sendControlMaps = function(socket)
 				var using_gamepad = rows[i]["using_gamepad"];
 
 				var msg = composer.bigMessage("control_map",control_index,control_code,using_gamepad);
-				log.log(SQL,msg);
+				log.log("verbose",msg);
 				socket.emit("big_message",msg);
 			}
 	});
@@ -741,7 +867,7 @@ var sendNetManPlayerStats = function(socket, objIndex, uniqueId)
 {
 	var theDude = socket.myPlayer;
 	var username = socket.myPlayer.pName;
-	var columns = ['stats.rank','stats.xp','stats.global_rank','stats.wins','stats.losses','stats.kills','stats.deaths','stats.assists'];
+	var columns = ['stats.rank','stats.true_skill','stats.xp','stats.global_rank','stats.wins','stats.losses','stats.kills','stats.deaths','stats.assists'];
 	var parts = ['users.hat','users.helmet','users.torso','users.shoulder','users.forearm','users.leg','users.shin','users.foot','users.prop'];
 	for (var i=0; i<NUM_BPARTS; i++)
 	{
@@ -782,7 +908,7 @@ var sendNetManPlayerStats = function(socket, objIndex, uniqueId)
 			var result = rows[0][param];
 
 			var message = composer.objUpdate(objIndex, uniqueId, param, result, FL_NORMAL);
-			log.log(SQL,message);
+			log.log("verbose",message);
 			pkgDude.messages.push(message);
 		}
 		
@@ -803,7 +929,7 @@ var sendCompletePlayerStats = function(socket, gameRoom, objIndex, broadcast_onl
 	if (gameRoom.indexOf("bot")>-1)
 		stat_table = "bot_stats"
 
-	var columns = ['stats.rank','stats.xp','stats.global_rank',stat_table+'.points',stat_table+'.wins',stat_table+'.losses',stat_table+'.kills',stat_table+'.deaths',stat_table+'.assists',stat_table+'.kill_streak',stat_table+'.win_streak',stat_table+'.rollover_kstreak',stat_table+'.rollover_wstreak'];
+	var columns = ['stats.rank','stats.true_skill','stats.xp','stats.global_rank',stat_table+'.points',stat_table+'.wins',stat_table+'.losses',stat_table+'.kills',stat_table+'.deaths',stat_table+'.assists',stat_table+'.kill_streak',stat_table+'.win_streak',stat_table+'.rollover_kstreak',stat_table+'.rollover_wstreak'];
 	var parts = ['users.hat','users.helmet','users.torso','users.shoulder','users.forearm','users.leg','users.shin','users.foot','users.prop'];
 
 	for (var i=0; i<NUM_BPARTS; i++)
