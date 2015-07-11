@@ -1,7 +1,13 @@
 ///complete_challenge(challenge_name)
 var name = argument0
-
 var cha = find_challenge(name)
+
+var grav = net_manager.stat_gravatar
+if not instance_exists(grav) or objVarRead(grav,"pName") != objVarRead(net_manager,"pName")
+{
+    printf("WARNING: cannot complete challenge while looking at another player's stats")
+    return false
+}
 
 if instance_exists(cha)
 {

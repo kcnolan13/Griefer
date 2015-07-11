@@ -27,19 +27,29 @@
             <kind>1</kind>
             <string>event_inherited()
 
+netvars = ds_map_create()
+
 cursor_depressed = false
 mouse_lasty = 0
 cursor_sens = 10
+
+row_draw_num = 0
+extra_stats = 3
 
 label = "button"+string(id)
 active = false
 clicked = false
 is_sens = false
 snap_2view = true
-width = global.table_width*2//+64*2
-height = view_hview*1/2+64
-row_height = global.row_height
+width = global.table_width*2
+height = view_hview*1/2+64*2
+row_height = global.row_height+8
 row_vsep = global.row_vsep+2
+
+hovrow = -1
+hovrow_counter = 0
+hovrow_delay = 10
+show_hovrow = false
 
 first_sort = false
 
@@ -116,6 +126,9 @@ if ds_exists(grid,ds_type_grid)
     
 if ds_exists(grid_header,ds_type_grid)
     ds_grid_destroy(grid_header)
+    
+if ds_exists(netvars,ds_type_map)
+    ds_map_destroy(netvars)
 </string>
           </argument>
         </arguments>
@@ -168,6 +181,15 @@ if valign = fa_center
             <string>///behavior
 event_inherited()
 
+if hovrow &gt; -1
+{
+    hovrow_counter ++
+    if hovrow_counter &gt; hovrow_delay
+        show_hovrow = true
+    else show_hovrow = false
+}   
+else show_hovrow = false
+
 if cols &lt; 0 or rows &lt; 0 exit
 
 if not first_sort and ds_exists(grid,ds_type_grid)
@@ -213,6 +235,11 @@ if grid = NO_HANDLE
     //ds_grid_add(grid_header,11,0,"losses")
     ds_grid_add(grid_header,11,0,"kill_streak")
     ds_grid_add(grid_header,12,0,"win_streak")
+    ds_grid_add(grid_header,13,0,"global_rank")
+    ds_grid_add(grid_header,14,0,"helmet0")
+    ds_grid_add(grid_header,15,0,"hat0")
+    
+    cols -= extra_stats
     
     //create ascending array
     for (var i=0; i&lt;ds_grid_width(grid); i++)
@@ -403,10 +430,12 @@ ydraw += row_height*1.5
 var ist = round_nearest(s_index,row_height)/row_height
 
 //all the rows
+row_draw_num = 0
 for (var i=ist; i&lt;ds_grid_height(grid); i++)
 {
     draw_modal_row(left,ydraw,color,text_color,alpha,i,grid)
     ydraw += row_height+row_vsep
+    row_draw_num++
     
     if ydraw - top &gt; height
         break

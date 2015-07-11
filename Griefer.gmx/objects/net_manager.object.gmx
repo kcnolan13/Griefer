@@ -500,7 +500,8 @@ instance_create(x,y,xp_bar)
           <argument>
             <kind>1</kind>
             <string>///free net vars
-ds_map_destroy(netvars)
+if ds_exists(netvars,ds_type_map)
+    ds_map_destroy(netvars)
 </string>
           </argument>
         </arguments>
@@ -3043,60 +3044,18 @@ for (var i=0; i&lt;instance_number(avatar); i++)
             audio_play_sound(snd_scroll3,2,false)
             av_popup_drawn = true
         }
-        //if not drawing_cache_popup
-            draw_player_popup(ID,mouse_x,mouse_y)
-            if not is_bot(ID) and (input_check_pressed(mapped_control(C_JUMP)) or mouse_check_button_pressed(mb_left)) and not lock_armory
-            {
-                //show his stats!
-                net_manager.menu_mode = "stats"
-                //request personal stats
-                stat_manager.stat_tab = stat_manager.tabs[0]
-                var fl = FL_NORMAL
-                gravatar_wipe(stat_gravatar)
-                stat_manager.grav_ready = false
-                stat_manager.grav_name = objVarRead(ID,"pName")
-                printf("::: requesting gravatar stats for "+string(stat_manager.grav_name))
-                request_personal_stats(stat_manager.grav_name,fl)
-                request_accolades(stat_manager.grav_name,fl)
-            }
+        
+        //DRAW THE PLAYER POPUP
+        draw_player_popup_ext(cursor.x,cursor.y,objVarRead(av_popup,"pName"),objVarRead(av_popup,"rank"),objVarRead(av_popup,"global_rank"),objVarRead(av_popup,"true_skill"),
+            objVarRead(av_popup,"helmet0"),objVarRead(av_popup,"hat0"),1)
+        
+        //GET CLICKED!
+        if not is_bot(ID) and (input_check_pressed(mapped_control(C_JUMP)) or mouse_check_button_pressed(mb_left)) and not lock_armory and menmode() != "armory"
+        {
+            show_player_stats(objVarRead(ID,"pName"))
+        }
     }
 }
-
-/*
-if room = rm_lobby
-{
-    promoted_xoff = 16
-    promoted_yoff = 16
-    xtra_yoff = 0
-    
-    if came_from_match and varRead("match_flag") != FL_NEUTRAL and not bot_match 
-    {
-        xtra_yoff = 48
-        //draw promoted/demoted text
-        draw_set_font(fnt_promoted)
-        
-        if varRead("match_flag") = FL_WIN
-        {
-            prom_txt = "Promoted!"
-            prom_col = c_white
-        }
-        else
-        {
-            prom_txt = "Demoted!"
-            prom_col = make_color_rgb(255,120,120)
-        }
-        
-        draw_set_halign(fa_right)
-        draw_set_valign(fa_top)
-        draw_set_color(prom_col)
-        
-        if menu_mode != "armory" and menu_mode != "lottery_steal" and menu_mode != "challenges"
-            draw_text(room_width-promoted_xoff,64+promoted_yoff,prom_txt)
-            
-        draw_set_color(c_white)
-    }
-    
-}*/
 </string>
           </argument>
         </arguments>

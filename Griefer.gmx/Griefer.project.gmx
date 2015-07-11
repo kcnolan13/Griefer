@@ -878,6 +878,7 @@
     <scripts name="challenges">
       <script>scripts\instantiate_challenge.gml</script>
       <script>scripts\draw_popup_challenge.gml</script>
+      <script>scripts\draw_player_popup_ext.gml</script>
       <script>scripts\draw_challenge_unlock_bar.gml</script>
       <script>scripts\populate_challenges.gml</script>
       <script>scripts\populate_progression_challenges.gml</script>
@@ -1035,6 +1036,7 @@
       <script>scripts\request_personal_stats.gml</script>
       <script>scripts\gravatar_wipe.gml</script>
       <script>scripts\wipe_stat_modals.gml</script>
+      <script>scripts\show_player_stats.gml</script>
     </scripts>
     <scripts name="draw">
       <scripts name="score_table">
@@ -1067,6 +1069,7 @@
       <scripts name="modal_table">
         <script>scripts\draw_modal_row.gml</script>
         <script>scripts\sort_col_highlighted.gml</script>
+        <script>scripts\row_highlighted.gml</script>
       </scripts>
       <script>scripts\draw_limb.gml</script>
       <script>scripts\convert_spr_none_to_drawable.gml</script>

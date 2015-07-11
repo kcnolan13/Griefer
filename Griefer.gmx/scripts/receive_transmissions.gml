@@ -345,6 +345,12 @@ while (objUpdatesWaiting() and wait_counter < 1000)
         continue
     }
     
+    if ID.object_index = gravatar and ID.bparts_done_ready
+    {
+        //bail on this update
+        continue
+    }
+    
     //update objects that do exist
     switch (flag)
     {

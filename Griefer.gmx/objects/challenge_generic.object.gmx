@@ -209,22 +209,31 @@ if in_match() and popup_show
 
 if progress_varname != "" and nth_frame(auto_frame_offset) //reduce frames checked to save performance a bit
 {
-    if is_competitive
-        progress = acc_data(progress_varname,COL_TOTAL)
-    else if is_bot_mode
-        progress = acc_data(progress_varname,COL_BOT_TOTAL)
-    else if is_challenge
-        progress = acc_data(progress_varname,COL_TOTAL) + acc_data(progress_varname,COL_BOT_TOTAL)
-    
-    progress_max = acc_data(progress_varname,COL_CHAL_NEEDED)
-    
-    if progress &gt; progress_max or completed
-        progress = progress_max
-        
-    if progress &gt;= progress_max and not challenge_is_complete(name) and progress_max &gt; 0
+
+    var grav = net_manager.stat_gravatar
+    if not instance_exists(grav) or objVarRead(grav,"pName") != objVarRead(net_manager,"pName")
     {
-        printf("::: auto completing challenge: "+string(name))
-        complete_challenge(name)
+        printf("WARNING: cannot complete challenge while looking at another player's stats")
+    }
+    else //yes you can complete this challenge!
+    {
+        if is_competitive
+            progress = acc_data(progress_varname,COL_TOTAL)
+        else if is_bot_mode
+            progress = acc_data(progress_varname,COL_BOT_TOTAL)
+        else if is_challenge
+            progress = acc_data(progress_varname,COL_TOTAL) + acc_data(progress_varname,COL_BOT_TOTAL)
+        
+        progress_max = acc_data(progress_varname,COL_CHAL_NEEDED)
+        
+        if progress &gt; progress_max or completed
+            progress = progress_max
+            
+        if progress &gt;= progress_max and not challenge_is_complete(name) and progress_max &gt; 0
+        {
+            printf("::: auto completing challenge: "+string(name))
+            complete_challenge(name)
+        }
     }
 }
 </string>

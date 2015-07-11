@@ -1,13 +1,15 @@
 ///draw_modal_row(x, y, color, text_color, alpha, grid_y, dgrid)
 
-var xdraw = argument0
-var ydraw = argument1
+var rxdraw = argument0
+var rydraw = argument1
 var col = argument2
 var txt_col = argument3
 var alpha = argument4
 var grid_y = argument5
 var dgrid = argument6
-    
+
+txt_fields_start = global.txt_fields_start
+
 if not ds_exists(dgrid,ds_type_grid)
 {
     printf("ERROR: draw_modal_row dgrid does not exist")
@@ -19,16 +21,16 @@ if not ds_grid_height(dgrid) > grid_y
     printf("ERROR: draw_modal_row indexing outside of dgrid")
     return false
 }
-    
+
 
 var txt_alpha = 1
 
 draw_set_alpha(alpha)
 
 draw_set_color(col)
-draw_rectangle(xdraw,ydraw,xdraw+width,ydraw+row_height,false)
+draw_rectangle(rxdraw,rydraw,rxdraw+width,rydraw+row_height,false)
 
-var txt_y = ydraw+global.row_height/2
+var txt_y = rydraw+global.row_height/2+3
 
 draw_set_color(txt_col)
 draw_set_alpha(txt_alpha)
@@ -40,16 +42,57 @@ draw_set_font(global.table_font)
 var kst = 2
 
 //draw the columns
-var dx = xdraw+global.txt_fields_start
-var x_incr = (width-global.txt_fields_start)/(ds_grid_width(dgrid)-2)
+var dx = rxdraw+txt_fields_start
+var x_incr = (width-txt_fields_start)/(ds_grid_width(dgrid)-2-extra_stats)
+
+helm = ds_grid_get(grid,14,row_draw_num)
+if not is_real(helm)
+    ds_grid_set(grid,14,row_draw_num,bpart_extract_sprite(helm))
+hat = ds_grid_get(grid,15,row_draw_num)
+if not is_real(hat)
+    ds_grid_set(grid,15,row_draw_num,bpart_extract_sprite(hat))
 
 if dgrid != grid_header
 {
     var pname = string(ds_grid_get(dgrid,0,grid_y))
     var prank = real(ds_grid_get(dgrid,1,grid_y))
+    
+    if rect_highlighted(rxdraw,rydraw,rxdraw+width,rydraw+row_height)
+    {
+        if row_draw_num != hovrow
+        {
+            hovrow_counter = 0
+            show_hovrow = false
+        }
+        hovrow = row_draw_num
+    }
+    else //moused out of area
+    {
+        if row_draw_num = hovrow
+        {
+            hovrow_counter = 0
+            show_hovrow = false
+            hovrow = -1
+        }
+    }
+    if hovrow = row_draw_num
+    {
+        draw_set_color(c_ltgray)
+        draw_rectangle(rxdraw,rydraw,rxdraw+width,rydraw+row_height,false)
+    }
+    draw_set_color(txt_col)
   
     if  pname != "" and prank != -99
-        draw_namerank(pname, prank, xdraw+5, ydraw+global.row_height/4-4, global.table_namerank_scale, c_white)
+    {
+        //DRAW LITTLE AVATAR HEAD
+        var xoff_causeav = 24
+        var helm = ds_grid_get(grid,14,row_draw_num)
+        var hat = ds_grid_get(grid,15,row_draw_num)
+        varWrite("helmet0",helm)
+        varWrite("hat0",hat)
+        draw_avatar_head(rxdraw+3+24,rydraw+global.row_height/4-4+24,id,0,0.375,1,FL_NOBAR)
+        draw_namerank(pname, prank, rxdraw+25+xoff_causeav, rydraw+global.row_height/4-1, global.table_namerank_scale, c_white)
+    }
 }
 else
 {
@@ -62,31 +105,36 @@ else
             draw_set_color(c_gray)
             if col_high > 1
             {
-                draw_rectangle(dx+x_incr*(col_high-2),ydraw,dx+x_incr*(col_high-1),ydraw+row_height,false)
+                draw_rectangle(dx+x_incr*(col_high-2),rydraw,dx+x_incr*(col_high-1),rydraw+row_height,false)
             }
             else
             {
                 //it's the player name column
-                draw_rectangle(xdraw,ydraw,dx,ydraw+row_height,false)
+                draw_rectangle(rxdraw,rydraw,dx,rydraw+row_height,false)
             }
-            draw_set_color(txt_col)
+            draw_set_color(c_white)
         }
     }
-    draw_text(xdraw+5, txt_y, "Player")
+    draw_text(rxdraw+5, txt_y, "Player")
 }
 
-for (var k=kst; k < ds_grid_width(dgrid); k++)
+for (var k=kst; k < ds_grid_width(dgrid)-extra_stats; k++)
 {
     var cell = ds_grid_get(dgrid,k,grid_y)
     
     if is_string(cell)
     {
-        if k < 5
+        if k < 5 and k > 2
         {
             cell = string_upper(cell)
         }
         else
-            cell = capwords_super(cell)
+        {
+            if cell = "true_skill"
+                cell = global.tskill
+            else
+                cell = capwords_super(cell)
+        }
     }
         
     draw_text(dx, txt_y, string(cell))
@@ -100,7 +148,18 @@ if dgrid = grid
 {
     draw_set_color(c_black)
     draw_set_halign(fa_right)
-    draw_text(xdraw-10,ydraw+row_height/2,string(grid_y+1))
+    draw_text(rxdraw-10,rydraw+row_height/2,string(grid_y+1))
 }
 
 draw_set_alpha(1)
+
+if hovrow > -1 and show_hovrow
+{
+    //show popup
+    draw_player_popup_ext(cursor.x,cursor.y,ds_grid_get(grid,0,hovrow),
+        ds_grid_get(grid,1,hovrow),ds_grid_get(grid,13,hovrow),ds_grid_get(grid,2,hovrow),real(ds_grid_get(grid,14,hovrow)),real(ds_grid_get(grid,15,hovrow)),1)
+    if input_check_pressed(mapped_control(C_JUMP)) or mouse_check_button_pressed(mb_left)
+    {
+        show_player_stats(ds_grid_get(grid,0,hovrow))
+    }
+}
