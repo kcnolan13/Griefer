@@ -344,7 +344,7 @@ if varRead("draw_trajectory")
     visible = true
 
 //unbond from contemplation slot if picked up by someone else
-if instance_exists(net_manager.local_player) and varRead("my_player") &gt;= 0
+if lobby_leader()
 {
     if net_manager.local_player.weapon_contemplating = id
         net_manager.local_player.weapon_contemplating = NO_HANDLE
@@ -377,7 +377,7 @@ dat_jugador = find_player(varRead("my_player"))
         {
             //DISAPPEAR EMPTY WEAPONS --&gt; ONLY PLAYER 0 IS ALLOWED TO DO THIS
             varSub("disappear_counter",1)
-            if varRead("disappear_counter") = 0 and objVarRead(net_manager.local_player,"uniqueId") = 0
+            if varRead("disappear_counter") = 0 lobby_leader()
             {
                 if DEBUG
                     printf("disappearing weapon: "+varRead("uniqueId")+" : "+varRead("name"))
@@ -388,7 +388,7 @@ dat_jugador = find_player(varRead("my_player"))
         }
         
         //DESTROY EMPTY WEAPONS --&gt; ONLY PLAYER 0 IS ALLOWED TO DO THIS
-        if varRead("ammo") &lt; 1 and varRead("clip") &lt; 1 and objVarRead(net_manager.local_player,"uniqueId") = 0
+        if varRead("ammo") &lt; 1 and varRead("clip") &lt; 1 and lobby_leader()
         {
             if DEBUG
                 printf("destroying empty weapon: "+varRead("uniqueId")+" : "+varRead("name"))

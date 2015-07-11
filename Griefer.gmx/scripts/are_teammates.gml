@@ -7,12 +7,12 @@ if not instance_exists(player_obj) or not instance_exists(player_obj2)
 
 if net_manager.team > -1
 {
-    if objVarRead(player_obj,"uniqueId") >= ceil(net_manager.num_players/2)
+    if objVarRead(player_obj,"pNum") >= ceil(net_manager.num_players/2)
         theTeam = 1
     else
         theTeam = 0
         
-    if objVarRead(player_obj2,"uniqueId") >= ceil(net_manager.num_players/2)
+    if objVarRead(player_obj2,"pNum") >= ceil(net_manager.num_players/2)
         theTeam2 = 1
     else
         theTeam2 = 0

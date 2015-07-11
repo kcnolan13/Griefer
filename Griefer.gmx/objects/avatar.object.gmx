@@ -34,6 +34,7 @@ anim_prescaled = 1
 
 event_inherited()
 printf("A DUDE IS BEING MADE")
+varWrite("pNum",0)
 varWrite("animation_scale",3)
 varWrite("player_quit",false)
 varWrite("bot",false)
@@ -75,11 +76,13 @@ assume_weapon(wep_index)
 
 animation_stand()
 varWrite("visible",false)
-varWrite("animaion_speed",SPD_STAND)
+varWrite("animation_speed",SPD_STAND)
 visible = false
 alarm[0] = room_speed*10
 alarm[1] = 1
 alarm[2] = room_speed
+//set xy to reasonable numbers
+//alarm[3] = room_speed
 </string>
           </argument>
         </arguments>
@@ -103,6 +106,37 @@ alarm[2] = room_speed
           <argument>
             <kind>1</kind>
             <string>printf("AVATAR DESTROY TRIGGERED")
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="3">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///set x,y to a reasonable number
+if x &gt; room_width*2
+{
+    printf("::: alarm[3] setting x,y to reasonable numbers")
+    varWrite("myX",room_width*1/2)
+    varWrite("myY",room_height-5*room_height)
+    x = varRead("myX")
+    y = varRead("myY")
+}
 </string>
           </argument>
         </arguments>
@@ -155,7 +189,7 @@ alarm[2] = room_speed*5
           <argument>
             <kind>1</kind>
             <string>///print debug
-printf(string(varRead("pName"))+" was instantiated with uniqueId #"+string(varRead("uniqueId")))
+printf("::: "+string(varRead("pName"))+" was instantiated with uniqueId #"+string(varRead("uniqueId")))
 </string>
           </argument>
         </arguments>
@@ -427,7 +461,7 @@ if room = rm_lobby and force_jumped = false and varRead("uniqueId") &gt; -30
             if temp = other.id
                 break
         }
-        other.id.x = av_padding*(objVarRead(temp,"uniqueId")+0.5)
+        other.id.x = av_padding*(objVarRead(temp,"pNum")+0.5)
         other.id.y = 0
     }
 }
@@ -692,6 +726,7 @@ if is_bot(id) and in_match()
     my_bot = instance_create(random(room_width), -4*room_height,player)
     syncVar(my_bot,"bot")
     syncVar(my_bot,"uniqueId")
+    syncVar(my_bot,"pNum")
     syncVar(my_bot,"rank")
     syncVar(my_bot,"pName")
     syncVar(my_bot,"global_rank")
@@ -750,13 +785,15 @@ if net_manager.room_counter % room_speed = 0 and SUPER_DEBUG
     if not is_bot(id) and DEBUG
     draw_text(x,y-200,"bot_rank: "+varRead("bot_rank"))
     
-if net_manager.show_cout
+//if net_manager.show_cout
 {
     //draw_text(x,y-290,"global_rank: "+varRead("global_rank"))
     //draw_text(x,y-260,"rank: "+varRead("rank"))
-    draw_text(x,y-230,"uId: "+string(varRead("uniqueId")))
+    draw_text(x,y-230,"uniqueId: "+string(varRead("uniqueId")))
+    draw_text(x,y-200,"pNum: "+string(varRead("pNum")))
     //draw_text(x,y-200,"player_quit: "+varRead("player_quit"))
-    
+    if net_manager.show_cout or room = rm_lobby and rtime() &lt; room_speed*3
+        printf("::: AVATAR "+string(varRead("pName"))+": uniqueId = "+string(varRead("uniqueId"))+", pNum = "+string(varRead("pNum"))+", x="+string(x)+", y="+string(y))
 }
 
 prescaled = false

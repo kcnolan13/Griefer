@@ -92,9 +92,9 @@ if exit_child
     exit
 }
 
-if active = false
+if active = false and not net_manager.lock_armory
 {
-    request_accolades(FL_NORMAL)
+    request_accolades(objVarRead(net_manager,"pName"),FL_NORMAL)
     active = true
     net_manager.menu_mode = "challenges"
 }

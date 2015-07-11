@@ -1,7 +1,7 @@
-///request_personal_stats(flag)
-var fl = real(argument0)
+///request_personal_stats(username,flag)
+var username = string(argument0)
+var fl = real(argument1)
 
 printf("::: sent personal stats request")
-sendMessageReal("get_personal_stats",fl)
-
+sendBigMessageStrReal("get_personal_stats",username,fl,FL_NORMAL)
 

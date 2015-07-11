@@ -342,7 +342,7 @@ if not in_match()
 }
 
 dummy_counter ++
-if varRead("visible") and (varRead("dude_x") or varRead("dude_y"))
+if (varRead("visible") or object_index = gravatar) and (varRead("dude_x") or varRead("dude_y"))
 {
     //printf("lerping")
     x = lerp(x,varRead("dude_x"),0.3)

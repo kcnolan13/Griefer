@@ -1033,6 +1033,7 @@
       <script>scripts\write_stat_pnum.gml</script>
       <script>scripts\insert_global_stat.gml</script>
       <script>scripts\request_personal_stats.gml</script>
+      <script>scripts\gravatar_wipe.gml</script>
     </scripts>
     <scripts name="draw">
       <scripts name="score_table">
@@ -1104,6 +1105,7 @@
       <script>scripts\myPlayer.gml</script>
       <script>scripts\myAvatar.gml</script>
       <script>scripts\playerName.gml</script>
+      <script>scripts\lobby_leader.gml</script>
     </scripts>
     <scripts name="animations">
       <script>scripts\sync_poses_and_animations.gml</script>
@@ -1436,6 +1438,7 @@
       <object>objects\net_manager</object>
       <object>objects\player</object>
       <object>objects\avatar</object>
+      <object>objects\gravatar</object>
     </objects>
     <objects name="VITALS">
       <object>objects\input_manager</object>
@@ -1679,6 +1682,7 @@
         <object>objects\bn_challenges</object>
         <object>objects\bn_leaderboards</object>
         <object>objects\bn_stats</object>
+        <object>objects\bn_friends</object>
         <object>objects\bn_settings</object>
         <object>objects\bn_logout</object>
         <object>objects\bn_randomize</object>

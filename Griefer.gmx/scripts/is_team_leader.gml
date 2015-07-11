@@ -7,16 +7,16 @@ return -1
 
 if net_manager.team > -1
 {
-    if objVarRead(player_obj,"uniqueId") >= ceil(net_manager.num_players/2)
+    if objVarRead(player_obj,"pNum") >= ceil(net_manager.num_players/2)
     {
-        if objVarRead(player_obj,"uniqueId") = ceil(net_manager.num_players/2)
+        if objVarRead(player_obj,"pNum") = ceil(net_manager.num_players/2)
             return true
         else
             return false
     }
     else
     {
-        if objVarRead(player_obj,"uniqueId") = 0
+        if objVarRead(player_obj,"pNum") = 0
             return true
         else
             return false

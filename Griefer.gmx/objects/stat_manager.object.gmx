@@ -28,6 +28,9 @@
             <string>///init
 stat_flag = FL_NORMAL
 
+grav_name = "GoshDarnNoOne"
+grav_ready = false
+
 netvars = ds_map_create()
 
 time_match_start = 0
@@ -215,7 +218,7 @@ if in_match() or room = rm_login exit
 
 if net_manager.menu_mode = "stats"
 {
-    if not instance_exists(bn_stat_tab)
+    if not instance_exists(bn_stat_tab) and grav_ready
     {
         
         w = 64*2.1
@@ -295,26 +298,30 @@ if net_manager.menu_mode = "stats"
     {
         //competitive
         case "Competitive":
-            fade_modal(modal_table)
-            if instance_exists(leaderboards_title)
+            if grav_ready
             {
-                fade_modal(leaderboards_title)
-                leaderboards_title = NO_HANDLE
+                fade_modal(modal_table)
+                if instance_exists(leaderboards_title)
+                {
+                    fade_modal(leaderboards_title)
+                    leaderboards_title = NO_HANDLE
+                }
+                manage_meters()
             }
-            
-            manage_meters()
         break
         
         //bot mode
         case "Bot Mode":
-            fade_modal(modal_table)
-            if instance_exists(leaderboards_title)
+            if grav_ready
             {
-                fade_modal(leaderboards_title)
-                leaderboards_title = NO_HANDLE
+                fade_modal(modal_table)
+                if instance_exists(leaderboards_title)
+                {
+                    fade_modal(leaderboards_title)
+                    leaderboards_title = NO_HANDLE
+                }
+                manage_meters()
             }
-            
-            manage_meters()
         break
         
         //leaderboards

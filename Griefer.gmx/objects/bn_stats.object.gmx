@@ -92,7 +92,7 @@ if exit_child
     exit
 }
 
-if active = false
+if active = false and not net_manager.lock_armory
 {
     active = true
     net_manager.menu_mode = "stats"
@@ -100,9 +100,14 @@ if active = false
     var fl = FL_NORMAL
     if stat_manager.stat_tab = stat_manager.tabs[1]
         fl = FL_BOT
-        
-    request_personal_stats(fl)
-    request_accolades(fl)
+
+    if instance_exists(net_manager.stat_gravatar)
+        gravatar_wipe(net_manager.stat_gravatar)
+                
+    stat_manager.grav_ready = false
+    stat_manager.grav_name = objVarRead(net_manager,"pName")
+    request_personal_stats(stat_manager.grav_name,fl)
+    request_accolades(stat_manager.grav_name,fl)
 }
 else {
     active = false

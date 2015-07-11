@@ -127,20 +127,30 @@ audio_play_sound(snd_click,2,false)
 
 if label = "Back"
 {
+    net_manager.party_leader = false
+    net_manager.in_party = false
+    net_manager.bot_match = false
     with bn_start_matchmaking {fade_out = true}
     leave_matchmaking()
     sendMessageReal("syncPlayersConnected",FL_NORMAL)
     return false
 }
 
-if objVarRead(net_manager,"game_mode") = "no_mode"
+if not net_manager.party_leader or not net_manager.in_party
 {
-    start_matchmaking(label)
+    if objVarRead(net_manager,"game_mode") = "no_mode"
+    {
+        start_matchmaking(label)
+    }
+    else
+    {
+        leave_matchmaking()
+        start_matchmaking(label)
+    }
 }
 else
 {
-    leave_matchmaking()
-    start_matchmaking(label)
+    sendBigMessageStr("start_party",label,"","")
 }
 
 sendMessageReal("syncPlayersConnected",FL_NORMAL)

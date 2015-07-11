@@ -32,6 +32,7 @@ for (var i=0; i<num_bots; i++)
     
     objVarWrite(ID,"bot",true)
     objVarWrite(ID,"uniqueId",pnum)
+    objVarWrite(ID,"pNum",pnum)
     objVarWrite(ID,"pName",name)
     objVarWrite(ID,"rank",rank)
     objVarWrite(ID,"global_rank",global_rank)

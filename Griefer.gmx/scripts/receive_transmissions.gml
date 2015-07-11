@@ -306,7 +306,8 @@ while (objUpdatesWaiting() and wait_counter < 1000)
         printf("payload is real: "+string(val))
     }
     
-    printf("obj_update for "+oid_str+" ( "+string(obj_index)+" : "+string(unique_id)+" ) ... "+string(netvar)+" = "+string(val))
+    if netvar = "pNum"
+        printf(":::obj_update for "+oid_str+" ( "+string(obj_index)+" : "+string(unique_id)+" ) ... "+string(netvar)+" = "+string(val))
     
     printf("{O}: reading objUpdate flag")
     flag = readObjUpdateFlag()

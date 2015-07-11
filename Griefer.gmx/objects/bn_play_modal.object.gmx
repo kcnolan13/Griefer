@@ -88,6 +88,13 @@ if not modal_highlighted(id) exit
 var left = net_manager.play_left-width/2
 var top = net_manager.play_top+24
 
+if text = global.pmode
+{
+    //start a party
+    net_manager.party_leader = true
+    net_manager.in_party = true
+}
+
 net_manager.menu_mode = "play"
 known_modes[0] = "versus"
 known_modes[1] = "ffa"

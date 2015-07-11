@@ -118,6 +118,9 @@ if label = txt_logout or room = rm_menu
     }
 } else
 {
+    net_manager.party_leader = false
+    net_manager.in_party = false
+    net_manager.bot_match = false
     leave_matchmaking()
     sendMessageReal("syncPlayersConnected",FL_NORMAL)
 }

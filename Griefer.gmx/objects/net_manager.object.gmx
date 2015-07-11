@@ -34,6 +34,9 @@ seed = 30
 
 xp_before = 0
 rank_before = 0
+party_leader = false
+in_party = false
+stat_gravatar = NO_HANDLE
 
 full_screen = false
 global.rank_colors = 0
@@ -1177,28 +1180,31 @@ else
 if room = rm_menu and came_from_match
     boot_loitering_avatars()
     
-if room = rm_menu and instance_exists(my_doll)
+if room = rm_menu and instance_exists(my_doll) and instance_exists(stat_gravatar)
 {
-    var curscale = objVarRead(my_doll,"animation_scale")
+    var datObj = my_doll
+    if menmode() = "stats"
+        datObj = stat_gravatar
+        
+    var curscale = objVarRead(datObj,"animation_scale")
         
         //avatar popups and scale lerping
-        if av_popup != noone or not collision_rectangle(my_doll.x-curscale*av_xbd, my_doll.y-curscale*av_ybd, my_doll.x+curscale*av_xbd, my_doll.y+curscale*av_ybd, cursor, false, false)
+        if av_popup != noone or not collision_rectangle(datObj.x-curscale*av_xbd, datObj.y-curscale*av_ybd, datObj.x+curscale*av_xbd, datObj.y+curscale*av_ybd, cursor, false, false)
         {
             if menu_mode != "armory"
-                objVarWrite(my_doll,"animation_scale",lerp(objVarRead(my_doll,"animation_scale"),av_scale_play,0.1))
+                objVarWrite(datObj,"animation_scale",lerp(objVarRead(datObj,"animation_scale"),av_scale_play,0.1))
             else
-                objVarWrite(my_doll,"animation_scale",lerp(objVarRead(my_doll,"animation_scale"),av_scale_menu,0.1))
-        
+                objVarWrite(datObj,"animation_scale",lerp(objVarRead(datObj,"animation_scale"),av_scale_menu,0.1))
         }
         else
         {
-            av_popup = my_doll
+            av_popup = datObj
             
             if menu_mode != "armory"
                 av_scale_highlighted = av_scale_highlighted_normal*(av_scale_play/av_scale_menu)
             else av_scale_highlighted = av_scale_highlighted_normal
             
-            objVarWrite(my_doll,"animation_scale",lerp(objVarRead(my_doll,"animation_scale"),av_scale_highlighted,0.25))
+            objVarWrite(datObj,"animation_scale",lerp(objVarRead(datObj,"animation_scale"),av_scale_highlighted,0.25))
         }
 }
 
@@ -1218,9 +1224,21 @@ if room = rm_lobby
     num_players = instance_number(avatar)
     av_padding = room_width/instance_number(avatar)
     
-    for (var i=0; i&lt;num_players; i++)
+    for (var i=0; i&lt;num_players+1; i++)
     {
-        ID = instance_find(avatar,i)
+        if i = num_players
+        {
+            ID = stat_gravatar
+            if not instance_exists(stat_gravatar)
+            {
+                printf("ERROR: no stat gravatar to be found")
+                continue
+            }
+            else if objVarRead(ID,"pName") = objVarRead(my_doll,"pName")
+                ID = my_doll
+        }
+        else ID = instance_find(avatar,i)
+        
         var curscale = objVarRead(ID,"animation_scale")
         
         //avatar popups and scale lerping
@@ -1247,7 +1265,7 @@ if room = rm_lobby
         {
             case "lobby":
                 objVarWrite(ID,"dude_y",lobby_dude_y)
-                objVarWrite(ID,"dude_x",av_padding*(objVarRead(ID,"uniqueId")+0.5))
+                objVarWrite(ID,"dude_x",av_padding*(objVarRead(ID,"pNum")+0.5))
             break
             
             case "armory":
@@ -1285,7 +1303,7 @@ if room = rm_lobby
             break
             
             case "stats":
-                if is_my_avatar(ID) and stat_manager.stat_tab != stat_manager.tabs[2]
+                if ID = stat_gravatar //or i=num_players
                 {
                     objVarWrite(ID,"dude_y",room_height*1.75/3-32)
                     objVarWrite(ID,"dude_x",room_width*1/5)
@@ -1375,19 +1393,21 @@ if room = rm_menu or room = rm_lobby
         break
         
         case "stats":
-            if stat_manager.stat_tab != stat_manager.tabs[2]
+            if instance_exists(stat_gravatar)
             {
-                dude_x = room_width*1/5
-                dude_y = room_height*1.75/3-32
+                objVarWrite(stat_gravatar,"dude_x",room_width*1/5)
+                objVarWrite(stat_gravatar,"dude_y",room_height*1.75/3-32)
             }
-            else
-            {
-                dude_x = -8*64
-                dude_y = room_height*1.75/3-64
-            }
+            dude_x = -8*64
+            dude_y = room_height*1.75/3-64
         break
         
         case "settings":
+            dude_x = room_width*1/9
+            dude_y = room_height*1.75/3-64
+        break
+        
+        case "friends":
             dude_x = room_width*1/9
             dude_y = room_height*1.75/3-64
         break
@@ -1476,7 +1496,7 @@ if (room = rm_menu or room = rm_lobby) and (room_counter &gt; room_speed/2 and (
     my_doll = find_pname_avatar(varRead("pName"))
     if my_doll != noone
     {
-        printf("FOUND LOCAL AVATAR")
+        printf(":::FOUND LOCAL AVATAR")
         objVarWrite(my_doll,"rank",varRead("rank"))
         objVarWrite(my_doll,"global_rank",varRead("global_rank"))
         if DEBUG
@@ -1491,8 +1511,10 @@ if (room = rm_menu or room = rm_lobby) and (room_counter &gt; room_speed/2 and (
         my_doll.x = dude_x
         my_doll.y = 0
         
-        //if DEBUG
-            printf("LOCAL AVATAR READY")
+        printf(":::creating stat gravatar")
+        stat_gravatar = instance_create(0,0,gravatar)
+        objVarWrite(stat_gravatar,"pName",varRead("pName"))
+        objVarWrite(stat_gravatar,"uniqueId",hash_string(varRead("pName")))
     }
 }
 </string>
@@ -3022,16 +3044,33 @@ for (var i=0; i&lt;instance_number(avatar); i++)
         }
         //if not drawing_cache_popup
             draw_player_popup(ID,mouse_x,mouse_y)
+            if not is_bot(ID) and (input_check_pressed(mapped_control(C_JUMP)) or mouse_check_button_pressed(mb_left)) and not lock_armory
+            {
+                //show his stats!
+                net_manager.menu_mode = "stats"
+                //request personal stats
+                var fl = FL_NORMAL
+                if stat_manager.stat_tab = stat_manager.tabs[1]
+                    fl = FL_BOT
+                if instance_exists(stat_gravatar)
+                    gravatar_wipe(stat_gravatar)
+                stat_manager.grav_ready = false
+                stat_manager.grav_name = objVarRead(ID,"pName")
+                printf("::: requesting gravatar stats for "+string(stat_manager.grav_name))
+                request_personal_stats(stat_manager.grav_name,fl)
+                request_accolades(stat_manager.grav_name,fl)
+            }
     }
 }
 
+/*
 if room = rm_lobby
 {
     promoted_xoff = 16
     promoted_yoff = 16
     xtra_yoff = 0
     
-    if came_from_match and varRead("match_flag") != FL_NEUTRAL and not bot_match
+    if came_from_match and varRead("match_flag") != FL_NEUTRAL and not bot_match 
     {
         xtra_yoff = 48
         //draw promoted/demoted text
@@ -3058,11 +3097,7 @@ if room = rm_lobby
         draw_set_color(c_white)
     }
     
-    /*if instance_exists(my_doll) and menu_mode != "armory" and menu_mode != "lottery_steal" and menu_mode != "challenges"
-    {
-        draw_player_popup(my_doll,room_width-promoted_xoff,promoted_yoff+xtra_yoff)
-    }*/
-}
+}*/
 </string>
           </argument>
         </arguments>
@@ -3404,9 +3439,9 @@ test_complete_counter = 0
           <argument>
             <kind>1</kind>
             <string>///toggle show_cout
-//show_cout ^= 1
+show_cout ^= 1
 
-draw_set_swf_aa_level(draw_get_swf_aa_level() ^ 1)
+//draw_set_swf_aa_level(draw_get_swf_aa_level() ^ 1)
 </string>
           </argument>
         </arguments>
