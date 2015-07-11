@@ -775,8 +775,8 @@ var getGlobalStats = function(socket)
 {
 	var theDude = socket.myPlayer;
 	var username = socket.myPlayer.pName;
-	var pstats = ['username','rank','true_skill','xp','time','ppl','kdr','wl','kills','deaths','assists','wins','losses','kill_streak','win_streak'];
-	var table = "stats";
+	var pstats = ['stats.username','stats.rank','stats.true_skill','stats.xp','stats.time','stats.ppl','stats.kdr','stats.wl','stats.kills',/*'stats.deaths',*/'stats.assists','stats.wins',/*'stats.losses',*/'stats.kill_streak','stats.win_streak','stats.global_rank','users.helmet0','users.hat0'];
+	var table = "stats join users on stats.username = users.username";
 
 	//send the leaderboard dimensions
 	var statement2 = "SELECT count(*) from users";
@@ -808,9 +808,17 @@ var getGlobalStats = function(socket)
 					{
 						for (var j=0; j<pstats.length; j++)
 						{
-							var stat_val = rows[i][pstats[j]];
+							var stat_name = pstats[j];
 
-							var msg = composer.bigMessage("global_stat",rows[i]['username'],pstats[j],stat_val);
+							if (globals.exists(stat_name) == true)
+								stat_name = stat_name.split(".")[1];
+							else log.log(CRITICAL,"getGlobalStats stat_name does not exist");
+
+							var stat_val = rows[i][stat_name];
+
+							var uname = rows[i]['username'];
+
+							var msg = composer.bigMessage("global_stat",uname,stat_name,stat_val);
 							
 							pkgDude.messages.push(msg);
 						}
