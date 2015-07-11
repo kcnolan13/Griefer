@@ -8,7 +8,7 @@ var netManObjIndex = global.netManObjIndex; var lobby_wait_time = global.lobby_w
 var default_netman_uniqueId = global.default_netman_uniqueId; var numTdm = global.numTdm; var numFfa = global.numFfa; var numVersus = global.numVersus;
 var	numMenu = global.numMenu; var numBot = global.numBot; var numSockets = global.numSockets; var numBotFfa = global.numBotFfa; var numBotTdm = global.numBotTdm;
 var NUM_BPARTS = global.NUM_BPARTS; var NUM_STATS = global.NUM_STATS; var clients = global.clients; var rooms = global.rooms;
-var SOCKETS = "sock"
+var SOCKETS = "sock"; var gravatarObjIndex = global.gravatarObjIndex;
 
 var conn;
 
@@ -192,60 +192,21 @@ io.on('connection', function(socket){
 					log.log(STD,err);
 			});
 	  	}
-
-	  	if (message.msg == "accolade_update")
+	  	else if (message.msg == "accolade_update")
 	  	{
 	  		if (message.val3 == FL_SQL)
 	  			dbman.updateAccolade(socket.myPlayer.pName, message.val1, message.val2, FL_SQL);
 	  		else
 	  			dbman.updateAccolade(socket.myPlayer.pName, message.val1, message.val2, message.val3);
 	  	}
-
-	  	if (message.msg == "start_party")
-	  	{
-	  		var mode = message.msg.val1;
-	  		var groupName = "party"+"_"+socket.myPlayer.uniqueId;
-	  		var roomType = cupid.roomOfType(mode);
-	  		var newRoom = new cupid.room(groupName, mode, roomType.maxPlayers, roomType.minPlayers);
-	  		rooms.push(newRoom);
-
-	  		newRoom.joinable = false;
-	  		newRoom.party = true;
-	  		
-	  		socket.leave(socket.myPlayer.room);
-	  		socket.myPlayer.room = groupName;
-	  		socket.join(groupName);
-
-	  		var firstMsg = composer.genMessage("goto_lobby",FL_NORMAL);
-			log.log(CUPID,firstMsg.name+" : "+firstMsg.msg+" : "+firstMsg.val);
-			socket.emit('general_message',firstMsg);
-	  	}
-
-	  	if (message.msg == "start_match")
-	  	{
-	  		var obj_room = cupid.room_with_name(socket.myPlayer.room);
-	  		var socks = cupid.socketsInRoom(socket.myPlayer.room); //uses room name
-	  		cupid.configure_match(socks,socket.myPlayer.room,30000);
-	  	}
-
-	  	if (message.msg = "join_party")
-	  	{
-	  		var groupName = message.msg.val1;
-	  		if (cupid.partyExpired(groupName) == false)
-	  		{
-	  			socket.leave(socket.myPlayer.room);
-		  		socket.myPlayer.room = groupName;
-		  		socket.join(groupName);
-
-		  		var firstMsg = composer.genMessage("goto_lobby",FL_NORMAL);
-				log.log(CUPID,firstMsg.name+" : "+firstMsg.msg+" : "+firstMsg.val);
-				socket.emit('general_message',firstMsg);
-	  		}
-	  		else
-	  		{
-	  			cupid.genMessage(socket,"party_expired",FL_NORMAL);
-	  		}
-	  	}
+	  	else if (message.msg == "get_accolades")
+		{
+			dbman.getGravatarAccolades(socket,message.val1,message.val2,true)
+		}
+		else if (message.msg == "get_personal_stats")
+		{
+			dbman.getGravatarStats(socket,message.val1,message.val2);
+		}
 
 	});
 
@@ -279,17 +240,9 @@ io.on('connection', function(socket){
 		log.log(STD,"adding perma challenge: "+message.val);
 		dbman.addPermaChallenge(socket,message.val);
 	}
-	else if (message.msg == "get_personal_stats")
-	{
-		dbman.getPersonalStats(socket,message.val);
-	}
 	else if (message.msg == "get_global_stats")
 	{
 		dbman.getGlobalStats(socket);
-	}
-	else if (message.msg == "get_accolades")
-	{
-		dbman.sendAccolades(socket,message.val,true)
 	}
 	else {
 		//OTHERWISE, FORWARD THE MESSAGE TO OTHER PLAYERS

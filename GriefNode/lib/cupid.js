@@ -8,6 +8,7 @@ var netManObjIndex = global.netManObjIndex; var lobby_wait_time = global.lobby_w
 var default_netman_uniqueId = global.default_netman_uniqueId; var numTdm = global.numTdm; var numFfa = global.numFfa; var numVersus = global.numVersus;
 var	numMenu = global.numMenu; var numBot = global.numBot; var numSockets = global.numSockets; var numBotFfa = global.numBotFfa; var numBotTdm = global.numBotTdm;
 var NUM_BPARTS = global.NUM_BPARTS; var NUM_STATS = global.NUM_STATS; var clients = global.clients; var rooms = global.rooms;
+var gravatarObjIndex = global.gravatarObjIndex; var SOCKETS = "sock"
 
 var io;
 var conn;
@@ -193,14 +194,6 @@ exports.manageSockets = function(){
 	{
 		var sockets = [];
 		sockets = socketsInRoom(rooms[i].groupName);
-
-		//make sure no empty rooms are unjoinable because party
-		if (sockets.length == 0 && rooms[i].groupName.indexOf("arty") > 0)
-		{
-			//chuck this room -- party expired
-			var deadRoom = rooms.splice(i,1)
-			log.log(CUPID,"party room obliterated: "+deadRoom)
-		}
 
 		//collect network stats
 		numSockets += sockets.length;

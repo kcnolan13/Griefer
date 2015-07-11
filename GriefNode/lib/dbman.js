@@ -8,7 +8,7 @@ var netManObjIndex = global.netManObjIndex; var lobby_wait_time = global.lobby_w
 var default_netman_uniqueId = global.default_netman_uniqueId; var numTdm = global.numTdm; var numFfa = global.numFfa; var numVersus = global.numVersus;
 var	numMenu = global.numMenu; var numBot = global.numBot; var numSockets = global.numSockets; var numBotFfa = global.numBotFfa; var numBotTdm = global.numBotTdm;
 var NUM_BPARTS = global.NUM_BPARTS; var NUM_STATS = global.NUM_STATS; var clients = global.clients; var rooms = global.rooms;
-var SOCKETS = "sock"
+var SOCKETS = "sock"; var gravatarObjIndex = global.gravatarObjIndex;
 
 var conn;
 var io;
@@ -493,10 +493,9 @@ var sendPermaChallenges = function(socket)
 }
 exports.sendPermaChallenges = sendPermaChallenges
 
-var sendAccolades = function(socket, flag, retransmit)
+var getGravatarAccolades = function(socket, username, flag, retransmit)
 {
 	var theDude = socket.myPlayer;
-	var username = socket.myPlayer.pName;
 
 	var table = "accolades";
 	var retransmit_flag = FL_BOT
@@ -510,7 +509,7 @@ var sendAccolades = function(socket, flag, retransmit)
 	if (retransmit)
 	{
 		log.log(SQL,"sending the other half of the accolades as well")
-		sendAccolades(socket,retransmit_flag,false);
+		getGravatarAccolades(socket, username, retransmit_flag, false);
 	}
 
 	var statement = "SELECT * from "+table+" WHERE username='"+username+"'";
@@ -532,17 +531,70 @@ var sendAccolades = function(socket, flag, retransmit)
 				pkgDude.messages.push(msg);
 			}
 
+
+
 			socket.emit('pkg',pkgDude.messages);
 			log.log(SQL,pkgDude.messages);
 	});
 }
-exports.sendAccolades = sendAccolades
+exports.getGravatarAccolades = getGravatarAccolades
 
-
-var getPersonalStats = function(socket,flag)
+var getGravatarOutfit = function(socket, username, flag)
 {
 	var theDude = socket.myPlayer;
-	var username = socket.myPlayer.pName;
+	var uniqueId = socket.myPlayer.uniqueId;
+	var columns = [];
+	var parts = ['users.hat','users.helmet','users.torso','users.shoulder','users.forearm','users.leg','users.shin','users.foot','users.prop'];
+	for (var i=0; i<1; i++)
+	{
+		for (var j=0; j<parts.length; j++)
+			columns.push(parts[j]+i);
+	}
+
+	//create package for this player to receive all his stats
+	var pkgDude = new composer.createPkg();
+
+	//construct the query
+	var statement = "SELECT ";
+	for (var i=0; i<columns.length; i++)
+	{
+		var param = columns[i];
+		statement += param;
+		if (i<columns.length-1)
+			statement += ", ";
+	}
+	statement += " FROM users join stats on users.username=stats.username where users.username="+conn.escape(theDude.pName);
+	log.log(SQL,statement);
+
+	//perform the query, obtain results, and send off to the local player
+	conn.query(statement, function(err,rows) {
+
+		//log any errors
+		if (err)
+			log.log(SQL,err);
+
+		//construct all the object updates and add to package
+		for (var j=0; j<columns.length; j++)
+		{
+			var param = columns[j].substring(columns[j].indexOf('.')+1,columns[j].length);
+			var result = rows[0][param];
+
+			var message = composer.objUpdate(gravatarObjIndex, uniqueId, param, result, FL_NORMAL);
+			log.log(SQL,message);
+			pkgDude.messages.push(message);
+		}
+		
+		//send package
+		//log.log(SQL,pkgDude);
+		socket.emit('pkg', pkgDude.messages);
+	});
+}
+exports.getGravatarOutfit = getGravatarOutfit
+
+
+var getGravatarStats = function(socket, username, flag)
+{
+	var theDude = socket.myPlayer;
 	var pstats = ['ppl','kdr','wl','points','kills','deaths','assists','wins','losses','kill_streak','win_streak','kdr_history','ppl_history','win_history'];
 	var table = "bot_stats";
 
@@ -579,11 +631,14 @@ var getPersonalStats = function(socket,flag)
 		socket.emit('pkg',pkgDude.messages);
 		log.log(SQL,pkgDude.messages);
 
+		//now get the outfit
+		getGravatarOutfit(socket, username, flag);
+
 	});
 }
-exports.getPersonalStats = getPersonalStats
+exports.getGravatarStats = getGravatarStats
 
-function getGlobalStats(socket)
+var getGlobalStats = function(socket)
 {
 	var theDude = socket.myPlayer;
 	var username = socket.myPlayer.pName;
@@ -640,6 +695,7 @@ function getGlobalStats(socket)
 			});
 	});
 }
+exports.getGlobalStats = getGlobalStats;
 
 var sendControlMaps = function(socket)
 {

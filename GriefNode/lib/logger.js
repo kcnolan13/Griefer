@@ -8,6 +8,7 @@ var netManObjIndex = global.netManObjIndex; var lobby_wait_time = global.lobby_w
 var default_netman_uniqueId = global.default_netman_uniqueId; var numTdm = global.numTdm; var numFfa = global.numFfa; var numVersus = global.numVersus;
 var	numMenu = global.numMenu; var numBot = global.numBot; var numSockets = global.numSockets; var numBotFfa = global.numBotFfa; var numBotTdm = global.numBotTdm;
 var NUM_BPARTS = global.NUM_BPARTS; var NUM_STATS = global.NUM_STATS; var clients = global.clients; var rooms = global.rooms;
+var gravatarObjIndex = global.gravatarObjIndex;
 
 var fs = require('fs');
 var util = require('util');
