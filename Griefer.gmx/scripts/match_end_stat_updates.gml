@@ -33,7 +33,8 @@ with stat_manager
 }
 
 var time_played = objVarRead(guy,"time")+stat_manager.time_match_total
-stat_update_string("time",time_played,FL_NORMAL)
+stat_update_real("time",time_played,FL_NORMAL)
+printf("::: UPDATING time: "+string(objVarRead(guy,"time"))+" --> "+string(time_played))
 
 update_kdr = true
 update_wl = true

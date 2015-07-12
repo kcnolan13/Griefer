@@ -134,7 +134,7 @@ for (var i=0; i<getLength(pstats); i++)
         
         if pstats[i] = "time"
         {
-            lab.text = "Time Played:"
+            lab.text = global.time_played
         }
         
         printf("::: lab text: "+string(lab.text))
@@ -154,7 +154,11 @@ for (var i=0; i<getLength(pstats); i++)
         
         strval = string(varRead(pstats[i]))
         if pstats[i] = "time"
+        {
+            printf("::: Time Stat [in manage meters]: "+string(real(varRead("time"))))
             strval = time_ms_2string(real(varRead("time")),true)
+            printf("::: time string: "+strval)
+        }
         val.text = strval
         printf("::: val text: "+string(val.text))
         

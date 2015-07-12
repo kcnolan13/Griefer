@@ -71,9 +71,10 @@ if not in_match()
         bottom = draw_y+height
     }
     
-    
-    while (bottom > room_height)
+    var whiles = 0
+    while (bottom > room_height) and whiles < 1000
     {
+        whiles++
         bottom --
         top --
     }
@@ -84,6 +85,15 @@ else
     right = left+width
     top = draw_y
     bottom = top+height
+    
+    var whiles = 0
+    while (right > view_xview+view_wview) and whiles < 1000
+    {
+        whiles++
+        right--
+        left--
+    }
+    
 }
 
 //draw title rectangle
@@ -116,6 +126,7 @@ if progress_varname != "" subtitle = string(progress)+" / "+string(progress_max)
     draw_text_ext(left+net_manager.armory_ysep*3.3+net_manager.armory_sl+txt_pad+10,top+32+txt_pad+5,subtitle, 24, width-145)
 draw_set_color(c_white)
 //draw description
+
 draw_text_ext(left+net_manager.armory_ysep*3.3+net_manager.armory_sl+txt_pad+10,top+height/2+txt_pad+5,descr, 24, width-145)
 draw_set_valign(fa_top)
 

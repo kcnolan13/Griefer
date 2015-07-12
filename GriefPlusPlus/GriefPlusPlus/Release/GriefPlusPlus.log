@@ -1,8 +1,22 @@
-﻿Build started 7/8/2015 9:56:29 PM.
+﻿Build started 7/12/2015 10:33:44 AM.
      1>Project "E:\Griefer\GriefPlusPlus\GriefPlusPlus\GriefPlusPlus.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\boost /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _SCL_SECURE_NO_WARNINGS /D WIN32 /D NDEBUG /D _CONSOLE /D _WINDLL /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ..\src\gm_transmitters.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\boost /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _SCL_SECURE_NO_WARNINGS /D WIN32 /D NDEBUG /D _CONSOLE /D _WINDLL /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ..\main.cpp ..\src\event_bindings.cpp ..\src\gm_readers.cpp ..\src\gm_transmitters.cpp ..\src\helpers.cpp ..\src\internal\sio_client_impl.cpp ..\src\internal\sio_packet.cpp ..\src\receivers.cpp ..\src\sio_client.cpp ..\src\sio_socket.cpp
+         main.cpp
+         event_bindings.cpp
+     1>..\src\event_bindings.cpp(35): warning C4018: '<' : signed/unsigned mismatch
+         gm_readers.cpp
+     1>..\src\gm_readers.cpp(13): warning C4018: '<' : signed/unsigned mismatch
          gm_transmitters.cpp
+         helpers.cpp
+         sio_client_impl.cpp
+     1>..\src\internal\sio_client_impl.cpp(478): warning C4390: ';' : empty controlled statement found; is this the intent?
+         sio_packet.cpp
+         receivers.cpp
+     1>..\src\receivers.cpp(77): warning C4305: 'initializing' : truncation from '__int64' to 'size_t'
+     1>..\src\receivers.cpp(77): warning C4309: 'initializing' : truncation of constant value
+         sio_client.cpp
+         sio_socket.cpp
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Griefer\GriefPlusPlus\GriefPlusPlus\Release\GriefPlusPlus.dll" /INCREMENTAL:NO /NOLOGO /LIBPATH:C:\boost\release\lib boost.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\Griefer\GriefPlusPlus\GriefPlusPlus\Release\GriefPlusPlus.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Griefer\GriefPlusPlus\GriefPlusPlus\Release\GriefPlusPlus.lib" /MACHINE:X86 /SAFESEH /DLL Release\main.obj
          Release\event_bindings.obj
@@ -23,4 +37,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:08.79
+Time Elapsed 00:00:24.01

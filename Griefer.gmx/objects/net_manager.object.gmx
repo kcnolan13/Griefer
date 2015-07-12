@@ -200,7 +200,7 @@ mode_counter = 0
 came_from_match = false
 draw_edge_padding = 8
 lobby_wait_time = 45*room_speed
-armory_locked = false
+lock_armory = false
 num_players = 1
 saving_armor = 0
 saving_armor_max = 2*room_speed
@@ -866,13 +866,12 @@ else if varRead("game_mode") = "versus"
 if room_counter &lt; room_speed*15 and nth_frame(10) and instance_exists(local_player)
 {
     objVarWrite(local_player,"bot",bot_override)  
-    printf("ERROR (not): writing local_player.bot to "+string(bot_override))
+    //printf("ERROR (not): writing local_player.bot to "+string(bot_override))
 }
 
 //view zooming
 if starting_match
 {
-
     view_lerp = 0.06
     view_xtarget = room_width/2
     view_ytarget = room_height/2
@@ -2250,6 +2249,11 @@ if (starting_match)
 
 if bot_override
 {
+    /*if instance_exists(local_player) and in_match() and rtime() &gt; room_speed 
+        and nth_frame(5*room_speed)
+    {
+        objVarWrite(local_player,"rank",ceil(random_range(5,25)))   
+    }*/
     draw_set_halign(fa_right)
     draw_set_valign(fa_top)
     draw_set_color(c_white)

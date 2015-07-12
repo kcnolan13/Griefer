@@ -174,7 +174,7 @@ if surface_exists(surface)
           <argument>
             <kind>1</kind>
             <string>///snap
-if snapped and (object_index != accolade_generic or 1=1)
+if snapped and (object_index != accolade_generic )
 {
     x = view_xview+view_xpercent*view_wview
     y = view_yview+view_ypercent*view_hview
@@ -207,7 +207,7 @@ else if snapped
           <argument>
             <kind>1</kind>
             <string>///snap
-if snapped and (object_index != accolade_generic or 1=1)
+if snapped and (object_index != accolade_generic )
 {
     x = view_xview+view_xpercent*view_wview
     y = view_yview+view_ypercent*view_hview
@@ -270,7 +270,7 @@ if birth_delay &gt; 0
     exit
 }
 
-if snapped and (object_index != accolade_generic or 1=1)
+if snapped and (object_index != accolade_generic )
 {
     x = view_xview+view_xpercent*view_wview
     y = view_yview+view_ypercent*view_hview

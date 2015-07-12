@@ -5,6 +5,29 @@
 //
 #include "gm_readers.h"
 
+GMEXPORT const double hash_string(char *str)
+{
+	long hash = 0;
+	if (strlen(str) == 0)
+		return hash;
+	for (int i = 0; i< strlen(str); i++)
+	{
+		char c = str[i];
+		hash = ((hash << 5) - hash) + c;
+		//cout << "::: intermediary hash: " << hash << endl;
+		hash |= 0; //convert to 32-bit int
+		//cout << "::: after anding: " << hash << endl;
+	}
+	//cout << "::: HASHED " + string(str) + " ---> " << hash << endl;
+	hash = abs(hash);
+	//cout << "::: final result: " << hash << endl;
+	return static_cast<double>(hash);
+}
+
+std::string toString(int val) {
+	return std::to_string(static_cast<float>(val));
+}
+
 GMEXPORT const double isString(char *type)
 {
 	_lock.lock();

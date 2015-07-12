@@ -14,8 +14,10 @@ var cycle_back_at_end = false
 if objVarRead(wep_2pickup,"is_nade")
 {
     cycle_back_at_end = true
-    while (varRead("weapon_index") != 3)
+    var whiles = 0
+    while (varRead("weapon_index") != 3) and whiles < 1000
     {
+        whiles++
         previous_weapon()
         backcycle_counter++
     }
@@ -40,9 +42,11 @@ if objVarRead(wep_2pickup,"is_nade")
         if goto_num != 0 and goto_num != 2
             goto_num = 0
     }
-        
-    while (varRead("weapon_index") != goto_num)
+    
+    var whiles = 0
+    while (varRead("weapon_index") != goto_num) and whiles < 1000
     {
+        whiles++
         previous_weapon()
         backcycle_counter++
     }
@@ -62,6 +66,8 @@ varWrite("weapon"+string(varRead("weapon_index")),wep_2pickup)
 //give your id to the weapon's my_player
 if DEBUG
     printf("updating "+objVarRead(wep_2pickup,"uniqueId")+"'s my_player var to "+varRead("uniqueId"))
+    
+printf("::: "+string(varRead("pName"))+" is picking up: "+string(objVarRead(wep_2pickup,"name"))+" ... myPlayer --> "+string(varRead("uniqueId")))
 objVarWrite(wep_2pickup,"my_player",varRead("uniqueId"))
 
 //make sure it wont disappear on you
@@ -92,13 +98,15 @@ if DEBUG
 sync_active_weapon()
 
 if DEBUG
-    printf("picked up weapon: "+objVarRead(wep_2pickup,"uniqueId")+" : "+objVarRead(wep_2pickup,"name"))
+    printf(":::picked up weapon: "+objVarRead(wep_2pickup,"uniqueId")+" : "+objVarRead(wep_2pickup,"name"))
 
 //return to the weapon you were on before if you picked up grenades or a sidearm
 if cycle_back_at_end
 {
-    while (backcycle_counter)
+    var whiles = 0
+    while (backcycle_counter) and whiles < 1000
     {
+        whiles++
         next_weapon()
         backcycle_counter --
     }

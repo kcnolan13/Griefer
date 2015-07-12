@@ -52,9 +52,10 @@ if not in_match()
         top = draw_y
         bottom = draw_y+height
     }
-    
-    while (bottom > room_height)
+    var whiles = 0
+    while (bottom > room_height) and whiles < 1000
     {
+        whiles++
         bottom --
         top --
     }

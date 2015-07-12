@@ -2,11 +2,10 @@
 var time = argument0
 var do_round = argument1
 
-var days = truncate(time/1000/60/60/24,1)
+var days = time/1000/60/60/24
 if days > 0
 {
-    
-    time -= days*1000*60*60*24
+    //time -= days*1000*60*60*24
     if days > 1
     {
         if do_round days = round(days)
@@ -14,10 +13,10 @@ if days > 0
     }
 }
     
-var hrs = truncate(time/1000/60/60,1)
+var hrs = time/1000/60/60
 if hrs > 0
 {
-    time -= hrs*1000*60*60
+    //time -= hrs*1000*60*60
     if hrs > 1
     {
         if do_round hrs = round(hrs)
@@ -25,10 +24,10 @@ if hrs > 0
     }
 }
     
-var mins = truncate(time/1000/60,1)
+var mins = time/1000/60
 if mins > 0
 {
-    time -= mins*1000*60
+    //time -= mins*1000*60
     if mins > 1
     {
         if do_round mins = round(mins)
@@ -36,7 +35,7 @@ if mins > 0
     }
 }
 
-var secs = truncate(time/1000,0)
+var secs = time/1000
 {
     if do_round secs = round(secs)
      return string(secs)+pluralize(" Sec",secs)

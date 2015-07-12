@@ -10,8 +10,10 @@ var prob_preset = argument0
 var name = "sdflkjsdflkjsdflkjsdflkjsdflksjdflksdjf"
 var ind = 0
 
-while (string_length(name) > 20)
+var whiles = 0
+while (string_length(name) > 20) and whiles < 1000
 {
+    whiles++
     var list1 = global.adjs
     var list2 = global.nouns
     

@@ -36,6 +36,7 @@ if object_index != rag_generic and (object_index-rag_head &lt; getLength(global.
 }
 
 max_speed = 35
+max_vang = 360*2
 
 scale = 1
 image_angoff = 0
@@ -110,6 +111,54 @@ physics_fixture_delete(fix)
         </arguments>
       </action>
     </event>
+    <event eventtype="3" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///constrict speed
+constrict_physics_speed(max_speed,max_vang)
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///constrict speed
+constrict_physics_speed(max_speed,max_vang)
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
@@ -131,14 +180,6 @@ physics_fixture_delete(fix)
 event_inherited()
 
 life++
-
-//constrict speed
-if phy_speed &gt; max_speed
-{
-    var speed_ang = point_direction(0,0,phy_speed_x,phy_speed_y)
-    phy_speed_x = trigx(max_speed,speed_ang)
-    phy_speed_y = trigy(max_speed,speed_ang)
-}
 
 //FADE OUT CONTROL
 if fade_delay

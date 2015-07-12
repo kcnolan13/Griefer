@@ -84,8 +84,10 @@ if recalculate
         data_ind = string_count(",",hist)-1
     
     nodata = true
-    while (string_pos(",",hist))
+    var whiles = 0
+    while (string_pos(",",hist)) and whiles < 1000
     {
+        whiles++
         nodata = false
         var pos = string_pos(",",hist)
         var strval = string_copy(hist,1,pos-1)

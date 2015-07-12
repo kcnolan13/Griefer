@@ -53,6 +53,10 @@ if (varRead("arms_posing"))
     
     if varRead("arm_animation_index") >= varRead("arm_animation_length") or varRead("arm_animation_index") < 0
     {
+        //set nade animation speed to 0 please
+        if varRead("arm_pose") = "nade"
+            varWrite("arm_animation_speed",0)
+            
         if varRead("arm_animation_index") >= varRead("arm_animation_length")
             varWrite("arm_animation_index",0)
         else

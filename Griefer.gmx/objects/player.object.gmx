@@ -35,6 +35,10 @@ curs_yoff = 256
 
 damage_scaler = 0.75
 
+//bot constants
+weapon_time = 0
+weapon_time_min = room_speed
+
 time_since_wepcont = 0
 near_death = false
 hide_spawn_text = false
@@ -1277,6 +1281,15 @@ if varRead("controllable")
 if is_bot(id) and varRead("controllable") and not net_manager.starting_match and varRead("alive")
 {
     var dat_rank = varRead("rank")+1
+    
+    //AI override adjustment
+    if myPlayer() = id
+    {
+        dat_rank += 10
+        if dat_rank &gt; 25
+            dat_rank = 25
+    }
+    
     var max_rank = array_length_1d(global.rank_names)
     var per_active = dat_rank/max_rank*1.5
     var per_reflexes = dat_rank/max_rank*2
@@ -1360,6 +1373,14 @@ if (varRead("controllable")) or objVarRead(net_manager,"end_match_coming")
     }
     else
     {animation_crawl() varWrite("animation_speed",0)}
+    
+    //make damn well sure he's crawling
+    if sprite_index = spr_player_crawl and varRead("animation") != "crawl" and rolling = 0 and varRead("animation") != "roll"
+    {
+        printf("::: FORCING ANIMATION CRAWL")
+        animation_crawl()
+    }
+    
 }
 </string>
           </argument>
@@ -1984,7 +2005,7 @@ draw_set_valign(fa_center)
 
 
 
-if net_manager.local_player = id or is_local_teammate(id)
+if net_manager.local_player = id or is_local_teammate(id) or net_manager.bot_override
 {
     draw_set_font(fnt_hud_big)
     draw_set_color(c_white)

@@ -11,7 +11,7 @@ var points = floor(random_range(avg_rank*num_bots*2/3,avg_rank*num_bots*3/2))
 for (var i=0; i<num_bots; i++)
 {
     //select uniqueID
-    var pnum = instance_number(avatar)
+    var pnum = i+1
     
     //select name and rank
     var name = string(generate_name(0.01))

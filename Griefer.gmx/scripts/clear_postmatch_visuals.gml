@@ -34,3 +34,6 @@ with (action_word)
 av_head = NO_HANDLE
 av_txt = NO_HANDLE
 av_namerank = NO_HANDLE
+
+alarm[1] = 0
+with bn_postmatch_done fade_out = true

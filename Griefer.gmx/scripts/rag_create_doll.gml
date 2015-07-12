@@ -53,6 +53,13 @@ for (var i=RAG_HEAD; i<= RAG_FOOTR; i++)
     rags[i] = NO_HANDLE
 }
 
+if is_hatless(varRead(limb_names[0]+"0"))
+{
+    rag_exclusions[6] = true
+    printf("::: adding hat to ragdoll exclusions in rag_create_doll")
+}
+
+
 //create each rag limb
 for (var i=0; i<getLength(limb_names); i++)
 {

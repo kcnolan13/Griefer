@@ -7,8 +7,10 @@ return false
 players_with_max = ds_list_create()
 rank = 1
 
-while (rank <= num_players)
+var whiles = 0
+while (rank <= num_players) and whiles < 1000
 {
+    whiles++
     max_kills = 0
     
     for (i=1; i<=num_players; i++) //find max kills

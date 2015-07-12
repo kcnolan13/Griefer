@@ -161,8 +161,10 @@ if draw_it
         bottom = draw_y+title_height+body_height
     }
     
-    while (bottom &gt; room_height)
+    var attempts = 0
+    while (bottom &gt; room_height and attempts &lt; 1000)
     {
+        attempts ++
         bottom --
         top --
     }

@@ -438,7 +438,7 @@ if net_manager.menu_mode = "lottery_steal" and not instance_exists(bn_postmatch_
     }
 }
 
-if xp_done_counter &gt; xp_done_counter_max and instance_exists(bn_postmatch_done)
+if (net_manager.lock_armory or xp_done_counter &gt; xp_done_counter_max) and instance_exists(bn_postmatch_done)
 {
     net_manager.menu_mode = "lobby"
     alarm[1] = 0

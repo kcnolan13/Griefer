@@ -766,6 +766,7 @@
         <script>scripts\rag_init_exclusions.gml</script>
         <script>scripts\rag_apply_sever_impulse.gml</script>
         <script>scripts\rag_apply_death_impulse.gml</script>
+        <script>scripts\constrict_physics_speed.gml</script>
       </scripts>
     </scripts>
     <scripts name="control mapping">
@@ -986,15 +987,15 @@
       <script>scripts\instance_create_for_everyone.gml</script>
       <script>scripts\instance_destroy_for_everyone.gml</script>
       <script>scripts\obj_update_real.gml</script>
+      <script>scripts\obj_update_string.gml</script>
       <script>scripts\obj_pname_update_real.gml</script>
       <script>scripts\obj_pname_update_string.gml</script>
-      <script>scripts\stat_update_real.gml</script>
       <script>scripts\obj_sendval_real.gml</script>
-      <script>scripts\obj_update_string.gml</script>
+      <script>scripts\obj_sendval_string.gml</script>
+      <script>scripts\stat_update_real.gml</script>
       <script>scripts\stat_update_string.gml</script>
       <script>scripts\pname_stat_update_string.gml</script>
       <script>scripts\pname_stat_update_real.gml</script>
-      <script>scripts\obj_sendval_string.gml</script>
       <scripts name="not as important">
         <script>scripts\instance_create_net.gml</script>
       </scripts>

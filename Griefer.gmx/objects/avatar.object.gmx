@@ -29,8 +29,8 @@
 netvars = NO_HANDLE
 
 shuffling = 0
-shuffling_max = room_speed*5
-shuffling_toff = 10
+shuffling_max = room_speed*2
+shuffling_toff = room_speed
 
 lobby_scale_decrementor = 0.2
 prescaled = false
@@ -219,6 +219,8 @@ printf("::: "+string(varRead("pName"))+" was instantiated with uniqueId #"+strin
           <argument>
             <kind>1</kind>
             <string>///shuffling
+
+
 if shuffling and x &gt; 0 and x &lt; room_width
 {
     shuffling--
@@ -240,7 +242,7 @@ if shuffling and x &gt; 0 and x &lt; room_width
         shuffle_frames = 1
         
     //shuffle name and gear and rank and whatnot
-    if nth_frame(shuffle_frames)
+    if nth_frame(2)
     {
         var avg_rank = floor(global.num_ranks/2)
         var num_bots = instance_number(avatar) -1
@@ -274,6 +276,7 @@ if shuffling and x &gt; 0 and x &lt; room_width
         points -= rank
         global_rank = 99999
 
+        varWrite("uniqueId",hash_string(name))
         varWrite("pName",name)
         varWrite("rank",rank)
         varWrite("global_rank",global_rank)
@@ -860,7 +863,7 @@ if is_bot(id) and in_match()
         syncVar(my_bot,global.bpart_limb_types[i]+"0")
     }
     
-    printf("created bot player: "+objVarRead(my_bot,"pName"))
+    printf(":::created bot player: "+string(objVarRead(my_bot,"pName"))+", pNum="+string(objVarRead(my_bot,"pNum")))
 }
 
 if is_bot(id) and room = rm_lobby
@@ -929,6 +932,7 @@ if not is_my_avatar(id) and net_manager.show_cout
         +", weapon_x="+string(weapon_x)+", weapon_xoffset_temp="+string(weapon_xoffset_temp)
         +", weapon_y="+string(weapon_y)+", weapon_yoffset_temp="+string(weapon_yoffset_temp)
         +", weapon_rot="+string(weapon_rot))
+    printf("::: teammate? "+string(are_teammates(id,myAvatar())))
 }
 
 if not in_match()

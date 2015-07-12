@@ -8,6 +8,12 @@ y = varRead("myY")
 
 gfric_max = 2
 
+if (hsp > 1000) or vsp > 1000
+{
+    printf("ERROR: object's speed is too large to be processed by basic_physics")
+    return false
+}
+
 //position adjustment based on hsp and vsp
     scr_pixel_horizontal(2)
 
@@ -46,7 +52,7 @@ gfric_max = 2
     if position_meeting(x,bbox_bottom+3,block) || standing_2way = true
     {
         grav = 0
-        if not rolling and not keyboard_check(ord('A')) and not keyboard_check(ord('D'))
+        if not rolling and not input_check(mapped_control(C_MOVE_LEFT)) and not input_check(mapped_control(C_MOVE_RIGHT))
         {
             gfric = 1
             //make sure you don't damp past zero
@@ -70,7 +76,7 @@ gfric_max = 2
     if collision_rectangle(bbox_left,bbox_top,bbox_right,bbox_bottom+5,block,true,true) || standing_2way = true
     {
         grav = 0
-        if not rolling and not keyboard_check(ord('A')) and not keyboard_check(ord('D'))
+        if not rolling and not input_check(mapped_control(C_MOVE_LEFT)) and not input_check(mapped_control(C_MOVE_RIGHT))
         {
             gfric = gfric_max
             //make sure you don't damp past zero
