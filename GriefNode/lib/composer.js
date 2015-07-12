@@ -18,7 +18,7 @@ var log = require('./logger.js');
 
 //EXPORTS
 var hash_string = function(string) {
-    var hash = 0;
+    var hash = 5381;
     if (string.length == 0) return hash;
     for (var i = 0; i < string.length; i++) {
         var c = string.charCodeAt(i);
@@ -26,7 +26,9 @@ var hash_string = function(string) {
         hash = hash & hash; // Convert to 32bit integer
     }
     log.log(STD,"HASHED "+string+" ---> "+hash);
-    return hash;
+    if (hash < 0)
+    	hash = hash*2;
+    return Math.abs(hash);
 }
 exports.hash_string = hash_string;
 

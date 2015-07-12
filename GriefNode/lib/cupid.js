@@ -418,6 +418,8 @@ var configure_match = function(playerSubGroup, gameRoom, wait_time) {
 
 	//determine the next map
 	var mapNum = Math.floor((Math.random() * num_maps));
+	var dat_wait_time = wait_time;
+	log.log(CUPID,"dat_wait_time was: "+dat_wait_time);
 
 	for (var s=0; s<playerSubGroup.length; s++)
 	{
@@ -426,16 +428,20 @@ var configure_match = function(playerSubGroup, gameRoom, wait_time) {
 		eachSocket.myPlayer.nextMapNum = mapNum;
 	}
 
-	setTimeout(function() {
-
+	setTimeout(function(gameRoom,waitin_time) {
+		log.log(CUPID,"last layer waitin_time="+waitin_time);
 		//update next_map
 		var message = composer.objUpdate(netManObjIndex,default_netman_uniqueId,"next_map",mapNum,FL_NORMAL);
-		eachSocket.emit('obj_update',message);
+		io.to(gameRoom).emit('obj_update',message);
 
 		//update lobby wait time
-		var message = composer.objUpdate(netManObjIndex,default_netman_uniqueId,"lobby_wait_time",Math.ceil((wait_time-1000)/1000*30),FL_NORMAL);
-		eachSocket.emit('obj_update',message);
-	},1000);
+		var new_wait_time = Math.ceil((waitin_time-1000)/1000*30)
+		log.log(CUPID,"waitin_time: "+waitin_time+" ---> "+new_wait_time);
+		var message = composer.objUpdate(netManObjIndex,default_netman_uniqueId,"lobby_wait_time",new_wait_time,FL_NORMAL);
+		io.to(gameRoom).emit('obj_update',message);
+		log.log(CUPID,"sending lobby_wait_time: ");
+		log.log(CUPID,message);
+	},1000,gameRoom,dat_wait_time);
 
 	//shuffle around people's uniqueIds based on who is still in the match
 	id_shuffler = setTimeout(function(gameRoom){

@@ -217,7 +217,7 @@ io.on('connection', function(socket){
 
   		//trigger a player re-ranking
   		if (message.val != FL_BOT)
-  			setTimeout(function() {dgman.rankPlayers()},5000);
+  			setTimeout(function() {dbman.rankPlayers()},5000);
 
   		//configure the next match after a short delay
   		setTimeout(function(playerSubGroup, gameRoom) {

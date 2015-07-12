@@ -57,7 +57,7 @@ exports.cdefaults = cdefaults;
 exports.cindices = cindices;
 
 //how to remake the users table when you need to
-var statement = 'create table users (username VARCHAR(20), password VARCHAR(32), ';
+var statement = 'create table users (username VARCHAR(20), userhash real, password VARCHAR(32), ';
 var parts = ['hat','helmet','torso','shoulder','forearm','leg','shin','foot','prop'];
 for (var i=0; i<NUM_BPARTS; i++)
 {
@@ -264,8 +264,9 @@ exports.correctPassword = correctPassword
 
 var authUnameExists = function(socket, username, password, callback)
 {
-	var statement = "SELECT * from users WHERE username="+conn.escape(username);
+	var statement = "SELECT * from users WHERE username="+conn.escape(username)+" OR userhash="+conn.escape(composer.hash_string(username));
 	var result = 0;
+	log.log(SQL,statement);
 
 		conn.query(statement, function (err, rows) {
 			result = rows.length;
@@ -276,6 +277,7 @@ var authUnameExists = function(socket, username, password, callback)
 				result = 0;
 				callback(result);
 			} else {
+
 				log.log(SQL,"authUname Does Not Exist");
 				result = 2;
 
@@ -327,7 +329,7 @@ exports.userDelete = userDelete
 var userCreate = function(socket, username, password)
 {
 	//compose the query
-	var columns = ['username','password'];
+	var columns = ['username','userhash','password'];
 	var parts = ['hat','helmet','torso','shoulder','forearm','leg','shin','foot','prop'];
 	for (var i=0; i<NUM_BPARTS; i++)
 	{
@@ -358,7 +360,7 @@ var userCreate = function(socket, username, password)
 
 	log.log(SQL,"\n\nincoming new username: "+conn.escape(username)+" : "+username+"\n\n");
 
-	var vals = "("+conn.escape(username)+", MD5("+conn.escape(password)+"), "; //5,-1,-1,0,-1,-1,1,-1,-1,6,-1,-1,7,-1,-1,2,-1,-1,3,-1,-1,4,-1,-1)";
+	var vals = "("+conn.escape(username)+", "+conn.escape(composer.hash_string(username))+", MD5("+conn.escape(password)+"), "; //5,-1,-1,0,-1,-1,1,-1,-1,6,-1,-1,7,-1,-1,2,-1,-1,3,-1,-1,4,-1,-1)";
 	vals += str_starting_limbs+')'
 
 	//username, password, and default limbs
@@ -529,6 +531,11 @@ var getGravatarAccolades = function(socket, username, flag, retransmit)
 			//log any errors
 			if (err)
 				log.log(SQL,err);
+
+			if (globals.exists(rows) != true)
+			{
+				log.log(CRITICAL,"getGravatarAccolades got no rows back");
+			}
 
 			for (var i=0; i<accolades.length; i++)
 			{
@@ -875,7 +882,7 @@ var sendNetManPlayerStats = function(socket, objIndex, uniqueId)
 {
 	var theDude = socket.myPlayer;
 	var username = socket.myPlayer.pName;
-	var columns = ['stats.rank','stats.true_skill','stats.xp','stats.global_rank','stats.wins','stats.losses','stats.kills','stats.deaths','stats.assists'];
+	var columns = ['stats.rank','stats.true_skill','stats.time','stats.xp','stats.global_rank','stats.wins','stats.losses','stats.kills','stats.deaths','stats.assists'];
 	var parts = ['users.hat','users.helmet','users.torso','users.shoulder','users.forearm','users.leg','users.shin','users.foot','users.prop'];
 	for (var i=0; i<NUM_BPARTS; i++)
 	{
@@ -937,7 +944,7 @@ var sendCompletePlayerStats = function(socket, gameRoom, objIndex, broadcast_onl
 	if (gameRoom.indexOf("bot")>-1)
 		stat_table = "bot_stats"
 
-	var columns = ['stats.rank','stats.true_skill','stats.xp','stats.global_rank',stat_table+'.points',stat_table+'.wins',stat_table+'.losses',stat_table+'.kills',stat_table+'.deaths',stat_table+'.assists',stat_table+'.kill_streak',stat_table+'.win_streak',stat_table+'.rollover_kstreak',stat_table+'.rollover_wstreak'];
+	var columns = ['stats.rank','stats.time','stats.true_skill','stats.xp','stats.global_rank',stat_table+'.points',stat_table+'.wins',stat_table+'.losses',stat_table+'.kills',stat_table+'.deaths',stat_table+'.assists',stat_table+'.kill_streak',stat_table+'.win_streak',stat_table+'.rollover_kstreak',stat_table+'.rollover_wstreak'];
 	var parts = ['users.hat','users.helmet','users.torso','users.shoulder','users.forearm','users.leg','users.shin','users.foot','users.prop'];
 
 	for (var i=0; i<NUM_BPARTS; i++)
