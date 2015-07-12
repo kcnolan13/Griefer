@@ -74,13 +74,13 @@ txt_alpha_idle = 0.35
 txt_alpha_highlighted = 0.8
 txt_alpha = txt_alpha_idle
 txt_alpha_target = txt_alpha
-txt_alpha_lerp = 0.5
+txt_alpha_lerp = 0.25
 
 txt_scale_idle = 72/global.challenge_slot_width
 txt_scale_highlighted = txt_scale_idle*1.35
 txt_scale = txt_scale_idle
 txt_scale_target = txt_scale
-txt_scale_lerp = 0.5
+txt_scale_lerp = 0.75
 
 popup_alpha_idle = 0.5
 popup_alpha_highlighted = 1
@@ -140,8 +140,8 @@ rewards[0] = icon
             <string>///update offsets
 if in_match() and popup_show
 {
-    x = view_xview+view_wview-global.challenge_popup_width-net_manager.armory_ysep+popup_xoff
-    y = view_yview+view_hview-global.challenge_popup_height-net_manager.armory_ysep+popup_yoff
+    x = view_xview+view_wview-global.challenge_popup_width+popup_xoff
+    y = view_yview+view_hview-global.challenge_popup_height+popup_yoff
     
     col_id = collision_rectangle(bbox_left,bbox_top,bbox_right,bbox_bottom,challenge_generic,false,true)
     if instance_exists(col_id) and id &lt; col_id.id
@@ -174,8 +174,8 @@ if in_match() and popup_show
             <string>///update offsets
 if in_match() and popup_show
 {
-    x = view_xview+view_wview-global.challenge_popup_width-net_manager.armory_ysep+popup_xoff
-    y = view_yview+view_hview-global.challenge_popup_height-net_manager.armory_ysep+popup_yoff
+    x = view_xview+view_wview-global.challenge_popup_width+popup_xoff
+    y = view_yview+view_hview-global.challenge_popup_height+popup_yoff
     
     col_id = collision_rectangle(bbox_left,bbox_top,bbox_right,bbox_bottom,challenge_generic,false,true)
     if instance_exists(col_id) and id &lt; col_id.id
@@ -302,8 +302,8 @@ if in_match() and completed and (not shown_completed or (not tripped_end_match a
 
 if in_match() and popup_show
 {
-    x = view_xview+view_wview-global.challenge_popup_width-net_manager.armory_ysep+popup_xoff
-    y = view_yview+view_hview-global.challenge_popup_height-net_manager.armory_ysep+popup_yoff
+    x = view_xview+view_wview-global.challenge_popup_width+popup_xoff
+    y = view_yview+view_hview-global.challenge_popup_height+popup_yoff
     
     col_id = collision_rectangle(bbox_left,bbox_top,bbox_right,bbox_bottom,challenge_generic,false,true)
     if instance_exists(col_id) and id &lt; col_id.id

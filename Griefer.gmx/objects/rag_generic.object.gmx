@@ -35,6 +35,8 @@ if object_index != rag_generic and (object_index-rag_head &lt; getLength(global.
     limb_type = global.bpart_limb_types[object_index-rag_head]
 }
 
+max_speed = 35
+
 scale = 1
 image_angoff = 0
 do_bind = false
@@ -125,10 +127,18 @@ physics_fixture_delete(fix)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///fade out and bleed
+            <string>///fade out and bleed, constrict speed
 event_inherited()
 
 life++
+
+//constrict speed
+if phy_speed &gt; max_speed
+{
+    var speed_ang = point_direction(0,0,phy_speed_x,phy_speed_y)
+    phy_speed_x = trigx(max_speed,speed_ang)
+    phy_speed_y = trigy(max_speed,speed_ang)
+}
 
 //FADE OUT CONTROL
 if fade_delay

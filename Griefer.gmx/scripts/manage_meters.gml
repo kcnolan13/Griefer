@@ -154,7 +154,7 @@ for (var i=0; i<getLength(pstats); i++)
         
         strval = string(varRead(pstats[i]))
         if pstats[i] = "time"
-            strval = time_ms_2string(real(varRead("time")))
+            strval = time_ms_2string(real(varRead("time")),true)
         val.text = strval
         printf("::: val text: "+string(val.text))
         
@@ -175,7 +175,7 @@ for (var i=0; i<getLength(pstats); i++)
     {
         strval = string(varRead(pstats[i]))
         if pstats[i] = "time"
-            strval = time_ms_2string(real(varRead("time")))
+            strval = time_ms_2string(real(varRead("time")),true)
         val.text = strval
         val.label = val.text   
     }

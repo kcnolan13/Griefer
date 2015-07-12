@@ -33,7 +33,7 @@ with stat_manager
 }
 
 var time_played = objVarRead(guy,"time")+stat_manager.time_match_total
-stat_update_string("time",time_played,stat_manager.stat_flag)
+stat_update_string("time",time_played,FL_NORMAL)
 
 update_kdr = true
 update_wl = true

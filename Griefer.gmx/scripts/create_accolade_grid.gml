@@ -138,7 +138,7 @@ var dbug = true
     //sindex = 0 is grid_xmid! remember that...
     if instance_exists(accolade_generic)
     {
-        accolade_manager.sindex_max = instance_find(accolade_generic,instance_number(accolade_generic)-1).x - accolade_manager.grid_xmid
+        accolade_manager.sindex_max = instance_find(accolade_generic,instance_number(accolade_generic)-1).x-1 - accolade_manager.grid_xmid
         accolade_manager.sindex_min = -1*sindex_max
     }
     

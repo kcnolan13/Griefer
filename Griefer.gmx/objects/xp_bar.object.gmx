@@ -396,6 +396,18 @@ if (instance_exists(mw) or instance_exists(aw) or instance_exists(av_txt) or ins
 
 }
 
+if net_manager.menu_mode != "lottery_steal" and not in_match()
+{
+    with (action_word)
+    {
+        if init_as_promoted and fade_time &gt; 5
+        {
+            fade_time = 5
+            fade_delay = 1
+        }
+    }
+}
+
 if instance_exists(av_txt)
 {
     //av_namerank.txt = get_rank_name(rank)

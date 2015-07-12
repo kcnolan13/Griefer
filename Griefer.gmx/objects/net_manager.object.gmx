@@ -788,19 +788,6 @@ room_goto(rm_menu)
 
 num_players = instance_number(player)
 
-/*for (i=0; i&lt;instance_number(player); i++)
-{
-    ID = instance_find(player,i)
-    write_stat_pnum(objVarRead(ID,"uniqueId"),"i_rank",objVarRead(ID,"rank"))
-    write_stat_pnum(objVarRead(ID,"uniqueId"),"i_wins",objVarRead(ID,"wins"))
-    write_stat_pnum(objVarRead(ID,"uniqueId"),"i_losses",objVarRead(ID,"losses"))
-    write_stat_pnum(objVarRead(ID,"uniqueId"),"i_headshots",objVarRead(ID,"headshots"))
-    write_stat_pnum(objVarRead(ID,"uniqueId"),"i_sprees",objVarRead(ID,"sprees"))
-    write_stat_pnum(objVarRead(ID,"uniqueId"),"i_kills",objVarRead(ID,"kills"))
-    write_stat_pnum(objVarRead(ID,"uniqueId"),"i_deaths",objVarRead(ID,"deaths"))
-    write_stat_pnum(objVarRead(ID,"uniqueId"),"pName",objVarRead(ID,"pName"))
-    write_stat_pnum(objVarRead(ID,"uniqueId"),"match_rank",objVarRead(ID,"match_rank"))
-}*/
 if varRead("game_mode") = "bot_tdm"
 {
     varWrite("game_mode","tdm")
@@ -825,7 +812,7 @@ if varRead("game_mode") = "tdm"
     respawn_delay = room_speed*5
     varWrite("using_teams",true)
     kill_limit = tdm_kill_limit
-    if objVarRead(local_player,"uniqueId") &gt;= ceil(num_players/2)
+    if objVarRead(local_player,"pNum") &gt;= ceil(num_players/2)
         team = 1
     else
         team = 0
@@ -1106,7 +1093,7 @@ if instance_exists(NO_HANDLE)
             <string>///lobby networking and game mode stuff
 if instance_exists(my_doll) and room = rm_lobby
 {
-    if objVarRead(my_doll,"uniqueId") = 0
+    if objVarRead(my_doll,"pNum") = 0
     {
         if SUPER_DEBUG
             printf("sending lobby wait time")
@@ -1237,8 +1224,8 @@ if room = rm_lobby
                 printf("ERROR: no stat gravatar to be found")
                 continue
             }
-            else if objVarRead(ID,"pName") = objVarRead(my_doll,"pName")
-                ID = my_doll
+            //else if objVarRead(ID,"pName") = objVarRead(my_doll,"pName")
+              //  ID = my_doll
         }
         else ID = instance_find(avatar,i)
         
@@ -1251,7 +1238,6 @@ if room = rm_lobby
                 objVarWrite(ID,"animation_scale",lerp(objVarRead(ID,"animation_scale"),av_scale_lobby,0.1))
             else
                 objVarWrite(ID,"animation_scale",lerp(objVarRead(ID,"animation_scale"),av_scale_menu,0.1))
-        
         }
         else
         {
@@ -1282,9 +1268,9 @@ if room = rm_lobby
                 {
                     objVarWrite(ID,"dude_y",lobby_dude_y)
                     if ID.x &lt; room_width/2
-                        objVarWrite(ID,"dude_x",-64*5)
+                        objVarWrite(ID,"dude_x",-64*8)
                     else
-                        objVarWrite(ID,"dude_x",room_width+64*5)
+                        objVarWrite(ID,"dude_x",room_width+64*8)
                 }
             break
             
@@ -1298,9 +1284,9 @@ if room = rm_lobby
                 {
                     objVarWrite(ID,"dude_y",lobby_dude_y)
                     if ID.x &lt; room_width/2
-                        objVarWrite(ID,"dude_x",-64*5)
+                        objVarWrite(ID,"dude_x",-64*8)
                     else
-                        objVarWrite(ID,"dude_x",room_width+64*5)
+                        objVarWrite(ID,"dude_x",room_width+64*8)
                 }
             break
             
@@ -1314,9 +1300,9 @@ if room = rm_lobby
                 {
                     objVarWrite(ID,"dude_y",lobby_dude_y)
                     if ID.x &lt; room_width/2
-                        objVarWrite(ID,"dude_x",-64*5)
+                        objVarWrite(ID,"dude_x",-64*8)
                     else
-                        objVarWrite(ID,"dude_x",room_width+64*5)
+                        objVarWrite(ID,"dude_x",room_width+64*8)
                 }
             break
             
@@ -1333,9 +1319,9 @@ if room = rm_lobby
             default:
                 objVarWrite(ID,"dude_y",lobby_dude_y)
                 if ID.x &lt; room_width/2
-                    objVarWrite(ID,"dude_x",-64*5)
+                    objVarWrite(ID,"dude_x",-64*8)
                 else
-                    objVarWrite(ID,"dude_x",room_width+64*5)
+                    objVarWrite(ID,"dude_x",room_width+64*8)
             break
         }
     }
@@ -2059,7 +2045,8 @@ if room = rm_lobby
     alarm[3] = room_speed*5
     //alarm[3] = floor(random_range(room_speed*4,room_speed*8))
     saving_armor = false
-    varWrite("lobby_wait_time",lobby_wait_time)
+    if varRead("lobby_wait_time") &lt; room_speed*20
+        varWrite("lobby_wait_time",lobby_wait_time)
     lock_armory = false
     menu_mode = "lobby"
     
@@ -2080,7 +2067,7 @@ if room = rm_lobby
         else
             ID.y = -64*10
             
-        ID.x = av_padding*(objVarRead(ID,"uniqueId")+0.5)
+        ID.x = av_padding*(objVarRead(ID,"pNum")+0.5)
     }
 }
 
@@ -3008,7 +2995,7 @@ draw_set_halign(fa_center)
 draw_set_valign(fa_center)
 draw_set_color(c_black)
 
-var scale_tol = 0.05
+var scale_tol = 0.25
 
 if av_popup = noone
     av_popup_drawn = false
@@ -3047,7 +3034,7 @@ for (var i=0; i&lt;instance_number(avatar); i++)
         
         //DRAW THE PLAYER POPUP
         draw_player_popup_ext(cursor.x,cursor.y,objVarRead(av_popup,"pName"),objVarRead(av_popup,"rank"),objVarRead(av_popup,"global_rank"),objVarRead(av_popup,"true_skill"),
-            objVarRead(av_popup,"helmet0"),objVarRead(av_popup,"hat0"),1)
+            objVarRead(av_popup,"helmet0"),objVarRead(av_popup,"hat0"),1,is_bot(av_popup))
         
         //GET CLICKED!
         if not is_bot(ID) and (input_check_pressed(mapped_control(C_JUMP)) or mouse_check_button_pressed(mb_left)) and not lock_armory and menmode() != "armory"

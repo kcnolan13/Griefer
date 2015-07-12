@@ -119,6 +119,8 @@ valign = fa_top
 
 snap_2view = false
 snapped = false
+view_xpercent = 0
+view_ypercent = 0
 view_xoff = 0
 view_yoff = 0
 
@@ -172,12 +174,16 @@ if surface_exists(surface)
           <argument>
             <kind>1</kind>
             <string>///snap
-
-if snapped
+if snapped and (object_index != accolade_generic or 1=1)
+{
+    x = view_xview+view_xpercent*view_wview
+    y = view_yview+view_ypercent*view_hview
+}
+else if snapped
 {
     x = view_xview+view_xoff
     y = view_yview+view_yoff
-}
+}   
 </string>
           </argument>
         </arguments>
@@ -201,12 +207,16 @@ if snapped
           <argument>
             <kind>1</kind>
             <string>///snap
-
-if snapped
+if snapped and (object_index != accolade_generic or 1=1)
+{
+    x = view_xview+view_xpercent*view_wview
+    y = view_yview+view_ypercent*view_hview
+}
+else if snapped
 {
     x = view_xview+view_xoff
     y = view_yview+view_yoff
-}
+}   
 </string>
           </argument>
         </arguments>
@@ -237,6 +247,8 @@ if snap_2view = true and snapped = false and counter &gt; 1
     snapped = true
     view_xoff = x - view_xview
     view_yoff = y - view_yview
+    view_xpercent = abs(view_xoff/view_wview)
+    view_ypercent = abs(view_yoff/view_hview)
 }
 
 if fade_delay
@@ -258,11 +270,16 @@ if birth_delay &gt; 0
     exit
 }
 
-if snapped
+if snapped and (object_index != accolade_generic or 1=1)
+{
+    x = view_xview+view_xpercent*view_wview
+    y = view_yview+view_ypercent*view_hview
+}
+else if snapped
 {
     x = view_xview+view_xoff
     y = view_yview+view_yoff
-}
+}   
 
 image_xscale = width
 image_yscale = height

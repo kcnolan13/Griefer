@@ -22,6 +22,15 @@ if instance_exists(av_namerank)
         fade_time = 5
     }
     
+with (action_word)
+{
+    if init_as_promoted and fade_time > 5
+    {
+        fade_time = 5
+        fade_delay = 1
+    }
+}
+    
 av_head = NO_HANDLE
 av_txt = NO_HANDLE
 av_namerank = NO_HANDLE

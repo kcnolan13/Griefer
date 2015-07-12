@@ -878,7 +878,6 @@
     <scripts name="challenges">
       <script>scripts\instantiate_challenge.gml</script>
       <script>scripts\draw_popup_challenge.gml</script>
-      <script>scripts\draw_player_popup_ext.gml</script>
       <script>scripts\draw_challenge_unlock_bar.gml</script>
       <script>scripts\populate_challenges.gml</script>
       <script>scripts\populate_progression_challenges.gml</script>
@@ -988,6 +987,7 @@
       <script>scripts\instance_destroy_for_everyone.gml</script>
       <script>scripts\obj_update_real.gml</script>
       <script>scripts\obj_pname_update_real.gml</script>
+      <script>scripts\obj_pname_update_string.gml</script>
       <script>scripts\stat_update_real.gml</script>
       <script>scripts\obj_sendval_real.gml</script>
       <script>scripts\obj_update_string.gml</script>
@@ -1047,10 +1047,11 @@
       </scripts>
       <scripts name="meta draw">
         <script>scripts\draw_armory_grid.gml</script>
+        <script>scripts\draw_player_popup_ext.gml</script>
+        <script>scripts\draw_player_popup.gml</script>
         <script>scripts\draw_prop_grid.gml</script>
         <script>scripts\draw_armory_cache.gml</script>
         <script>scripts\compute_body_text_override.gml</script>
-        <script>scripts\draw_player_popup.gml</script>
         <script>scripts\draw_bpart_icon.gml</script>
         <script>scripts\draw_bpart_icon_ext.gml</script>
         <script>scripts\draw_bpart_slot.gml</script>
@@ -1136,6 +1137,7 @@
       <script>scripts\getMax.gml</script>
       <script>scripts\getMin.gml</script>
       <script>scripts\time_ms_2string.gml</script>
+      <script>scripts\pluralize.gml</script>
     </scripts>
     <scripts name="player">
       <script>scripts\framely_view_adjust.gml</script>
@@ -1372,12 +1374,12 @@
       <script>scripts\match_ending.gml</script>
     </scripts>
     <scripts name="general utilities">
+      <script>scripts\hash_string.gml</script>
       <script>scripts\keep_view_in_bounds.gml</script>
       <script>scripts\score_grid_valid.gml</script>
       <script>scripts\inside_room.gml</script>
       <script>scripts\in_view.gml</script>
       <script>scripts\printf.gml</script>
-      <script>scripts\hash_string.gml</script>
       <script>scripts\rtime.gml</script>
       <script>scripts\modal_highlighted.gml</script>
       <script>scripts\round_nearest.gml</script>

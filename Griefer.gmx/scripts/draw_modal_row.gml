@@ -157,7 +157,7 @@ if hovrow > -1 and show_hovrow
 {
     //show popup
     draw_player_popup_ext(cursor.x,cursor.y,ds_grid_get(grid,0,hovrow),
-        ds_grid_get(grid,1,hovrow),ds_grid_get(grid,13,hovrow),ds_grid_get(grid,2,hovrow),real(ds_grid_get(grid,14,hovrow)),real(ds_grid_get(grid,15,hovrow)),1)
+        ds_grid_get(grid,1,hovrow),ds_grid_get(grid,13,hovrow),ds_grid_get(grid,2,hovrow),real(ds_grid_get(grid,14,hovrow)),real(ds_grid_get(grid,15,hovrow)),1,false)
     if input_check_pressed(mapped_control(C_JUMP)) or mouse_check_button_pressed(mb_left)
     {
         show_player_stats(ds_grid_get(grid,0,hovrow))

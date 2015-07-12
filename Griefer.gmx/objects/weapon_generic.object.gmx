@@ -207,7 +207,6 @@ else
                 if not find_my_weapon_by_name(objVarRead(other.id,"name"))
                     net_manager.local_player.weapon_contemplating = other.id
             }
-            
         }
         
         //AUTO ABSORPTION
@@ -377,7 +376,7 @@ dat_jugador = find_player(varRead("my_player"))
         {
             //DISAPPEAR EMPTY WEAPONS --&gt; ONLY PLAYER 0 IS ALLOWED TO DO THIS
             varSub("disappear_counter",1)
-            if varRead("disappear_counter") = 0 lobby_leader()
+            if varRead("disappear_counter") = 0 and lobby_leader()
             {
                 if DEBUG
                     printf("disappearing weapon: "+varRead("uniqueId")+" : "+varRead("name"))

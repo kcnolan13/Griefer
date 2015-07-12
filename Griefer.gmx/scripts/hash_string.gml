@@ -1,6 +1,6 @@
 ///hash_string(string)
 var str = argument0
-var result = 0
+var result = 5381
 
 /*var max_length = 15
 //printf("hashing string "+str)
@@ -21,4 +21,7 @@ for (var i=0; i < string_length(str); i++)
 if SPBUG
     printf("HASHED "+str+" ---> "+string(result))
     
-return result
+if result < 0
+    result = result*2
+    
+return abs(result)

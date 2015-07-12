@@ -126,7 +126,7 @@ if not in_match()
     sync_mod_vars()
 }
 
-alarm[2] = room_speed*5
+alarm[2] = room_speed*1/2
 </string>
           </argument>
         </arguments>
@@ -179,8 +179,8 @@ mouse_wheel_delay --
 
 if in_match()
 {
-    x = room_width+400
-    y = -400
+    x = room_width+64*8
+    y = -64*8
 }
 else
 {   //sync uniqueId up with your local avatar
@@ -215,6 +215,10 @@ if not bparts_done_ready
     {
         printf("::: all bparts ready for grav --&gt; enable grav_ready in stat man!")
         stat_manager.grav_ready = true
+        if (net_manager.stat_gravatar != id)
+        {
+            printf(":::WARNING: gravatar expected netman.stat_gravatar to be equal to his id in step_1")
+        }
         varWrite("visible",true)
         visible = true
     }
@@ -223,11 +227,18 @@ if not bparts_done_ready
 if room = rm_menu or room = rm_lobby
 {
     varWrite("arm_animation_speed",0)
+    varWrite("arm_animation_index",0)
     sync_poses_and_animations()
     
     if menmode() != "stats" or stat_manager.stat_tab = stat_manager.tabs[2]
     {
-        varWrite("dude_x",-800)
+        varWrite("dude_x",-64*8)
+    }
+    
+    if not bparts_done_ready
+    {
+        varWrite("visible",false)
+        visible = false
     }
 }
 
@@ -458,8 +469,8 @@ if net_manager.show_cout
         printf("::: GRAVATAR "+string(varRead("pName"))+": uniqueId = "+string(varRead("uniqueId"))+", pNum = "+string(varRead("pNum"))+", x="+string(x)+", y="+string(y))
 }
 
-    if not in_match()
-        event_inherited()
+if not in_match()
+    event_inherited()
 </string>
           </argument>
         </arguments>
