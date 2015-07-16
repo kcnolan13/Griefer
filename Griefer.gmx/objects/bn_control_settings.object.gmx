@@ -3,9 +3,9 @@
   <spriteName>spr_1pixel</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-101</depth>
+  <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>bn_tab</parentName>
+  <parentName>modal_button</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -25,12 +25,60 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///inherit and specify new label
+            <string>///inherit and define properties
+life = 0
 event_inherited()
+text = "Control Settings"
+alpha_max = 0.75
+halign = fa_center
+valign = fa_center
 
-label = "Settings"
-text = "Settings"
-active = false
+gamepad_yes = "Using Gamepad"
+gamepad_no = "Use Gamepad"
+gamepad_disconnected = "[No Gamepad Detected]"
+
+alarm[0] = 1
+
+exit_child = false
+
+hue = 0
+sat = 0
+val = 0
+notif_scale = 1.25
+
+label_name = "Use Gamepad"
+using_gamepad = false
+
+active_color = make_colour_hsv(0,0,150)
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///adjust for aligns
+if halign = fa_center
+    x -= width/2
+if valign = fa_center
+    y -= height/2
+    
+text_normal = text
 </string>
           </argument>
         </arguments>
@@ -53,14 +101,14 @@ active = false
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>event_inherited()
+            <string>///all dat ish
+event_inherited()
+label = text
+life++
 
-if net_manager.menu_mode = "settings"
-    active = true
-else
-{
-    active = false
-}
+alpha_max = 1
+highlightable = true
+active = true
 </string>
           </argument>
         </arguments>
@@ -83,22 +131,51 @@ else
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>event_inherited()
-
-if exit_child
+            <string>///all dat ish
+if not modal_highlighted(id)
 {
-    exit_child = false
+    exit_child = true
     exit
 }
 
-if active = false and not net_manager.lock_armory
+if clicked exit
+    clicked = 2
+
+if instance_exists(modal_controls)
 {
-    active = true
-    net_manager.menu_mode = "settings"
+    modal_controls.mode_index = 2
+    with bn_cedit fade_out = true
+    with bn_clabel fade_out = true
+    with bn_match_quit fade_out = true
+    with modal_controls
+    {
+        regen_cedits(FL_NORMAL)
+    }
 }
-else {
-    active = false
-}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="27">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///escape cancels control capture
+capturing = false
 </string>
           </argument>
         </arguments>
@@ -118,6 +195,6 @@ else {
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
   <PhysicsShapePoints>
     <point>0,0</point>
-    <point>64,64</point>
+    <point>0,0</point>
   </PhysicsShapePoints>
 </object>

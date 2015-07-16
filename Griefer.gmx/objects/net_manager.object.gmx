@@ -920,6 +920,12 @@ if starting_match
     view_wview = ceil(lerp(view_wview,view_hwidth,view_lerp))
     view_hview = ceil(lerp(view_hview,view_vwidth,view_lerp))
     
+    if instance_exists(modal_controls) and in_match()
+    {
+        view_wview = 1365
+        view_hview = 9/16*1365
+    }
+    
     view_xview = view_xtarget - view_wview/2//lerp(view_xview, view_xtarget - view_wview/2,view_lerp)
     view_yview = view_ytarget - view_hview/2//lerp(view_xview, view_ytarget - view_hview/2,view_lerp)
     
@@ -973,6 +979,12 @@ else if (instance_exists(local_player) and is_bot(local_player))
     
     view_wview = ceil(lerp(view_wview,view_hwidth,view_lerp))
     view_hview = ceil(lerp(view_hview,view_vwidth,view_lerp))
+    
+    if instance_exists(modal_controls) and in_match()
+    {
+        view_wview = 1365
+        view_hview = 9/16*1365
+    }
     
     view_xview = view_xtarget - view_wview/2//lerp(view_xview, view_xtarget - view_wview/2,view_lerp)
     view_yview = view_ytarget - view_hview/2//lerp(view_xview, view_ytarget - view_hview/2,view_lerp)
@@ -1821,6 +1833,14 @@ if (keyboard_check_pressed(vk_tab) or (global.using_gamepad and gamepad_button_c
     show_scores ^= 1
 }
 
+if in_match() and instance_exists(modal_controls)
+{
+    if modal_controls.mode_index = 0
+        show_scores = true
+    else
+        show_scores = false
+}
+
 //sort scores @ 2 Hz
 //see if anything sort-worthy has happened
 sort_worthy = false
@@ -2285,13 +2305,13 @@ if instance_exists(local_player)
         printf("local_player = "+string(local_player))
         printf("local_player.weapon_contemplating = "+string(local_player.weapon_contemplating))
         //printf(room_counter+" --&gt; drawing weapon_contemplating")
-        draw_weapon_slot(local_player.weapon_contemplating,view_xview+sprite_get_width(spr_weapon_slot)/2+border,view_yview+view_hview-sprite_get_height(spr_weapon_slot)/2-border,1,1,FL_NORMAL)
+        draw_weapon_slot(local_player.weapon_contemplating,view_xview+view_wview-sprite_get_width(spr_weapon_slot)/2-border,view_yview+8+1.75*(sprite_get_height(spr_weapon_slot)+border+8),1,1,FL_NORMAL)
         draw_set_color(c_white)
         draw_set_font(fnt_hud)
         draw_set_alpha(1)
-        draw_set_halign(fa_left)
+        draw_set_halign(fa_right)
         draw_set_valign(fa_center)
-        draw_text(view_xview+sprite_get_width(spr_weapon_slot)+border+8,view_yview+view_hview-border-sprite_get_height(spr_weapon_slot)/2,"["+get_input_name(mapped_control(C_PICKUP))+"]")
+        draw_text(view_xview+view_wview-sprite_get_width(spr_weapon_slot)-border-8,view_yview+sprite_get_height(spr_weapon_slot)*1.75+border*2.25+2+8,"["+get_input_name(mapped_control(C_PICKUP))+"]")
     } //else printf("ERROR: no weapon_contemplating")
     
     if local_player.weapon_wheel_alpha &gt; 0
@@ -2299,7 +2319,7 @@ if instance_exists(local_player)
         show_scores = 0
         draw_weapon_wheel(local_player,view_xview+view_wview/2,view_yview+view_hview/2,local_player.weapon_wheel_alpha)
     }
-        
+
     if instance_exists(objVarRead(local_player,"active_weapon"))
     {
         border = 16
@@ -2357,8 +2377,13 @@ if varRead("end_match_coming") and win_countdown &lt; -90
     
 if ((show_scores &gt; 0) and not varRead("end_match_coming") or (room_counter &gt; room_speed*2 and room_counter &lt; room_speed*7)) and (in_match() and room_counter &gt; room_speed*3)//or room=rm_match_end
 {
+    var sy = view_yview+view_hview/2 - global.row_height*(instance_number(avatar)/2+2)
+    
+    if instance_exists(modal_controls)
+        sy += 72
+        
     if not disable_scores
-        draw_score_table(view_xview+view_wview/2 - global.table_width/2, view_yview+view_hview/2 - global.row_height*(instance_number(avatar)/2+2))
+        draw_score_table(view_xview+view_wview/2 - global.table_width/2, sy)
     //draw_scores(view_xview+64,view_yview+16)
 }
 
@@ -3525,6 +3550,32 @@ if instance_exists(local_player)
         </arguments>
       </action>
     </event>
+    <event eventtype="9" enumb="33">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///create other menu looking thing
+
+ID = spawn_controls()
+ID.behave_match = true
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="9" enumb="27">
       <action>
         <libid>1</libid>
@@ -3542,7 +3593,73 @@ if instance_exists(local_player)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///leave full screen
+            <string>///show in-match settings
+
+//if in_match()
+if not instance_exists(modal_controls)
+{
+    view_wview = 1365
+    view_hview = 9/16*1365
+    
+    cxoff = view_xview+view_wview/2
+    cyoff = view_yview+view_hview/2
+
+    view_scaler = 1
+
+    //calculate x offset percentages (percent of view_width away from middle of screen)
+    view_xoffset = -1*(view_xview+floor(view_wview/2)-cxoff)/(floor(view_wview/2))
+    
+    //constrain maximum x offset to 1
+    if abs(view_xoffset)&gt;1 
+    view_xoffset = sign(view_xoffset)
+    
+    //calculate y offset percentages (percent of view_width away from middle of screen)    
+    view_yoffset = -1*(view_yview+floor(view_hview/2)-cyoff)/(floor(view_hview/2))
+    
+    //constrain maximum y offset to 1
+    if abs(view_yoffset)&gt;1 
+    view_yoffset = sign(view_yoffset)
+    
+    // add up to 1/3 of the view's height/width depending on offset percentages
+    if instance_exists(local_player)
+    {
+        xtest = floor(local_player.x+16-floor(view_wview/2)+floor(view_xoffset*view_wview*1/3*view_scaler))
+        ytest = floor(local_player.y+16-floor(view_hview/2)+floor(view_yoffset*view_hview*1/3*view_scaler))
+    }
+    else
+    {
+        xtest = view_xview
+        ytest = view_yview
+    }
+    
+    if not global.using_gamepad or not objVarRead(local_player,"alive") or net_manager.match_countdown or net_manager.starting_match or abs(xtest-view_xview) &gt; 3 or (gamepad_axis_check(global.devno,gp_axisrh) or gamepad_axis_check(global.devno,gp_axisrv))
+        view_xview=xtest
+    if not global.using_gamepad or not objVarRead(local_player,"alive") or net_manager.match_countdown or net_manager.starting_match or abs(ytest-view_yview) &gt; 3 or (gamepad_axis_check(global.devno,gp_axisrh) or gamepad_axis_check(global.devno,gp_axisrv))
+        view_yview=ytest
+    
+     // make sure the adjusted view doesn't go outside the room
+    if view_xview &lt; 0 
+    view_xview = 0
+    
+    if view_xview &gt; (room_width-view_wview)
+    view_xview = room_width-view_wview
+    
+    if view_yview&lt;0 
+    view_yview = 0
+    
+    if view_yview &gt; (room_height-view_hview)
+    view_yview = room_height-view_hview
+    
+    spawn_controls()
+}
+else
+{
+    with modal_controls fade_out = true
+    show_scores = false
+}
+
+
+
 full_screen = false
 window_set_fullscreen(full_screen)
 </string>

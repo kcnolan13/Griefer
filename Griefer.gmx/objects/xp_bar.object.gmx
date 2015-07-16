@@ -576,6 +576,17 @@ draw_circle(xmark2,ymark2,5,false)
 */
 draw_set_alpha(alpha)
 
+if instance_exists(modal_controls)
+{
+    if modal_controls.mode_index = 0 and modal_controls.life &gt; 10
+    {
+        scale = 1
+        alpha_override = true
+        alpha = 1
+        draw_xpbar(modal_controls.left+modal_controls.width/2,modal_controls.top+modal_controls.height,fraction_full,scale,fa_center,fa_bottom,c_black,false)
+    }
+}
+
 //if in_match() and alpha &gt; 0
 if room = rm_menu and net_manager.menu_mode = "play"
 {

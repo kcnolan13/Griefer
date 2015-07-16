@@ -3,7 +3,7 @@
   <spriteName>spr_1pixel</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-99</depth>
   <persistent>0</persistent>
   <parentName>modal_button</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -28,6 +28,7 @@
             <string>///inherit and define properties
 event_inherited()
 text = ""
+text_halign = fa_left
 alpha_max = 0.75
 halign = fa_center
 valign = fa_center
@@ -36,11 +37,24 @@ life = 0
 width = view_wview*2/3+64
 height = view_hview*2/3
 extra_height = 50
+
+if in_match()
+{
+    view_wview = 1365
+    view_hview = 9/16*1365
+}   
+
 x = view_xview+view_wview/2
 y = view_yview+view_hview/2+36
 
+behave_match = in_match()
+
 y_adder = 22
-x_adder = 64*1.5
+
+if not behave_match
+    x_adder = 64*1.5
+else
+    x_adder = 0
 
 y += y_adder
 x += x_adder
@@ -62,16 +76,28 @@ val = 20
 alpha_max = 0.75
 notif_scale = 1.25
 
-header_height = 64
-header_font = fnt_hud_big
+header_height = 72
+header_xoff = 24
+header_yoff = -14
+header_font = fnt_pstats_title
 header_color = c_black
 header_orig = "Control Settings: "
 
 gamepad_yes = "Gamepad Detected"
 gamepad_no = "[No Gamepad Detected]"
 
-header_text = "Control Settings"
 header_text_color = c_white
+
+header_texts[0] = "Match Settings"
+header_texts[1] = "General Options"
+header_texts[2] = ""
+modes[0] = "Match Settings"
+modes[1] = "General Options"
+modes[2] = "Controls"
+
+header_text = header_texts[1]
+mode_index = 1
+mode = modes[mode_index]
 </string>
           </argument>
         </arguments>
@@ -94,7 +120,8 @@ header_text_color = c_white
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///adjust for aligns
+            <string>///create all the control edit fields and labels
+
 if halign = fa_center
     x -= width/2
 if valign = fa_center
@@ -102,28 +129,85 @@ if valign = fa_center
 
 y_adder -= height/2
 x_adder -= width/2
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///create all the control edit fields and labels
-regen_cedits(FL_NORMAL)
+
+//create the big tabs
+var bdelay = 1
+var binc = 2
+
+if behave_match
+{
+    draw_fade = true
+    fade_alpha = 0.6
+    fade_color = c_black
+    w = 72*4
+    hspacer = w+36
+    xoff = 40+x_adder
+}
+else
+    {
+    w = 72*4.5
+    hspacer = w*2/3
+    xoff = 68+x_adder
+}
+
+h = 72
+yoff = top-(h+12)+72
+//64*4
+
+//GET/MATCH SETTINGS
+var obj = bn_match_settings
+if not behave_match
+    obj = bn_gen_settings
+blah = instance_create(left+width*4/5-hspacer+xoff,yoff,obj)
+blah.width = w
+blah.height = h
+blah.depth = depth-1
+blah.birth_delay = bdelay
+blah.hue = 20
+blah.sat = 0
+blah.val = 30
+blah.color = make_colour_hsv(blah.hue,blah.sat,blah.val)
+blah.active_color = make_colour_hsv(blah.hue,blah.sat*3,blah.val*1.25)
+blah.text_halign = fa_left
+blah.text_xoff = 72+5
+blah.image = icon_settings
+bdelay += binc
+
+//POSSIBLY GEN SETTINGS IN MIDDLE
+if behave_match
+{
+    blah = instance_create(left+width*4/5+xoff,yoff,bn_gen_settings)
+    blah.width = w
+    blah.height = h
+    blah.depth = depth-1
+    blah.birth_delay = bdelay
+    blah.hue = 20
+    blah.sat = 0
+    blah.val = 30
+    blah.color = make_colour_hsv(blah.hue,blah.sat,blah.val)
+    blah.active_color = make_colour_hsv(blah.hue,blah.sat*3,blah.val*1.25)
+    blah.text_halign = fa_left
+    blah.text_xoff = 72+5
+    blah.image = icon_settings
+    bdelay += binc
+}
+
+//CONTROL SETTINGS
+blah = instance_create(left+width*4/5+hspacer+xoff,yoff,bn_control_settings)
+blah.width = w
+blah.height = h
+blah.depth = depth-1
+blah.birth_delay = bdelay
+blah.hue = 20
+blah.sat = 0
+blah.val = 30
+blah.color = make_colour_hsv(blah.hue,blah.sat,blah.val)
+blah.active_color = make_colour_hsv(blah.hue,blah.sat*3,blah.val*1.25)
+blah.text_halign = fa_left
+blah.text_xoff = 72+5
+blah.image = icon_settings
+bdelay += binc
+
 </string>
           </argument>
         </arguments>
@@ -153,7 +237,10 @@ event_inherited()
 
 life++
 
-if fade_out or (not in_match() and menmode() != "settings")
+header_text = header_texts[mode_index]
+mode = modes[mode_index]
+
+if fade_out or (not behave_match and menmode() != "settings")
 {
     fade_out = true
     with bn_cedit fade_out = true
@@ -161,10 +248,26 @@ if fade_out or (not in_match() and menmode() != "settings")
     with bn_restore_defaults fade_out = true
     with bn_use_keyboard fade_out = true
     with bn_use_gamepad fade_out = true
+    with bn_match_settings fade_out = true
+    with bn_match_quit fade_out = true
+    with bn_gen_settings fade_out = true
+    with bn_control_settings fade_out = true
 }
-else if life &gt; room_speed*2 and not instance_exists(bn_cedit)
-{
-    regen_cedits(FL_CEDITS)
+else if life &gt; 20
+{ 
+    //not fading out
+    if not instance_exists(bn_cedit) and mode_index = 2
+    {
+        regen_cedits(FL_CEDITS)
+    }
+    else if not instance_exists(bn_cedit) and mode_index = 1
+    {
+        regen_cedits(FL_GEN_SETTINGS)
+    }
+    else if not instance_exists(bn_match_quit) and mode_index = 0
+    {
+        regen_cedits(FL_MATCH_SETTINGS)
+    }
 }
 </string>
           </argument>
@@ -214,6 +317,32 @@ if clicked exit
 
 printf("clicked: "+label)
 audio_play_sound(snd_click,2,false)
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///mostly inherited
+
+text_halign = fa_left
+event_inherited()
 </string>
           </argument>
         </arguments>

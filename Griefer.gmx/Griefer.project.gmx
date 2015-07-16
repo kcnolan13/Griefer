@@ -1476,7 +1476,64 @@
       <object>objects\col_generic</object>
       <object>objects\ambient_generic</object>
       <object>objects\kLight</object>
+    </objects>
+    <objects name="GUI">
       <object>objects\modal_window</object>
+      <object>objects\modal_button</object>
+      <objects name="main_menu">
+        <object>objects\bn_play</object>
+        <object>objects\bn_tab</object>
+        <object>objects\bn_play_tab</object>
+        <object>objects\bn_armory</object>
+        <object>objects\bn_challenges</object>
+        <object>objects\bn_leaderboards</object>
+        <object>objects\bn_stats</object>
+        <object>objects\bn_friends</object>
+        <object>objects\bn_settings</object>
+        <object>objects\bn_logout</object>
+        <object>objects\bn_randomize</object>
+        <object>objects\bn_postmatch</object>
+        <object>objects\bn_postmatch_done</object>
+        <object>objects\bn_start_matchmaking</object>
+        <object>objects\bn_play_modal</object>
+        <object>objects\tab_bg_modal</object>
+      </objects>
+      <objects name="lobbies">
+        <object>objects\bn_leave_matchmaking</object>
+      </objects>
+      <objects name="login">
+        <object>objects\bn_login_user</object>
+        <object>objects\bn_create_new</object>
+        <object>objects\randomize_name</object>
+      </objects>
+      <objects name="autoplay">
+        <object>objects\autoplay_d</object>
+        <object>objects\autoplay_a</object>
+        <object>objects\autoplay_b</object>
+        <object>objects\autoplay_c</object>
+      </objects>
+      <objects name="controls">
+        <object>objects\modal_controls</object>
+        <object>objects\bn_restore_defaults</object>
+        <object>objects\bn_use_keyboard</object>
+        <object>objects\bn_use_gamepad</object>
+        <object>objects\bn_gen_settings</object>
+        <object>objects\bn_match_settings</object>
+        <object>objects\bn_control_settings</object>
+        <object>objects\bn_match_quit</object>
+        <object>objects\bn_cedit</object>
+        <object>objects\bn_clabel</object>
+      </objects>
+      <objects name="stats">
+        <object>objects\bn_tbottom</object>
+        <object>objects\bn_stat_tab</object>
+        <object>objects\bn_slabel</object>
+        <object>objects\modal_stat_history</object>
+        <object>objects\modal_meter</object>
+        <object>objects\modal_table</object>
+      </objects>
+      <object>objects\toggle_button_generic</object>
+      <object>objects\button_generic</object>
     </objects>
     <objects name="weapons">
       <object>objects\weapon_placeholder1</object>
@@ -1679,59 +1736,6 @@
       <object>objects\cursor_shotgun</object>
       <object>objects\cursor_placeholder2</object>
     </objects>
-    <objects name="GUI">
-      <object>objects\modal_button</object>
-      <objects name="main_menu">
-        <object>objects\bn_play</object>
-        <object>objects\bn_tab</object>
-        <object>objects\bn_play_tab</object>
-        <object>objects\bn_armory</object>
-        <object>objects\bn_challenges</object>
-        <object>objects\bn_leaderboards</object>
-        <object>objects\bn_stats</object>
-        <object>objects\bn_friends</object>
-        <object>objects\bn_settings</object>
-        <object>objects\bn_logout</object>
-        <object>objects\bn_randomize</object>
-        <object>objects\bn_postmatch</object>
-        <object>objects\bn_postmatch_done</object>
-        <object>objects\bn_start_matchmaking</object>
-        <object>objects\bn_play_modal</object>
-        <object>objects\tab_bg_modal</object>
-      </objects>
-      <objects name="lobbies">
-        <object>objects\bn_leave_matchmaking</object>
-      </objects>
-      <objects name="login">
-        <object>objects\bn_login_user</object>
-        <object>objects\bn_create_new</object>
-        <object>objects\randomize_name</object>
-      </objects>
-      <objects name="autoplay">
-        <object>objects\autoplay_d</object>
-        <object>objects\autoplay_a</object>
-        <object>objects\autoplay_b</object>
-        <object>objects\autoplay_c</object>
-      </objects>
-      <objects name="controls">
-        <object>objects\modal_controls</object>
-        <object>objects\bn_restore_defaults</object>
-        <object>objects\bn_use_keyboard</object>
-        <object>objects\bn_use_gamepad</object>
-        <object>objects\bn_cedit</object>
-        <object>objects\bn_clabel</object>
-      </objects>
-      <objects name="stats">
-        <object>objects\bn_tbottom</object>
-        <object>objects\bn_stat_tab</object>
-        <object>objects\bn_slabel</object>
-        <object>objects\modal_stat_history</object>
-        <object>objects\modal_meter</object>
-        <object>objects\modal_table</object>
-      </objects>
-      <object>objects\toggle_button_generic</object>
-      <object>objects\button_generic</object>
-    </objects>
     <objects name="Glare">
       <object>objects\obj_light_mouse</object>
       <object>objects\obj_light_static</object>
@@ -1789,7 +1793,7 @@
       <room>rooms\map_placeholder2</room>
     </rooms>
   </rooms>
-  <constants number="132">
+  <constants number="134">
     <constant name="FORCE_REDONK">22</constant>
     <constant name="FORCE_MAJOR">14</constant>
     <constant name="FORCE_MINOR">6</constant>
@@ -1912,6 +1916,8 @@
     <constant name="FL_GAMEPAD">20</constant>
     <constant name="FL_CEDITS">21</constant>
     <constant name="FL_COMPETITIVE">22</constant>
+    <constant name="FL_MATCH_SETTINGS">23</constant>
+    <constant name="FL_GEN_SETTINGS">24</constant>
     <constant name="DIST_INTERACT">128</constant>
     <constant name="PLAYER_SCALE">1.25</constant>
     <constant name="BOUNCE_MINSPEED">8</constant>

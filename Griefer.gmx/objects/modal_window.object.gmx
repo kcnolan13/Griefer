@@ -40,6 +40,13 @@ active_color = c_gray
 highlightable = true
 surface = NO_HANDLE
 
+draw_fade = false
+fade_color = c_black
+fade_alpha = 0.65
+
+header_xoff = 0
+header_yoff = 0
+
 hover_delay = 10
 hover_counter = 0
 show_popup = false
@@ -355,6 +362,13 @@ else
 if birth_delay &gt; 0
     exit
 
+if draw_fade
+{
+    draw_set_alpha(fade_alpha)
+    draw_set_color(fade_color)
+    draw_rectangle(view_xview,view_yview,view_xview+view_wview,view_yview+view_hview,false)
+}    
+
 draw_set_alpha(alpha)
 
 left = x
@@ -428,8 +442,8 @@ if not surface_exists(surface)
         draw_set_halign(fa_center)
         draw_set_valign(fa_middle)
         
-        var xpos = left+width*scale/2
-        var ypos = top+height*scale/2
+        xpos = left+width*scale/2
+        ypos = top+height*scale/2
         
         if text_halign = fa_right
         {
@@ -464,9 +478,9 @@ if not surface_exists(surface)
         {
             draw_set_font(header_font)
             draw_set_color(header_text_color)
-            draw_set_halign(fa_center)
+            draw_set_halign(text_halign)
             draw_set_valign(fa_center)
-            draw_text_ext_transformed(left+width*scale/2,top+header_height*scale/2,header_text,10,width*scale,scale,scale,0)
+            draw_text_ext_transformed(xpos+header_xoff,top+header_yoff+header_height*scale/2,header_text,10,width*scale,scale,scale,0)
         }
         
         draw_set_alpha(alpha)
