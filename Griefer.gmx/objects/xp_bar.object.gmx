@@ -583,7 +583,7 @@ if instance_exists(modal_controls)
         scale = 1
         alpha_override = true
         alpha = 1
-        draw_xpbar(modal_controls.left+modal_controls.width/2,modal_controls.top+modal_controls.height,fraction_full,scale,fa_center,fa_bottom,c_black,false)
+        draw_xpbar(modal_controls.left+modal_controls.width/2,modal_controls.top+modal_controls.height,fraction_full,scale,fa_center,fa_bottom,c_white,false)
     }
 }
 
@@ -633,7 +633,7 @@ else
         alpha_override = false
 }
 
-if in_match() and alpha &gt; 0 and rtime() &gt; room_speed
+if in_match() and alpha &gt; 0 and rtime() &gt; room_speed and not instance_exists(modal_controls)
 {
     draw_xpbar(view_xview+view_wview-XPBAR_RIGHT,view_yview+view_hview-XPBAR_BOTTOM,fraction_full,scale,fa_right,fa_bottom,c_white,false)
 }

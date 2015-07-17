@@ -364,7 +364,7 @@ if birth_delay &gt; 0
 
 if draw_fade
 {
-    draw_set_alpha(fade_alpha)
+    draw_set_alpha(fade_alpha*alpha)
     draw_set_color(fade_color)
     draw_rectangle(view_xview,view_yview,view_xview+view_wview,view_yview+view_hview,false)
 }    
@@ -424,7 +424,7 @@ if not surface_exists(surface)
     if header_height &gt; 0
     {
         draw_set_color(header_color)
-        draw_rectangle(left,top+header_height*scale,left+width*scale,top+(height+extra_height)*scale,false)
+        draw_rectangle(left,top+header_height*scale,left+width*scale,top,false)
     }
     
     if image != spr_none

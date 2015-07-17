@@ -870,7 +870,7 @@ if room_counter &lt; room_speed*15 and nth_frame(10) and instance_exists(local_p
 }
 
 //view zooming
-if starting_match
+if starting_match and not instance_exists(modal_controls)
 {
     view_lerp = 0.06
     view_xtarget = room_width/2
@@ -2257,7 +2257,7 @@ random_set_seed(random(1000000))
           <argument>
             <kind>1</kind>
             <string>///HUD
-if (starting_match)
+if (starting_match) and not instance_exists(modal_controls)
 {
     draw_set_font(fnt_splashscreen)
     draw_set_color(c_white)
@@ -2284,35 +2284,38 @@ if bot_override
 
 if instance_exists(local_player)
 {
-    with local_player
+    if not instance_exists(modal_controls)
     {
-        if respawn_counter and not net_manager.starting_match and not hide_spawn_text
-            with other.id
-            {
-                draw_set_font(fnt_splashscreen)
-                draw_set_color(c_white)
-                draw_set_halign(fa_center)
-                draw_set_valign(fa_center)
-                if local_player.spawn_fail_message = ""
-                    draw_text(view_xview+view_wview/2,view_yview+view_hview/2,"Respawning . . . "+string(ceil(local_player.respawn_counter/room_speed)))
-                else
-                    draw_text(view_xview+view_wview/2,view_yview+view_hview/2,local_player.spawn_fail_message+" "+string(ceil(local_player.respawn_counter/room_speed)))
-            }
-    }
+        with local_player
+        {
+            if respawn_counter and not net_manager.starting_match and not hide_spawn_text
+                with other.id
+                {
+                    draw_set_font(fnt_splashscreen)
+                    draw_set_color(c_white)
+                    draw_set_halign(fa_center)
+                    draw_set_valign(fa_center)
+                    if local_player.spawn_fail_message = ""
+                        draw_text(view_xview+view_wview/2,view_yview+view_hview/2,"Respawning . . . "+string(ceil(local_player.respawn_counter/room_speed)))
+                    else
+                        draw_text(view_xview+view_wview/2,view_yview+view_hview/2,local_player.spawn_fail_message+" "+string(ceil(local_player.respawn_counter/room_speed)))
+                }
+        }
 
-    if instance_exists(local_player.weapon_contemplating)
-    {
-        printf("local_player = "+string(local_player))
-        printf("local_player.weapon_contemplating = "+string(local_player.weapon_contemplating))
-        //printf(room_counter+" --&gt; drawing weapon_contemplating")
-        draw_weapon_slot(local_player.weapon_contemplating,view_xview+view_wview-sprite_get_width(spr_weapon_slot)/2-border,view_yview+8+1.75*(sprite_get_height(spr_weapon_slot)+border+8),1,1,FL_NORMAL)
-        draw_set_color(c_white)
-        draw_set_font(fnt_hud)
-        draw_set_alpha(1)
-        draw_set_halign(fa_right)
-        draw_set_valign(fa_center)
-        draw_text(view_xview+view_wview-sprite_get_width(spr_weapon_slot)-border-8,view_yview+sprite_get_height(spr_weapon_slot)*1.75+border*2.25+2+8,"["+get_input_name(mapped_control(C_PICKUP))+"]")
-    } //else printf("ERROR: no weapon_contemplating")
+        if instance_exists(local_player.weapon_contemplating)
+        {
+            printf("local_player = "+string(local_player))
+            printf("local_player.weapon_contemplating = "+string(local_player.weapon_contemplating))
+            //printf(room_counter+" --&gt; drawing weapon_contemplating")
+            draw_weapon_slot(local_player.weapon_contemplating,view_xview+view_wview-sprite_get_width(spr_weapon_slot)/2-border,view_yview+8+1.75*(sprite_get_height(spr_weapon_slot)+border+8),1,1,FL_NORMAL)
+            draw_set_color(c_white)
+            draw_set_font(fnt_hud)
+            draw_set_alpha(1)
+            draw_set_halign(fa_right)
+            draw_set_valign(fa_center)
+            draw_text(view_xview+view_wview-sprite_get_width(spr_weapon_slot)-border-8,view_yview+sprite_get_height(spr_weapon_slot)*1.75+border*2.25+2+8,"["+get_input_name(mapped_control(C_PICKUP))+"]")
+        } //else printf("ERROR: no weapon_contemplating")
+    }
     
     if local_player.weapon_wheel_alpha &gt; 0
     {
@@ -2378,12 +2381,25 @@ if varRead("end_match_coming") and win_countdown &lt; -90
 if ((show_scores &gt; 0) and not varRead("end_match_coming") or (room_counter &gt; room_speed*2 and room_counter &lt; room_speed*7)) and (in_match() and room_counter &gt; room_speed*3)//or room=rm_match_end
 {
     var sy = view_yview+view_hview/2 - global.row_height*(instance_number(avatar)/2+2)
-    
+    var do_draw = true
+    var dalph = 1
     if instance_exists(modal_controls)
+    {
         sy += 72
+        dalph = 0.7
+        if modal_controls.mode_index != 0 or modal_controls.fade_out
+        {
+            do_draw = false
+            show_scores = 0
+        }
+    }
         
-    if not disable_scores
+    if not disable_scores and do_draw
+    {
+        draw_set_alpha(dalph)
         draw_score_table(view_xview+view_wview/2 - global.table_width/2, sy)
+        draw_set_alpha(1)
+    }
     //draw_scores(view_xview+64,view_yview+16)
 }
 
@@ -3596,7 +3612,7 @@ ID.behave_match = true
             <string>///show in-match settings
 
 //if in_match()
-if not instance_exists(modal_controls)
+if not instance_exists(modal_controls) and in_match() and not match_ending()
 {
     view_wview = 1365
     view_hview = 9/16*1365
@@ -3658,10 +3674,10 @@ else
     show_scores = false
 }
 
-
-
+/*
 full_screen = false
 window_set_fullscreen(full_screen)
+*/
 </string>
           </argument>
         </arguments>

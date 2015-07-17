@@ -25,6 +25,8 @@ else
     hspacer = w+36
     yoff = top+62
     xoff = 40+x_adder//64*4
+    if behave_match
+        xoff = -150
     
     //make local copy of global control names (for no reason)
     if fl = FL_GEN_SETTINGS
@@ -41,18 +43,19 @@ else
     {
         hspacer = w*2
         //create dat one button and trigger draw scores + table and whatnot
-        blah = instance_create(left+width*4/5+256+xoff,yoff,bn_match_quit)
+        blah = instance_create(left+width*4/5+296+xoff,yoff,bn_match_quit)
         blah.width = w-32
         blah.height = h
         blah.depth = depth-1
         blah.birth_delay = 1
-        blah.hue = 20
-        blah.sat = 0
-        blah.val = 30
-        blah.color = make_colour_hsv(blah.hue,blah.sat,blah.val)
-        blah.active_color = make_colour_hsv(blah.hue,blah.sat*3,blah.val*1.25)
+        blah.hue = 218
+        blah.sat = 100
+        blah.val = 100
+        blah.color = web_hsv(chue,csat,cval)
+        blah.active_color = web_hsv(chue*chue_mult,csat*csat_mult,cval*cval_mult)
         blah.text_halign = fa_left
         blah.text_xoff = 72+5
+        blah.text_color = text_color
         blah.image = icon_settings
         return true
     }
@@ -76,10 +79,11 @@ else
         blah.hue = 20
         blah.sat = 0
         blah.val = 30
-        blah.color = make_colour_hsv(blah.hue,blah.sat,blah.val)
-        blah.active_color = make_colour_hsv(blah.hue,blah.sat*3,blah.val*1.25)
+        blah.color = web_hsv(chue,csat,cval)
+        blah.active_color = web_hsv(chue*chue_mult,csat*csat_mult,cval*cval_mult)
         blah.text_halign = fa_left
         blah.text_xoff = 72+5
+        blah.text_color = text_color
         blah.image = icon_settings
         bdelay += binc
         
@@ -92,10 +96,11 @@ else
         blah.hue = 20
         blah.sat = 0
         blah.val = 30
-        blah.color = make_colour_hsv(blah.hue,blah.sat,blah.val)
-        blah.active_color = make_colour_hsv(blah.hue,blah.sat*3,blah.val*1.25)
+        blah.color = web_hsv(chue,csat,cval)
+        blah.active_color = web_hsv(chue*chue_mult,csat*csat_mult,cval*cval_mult)
         blah.text_halign = fa_left
         blah.text_xoff = 72+5
+        blah.text_color = text_color
         blah.image = icon_settings
         bdelay += binc
         
@@ -108,10 +113,11 @@ else
         blah.hue = 20
         blah.sat = 0
         blah.val = 30
-        blah.color = make_colour_hsv(blah.hue,blah.sat,blah.val)
-        blah.active_color = make_colour_hsv(blah.hue,blah.sat*3,blah.val*1.25)
+        blah.color = web_hsv(chue,csat,cval)
+        blah.active_color = web_hsv(chue*chue_mult,csat*csat_mult,cval*cval_mult)
         blah.text_halign = fa_left
         blah.text_xoff = 72+5
+        blah.text_color = text_color
         blah.image = icon_settings
         
         bdelay += binc
@@ -123,6 +129,9 @@ else
     var eheight = lheight
     
     var xst = left+width/4+lwidth+x_adder
+    if behave_match
+        xst += 64*1.5
+        
     var yst_original = top+header_height+64*3+lheight+y_adder
     var yst = yst_original
     var hspacer = 64
@@ -146,6 +155,7 @@ else
         ID.depth = depth-1
         ID.text_halign = fa_right
         ID.text_valign = fa_center
+        ID.text_color = text_color
         
         //create the edit field
         ID2 = instance_create(xst+lwidth/2+hspacer,yst,bn_cedit)
@@ -158,6 +168,8 @@ else
         ID2.using_gamepad = global.using_gamepad
         ID2.myLabel = ID
         ID.myCedit = ID2
+        ID2.color = web_hsv(chue,csat,cval)
+        ID2.text_color = text_color
         
         if fl != FL_GEN_SETTINGS and fl != FL_MATCH_SETTINGS
         {

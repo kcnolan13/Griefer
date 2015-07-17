@@ -1438,6 +1438,7 @@
     <font>fonts\fnt_play</font>
     <font>fonts\fnt_cout</font>
     <font>fonts\fnt_pstats</font>
+    <font>fonts\fnt_menu</font>
     <font>fonts\fnt_pstats_title</font>
   </fonts>
   <objects name="objects">

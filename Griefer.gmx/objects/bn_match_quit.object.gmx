@@ -109,6 +109,7 @@ life++
 alpha_max = 1
 highlightable = true
 active = true
+
 </string>
           </argument>
         </arguments>
