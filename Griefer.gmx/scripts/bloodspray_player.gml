@@ -5,6 +5,10 @@ var mag = argument2
 var dir = argument3
 var col = argument4
 
+if not truthval(global.gc[GC_VIOLENT_CONTENT,1])
+{
+    return noone
+}
 
 if mag > 1
     mag = 1

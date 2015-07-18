@@ -770,7 +770,9 @@
       </scripts>
     </scripts>
     <scripts name="control mapping">
+      <script>scripts\gc_ind.gml</script>
       <script>scripts\regen_cedits.gml</script>
+      <script>scripts\save_setting.gml</script>
       <script>scripts\refresh_control_scheme.gml</script>
       <script>scripts\spawn_controls.gml</script>
       <script>scripts\framely_player_controls.gml</script>
@@ -1399,6 +1401,8 @@
       <script>scripts\capwords_super.gml</script>
       <script>scripts\rect_highlighted.gml</script>
       <script>scripts\modal_aligns.gml</script>
+      <script>scripts\truthval.gml</script>
+      <script>scripts\toggle_truthval.gml</script>
     </scripts>
     <scripts name="kyle's lighting engine">
       <script>scripts\kyle_light_create.gml</script>
@@ -1794,7 +1798,11 @@
       <room>rooms\map_placeholder2</room>
     </rooms>
   </rooms>
-  <constants number="134">
+  <constants number="138">
+    <constant name="GC_AA_LEVEL">3</constant>
+    <constant name="GC_CONTROL_HINTS">2</constant>
+    <constant name="GC_SHOW_XP">1</constant>
+    <constant name="GC_VIOLENT_CONTENT">0</constant>
     <constant name="FORCE_REDONK">22</constant>
     <constant name="FORCE_MAJOR">14</constant>
     <constant name="FORCE_MINOR">6</constant>

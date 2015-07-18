@@ -41,6 +41,7 @@ GMEXPORT const double sendGenMessageReal(char *message_string, double value);
 GMEXPORT const double sendBigMessageStr(char *message_string, char *value1, char *value2, char *value3);
 GMEXPORT const double sendBigMessageReal(char *message_string, double value1, double value2, double value3);
 GMEXPORT const double sendBigMessageStrReal(char *message_string, char  *value1, double value2, double value3);
+GMEXPORT const double sendBigMessageStrReal2(char *message_string, char  *value1, char *value2, double value3);
 
 GMEXPORT const double startMatchMaking(char * gameMode);
 GMEXPORT const double leaveMatchMaking();

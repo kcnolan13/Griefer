@@ -119,6 +119,11 @@ if not created_rag and varRead("can_die")
         rag_force = real(varRead("hit_force"))
     }
     
+    if not truthval(global.gc[GC_VIOLENT_CONTENT,1])
+    {
+        rag_frac_prob = 0
+        rag_exclusions[RAG_HEAD] = false
+    }
     rag_create_doll(rag_frac_prob,rag_force,rag_fdir)
 }
 

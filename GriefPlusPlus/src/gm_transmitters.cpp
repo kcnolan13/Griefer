@@ -160,6 +160,14 @@ GMEXPORT const double sendBigMessageStrReal(char *message_string, char  *value1,
 	_lock.unlock();
 	return 0;
 }
+GMEXPORT const double sendBigMessageStrReal2(char *message_string, char  *value1, char *value2, double value3)
+{
+	_lock.lock();
+	string msgJSON = bigMessageJSON(message_string, value1, value2, value3);
+	pkgOrSend("big_message", msgJSON);
+	_lock.unlock();
+	return 0;
+}
 
 GMEXPORT const double startMatchMaking(char * gameMode)
 {

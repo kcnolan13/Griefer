@@ -39,6 +39,7 @@ myLabel = noone
 xs = 0
 xf = 0
 sens_divs = 20
+exclude_zero = true
 
 sens_col = make_colour_hsv(255*2/3,0,210)
 sens_bg = make_colour_hsv(0,0,20)
@@ -126,6 +127,12 @@ if is_sens
           <argument>
             <kind>1</kind>
             <string>///capture input
+if not instance_exists(modal_controls)
+{
+    instance_destroy()
+    exit
+}
+
 if not modal_highlighted(id) and was_highlighted
 {
     was_highlighted--
@@ -169,69 +176,86 @@ else
     xs = drew_left+sp
     xf = drew_right-sp
     
-    if instance_exists(myLabel) 
+    if instance_exists(modal_controls) and modal_controls.mode_index = 2
     {
-        if not global.using_gamepad
+        if instance_exists(myLabel) 
         {
-            visible = false
-            myLabel.visible = false
-        } else
-        {
-            visible = true
-            myLabel.visible = true
+            if not global.using_gamepad
+            {
+                visible = false
+                myLabel.visible = false
+            } else
+            {
+                visible = true
+                myLabel.visible = true
+            }
+            
         }
         
-    }
-    
-    if string(label_name) = global.cactions[C_LOOK_SENS]
-    {
-        if global.using_gamepad
+        if string(label_name) = global.cactions[C_LOOK_SENS]
         {
-            sens_low = global.match_cursor_speed_low
-            sens_high = global.match_cursor_speed_high
+            if global.using_gamepad
+            {
+                sens_low = global.match_cursor_speed_low
+                sens_high = global.match_cursor_speed_high
+            }
+            else
+            {
+                sens_low = global.nogp_match_cursor_speed_low
+                sens_high = global.nogp_match_cursor_speed_high
+            }
         }
         else
         {
-            sens_low = global.nogp_match_cursor_speed_low
-            sens_high = global.nogp_match_cursor_speed_high
+            if global.using_gamepad
+            {
+                sens_low = global.cursor_speed_low
+                sens_high = global.cursor_speed_high
+            }
+            else
+            {
+                sens_low = global.nogp_cursor_speed_low
+                sens_high = global.nogp_cursor_speed_high
+            }
         }
-    }
-    else
-    {
-        if global.using_gamepad
-        {
-            sens_low = global.cursor_speed_low
-            sens_high = global.cursor_speed_high
-        }
-        else
-        {
-            sens_low = global.nogp_cursor_speed_low
-            sens_high = global.nogp_cursor_speed_high
-        }
-    }
-    
-    //is a sensitivity input
-    if sens_update
-    {
-        sens_update --   
         
-        if not sens_update
+        if recompute_sens_percent
         {
-            //update the control values for this field
-            map_control(label_name,sens_val)
-        }
+            sens_percent = (sens_val-sens_low)/(sens_high - sens_low)
+        }   
+        
     }
     
-    if recompute_sens_percent
+    if instance_exists(modal_controls)
     {
-        sens_percent = (sens_val-sens_low)/(sens_high - sens_low)
-    }   
+        //is a sensitivity input
+        if sens_update
+        {
+            sens_update --   
+            
+            if not sens_update
+            {
+                //update the control values for this field
+                if modal_controls.mode_index = 2
+                    map_control(label_name,sens_val)
+                else
+                {
+                    var ind = gc_ind(myLabel.text)
+                    if ind &gt; -1
+                        save_setting(ind)
+                    else
+                    {
+                        printf("ERROR: unable to save setting: "+string(myLabel.text)+" has ind: "+string(ind))
+                    }
+                }
+            }
+        }
+    }
     
     if sens_val &gt; sens_high
         sens_val = sens_high
     if sens_val &lt; sens_low
         sens_val = sens_low
-    
 }
 
 if instance_exists(myLabel) and myLabel.text = global.cactions[C_SWAP_STICKS]
@@ -285,7 +309,7 @@ event_inherited()
 label = text
 life++
 
-if life &gt; 1
+if life &gt; 1 and not is_onoff and not is_yesno
 {
     if not capturing
         text = text_normal
@@ -346,18 +370,20 @@ if not is_onoff and not is_yesno
 }
 else
 {
-    if string_upper(text) = "YES"
-        text = "No"
-    else if string_upper(text) = "NO"
-        text = "Yes"
-    else if string_upper(text) = "ON"
-        text = "OFF"
-    else if string_upper(text) = "OFF"
-        text = "ON"
-        
+    text = toggle_truthval(text)
+
     //ADJUST THE REAL SETTING VARIABLES BASED ON MYLABEL TEXT
-    
-        
+    var ind = gc_ind(myLabel.text)
+    if ind &gt; -1
+    {
+        global.gc[ind,1] = toggle_truthval(global.gc[ind,1])
+        //send to server
+        save_setting(ind)
+    }
+    else
+    {
+        printf("ERROR: could not toggle bn_cedit due to bad gc_ind")
+    }
 }
 </string>
           </argument>
@@ -387,9 +413,17 @@ if is_sens and modal_highlighted(id) or was_highlighted
 {
     was_highlighted = 2
     //var xf = (x + 2*width*scale/2)
-    sens_percent = ceil(sens_divs*(cursor.x-xs)/(xf-xs))
-        if sens_percent &lt; 1
-            sens_percent = 1
+    if exclude_zero
+        sens_percent = ceil(sens_divs*(cursor.x-xs)/(xf-xs))
+    else
+        sens_percent = floor((sens_divs+1)*(cursor.x-xs)/(xf-xs))
+    
+        var minmark = 1
+        if not exclude_zero
+            minmark = 0
+        if sens_percent &lt; minmark
+            sens_percent = minmark
+            
         if sens_percent &gt; sens_divs
             sens_percent = sens_divs
     sens_percent = sens_percent/sens_divs
@@ -401,6 +435,29 @@ if is_sens and modal_highlighted(id) or was_highlighted
         sens_val = sens_high
     if sens_val &lt; sens_low
         sens_val = sens_low
+        
+    if myLabel.text = global.gc[GC_AA_LEVEL,0]
+    {
+        printf("::: setting swf aa level: "+string(sens_val))
+        var ind = gc_ind(myLabel.text)
+        if ind &gt; -1
+        {
+            if sens_val = 0
+            {
+                draw_enable_swf_aa(false)
+            }
+            else
+            {
+                draw_enable_swf_aa(true)
+                draw_set_swf_aa_level(sens_val)
+            }
+            global.gc[ind,1] = sens_val
+        }
+        else
+        {
+            printf("ERROR: could not update sensitivity setting "+string(myLabel.text)+" -- bad ind")
+        }
+    }
 }
 </string>
           </argument>
