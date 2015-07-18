@@ -5,13 +5,6 @@ if objVarRead(bot_maybe,"bot")
     if instance_exists(net_manager.local_player)
     {
         return true
-        //no longer relevant
-        /*
-        if objVarRead(net_manager.local_player,"uniqueId") = 0
-        {
-            return true
-        }
-        else return false*/
     }
     else
     {

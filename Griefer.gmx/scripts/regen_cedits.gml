@@ -10,24 +10,63 @@ if instance_exists(modal_controls) and object_index != modal_controls
 }
 else
 {
+    //clear arrays
+    labels = 0
+    cnames = 0
+    
     labels[0] = "blah"
     cnames[0] = "blah"
-    
-    //make local copy of global control names (for no reason)
-    for (var i=0; i<getLength(global.cactions); i++)
-    {
-        labels[i] = get_caction_name(i)
-        cnames[i] = get_input_name(global.cvals[i])
-    }
     
     var bdelay = 1
     var binc = 2
     
     w = 72*4
-    h = 72
+    h = 55
     hspacer = w+36
-    yoff = top-(h+12)+72
+    yoff = top+62
     xoff = 40+x_adder//64*4
+    if behave_match
+        xoff = -150
+    
+    //make local copy of global control names (for no reason)
+    if fl = FL_GEN_SETTINGS
+    {
+        //create general settings
+        labels[0] = "Violent Content"
+        cnames[0] = "On"
+        labels[1] = "Control Hints"
+        cnames[1] = "On"
+        labels[2] = "Show XP in Match"
+        cnames[2] = "On"
+    }
+    else if fl = FL_MATCH_SETTINGS
+    {
+        hspacer = w*2
+        //create dat one button and trigger draw scores + table and whatnot
+        blah = instance_create(left+width*4/5+296+xoff,yoff,bn_match_quit)
+        blah.width = w-32
+        blah.height = h
+        blah.depth = depth-1
+        blah.birth_delay = 1
+        blah.hue = 218
+        blah.sat = 100
+        blah.val = 100
+        blah.color = web_hsv(chue,csat,cval)
+        blah.active_color = web_hsv(chue*chue_mult,csat*csat_mult,cval*cval_mult)
+        blah.text_halign = fa_left
+        blah.text_xoff = 72+5
+        blah.text_color = text_color
+        blah.image = icon_settings
+        return true
+    }
+    else
+    {
+        for (var i=0; i<getLength(global.cactions); i++)
+        {
+            labels[i] = get_caction_name(i)
+            cnames[i] = get_input_name(global.cvals[i])
+        }
+    }
     
     //THE RESTORE DEFAULTS BUTTON
     if fl = FL_NORMAL
@@ -40,14 +79,12 @@ else
         blah.hue = 20
         blah.sat = 0
         blah.val = 30
-        
-        blah.color = make_colour_hsv(blah.hue,blah.sat,blah.val)
-        blah.active_color = make_colour_hsv(blah.hue,blah.sat*3,blah.val*1.25)
-        
+        blah.color = web_hsv(chue,csat,cval)
+        blah.active_color = web_hsv(chue*chue_mult,csat*csat_mult,cval*cval_mult)
         blah.text_halign = fa_left
         blah.text_xoff = 72+5
+        blah.text_color = text_color
         blah.image = icon_settings
-        
         bdelay += binc
         
         //USE KEYBOARD BUTTON
@@ -59,12 +96,12 @@ else
         blah.hue = 20
         blah.sat = 0
         blah.val = 30
-        blah.color = make_colour_hsv(blah.hue,blah.sat,blah.val)
-        blah.active_color = make_colour_hsv(blah.hue,blah.sat*3,blah.val*1.25)
+        blah.color = web_hsv(chue,csat,cval)
+        blah.active_color = web_hsv(chue*chue_mult,csat*csat_mult,cval*cval_mult)
         blah.text_halign = fa_left
         blah.text_xoff = 72+5
+        blah.text_color = text_color
         blah.image = icon_settings
-        
         bdelay += binc
         
         //USE GAMEPAD BUTTON
@@ -76,10 +113,11 @@ else
         blah.hue = 20
         blah.sat = 0
         blah.val = 30
-        blah.color = make_colour_hsv(blah.hue,blah.sat,blah.val)
-        blah.active_color = make_colour_hsv(blah.hue,blah.sat*3,blah.val*1.25)
+        blah.color = web_hsv(chue,csat,cval)
+        blah.active_color = web_hsv(chue*chue_mult,csat*csat_mult,cval*cval_mult)
         blah.text_halign = fa_left
         blah.text_xoff = 72+5
+        blah.text_color = text_color
         blah.image = icon_settings
         
         bdelay += binc
@@ -91,6 +129,9 @@ else
     var eheight = lheight
     
     var xst = left+width/4+lwidth+x_adder
+    if behave_match
+        xst += 64*1.5
+        
     var yst_original = top+header_height+64*3+lheight+y_adder
     var yst = yst_original
     var hspacer = 64
@@ -104,19 +145,17 @@ else
             break
             
         bdelay += binc
-        
-        //if fl = FL_NORMAL
-        {
-            //create the label
-            ID = instance_create(xst,yst-6,bn_clabel)
-            ID.width = lwidth
-            ID.height = lheight
-            ID.text = labels[i]
-            ID.birth_delay = bdelay
-            ID.depth = depth-1
-            ID.text_halign = fa_right
-            ID.text_valign = fa_center
-        }
+    
+        //create the label
+        ID = instance_create(xst,yst-6,bn_clabel)
+        ID.width = lwidth
+        ID.height = lheight
+        ID.text = labels[i]
+        ID.birth_delay = bdelay
+        ID.depth = depth-1
+        ID.text_halign = fa_right
+        ID.text_valign = fa_center
+        ID.text_color = text_color
         
         //create the edit field
         ID2 = instance_create(xst+lwidth/2+hspacer,yst,bn_cedit)
@@ -129,19 +168,24 @@ else
         ID2.using_gamepad = global.using_gamepad
         ID2.myLabel = ID
         ID.myCedit = ID2
+        ID2.color = web_hsv(chue,csat,cval)
+        ID2.text_color = text_color
         
-        if i = C_LOOK_SENS
+        if fl != FL_GEN_SETTINGS and fl != FL_MATCH_SETTINGS
         {
-            ID2.is_sens = true
-            ID2.sens_val = global.cvals[C_LOOK_SENS]
-            ID2.sens_low = global.match_cursor_speed_low
-            ID2.sens_high = global.match_cursor_speed_high
-        } else if i = C_MOUSE_SENS
-        {
-            ID2.is_sens = true
-            ID2.sens_val = global.cvals[C_MOUSE_SENS]
-            ID2.sens_low = global.cursor_speed_low
-            ID2.sens_high = global.cursor_speed_high
+            if i = C_LOOK_SENS
+            {
+                ID2.is_sens = true
+                ID2.sens_val = global.cvals[C_LOOK_SENS]
+                ID2.sens_low = global.match_cursor_speed_low
+                ID2.sens_high = global.match_cursor_speed_high
+            } else if i = C_MOUSE_SENS
+            {
+                ID2.is_sens = true
+                ID2.sens_val = global.cvals[C_MOUSE_SENS]
+                ID2.sens_low = global.cursor_speed_low
+                ID2.sens_high = global.cursor_speed_high
+            }
         }
         
         yst += (lheight+vspacer)

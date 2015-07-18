@@ -47,5 +47,7 @@ else
 printf("::: writing to grid @("+string(row)+","+string(col))
 
 //Success!! Add the stat to the table
+if string(stat) = "time"
+    val = time_ms_2string(val,true)
+    
 ds_grid_set(m.grid,col,row,val)
-

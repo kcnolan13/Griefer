@@ -42,9 +42,10 @@ else
 draw_set_color(color)
 
 var traj_bounces = 0
-
-while (dist < length and not bail)
+var whiles = 0
+while (dist < length and not bail) and whiles < 10000
 {
+    whiles++
     xi = xnow
     yi = ynow
     

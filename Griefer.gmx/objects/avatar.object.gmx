@@ -28,6 +28,10 @@
             <string>///initialize
 netvars = NO_HANDLE
 
+shuffling = 0
+shuffling_max = room_speed*2
+shuffling_toff = room_speed
+
 lobby_scale_decrementor = 0.2
 prescaled = false
 anim_prescaled = 1
@@ -198,6 +202,119 @@ printf("::: "+string(varRead("pName"))+" was instantiated with uniqueId #"+strin
       </action>
     </event>
     <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///shuffling
+
+
+if shuffling and x &gt; 0 and x &lt; room_width
+{
+    shuffling--
+    event_perform(ev_alarm,2)
+    alarm[2] = 5
+    
+    image_alpha = 0.35
+    
+    if not shuffling
+    {    
+        image_alpha = 1
+        //play swoosh in sound?
+    }
+    
+    //scale down while shuffling
+    varWrite("animation_scale",lerp(varRead("animation_scale"),2.15,1))
+    
+    var shuffle_frames = ceil(lerp(0.05,3,(shuffling_max-shuffling)/shuffling_max))
+    
+    if shuffle_frames = 0
+        shuffle_frames = 1
+        
+    //shuffle name and gear and rank and whatnot
+    if nth_frame(2)
+    {
+        var avg_rank = floor(global.num_ranks/2)
+        var num_bots = instance_number(avatar) -1
+        var points = floor(random_range(avg_rank*num_bots*2/3,avg_rank*num_bots*3/2))
+
+        //select name and rank
+        var name = string(generate_name(0.01))
+    
+        if not instance_exists(myAvatar())
+        {
+            printf("ERROR: cannot shuffle in avatar step --&gt; no myAvatar() to cross-check name hashes with")
+            return false
+        }
+    
+        rank = floor(max(0,min(random_range(0,global.num_ranks-1),global.num_ranks-1)))
+        if random(1) &lt; 0.5
+            rank = floor(rank/2)
+        if rank &gt; global.num_ranks - 10 and random(1) &lt; 0.5
+            rank -= 15
+        if rank &lt; 5 and random(1) &lt; 0.5
+            rank += 5
+            
+        if hash_string(name) = objVarRead(myAvatar(),"uniqueId")
+        {
+            while (hash_string(name) = objVarRead(myAvatar(),"uniqueId"))
+            {
+                name = string(generate_name(0.01))
+            }
+        }
+            
+        points -= rank
+        global_rank = 99999
+
+        varWrite("uniqueId",hash_string(name))
+        varWrite("pName",name)
+        varWrite("rank",rank)
+        varWrite("global_rank",global_rank)
+    
+        same_armor_probability = random_range(0,1.5)
+        armor_set = armor_set_diceroll(rank)
+    
+        //select some gear for the bot to wear
+        for (var j=0; j&lt;array_length_1d(global.bpart_limb_types); j++)
+        {
+            var new_limb
+            
+            if j=4 and random(1) &gt; 0.15+rank/array_length_1d(global.rank_names)
+                new_limb = spr_hat
+            else
+            {
+            
+                var sameprob = same_armor_probability
+                if j=0
+                    sameprob = sameprob/6
+            
+                if random(1) &lt; sameprob and j &lt; 8
+                    new_limb = armor_set_limb(armor_set,global.bpart_limb_types[j]) 
+                else
+                    new_limb = random_diceroll_limbtype(global.bpart_limb_types[j])
+            }
+            
+            varWrite(global.bpart_limb_types[j]+"0",new_limb)
+        }
+    
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -407,7 +524,7 @@ if not bparts_ready[0]
     }
 }
 
-if net_manager.room_counter &lt; room_speed
+if rtime() &lt; room_speed
     with net_manager
     {
         if not is_my_avatar(other.id)
@@ -431,17 +548,17 @@ if room = rm_lobby and net_manager.room_counter &gt; room_speed
     {
         //sync uniqueID with netMan's
             //varWrite("uniqueId",objVarRead(net_manager,"uniqueId"))
-            
+
         obj_pname_update_real(id,"rot_true",FL_NORMAL)
-        if nth_frame(5) obj_pname_update_real(id,"active_weapon_sprite",FL_NORMAL)
+        if nth_frame(3) obj_pname_update_real(id,"active_weapon_sprite",FL_NORMAL)
         //obj_pname_update_real(id,"animation_speed",FL_NORMAL)
         //obj_pname_update_real(id,"arm_animation_speed",FL_NORMAL)
         //obj_pname_update_real(id,"animation_index",FL_NORMAL)
-        if nth_frame(5) obj_pname_update_real(id,"active_weapon_prescaler",FL_NORMAL)
-        if nth_frame(5) obj_pname_update_real(id,"animation_xscale",FL_NORMAL)
-        if nth_frame(5) obj_pname_update_real(id,"arm_pose",FL_NORMAL)
-        if nth_frame(5) obj_pname_update_real(id,"true_skill",FL_NORMAL)
-        if nth_frame(5) obj_pname_update_real(id,"global_rank",FL_NORMAL)
+        if nth_frame(3) obj_pname_update_real(id,"active_weapon_prescaler",FL_NORMAL)
+        if nth_frame(1) obj_pname_update_real(id,"animation_xscale",FL_NORMAL)
+        if nth_frame(3) obj_pname_update_string(id,"arm_pose",FL_NORMAL)
+        if nth_frame(10) obj_pname_update_real(id,"true_skill",FL_NORMAL)
+        if nth_frame(10) obj_pname_update_real(id,"global_rank",FL_NORMAL)
     }
 
 }
@@ -449,6 +566,7 @@ if room = rm_lobby and net_manager.room_counter &gt; room_speed
 if room = rm_menu or room = rm_lobby
 {
     varWrite("arm_animation_speed",0)
+    varWrite("arm_animation_index",0)
     sync_poses_and_animations()
 }
 
@@ -682,6 +800,11 @@ event_inherited()
 visible = false
 varWrite("visible",false)
 
+if is_bot(id) and not in_match()
+{
+    shuffling = shuffling_max+shuffling_toff*(varRead("pNum")-1)
+}
+
 if in_match()
 {
     varWrite("match_points",0)
@@ -742,7 +865,7 @@ if is_bot(id) and in_match()
         syncVar(my_bot,global.bpart_limb_types[i]+"0")
     }
     
-    printf("created bot player: "+objVarRead(my_bot,"pName"))
+    printf(":::created bot player: "+string(objVarRead(my_bot,"pName"))+", pNum="+string(objVarRead(my_bot,"pNum")))
 }
 
 if is_bot(id) and room = rm_lobby
@@ -783,7 +906,7 @@ if is_bot(id) and room = rm_lobby
             <string>///debug
 //if varRead("player_quit") exit
 //printf("dude_x = "+string(varRead("dude_x"))+", dude_y = "+string(varRead("dude_y"))+", x = "+string(x)+", y = "+string(y))
-    
+
 if net_manager.show_cout
 {
     //draw_text(x,y-290,"global_rank: "+varRead("global_rank"))
@@ -801,6 +924,17 @@ if room = rm_lobby and net_manager.menu_mode = "lobby"
     anim_prescale = varRead("animation_scale")
     prescaled = true
     varWrite("animation_scale",real(varRead("animation_scale"))-(instance_number(avatar)-1)*lobby_scale_decrementor)
+}
+
+if not is_my_avatar(id) and net_manager.show_cout
+{
+    printf("::: pName="+string(varRead("pName"))+", animation_index="+string(varRead("animation_index"))+", arm_animation_index="+string(varRead("arm_animation_index"))
+        +", animation_xscale="+string(varRead("animation_xscale"))+" arms_posing="+string(varRead("arms_posing"))
+        +", animation="+string(varRead("animation"))+", arm_pose="+string(varRead("arm_pose"))
+        +", weapon_x="+string(weapon_x)+", weapon_xoffset_temp="+string(weapon_xoffset_temp)
+        +", weapon_y="+string(weapon_y)+", weapon_yoffset_temp="+string(weapon_yoffset_temp)
+        +", weapon_rot="+string(weapon_rot))
+    printf("::: teammate? "+string(are_teammates(id,myAvatar())))
 }
 
 if not in_match()

@@ -60,6 +60,8 @@ stick_2view = false
 stuck_yet = false
 view_xoff = 0
 view_yoff = 0
+view_xpercent = 0
+view_ypercent = 0
 alpha_max = 1
 
 init_as_promoted = false
@@ -145,13 +147,15 @@ if is_string(txt) and not drawing_namerank and not drawing_slot and image=spr_no
 {
     view_xoff = x - view_xview
     view_yoff = y - view_yview
+    view_xpercent = abs(view_xoff/view_wview)
+    view_ypercent = abs(view_yoff/view_hview)
     stuck_yet = true
 }
 
 if stick_2view and stuck_yet
 {
-    draw_x = view_xview+view_xoff
-    draw_y = view_yview+view_yoff
+    draw_x = view_xview+view_xpercent*view_wview
+    draw_y = view_yview+view_ypercent*view_hview
 }
 
 //printf("ERROR: draw_x = "+string(draw_x)+", draw_y = "+string(draw_y)+", visible = "+string(visible))
@@ -181,12 +185,15 @@ if stick_2view and stuck_yet
 {
     view_xoff = x - view_xview
     view_yoff = y - view_yview
+    view_xpercent = abs(view_xoff/view_wview)
+    view_ypercent = abs(view_yoff/view_hview)
     stuck_yet = true
 }
+
 if stick_2view and stuck_yet
 {
-    draw_x = view_xview+view_xoff
-    draw_y = view_yview+view_yoff
+    draw_x = view_xview+view_xpercent*view_wview
+    draw_y = view_yview+view_ypercent*view_hview
 }
 </string>
           </argument>
@@ -250,13 +257,15 @@ if stick_2view and not stuck_yet
 {
     view_xoff = x - view_xview
     view_yoff = y - view_yview
+    view_xpercent = abs(view_xoff/view_wview)
+    view_ypercent = abs(view_yoff/view_hview)
     stuck_yet = true
 }
 
 if stick_2view and stuck_yet
 {
-    draw_x = view_xview+view_xoff
-    draw_y = view_yview+view_yoff
+    draw_x = view_xview+view_xpercent*view_wview
+    draw_y = view_yview+view_ypercent*view_hview
 }
 
 scale += growth

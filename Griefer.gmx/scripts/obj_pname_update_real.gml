@@ -3,6 +3,11 @@ obj = argument0
 variable = argument1
 flag = argument2
 
+if net_manager.bot_match
+{
+    return false
+}
+
 if obj.object_index = avatar //and SUPER_DEBUG
     printf("sending netVar update: updating "+objVarRead(obj,"pName")+"'s "+variable+"...")
 

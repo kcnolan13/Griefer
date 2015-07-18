@@ -1,6 +1,6 @@
 ///leave_matchmaking()
 leaveMatchMaking()
-net_manager.armory_locked = false
+net_manager.lock_armory = false
 objVarWrite(net_manager,"game_mode","no_mode")
 if room != rm_menu
 {

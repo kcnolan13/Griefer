@@ -102,9 +102,10 @@ if flag = FL_RANDOM
         spawn_ind = floor(random_range(0,ds_map_size(rando_list)))
         var i=0
         var cand = ds_map_find_first(rando_list)
-        
-        while (i<spawn_ind-1)
+        var whiles = 0
+        while (i<spawn_ind-1) and whiles < 1000
         {
+            whiles++
             i++
             cand = ds_map_find_next(rando_list,cand)
         }

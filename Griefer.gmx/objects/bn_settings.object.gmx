@@ -28,8 +28,8 @@
             <string>///inherit and specify new label
 event_inherited()
 
-label = "Controls"
-text = "Controls"
+label = "Settings"
+text = "Settings"
 active = false
 </string>
           </argument>
@@ -91,7 +91,7 @@ if exit_child
     exit
 }
 
-if active = false
+if active = false and not net_manager.lock_armory
 {
     active = true
     net_manager.menu_mode = "settings"

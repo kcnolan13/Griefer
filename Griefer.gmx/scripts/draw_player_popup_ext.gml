@@ -1,4 +1,4 @@
-///draw_player_popup_ext(x, y, pName, rank, global_rank, trueskill, head_spr, hat_spr, alpha)
+///draw_player_popup_ext(x, y, pName, rank, global_rank, trueskill, head_spr, hat_spr, alpha, is_bot)
 
 var draw_x = argument0
 var draw_y = argument1
@@ -9,12 +9,13 @@ var trueskill = real(argument5)
 var head_spr = real(argument6)
 var hat_spr = real(argument7)
 var alpha = argument8
+var tis_bot = argument9
 
 var rank_name = global.rank_names[rank]
 var rank_color = global.rank_colors[rank]
 
 var height = global.challenge_popup_height 
-var width = global.challenge_popup_width
+var width = global.challenge_popup_width+32
 var txt_pad = 5
 var icon_pad = 20
 
@@ -51,10 +52,10 @@ if not in_match()
         top = draw_y
         bottom = draw_y+height
     }
-    
-    
-    while (bottom > room_height)
+    var whiles = 0
+    while (bottom > room_height) and whiles < 1000
     {
+        whiles++
         bottom --
         top --
     }
@@ -103,20 +104,29 @@ draw_set_font(fnt_hud)
 draw_set_valign(fa_top)
 draw_set_color(c_white)
 var sub_xoff = left+net_manager.armory_ysep*3.3+net_manager.armory_sl+txt_pad+10
-var sub_yoff = top+32+txt_pad+5
+var sub_yoff = top+32+txt_pad+10
 draw_text_ext(sub_xoff,sub_yoff,rank_name, 24, width-145)
 draw_set_color(c_white)
 
 //draw true skill
-draw_set_halign(fa_right)
-draw_text_ext(left+width-txt_pad,sub_yoff,global.tskill+": "+string(trueskill),24,width*2/3)
-
-//draw global rank
-draw_set_halign(fa_left)
-var globrank = global_rank_2str(global_rank)
-var globranktxt = "Ranked "+globrank+" in the World#Click for Stats"
-var gob_xoff = left+net_manager.armory_ysep*3.3+net_manager.armory_sl+txt_pad+10
-var gob_yoff = top+height/2+txt_pad+5
-draw_set_valign(fa_top)
-draw_text_ext(gob_xoff,gob_yoff,globranktxt, 24, width-145)
+if not tis_bot
+{
+    draw_set_halign(fa_right)
+    draw_text_ext(left+width-txt_pad,sub_yoff,global.tskill+": "+string(trueskill),24,width*2/3)
+    
+    //draw global rank
+    draw_set_halign(fa_left)
+    var globrank = global_rank_2str(global_rank)
+    var globranktxt = "Ranked "+globrank+" in the World"
+    var glob_xoff = left+net_manager.armory_ysep*3.3+net_manager.armory_sl+txt_pad+10
+    var glob_yoff = top+height/2+txt_pad+5
+    draw_set_valign(fa_top)
+    draw_text_ext(glob_xoff,glob_yoff,globranktxt, 24, width-145)
+    
+    if menmode() != "armory" and not net_manager.lock_armory
+    {
+        draw_set_alpha(0.5)
+        draw_text_ext(glob_xoff,glob_yoff+28,"[Click for Stats]", 24, width-145)
+    }
+}
 draw_set_alpha(1)

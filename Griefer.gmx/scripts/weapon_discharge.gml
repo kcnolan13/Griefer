@@ -47,8 +47,10 @@ if my_dude = net_manager.local_player
     }
     
     //backcylce if this was a quicktoss
-    while (varRead("quicktoss_backcycles"))
+    var whiles = 0
+    while (varRead("quicktoss_backcycles")) and whiles < 1000
     {
+        whiles++
         varSub("quicktoss_backcycles",1)
         with (my_dude) previous_weapon()
     }

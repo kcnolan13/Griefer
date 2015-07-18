@@ -1,4 +1,5 @@
 ///armor_set_diceroll(rank)
+var rank = argument0
 var rar = random(1)
 var rar_index = -1
 rar = step_rand(rar,rank)

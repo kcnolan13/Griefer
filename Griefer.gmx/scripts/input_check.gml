@@ -1,6 +1,8 @@
 ///input_check(control_constant)
 var input_const = argument0
 
+if instance_exists(modal_controls) return false
+
 if input_is_keyboard(input_const)
     return keyboard_check(input_const)
 

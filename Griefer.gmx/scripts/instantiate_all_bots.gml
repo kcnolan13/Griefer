@@ -3,16 +3,33 @@ var num_bots = argument0
 
 printf("ERROR (not): INSTANTIATING "+string(num_bots)+" bots")
 
+//THIS WHOLE ALGORITHM BASICALLY DOESN'T MATTER ANYMORE -- SHUFFLE LOGIC IN AVATAR STEP IS WHAT REALLY MATTERS
+
 var avg_rank = floor(global.num_ranks/2)
 var points = floor(random_range(avg_rank*num_bots*2/3,avg_rank*num_bots*3/2))
 
 for (var i=0; i<num_bots; i++)
 {
     //select uniqueID
-    var pnum = instance_number(avatar)
+    var pnum = i+1
     
     //select name and rank
     var name = string(generate_name(0.01))
+    
+    if not instance_exists(myAvatar())
+    {
+        printf("ERROR: cannot instantiate_all_bots --> no myAvatar() to cross-check name hashes with")
+        return false
+    }
+    
+    if hash_string(name) = objVarRead(myAvatar(),"uniqueId")
+    {
+        while (hash_string(name) = objVarRead(myAvatar(),"uniqueId"))
+        {
+            name = string(generate_name(0.01))
+        }
+    }
+    
     var rank = floor(max(0,min(random_range(0,global.num_ranks-1),global.num_ranks-1)))
     
     if random(1) < 0.5
@@ -31,11 +48,16 @@ for (var i=0; i<num_bots; i++)
     ID = instance_create(room_width/2,-4*room_height,avatar)
     
     objVarWrite(ID,"bot",true)
-    objVarWrite(ID,"uniqueId",pnum)
+    objVarWrite(ID,"uniqueId",hash_string(name))
     objVarWrite(ID,"pNum",pnum)
     objVarWrite(ID,"pName",name)
     objVarWrite(ID,"rank",rank)
     objVarWrite(ID,"global_rank",global_rank)
+    
+    with ID
+    {
+        shuffling = shuffling_max+shuffling_toff*(varRead("pNum")-1)
+    }
     
     printf(objVarRead(ID,"pName")+" IN DA HOOUUSE")
     

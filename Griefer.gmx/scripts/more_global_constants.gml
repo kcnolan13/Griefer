@@ -3,6 +3,7 @@ global.cmode = "Ranked"
 global.pmode = "Start a Party"
 global.tskill = "True Skill"
 global.accolade_name = "Medal"
+global.time_played = "Career Time"
 
 global.col_alpha_default = 0.6
 global.challenge_index = 0

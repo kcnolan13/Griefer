@@ -555,6 +555,17 @@
             <arg>2</arg>
           </args>
         </function>
+        <function>
+          <name>hash_string_gpp</name>
+          <externalName>hash_string</externalName>
+          <kind>12</kind>
+          <help>hash_string(str)</help>
+          <returnType>2</returnType>
+          <argCount>1</argCount>
+          <args>
+            <arg>1</arg>
+          </args>
+        </function>
       </functions>
       <constants/>
     </file>

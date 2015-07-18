@@ -42,8 +42,8 @@ grid_hsep = match_hsep
 grid_vsep = grid_hsep
 
 //stat mode scrolling variables
-grid_left = room_width/2-64*5.5
-grid_right = room_width-64*2.5
+grid_left = room_width/2-64*3.5
+grid_right = room_width-48
 grid_ymid = room_height/2+64*4
 grid_xmid = average2(grid_left,grid_right)
 grid_width = abs(grid_right-grid_left)
@@ -297,7 +297,7 @@ if not in_match() and room != rm_login
                     var col = COL_TOTAL
                     if stat_manager.stat_tab = stat_manager.tabs[1]
                        col =  COL_BOT_TOTAL
-                    create_accolade_grid(grid_left,grid_ymid,room_width+64*2,room_height,fa_center,fa_center,32,col)
+                    create_accolade_grid(grid_left,grid_ymid,grid_right,room_height,fa_center,fa_center,0,col)
                 }
                 
                 //update that stupid scrollable grid

@@ -1,6 +1,11 @@
 ///is_my_avatar(instance)
 var instance = argument0
-if string(objVarRead(instance,"pName")) = string(objVarRead(net_manager,"pName"))
+if not instance_exists(myAvatar())
+{
+    printf("ERROR: is_my_avatar thinks myAvatar() doesn't exist")
+    return false
+}
+if string(objVarRead(instance,"uniqueId")) = string(objVarRead(net_manager.my_doll,"uniqueId"))
     return true
 else
     return false

@@ -8,8 +8,10 @@ var len = 0
 if not string_count(" ",str)
     ret += capfirst(str)
 
-while (string_count(" ",str))
+var whiles = 0
+while (string_count(" ",str) and whiles < 1000)
 {
+    whiles++
     spacepos = string_pos(" ",str)
     len = string_length(str)
     

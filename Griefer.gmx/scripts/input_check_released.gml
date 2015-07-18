@@ -1,6 +1,8 @@
 ///input_check_released(control_constant)
 var input_const = argument0
 
+if instance_exists(modal_controls) return false
+
 if input_is_keyboard(input_const)
     return keyboard_check_released(input_const)
 

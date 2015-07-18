@@ -396,6 +396,18 @@ if (instance_exists(mw) or instance_exists(aw) or instance_exists(av_txt) or ins
 
 }
 
+if net_manager.menu_mode != "lottery_steal" and not in_match()
+{
+    with (action_word)
+    {
+        if init_as_promoted and fade_time &gt; 5
+        {
+            fade_time = 5
+            fade_delay = 1
+        }
+    }
+}
+
 if instance_exists(av_txt)
 {
     //av_namerank.txt = get_rank_name(rank)
@@ -426,7 +438,7 @@ if net_manager.menu_mode = "lottery_steal" and not instance_exists(bn_postmatch_
     }
 }
 
-if xp_done_counter &gt; xp_done_counter_max and instance_exists(bn_postmatch_done)
+if (net_manager.lock_armory or xp_done_counter &gt; xp_done_counter_max) and instance_exists(bn_postmatch_done)
 {
     net_manager.menu_mode = "lobby"
     alarm[1] = 0
@@ -564,6 +576,17 @@ draw_circle(xmark2,ymark2,5,false)
 */
 draw_set_alpha(alpha)
 
+if instance_exists(modal_controls)
+{
+    if modal_controls.mode_index = 0 and modal_controls.life &gt; 10
+    {
+        scale = 1
+        alpha_override = true
+        alpha = 1
+        draw_xpbar(modal_controls.left+modal_controls.width/2,modal_controls.top+modal_controls.height,fraction_full,scale,fa_center,fa_bottom,c_white,false)
+    }
+}
+
 //if in_match() and alpha &gt; 0
 if room = rm_menu and net_manager.menu_mode = "play"
 {
@@ -610,7 +633,7 @@ else
         alpha_override = false
 }
 
-if in_match() and alpha &gt; 0 and rtime() &gt; room_speed
+if in_match() and alpha &gt; 0 and rtime() &gt; room_speed and not instance_exists(modal_controls)
 {
     draw_xpbar(view_xview+view_wview-XPBAR_RIGHT,view_yview+view_hview-XPBAR_BOTTOM,fraction_full,scale,fa_right,fa_bottom,c_white,false)
 }

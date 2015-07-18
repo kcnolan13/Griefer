@@ -45,6 +45,8 @@ sens_bg = make_colour_hsv(0,0,20)
 
 sp = 4
 is_sens = false
+is_yesno = false
+is_onoff = false
 sens_val = 0
 sens_low = 0
 sens_high = 0
@@ -127,6 +129,20 @@ if is_sens
 if not modal_highlighted(id) and was_highlighted
 {
     was_highlighted--
+}
+
+if string_upper(text) = "YES" or string_upper(text) = "NO"
+{
+    is_yesno = true
+    is_onoff = false
+    is_sens = false
+}
+
+if string_upper(text) = "ON" or string_upper(text) = "OFF"
+{
+    is_onoff = true
+    is_yesno = false
+    is_sens = false
 }
 
 if not is_sens
@@ -311,19 +327,37 @@ if clicked exit
 printf("clicked: "+label)
 audio_play_sound(snd_click,2,false)
 
-if instance_exists(myLabel) and myLabel.text != global.cactions[C_SWAP_STICKS]
+if not is_onoff and not is_yesno
 {
-    text = "Capturing ..."
-    capturing = true
+    if instance_exists(myLabel) and myLabel.text != global.cactions[C_SWAP_STICKS]
+    {
+        text = "Capturing ..."
+        capturing = true
+    }
+    else
+    {
+        global.cvals[C_SWAP_STICKS] ^= 1
+        
+        if global.using_gamepad
+            transmit_control_map(FL_GAMEPAD)
+        else
+            transmit_control_map(FL_KEYBOARD)
+    }
 }
 else
 {
-    global.cvals[C_SWAP_STICKS] ^= 1
+    if string_upper(text) = "YES"
+        text = "No"
+    else if string_upper(text) = "NO"
+        text = "Yes"
+    else if string_upper(text) = "ON"
+        text = "OFF"
+    else if string_upper(text) = "OFF"
+        text = "ON"
+        
+    //ADJUST THE REAL SETTING VARIABLES BASED ON MYLABEL TEXT
     
-    if global.using_gamepad
-        transmit_control_map(FL_GAMEPAD)
-    else
-        transmit_control_map(FL_KEYBOARD)
+        
 }
 </string>
           </argument>

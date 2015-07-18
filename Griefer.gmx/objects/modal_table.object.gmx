@@ -48,7 +48,7 @@ row_vsep = global.row_vsep+2
 
 hovrow = -1
 hovrow_counter = 0
-hovrow_delay = 10
+hovrow_delay = 0
 show_hovrow = false
 
 first_sort = false

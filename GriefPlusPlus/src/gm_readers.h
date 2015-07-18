@@ -52,5 +52,7 @@ GMEXPORT const double readObjCreateUniqueId();
 GMEXPORT const double readObjCreateMyX();
 GMEXPORT const double readObjCreateMyY();
 
+GMEXPORT const double hash_string(char *str);
+
 
 #endif // __GM_READERS_H__

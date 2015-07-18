@@ -3,6 +3,11 @@ obj = argument0
 variable = argument1
 flag = argument2
 
+if net_manager.bot_match
+{
+    return false
+}
+
 if not instance_exists(obj) return false
 
 if variable = "arm_animation_index"

@@ -37,8 +37,10 @@ if(first_instance != noone)
 {
     dx = argument2 - argument0
     dy = argument3 - argument1
-    while (abs(dx) >= 1 or abs(dy) >= 1)
+    var whiles = 0
+    while (abs(dx) >= 1 or abs(dy) >= 1) and whiles < 10000
         {
+            whiles++
             dx /= 2
             dy /= 2
             instance = collision_line(argument0, argument1, argument2-dx, argument3-dy, argument4, argument5, argument6)

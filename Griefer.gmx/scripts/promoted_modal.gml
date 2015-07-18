@@ -34,6 +34,12 @@ else
     ID.init_as_promoted = true*/
     
     // "Promoted"
+    with (action_word)
+    {
+        if init_as_promoted
+            instance_destroy()
+    }
+    
     ID = instance_create(xpos/*+get_head_width(scale)-twidth/2*/,ypos+view_hview*1/4,action_word)
     ID.fade_delay = fade_delay
     ID.stick_2view = true

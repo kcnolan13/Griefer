@@ -19,8 +19,10 @@ var desired_index = 1
 if varRead("weapon_index") = 1
     desired_index = 0
 
-while (varRead("weapon_index") != desired_index)
+var whiles = 0
+while (varRead("weapon_index") != desired_index) and whiles < 1000
 {
+    whiles++
     if net_manager.local_player = id
         audio_play_sound(snd_scroll3,2,false)
     

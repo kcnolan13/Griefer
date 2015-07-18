@@ -70,8 +70,10 @@ if draw_normal
         pbottom = draw_y+title_height+body_height
     }
     
-    while (pbottom > room_height)
+    var whiles = 0
+    while (pbottom > room_height) and whiles < 1000
     {
+        whiles++
         pbottom --
         ptop --
     }

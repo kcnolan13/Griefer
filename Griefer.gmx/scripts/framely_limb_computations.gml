@@ -12,7 +12,11 @@ if varRead("animation_index") >= varRead("animation_length") or varRead("animati
 varWrite("animation",string(varRead("animation")))
 varWrite("arm_pose",string(varRead("arm_pose")))
 
-if instance_exists(cursor) and varRead("animation") != "die" and varRead("animation") != "die_headshot" and (varRead("controllable") or (not in_match() and (object_index = gravatar or string(varRead("pName")) = string(objVarRead(net_manager,"pName")))) or (net_manager.local_player = id and net_manager.starting_match)) and not slide_left and not slide_right
+if instance_exists(cursor) and varRead("animation") != "die" and varRead("animation") != "die_headshot" and 
+    (varRead("controllable") or 
+    (not in_match() and (object_index = gravatar or string(varRead("pName")) = string(objVarRead(net_manager,"pName")))) 
+    or (net_manager.local_player = id and net_manager.starting_match)) 
+    and not slide_left and not slide_right
 {
     pDir = point_direction(x,y,cursor.x,cursor.y) mod 360
     
@@ -49,6 +53,10 @@ if (varRead("arms_posing"))
     
     if varRead("arm_animation_index") >= varRead("arm_animation_length") or varRead("arm_animation_index") < 0
     {
+        //set nade animation speed to 0 please
+        if varRead("arm_pose") = "nade"
+            varWrite("arm_animation_speed",0)
+            
         if varRead("arm_animation_index") >= varRead("arm_animation_length")
             varWrite("arm_animation_index",0)
         else

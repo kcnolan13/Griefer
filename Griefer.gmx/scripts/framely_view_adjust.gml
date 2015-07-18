@@ -24,23 +24,34 @@ if not is_bot(id) and not double_spawn_counter and  not respawn_counter and (vis
         view_vwidth = floor((9/16)*view_hwidth)
     }
     
+    var cxoff = cursor.x
+    var cyoff = cursor.y
+    
     //if abs(view_hwidth-view_wview) > 1 and abs(view_vwidth-view_hview) > 1
+    if not instance_exists(modal_controls)
     {
         view_wview = ceil(lerp(view_wview,view_hwidth,0.5))
         view_hview = ceil(lerp(view_hview,view_vwidth,0.5))
     }
+    else
+    {
+        view_wview = 1365
+        view_hview = 9/16*1365
+        cxoff = view_xview+view_wview/2
+        cyoff = view_yview+view_hview/2
+    }
 
     view_scaler = 1
-    
+
     //calculate x offset percentages (percent of view_width away from middle of screen)
-    view_xoffset = -1*(view_xview+floor(view_wview/2)-cursor.x)/(floor(view_wview/2))
+    view_xoffset = -1*(view_xview+floor(view_wview/2)-cxoff)/(floor(view_wview/2))
     
         //constrain maximum x offset to 1
         if abs(view_xoffset)>1 
         view_xoffset = sign(view_xoffset)
     
     //calculate y offset percentages (percent of view_width away from middle of screen)    
-    view_yoffset = -1*(view_yview+floor(view_hview/2)-cursor.y)/(floor(view_hview/2))
+    view_yoffset = -1*(view_yview+floor(view_hview/2)-cyoff)/(floor(view_hview/2))
     
         //constrain maximum y offset to 1
         if abs(view_yoffset)>1 
@@ -56,7 +67,7 @@ if not is_bot(id) and not double_spawn_counter and  not respawn_counter and (vis
         view_yview=ytest
     
     //shake the view
-    if view_shake_counter > 0
+    if view_shake_counter > 0 and not instance_exists(modal_controls)
     {
         //printf("::: view shake is "+string(view_shake_counter))
         view_xview += random_range(-4*view_shake_counter,4*view_shake_counter)
