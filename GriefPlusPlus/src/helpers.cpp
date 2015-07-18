@@ -243,6 +243,13 @@ string bigMessageJSON(char *message_string, const char * value1, double value2, 
 	console("JSON Constructed: " + ret);
 	return ret;
 }
+string bigMessageJSON(char *message_string, const char * value1, char *value2, double value3)
+{
+	string ret = "{" + field("name", "bigMessage") + ", " + field("msg", message_string) + ", " + field("val1", value1) + ", " + field("val2", value2) + ", " + field("val3", value3) + "}";
+
+	console("JSON Constructed: " + ret);
+	return ret;
+}
 double chopDeck(double chopTo, deque<string> *longer)
 {
 	int i = 0;

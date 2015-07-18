@@ -13,9 +13,11 @@ else
     //clear arrays
     labels = 0
     cnames = 0
+    is_senses = 0
     
     labels[0] = "blah"
     cnames[0] = "blah"
+    is_senses[0] = false
     
     var bdelay = 1
     var binc = 2
@@ -32,12 +34,12 @@ else
     if fl = FL_GEN_SETTINGS
     {
         //create general settings
-        labels[0] = "Violent Content"
-        cnames[0] = "On"
-        labels[1] = "Control Hints"
-        cnames[1] = "On"
-        labels[2] = "Show XP in Match"
-        cnames[2] = "On"
+        for (var i=0; i<array_height_2d(global.gc); i++)
+        {
+            labels[i] = global.gc[i,0]
+            cnames[i] = global.gc[i,1]
+            is_senses[i] = global.gc[i,2]
+        }   
     }
     else if fl = FL_MATCH_SETTINGS
     {
@@ -65,6 +67,7 @@ else
         {
             labels[i] = get_caction_name(i)
             cnames[i] = get_input_name(global.cvals[i])
+            is_senses[i] = false
         }
     }
     
@@ -141,13 +144,14 @@ else
     for (var i=0; i<len; i++)
     {
         //don't show swap sticks unless gamepad is plugged in
-        if not global.using_gamepad and i=len-1
+        if not global.using_gamepad and i=len-1 and fl != FL_GEN_SETTINGS and fl != FL_MATCH_SETTINGS
             break
             
         bdelay += binc
     
         //create the label
         ID = instance_create(xst,yst-6,bn_clabel)
+        printf("::: creating control label: "+string(labels[i]))
         ID.width = lwidth
         ID.height = lheight
         ID.text = labels[i]
@@ -162,6 +166,10 @@ else
         ID2.width = ewidth
         ID2.height = eheight
         ID2.text = cnames[i]
+        if string_upper(ID2.text) = "ON" or string_upper(ID2.text) = "OFF"
+            ID2.is_onoff = true
+        else if string_upper(ID2.text) = "YES" or string_upper(ID2.text) = "NO"
+            ID2.is_yesno = true
         ID2.birth_delay = bdelay
         ID2.depth = depth-1
         ID2.label_name = labels[i]
@@ -170,6 +178,15 @@ else
         ID.myCedit = ID2
         ID2.color = web_hsv(chue,csat,cval)
         ID2.text_color = text_color
+        
+        if is_senses[i] = true
+        {
+            ID2.is_sens = true
+            ID2.sens_val = global.gc[i,1]
+            ID2.exclude_zero = false
+            ID2.sens_low = 0
+            ID2.sens_high = 1
+        }
         
         if fl != FL_GEN_SETTINGS and fl != FL_MATCH_SETTINGS
         {

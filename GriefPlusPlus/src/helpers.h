@@ -83,4 +83,5 @@ string genMessageJSON(char *message_string, double value);
 string bigMessageJSON(char *message_string, double value1, double value2, double value3);
 string bigMessageJSON(char *message_string, const char *value1, const char *value2, const char *value3);
 string bigMessageJSON(char *message_string, const char * value1, double value2, double value3);
+string bigMessageJSON(char *message_string, const char * value1, char *value2, double value3);
 #endif // __HELPERS_H__

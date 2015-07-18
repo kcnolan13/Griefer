@@ -48,6 +48,22 @@ while (bigMessagesWaiting() and wait_counter < 500000)
             }
         break
         
+        case "load_setting":
+            printf("::: RECEIVED a Setting: "+string(genVal1)+", "+string(genVal2)+", "+string(genVal3))
+            var ind = gc_ind(genVal1)
+            if ind > -1
+            {
+                if global.gc[ind,2] // if it is_sens use real val
+                    global.gc[ind,1] = genVal3
+                else
+                    global.gc[ind,1] = genVal2
+            }
+            else
+            {
+                printf("ERROR: failed to process load_setting big_message from server")
+            }
+        break
+        
         case "accolade":
             var dat_acc_name = string(genVal1)
             var acc_val = genVal2

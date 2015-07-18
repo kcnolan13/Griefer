@@ -1,3 +1,20 @@
+//general control constants
+global.gc[GC_SHOW_XP,0] = "Show XP In Match"
+global.gc[GC_SHOW_XP,1] = "On"
+global.gc[GC_SHOW_XP,2] = false //is_sens
+global.gc[GC_VIOLENT_CONTENT,0] = "Violent Content"
+global.gc[GC_VIOLENT_CONTENT,1] = "On"
+global.gc[GC_VIOLENT_CONTENT,2] = false //is_sens
+global.gc[GC_CONTROL_HINTS,0] = "Control Hints"
+global.gc[GC_CONTROL_HINTS,1] = "On"
+global.gc[GC_CONTROL_HINTS,2] = false //is_sens
+global.gc[GC_AA_LEVEL,0] = "SWF Anti-Aliasing"
+global.gc[GC_AA_LEVEL,1] = 1
+global.gc[GC_AA_LEVEL,2] = true //is_sens
+
+global.dismembered = "Dismembered"
+global.dismembered_tame = "Explosive"
+
 //gamepad device number
 global.devno = 0
 global.using_gamepad = false

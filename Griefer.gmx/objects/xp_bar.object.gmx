@@ -633,7 +633,7 @@ else
         alpha_override = false
 }
 
-if in_match() and alpha &gt; 0 and rtime() &gt; room_speed and not instance_exists(modal_controls)
+if in_match() and alpha &gt; 0 and rtime() &gt; room_speed and not instance_exists(modal_controls) and truthval(global.gc[GC_SHOW_XP,1])
 {
     draw_xpbar(view_xview+view_wview-XPBAR_RIGHT,view_yview+view_hview-XPBAR_BOTTOM,fraction_full,scale,fa_right,fa_bottom,c_white,false)
 }

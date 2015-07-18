@@ -11,6 +11,12 @@ var spd_var = argument8
 var xy_var = argument9
 var col = argument10
 
+
+if not truthval(global.gc[GC_VIOLENT_CONTENT,1])
+{
+    return noone
+}
+
 ID = instance_create(xi,yi,blood_splosion)
 if ID != noone
 {

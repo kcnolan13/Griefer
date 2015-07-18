@@ -97,8 +97,10 @@ if dead_homes != net_manager.local_player and killer = net_manager.local_player
                 if spree_gibs = 3 complete_accolade("3gibs") else if spree_gibs = 6 complete_accolade("6gibs")
                 else if spree_gibs = 9 complete_accolade("9gibs") else if spree_gibs = 12 complete_accolade("12gibs")
             }
-            
-            ID = boom_boom_pow("+"+string(POINTS_GIB)+" Dismembered",global.action_word_color)
+            var dismem = global.dismembered
+            if not truthval(global.gc[GC_VIOLENT_CONTENT,1])
+                dismem = global.dismembered_tame
+            ID = boom_boom_pow("+"+string(POINTS_GIB)+" "+dismem,global.action_word_color)
             ID.fnt = fnt_boom
             ID.extra_delay = boom_delay
             ID.birth_delay = 1
@@ -116,8 +118,10 @@ if dead_homes != net_manager.local_player and killer = net_manager.local_player
                 if spree_gibs = 3 complete_accolade("3gibs") else if spree_gibs = 6 complete_accolade("6gibs")
                 else if spree_gibs = 9 complete_accolade("9gibs") else if spree_gibs = 12 complete_accolade("12gibs")
             }
-            
-            ID = boom_boom_pow("+"+string(POINTS_GIB)+" Dismembered",global.action_word_color)
+            var dismem = global.dismembered
+            if not truthval(global.gc[GC_VIOLENT_CONTENT,1])
+                dismem = global.dismembered_tame
+            ID = boom_boom_pow("+"+string(POINTS_GIB)+" "+dismem,global.action_word_color)
             ID.fnt = fnt_boom
             ID.extra_delay = boom_delay
             ID.birth_delay = 1
