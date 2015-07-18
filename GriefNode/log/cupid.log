@@ -1,0 +1,215 @@
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+
+enough players in bot_ffa_lobby to start a match
+grouping bot_ffa_lobby sockets
+looking for a joinable game room...
+done searching
+no joinable game rooms ... looking for an empty game room...
+migrating 1 players to game room: bot_ffa1
+generalMessage : goto_lobby : 0
+dat_wait_time was: 30000
+SYNCHRONIZING PLAYERS CONNECTED
+last layer waitin_time=30000
+waitin_time: 30000 ---> 870
+sending lobby_wait_time: 
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'lobby_wait_time',
+  val: 870,
+  flag: 0 }
+Bot match -- no need to shuffle
+id_shuffler = [object Object]
+recomputing playerSubGroup to be inclusive of newly joined players
+new playerSubGroup: 1 players
+kyle: match still good
+generalMessage : lock_armory : 0
+SYNCHRONIZING PLAYERS CONNECTED
+recomputing playerSubGroup to be inclusive of newly joined players
+new playerSubGroup: 1 players
+kyle: match still good
+selected map number:  2
+generalMessage : goto_map : 2
+creating player kyle, #0
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+
+enough players in bot_ffa_lobby to start a match
+grouping bot_ffa_lobby sockets
+looking for a joinable game room...
+done searching
+no joinable game rooms ... looking for an empty game room...
+migrating 1 players to game room: bot_ffa1
+generalMessage : goto_lobby : 0
+dat_wait_time was: 30000
+SYNCHRONIZING PLAYERS CONNECTED
+last layer waitin_time=30000
+waitin_time: 30000 ---> 870
+sending lobby_wait_time: 
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'lobby_wait_time',
+  val: 870,
+  flag: 0 }
+Bot match -- no need to shuffle
+id_shuffler = [object Object]
+recomputing playerSubGroup to be inclusive of newly joined players
+new playerSubGroup: 1 players
+kyle: match still good
+generalMessage : lock_armory : 0
+SYNCHRONIZING PLAYERS CONNECTED
+recomputing playerSubGroup to be inclusive of newly joined players
+new playerSubGroup: 1 players
+kyle: match still good
+selected map number:  15
+generalMessage : goto_map : 15
+creating player kyle, #0
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+
+enough players in bot_ffa_lobby to start a match
+grouping bot_ffa_lobby sockets
+looking for a joinable game room...
+done searching
+no joinable game rooms ... looking for an empty game room...
+migrating 1 players to game room: bot_ffa1
+generalMessage : goto_lobby : 0
+dat_wait_time was: 30000
+SYNCHRONIZING PLAYERS CONNECTED
+last layer waitin_time=30000
+waitin_time: 30000 ---> 870
+sending lobby_wait_time: 
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'lobby_wait_time',
+  val: 870,
+  flag: 0 }
+Bot match -- no need to shuffle
+id_shuffler = [object Object]
+recomputing playerSubGroup to be inclusive of newly joined players
+new playerSubGroup: 1 players
+kyle: match still good
+generalMessage : lock_armory : 0
+SYNCHRONIZING PLAYERS CONNECTED
+recomputing playerSubGroup to be inclusive of newly joined players
+new playerSubGroup: 1 players
+kyle: match still good
+selected map number:  2
+generalMessage : goto_map : 2
+creating player kyle, #0
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+
+enough players in bot_ffa_lobby to start a match
+grouping bot_ffa_lobby sockets
+looking for a joinable game room...
+done searching
+no joinable game rooms ... looking for an empty game room...
+migrating 1 players to game room: bot_ffa1
+generalMessage : goto_lobby : 0
+dat_wait_time was: 30000
+last layer waitin_time=30000
+waitin_time: 30000 ---> 870
+sending lobby_wait_time: 
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'lobby_wait_time',
+  val: 870,
+  flag: 0 }
+Bot match -- no need to shuffle
+SYNCHRONIZING PLAYERS CONNECTED
+id_shuffler = [object Object]
+recomputing playerSubGroup to be inclusive of newly joined players
+new playerSubGroup: 1 players
+kyle: match still good
+generalMessage : lock_armory : 0
+SYNCHRONIZING PLAYERS CONNECTED
+recomputing playerSubGroup to be inclusive of newly joined players
+new playerSubGroup: 1 players
+kyle: match still good
+selected map number:  13
+generalMessage : goto_map : 13
+creating player kyle, #0
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+dat_wait_time was: 60000
+last layer waitin_time=60000
+waitin_time: 60000 ---> 1770
+sending lobby_wait_time: 
+{ name: 'objUpdate',
+  oid_string: '0:-1',
+  object_index: 0,
+  uniqueId: -1,
+  netvar: 'lobby_wait_time',
+  val: 1770,
+  flag: 0 }
+Bot match -- no need to shuffle
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+id_shuffler = [object Object]
+recomputing playerSubGroup to be inclusive of newly joined players
+new playerSubGroup: 0 players
+THIS MATCH HAS EXPIRED
+aborting the save/quit armory command
+SYNCHRONIZING PLAYERS CONNECTED
+recomputing playerSubGroup to be inclusive of newly joined players
+new playerSubGroup: 0 players
+THIS MATCH HAS EXPIRED
+ABORTING --> this match has expired
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
+SYNCHRONIZING PLAYERS CONNECTED
