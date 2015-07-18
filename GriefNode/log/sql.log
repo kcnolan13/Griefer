@@ -719,3 +719,18 @@ Recalculating TRUE SKILL + GLOBAL RANKINGS
 Calculated kyle's True Skill: 0
 Calculated kyle's Global Rank: 1
 UPDATE stats set true_skill=0, global_rank=1 WHERE username='kyle'
+
+Recalculating TRUE SKILL + GLOBAL RANKINGS
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1
+UPDATE stats set true_skill=0, global_rank=1 WHERE username='kyle'
+
+Recalculating TRUE SKILL + GLOBAL RANKINGS
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1
+UPDATE stats set true_skill=0, global_rank=1 WHERE username='kyle'
+
+Recalculating TRUE SKILL + GLOBAL RANKINGS
+Calculated kyle's True Skill: 0
+Calculated kyle's Global Rank: 1
+UPDATE stats set true_skill=0, global_rank=1 WHERE username='kyle'
