@@ -1403,10 +1403,14 @@
       <script>scripts\modal_aligns.gml</script>
       <script>scripts\truthval.gml</script>
       <script>scripts\toggle_truthval.gml</script>
+      <script>scripts\chop_string.gml</script>
     </scripts>
     <scripts name="kyle's lighting engine">
       <script>scripts\kyle_light_create.gml</script>
       <script>scripts\kyle_light_get_count.gml</script>
+    </scripts>
+    <scripts name="feeds">
+      <script>scripts\new_kill_feed_message.gml</script>
     </scripts>
   </scripts>
   <shaders name="shaders">
@@ -1444,6 +1448,7 @@
     <font>fonts\fnt_pstats</font>
     <font>fonts\fnt_menu</font>
     <font>fonts\fnt_pstats_title</font>
+    <font>fonts\fnt_feed</font>
   </fonts>
   <objects name="objects">
     <objects name="DONT MOVE ME">
@@ -1485,6 +1490,10 @@
     <objects name="GUI">
       <object>objects\modal_window</object>
       <object>objects\modal_button</object>
+      <object>objects\feed_message</object>
+      <objects name="feeds">
+        <object>objects\kill_feed</object>
+      </objects>
       <objects name="main_menu">
         <object>objects\bn_play</object>
         <object>objects\bn_tab</object>
@@ -1798,7 +1807,9 @@
       <room>rooms\map_placeholder2</room>
     </rooms>
   </rooms>
-  <constants number="138">
+  <constants number="140">
+    <constant name="GC_KILL_FEED_ALPHA">5</constant>
+    <constant name="GC_KILL_FEED">4</constant>
     <constant name="GC_AA_LEVEL">3</constant>
     <constant name="GC_CONTROL_HINTS">2</constant>
     <constant name="GC_SHOW_XP">1</constant>

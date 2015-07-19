@@ -30,6 +30,7 @@ event_inherited()
 
 halign = fa_center
 valign = fa_center
+snap_by_percent = false
 
 width = 64*7
 height = 64*5

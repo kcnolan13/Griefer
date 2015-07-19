@@ -438,7 +438,6 @@ if is_sens and modal_highlighted(id) or was_highlighted
         
     if myLabel.text = global.gc[GC_AA_LEVEL,0]
     {
-        printf("::: setting swf aa level: "+string(sens_val))
         var ind = gc_ind(myLabel.text)
         if ind &gt; -1
         {
@@ -451,6 +450,18 @@ if is_sens and modal_highlighted(id) or was_highlighted
                 draw_enable_swf_aa(true)
                 draw_set_swf_aa_level(sens_val)
             }
+            global.gc[ind,1] = sens_val
+        }
+        else
+        {
+            printf("ERROR: could not update sensitivity setting "+string(myLabel.text)+" -- bad ind")
+        }
+    }
+    else if myLabel.text = global.gc[GC_KILL_FEED_ALPHA,0]
+    {
+        var ind = gc_ind(myLabel.text)
+        if ind &gt; -1
+        {
             global.gc[ind,1] = sens_val
         }
         else

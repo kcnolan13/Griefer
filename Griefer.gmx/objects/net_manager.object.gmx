@@ -316,6 +316,7 @@ instance_create(x,y,popup_drawer)
 instance_create(x,y,accolade_manager)
 instance_create(x,y,challenge_manager)
 instance_create(x,y,stat_manager)
+instance_create(x,y,kill_feed)
 
 
 netvars = ds_map_create()

@@ -168,7 +168,7 @@ if ds_exists(grid,ds_type_grid)
 
 if nth_frame(5*room_speed)
 {
-    print_ds_grid(grid)
+    //print_ds_grid(grid)
 }
 </string>
           </argument>

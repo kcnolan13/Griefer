@@ -9,6 +9,12 @@ else if string_upper(str) = "YES"
     return true
 else if string_upper(str) = "NO"
     return false
+else if string_upper(str) = "ALWAYS"
+    return 1
+else if string_upper(str) = "NEVER"
+    return 0
+else if string_upper(str) = "ON ACTION"
+    return 2
 else
 {
     printf("ERROR: truthval passed: "+string(str))

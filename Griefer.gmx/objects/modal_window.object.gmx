@@ -35,11 +35,13 @@ image_yscale = height
 alpha = 0.4
 alpha_max = 1
 alpha_highlight = alpha_max
+alpha_scaler = 1
 active = false
 active_color = c_gray
 highlightable = true
 surface = NO_HANDLE
 
+draw_rect = true
 draw_fade = false
 fade_color = c_black
 fade_alpha = 0.65
@@ -126,6 +128,7 @@ valign = fa_top
 
 snap_2view = false
 snapped = false
+snap_by_percent = true
 view_xpercent = 0
 view_ypercent = 0
 view_xoff = 0
@@ -181,7 +184,7 @@ if surface_exists(surface)
           <argument>
             <kind>1</kind>
             <string>///snap
-if snapped and (object_index != accolade_generic )
+if snapped and snap_by_percent
 {
     x = view_xview+view_xpercent*view_wview
     y = view_yview+view_ypercent*view_hview
@@ -214,7 +217,7 @@ else if snapped
           <argument>
             <kind>1</kind>
             <string>///snap
-if snapped and (object_index != accolade_generic )
+if snapped and snap_by_percent
 {
     x = view_xview+view_xpercent*view_wview
     y = view_yview+view_ypercent*view_hview
@@ -277,7 +280,7 @@ if birth_delay &gt; 0
     exit
 }
 
-if snapped and (object_index != accolade_generic )
+if snapped and snap_by_percent
 {
     x = view_xview+view_xpercent*view_wview
     y = view_yview+view_ypercent*view_hview
@@ -364,12 +367,12 @@ if birth_delay &gt; 0
 
 if draw_fade
 {
-    draw_set_alpha(fade_alpha*alpha)
+    draw_set_alpha(fade_alpha*alpha*alpha_scaler)
     draw_set_color(fade_color)
     draw_rectangle(view_xview,view_yview,view_xview+view_wview,view_yview+view_hview,false)
 }    
 
-draw_set_alpha(alpha)
+draw_set_alpha(alpha*alpha_scaler)
 
 left = x
 top = y
@@ -405,7 +408,7 @@ if valign = fa_bottom
     
 if object_index = accolade_generic
 {
-    draw_set_alpha(alpha*alpha_scroll_scaler)
+    draw_set_alpha(alpha*alpha_scroll_scaler*alpha_scaler)
     draw_accolade()
     exit
 }
@@ -417,7 +420,10 @@ if not surface_exists(surface)
     else
         draw_set_color(color)
         
-    draw_rectangle(left,top,left+width*scale,top+(height+extra_height)*scale,false)
+    if draw_rect
+    {
+        draw_rectangle(left,top,left+width*scale,top+(height+extra_height)*scale,false)
+    }
     drew_left = left
     drew_right = left+width*scale
     
@@ -435,7 +441,7 @@ if not surface_exists(surface)
     if text != "" or header_text != ""
     {
         if text_alpha_override
-        draw_set_alpha(1)
+        draw_set_alpha(1*alpha_scaler)
         
         draw_set_font(font)
         draw_set_color(text_color)
@@ -483,7 +489,7 @@ if not surface_exists(surface)
             draw_text_ext_transformed(xpos+header_xoff,top+header_yoff+header_height*scale/2,header_text,10,width*scale,scale,scale,0)
         }
         
-        draw_set_alpha(alpha)
+        draw_set_alpha(alpha*alpha_scaler)
     }
     
     draw_set_alpha(1)

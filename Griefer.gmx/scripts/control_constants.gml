@@ -11,6 +11,12 @@ global.gc[GC_CONTROL_HINTS,2] = false //is_sens
 global.gc[GC_AA_LEVEL,0] = "SWF Anti-Aliasing"
 global.gc[GC_AA_LEVEL,1] = 1
 global.gc[GC_AA_LEVEL,2] = true //is_sens
+global.gc[GC_KILL_FEED,0] = "Show Kill Feed"
+global.gc[GC_KILL_FEED,1] = "On Action"
+global.gc[GC_KILL_FEED,2] = false
+global.gc[GC_KILL_FEED_ALPHA,0] = "Kill Feed Opacity"
+global.gc[GC_KILL_FEED_ALPHA,1] = 1
+global.gc[GC_KILL_FEED_ALPHA,2] = true //is_sens
 
 global.dismembered = "Dismembered"
 global.dismembered_tame = "Explosive"

@@ -570,7 +570,7 @@
           <name>sendBigMessageStrReal2</name>
           <externalName>sendBigMessageStrReal2</externalName>
           <kind>12</kind>
-          <help>sendBigMessageStrReal2</help>
+          <help>sendBigMessageStrReal2(str msg, str val1, str val2, real val3)</help>
           <returnType>2</returnType>
           <argCount>4</argCount>
           <args>

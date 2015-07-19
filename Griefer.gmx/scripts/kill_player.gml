@@ -7,6 +7,14 @@ var hit_force = argument4
 var instrument_of_death = argument5
 var acc_autocomplete = argument6
 
+var killer_name = string(objVarRead(killer,"pName"))
+var deadguy_name = string(objVarRead(dead_homes,"pName"))
+if not net_manager.bot_match
+{
+    sendBigMessageStrReal2("kill_feed",killer_name,deadguy_name,real(instrument_of_death))
+}
+new_kill_feed_message(killer_name,deadguy_name,real(instrument_of_death))
+
 if objVarRead(net_manager,"end_match_coming")
 {
     printf("NOTICE: can't kill player -- end match coming")

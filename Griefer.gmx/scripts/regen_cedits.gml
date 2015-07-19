@@ -166,9 +166,9 @@ else
         ID2.width = ewidth
         ID2.height = eheight
         ID2.text = cnames[i]
-        if string_upper(ID2.text) = "ON" or string_upper(ID2.text) = "OFF"
+        if string_upper(ID2.text) = "ON" or string_upper(ID2.text) = "OFF" or string_upper(ID2.text) = "ON ACTION" or string_upper(ID2.text) = "ALWAYS" or string_upper(ID2.text) = "NEVER"
             ID2.is_onoff = true
-        else if string_upper(ID2.text) = "YES" or string_upper(ID2.text) = "NO"
+        else if string_upper(ID2.text) = "YES" or string_upper(ID2.text) = "NO" 
             ID2.is_yesno = true
         ID2.birth_delay = bdelay
         ID2.depth = depth-1

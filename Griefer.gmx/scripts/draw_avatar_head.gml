@@ -42,6 +42,8 @@ var head_prescaler = 2.25
 var alph = 1
 if object_index = action_word
     alph = alpha
+else if object_index = feed_message
+    alph = draw_get_alpha()
 
 //draw the head
 if sprite_exists(head_spr)
@@ -65,5 +67,3 @@ if flag != FL_NOBAR
     draw_set_alpha(1)
     draw_text(xdraw,ydraw,av_score)
 }
-
-draw_set_alpha(1)

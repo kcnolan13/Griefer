@@ -110,6 +110,11 @@ while (bigMessagesWaiting() and wait_counter < 500000)
                 printf("ERROR: cannot set leaderboard dims ... modal_table does not exist")
             }
         break
+        
+        case "kill_feed":
+            printf("::: RECEIVED kill feed message!")
+            new_kill_feed_message(genVal1,genVal2,genVal3)
+        break
     }
         
 }
