@@ -1,0 +1,399 @@
+listening on *:8080
+NEW CLIENT
+NEW CLIENT
+John Doe: disconnected
+deleting John Doe's socket
+PING!
+pong . . .
+
+
+Received JSON Test
+original message: {"val1": 52}
+string JSON detected
+val1 = 52
+[ { name: 'generalMessage', msg: 'greetings', val: 99 },
+  { name: 'generalMessage', msg: 'blah', val: 'plaza' },
+  'stringBean' ]
+received authentication request:
+{"username": "kyle", "password": "abc123"}
+intermediary hash: 107
+after anding: 107
+intermediary hash: 3438
+after anding: 3438
+intermediary hash: 106686
+after anding: 106686
+intermediary hash: 3307367
+after anding: 3307367
+HASHED kyle ---> 3307367
+final result: 3307367
+intermediary hash: 107
+after anding: 107
+intermediary hash: 3438
+after anding: 3438
+intermediary hash: 106686
+after anding: 106686
+intermediary hash: 3307367
+after anding: 3307367
+HASHED kyle ---> 3307367
+final result: 3307367
+intermediary hash: 107
+after anding: 107
+intermediary hash: 3438
+after anding: 3438
+intermediary hash: 106686
+after anding: 106686
+intermediary hash: 3307367
+after anding: 3307367
+HASHED kyle ---> 3307367
+final result: 3307367
+kyle: no_mode, main_menu
+sending kyle stats to local net manager
+sending kyle challenge stats
+intermediary hash: 107
+after anding: 107
+intermediary hash: 3438
+after anding: 3438
+intermediary hash: 106686
+after anding: 106686
+intermediary hash: 3307367
+after anding: 3307367
+HASHED kyle ---> 3307367
+final result: 3307367
+John Doe: disconnected
+deleting John Doe's socket
+kyle: disconnected
+deleting kyle's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+
+Received JSON Test
+original message: {"val1": 52}
+string JSON detected
+val1 = 52
+[ { name: 'generalMessage', msg: 'greetings', val: 99 },
+  { name: 'generalMessage', msg: 'blah', val: 'plaza' },
+  'stringBean' ]
+received authentication request:
+{"username": "kyle", "password": "abc123"}
+correct password
+unique login for: kyle
+intermediary hash: 107
+after anding: 107
+intermediary hash: 3438
+after anding: 3438
+intermediary hash: 106686
+after anding: 106686
+intermediary hash: 3307367
+after anding: 3307367
+HASHED kyle ---> 3307367
+final result: 3307367
+kyle: no_mode, main_menu
+sending kyle stats to local net manager
+sending kyle challenge stats
+intermediary hash: 107
+after anding: 107
+intermediary hash: 3438
+after anding: 3438
+intermediary hash: 106686
+after anding: 106686
+intermediary hash: 3307367
+after anding: 3307367
+HASHED kyle ---> 3307367
+final result: 3307367
+intermediary hash: 107
+after anding: 107
+intermediary hash: 3438
+after anding: 3438
+intermediary hash: 106686
+after anding: 106686
+intermediary hash: 3307367
+after anding: 3307367
+HASHED kyle ---> 3307367
+final result: 3307367
+kyle: disconnected
+deleting kyle's socket
+PING!
+pong . . .
+
+
+Received JSON Test
+original message: {"val1": 52}
+string JSON detected
+val1 = 52
+[ { name: 'generalMessage', msg: 'greetings', val: 99 },
+  { name: 'generalMessage', msg: 'blah', val: 'plaza' },
+  'stringBean' ]
+received authentication request:
+{"username": "kyle", "password": "abc123"}
+correct password
+unique login for: kyle
+intermediary hash: 107
+after anding: 107
+intermediary hash: 3438
+after anding: 3438
+intermediary hash: 106686
+after anding: 106686
+intermediary hash: 3307367
+after anding: 3307367
+HASHED kyle ---> 3307367
+final result: 3307367
+kyle: no_mode, main_menu
+sending kyle stats to local net manager
+sending kyle challenge stats
+intermediary hash: 107
+after anding: 107
+intermediary hash: 3438
+after anding: 3438
+intermediary hash: 106686
+after anding: 106686
+intermediary hash: 3307367
+after anding: 3307367
+HASHED kyle ---> 3307367
+final result: 3307367
+intermediary hash: 107
+after anding: 107
+intermediary hash: 3438
+after anding: 3438
+intermediary hash: 106686
+after anding: 106686
+intermediary hash: 3307367
+after anding: 3307367
+HASHED kyle ---> 3307367
+final result: 3307367
+kyle moving to: bot_ffa_lobby
+intermediary hash: 107
+after anding: 107
+intermediary hash: 3438
+after anding: 3438
+intermediary hash: 106686
+after anding: 106686
+intermediary hash: 3307367
+after anding: 3307367
+HASHED kyle ---> 3307367
+final result: 3307367
+John Doe: disconnected
+deleting John Doe's socket
+kyle: disconnected
+deleting kyle's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+
+Received JSON Test
+original message: {"val1": 52}
+string JSON detected
+val1 = 52
+[ { name: 'generalMessage', msg: 'greetings', val: 99 },
+  { name: 'generalMessage', msg: 'blah', val: 'plaza' },
+  'stringBean' ]
+received authentication request:
+{"username": "kyle", "password": "abc123"}
+correct password
+unique login for: kyle
+intermediary hash: 107
+after anding: 107
+intermediary hash: 3438
+after anding: 3438
+intermediary hash: 106686
+after anding: 106686
+intermediary hash: 3307367
+after anding: 3307367
+HASHED kyle ---> 3307367
+final result: 3307367
+kyle: no_mode, main_menu
+sending kyle stats to local net manager
+sending kyle challenge stats
+intermediary hash: 107
+after anding: 107
+intermediary hash: 3438
+after anding: 3438
+intermediary hash: 106686
+after anding: 106686
+intermediary hash: 3307367
+after anding: 3307367
+HASHED kyle ---> 3307367
+final result: 3307367
+intermediary hash: 107
+after anding: 107
+intermediary hash: 3438
+after anding: 3438
+intermediary hash: 106686
+after anding: 106686
+intermediary hash: 3307367
+after anding: 3307367
+HASHED kyle ---> 3307367
+final result: 3307367
+kyle moving to: bot_ffa_lobby
+intermediary hash: 107
+after anding: 107
+intermediary hash: 3438
+after anding: 3438
+intermediary hash: 106686
+after anding: 106686
+intermediary hash: 3307367
+after anding: 3307367
+HASHED kyle ---> 3307367
+final result: 3307367
+John Doe: disconnected
+deleting John Doe's socket
+kyle: disconnected
+deleting kyle's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+
+Received JSON Test
+original message: {"val1": 52}
+string JSON detected
+val1 = 52
+[ { name: 'generalMessage', msg: 'greetings', val: 99 },
+  { name: 'generalMessage', msg: 'blah', val: 'plaza' },
+  'stringBean' ]
+received authentication request:
+{"username": "kyle", "password": "abc123"}
+correct password
+unique login for: kyle
+intermediary hash: 107
+after anding: 107
+intermediary hash: 3438
+after anding: 3438
+intermediary hash: 106686
+after anding: 106686
+intermediary hash: 3307367
+after anding: 3307367
+HASHED kyle ---> 3307367
+final result: 3307367
+kyle: no_mode, main_menu
+sending kyle stats to local net manager
+sending kyle challenge stats
+intermediary hash: 107
+after anding: 107
+intermediary hash: 3438
+after anding: 3438
+intermediary hash: 106686
+after anding: 106686
+intermediary hash: 3307367
+after anding: 3307367
+HASHED kyle ---> 3307367
+final result: 3307367
+kyle moving to: bot_ffa_lobby
+intermediary hash: 107
+after anding: 107
+intermediary hash: 3438
+after anding: 3438
+intermediary hash: 106686
+after anding: 106686
+intermediary hash: 3307367
+after anding: 3307367
+HASHED kyle ---> 3307367
+final result: 3307367
+John Doe: disconnected
+deleting John Doe's socket
+kyle: disconnected
+deleting kyle's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+
+Received JSON Test
+original message: {"val1": 52}
+string JSON detected
+val1 = 52
+[ { name: 'generalMessage', msg: 'greetings', val: 99 },
+  { name: 'generalMessage', msg: 'blah', val: 'plaza' },
+  'stringBean' ]
+received authentication request:
+{"username": "kyle", "password": "abc123"}
+correct password
+unique login for: kyle
+intermediary hash: 107
+after anding: 107
+intermediary hash: 3438
+after anding: 3438
+intermediary hash: 106686
+after anding: 106686
+intermediary hash: 3307367
+after anding: 3307367
+HASHED kyle ---> 3307367
+final result: 3307367
+kyle: no_mode, main_menu
+sending kyle stats to local net manager
+sending kyle challenge stats
+intermediary hash: 107
+after anding: 107
+intermediary hash: 3438
+after anding: 3438
+intermediary hash: 106686
+after anding: 106686
+intermediary hash: 3307367
+after anding: 3307367
+HASHED kyle ---> 3307367
+final result: 3307367
+kyle moving to: bot_ffa_lobby
+intermediary hash: 107
+after anding: 107
+intermediary hash: 3438
+after anding: 3438
+intermediary hash: 106686
+after anding: 106686
+intermediary hash: 3307367
+after anding: 3307367
+HASHED kyle ---> 3307367
+final result: 3307367
+intermediary hash: 107
+after anding: 107
+intermediary hash: 3438
+after anding: 3438
+intermediary hash: 106686
+after anding: 106686
+intermediary hash: 3307367
+after anding: 3307367
+HASHED kyle ---> 3307367
+final result: 3307367
+intermediary hash: 107
+after anding: 107
+intermediary hash: 3438
+after anding: 3438
+intermediary hash: 106686
+after anding: 106686
+intermediary hash: 3307367
+after anding: 3307367
+HASHED kyle ---> 3307367
+final result: 3307367
+intermediary hash: 107
+after anding: 107
+intermediary hash: 3438
+after anding: 3438
+intermediary hash: 106686
+after anding: 106686
+intermediary hash: 3307367
+after anding: 3307367
+HASHED kyle ---> 3307367
+final result: 3307367
+kyle Leaving Matchmaking
+adding perma challenge: Mincer
+adding perma challenge: Neophyte I
+PING!
+pong . . .
+
+
+Received JSON Test
+original message: {"val1": 52}
+string JSON detected
+val1 = 52
+[ { name: 'generalMessage', msg: 'greetings', val: 99 },
+  { name: 'generalMessage', msg: 'blah', val: 'plaza' },
+  'stringBean' ]
+John Doe: disconnected
+deleting John Doe's socket
+kyle: disconnected
+deleting kyle's socket

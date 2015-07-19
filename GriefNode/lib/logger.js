@@ -21,7 +21,7 @@ var CRITICAL = "err"
 var SOCKETS = "sock"
 var VERBOSE = "verbose"
 
-var log_std = fs.createWriteStream(__dirname + '/../log/general.log', {flags : 'w'});
+var log_std = fs.createWriteStream(__dirname + '/../log/std.log', {flags : 'w'});
 var log_cupid = fs.createWriteStream(__dirname + '/../log/cupid.log', {flags : 'w'});
 var log_critical = fs.createWriteStream(__dirname + '/../log/critical.log', {flags : 'w'});
 var log_sockets = fs.createWriteStream(__dirname+ '/../log/sockets.log', {flags : 'w'});
@@ -47,12 +47,12 @@ exports.log = function(flag,text) {
 };
 
 var std_cleaner = setInterval(function() {
-	var stats = fs.statSync(__dirname + '/../log/general.log');
+	var stats = fs.statSync(__dirname + '/../log/std.log');
 	var fsize_mb = stats["size"]/1000000.0;
 	//console.log("\n\nLog File Size: "+fsize_mb+" MegaBytes\n\n");
 	if (fsize_mb > 5)
 	{
-		log_std = fs.createWriteStream(__dirname + '/../log/general.log', {flags : 'w'});
+		log_std = fs.createWriteStream(__dirname + '/../log/std.log', {flags : 'w'});
 	}
 }, 100000);
 

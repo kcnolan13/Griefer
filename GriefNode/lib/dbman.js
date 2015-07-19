@@ -76,6 +76,7 @@ log.log(SQL,statement);
 //sql create challenges + friends
 //create table friends (username VARCHAR(20), friend VARCHAR(20));
 //create table challenges (username VARCHAR(20), challenge_name text);
+//create table settings (username VARCHAR(20), setting_name text, val_str text val_real real, is_sens real);
 //create table controls (username VARCHAR(20), control_name text, control_index real, control_code real, using_gamepad real);
 //create table stats (username VARCHAR(20), rank real, true_skill real, xp real, ppl real, kdr real, wl real, time real, points real, kills real, deaths real, assists real, wins real, losses real, kill_streak real, win_streak real, rollover_kstreak real, rollover_wstreak real, global_rank real, kdr_history text, ppl_history text, win_history text);
 //create table bot_stats (username VARCHAR(20), bot_rank real, ppl real, kdr real, wl real, points real, kills real, deaths real, assists real, wins real, losses real, kill_streak real, win_streak real, rollover_kstreak real, rollover_wstreak real, kdr_history text, ppl_history text, win_history text);
@@ -314,7 +315,7 @@ exports.alreadyLoggedIn = alreadyLoggedIn
 
 var userDelete = function(username)
 {
-	var tables = ['users','stats','bot_stats','challenges','controls','accolades','bot_accolades'];
+	var tables = ['users','stats','bot_stats','challenges','controls','accolades','bot_accolades','settings'];
 	for (var i=0; i<tables.length; i++)
 	{
 		var where = " where username='"+username+"'";
@@ -488,6 +489,8 @@ var sendPermaChallenges = function(socket)
 
 	conn.query(statement, function(err,rows) {
 
+			var pkgDude = new composer.createPkg();
+
 			//log any errors
 			if (err)
 				log.log(SQL,err);
@@ -497,11 +500,68 @@ var sendPermaChallenges = function(socket)
 				var challenge_name = rows[i]["challenge_name"];
 				var msg = composer.genMessage("perma_challenge",challenge_name);
 				log.log("verbose",msg);
-				socket.emit("general_message",msg);
+				pkgDude.messages.push(msg);
 			}
+
+			socket.emit('pkg',pkgDude.messages);
+			log.log("verbose",pkgDude.messages);
 	});
 }
 exports.sendPermaChallenges = sendPermaChallenges
+
+var loadSettings = function(socket)
+{
+	var theDude = socket.myPlayer;
+	var username = socket.myPlayer.pName;
+	var statement = "SELECT setting_name, val_str, val_real from settings where username='"+username+"'";
+
+	conn.query(statement, function(err,rows) {
+
+			var pkgDude = new composer.createPkg();
+
+			//log any errors
+			if (err)
+				log.log(SQL,err);
+
+			for (var i=0; i<rows.length; i++)
+			{
+				var setting_name = rows[i]['setting_name'];
+				var val_str = rows[i]['val_str'];
+				var val_real = rows[i]['val_real'];
+				var msg = composer.bigMessage("load_setting",setting_name,val_str,val_real);
+				//log.log("verbose",msg);
+				pkgDude.messages.push(msg);
+			}
+
+			socket.emit('pkg',pkgDude.messages);
+			log.log("verbose",pkgDude.messages);
+	});
+}
+exports.loadSettings = loadSettings
+
+var saveSetting = function(socket, setting_name, val_str, val_real)
+{
+	var username = socket.myPlayer.pName;
+	var count = 0;
+	var statement = "SELECT COUNT(*) from settings where username='"+username+"' AND setting_name='"+setting_name+"'";
+	conn.query(statement, function(err,rows) {
+		if (err)
+			log.log(SQL, err);
+
+		count = rows[0]['COUNT(*)'];
+		if (count > 0)
+		{
+			statement = "UPDATE settings set val_str='"+val_str+"', val_real='"+val_real+"' WHERE username='"+username+"' AND setting_name='"+setting_name+"'";
+		}
+		else
+		{
+			statement = "INSERT INTO settings (username, setting_name, val_str, val_real) VALUES ('"+username+"','"+setting_name+"','"+val_str+"','"+val_real+"')";
+		}
+		log.log(SQL,statement);
+		execute(statement);
+	})
+}
+exports.saveSetting = saveSetting
 
 var getGravatarAccolades = function(socket, username, flag, retransmit)
 {
@@ -690,7 +750,7 @@ var rankPlayers = function() {
 			var wl = rows[i]['wl'];
 			var grank = 0;
 			var tskill = Math.floor(ppl * (wl+1)/2);
-			log.log(STD, "Calculated "+username+"'s True Skill: "+tskill);
+			log.log(SQL, "Calculated "+username+"'s True Skill: "+tskill);
 
 			player.push(username);
 			player.push(tskill);
@@ -721,7 +781,7 @@ var rankPlayers = function() {
 			}
 
 			players[i][2] = grank;
-			log.log(STD, "Calculated "+players[i][0]+"'s Global Rank: "+grank);
+			log.log(SQL, "Calculated "+players[i][0]+"'s Global Rank: "+grank);
 
 			//update db with results
 			var statement = "UPDATE stats set true_skill="+players[i][1]+", global_rank="+players[i][2]+" WHERE username='"+players[i][0]+"'";
@@ -742,14 +802,14 @@ var rankPlayers = function() {
 							var manual_uid = composer.hash_string(sock.myPlayer.pName);
 							if (sock.myPlayer.room != "")
 							{
-								log.log(STD,"updating "+sock.myPlayer.pName+"'s local avatar: true_skill="+players[i][1]+", global_rank = "+players[i][2]);
+								log.log(SQL,"updating "+sock.myPlayer.pName+"'s local avatar: true_skill="+players[i][1]+", global_rank = "+players[i][2]);
 								//update the local avatar with his new trueskill / global_rank
 								var upd = composer.objUpdate(avatarObjIndex,manual_uid,"true_skill",players[i][1],FL_NORMAL);
-								log.log(STD,upd);
+								log.log(SQL,upd);
 								sock.emit('obj_update',upd);
 								
 								upd = composer.objUpdate(avatarObjIndex,manual_uid,"global_rank",players[i][2],FL_NORMAL);
-								log.log(STD,upd);
+								log.log(SQL,upd);
 								sock.emit('obj_update',upd);
 							}
 							else

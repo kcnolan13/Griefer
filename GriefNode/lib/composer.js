@@ -14,21 +14,25 @@ var SOCKETS = "sock"
 
 //LOAD MODULES
 var log = require('./logger.js');
-
+//var dealer_module = require('./build/Release/dealer');
+//var dealer = new dealer_module.dealer(5);
 
 //EXPORTS
 var hash_string = function(string) {
-    var hash = 5381;
+	//return dealer.hash(string);
+    var hash = 0;
     if (string.length == 0) return hash;
     for (var i = 0; i < string.length; i++) {
         var c = string.charCodeAt(i);
         hash = ((hash<<5)-hash)+c;
-        hash = hash & hash; // Convert to 32bit integer
+        log.log(STD,"intermediary hash: "+hash)
+        hash |= 0; // Convert to 32bit integer
+        log.log(STD,"after anding: "+hash)
     }
     log.log(STD,"HASHED "+string+" ---> "+hash);
-    if (hash < 0)
-    	hash = hash*2;
-    return Math.abs(hash);
+	hash = Math.abs(hash);
+    log.log(STD,"final result: "+hash);
+    return hash;
 }
 exports.hash_string = hash_string;
 

@@ -81,6 +81,7 @@ io.on('connection', function(socket){
 			log.log(STD,"sending "+socket.myPlayer.pName+" challenge stats");
 			dbman.sendPermaChallenges(socket);
 			dbman.sendControlMaps(socket);
+			dbman.loadSettings(socket);
 		}, 500, socket);
 
 	  	//send player stats after 35 ms delay
@@ -186,8 +187,8 @@ io.on('connection', function(socket){
 	  	{
 	  		//example usage
 	  		var statement = "UPDATE controls set control_code="+message.val2+" WHERE username='"+socket.myPlayer.pName+"' AND control_index="+message.val1+" AND using_gamepad="+message.val3;
-	  		log.log(STD,"USER-DEFINED CONTROL MAPPING:\n"+statement+"\n\n");
-			dbman.esecute(statement);
+	  		log.log(SQL,"USER-DEFINED CONTROL MAPPING:\n"+statement+"\n\n");
+			dbman.execute(statement);
 	  	}
 	  	else if (message.msg == "accolade_update")
 	  	{
@@ -203,6 +204,10 @@ io.on('connection', function(socket){
 		else if (message.msg == "get_personal_stats")
 		{
 			dbman.getGravatarStats(socket,message.val1,message.val2);
+		} else if (message.msg == "save_setting")
+		{
+			dbman.saveSetting(socket, message.val1, message.val2, message.val3);
+			log.log("verbose", "GENERAL SETTING:\n"+message);
 		}
 
 	});
