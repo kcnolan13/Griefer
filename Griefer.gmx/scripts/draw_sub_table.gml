@@ -11,6 +11,12 @@ for (var i=0; i<ds_grid_height(pgrid); i++)
 {
     var av = ds_grid_get(pgrid,1,i)
     
+    if not instance_exists(av) or av.object_index != avatar
+    {
+        printf("ERROR: nonexistent av in draw_sub_table (or wrong obj_index or something)")
+        return false
+    }
+    
     var playa = find_player_by_pname(objVarRead(av,"pName"))
     if instance_exists(playa) and not objVarRead(net_manager,"end_match_coming")
     {
@@ -31,27 +37,7 @@ for (var i=0; i<ds_grid_height(pgrid); i++)
         
     var ass = objVarRead(av,"match_assists")
     
-    if objVarRead(net_manager,"game_mode") = "tdm"
-    {
-        if pgrid = net_manager.team1
-        {
-            bgcolor = global.team1_color
-            if av = net_manager.my_doll
-                bgcolor = global.you1_color
-        }
-        else
-        {
-            bgcolor = global.team0_color
-            if av = net_manager.my_doll
-                bgcolor = global.you0_color
-        }
-    }
-    else
-    {
-        bgcolor = global.team_all_color
-        if av = net_manager.my_doll
-            bgcolor = global.you_all_color
-    }
+    bgcolor = team_color_pname(objVarRead(av,"pName"))
     
     if objVarRead(av,"player_quit")
         bg_color = c_black

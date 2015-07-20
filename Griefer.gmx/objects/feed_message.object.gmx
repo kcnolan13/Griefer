@@ -29,17 +29,22 @@
 event_inherited()
 text = ""
 alpha = 0
+alph_max = 1
 alpha_max = 100
 alpha_highlight = 0
 halign = fa_center
 valign = fa_center
 font = fnt_hud_big
+notif_time = 0
+notif_color = c_white
 
 netvars = ds_map_create()
 
 show_text = true
 deadguy = noone
 deadguy_blood_color = c_red
+av1 = noone
+av2 = noone
 avname1 = ""
 avname2 = ""
 avhead1 = -1
@@ -51,6 +56,8 @@ weapon = -1
 snap_2view = false
 snap_obj = kill_feed
 text_yoff = -15
+text_linesep = 14
+max_length = 9
 
 lerp_ytarget = 0
 lerp_ycurrent = 0
@@ -173,6 +180,14 @@ if instance_exists(snap_obj)
             <string>///snap to snap_obj and find deadguy
 event_inherited()
 
+if notif_time
+    notif_time --
+
+if fade_out
+{
+    printf(":::feed_message fading out: "+string(alpha))    
+}
+
 if not instance_exists(deadguy) and avname2 != ""
 {
     var test = find_pname_avatar(avname2)
@@ -274,13 +289,15 @@ if ds_exists(netvars,ds_type_map)
           <argument>
             <kind>1</kind>
             <string>///draw av heads and stuff
-alpha_scaler = kill_feed.alpha_scaler
-var alph = min(1,alpha)*alpha_scaler*alpha_scaler
+alpha_scaler = snap_obj.alpha_scaler
+var alph = min(alph_max,alpha)*alpha_scaler*alpha_scaler
 if alph &gt; 0.1
 {
     draw_set_alpha(alph)
     
     var head_xoff = 1.75*sprite_get_width(spr_head)/2*avhead_scale*scale
+    if snap_obj = chat_feed
+        head_xoff *= 1.5
     
     //draw the weapon
     if weapon &gt; -1 and sprite_exists(weapon)
@@ -303,6 +320,16 @@ if alph &gt; 0.1
     
     if avhead1 &gt; -1 and sprite_exists(avhead1)
     {
+        if not instance_exists(av1)
+            av1 = find_pname_avatar(avname1)
+            
+        if instance_exists(av1)
+        {
+            avhead1 = objVarRead(av1,"helmet0")
+            avhat1 = objVarRead(av1,"hat0")
+            color = team_color_pname(avname1)
+        }
+        
         varWrite("helmet0",avhead1)
         if avhat1 &gt; -1 and sprite_exists(avhat1)
             varWrite("hat0",avhat1)
@@ -314,12 +341,21 @@ if alph &gt; 0.1
         draw_set_font(fnt_feed)
         draw_set_color(c_white)
         draw_set_halign(fa_left)
-        draw_text(x-width/2-head_xoff*2,y,chop_string(avname1,9))
+        draw_text(x-width/2-head_xoff*2,y,capwords(chop_string(avname1,max_length)))
         draw_set_alpha(alph)
     }
     
     if avhead2 &gt; -1 and sprite_exists(avhead2)
     {
+        if not instance_exists(av2)
+            av2 = find_pname_avatar(avname2)
+        
+        if instance_exists(av2)
+        {
+            avhead2 = objVarRead(av2,"helmet0")
+            avhat2 = objVarRead(av2,"hat0")
+        }
+            
         //draw splats for dead guy
         if instance_exists(deadguy)
         {
@@ -335,7 +371,7 @@ if alph &gt; 0.1
         draw_set_font(fnt_feed)
         draw_set_color(c_white)
         draw_set_halign(fa_right)
-        draw_text(x+width/2+head_xoff*2,y,chop_string(avname2,9))
+        draw_text(x+width/2+head_xoff*2,y,capwords(chop_string(avname2,max_length)))
         draw_set_alpha(alph)
     }
 }
@@ -343,8 +379,14 @@ if alph &gt; 0.1
 draw_set_halign(fa_center)
 
 if show_text
+{
     event_inherited()
+}
 
+if notif_time
+{
+    draw_notification(1,x-width/2+rect_xoff,y-height/2+rect_yoff,1,notif_color,alpha_scaler)
+}
 </string>
           </argument>
         </arguments>

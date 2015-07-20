@@ -865,6 +865,7 @@
       <script>scripts\print_list.gml</script>
     </scripts>
     <scripts name="avatar">
+      <script>scripts\team_color_pname.gml</script>
       <script>scripts\lose_gear.gml</script>
       <script>scripts\steal_gear.gml</script>
       <script>scripts\find_pnum_avatar.gml</script>
@@ -1375,6 +1376,7 @@
       <script>scripts\in_match.gml</script>
       <script>scripts\get_player_limit.gml</script>
       <script>scripts\match_ending.gml</script>
+      <script>scripts\match_starting.gml</script>
     </scripts>
     <scripts name="general utilities">
       <script>scripts\hash_string.gml</script>
@@ -1411,6 +1413,7 @@
     </scripts>
     <scripts name="feeds">
       <script>scripts\new_kill_feed_message.gml</script>
+      <script>scripts\new_chat_feed_message.gml</script>
     </scripts>
   </scripts>
   <shaders name="shaders">
@@ -1490,9 +1493,10 @@
     <objects name="GUI">
       <object>objects\modal_window</object>
       <object>objects\modal_button</object>
-      <object>objects\feed_message</object>
       <objects name="feeds">
         <object>objects\kill_feed</object>
+        <object>objects\chat_feed</object>
+        <object>objects\feed_message</object>
       </objects>
       <objects name="main_menu">
         <object>objects\bn_play</object>
@@ -1548,6 +1552,7 @@
       </objects>
       <object>objects\toggle_button_generic</object>
       <object>objects\button_generic</object>
+      <object>objects\input_field</object>
     </objects>
     <objects name="weapons">
       <object>objects\weapon_placeholder1</object>
@@ -1712,7 +1717,6 @@
       <object>objects\hit_indicator</object>
       <objects name="labels">
         <object>objects\title</object>
-        <object>objects\input_field</object>
         <object>objects\processing</object>
       </objects>
     </objects>
@@ -1807,7 +1811,9 @@
       <room>rooms\map_placeholder2</room>
     </rooms>
   </rooms>
-  <constants number="140">
+  <constants number="142">
+    <constant name="GC_CHAT_FEED_ALPHA">7</constant>
+    <constant name="GC_CHAT_FEED">6</constant>
     <constant name="GC_KILL_FEED_ALPHA">5</constant>
     <constant name="GC_KILL_FEED">4</constant>
     <constant name="GC_AA_LEVEL">3</constant>

@@ -1,5 +1,9 @@
 ///framely_player_controls()
 
+//bail out if in text entry somewhere
+if chat_feed.entry.input_active
+    return false
+
 //BUTTON HOLDS
 if input_check(mapped_control(C_SHOOT))
 {

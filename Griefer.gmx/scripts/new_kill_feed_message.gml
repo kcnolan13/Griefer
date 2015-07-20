@@ -71,9 +71,10 @@ with (kill_feed)
     {
         msgs[i].lerp_ytarget += msg_height+msg_ysep
         
-        if i+1 > msgs_max
+        if i+1 >= msgs_max
         {
             msgs[i].fade_out = true
+            msgs[i].alpha = min(1,msgs[i].alpha)
             msgs[i] = NO_HANDLE
         }
         else

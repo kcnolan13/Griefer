@@ -38,9 +38,15 @@ alpha_highlight = alpha_max
 alpha_scaler = 1
 active = false
 active_color = c_gray
+color_highlighted = GARBAGE
 highlightable = true
 surface = NO_HANDLE
 
+rect_xoff = 0
+rect_yoff = 0
+rect_yextra = 0
+rect_xextra = 0
+rect_alpha = 1
 draw_rect = true
 draw_fade = false
 fade_color = c_black
@@ -113,6 +119,7 @@ text_halign = fa_center
 text_valign = fa_middle
 text_xoff = 0
 text_yoff = 0
+text_linesep = 20
 
 image = spr_none
 
@@ -418,11 +425,18 @@ if not surface_exists(surface)
     if active
         draw_set_color(active_color)
     else
-        draw_set_color(color)
+    {
+        if color_highlighted = GARBAGE or not modal_highlighted(id)
+            draw_set_color(color)
+        else draw_set_color(color_highlighted)
+    }
         
     if draw_rect
     {
-        draw_rectangle(left,top,left+width*scale,top+(height+extra_height)*scale,false)
+        var alph = draw_get_alpha()
+        draw_set_alpha(alph*rect_alpha*alpha_scaler)
+        draw_rectangle(left+rect_xoff*scale-rect_xextra*scale/2,top+rect_yoff*scale-rect_yextra*scale/2,left+width*scale+rect_xoff*scale+rect_xextra*scale/2,top+(height+extra_height)*scale+rect_yoff*scale+rect_yextra*scale/2,false)
+        draw_set_alpha(alph)
     }
     drew_left = left
     drew_right = left+width*scale
@@ -430,12 +444,12 @@ if not surface_exists(surface)
     if header_height &gt; 0
     {
         draw_set_color(header_color)
-        draw_rectangle(left,top+header_height*scale,left+width*scale,top,false)
+        draw_rectangle(left+rect_xoff*scale,top+header_height*scale+rect_yoff*scale,left+width*scale+rect_xoff*scale,top+rect_yoff*scale,false)
     }
     
     if image != spr_none
     {
-        draw_sprite_ext(image,img_index,left,top,scale,scale,0,c_white,1)
+        draw_sprite_ext(image,img_index,left+rect_xoff*scale,top+rect_yoff*scale,scale,scale,0,c_white,1)
     }
     
     if text != "" or header_text != ""
@@ -448,8 +462,8 @@ if not surface_exists(surface)
         draw_set_halign(fa_center)
         draw_set_valign(fa_middle)
         
-        xpos = left+width*scale/2
-        ypos = top+height*scale/2
+        xpos = left+width*scale/2+rect_xoff*scale
+        ypos = top+height*scale/2+rect_yoff*scale
         
         if text_halign = fa_right
         {
@@ -478,7 +492,7 @@ if not surface_exists(surface)
         xpos += text_xoff*scale
         ypos += text_yoff*scale
         
-        draw_text_ext_transformed(xpos,ypos,text,10,width*scale,scale,scale,0)
+        draw_text_ext_transformed(xpos,ypos,text,text_linesep,width*scale,scale,scale,0)
         
         if header_height &gt; 0
         {
@@ -486,7 +500,7 @@ if not surface_exists(surface)
             draw_set_color(header_text_color)
             draw_set_halign(text_halign)
             draw_set_valign(fa_center)
-            draw_text_ext_transformed(xpos+header_xoff,top+header_yoff+header_height*scale/2,header_text,10,width*scale,scale,scale,0)
+            draw_text_ext_transformed(xpos+header_xoff,top+header_yoff+header_height*scale/2,header_text,text_linesep,width*scale,scale,scale,0)
         }
         
         draw_set_alpha(alpha*alpha_scaler)

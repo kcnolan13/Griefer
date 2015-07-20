@@ -406,6 +406,15 @@ if varRead("player_quit")
 if mouse_wheel_delay &gt; 0
 mouse_wheel_delay --
 
+//talk sometimes
+if is_bot(id)
+{
+    if random(1) &lt; 1/(room_speed*30)
+    {
+        new_chat_feed_message(varRead("pName"),"","Are you sucking my cock or is it just me?")
+    }
+}
+
 if in_match()
 {
     x = room_width+400

@@ -3,6 +3,7 @@ var percent_active = argument0
 var percent_reflexes = argument1
 
 {
+
     weapon_time ++
     
     percent_active += 0.05

@@ -58,7 +58,7 @@ csat_mult = 0.75
 cval_mult = 4
 header_height = 28
 header_xoff = 0
-header_yoff = -10
+header_yoff = -8
 header_font = fnt_hud_big
 header_color = c_black//web_hsv(main_hue,csat*2,65)
 color = web_hsv(main_hue,csat,cval*0.5)
@@ -192,6 +192,12 @@ else
     printf("ERROR: kill_feed has unexpected GC_KILL_FEED value: "+string(tval))
 }
 
+//don't show up when chat feed is blocking the way
+if in_match() and chat_feed.alpha_scaler &gt; 0.1
+{
+    alpha_scaler = 0
+}
+
 /*
 if not in_match()
 {
@@ -283,6 +289,9 @@ audio_play_sound(snd_click,2,false)
           <argument>
             <kind>1</kind>
             <string>///mostly inherited
+
+if room = rm_login
+    alpha_scaler = 0
 
 text_halign = fa_center
 event_inherited()

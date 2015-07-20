@@ -39,6 +39,9 @@ backspace_hold_delay = 10
 backspace_delay = backspace_hold_delay
 tab_delay = 0
 auto_started = false
+text_linesep = 14
+alpha = 1
+font = fnt_button
 </string>
           </argument>
         </arguments>
@@ -95,7 +98,14 @@ alarm[0] = room_speed/3
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if global.using_gamepad 
+            <string>///stuff
+if alpha &lt; 0.1
+{
+    input_active = false
+    str_cursor = ""
+}
+
+if global.using_gamepad 
 {
     if gamepad_button_check_pressed(global.devno,global.cvals[C_JUMP]) 
     or gamepad_button_check_pressed(global.devno,global.cvals[C_SHOOT])
@@ -110,7 +120,6 @@ alarm[0] = room_speed/3
     }
 }
 
-
 if not input_active exit
 
 
@@ -118,47 +127,50 @@ if not input_active exit
 if tab_delay &gt; 0
 tab_delay --
 
-if keyboard_check(vk_backspace)
+if input_active
 {
-    backspace_counter++
-    if backspace_counter &gt; backspace_delay
+    if keyboard_check(vk_backspace)
     {
-        if string_length(keyboard_string) &gt; 0
+        backspace_counter++
+        if backspace_counter &gt; backspace_delay
         {
-            keyboard_string = string_copy(keyboard_string,1,string_length(keyboard_string)-1)
-            input_string = keyboard_string
-        }
-        backspace_delay = 1
-        backspace_counter = 0
-    }
-}
-else 
-{
-    backspace_counter = 0
-    backspace_delay = backspace_hold_delay
-}
-
-if keyboard_check_pressed(vk_tab) and not tab_delay
-{
-    if input_active
-    {
-        tab_delay = 5
-        input_active = false
-        str_cursor = ""
-        for (i=0; i&lt;instance_number(input_field); i++)
-        {
-            ID = instance_find(input_field,i)
-            if ID.id != id
+            if string_length(keyboard_string) &gt; 0
             {
-                with ID
+                keyboard_string = string_copy(keyboard_string,1,string_length(keyboard_string)-1)
+                input_string = keyboard_string
+            }
+            backspace_delay = 1
+            backspace_counter = 0
+        }
+    }
+    else 
+    {
+        backspace_counter = 0
+        backspace_delay = backspace_hold_delay
+    }
+    
+    if keyboard_check_pressed(vk_tab) and not tab_delay and room = rm_login
+    {
+        if input_active
+        {
+            tab_delay = 5
+            input_active = false
+            str_cursor = ""
+            for (i=0; i&lt;instance_number(input_field); i++)
+            {
+                ID = instance_find(input_field,i)
+                if ID.id != id
                 {
-                    tab_delay = 5
-                    input_active = true
-                    keyboard_string = ""
-                    input_string = ""
-                    str_cursor = "|"
+                    with ID
+                    {
+                        tab_delay = 5
+                        input_active = true
+                        keyboard_string = ""
+                        input_string = ""
+                        str_cursor = "|"
+                    }
+                    break
                 }
-                break
             }
         }
     }
@@ -187,6 +199,8 @@ if keyboard_check_pressed(vk_tab) and not tab_delay
             <kind>1</kind>
             <string>///toggle active
 
+if alpha &lt; 0.1 exit
+
 if !instance_place(x,y,cursor)
 {
     input_active = false
@@ -207,7 +221,35 @@ str_cursor = "|"
         instantClear = true
         input_string = ""
     }
-
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///redo insta-clear
+if room != rm_login
+{
+    instantClear = true
+    keyboard_string = ""
+    input_string = ""
 }
 </string>
           </argument>
@@ -231,21 +273,25 @@ str_cursor = "|"
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if input_active = true or instance_place(x,y,cursor)
+            <string>draw_set_alpha(alpha)
+
+if input_active = true or instance_place(x,y,cursor)
     image_index = 1
 else
     image_index = 0
 
-draw_set_font(fnt_button)
-    
-draw_sprite(sprite_index,image_index,x,y)
+draw_set_font(font)
+
+draw_sprite_ext(sprite_index,image_index,x,y,image_xscale,image_yscale,0,image_blend,alpha)
 draw_set_halign(fa_left)
 draw_set_valign(fa_center)
 
 draw_set_color(c_white)
-draw_text(x,y+sprite_get_height(sprite_index)/2,string(input_string)+string(str_cursor))
+draw_text_ext(x,y+image_yscale*sprite_get_height(sprite_index)/2,string(input_string)+string(str_cursor),text_linesep,sprite_width-5)
 draw_set_color(c_white)
-draw_text(x,y-sprite_get_height(sprite_index)/2,label)
+draw_text(x,y-image_yscale*sprite_get_height(sprite_index)/2,label)
+
+draw_set_alpha(1)
 </string>
           </argument>
         </arguments>
@@ -270,8 +316,11 @@ draw_text(x,y-sprite_get_height(sprite_index)/2,label)
             <kind>1</kind>
             <string>///add text
 
-if not input_active and bn_login_user.field_username = id and not auto_started
+if not input_active and not auto_started and alpha &gt; 0.1
 {
+    if room = rm_login and bn_login_user.field_username != id
+        return false
+    
     auto_started = true
     if not audio_is_playing(snd_click) and not input_active
     audio_play_sound(snd_click,3,false)
@@ -286,7 +335,7 @@ if not input_active and bn_login_user.field_username = id and not auto_started
     }
 }
 
-if input_active=true
+if input_active=true and alpha &gt; 0.1
 {
     if instantClear = true
     {

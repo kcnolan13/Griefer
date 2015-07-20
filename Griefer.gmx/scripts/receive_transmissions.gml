@@ -115,6 +115,11 @@ while (bigMessagesWaiting() and wait_counter < 500000)
             printf("::: RECEIVED kill feed message!")
             new_kill_feed_message(genVal1,genVal2,genVal3)
         break
+        
+        case "chat_feed":
+            printf("::: RECEIVED chat feed message!")
+            new_chat_feed_message(genVal1,genVal2,genVal3)
+        break
     }
         
 }

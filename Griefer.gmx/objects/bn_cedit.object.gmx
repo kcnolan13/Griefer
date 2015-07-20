@@ -457,7 +457,7 @@ if is_sens and modal_highlighted(id) or was_highlighted
             printf("ERROR: could not update sensitivity setting "+string(myLabel.text)+" -- bad ind")
         }
     }
-    else if myLabel.text = global.gc[GC_KILL_FEED_ALPHA,0]
+    else if myLabel.text = global.gc[GC_KILL_FEED_ALPHA,0] or myLabel.text = global.gc[GC_CHAT_FEED_ALPHA,0]
     {
         var ind = gc_ind(myLabel.text)
         if ind &gt; -1
