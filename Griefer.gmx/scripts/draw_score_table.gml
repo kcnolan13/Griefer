@@ -2,6 +2,8 @@
 var xdraw = argument0
 ydraw = argument1       //this is not var'd, so subroutines will change its value as they go --> hopefully this is a good idea....
 
+var master_scale = kill_feed.master_scale
+
 //printf("drawing score table @ "+xdraw+", "+ydraw)
 //draw the match header
 draw_set_font(global.table_font)

@@ -39,9 +39,10 @@ backspace_hold_delay = 10
 backspace_delay = backspace_hold_delay
 tab_delay = 0
 auto_started = false
-text_linesep = 14
+text_linesep = 16
 alpha = 1
 font = fnt_button
+master_scale = 1
 </string>
           </argument>
         </arguments>
@@ -281,15 +282,18 @@ else
     image_index = 0
 
 draw_set_font(font)
+var fnt_scale = 1
+if font = fnt_feed
+    fnt_scale = 0.5
 
-draw_sprite_ext(sprite_index,image_index,x,y,image_xscale,image_yscale,0,image_blend,alpha)
+draw_sprite_ext(sprite_index,image_index,x,y,image_xscale*master_scale,image_yscale*master_scale,0,image_blend,alpha)
 draw_set_halign(fa_left)
 draw_set_valign(fa_center)
 
 draw_set_color(c_white)
-draw_text_ext(x,y+image_yscale*sprite_get_height(sprite_index)/2,string(input_string)+string(str_cursor),text_linesep,sprite_width-5)
+draw_text_ext_transformed(x+5*master_scale,y+image_yscale*sprite_get_height(sprite_index)/2*master_scale,string(input_string)+string(str_cursor),text_linesep*master_scale/fnt_scale,(sprite_width-10)/fnt_scale,fnt_scale*master_scale,fnt_scale*master_scale,0)
 draw_set_color(c_white)
-draw_text(x,y-image_yscale*sprite_get_height(sprite_index)/2,label)
+draw_text_transformed(x,y-image_yscale*sprite_get_height(sprite_index)/2*master_scale,label,fnt_scale*master_scale,fnt_scale*master_scale,0)
 
 draw_set_alpha(1)
 </string>

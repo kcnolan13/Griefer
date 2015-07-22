@@ -47,16 +47,15 @@ else if object_index = feed_message
 
 //draw the head
 if sprite_exists(head_spr)
-    draw_sprite_ext(head_spr,-1,xdraw,ydraw+heady*head_prescaler,flip*head_prescaler*av_scale,head_prescaler*av_scale,head_rot+rot_adjust*flip,c_white,alph)
+    draw_sprite_ext(head_spr,-1,xdraw,ydraw+heady*head_prescaler*av_scale,flip*head_prescaler*av_scale,head_prescaler*av_scale,head_rot+rot_adjust*flip,c_white,alph)
 if not is_hatless(head_spr) and sprite_exists(hat_spr)
-    draw_sprite_ext(hat_spr,-1,xdraw+head_prescaler*(av_scale*(hat_xoff-head_xoff)),ydraw+head_prescaler*(heady+av_scale*(hat_yoff-head_yoff)),flip*head_prescaler*av_scale,head_prescaler*av_scale,hat_rot+rot_adjust*flip,c_white,alph)
+    draw_sprite_ext(hat_spr,-1,xdraw+head_prescaler*(av_scale*(hat_xoff-head_xoff)),ydraw+head_prescaler*(heady*av_scale+av_scale*(hat_yoff-head_yoff)),flip*head_prescaler*av_scale,head_prescaler*av_scale,hat_rot+rot_adjust*flip,c_white,alph)
 
 //draw the black bar
 if flag != FL_NOBAR
 {
-    draw_set_alpha(1)
     draw_set_color(c_black)
-    draw_sprite(spr_fhead_bar,-1,xdraw+barx*av_scale,ydraw+bary*av_scale)
+    draw_sprite_ext(spr_fhead_bar,-1,xdraw+barx*av_scale,ydraw+bary*av_scale,av_scale,av_scale,0,c_white,1)
     draw_set_alpha(global.fhead_alpha)
     
     //draw the score over the black bar
@@ -65,5 +64,5 @@ if flag != FL_NOBAR
     draw_set_halign(fa_center)
     draw_set_valign(fa_center)
     draw_set_alpha(1)
-    draw_text(xdraw,ydraw,av_score)
+    draw_text_transformed(xdraw,ydraw,av_score,av_scale,av_scale,0)
 }

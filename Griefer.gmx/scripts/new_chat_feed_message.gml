@@ -29,9 +29,10 @@ with (chat_feed)
     ID.text_yoff = 0
     ID.color = team_color_pname(name1)
     ID.rect_yextra = 18
-    ID.rect_alpha = 0.5
+    ID.rect_alpha = 0.85
     ID.notif_time = room_speed*2
     ID.notif_color = ID.color
+    ID.master_scale = master_scale
     
     if is_string(weptxt)
     {

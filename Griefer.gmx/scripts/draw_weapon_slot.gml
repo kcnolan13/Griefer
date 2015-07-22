@@ -7,8 +7,8 @@ slot_flag = argument5
 
 slot_icon_scale = 1.2
 
-slot_width = sprite_get_width(spr_weapon_slot)
-slot_height = sprite_get_height(spr_weapon_slot)
+slot_width = sprite_get_width(spr_weapon_slot)*slot_scale
+slot_height = sprite_get_height(spr_weapon_slot)*slot_scale
 icons_start = 64*slot_scale
 icons_voffset = 9*slot_scale
 
@@ -18,7 +18,7 @@ if instance_exists(wep_obj)
 {
     slot_icon = objVarRead(wep_obj,"icon")
     slot_bullet_icon = objVarRead(wep_obj,"bullet_icon")
-    slot_bullet_icon_width = sprite_get_width(slot_bullet_icon)
+    slot_bullet_icon_width = sprite_get_width(slot_bullet_icon)*slot_scale
     slot_name = objVarRead(wep_obj,"name")
     slot_ammo = objVarRead(wep_obj,"ammo")
     slot_clip = objVarRead(wep_obj,"clip")
@@ -49,12 +49,12 @@ draw_set_valign(fa_bottom)
 draw_set_alpha(slot_alpha)
 
 if slot_flag != FL_ACTIVE_WEAPON
-    draw_text(slot_x,slot_y-slot_height/2-2,slot_name)
+    draw_text_transformed(slot_x,slot_y-slot_height/2-2*slot_scale,slot_name,slot_scale,slot_scale,0)
 
 //draw ammo remaining
 draw_set_halign(fa_center)
 draw_set_valign(fa_bottom)
-draw_text(slot_x-slot_width/2+24,slot_y+slot_height/2-2,""+string(slot_ammo))
+draw_text_transformed(slot_x-slot_width/2+24*slot_scale,slot_y+slot_height/2-2*slot_scale,""+string(slot_ammo),slot_scale,slot_scale,0)
 
 draw_set_alpha(1)
 
@@ -65,5 +65,23 @@ for (i=0; i<slot_clip; i++)
 }
 
 //draw the actual weapon
-draw_sprite_ext(slot_icon,-1,slot_x,slot_y,slot_scale*slot_icon_prescaler*PLAYER_SCALE*slot_icon_scale,slot_scale*slot_icon_prescaler*PLAYER_SCALE*slot_icon_scale,0,c_white,slot_alpha)
+var spr_width = sprite_get_bbox_right(slot_icon) - sprite_get_bbox_left(slot_icon)
+var spr_height = sprite_get_bbox_bottom(slot_icon) - sprite_get_bbox_top(slot_icon)
+var wepscale = (slot_width*2/3)/max(0.0005,spr_width)
+
+if spr_height*wepscale > slot_height*1/2
+    wepscale = slot_height*1/2/spr_height //(height)/spr_height
+
+if slot_icon = spr_torque
+    wepscale *= 1.3
+
+var wep_xoff = wepscale*(sprite_get_xoffset(slot_icon)-sprite_get_width(slot_icon)/2)
+var wep_yoff = wepscale*(sprite_get_yoffset(slot_icon)-sprite_get_height(slot_icon)/2)
+
+draw_sprite_ext(slot_icon,-1,slot_x+wep_xoff,slot_y+wep_yoff-9*slot_scale,wepscale,wepscale,0,c_white,slot_alpha)
 //printf("Weapon Drawn!")
+
+
+
+
+

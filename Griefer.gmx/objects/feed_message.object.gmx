@@ -37,6 +37,7 @@ valign = fa_center
 font = fnt_hud_big
 notif_time = 0
 notif_color = c_white
+text_pad = 10
 
 netvars = ds_map_create()
 
@@ -56,7 +57,7 @@ weapon = -1
 snap_2view = false
 snap_obj = kill_feed
 text_yoff = -15
-text_linesep = 14
+text_linesep = 16
 max_length = 9
 
 lerp_ytarget = 0
@@ -125,7 +126,8 @@ if ds_exists(netvars,ds_type_map)
 if instance_exists(snap_obj)
 {
     x = snap_obj.x
-    y = snap_obj.y-snap_obj.height/2+lerp_ycurrent
+    y = snap_obj.y-snap_obj.master_scale*(snap_obj.height/2-lerp_ycurrent)
+    master_scale = snap_obj.master_scale
 }
 </string>
           </argument>
@@ -153,7 +155,8 @@ if instance_exists(snap_obj)
 if instance_exists(snap_obj)
 {
     x = snap_obj.x
-    y = snap_obj.y-snap_obj.height/2+lerp_ycurrent
+    y = snap_obj.y-snap_obj.master_scale*(snap_obj.height/2-lerp_ycurrent)
+    master_scale = snap_obj.master_scale
 }
 </string>
           </argument>
@@ -203,7 +206,8 @@ lerp_ycurrent = lerp(lerp_ycurrent,lerp_ytarget,lerp_ystep)
 if instance_exists(snap_obj)
 {
     x = snap_obj.x
-    y = snap_obj.y-snap_obj.height/2+lerp_ycurrent
+    y = snap_obj.y-snap_obj.master_scale*(snap_obj.height/2-lerp_ycurrent)
+    master_scale = snap_obj.master_scale
 }
 
 label = text
@@ -295,7 +299,7 @@ if alph &gt; 0.1
 {
     draw_set_alpha(alph)
     
-    var head_xoff = 1.75*sprite_get_width(spr_head)/2*avhead_scale*scale
+    var head_xoff = 1.75*sprite_get_width(spr_head)/2*avhead_scale*scale*master_scale
     if snap_obj = chat_feed
         head_xoff *= 1.5
     
@@ -305,10 +309,10 @@ if alph &gt; 0.1
         show_text = false
         var spr_width = sprite_get_bbox_right(weapon) - sprite_get_bbox_left(weapon)
         var spr_height = sprite_get_bbox_bottom(weapon) - sprite_get_bbox_top(weapon)
-        var wepscale = (width*2/3)/max(0.0005,spr_width)
+        var wepscale = (width*master_scale*2/3)/max(0.0005,spr_width)
         
-        if spr_height*wepscale &gt; height*1.25
-            wepscale = height*1.25/spr_height //(height)/spr_height
+        if spr_height*wepscale &gt; height*master_scale*1.25
+            wepscale = height*master_scale*1.25/spr_height //(height)/spr_height
             
         if weapon = spr_torque
             wepscale *= 1.5
@@ -336,12 +340,12 @@ if alph &gt; 0.1
             
         var alph = draw_get_alpha()
         draw_set_alpha(alph*1)
-        draw_avatar_head(x-width/2-head_xoff,y-10,id,0,avhead_scale*scale,1,FL_NOBAR)
+        draw_avatar_head(x-width/2*master_scale-head_xoff,y-10*master_scale,id,0,avhead_scale*scale*master_scale,1,FL_NOBAR)
         draw_set_alpha(average3(alph,1,1))
         draw_set_font(fnt_feed)
         draw_set_color(c_white)
         draw_set_halign(fa_left)
-        draw_text(x-width/2-head_xoff*2,y,capwords(chop_string(avname1,max_length)))
+        draw_text_transformed(x-width/2*master_scale-head_xoff*2,y,capwords(chop_string(avname1,max_length)),master_scale/2,master_scale/2,1)
         draw_set_alpha(alph)
     }
     
@@ -355,23 +359,23 @@ if alph &gt; 0.1
             avhead2 = objVarRead(av2,"helmet0")
             avhat2 = objVarRead(av2,"hat0")
         }
-            
+
         //draw splats for dead guy
         if instance_exists(deadguy)
         {
-            draw_splats(x+width/2+head_xoff,y-10,0.225,deadguy_blood_color,draw_get_alpha()/2)
+            draw_splats(x+width/2*master_scale+head_xoff,y-10*master_scale,0.225*master_scale,deadguy_blood_color,draw_get_alpha()/2)
         }
         varWrite("helmet0",avhead2)
         if avhat2 &gt; -1 and sprite_exists(avhat2)
             varWrite("hat0",avhat2)
         var alph = draw_get_alpha()
         draw_set_alpha(alph*1)
-        draw_avatar_head(x+width/2+head_xoff,y-10,id,0,avhead_scale*scale,-1,FL_NOBAR)
+        draw_avatar_head(x+width/2*master_scale+head_xoff,y-10*master_scale,id,0,avhead_scale*scale*master_scale,-1,FL_NOBAR)
         draw_set_alpha(average3(alph,1,1))
         draw_set_font(fnt_feed)
         draw_set_color(c_white)
         draw_set_halign(fa_right)
-        draw_text(x+width/2+head_xoff*2,y,capwords(chop_string(avname2,max_length)))
+        draw_text_transformed(x+width/2*master_scale+head_xoff*2,y,capwords(chop_string(avname2,max_length)),master_scale/2,master_scale/2,1)
         draw_set_alpha(alph)
     }
 }
@@ -385,7 +389,7 @@ if show_text
 
 if notif_time
 {
-    draw_notification(1,x-width/2+rect_xoff,y-height/2+rect_yoff,1,notif_color,alpha_scaler)
+    draw_notification(1,x-width/2*master_scale+rect_xoff*master_scale,y-height/2*master_scale+rect_yoff*master_scale,1,notif_color,alpha_scaler)
 }
 </string>
           </argument>

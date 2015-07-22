@@ -28,6 +28,9 @@
             <string>///inherit and define properties
 event_inherited()
 
+master_scale = 1
+match_scale = 0.9
+
 force_show = false
 width = 64*6
 height = 64*4.5
@@ -139,27 +142,35 @@ msg_text_width = msg_width - msg_avhead_scale*2*160
           <argument>
             <kind>1</kind>
             <string>///snap
+if alpha &lt; 0.1 return false
+
 if not in_match()
 {
+    if keyboard_check_pressed(vk_up)
+        master_scale += 0.25
+    else if keyboard_check_pressed(vk_down)
+        master_scale -= 0.25
     if not instance_exists(tab_bg_modal) or not tab_bg_modal.popped_in
     {
-        x = view_xview+view_wview-width/2
+        x = view_xview+view_wview-width/2*master_scale
     } else
     {
         x = average2(view_xview+view_wview,tab_bg_modal.x+tab_bg_modal.width)
     }
-    y = view_yview+height/2
+    y = view_yview+height/2*master_scale
 }
 else
 {
-    x = view_xview+width/2
-    y = view_yview+view_hview-height/2-entry_height
+    master_scale = view_hview/768*match_scale
+    x = view_xview+width/2*master_scale
+    y = view_yview+view_hview-height/2*master_scale-entry_height*master_scale
 }
-entry.x = x-width/2
-entry.y = y+height/2
-send.x = entry.x+sprite_get_width(entry.sprite_index)*entry.image_xscale+send.width/2
-send.y = y+height/2+send.height/2
-
+entry.x = x-width/2*master_scale
+entry.y = y+height/2*master_scale
+send.x = entry.x+sprite_get_width(entry.sprite_index)*entry.image_xscale*master_scale+send.width/2*master_scale
+send.y = y+height/2*master_scale+send.height/2*master_scale
+entry.master_scale = master_scale
+send.master_scale = master_scale
 </string>
           </argument>
         </arguments>
@@ -183,27 +194,35 @@ send.y = y+height/2+send.height/2
           <argument>
             <kind>1</kind>
             <string>///snap
+if alpha &lt; 0.1 return false
+
 if not in_match()
 {
+    if keyboard_check_pressed(vk_up)
+        master_scale += 0.25
+    else if keyboard_check_pressed(vk_down)
+        master_scale -= 0.25
     if not instance_exists(tab_bg_modal) or not tab_bg_modal.popped_in
     {
-        x = view_xview+view_wview-width/2
+        x = view_xview+view_wview-width/2*master_scale
     } else
     {
         x = average2(view_xview+view_wview,tab_bg_modal.x+tab_bg_modal.width)
     }
-    y = view_yview+height/2
+    y = view_yview+height/2*master_scale
 }
 else
 {
-    x = view_xview+width/2
-    y = view_yview+view_hview-height/2-entry_height
+    master_scale = view_hview/768*match_scale
+    x = view_xview+width/2*master_scale
+    y = view_yview+view_hview-height/2*master_scale-entry_height*master_scale
 }
-entry.x = x-width/2
-entry.y = y+height/2
-send.x = entry.x+sprite_get_width(entry.sprite_index)*entry.image_xscale+send.width/2
-send.y = y+height/2+send.height/2
-
+entry.x = x-width/2*master_scale
+entry.y = y+height/2*master_scale
+send.x = entry.x+sprite_get_width(entry.sprite_index)*entry.image_xscale*master_scale+send.width/2*master_scale
+send.y = y+height/2*master_scale+send.height/2*master_scale
+entry.master_scale = master_scale
+send.master_scale = master_scale
 </string>
           </argument>
         </arguments>
@@ -231,8 +250,9 @@ event_inherited()
 
 if nth_frame(room_speed)
 {
-    alpha_scaler_max = average2(global.gc[GC_CHAT_FEED_ALPHA,1],1)
-    alpha_max = alpha_max_original*global.gc[GC_CHAT_FEED_ALPHA,1]
+    alpha_scaler_max = 1//average2(global.gc[GC_CHAT_FEED_ALPHA,1],1)
+    alpha_max = alpha_max_original//*global.gc[GC_CHAT_FEED_ALPHA,1]
+    match_scale = average2(global.gc[GC_CHAT_FEED_ALPHA,1],1)
 }
 
 if in_match()
@@ -282,6 +302,7 @@ if in_match()
 }
 else
 {
+    master_scale = 1
     if room = rm_lobby and menmode() = "lobby"
     {
         force_show = true
@@ -323,27 +344,35 @@ if instance_exists(modal_controls) or rtime() &lt; room_speed
           <argument>
             <kind>1</kind>
             <string>///snap
+if alpha &lt; 0.1 return false
+
 if not in_match()
 {
+    if keyboard_check_pressed(vk_up)
+        master_scale += 0.25
+    else if keyboard_check_pressed(vk_down)
+        master_scale -= 0.25
     if not instance_exists(tab_bg_modal) or not tab_bg_modal.popped_in
     {
-        x = view_xview+view_wview-width/2
+        x = view_xview+view_wview-width/2*master_scale
     } else
     {
         x = average2(view_xview+view_wview,tab_bg_modal.x+tab_bg_modal.width)
     }
-    y = view_yview+height/2
+    y = view_yview+height/2*master_scale
 }
 else
 {
-    x = view_xview+width/2
-    y = view_yview+view_hview-height/2-entry_height
+    master_scale = view_hview/768*match_scale
+    x = view_xview+width/2*master_scale
+    y = view_yview+view_hview-height/2*master_scale-entry_height*master_scale
 }
-entry.x = x-width/2
-entry.y = y+height/2
-send.x = entry.x+sprite_get_width(entry.sprite_index)*entry.image_xscale+send.width/2
-send.y = y+height/2+send.height/2
-
+entry.x = x-width/2*master_scale
+entry.y = y+height/2*master_scale
+send.x = entry.x+sprite_get_width(entry.sprite_index)*entry.image_xscale*master_scale+send.width/2*master_scale
+send.y = y+height/2*master_scale+send.height/2*master_scale
+entry.master_scale = master_scale
+send.master_scale = master_scale
 </string>
           </argument>
         </arguments>

@@ -34,6 +34,9 @@ alpha_max_original = alpha_max
 halign = fa_center
 valign = fa_center
 
+master_scale = 1.5
+match_scale = 0.9
+
 alpha_scaler_max = 1
 alpha_scaler = alpha_scaler_max
 alpha_dec = 0.025
@@ -107,8 +110,10 @@ msg_text_width = msg_width - msg_avhead_scale*2*120
           <argument>
             <kind>1</kind>
             <string>///snap
-x = view_xview+width/2
-y = view_yview+view_hview-height/2
+if in_match()
+    master_scale = view_hview/768*match_scale
+x = view_xview+width/2*master_scale
+y = view_yview+view_hview-height/2*master_scale
 </string>
           </argument>
         </arguments>
@@ -132,8 +137,10 @@ y = view_yview+view_hview-height/2
           <argument>
             <kind>1</kind>
             <string>///snap
-x = view_xview+width/2
-y = view_yview+view_hview-height/2
+if in_match()
+    master_scale = view_hview/768*match_scale
+x = view_xview+width/2*master_scale
+y = view_yview+view_hview-height/2*master_scale
 </string>
           </argument>
         </arguments>
@@ -161,9 +168,10 @@ event_inherited()
 
 if nth_frame(room_speed)
 {
-    alpha_scaler_max = average2(global.gc[GC_KILL_FEED_ALPHA,1],1)
-    alpha_max = alpha_max_original*global.gc[GC_KILL_FEED_ALPHA,1]
-}
+    alpha_scaler_max = 1//average2(global.gc[GC_KILL_FEED_ALPHA,1],1)
+    alpha_max = alpha_max_original//*global.gc[GC_KILL_FEED_ALPHA,1]
+    match_scale = average2(global.gc[GC_KILL_FEED_ALPHA,1],1)
+}  
 
 var tval =  truthval(global.gc[GC_KILL_FEED,1])
 if tval = 2
@@ -198,11 +206,13 @@ if in_match() and chat_feed.alpha_scaler &gt; 0.1
     alpha_scaler = 0
 }
 
-/*
+
 if not in_match()
 {
-    
-    var spr = floor(random_range(spr_weapon_placeholder1,spr_weapon_placeholder2+0.99))
+    master_scale = 1
+    alpha_scaler = 0
+        
+    /*var spr = floor(random_range(spr_weapon_placeholder1,spr_weapon_placeholder2+0.99))
   
     while (spr = spr_no_hitforce or spr = spr_minor_hitforce or spr = spr_major_hitforce or spr = spr_redonk_hitforce)
     {
@@ -214,10 +224,12 @@ if not in_match()
         
     if nth_frame(room_speed*5)
         new_kill_feed_message("kyle",0,"10 Kill Streak")
+    */
 }
-*/
-x = view_xview+width/2
-y = view_yview+view_hview-height/2
+else
+    master_scale = view_hview/768*match_scale
+x = view_xview+width/2*master_scale
+y = view_yview+view_hview-height/2*master_scale
 </string>
           </argument>
         </arguments>

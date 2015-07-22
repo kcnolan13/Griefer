@@ -23,6 +23,7 @@ with (kill_feed)
     ID.lerp_ycurrent = ID.lerp_ytarget
     ID.text_color = c_white
     ID.draw_rect = false
+    ID.master_scale = master_scale
     
     if is_string(weptxt)
     {

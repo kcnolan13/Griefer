@@ -30,6 +30,9 @@ draw_set_swf_aa_level(1)
 draw_enable_swf_aa(true)
 setGppDebug(0)
 
+master_scale = 1
+match_scale = 0.9
+
 seed = 30
 
 xp_before = 0
@@ -872,7 +875,7 @@ if room_counter &lt; room_speed*15 and nth_frame(10) and instance_exists(local_p
 }
 
 //view zooming
-if starting_match and not instance_exists(modal_controls)
+if match_starting() or match_ending() and not instance_exists(modal_controls)
 {
     view_lerp = 0.06
     view_xtarget = room_width/2
@@ -884,7 +887,7 @@ if starting_match and not instance_exists(modal_controls)
     }
     else
     { 
-        if instance_exists(local_player) and objVarRead(local_player,"visible")
+        if instance_exists(local_player) and objVarRead(local_player,"visible") and objVarRead(local_player,"alive")
         {
             view_xtarget = lerp(view_xview+view_wview/2,local_player.spawn_x,view_lerp) //objVarRead(local_player,"myX")
             view_ytarget = lerp(view_yview+view_hview/2,local_player.spawn_y,view_lerp) //objVarRead(local_player,"myY")
@@ -908,7 +911,10 @@ if starting_match and not instance_exists(modal_controls)
         }
         else
         {
-            view_overscaler = 1
+            if match_ending()
+                view_overscaler = 1.15
+            else
+                view_overscaler = 1
         }
     }
     
@@ -2259,6 +2265,8 @@ random_set_seed(random(1000000))
           <argument>
             <kind>1</kind>
             <string>///HUD
+master_scale = view_hview/768*match_scale
+
 if (starting_match) and not instance_exists(modal_controls)
 {
     draw_set_font(fnt_splashscreen)
@@ -2309,26 +2317,26 @@ if instance_exists(local_player)
             printf("local_player = "+string(local_player))
             printf("local_player.weapon_contemplating = "+string(local_player.weapon_contemplating))
             //printf(room_counter+" --&gt; drawing weapon_contemplating")
-            draw_weapon_slot(local_player.weapon_contemplating,view_xview+view_wview-sprite_get_width(spr_weapon_slot)/2-border,view_yview+8+1.75*(sprite_get_height(spr_weapon_slot)+border+8),1,1,FL_NORMAL)
+            draw_weapon_slot(local_player.weapon_contemplating,view_xview+view_wview-sprite_get_width(spr_weapon_slot)/2*master_scale-border,view_yview+(8+1.75*(sprite_get_height(spr_weapon_slot)+border+8))*master_scale,master_scale,1,FL_NORMAL)
             draw_set_color(c_white)
             draw_set_font(fnt_hud)
             draw_set_alpha(1)
             draw_set_halign(fa_right)
             draw_set_valign(fa_center)
-            draw_text(view_xview+view_wview-sprite_get_width(spr_weapon_slot)-border-8,view_yview+sprite_get_height(spr_weapon_slot)*1.75+border*2.25+2+8,"["+get_input_name(mapped_control(C_PICKUP))+"]")
+            draw_text(view_xview+view_wview-sprite_get_width(spr_weapon_slot)*master_scale-border-10,view_yview+(sprite_get_height(spr_weapon_slot)*1.75+border*2.25+2+8)*master_scale,"["+get_input_name(mapped_control(C_PICKUP))+"]")
         } //else printf("ERROR: no weapon_contemplating")
     }
     
     if local_player.weapon_wheel_alpha &gt; 0
     {
         show_scores = 0
-        draw_weapon_wheel(local_player,view_xview+view_wview/2,view_yview+view_hview/2,local_player.weapon_wheel_alpha)
+        draw_weapon_wheel(local_player,view_xview+view_wview/2,view_yview+view_hview/2,local_player.weapon_wheel_alpha, master_scale)
     }
 
     if instance_exists(objVarRead(local_player,"active_weapon"))
     {
         border = 16
-        draw_weapon_slot(objVarRead(local_player,"active_weapon"),view_xview+view_wview-sprite_get_width(spr_weapon_slot)/2-border,view_yview+sprite_get_height(spr_weapon_slot)/2+border+8,1,1,FL_NORMAL)
+        draw_weapon_slot(objVarRead(local_player,"active_weapon"),view_xview+view_wview-sprite_get_width(spr_weapon_slot)/2*master_scale-border,view_yview+(sprite_get_height(spr_weapon_slot)/2+border+8)*master_scale,master_scale,1,FL_NORMAL)
     }
 }
 
@@ -2512,15 +2520,15 @@ if in_match() and not varRead("end_match_coming") and instance_exists(my_doll) a
     }
 
     //you now have handles to both avatars whose heads you need to draw
-    var head_scale = 1
+    var head_scale = 1.15
     var head_width = sprite_get_width(spr_head)*2*head_scale
     var head_height = sprite_get_height(spr_head)*2*head_scale
     
-    var xhead = view_xview+armory_ysep+head_width/2
-    var yhead = view_yview+armory_ysep+head_height/2
+    var xhead = view_xview+armory_ysep*master_scale+head_width/2*master_scale
+    var yhead = view_yview+armory_ysep*master_scale+head_height/2*master_scale
     
-    draw_avatar_head(xhead, yhead, av_head0, score0, head_scale, 1, FL_NORMAL)
-    draw_avatar_head(xhead+head_width*1, yhead, av_head1, score1, head_scale, -1, FL_NORMAL)
+    draw_avatar_head(xhead, yhead, av_head0, score0, head_scale*master_scale, 1, FL_NORMAL)
+    draw_avatar_head(xhead+head_width*1*master_scale, yhead, av_head1, score1, head_scale*master_scale, -1, FL_NORMAL)
     
 }
 </string>
