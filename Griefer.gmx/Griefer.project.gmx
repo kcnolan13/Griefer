@@ -1099,6 +1099,7 @@
       <script>scripts\draw_lives.gml</script>
       <script>scripts\simple_popup.gml</script>
       <script>scripts\web_hsv.gml</script>
+      <script>scripts\draw_modal_window.gml</script>
     </scripts>
     <scripts name="net_utils">
       <script>scripts\find_player.gml</script>
@@ -1811,7 +1812,9 @@
       <room>rooms\map_placeholder2</room>
     </rooms>
   </rooms>
-  <constants number="142">
+  <constants number="144">
+    <constant name="WVIEW">1365</constant>
+    <constant name="HVIEW">768</constant>
     <constant name="GC_CHAT_FEED_ALPHA">7</constant>
     <constant name="GC_CHAT_FEED">6</constant>
     <constant name="GC_KILL_FEED_ALPHA">5</constant>

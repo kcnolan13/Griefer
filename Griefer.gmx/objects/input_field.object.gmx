@@ -202,10 +202,15 @@ if input_active
 
 if alpha &lt; 0.1 exit
 
-if !instance_place(x,y,cursor)
+if !instance_place(x+view_xview,y+view_yview,cursor)
 {
     input_active = false
     str_cursor = ""
+    if id = chat_feed.entry
+    {
+        keyboard_string = ""
+        input_string = ""
+    }
 }
 else
 {
@@ -257,7 +262,7 @@ if room != rm_login
         </arguments>
       </action>
     </event>
-    <event eventtype="8" enumb="0">
+    <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -276,7 +281,7 @@ if room != rm_login
             <kind>1</kind>
             <string>draw_set_alpha(alpha)
 
-if input_active = true or instance_place(x,y,cursor)
+if input_active = true or instance_place(x+view_xview,y+view_yview,cursor)
     image_index = 1
 else
     image_index = 0
@@ -299,6 +304,22 @@ draw_set_alpha(1)
 </string>
           </argument>
         </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>425</id>
+        <kind>4</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
       </action>
     </event>
     <event eventtype="9" enumb="1">

@@ -35,6 +35,10 @@ snap_by_percent = false
 width = 64*7
 height = 64*5
 
+is_gui = true
+gui_xoff = x
+gui_yoff = y
+
 //color scheme
 alpha_max = 0.95
 
@@ -77,10 +81,6 @@ depth_normal = depth
           <argument>
             <kind>1</kind>
             <string>///do whateva an accolade generic does...
-if in_match()
-{
-    printf("::: "+string(text)+" is alive at "+string(x)+", "+string(y))
-}
 
 //inherited modal behavior
 event_inherited()

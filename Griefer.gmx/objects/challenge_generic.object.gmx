@@ -63,10 +63,13 @@ icon_complete = spr_head
 color = c_white
 icon = spr_head
 font = fnt_hud_big
+show_number = 0
 
 popup_xoff = 0
+popup_xoff_extra = 0
 popup_yoff_original = -68
 popup_yoff = popup_yoff_original
+popup_yoff_extra = 0
 popup_hsp = 0
 popup_vsp = 0
 sweep_delay = 2.5*room_speed
@@ -125,74 +128,6 @@ rewards[0] = icon
         </arguments>
       </action>
     </event>
-    <event eventtype="3" enumb="2">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///update offsets
-if in_match() and popup_show
-{
-    x = view_xview+view_wview-global.challenge_popup_width+popup_xoff
-    y = view_yview+view_hview-global.challenge_popup_height+popup_yoff
-    
-    col_id = collision_rectangle(bbox_left,bbox_top,bbox_right,bbox_bottom,challenge_generic,false,true)
-    if instance_exists(col_id) and id &lt; col_id.id
-    {
-        popup_yoff -= (bbox_bottom-bbox_top)*spacer
-    }
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="3" enumb="1">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///update offsets
-if in_match() and popup_show
-{
-    x = view_xview+view_wview-global.challenge_popup_width+popup_xoff
-    y = view_yview+view_hview-global.challenge_popup_height+popup_yoff
-    
-    col_id = collision_rectangle(bbox_left,bbox_top,bbox_right,bbox_bottom,challenge_generic,false,true)
-    if instance_exists(col_id) and id &lt; col_id.id
-    {
-        popup_yoff -= (bbox_bottom-bbox_top)*spacer
-    }
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
@@ -214,11 +149,10 @@ if in_match() and popup_show
 
 if progress_varname != "" and nth_frame(auto_frame_offset) //reduce frames checked to save performance a bit
 {
-
     var grav = net_manager.stat_gravatar
     if not instance_exists(grav) or objVarRead(grav,"pName") != objVarRead(net_manager,"pName")
     {
-        printf("WARNING: cannot complete challenge while looking at another player's stats")
+        printf(":::WARNING: cannot complete challenge while looking at another player's stats")
     }
     else //yes you can complete this challenge!
     {
@@ -307,24 +241,33 @@ if in_match() and completed and (not shown_completed or (not tripped_end_match a
 
 if in_match() and popup_show
 {
-    x = view_xview+view_wview-global.challenge_popup_width+popup_xoff
-    y = view_yview+view_hview-global.challenge_popup_height+popup_yoff
+    x = WVIEW-global.challenge_popup_width+popup_xoff+popup_xoff_extra
+    y = HVIEW-global.challenge_popup_height+popup_yoff+popup_yoff_extra
     
-    col_id = collision_rectangle(bbox_left,bbox_top,bbox_right,bbox_bottom,challenge_generic,false,true)
-    if instance_exists(col_id) and id &lt; col_id.id
+    for (var i=0; i&lt;instance_number(challenge_generic); i++)
     {
-        popup_yoff -= (bbox_bottom-bbox_top)*spacer
+        show_number = 0
+        CHA = instance_find(challenge_generic,i)
+        if CHA.popup_show
+        {
+            if CHA.id != id
+                show_number ++
+            else
+                break
+        }
     }
+    
+    popup_yoff = popup_yoff_original-(bbox_bottom-bbox_top)*spacer*show_number
     
     if sweep_counter
         sweep_counter --
         
     if not sweep_counter and not match_ending()
     {
-        popup_xoff += popup_hsp
-        popup_yoff += popup_vsp
+        popup_xoff_extra += popup_hsp
+        popup_yoff_extra += popup_vsp
         
-        if x &gt; room_width+64
+        if x &gt; WVIEW+64
         {
             popup_show = false
             popup_xoff = 0
@@ -463,7 +406,7 @@ if in_match() and completed
         </arguments>
       </action>
     </event>
-    <event eventtype="8" enumb="0">
+    <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -602,15 +545,28 @@ if room = rm_menu or room = rm_lobby
 
 //BEHAVIOR FOR IN MATCH
 if in_match() and popup_show and not is_progression
-{
-    if net_manager.match_countdown
-        y = view_yview+view_hview-global.challenge_popup_height+popup_yoff_original-completed_num*spacer*(bbox_bottom-bbox_top)
-        
+{       
     draw_popup_challenge(x, y, name, "", description, icon, color, popup_alpha)
 }
 </string>
           </argument>
         </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>425</id>
+        <kind>4</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
       </action>
     </event>
   </events>

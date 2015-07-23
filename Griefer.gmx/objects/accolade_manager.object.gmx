@@ -34,7 +34,7 @@ netvars = ds_map_create()
 match_end_accs = false
 
 //in match offsets
-match_xoff = 64
+match_xoff = 64*1.15
 match_yoff = 64*3.5
 acc_width = sprite_get_width(acc_dub_kill)+24
 match_hsep = 24
@@ -168,7 +168,7 @@ if ds_exists(grid,ds_type_grid)
 
 if nth_frame(5*room_speed)
 {
-    //print_ds_grid(grid)
+    print_ds_grid(grid)
 }
 </string>
           </argument>
@@ -231,7 +231,7 @@ if in_match() and match_ending() and not spawned_grid
         printf("::: creating match end accolade grid")
         with accolade_generic instance_destroy()
         
-        create_accolade_grid(view_xview+match_xoff,view_yview+match_yoff,view_xview+match_xoff+acc_width*4+match_hsep*2,view_yview+view_hview,fa_left,fa_center,5,COL_MATCH_TOTAL)
+        create_accolade_grid(match_xoff,match_yoff,match_xoff+acc_width*4+match_hsep*2,HVIEW,fa_left,fa_center,5,COL_MATCH_TOTAL)
     }
 }
 </string>

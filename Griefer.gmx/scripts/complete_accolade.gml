@@ -16,8 +16,8 @@ update_accolade_total(name,curr_match_total+1,MATCH_TOTAL,false)
 update_accolade_total(name,curr_total+1,stat_manager.stat_flag,true)
 
 //create the accolade thing
-var xst = view_xview+accolade_manager.match_xoff
-var yst = view_yview+accolade_manager.match_yoff
+var xst = accolade_manager.match_xoff
+var yst = accolade_manager.match_yoff
 var sep = accolade_manager.match_hsep+accolade_manager.acc_width
 
 var xoff = sep*instance_number(accolade_generic)

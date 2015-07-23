@@ -26,6 +26,7 @@ if instance_exists(av)
 }
 else
 {
-    printf("ERROR: team_color_pname could not find avatar with pname: "+string(pname))  
+    if not net_manager.bot_match
+        printf("ERROR: team_color_pname could not find avatar with pname: "+string(pname))  
     return c_white 
 }

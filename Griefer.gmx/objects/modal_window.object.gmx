@@ -42,6 +42,9 @@ color_highlighted = GARBAGE
 highlightable = true
 surface = NO_HANDLE
 master_scale = 1
+is_gui = false
+gui_xoff = x
+gui_yoff = y
 
 rect_xoff = 0
 rect_yoff = 0
@@ -193,16 +196,19 @@ if surface_exists(surface)
           <argument>
             <kind>1</kind>
             <string>///snap
-if snapped and snap_by_percent
+if not is_gui
 {
-    x = view_xview+view_xpercent*view_wview
-    y = view_yview+view_ypercent*view_hview
+    if snapped and snap_by_percent
+    {
+        x = view_xview+view_xpercent*view_wview
+        y = view_yview+view_ypercent*view_hview
+    }
+    else if snapped
+    {
+        x = view_xview+view_xoff
+        y = view_yview+view_yoff
+    }   
 }
-else if snapped
-{
-    x = view_xview+view_xoff
-    y = view_yview+view_yoff
-}   
 </string>
           </argument>
         </arguments>
@@ -226,16 +232,19 @@ else if snapped
           <argument>
             <kind>1</kind>
             <string>///snap
-if snapped and snap_by_percent
+if not is_gui
 {
-    x = view_xview+view_xpercent*view_wview
-    y = view_yview+view_ypercent*view_hview
+    if snapped and snap_by_percent
+    {
+        x = view_xview+view_xpercent*view_wview
+        y = view_yview+view_ypercent*view_hview
+    }
+    else if snapped
+    {
+        x = view_xview+view_xoff
+        y = view_yview+view_yoff
+    }   
 }
-else if snapped
-{
-    x = view_xview+view_xoff
-    y = view_yview+view_yoff
-}   
 </string>
           </argument>
         </arguments>
@@ -261,7 +270,7 @@ else if snapped
             <string>///all dat ish
 counter ++
 
-if snap_2view = true and snapped = false and counter &gt; 1
+if snap_2view = true and snapped = false and counter &gt; 1 and not is_gui
 {
     snapped = true
     view_xoff = x - view_xview
@@ -289,16 +298,19 @@ if birth_delay &gt; 0
     exit
 }
 
-if snapped and snap_by_percent
+if not is_gui
 {
-    x = view_xview+view_xpercent*view_wview
-    y = view_yview+view_ypercent*view_hview
-}
-else if snapped
-{
-    x = view_xview+view_xoff
-    y = view_yview+view_yoff
-}   
+    if snapped and snap_by_percent
+    {
+        x = view_xview+view_xpercent*view_wview
+        y = view_yview+view_ypercent*view_hview
+    }
+    else if snapped
+    {
+        x = view_xview+view_xoff
+        y = view_yview+view_yoff
+    } 
+}  
 
 image_xscale = width
 image_yscale = height
@@ -353,6 +365,65 @@ else
         </arguments>
       </action>
     </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///draw in the GUI layer
+if birth_delay &gt; 0 or not is_gui
+    exit
+
+if draw_fade
+{
+    draw_set_alpha(fade_alpha*alpha*alpha_scaler)
+    draw_set_color(fade_color)
+    draw_rectangle(0,0,WVIEW,HVIEW,false)
+}    
+
+draw_set_alpha(alpha*alpha_scaler)
+gui_xoff = x
+gui_yoff = y
+left = gui_xoff
+top = gui_yoff
+
+if object_index = modal_meter
+{
+    var datVal = meter_val
+    if meter_val_places &gt; 0 and meter_val mod 1 = 0
+    {
+        datVal = string(meter_val)+"."
+        for (var i=0; i&lt;meter_val_places; i++)
+            datVal += "0"
+    }
+    draw_stat_meter(gui_xoff,gui_yoff,datVal,meter_desc,meter_col_out,meter_col_in,scale*master_scale,meter_backing_percent,meter_percent)
+    exit
+}
+
+if object_index = modal_stat_history
+{
+    draw_stat_history_chart(gui_xoff,gui_yoff,scale*master_scale,col_pos,col_neg,y_threshold,history_string,record_count)
+    exit
+}
+
+draw_modal_window()
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
@@ -371,7 +442,7 @@ else
           <argument>
             <kind>1</kind>
             <string>///draw the stuff
-if birth_delay &gt; 0
+if birth_delay &gt; 0 or is_gui
     exit
 
 if draw_fade
@@ -405,120 +476,7 @@ if object_index = modal_stat_history
     exit
 }
 
-if halign = fa_center
-    left -= width*scale*master_scale/2
-if halign = fa_right
-    left -= width*scale*master_scale/2
-    
-if valign = fa_center
-    top -= height*scale*master_scale/2
-if valign = fa_bottom
-    top -= height*scale*master_scale/2
-    
-if object_index = accolade_generic
-{
-    draw_set_alpha(alpha*alpha_scroll_scaler*alpha_scaler)
-    draw_accolade()
-    exit
-}
-
-if not surface_exists(surface)
-{   
-    if active
-        draw_set_color(active_color)
-    else
-    {
-        if color_highlighted = GARBAGE or not modal_highlighted(id)
-            draw_set_color(color)
-        else draw_set_color(color_highlighted)
-    }
-        
-    if draw_rect
-    {
-        var alph = draw_get_alpha()
-        draw_set_alpha(alph*rect_alpha*alpha_scaler)
-        draw_rectangle(left+rect_xoff*scale*master_scale-rect_xextra*scale*master_scale/2,top+rect_yoff*scale*master_scale-rect_yextra*scale*master_scale/2,left+width*scale*master_scale+rect_xoff*scale*master_scale+rect_xextra*scale*master_scale/2,top+(height+extra_height)*scale*master_scale+rect_yoff*scale*master_scale+rect_yextra*scale*master_scale/2,false)
-        draw_set_alpha(alph)
-    }
-    drew_left = left
-    drew_right = left+width*scale*master_scale
-    
-    if header_height &gt; 0
-    {
-        draw_set_color(header_color)
-        draw_rectangle(left+rect_xoff*scale*master_scale,top+header_height*scale*master_scale+rect_yoff*scale*master_scale,left+width*scale*master_scale+rect_xoff*scale*master_scale,top+rect_yoff*scale*master_scale,false)
-    }
-    
-    if image != spr_none
-    {
-        draw_sprite_ext(image,img_index,left+rect_xoff*scale*master_scale,top+rect_yoff*scale*master_scale,scale*master_scale,scale*master_scale,0,c_white,1)
-    }
-    
-    if text != "" or header_text != ""
-    {
-        if text_alpha_override
-        draw_set_alpha(1*alpha_scaler)
-        
-        draw_set_font(font)
-        draw_set_color(text_color)
-        draw_set_halign(fa_center)
-        draw_set_valign(fa_middle)
-        
-        xpos = left+width*scale*master_scale/2+rect_xoff*scale*master_scale
-        ypos = top+height*scale*master_scale/2+rect_yoff*scale*master_scale
-        
-        if text_halign = fa_right
-        {
-            draw_set_halign(fa_right)
-            xpos = left+(width*scale-6)*master_scale
-        }
-        
-        if text_halign = fa_left
-        {
-            draw_set_halign(fa_left)
-            xpos = left+2*scale*master_scale
-        }
-        
-        if text_valign = fa_top
-        {
-            draw_set_valign(fa_top)
-            ypos = top+2*scale*master_scale
-        }
-        
-        if text_valign = fa_bottom
-        {
-            draw_set_valign(fa_bottom)
-            ypos = top+height*scale*master_scale-25*scale*master_scale
-        }
-        
-        xpos += text_xoff*scale*master_scale
-        ypos += text_yoff*scale*master_scale
-        
-        if text_halign = fa_center
-            draw_text_ext_transformed(xpos+text_pad,ypos,text,text_linesep,(width-text_pad*2)*scale,scale*master_scale,scale*master_scale,0)
-        else
-            draw_text_ext_transformed(xpos,ypos,text,text_linesep,(width-text_pad*2)*scale,scale*master_scale,scale*master_scale,0)
-        
-        if header_height &gt; 0
-        {
-            draw_set_font(header_font)
-            draw_set_color(header_text_color)
-            draw_set_halign(text_halign)
-            draw_set_valign(fa_center)
-            draw_text_ext_transformed(xpos+header_xoff,top+header_yoff+header_height*scale*master_scale/2,header_text,text_linesep,width*scale,scale*master_scale,scale*master_scale,0)
-        }
-        
-        draw_set_alpha(alpha*alpha_scaler)
-    }
-    
-    draw_set_alpha(1)
-}
-else
-{
-    ///just draw whatever is on the surface
-    draw_surface_general(surface,0,0,width,height,left,top,1,1,0,c_white,c_white,c_white,c_white,1)
-    //draw_surface(surface,left,top,width*scale,height*scale)
-}
+draw_modal_window()
 </string>
           </argument>
         </arguments>

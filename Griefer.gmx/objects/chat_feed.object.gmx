@@ -31,6 +31,8 @@ event_inherited()
 master_scale = 1
 match_scale = 0.9
 
+is_gui = true
+
 force_show = false
 width = 64*6
 height = 64*4.5
@@ -64,6 +66,7 @@ send.text = "SEND"
 send.scale_highlighted = 1
 send.text_alpha_override = false
 send.depth = depth-2
+send.is_gui = true
 
 text = ""
 text_halign = fa_left
@@ -101,8 +104,8 @@ header_text_color = c_white
 text_color = c_white
 header_text = "Lobby Chat"
 
-x = view_xview+width/2
-y = view_yview+view_hview-height/2-entry_height
+x = width/2
+y = HVIEW-height/2-entry_height
 modal_aligns()
 
 snap_2view = false
@@ -119,110 +122,6 @@ msg_width = width
 msg_avhead_scale = (msg_height)/82
 msg_text_width = msg_width - msg_avhead_scale*2*160
 
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="3" enumb="2">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///snap
-if alpha &lt; 0.1 return false
-
-if not in_match()
-{
-    if keyboard_check_pressed(vk_up)
-        master_scale += 0.25
-    else if keyboard_check_pressed(vk_down)
-        master_scale -= 0.25
-    if not instance_exists(tab_bg_modal) or not tab_bg_modal.popped_in
-    {
-        x = view_xview+view_wview-width/2*master_scale
-    } else
-    {
-        x = average2(view_xview+view_wview,tab_bg_modal.x+tab_bg_modal.width)
-    }
-    y = view_yview+height/2*master_scale
-}
-else
-{
-    master_scale = view_hview/768*match_scale
-    x = view_xview+width/2*master_scale
-    y = view_yview+view_hview-height/2*master_scale-entry_height*master_scale
-}
-entry.x = x-width/2*master_scale
-entry.y = y+height/2*master_scale
-send.x = entry.x+sprite_get_width(entry.sprite_index)*entry.image_xscale*master_scale+send.width/2*master_scale
-send.y = y+height/2*master_scale+send.height/2*master_scale
-entry.master_scale = master_scale
-send.master_scale = master_scale
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="3" enumb="1">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///snap
-if alpha &lt; 0.1 return false
-
-if not in_match()
-{
-    if keyboard_check_pressed(vk_up)
-        master_scale += 0.25
-    else if keyboard_check_pressed(vk_down)
-        master_scale -= 0.25
-    if not instance_exists(tab_bg_modal) or not tab_bg_modal.popped_in
-    {
-        x = view_xview+view_wview-width/2*master_scale
-    } else
-    {
-        x = average2(view_xview+view_wview,tab_bg_modal.x+tab_bg_modal.width)
-    }
-    y = view_yview+height/2*master_scale
-}
-else
-{
-    master_scale = view_hview/768*match_scale
-    x = view_xview+width/2*master_scale
-    y = view_yview+view_hview-height/2*master_scale-entry_height*master_scale
-}
-entry.x = x-width/2*master_scale
-entry.y = y+height/2*master_scale
-send.x = entry.x+sprite_get_width(entry.sprite_index)*entry.image_xscale*master_scale+send.width/2*master_scale
-send.y = y+height/2*master_scale+send.height/2*master_scale
-entry.master_scale = master_scale
-send.master_scale = master_scale
 </string>
           </argument>
         </arguments>
@@ -348,24 +247,20 @@ if alpha &lt; 0.1 return false
 
 if not in_match()
 {
-    if keyboard_check_pressed(vk_up)
-        master_scale += 0.25
-    else if keyboard_check_pressed(vk_down)
-        master_scale -= 0.25
     if not instance_exists(tab_bg_modal) or not tab_bg_modal.popped_in
     {
-        x = view_xview+view_wview-width/2*master_scale
+        x = WVIEW-width/2*master_scale
     } else
     {
-        x = average2(view_xview+view_wview,tab_bg_modal.x+tab_bg_modal.width)
+        x = average2(WVIEW,tab_bg_modal.x+tab_bg_modal.width)
     }
-    y = view_yview+height/2*master_scale
+    y = height/2*master_scale
 }
 else
 {
-    master_scale = view_hview/768*match_scale
-    x = view_xview+width/2*master_scale
-    y = view_yview+view_hview-height/2*master_scale-entry_height*master_scale
+    master_scale = 1*match_scale//view_hview/768*match_scale
+    x = width/2*master_scale
+    y = HVIEW-height/2*master_scale-entry_height*master_scale
 }
 entry.x = x-width/2*master_scale
 entry.y = y+height/2*master_scale
@@ -468,7 +363,7 @@ if room = rm_menu
         </arguments>
       </action>
     </event>
-    <event eventtype="8" enumb="0">
+    <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
         <id>603</id>

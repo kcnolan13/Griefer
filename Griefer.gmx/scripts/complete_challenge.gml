@@ -16,12 +16,12 @@ if instance_exists(cha)
         global.challenges_this_match ++
         cha.completed_num = global.challenges_this_match
         
-        printf("CHALLENGE COMPLETE: "+string(name))
+        printf(":::CHALLENGE COMPLETE: "+string(name))
         
         if in_match()
             audio_play_sound(snd_item_stolen,2,false)
         else
-            printf("::: silencing challenge sound")
+            printf("::: muting challenge sound")
             
         sendMessageStr("perma_challenge",name)
         cha.completed = true

@@ -37,7 +37,8 @@ valign = fa_center
 font = fnt_hud_big
 notif_time = 0
 notif_color = c_white
-text_pad = 10
+
+is_gui = true
 
 netvars = ds_map_create()
 
@@ -56,6 +57,8 @@ avhead_scale = 1
 weapon = -1
 snap_2view = false
 snap_obj = kill_feed
+text_pad = 0
+text_xoff = 0
 text_yoff = -15
 text_linesep = 16
 max_length = 9
@@ -275,7 +278,7 @@ if ds_exists(netvars,ds_type_map)
         </arguments>
       </action>
     </event>
-    <event eventtype="8" enumb="0">
+    <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
         <id>603</id>

@@ -29,6 +29,7 @@
 draw_set_swf_aa_level(1)
 draw_enable_swf_aa(true)
 setGppDebug(0)
+display_set_gui_size(WVIEW,HVIEW)
 
 master_scale = 1
 match_scale = 0.9
@@ -883,14 +884,14 @@ if match_starting() or match_ending() and not instance_exists(modal_controls)
     
     if room_counter &lt; 7.5*room_speed
     {
-        view_overscaler = 1.35
+        view_overscaler = 2
     }
     else
     { 
         if instance_exists(local_player) and objVarRead(local_player,"visible") and objVarRead(local_player,"alive")
         {
-            view_xtarget = lerp(view_xview+view_wview/2,local_player.spawn_x,view_lerp) //objVarRead(local_player,"myX")
-            view_ytarget = lerp(view_yview+view_hview/2,local_player.spawn_y,view_lerp) //objVarRead(local_player,"myY")
+            view_xtarget = lerp(view_xview+view_wview/2,local_player.x,view_lerp) //objVarRead(local_player,"myX")
+            view_ytarget = lerp(view_yview+view_hview/2,local_player.y,view_lerp) //objVarRead(local_player,"myY")
             //printf("targeting local_player: "+objVarRead(local_player,"pName")+": @ ("+view_xtarget+", "+view_ytarget+")")
         }
         else
@@ -907,7 +908,7 @@ if match_starting() or match_ending() and not instance_exists(modal_controls)
         
         if room_counter &lt; 10.5*room_speed and instance_exists(local_player) and objVarRead(local_player,"visible")
         {
-            view_overscaler = 0.65
+            view_overscaler = 0.4
         }
         else
         {
@@ -2247,7 +2248,7 @@ random_set_seed(random(1000000))
         </arguments>
       </action>
     </event>
-    <event eventtype="8" enumb="0">
+    <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -2265,7 +2266,7 @@ random_set_seed(random(1000000))
           <argument>
             <kind>1</kind>
             <string>///HUD
-master_scale = view_hview/768*match_scale
+master_scale = 1*match_scale//HVIEW/768*match_scale
 
 if (starting_match) and not instance_exists(modal_controls)
 {
@@ -2273,8 +2274,8 @@ if (starting_match) and not instance_exists(modal_controls)
     draw_set_color(c_white)
     draw_set_halign(fa_center)
     draw_set_valign(fa_center)
-    draw_text(view_xview+view_wview/2,view_yview+view_hview*1/4,"Starting Match . . . "+string(ceil(starting_match/room_speed)))
-    draw_text(view_xview+view_wview/2,view_yview+72,string(game_mode_name(varRead("game_mode")))+" on "+string(global.map_names[room]))
+    draw_text(0+WVIEW/2,0+HVIEW*1/4,"Starting Match . . . "+string(ceil(starting_match/room_speed)))
+    draw_text(0+WVIEW/2,0+72,string(game_mode_name(varRead("game_mode")))+" on "+string(global.map_names[room]))
 }
 
 if bot_override
@@ -2289,7 +2290,7 @@ if bot_override
     draw_set_color(c_white)
     draw_set_font(fnt_hud)
     draw_set_alpha(0.8)
-    draw_text(view_xview+view_wview-64,view_yview+view_hview-64,"AI Override")
+    draw_text(0+WVIEW-64,0+HVIEW-64,"AI Override")
 }
 
 if instance_exists(local_player)
@@ -2306,9 +2307,9 @@ if instance_exists(local_player)
                     draw_set_halign(fa_center)
                     draw_set_valign(fa_center)
                     if local_player.spawn_fail_message = ""
-                        draw_text(view_xview+view_wview/2,view_yview+view_hview/2,"Respawning . . . "+string(ceil(local_player.respawn_counter/room_speed)))
+                        draw_text(0+WVIEW/2,0+HVIEW/2,"Respawning . . . "+string(ceil(local_player.respawn_counter/room_speed)))
                     else
-                        draw_text(view_xview+view_wview/2,view_yview+view_hview/2,local_player.spawn_fail_message+" "+string(ceil(local_player.respawn_counter/room_speed)))
+                        draw_text(0+WVIEW/2,0+HVIEW/2,local_player.spawn_fail_message+" "+string(ceil(local_player.respawn_counter/room_speed)))
                 }
         }
 
@@ -2317,46 +2318,26 @@ if instance_exists(local_player)
             printf("local_player = "+string(local_player))
             printf("local_player.weapon_contemplating = "+string(local_player.weapon_contemplating))
             //printf(room_counter+" --&gt; drawing weapon_contemplating")
-            draw_weapon_slot(local_player.weapon_contemplating,view_xview+view_wview-sprite_get_width(spr_weapon_slot)/2*master_scale-border,view_yview+(8+1.75*(sprite_get_height(spr_weapon_slot)+border+8))*master_scale,master_scale,1,FL_NORMAL)
+            draw_weapon_slot(local_player.weapon_contemplating,0+WVIEW-sprite_get_width(spr_weapon_slot)/2*master_scale-border,0+(8+1.75*(sprite_get_height(spr_weapon_slot)+border+8))*master_scale,master_scale,1,FL_NORMAL)
             draw_set_color(c_white)
             draw_set_font(fnt_hud)
             draw_set_alpha(1)
             draw_set_halign(fa_right)
             draw_set_valign(fa_center)
-            draw_text(view_xview+view_wview-sprite_get_width(spr_weapon_slot)*master_scale-border-10,view_yview+(sprite_get_height(spr_weapon_slot)*1.75+border*2.25+2+8)*master_scale,"["+get_input_name(mapped_control(C_PICKUP))+"]")
+            draw_text(0+WVIEW-sprite_get_width(spr_weapon_slot)*master_scale-border-10,0+(sprite_get_height(spr_weapon_slot)*1.75+border*2.25+2+8)*master_scale,"["+get_input_name(mapped_control(C_PICKUP))+"]")
         } //else printf("ERROR: no weapon_contemplating")
     }
     
     if local_player.weapon_wheel_alpha &gt; 0
     {
         show_scores = 0
-        draw_weapon_wheel(local_player,view_xview+view_wview/2,view_yview+view_hview/2,local_player.weapon_wheel_alpha, master_scale)
+        draw_weapon_wheel(local_player,0+WVIEW/2,0+HVIEW/2,local_player.weapon_wheel_alpha, master_scale)
     }
 
     if instance_exists(objVarRead(local_player,"active_weapon"))
     {
         border = 16
-        draw_weapon_slot(objVarRead(local_player,"active_weapon"),view_xview+view_wview-sprite_get_width(spr_weapon_slot)/2*master_scale-border,view_yview+(sprite_get_height(spr_weapon_slot)/2+border+8)*master_scale,master_scale,1,FL_NORMAL)
-    }
-}
-
-if DEBUG
-{
-    for (i=0; i&lt;instance_number(weapon_generic); i++)
-    {
-        ID = instance_find(weapon_generic,i)
-        if (objVarRead(ID,"active") or objVarRead(ID,"my_player") &lt; 0)
-        {  
-            draw_set_font(fnt_hud)
-            draw_set_halign(fa_center)
-            draw_set_color(c_lime)
-            draw_text(ID.x,ID.y+40,"clip: "+string(objVarRead(ID,"clip")))
-            draw_text(ID.x,ID.y+80,"ammo: "+string(objVarRead(ID,"ammo")))
-            draw_text(ID.x,ID.y+100,"charge: "+string(ceil(objVarRead(ID,"charge")*100))+"%")
-            //draw_text(ID.x,ID.y+140,"discharge_delay: "+objVarRead(ID,"discharge_delay"))
-            //draw_text(ID.x,ID.y+160,"reload_counter: "+objVarRead(ID,"reload_counter"))
-            //draw_text(ID.x,ID.y+120,"reload_empty_counter: "+objVarRead(ID,"reload_empty_counter"))
-        }
+        draw_weapon_slot(objVarRead(local_player,"active_weapon"),0+WVIEW-sprite_get_width(spr_weapon_slot)/2*master_scale-border,0+(sprite_get_height(spr_weapon_slot)/2+border+8)*master_scale,master_scale,1,FL_NORMAL)
     }
 }
 </string>
@@ -2390,7 +2371,7 @@ if varRead("end_match_coming") and win_countdown &lt; -90
     
 if ((show_scores &gt; 0) and not varRead("end_match_coming") or (room_counter &gt; room_speed*2 and room_counter &lt; room_speed*7)) and (in_match() and room_counter &gt; room_speed*3)//or room=rm_match_end
 {
-    var sy = view_yview+view_hview/2 - global.row_height*(instance_number(avatar)/2+2)
+    var sy = HVIEW/2 - global.row_height*(instance_number(avatar)/2+2)
     var do_draw = true
     var dalph = 1
     if instance_exists(modal_controls)
@@ -2407,10 +2388,10 @@ if ((show_scores &gt; 0) and not varRead("end_match_coming") or (room_counter &g
     if not disable_scores and do_draw
     {
         draw_set_alpha(dalph)
-        draw_score_table(view_xview+view_wview/2 - global.table_width/2, sy)
+        draw_score_table(WVIEW/2 - global.table_width/2, sy)
         draw_set_alpha(1)
     }
-    //draw_scores(view_xview+64,view_yview+16)
+    //draw_scores(64,16)
 }
 
 if varRead("end_match_coming")
@@ -2469,12 +2450,12 @@ if varRead("end_match_coming")
         win_popup_scale = lerp(win_popup_scale,win_popup_scale_max,win_popup_lerp)
         win_popup_alpha = lerp(win_popup_alpha,win_popup_alpha_max,win_popup_lerp)
         //NOW DRAW THE WIN POPUP
-        draw_win_popup_centered(view_xview+view_wview/2,view_yview+view_hview/2,win_popup_width,win_popup_height,win_color,win_popup_scale,win_popup_alpha,av_head,titulo,subtitulo)
+        draw_win_popup_centered(WVIEW/2,HVIEW/2,win_popup_width,win_popup_height,win_color,win_popup_scale,win_popup_alpha,av_head,titulo,subtitulo)
     }
     else
     {
         if not disable_scores
-            draw_score_table(view_xview+view_wview/2 - global.table_width/2, view_yview+view_hview/2 - global.row_height*(instance_number(avatar)/2+2))
+            draw_score_table(WVIEW/2 - global.table_width/2, HVIEW/2 - global.row_height*(instance_number(avatar)/2+2))
     }
     
 }
@@ -2482,7 +2463,7 @@ if varRead("end_match_coming")
 if room = rm_lobby and came_from_match and menu_mode != "lottery_steal" and menu_mode != "armory" and menu_mode != "challenges" and menu_mode != "settings" and menu_mode != "stats"
 {
     if not disable_scores
-        draw_score_table(view_xview+armory_ysep, view_yview+64+armory_ysep+12)
+        draw_score_table(armory_ysep, 64+armory_ysep+12)
 }
 
 if in_match() and not varRead("end_match_coming") and instance_exists(my_doll) and room_counter &gt; room_speed*3
@@ -2524,8 +2505,8 @@ if in_match() and not varRead("end_match_coming") and instance_exists(my_doll) a
     var head_width = sprite_get_width(spr_head)*2*head_scale
     var head_height = sprite_get_height(spr_head)*2*head_scale
     
-    var xhead = view_xview+armory_ysep*master_scale+head_width/2*master_scale
-    var yhead = view_yview+armory_ysep*master_scale+head_height/2*master_scale
+    var xhead = armory_ysep*master_scale+head_width/2*master_scale
+    var yhead = armory_ysep*master_scale+head_height/2*master_scale
     
     draw_avatar_head(xhead, yhead, av_head0, score0, head_scale*master_scale, 1, FL_NORMAL)
     draw_avatar_head(xhead+head_width*1*master_scale, yhead, av_head1, score1, head_scale*master_scale, -1, FL_NORMAL)
@@ -2535,6 +2516,8 @@ if in_match() and not varRead("end_match_coming") and instance_exists(my_doll) a
           </argument>
         </arguments>
       </action>
+    </event>
+    <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -2948,6 +2931,80 @@ if (room = rm_menu or room = rm_lobby) and string(menu_mode) = "armory" and inst
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///avatar popups and promoted,demoted
+draw_set_font(fnt_hud_big)
+draw_set_halign(fa_center)
+draw_set_valign(fa_center)
+draw_set_color(c_black)
+
+var scale_tol = 0.25
+
+if av_popup = noone
+    av_popup_drawn = false
+    
+menu_mode = string(menu_mode)
+
+for (var i=0; i&lt;instance_number(avatar); i++)
+{
+    ID = instance_find(avatar,i)
+    if ID.visible and menu_mode != "armory" and menu_mode != "stats" and real(objVarRead(ID,"pName")) != BAD_READ
+    {
+        if room = rm_menu
+        {
+            if menu_mode = "play"
+                var yoff = 64*3.25
+            else
+                var yoff = 64*4.25
+        }
+        else var yoff = 64*3.2-30
+        
+        var xoff = 16*string_length(string(objVarRead(ID,"pName")))/2
+        draw_set_alpha(1)
+        draw_namerank(objVarRead(ID,"pName"), objVarRead(ID,"rank"), ID.x - xoff,ID.y - yoff, 1, c_black)
+        //draw_text(ID.x,ID.y - 64*3,objVarRead(ID,"pName"))
+        
+        if DEBUG
+            draw_text(ID.x,ID.y - 64*3.35, objVarRead(ID,"uniqueId"))
+    }
+    if av_popup = ID and ID.visible and abs(objVarRead(ID,"animation_scale") - av_scale_highlighted) &lt; scale_tol
+    {
+        if not av_popup_drawn
+        {
+            audio_play_sound(snd_scroll3,2,false)
+            av_popup_drawn = true
+        }
+        
+        //DRAW THE PLAYER POPUP
+        draw_player_popup_ext(cursor.x,cursor.y,objVarRead(av_popup,"pName"),objVarRead(av_popup,"rank"),objVarRead(av_popup,"global_rank"),objVarRead(av_popup,"true_skill"),
+            objVarRead(av_popup,"helmet0"),objVarRead(av_popup,"hat0"),1,is_bot(av_popup))
+        
+        //GET CLICKED!
+        if not is_bot(ID) and (input_check_pressed(mapped_control(C_JUMP)) or mouse_check_button_pressed(mb_left)) and not lock_armory and menmode() != "armory"
+        {
+            show_player_stats(objVarRead(ID,"pName"))
+        }
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///draw lottery/seal
 if lotto_counter &gt; lotto_delay and instance_exists(xp_bar.aw)
 {
@@ -3021,80 +3078,6 @@ if lotto_counter &gt; lotto_delay and instance_exists(xp_bar.aw)
                     }
                 }
             }
-        }
-    }
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///avatar popups and promoted,demoted
-draw_set_font(fnt_hud_big)
-draw_set_halign(fa_center)
-draw_set_valign(fa_center)
-draw_set_color(c_black)
-
-var scale_tol = 0.25
-
-if av_popup = noone
-    av_popup_drawn = false
-    
-menu_mode = string(menu_mode)
-
-for (var i=0; i&lt;instance_number(avatar); i++)
-{
-    ID = instance_find(avatar,i)
-    if ID.visible and menu_mode != "armory" and menu_mode != "stats" and real(objVarRead(ID,"pName")) != BAD_READ
-    {
-        if room = rm_menu
-        {
-            if menu_mode = "play"
-                var yoff = 64*3.25
-            else
-                var yoff = 64*4.25
-        }
-        else var yoff = 64*3.2-30
-        
-        var xoff = 16*string_length(string(objVarRead(ID,"pName")))/2
-        draw_set_alpha(1)
-        draw_namerank(objVarRead(ID,"pName"), objVarRead(ID,"rank"), ID.x - xoff,ID.y - yoff, 1, c_black)
-        //draw_text(ID.x,ID.y - 64*3,objVarRead(ID,"pName"))
-        
-        if DEBUG
-            draw_text(ID.x,ID.y - 64*3.35, objVarRead(ID,"uniqueId"))
-    }
-    if av_popup = ID and ID.visible and abs(objVarRead(ID,"animation_scale") - av_scale_highlighted) &lt; scale_tol
-    {
-        if not av_popup_drawn
-        {
-            audio_play_sound(snd_scroll3,2,false)
-            av_popup_drawn = true
-        }
-        
-        //DRAW THE PLAYER POPUP
-        draw_player_popup_ext(cursor.x,cursor.y,objVarRead(av_popup,"pName"),objVarRead(av_popup,"rank"),objVarRead(av_popup,"global_rank"),objVarRead(av_popup,"true_skill"),
-            objVarRead(av_popup,"helmet0"),objVarRead(av_popup,"hat0"),1,is_bot(av_popup))
-        
-        //GET CLICKED!
-        if not is_bot(ID) and (input_check_pressed(mapped_control(C_JUMP)) or mouse_check_button_pressed(mb_left)) and not lock_armory and menmode() != "armory"
-        {
-            show_player_stats(objVarRead(ID,"pName"))
         }
     }
 }
