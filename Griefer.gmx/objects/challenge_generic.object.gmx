@@ -150,9 +150,9 @@ rewards[0] = icon
 if progress_varname != "" and nth_frame(auto_frame_offset) //reduce frames checked to save performance a bit
 {
     var grav = net_manager.stat_gravatar
-    if not instance_exists(grav) or objVarRead(grav,"pName") != objVarRead(net_manager,"pName")
+    if instance_exists(grav) and objVarRead(grav,"pName") != objVarRead(net_manager,"pName")
     {
-        printf(":::WARNING: cannot complete challenge while looking at another player's stats")
+        printf(":::WARNING: cannot complete challenge while looking at another player ("+string(objVarRead(grav,"pName"))+")'s stats")
     }
     else //yes you can complete this challenge!
     {

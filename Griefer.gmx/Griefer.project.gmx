@@ -1430,6 +1430,7 @@
       <shader type="GLSLES">shaders\glr_shader_intensity.shader</shader>
       <shader type="GLSLES">shaders\glr_shader_shadow_sprite.shader</shader>
     </shaders>
+    <shader type="GLSLES">shaders\shader10.shader</shader>
   </shaders>
   <fonts name="fonts">
     <font>fonts\fnt_button</font>

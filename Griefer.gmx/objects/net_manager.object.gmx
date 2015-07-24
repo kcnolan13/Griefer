@@ -1492,7 +1492,7 @@ for (var i=0; i&lt;NUM_BPARTS; i++)
         <exetype>2</exetype>
         <functionname></functionname>
         <codestring></codestring>
-        <whoName>self</whoName>
+        <whoName>other</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
         <arguments>
@@ -1521,6 +1521,7 @@ if (room = rm_menu or room = rm_lobby) and (room_counter &gt; room_speed/2 and (
         
         printf(":::creating stat gravatar")
         stat_gravatar = instance_create(0,0,gravatar)
+        stat_manager.grav_name = varRead("pName")
         objVarWrite(stat_gravatar,"pName",varRead("pName"))
         objVarWrite(stat_gravatar,"uniqueId",hash_string(varRead("pName")))
     }
