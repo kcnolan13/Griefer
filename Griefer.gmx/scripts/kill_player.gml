@@ -305,6 +305,7 @@ switch(death_type)
         objVarWrite(uDead,"fire_counter",objVarRead(uDead,"fire_counter_max"))
     }   
 
+    objVarWrite(dead_homes,"killer",objVarRead(killer,"pName"))
     objVarWrite(uDead,"pName",objVarRead(dead_homes,"pName"))
     objVarWrite(uDead,"animation_xscale",objVarRead(dead_homes,"animation_xscale"))
     objVarWrite(uDead,"forearm0",objVarRead(dead_homes,"forearm0"))
@@ -321,6 +322,7 @@ switch(death_type)
     objVarWrite(uDead,"blood_color",objVarRead(dead_homes,"blood_color"))
     
     pkgCreate()
+    obj_update_real(dead_homes,"killer",FL_NORMAL)
     obj_update_real(uDead,"pName",FL_NORMAL)
     obj_update_real(uDead,"blood_color",0)
     obj_update_real(uDead,"can_die",FL_NORMAL)

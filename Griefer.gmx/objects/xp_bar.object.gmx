@@ -328,7 +328,7 @@ if xp_needed &lt;= 0 and not earn_pauser and is_my_avatar(net_manager.my_doll)
     if in_match() tyoff -= 48
     
     fade_delay = 0 // ---&gt; updated in promoted_modal()
-    promoted_modal(view_xview+view_wview/2,view_yview+tyoff,fa_center,fa_top,1,net_manager.my_doll)
+    promoted_modal(WVIEW/2,HVIEW/4+tyoff,fa_center,fa_top,1,net_manager.my_doll)
     birth_delay = 1*room_speed
     
     slot_width = 72
@@ -338,8 +338,9 @@ if xp_needed &lt;= 0 and not earn_pauser and is_my_avatar(net_manager.my_doll)
     {
         // "Unlocked:"
         uyoff = -12
-        ID = instance_create(view_xview+view_wview/2,view_yview+view_hview*1/2+uyoff+tyoff,action_word)
+        ID = instance_create(WVIEW/2,HVIEW/2+uyoff+tyoff,action_word)
         ID.scale = 1
+        ID.halign = fa_center
         ID.fnt = fnt_hud_big
         ID.col = c_white
         ID.birth_delay = birth_delay
@@ -349,7 +350,7 @@ if xp_needed &lt;= 0 and not earn_pauser and is_my_avatar(net_manager.my_doll)
         ID.init_as_promoted = true
         
         //Draw The Slot That Was Unlocked
-        ID = instance_create(view_xview+view_wview/2-slot_scale*slot_width/2,view_yview+view_hview*1/2+32+uyoff+tyoff,action_word)
+        ID = instance_create(WVIEW/2-slot_scale*slot_width/2,HVIEW/2+32+uyoff+tyoff,action_word)
         ID.scale = slot_scale
         ID.txt = rank
         ID.rank_2unlock = rank
@@ -685,20 +686,6 @@ simple_popup("Mark Distance",string(round(point_distance(xmark1,ymark1,xmark2,ym
       </action>
     </event>
     <event eventtype="9" enumb="13">
-      <action>
-        <libid>1</libid>
-        <id>425</id>
-        <kind>4</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>0</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-      </action>
       <action>
         <libid>1</libid>
         <id>603</id>

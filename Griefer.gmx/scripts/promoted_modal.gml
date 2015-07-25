@@ -14,7 +14,7 @@ if not instance_exists(av) or not is_my_avatar(av)
 
 var xpos = dx
 var ypos = dy
-var av_head_yoff = view_hview*1/4
+var av_head_yoff = HVIEW*1/4
 var blah_xoff = -64
 if in_match()
     fade_delay = 3*room_speed
@@ -40,7 +40,7 @@ else
             instance_destroy()
     }
     
-    ID = instance_create(xpos/*+get_head_width(scale)-twidth/2*/,ypos+view_hview*1/4,action_word)
+    ID = instance_create(xpos,ypos,action_word)
     ID.fade_delay = fade_delay
     ID.stick_2view = true
     ID.fnt = fnt_promoted
@@ -57,7 +57,7 @@ else
     
     
     // Rank + New Rank Name
-    ID = instance_create(xpos,ypos+view_hview*1/4+96,action_word)
+    ID = instance_create(xpos,ypos+96,action_word)
     ID.fade_delay = fade_delay
     ID.stick_2view = true
     ID.drawing_namerank = true

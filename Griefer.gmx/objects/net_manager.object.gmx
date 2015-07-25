@@ -44,6 +44,7 @@ stat_gravatar = NO_HANDLE
 rag_target = NO_HANDLE
 view_overscaler_target = 0
 view_overscaler_dead = 0.35
+draw_killed_by = false
 
 full_screen = false
 global.rank_colors = 0
@@ -880,6 +881,7 @@ if room_counter &lt; room_speed*15 and nth_frame(10) and instance_exists(local_p
 
 
 do_zoom = false
+draw_killed_by = false
 
 //match starting or ending
 if match_starting() or match_ending() and not instance_exists(modal_controls)
@@ -959,8 +961,10 @@ else if (instance_exists(local_player) and is_bot(local_player))
         }
     }
 }
+//YOU HAVE BEEN KILLED
 else if instance_exists(local_player) and not objVarRead(local_player,"alive") and instance_exists(rag_target)
 {
+    draw_killed_by = true
     do_zoom = true
     view_lerp = 0.25
     view_overscaler = lerp(view_overscaler,view_overscaler_target,0.05)
@@ -2280,6 +2284,35 @@ if not match_ending()
         draw_set_valign(fa_center)
         draw_text(0+WVIEW/2,0+HVIEW*1/4,"Starting Match . . . "+string(ceil(starting_match/room_speed)))
         draw_text(0+WVIEW/2,0+72,string(game_mode_name(varRead("game_mode")))+" on "+string(global.map_names[room]))
+    }
+    
+    if draw_killed_by
+    {
+        draw_set_font(fnt_splashscreen)
+        draw_set_color(c_white)
+        draw_set_halign(fa_center)
+        draw_set_valign(fa_center)
+        var killer_name = objVarRead(local_player,"killer")
+        if killer_name != varRead("pName")
+        {
+            var killer_av = find_pname_avatar(killer_name)
+            if instance_exists(killer_av)
+            {
+                var row_sep = 100
+                var starty = HVIEW/10
+                var row2_xoff = -76
+                var head_space = 64
+                
+                with killer_av
+                    draw_avatar_head(WVIEW/2+row2_xoff,starty+row_sep,id,0,1,1,FL_NOBAR)
+                    
+                draw_text(WVIEW/2,starty,"You Were Killed By: ")
+                draw_set_halign(fa_left)
+                draw_text(WVIEW/2+row2_xoff+head_space,starty+row_sep,string(killer_name))
+            }
+        }
+        else
+            draw_text(0+WVIEW/2,0+HVIEW/4,"You Killed Yourself...")
     }
     
     if bot_override
