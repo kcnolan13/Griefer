@@ -41,6 +41,9 @@ rank_before = 0
 party_leader = false
 in_party = false
 stat_gravatar = NO_HANDLE
+rag_target = NO_HANDLE
+view_overscaler_target = 0
+view_overscaler_dead = 0.35
 
 full_screen = false
 global.rank_colors = 0
@@ -875,9 +878,13 @@ if room_counter &lt; room_speed*15 and nth_frame(10) and instance_exists(local_p
     //printf("ERROR (not): writing local_player.bot to "+string(bot_override))
 }
 
-//view zooming
+
+do_zoom = false
+
+//match starting or ending
 if match_starting() or match_ending() and not instance_exists(modal_controls)
 {
+    do_zoom = true
     view_lerp = 0.06
     view_xtarget = room_width/2
     view_ytarget = room_height/2
@@ -900,12 +907,6 @@ if match_starting() or match_ending() and not instance_exists(modal_controls)
             view_ytarget = lerp(view_yview+view_hview/2,room_height/2,view_lerp)
         }
         
-        /*if not instance_place(view_xtarget, view_ytarget, hit_marker)
-        {
-            ID = instance_create(view_xtarget, view_ytarget, hit_marker)
-            ID.image_blend = c_red
-        }*/
-        
         if room_counter &lt; 10.5*room_speed and instance_exists(local_player) and objVarRead(local_player,"visible")
         {
             view_overscaler = 0.4
@@ -918,32 +919,11 @@ if match_starting() or match_ending() and not instance_exists(modal_controls)
                 view_overscaler = 1
         }
     }
-    
-    view_hwidth = 1365*view_overscaler*VIEW_SCALE
-    
-    if view_hwidth &gt; room_width
-        view_hwidth = room_width
-        
-    view_vwidth = (9/16)*view_hwidth
-    
-    view_wview = ceil(lerp(view_wview,view_hwidth,view_lerp))
-    view_hview = ceil(lerp(view_hview,view_vwidth,view_lerp))
-    
-    if instance_exists(modal_controls) and in_match()
-    {
-        view_wview = 1365
-        view_hview = 9/16*1365
-    }
-    
-    view_xview = view_xtarget - view_wview/2//lerp(view_xview, view_xtarget - view_wview/2,view_lerp)
-    view_yview = view_ytarget - view_hview/2//lerp(view_xview, view_ytarget - view_hview/2,view_lerp)
-    
-    keep_view_in_bounds()
-    
-    //printf("view_xtarget = "+view_xtarget+", view_ytarget = "+view_ytarget+", view_hwidth = "+view_hwidth+"view_wview = "+view_wview)
 }
+//local player is bot
 else if (instance_exists(local_player) and is_bot(local_player))
 {
+    do_zoom = true
     if bot_focus_counter
         bot_focus_counter --
         
@@ -978,13 +958,31 @@ else if (instance_exists(local_player) and is_bot(local_player))
             }
         }
     }
-    
+}
+else if instance_exists(local_player) and not objVarRead(local_player,"alive") and instance_exists(rag_target)
+{
+    do_zoom = true
+    view_lerp = 0.25
+    view_overscaler = lerp(view_overscaler,view_overscaler_target,0.05)
+    view_xtarget = lerp(view_xview+view_wview/2,rag_target.x,view_lerp)
+    view_ytarget = lerp(view_yview+view_hview/2,rag_target.y,view_lerp)
+}
+
+//view zooming
+if do_zoom
+{
     view_hwidth = 1365*view_overscaler*VIEW_SCALE
     
     if view_hwidth &gt; room_width
         view_hwidth = room_width
         
     view_vwidth = (9/16)*view_hwidth
+    
+    if view_vwidth &gt; room_height
+    {
+        view_vwidth = room_height
+        view_hwidth = 16/9*view_vwidth
+    }
     
     view_wview = ceil(lerp(view_wview,view_hwidth,view_lerp))
     view_hview = ceil(lerp(view_hview,view_vwidth,view_lerp))
@@ -997,9 +995,12 @@ else if (instance_exists(local_player) and is_bot(local_player))
     
     view_xview = view_xtarget - view_wview/2//lerp(view_xview, view_xtarget - view_wview/2,view_lerp)
     view_yview = view_ytarget - view_hview/2//lerp(view_xview, view_ytarget - view_hview/2,view_lerp)
-
+    
     keep_view_in_bounds()
 }
+
+    
+
 </string>
           </argument>
         </arguments>
@@ -2269,76 +2270,79 @@ random_set_seed(random(1000000))
             <string>///HUD
 master_scale = 1*match_scale//HVIEW/768*match_scale
 
-if (starting_match) and not instance_exists(modal_controls)
+if not match_ending()
 {
-    draw_set_font(fnt_splashscreen)
-    draw_set_color(c_white)
-    draw_set_halign(fa_center)
-    draw_set_valign(fa_center)
-    draw_text(0+WVIEW/2,0+HVIEW*1/4,"Starting Match . . . "+string(ceil(starting_match/room_speed)))
-    draw_text(0+WVIEW/2,0+72,string(game_mode_name(varRead("game_mode")))+" on "+string(global.map_names[room]))
-}
-
-if bot_override
-{
-    /*if instance_exists(local_player) and in_match() and rtime() &gt; room_speed 
-        and nth_frame(5*room_speed)
+    if (starting_match) and not instance_exists(modal_controls)
     {
-        objVarWrite(local_player,"rank",ceil(random_range(5,25)))   
-    }*/
-    draw_set_halign(fa_right)
-    draw_set_valign(fa_top)
-    draw_set_color(c_white)
-    draw_set_font(fnt_hud)
-    draw_set_alpha(0.8)
-    draw_text(0+WVIEW-64,0+HVIEW-64,"AI Override")
-}
-
-if instance_exists(local_player)
-{
-    if not instance_exists(modal_controls)
-    {
-        with local_player
-        {
-            if respawn_counter and not net_manager.starting_match and not hide_spawn_text
-                with other.id
-                {
-                    draw_set_font(fnt_splashscreen)
-                    draw_set_color(c_white)
-                    draw_set_halign(fa_center)
-                    draw_set_valign(fa_center)
-                    if local_player.spawn_fail_message = ""
-                        draw_text(0+WVIEW/2,0+HVIEW/2,"Respawning . . . "+string(ceil(local_player.respawn_counter/room_speed)))
-                    else
-                        draw_text(0+WVIEW/2,0+HVIEW/2,local_player.spawn_fail_message+" "+string(ceil(local_player.respawn_counter/room_speed)))
-                }
-        }
-
-        if instance_exists(local_player.weapon_contemplating)
-        {
-            printf("local_player = "+string(local_player))
-            printf("local_player.weapon_contemplating = "+string(local_player.weapon_contemplating))
-            //printf(room_counter+" --&gt; drawing weapon_contemplating")
-            draw_weapon_slot(local_player.weapon_contemplating,0+WVIEW-sprite_get_width(spr_weapon_slot)/2*master_scale-border,0+(8+1.75*(sprite_get_height(spr_weapon_slot)+border+8))*master_scale,master_scale,1,FL_NORMAL)
-            draw_set_color(c_white)
-            draw_set_font(fnt_hud)
-            draw_set_alpha(1)
-            draw_set_halign(fa_right)
-            draw_set_valign(fa_center)
-            draw_text(0+WVIEW-sprite_get_width(spr_weapon_slot)*master_scale-border-10,0+(sprite_get_height(spr_weapon_slot)*1.75+border*2.25+2+8)*master_scale,"["+get_input_name(mapped_control(C_PICKUP))+"]")
-        } //else printf("ERROR: no weapon_contemplating")
+        draw_set_font(fnt_splashscreen)
+        draw_set_color(c_white)
+        draw_set_halign(fa_center)
+        draw_set_valign(fa_center)
+        draw_text(0+WVIEW/2,0+HVIEW*1/4,"Starting Match . . . "+string(ceil(starting_match/room_speed)))
+        draw_text(0+WVIEW/2,0+72,string(game_mode_name(varRead("game_mode")))+" on "+string(global.map_names[room]))
     }
     
-    if local_player.weapon_wheel_alpha &gt; 0
+    if bot_override
     {
-        show_scores = 0
-        draw_weapon_wheel(local_player,0+WVIEW/2,0+HVIEW/2,local_player.weapon_wheel_alpha, master_scale)
+        /*if instance_exists(local_player) and in_match() and rtime() &gt; room_speed 
+            and nth_frame(5*room_speed)
+        {
+            objVarWrite(local_player,"rank",ceil(random_range(5,25)))   
+        }*/
+        draw_set_halign(fa_right)
+        draw_set_valign(fa_top)
+        draw_set_color(c_white)
+        draw_set_font(fnt_hud)
+        draw_set_alpha(0.8)
+        draw_text(0+WVIEW-64,0+HVIEW-64,"AI Override")
     }
-
-    if instance_exists(objVarRead(local_player,"active_weapon"))
+    
+    if instance_exists(local_player)
     {
-        border = 16
-        draw_weapon_slot(objVarRead(local_player,"active_weapon"),0+WVIEW-sprite_get_width(spr_weapon_slot)/2*master_scale-border,0+(sprite_get_height(spr_weapon_slot)/2+border+8)*master_scale,master_scale,1,FL_NORMAL)
+        if not instance_exists(modal_controls)
+        {
+            with local_player
+            {
+                if respawn_counter and not net_manager.starting_match and not hide_spawn_text
+                    with other.id
+                    {
+                        draw_set_font(fnt_splashscreen)
+                        draw_set_color(c_white)
+                        draw_set_halign(fa_center)
+                        draw_set_valign(fa_center)
+                        if local_player.spawn_fail_message = ""
+                            draw_text(0+WVIEW/2,0+HVIEW/2,"Respawning . . . "+string(ceil(local_player.respawn_counter/room_speed)))
+                        else
+                            draw_text(0+WVIEW/2,0+HVIEW/2,local_player.spawn_fail_message+" "+string(ceil(local_player.respawn_counter/room_speed)))
+                    }
+            }
+    
+            if instance_exists(local_player.weapon_contemplating)
+            {
+                printf("local_player = "+string(local_player))
+                printf("local_player.weapon_contemplating = "+string(local_player.weapon_contemplating))
+                //printf(room_counter+" --&gt; drawing weapon_contemplating")
+                draw_weapon_slot(local_player.weapon_contemplating,0+WVIEW-sprite_get_width(spr_weapon_slot)/2*master_scale-border,0+(8+1.75*(sprite_get_height(spr_weapon_slot)+border+8))*master_scale,master_scale,1,FL_NORMAL)
+                draw_set_color(c_white)
+                draw_set_font(fnt_hud)
+                draw_set_alpha(1)
+                draw_set_halign(fa_right)
+                draw_set_valign(fa_center)
+                draw_text(0+WVIEW-sprite_get_width(spr_weapon_slot)*master_scale-border-10,0+(sprite_get_height(spr_weapon_slot)*1.75+border*2.25+2+8)*master_scale,"["+get_input_name(mapped_control(C_PICKUP))+"]")
+            } //else printf("ERROR: no weapon_contemplating")
+        }
+        
+        if local_player.weapon_wheel_alpha &gt; 0
+        {
+            show_scores = 0
+            draw_weapon_wheel(local_player,0+WVIEW/2,0+HVIEW/2,local_player.weapon_wheel_alpha, master_scale)
+        }
+    
+        if instance_exists(objVarRead(local_player,"active_weapon"))
+        {
+            border = 16
+            draw_weapon_slot(objVarRead(local_player,"active_weapon"),0+WVIEW-sprite_get_width(spr_weapon_slot)/2*master_scale-border,0+(sprite_get_height(spr_weapon_slot)/2+border+8)*master_scale,master_scale,1,FL_NORMAL)
+        }
     }
 }
 </string>
@@ -2450,6 +2454,7 @@ if varRead("end_match_coming")
         
         win_popup_scale = lerp(win_popup_scale,win_popup_scale_max,win_popup_lerp)
         win_popup_alpha = lerp(win_popup_alpha,win_popup_alpha_max,win_popup_lerp)
+        draw_set_font(fnt_hud_big)
         //NOW DRAW THE WIN POPUP
         draw_win_popup_centered(WVIEW/2,HVIEW/2,win_popup_width,win_popup_height,win_color,win_popup_scale,win_popup_alpha,av_head,titulo,subtitulo)
     }

@@ -14,6 +14,13 @@ if (hsp > 1000) or vsp > 1000
     return false
 }
 
+was_standing = false
+sthresh = 5
+if continue_standing or collision_rectangle(bbox_left,bbox_bottom,bbox_right,bbox_bottom+sthresh,block,true,false) or standing_2way
+{
+    was_standing = true
+    continue_standing = false
+}
 //position adjustment based on hsp and vsp
 scr_pixel_horizontal(2)
 
@@ -93,7 +100,11 @@ if collision_rectangle(bbox_left,bbox_top,bbox_right,bbox_bottom+5,block,true,tr
         //exit
     }
 }
-else gfric = 0
+else 
+{
+    gfric = 0
+    in_air = true
+}
 
 //sync up myX and myY again
 varWrite("myX",x)

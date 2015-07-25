@@ -64,6 +64,9 @@ view_xpercent = 0
 view_ypercent = 0
 alpha_max = 1
 
+x = x-view_xview
+y = y-view_yview
+
 init_as_promoted = false
 
 alarm[0] = 1
@@ -126,80 +129,6 @@ if is_string(txt) and not drawing_namerank and not drawing_slot and image=spr_no
         </arguments>
       </action>
     </event>
-    <event eventtype="3" enumb="2">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if stick_2view and not stuck_yet
-{
-    view_xoff = x - view_xview
-    view_yoff = y - view_yview
-    view_xpercent = abs(view_xoff/view_wview)
-    view_ypercent = abs(view_yoff/view_hview)
-    stuck_yet = true
-}
-
-if stick_2view and stuck_yet
-{
-    draw_x = view_xview+view_xpercent*view_wview
-    draw_y = view_yview+view_ypercent*view_hview
-}
-
-//printf("ERROR: draw_x = "+string(draw_x)+", draw_y = "+string(draw_y)+", visible = "+string(visible))
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="3" enumb="1">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if stick_2view and not stuck_yet
-{
-    view_xoff = x - view_xview
-    view_yoff = y - view_yview
-    view_xpercent = abs(view_xoff/view_wview)
-    view_ypercent = abs(view_yoff/view_hview)
-    stuck_yet = true
-}
-
-if stick_2view and stuck_yet
-{
-    draw_x = view_xview+view_xpercent*view_wview
-    draw_y = view_yview+view_ypercent*view_hview
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
@@ -253,21 +182,6 @@ if not popped_in
 
 visible = true
 
-if stick_2view and not stuck_yet
-{
-    view_xoff = x - view_xview
-    view_yoff = y - view_yview
-    view_xpercent = abs(view_xoff/view_wview)
-    view_ypercent = abs(view_yoff/view_hview)
-    stuck_yet = true
-}
-
-if stick_2view and stuck_yet
-{
-    draw_x = view_xview+view_xpercent*view_wview
-    draw_y = view_yview+view_ypercent*view_hview
-}
-
 scale += growth
 
 if not fade_delay
@@ -288,12 +202,7 @@ else
     alpha = alpha_max
 }
 
-draw_y += vmov
-
-if stuck_yet
-{
-    view_yoff += vmov
-}
+y += vmov
 
 if alpha &lt; 0.05
 instance_destroy()
@@ -302,7 +211,7 @@ instance_destroy()
         </arguments>
       </action>
     </event>
-    <event eventtype="8" enumb="0">
+    <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -336,7 +245,7 @@ if is_string(txt)
     if txt != "" and not drawing_namerank
     {
         if not stuck_yet
-            draw_text_ext_transformed(view_xview+view_wview/2+draw_x,view_yview+view_hview/2+draw_y,txt,0,400,scale,scale,0)
+            draw_text_ext_transformed(0+WVIEW/2+draw_x,0+HVIEW/2+draw_y,txt,0,400,scale,scale,0)
         else
             draw_text_ext_transformed(draw_x,draw_y,txt,0,400,scale,scale,0)
     }
@@ -348,13 +257,13 @@ if image != spr_none
     if image.object_index != avatar
     {
         if not stuck_yet
-            draw_sprite_ext(image,-1,view_xview+view_wview/2+draw_x,view_yview+view_hview/2+draw_y,scale,scale,0,col,alpha)
+            draw_sprite_ext(image,-1,0+WVIEW/2+draw_x,0+HVIEW/2+draw_y,scale,scale,0,col,alpha)
         else
             draw_sprite_ext(image,-1,draw_x,draw_y,scale,scale,0,col,alpha)
     } else
     {
         if not stuck_yet
-            draw_avatar_head(view_xview+view_wview/2+draw_x,view_yview+view_hview/2+draw_y,image,0,scale,1,FL_NOBAR)
+            draw_avatar_head(0+WVIEW/2+draw_x,0+HVIEW/2+draw_y,image,0,scale,1,FL_NOBAR)
         else
             draw_avatar_head(draw_x,draw_y,image,0,scale,1,FL_NOBAR)
     }
@@ -369,7 +278,7 @@ if drawing_namerank and is_real(txt)
         namerank_xoff -= get_namerank_width(namerank_name,scale)/2
     }
         if not stuck_yet
-            draw_namerank(namerank_name,txt,namerank_xoff+view_xview+view_wview/2+draw_x,view_yview+view_hview/2+draw_y,scale,col)
+            draw_namerank(namerank_name,txt,namerank_xoff+0+WVIEW/2+draw_x,0+HVIEW/2+draw_y,scale,col)
         else
             draw_namerank(namerank_name,txt,namerank_xoff+draw_x,draw_y,scale,col)
 }
@@ -381,7 +290,7 @@ if drawing_slot
     color = get_bpart_color(icon)
     
     if not stuck_yet
-        draw_bpart_slot_complete_ext(id,view_xview+view_wview/2+draw_x,view_yview+view_hview/2+draw_y,scale,alpha)
+        draw_bpart_slot_complete_ext(id,0+WVIEW/2+draw_x,0+HVIEW/2+draw_y,scale,alpha)
     else
         draw_bpart_slot_complete_ext(id,draw_x,draw_y,scale,alpha)
 }

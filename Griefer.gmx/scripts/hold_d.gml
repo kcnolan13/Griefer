@@ -30,6 +30,8 @@ if x < room_width and slide_left = 0 and redirect_counter = 0
             if hsp > speed_walk/mass*varRead("speed_multiplier")
                 hsp = speed_walk/mass*varRead("speed_multiplier")
         }
+        
+        if hsp > speed_walk/mass hsp = speed_walk/mass
 
     }
     else
@@ -43,12 +45,17 @@ if x < room_width and slide_left = 0 and redirect_counter = 0
             if hsp > speed_crawl/mass*varRead("speed_multiplier")
                 hsp = speed_crawl/mass*varRead("speed_multiplier")
         }
+        
+        if hsp > speed_crawl/mass hsp = speed_crawl/mass
     }
     
-    if (cursor.x > varRead("myX"))
-        varWrite("animation_speed",SPD_WALK)
-    else
-        varWrite("animation_speed",-1*SPD_WALK)
+    if not in_air
+    {
+        if (cursor.x > varRead("myX"))
+            varWrite("animation_speed",SPD_WALK)
+        else
+            varWrite("animation_speed",-1*SPD_WALK)
+    }
     
     if (crawling = 0 && rolling = 0)
         animation_walk()

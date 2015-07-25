@@ -1,5 +1,6 @@
 if not varRead("controllable") or varRead("speed_multiplier") < 0.2 or in_snare(id) return false
 
+var speed_vwall_inc = 4
 
 if not jumping and (collision_rectangle(bbox_left,bbox_top,bbox_right,bbox_bottom+32,block,true,true) or collision_rectangle(bbox_left,bbox_top,bbox_right,bbox_bottom+32,block2_top,true,true) or standing_2way = true)
 {
@@ -24,7 +25,7 @@ if not jumping and (collision_rectangle(bbox_left,bbox_top,bbox_right,bbox_botto
         jumping = true
     }
 }
-    
+
 if slide_right = 1
 {
     if not is_bot(id)
@@ -34,13 +35,21 @@ if slide_right = 1
     var hinc = 0
     var ang = 0
     
-    if input_check(mapped_control(C_MOVE_LEFT))
-        ang = ang_vwall
-    else
-        ang = ang_hwall
+    var datspd = speed_jump
     
-    vinc = trigy(speed_jump,ang)
-    hinc = trigx(speed_jump,ang)
+    if input_check(mapped_control(C_MOVE_LEFT))
+    {
+        ang = ang_vwall
+        datspd += speed_vwall_inc
+    }
+    else
+    {
+        ang = ang_hwall
+        datspd += speed_vwall_inc+2
+    }
+    
+    vinc = trigy(datspd,ang)
+    hinc = trigx(datspd,ang)
     
     vsp = vinc/mass*varRead("speed_multiplier")
     jumping = true
@@ -63,14 +72,21 @@ if slide_left = 1
     var vinc = 0
     var hinc = 0
     var ang = 0
+    var datspd = speed_jump
     
     if input_check(mapped_control(C_MOVE_RIGHT))
+    {
         ang = ang_vwall
+        datspd += speed_vwall_inc
+    }
     else
+    {
         ang = ang_hwall
+        datspd += speed_vwall_inc+2
+    }
     
-    vinc = trigy(speed_jump,ang)
-    hinc = -1*trigx(speed_jump,ang)
+    vinc = trigy(datspd,ang)
+    hinc = -1*trigx(datspd,ang)
     
     vsp = vinc/mass*varRead("speed_multiplier")
     jumping = true

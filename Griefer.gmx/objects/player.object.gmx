@@ -455,6 +455,9 @@ if respawn_counter &gt; 0 and (is_my_avatar(id) or is_bot(id))
         respawn_flag = FL_NORMAL    //set afterwards on purpose
         double_spawn_counter = double_spawn_window
         
+        if net_manager.local_player = id
+            net_manager.rag_target = NO_HANDLE
+        
         objVarWrite(id,"myX",spawn_x)
         objVarWrite(id,"myY",spawn_y)
         objVarWrite(id,"hp",100)
@@ -1510,10 +1513,8 @@ if (varRead("controllable")) or objVarRead(net_manager,"end_match_coming")
         
         if abs(hsp) &lt; 1 and rolling = 1 and not in_snare(id) and varRead("speed_multiplier") &gt; 0.2
         {
-            hsp = 15*roll_dir*varRead("speed_multiplier")
+            hsp = roll_speed*roll_dir*varRead("speed_multiplier")
         }
-        
-        
         
         if redirect_counter &lt; 1
             {
@@ -1522,7 +1523,20 @@ if (varRead("controllable")) or objVarRead(net_manager,"end_match_coming")
                     if (slide_left = 0 &amp;&amp; slide_right = 0)
                     {
                         animation_walk()
-                        varSub("myY",49)
+                        var ysub = 49
+                        if not standing_2way
+                            ysub = 35
+                        varSub("myY",ysub)
+                        y = varRead("myY")
+                        sprite_index = spr_player
+                        x = varRead("myX")
+                        scr_unstick_guy()
+                        x = varRead("myX")
+                        
+                        if standing_2way or floating_2way
+                        {
+                            scr_pull_up(48)
+                        }
                     }
                     varWrite("animation_speed",0)
                     rolling = 0

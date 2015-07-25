@@ -33,6 +33,9 @@ if x > 0 and slide_right = 0 and redirect_counter = 0
             if hsp < -1*speed_walk/mass*varRead("speed_multiplier")
                 hsp = -1*speed_walk/mass*varRead("speed_multiplier")
         }
+        
+        if hsp < -1*speed_walk/mass hsp = -1*speed_walk/mass
+        
     }
     else
     {
@@ -46,12 +49,17 @@ if x > 0 and slide_right = 0 and redirect_counter = 0
                 hsp = -1*speed_crawl/mass*varRead("speed_multiplier")
         }
         
+        if hsp < -1*speed_crawl/mass hsp = -1*speed_crawl/mass
+        
     }
     
-    if (cursor.x > varRead("myX"))
-        varWrite("animation_speed",-1*SPD_WALK)
-    else
-        varWrite("animation_speed",SPD_WALK)
+    if not in_air
+    {
+        if (cursor.x > varRead("myX"))
+            varWrite("animation_speed",-1*SPD_WALK)
+        else
+            varWrite("animation_speed",SPD_WALK)
+    }
     
     if (crawling = 0 && rolling = 0)
         animation_walk()

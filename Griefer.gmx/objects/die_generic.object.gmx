@@ -46,6 +46,7 @@ varWrite("can_die",false)
 varWrite("hit_dir",90)
 varWrite("hit_force",FL_NO_FORCE)
 varWrite("blood_color",c_yellow)
+varWrite("pName","-1")
 
 animation_walk()
 pose_rifle()

@@ -14,7 +14,7 @@ if is_string(varRead("myX")) or is_string(varRead("myY"))
     varWrite("myX",real(varRead("myX")))
     varWrite("myY",real(varRead("myY")))
 }
-for (i=0;i<100;i+=1)
+for (i=0;i<96;i+=1)
 {
     if !collision_rectangle(bbox_left-2+i,bbox_top-2,bbox_right+2+i,bbox_bottom+2,block,true,true) && varRead("myX")+i > 0 && varRead("myX")+i < room_width
     {varAdd("myX",i) return true}

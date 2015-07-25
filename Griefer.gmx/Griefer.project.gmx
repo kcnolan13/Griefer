@@ -1789,6 +1789,7 @@
     <room>rooms\rm_lobby</room>
     <rooms name="maps">
       <room>rooms\map_placeholder1</room>
+      <room>rooms\rm_bridge</room>
       <room>rooms\rm_rocky</room>
       <room>rooms\rm_tower</room>
       <room>rooms\rm_double</room>
@@ -1807,7 +1808,6 @@
       <room>rooms\rm_snow</room>
       <room>rooms\rm_orange</room>
       <room>rooms\rm_chronic</room>
-      <room>rooms\rm_bridge</room>
       <room>rooms\rm_tree</room>
       <room>rooms\rm_crosscut</room>
       <room>rooms\map_placeholder2</room>

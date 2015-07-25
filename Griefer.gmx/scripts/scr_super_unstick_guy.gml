@@ -8,7 +8,8 @@ for (i=0;i<(room_height-y)/20;i+=20)
 if pass = false
 return false*/
 //unstick from any blocks that may be overlapping upon creation
-for (i=0;i<256;i+=32)
+printf("::: super unstick guy")
+for (i=0;i<128;i+=4)
 {
     if !collision_rectangle(bbox_left-2+i,bbox_top-2,bbox_right+2+i,bbox_bottom+2,block,true,true) && varRead("myX")+i > 0 && varRead("myX")+i < room_width
     {varAdd("myX",i) return true}

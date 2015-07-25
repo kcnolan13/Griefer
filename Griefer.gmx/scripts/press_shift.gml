@@ -25,11 +25,11 @@ else if slide_left
     wall_delay = wall_delay_max
     slide_left = 0
 }
-    
+
 roll_dir = sign(hsp)
-    
+
 varWrite("animation_speed",SPD_ROLL*sign(hsp)*sign(varRead("animation_xscale")))
-    
+
 if net_manager.local_player = id
     audio_play_sound(snd_roll,2,false)
 
@@ -38,3 +38,6 @@ rolling = 1
 redirect_counter = 15
 animation_roll()
 sprite_index = spr_player_crawl
+
+if was_standing
+    continue_standing = true

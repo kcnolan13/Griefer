@@ -3,7 +3,7 @@ if not varRead("controllable") return false
 if (crawling = 1) && !collision_rectangle(bbox_left,bbox_top-55,bbox_right,bbox_bottom-5,block,true,true)
 {
     crawling = 0
-    varSub("myY",35)
+    varSub("myY",45)
     return true
 }
 

@@ -145,3 +145,13 @@ for (var i=0; i<2; i++)
 
 //apply the hurt force to the torso
 rag_apply_death_impulse(rags[RAG_TORSO],force,fdir)
+
+//tell net_manager to focus on the torso rag
+if varRead("pName") = objVarRead(net_manager.my_doll,"pName")
+{
+    net_manager.rag_target = rags[RAG_TORSO]
+    net_manager.view_overscaler = view_hview/768
+    net_manager.view_overscaler_target = net_manager.view_overscaler_dead
+    printf("::: set rag_target to: "+string(varRead("pName")+"'s torso"))
+}
+
