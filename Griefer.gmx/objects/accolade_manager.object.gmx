@@ -87,7 +87,7 @@ init_grid_row('20ks','20 Kill Streak','20 Kills Without Dying',acc_dub_kill,35,2
 init_grid_row('25ks','25 Kill Streak','25 Kills Without Dying',acc_dub_kill,35,25,99,FL_NORMAL,snd_promoted,row_num) row_num++
 
 //weapon accolades --&gt; not to be awarded as accolades, but used for challenge progression tracking
-wep_kills_needed = 1
+wep_kills_needed = 3
 evil_row_num = row_num
 init_grid_row('spr_flame','text','descr',acc_dub_kill,0,wep_kills_needed,wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
 init_grid_row('spr_ink','text','descr',acc_dub_kill,0,wep_kills_needed,wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++

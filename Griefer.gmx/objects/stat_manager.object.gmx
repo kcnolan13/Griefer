@@ -464,6 +464,10 @@ alarm[0] = 3
 if in_match()
 {
     time_match_start = current_time
+    if instance_exists(net_manager.stat_gravatar)
+    {
+        grav_name = objVarRead(net_manager.stat_gravatar,"pName")
+    }
 }   
 </string>
           </argument>

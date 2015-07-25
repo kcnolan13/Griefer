@@ -1,32 +1,47 @@
 if not varRead("controllable") return false
 
+if slide_right = 1
+{
+    bail_slide_timer += 2
+    if bail_slide_timer < bail_slide_timer_max
+        return false
+    else
+    {
+        wall_delay = wall_delay_max
+        bail_slide_timer = 0
+        slide_right = 0
+        varAdd("myX",bail_slide_offset)
+    }
+}
+
+
 if x < room_width and slide_left = 0 and redirect_counter = 0
 {
     walking = true
     
     if crawling = 0
     {
-        if hsp < 10/mass
-            hsp += 5/mass
-        if slide_right = 1
-            varAdd("myX",7)
+        var accel = accel_walk
+        if in_air accel *= accel_air_scaler
+        if hsp < speed_walk/mass hsp += ceil(accel/mass)
             
         if varRead("speed_multiplier") < 1
         {
-            if hsp > 10/mass*varRead("speed_multiplier")
-                hsp = 10/mass*varRead("speed_multiplier")
+            if hsp > speed_walk/mass*varRead("speed_multiplier")
+                hsp = speed_walk/mass*varRead("speed_multiplier")
         }
-            
+
     }
     else
     {
-        if hsp < 5/mass
-        hsp += 5/mass
+        var accel = accel_crawl
+        if in_air accel *= accel_air_scaler
+        if hsp < speed_crawl/mass hsp += ceil(accel/mass)
         
         if varRead("speed_multiplier") < 1
         {
-            if hsp > 5/mass*varRead("speed_multiplier")
-                hsp = 5/mass*varRead("speed_multiplier")
+            if hsp > speed_crawl/mass*varRead("speed_multiplier")
+                hsp = speed_crawl/mass*varRead("speed_multiplier")
         }
     }
     

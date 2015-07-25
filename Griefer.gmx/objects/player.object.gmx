@@ -1336,8 +1336,8 @@ if (varRead("controllable")) or objVarRead(net_manager,"end_match_coming")
         sprite_index = spr_player
     
     //don't go too fast crawling
-    if (crawling = 1 &amp;&amp; rolling = 0 &amp;&amp; abs(hsp)&gt;5/mass)
-    hsp = 5*sign(hsp)/mass
+    if (crawling = 1 &amp;&amp; rolling = 0 &amp;&amp; abs(hsp)&gt;speed_crawl/mass)
+    hsp = speed_crawl*sign(hsp)/mass
     
     if collision_rectangle(bbox_left,bbox_top,bbox_right,bbox_bottom+5,block,true,true) || standing_2way = true || floating_2way = true
     if not crawling and not rolling
@@ -1405,9 +1405,17 @@ if (varRead("controllable")) or objVarRead(net_manager,"end_match_coming")
 if (varRead("controllable")) or objVarRead(net_manager,"end_match_coming")
 {
     ///walljumping
-    if wall_delay &gt; 0
-    wall_delay --
-        
+    if wall_delay &gt; 0 
+    {
+        wall_delay --
+        return false
+    }
+    
+    if bail_slide_timer
+    {
+        bail_slide_timer --
+    }
+    
     can_slide = true
     
         //first of all, let's bail if you're too close to the ground
@@ -1416,51 +1424,51 @@ if (varRead("controllable")) or objVarRead(net_manager,"end_match_coming")
         
         if can_slide
         {
-            //if !collision_rectangle(bbox_left+2,bbox_top,bbox_right-2,bbox_bottom+10,block,true,true)
             //don't get stuck on top corners
             if collision_rectangle(bbox_left+4,bbox_top+42,bbox_right+4,bbox_bottom-42,block,true,true) &amp;&amp; (collision_rectangle(bbox_left+4,y-10,bbox_right+4,y-9,block,true,true)&amp;&amp;collision_rectangle(bbox_left+4,y+20,bbox_right+4,y+25,block,true,true))
             {
-            //if slide_left = 0
-            //{audio_play_sound(snd_land_ground,3,false) audio_play_sound(snd_wallslide,3,false)}
-            wall_delay = 4
-            if (slide_left = 0)
-            {
-                slide_left = 1
-                ID = collision_rectangle(bbox_left+4,bbox_top+42,bbox_right+4,bbox_bottom-42,block,true,true)
-                varWrite("myX",ID.bbox_left-3-sprite_get_width(sprite_index)/2)
-            }
+     
+                if (slide_left = 0)
+                {
+                    bail_slide_timer = 0
+                    slide_left = 1
+                    ID = collision_rectangle(bbox_left+4,bbox_top+42,bbox_right+4,bbox_bottom-42,block,true,true)
+                    varWrite("myX",ID.bbox_left-3-sprite_get_width(sprite_index)/2)
+                }
+                    
+                hsp = 0
                 
-            hsp = 0
-            if gfric_max != 2
-            {grav = 0.5 if vsp&gt;12 vsp=12}
-            else
-            {if vsp&lt;0 grav=3 else grav=0.5 if vsp&gt;2*mass vsp=2*mass}
-            animation_wall()
-            varWrite("animation_xscale",-1)
+                if gfric_max != 2
+                {grav = 0.5 if vsp&gt;12 vsp=12}
+                else
+                {if vsp&lt;0 grav=grav_slide else grav=grav_slide if vsp&gt;slide_speed*mass vsp=slide_speed*mass}
+                
+                animation_wall()
+                varWrite("animation_xscale",-1)
             }
             else slide_left = 0
             
             if !collision_rectangle(bbox_left+2,bbox_top,bbox_right-2,bbox_bottom+10,block,true,true)
-            //don't get stuck on top corners
             if collision_rectangle(bbox_left-4,bbox_top+42,bbox_right-4,bbox_bottom-42,block,true,true) &amp;&amp; (collision_rectangle(bbox_left-4,y-10,bbox_right-4,y-9,block,true,true)&amp;&amp;collision_rectangle(bbox_left-4,y+20,bbox_right-4,y+25,block,true,true))
             {
-            //if slide_right = 0
-            //{audio_play_sound(snd_land_ground,3,false) audio_play_sound(snd_wallslide,3,false)}
-            wall_delay = 4
-            if slide_right = 0
-            {
-                slide_right = 1
-                ID = collision_rectangle(bbox_left-4,bbox_top+42,bbox_right-4,bbox_bottom-42,block,true,true)
-                varWrite("myX",ID.bbox_right+1+sprite_get_width(sprite_index)/2)
-            }
-            
-            hsp = 0
-            if gfric_max != 2
-            {grav = 0.5 if vsp&gt;12 vsp=12}
-            else
-            {if vsp&lt;0 grav=3 else grav=0.5 if vsp&gt;2*mass vsp=2*mass}
-            animation_wall()
-            varWrite("animation_xscale",1)
+                
+                if slide_right = 0
+                {
+                    bail_slide_timer =0
+                    slide_right = 1
+                    ID = collision_rectangle(bbox_left-4,bbox_top+42,bbox_right-4,bbox_bottom-42,block,true,true)
+                    varWrite("myX",ID.bbox_right+1+sprite_get_width(sprite_index)/2)
+                }
+                
+                hsp = 0
+                
+                if gfric_max != 2
+                {grav = 0.5 if vsp&gt;12 vsp=12}
+                else
+                {if vsp&lt;0 grav=grav_slide else grav=grav_slide if vsp&gt;slide_speed*mass vsp=slide_speed*mass}
+                
+                animation_wall()
+                varWrite("animation_xscale",1)
             }
             else slide_right = 0
         }
@@ -1485,7 +1493,10 @@ if (varRead("controllable")) or objVarRead(net_manager,"end_match_coming")
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///come out of combat rolls
+            <string>///come out of combat rolls + roll_timer
+if roll_timer
+    roll_timer --
+    
 if (varRead("controllable")) or objVarRead(net_manager,"end_match_coming")
 {
     if redirect_counter &gt; 0
