@@ -1498,8 +1498,11 @@ if (varRead("controllable")) or objVarRead(net_manager,"end_match_coming")
             <kind>1</kind>
             <string>///come out of combat rolls + roll_timer
 if roll_timer
+{
     roll_timer --
-    
+    if slide_left or slide_right
+        roll_timer = 0
+}
 if (varRead("controllable")) or objVarRead(net_manager,"end_match_coming")
 {
     if redirect_counter &gt; 0
@@ -1523,19 +1526,21 @@ if (varRead("controllable")) or objVarRead(net_manager,"end_match_coming")
                     if (slide_left = 0 &amp;&amp; slide_right = 0)
                     {
                         animation_walk()
-                        var ysub = 49
-                        if not standing_2way
-                            ysub = 35
+                        var ysub = 47
+                        if not standing_2way and not floating_2way
+                            ysub = 47
+                            
                         varSub("myY",ysub)
                         y = varRead("myY")
                         sprite_index = spr_player
+                        
                         x = varRead("myX")
                         scr_unstick_guy()
                         x = varRead("myX")
                         
                         if standing_2way or floating_2way
                         {
-                            scr_pull_up(48)
+                            scr_pull_up(ysub)
                         }
                     }
                     varWrite("animation_speed",0)
@@ -2014,6 +2019,9 @@ wheel_up()
             <kind>1</kind>
             <string>///draw me and my name
 if not bparts_ready exit
+
+//draw stupid
+//draw_sprite_ext(sprite_index,image_index,x,y,image_xscale,image_yscale,image_angle,c_white,image_alpha)
 
 if net_manager.show_cout
 {

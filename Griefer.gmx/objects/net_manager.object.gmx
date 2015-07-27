@@ -43,7 +43,7 @@ in_party = false
 stat_gravatar = NO_HANDLE
 rag_target = NO_HANDLE
 view_overscaler_target = 0
-view_overscaler_dead = 0.35
+view_overscaler_dead = 0.45
 draw_killed_by = false
 
 full_screen = false
@@ -911,7 +911,7 @@ if match_starting() or match_ending() and not instance_exists(modal_controls)
         
         if room_counter &lt; 10.5*room_speed and instance_exists(local_player) and objVarRead(local_player,"visible")
         {
-            view_overscaler = 0.4
+            view_overscaler = 0.55
         }
         else
         {

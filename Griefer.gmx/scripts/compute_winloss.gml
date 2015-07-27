@@ -9,10 +9,30 @@ if instance_exists(guy)
             stat_update_real("rollover_kstreak",challenge_manager.spree_kills+varRead("rollover_kstreak"),stat_manager.stat_flag)
     }
 }
+else
+{
+    printf("ERROR: COULD NOT COMPUTE_WINLOSS -- NO LOCAL PLAYER")
+    return false
+}
 
 if not computed_winloss and string(varRead("winning_pName")) != ""
 {
-    var winnah = find_player_by_pname(varRead("winning_pName"))
+    
+    var winnah = NO_HANDLE
+    
+    if not bot_match
+    {
+        winnah = find_player_by_pname(varRead("winning_pName"))
+    } else
+    {
+        if instance_exists(winner)
+        {
+            winnah = find_player_by_pname(objVarRead(winner,"pName"))
+            printf("::: identified bot match winner as: "+string(objVarRead(winnah,"pName")))
+        }
+        else
+            winnah = find_player_by_pname(varRead("winning_pName"))
+    }
     
     if not instance_exists(winnah) or not instance_exists(my_doll)
     {
@@ -23,7 +43,7 @@ if not computed_winloss and string(varRead("winning_pName")) != ""
         
     computed_winloss = true
     printf("")
-    printf("Computed Winloss")
+    printf(":::Computing Winloss")
     printf("")
         
     if net_manager.local_player = winnah or is_local_teammate(winnah)
@@ -48,68 +68,41 @@ if not computed_winloss and string(varRead("winning_pName")) != ""
             }
         }
         
-        printf("")
-        printf("YOU WON!")
-        printf("")
+        printf(":::YOU WON!")
         //go up a rank
         varWrite("match_flag",FL_WIN)
-        
-        //if not bot_match
-        {
-            mega_stat_update("wins",objVarRead(guy,"wins"))
-        }
+        mega_stat_update("wins",objVarRead(guy,"wins"))
     }
     else
     {
-        //YOU LOST!
-        printf("")
-        printf("YOU LOST!")
-        printf("")
-        
-        //go down a rank
-        varWrite("match_flag",FL_LOSS)
-        
         //UPDATE WIN_STREAK POTENTIALLY
-        if instance_exists(guy)
+        with guy
         {
-            with guy
-            {
-                stat_update_real("rollover_wstreak",0,stat_manager.stat_flag)
-                varAdd("losses",1)
-            }
+            stat_update_real("rollover_wstreak",0,stat_manager.stat_flag)
+            varAdd("losses",1)
         }
-        
+
+        //YOU LOST!
+        printf(":::YOU LOST!  losses: "+string(objVarRead(guy,"losses")-1)+" --> "+string(objVarRead(guy,"losses")))
+        varWrite("match_flag",FL_LOSS)
+        mega_stat_update("losses",objVarRead(guy,"losses"))
         rank_changed = true
-        
-        if instance_exists(local_player)
+
+        fewest_kills = objVarRead(local_player,"match_kills")
+        if varRead("game_mode") = "ffa" or tied_bot_match
         {
-            fewest_kills = objVarRead(local_player,"match_kills")
-            if varRead("game_mode") = "ffa" or tied_bot_match
+            //only subtract rank if you got the fewest kills in the match
+            for (var i=0; i<instance_number(player); i++)
             {
-                //only subtract rank if you got the fewest kills in the match
-                for (var i=0; i<instance_number(player); i++)
+                ID = instance_find(player,i)
+                var fewer_cand = objVarRead(ID,"match_kills")
+                if fewer_cand > -1 and fewer_cand < fewest_kills
                 {
-                    ID = instance_find(player,i)
-                    var fewer_cand = objVarRead(ID,"match_kills")
-                    if fewer_cand > -1 and fewer_cand < fewest_kills
-                    {
-                        rank_changed = false
-                        varWrite("match_flag",FL_NEUTRAL)
-                        printf("You don't Lose!! ... but really on a technicality (FFA and not fewest kills)")
-                    }
+                    rank_changed = false
+                    varWrite("match_flag",FL_NEUTRAL)
+                    printf(":::You don't Lose!! ... but really on a technicality (FFA and not fewest kills)")
                 }
             }
-            
-            if rank_changed //and not bot_match
-            {
-                mega_stat_update("losses",objVarRead(guy,"losses"))
-            }
-        
-        }
-        else
-        {
-            printf("ERROR: match_winloss failed. no local_player.")
-            return false
         }
         
         //ask for a new global rank
@@ -119,7 +112,7 @@ if not computed_winloss and string(varRead("winning_pName")) != ""
 {
     printf("")
     printf("")
-    printf("NO WINNING PNAME")
+    printf(":::NO WINNING PNAME")
     printf("")
     printf("")
 }

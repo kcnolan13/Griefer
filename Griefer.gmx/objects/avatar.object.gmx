@@ -221,7 +221,7 @@ printf("::: "+string(varRead("pName"))+" was instantiated with uniqueId #"+strin
             <string>///shuffling
 
 
-if shuffling and x &gt; 0 and x &lt; room_width
+if shuffling //and x &gt; 0 and x &lt; room_width
 {
     shuffling--
     event_perform(ev_alarm,2)
@@ -409,7 +409,7 @@ mouse_wheel_delay --
 //talk sometimes
 if is_bot(id)
 {
-    if random(1) &lt; 1/(room_speed*30)
+    if random(1) &lt; 1/(room_speed*120)
     {
         new_chat_feed_message(varRead("pName"),"","Are you sucking my cock or is it just me?")
     }

@@ -39,7 +39,7 @@ else if object_index = splosion_flame or object_index = splosion_flame_instant
         
         shot_range = min(shot_ranges[0],shot_ranges[1],shot_ranges[2])
         
-        if shot_range < radius or object_index = splosion_ink or object_index = splosion_snare or object_index = splosion_flame//damage radius defined in create
+        if  (dat_playa = from_player or not are_teammates(dat_playa,from_player)) and (shot_range < radius or object_index = splosion_ink or object_index = splosion_snare or object_index = splosion_flame)//damage radius defined in create
         {
             //player is hit!!      
             dat_playa.recovery_delay_counter = dat_playa.recovery_delay
@@ -101,7 +101,7 @@ else if object_index = splosion_flame or object_index = splosion_flame_instant
             
             if object_index = splosion_flashbang
             {
-                if dat_playa != net_manager.local_player and dmg > 50 and from_player = net_manager.local_player
+                if not is_local_teammate(dat_playa) and dmg > 50 and from_player = net_manager.local_player
                 {   
                     //award points for flash
                     award_points = ceil(POINTS_FLASH*dmg/100)

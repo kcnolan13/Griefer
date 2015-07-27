@@ -20,15 +20,25 @@ global.map_names[rm_trench] = "Trench"
 global.map_names[rm_rocky] = "Clutter"
 global.map_names[rm_pillar2] = "Bounce House"
 
-global.map_colors[rm_tower,0] = make_color_rgb(150,100,75)
+/*global.map_colors[rm_tower,0] = make_color_rgb(150,100,75)
 global.map_colors[rm_tower,1] = make_color_rgb(0,0,0)
 global.map_texs[rm_tower] = bg_stone
-global.col_alphas[rm_tower] = 0.8
+global.col_alphas[rm_tower] = 0.8*/
 
-global.map_colors[rm_rocky,0] = make_color_rgb(125,125,125)
+global.map_colors[rm_tower,0] = make_color_rgb(255,255,255)
+global.map_colors[rm_tower,1] = make_color_rgb(30,30,175)
+global.map_texs[rm_tower] = bg_stone
+global.col_alphas[rm_tower] = global.col_alpha_default
+
+/*global.map_colors[rm_rocky,0] = make_color_rgb(125,125,125)
 global.map_colors[rm_rocky,1] = make_color_rgb(0,0,0)
 global.map_texs[rm_rocky] = bg_jungle_brown
-global.col_alphas[rm_rocky] = 0.85
+global.col_alphas[rm_rocky] = 0.85*/
+
+global.map_colors[rm_rocky,0] = make_color_rgb(255,255,255)
+global.map_colors[rm_rocky,1] = make_color_rgb(30,30,175)
+global.map_texs[rm_rocky] = bg_stone
+global.col_alphas[rm_rocky] = global.col_alpha_default
 
 global.map_colors[rm_torque,0] = make_color_rgb(20,20,20)
 global.map_colors[rm_torque,1] = make_color_rgb(20,20,20)
@@ -75,10 +85,15 @@ global.map_colors[rm_debug,1] = make_color_rgb(30,30,175)
 global.map_texs[rm_debug] = bg_stone
 global.col_alphas[rm_debug] = global.col_alpha_default
 
-global.map_colors[rm_pillar,0] = make_color_rgb(90,90,90)
+/*global.map_colors[rm_pillar,0] = make_color_rgb(90,90,90)
 global.map_colors[rm_pillar,1] = make_color_rgb(0,0,0)
 global.map_texs[rm_pillar] = bg_dark2
-global.col_alphas[rm_pillar] = 0.6
+global.col_alphas[rm_pillar] = 0.6*/
+
+global.map_colors[rm_pillar,0] = make_color_rgb(255,255,255)
+global.map_colors[rm_pillar,1] = make_color_rgb(30,30,175)
+global.map_texs[rm_pillar] = bg_stone
+global.col_alphas[rm_pillar] = global.col_alpha_default
 
 global.map_colors[rm_dust,0] = make_color_rgb(150,100,75)
 global.map_colors[rm_dust,1] = make_color_rgb(0,0,0)

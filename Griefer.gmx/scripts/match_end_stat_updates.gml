@@ -1,5 +1,7 @@
 ///match_end_stat_updates()
 
+printf("::: match end stat updates")
+
 var guy = net_manager.local_player
 if not instance_exists(guy)
 {
@@ -11,13 +13,14 @@ if not instance_exists(guy)
 var kdr = objVarRead(guy,"match_kills") / max(1,objVarRead(guy,"match_deaths"))
 kdr = truncate(real(kdr),2)
 
-var wl = objVarRead(guy,"wins") - objVarRead(guy,"losses")
+var wl = objVarRead(guy,"wins") / max(1,objVarRead(guy,"losses"))
 wl = truncate(real(wl),2)
 
 var ppl = objVarRead(guy,"match_points") / max(1,objVarRead(guy,"match_deaths"))
 ppl = truncate(real(ppl),0)
 
 printf("::: calculated ppl: "+string(ppl)+", guy's points: "+string(objVarRead(guy,"points")))
+printf("::: calculated kdr: "+string(kdr)+", calculated wl: "+string(wl))
 
 stat_update_real("kdr",kdr,stat_manager.stat_flag)
 stat_update_real("wl",wl,stat_manager.stat_flag)

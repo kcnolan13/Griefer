@@ -140,14 +140,14 @@ if active and in_match()
             
         if core = "circle"
         {
-            for (var i=0; i&lt;core_linewidth; i++)
+            for (var i=0; i&lt;core_linewidth; i+=0.25)
             {
                 draw_circle(cursor.x,cursor.y,core_radius+i,true)
             }
         }
         else if core = "square"
         {
-            for (var i=0; i&lt;core_linewidth; i++)
+            for (var i=0; i&lt;core_linewidth; i+=0.25)
             {
                 draw_rectangle(cursor.x-core_radius-i,cursor.y-core_radius-i,cursor.x+core_radius+i,cursor.y+core_radius+i,true)
             }

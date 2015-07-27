@@ -545,7 +545,7 @@ if room = rm_menu or room = rm_lobby
 
 //BEHAVIOR FOR IN MATCH
 if in_match() and popup_show and not is_progression
-{       
+{
     draw_popup_challenge(x, y, name, "", description, icon, color, popup_alpha)
 }
 </string>

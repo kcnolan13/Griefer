@@ -1,5 +1,5 @@
 ///capwords(str)
-var str = string(argument0)
+var str = string_lower(string(argument0))
 var word = ""
 var ret = ""
 var spacepos = 0
