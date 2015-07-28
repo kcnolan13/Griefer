@@ -67,7 +67,7 @@ show_number = 0
 
 popup_xoff = 0
 popup_xoff_extra = 0
-popup_yoff_original = -68
+popup_yoff_original = -54
 popup_yoff = popup_yoff_original
 popup_yoff_extra = 0
 popup_hsp = 0
@@ -220,14 +220,9 @@ else
 
 if in_match() and completed and (not shown_completed or (not tripped_end_match and objVarRead(net_manager,"end_match_coming")))
 {
-    printf("SHOW POPUP TRIGGERED FOR: "+name)
+    printf(":::SHOW POPUP TRIGGERED FOR: "+name)
     if objVarRead(net_manager,"end_match_coming")
         tripped_end_match = true
-        
-    if tripped_end_match
-    {
-        popup_yoff_original += 64*2.5-48
-    }
         
     popup_show = true
     popup_alpha = popup_alpha_idle
@@ -244,9 +239,10 @@ if in_match() and popup_show
     x = WVIEW-global.challenge_popup_width+popup_xoff+popup_xoff_extra
     y = HVIEW-global.challenge_popup_height+popup_yoff+popup_yoff_extra
     
+    show_number = 0
+    
     for (var i=0; i&lt;instance_number(challenge_generic); i++)
     {
-        show_number = 0
         CHA = instance_find(challenge_generic,i)
         if CHA.popup_show
         {
@@ -257,7 +253,7 @@ if in_match() and popup_show
         }
     }
     
-    popup_yoff = popup_yoff_original-(bbox_bottom-bbox_top)*spacer*show_number
+    popup_yoff = popup_yoff_original-72*show_number
     
     if sweep_counter
         sweep_counter --
@@ -267,7 +263,7 @@ if in_match() and popup_show
         popup_xoff_extra += popup_hsp
         popup_yoff_extra += popup_vsp
         
-        if x &gt; WVIEW+64
+        if x+popup_xoff+popup_xoff_extra &gt; WVIEW+64
         {
             popup_show = false
             popup_xoff = 0
@@ -546,7 +542,17 @@ if room = rm_menu or room = rm_lobby
 //BEHAVIOR FOR IN MATCH
 if in_match() and popup_show and not is_progression
 {
-    draw_popup_challenge(x, y, name, "", description, icon, color, popup_alpha)
+    var endmatch_offset = 0
+    var descr = description
+    if match_ending()
+    {
+        endmatch_offset = 64
+        descr = ""
+        popup_xoff_extra = 0
+    }
+        
+    draw_popup_challenge(x+popup_xoff+popup_xoff_extra+endmatch_offset, y+popup_yoff+popup_yoff_extra, name, "", descr, icon, color, popup_alpha)
+    printf("::: show_number = "+string(show_number)+", id="+string(id)+", popup_xoff="+string(popup_xoff)+", popup_xoff_extra="+string(popup_xoff_extra))
 }
 </string>
           </argument>

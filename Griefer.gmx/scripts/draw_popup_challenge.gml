@@ -87,7 +87,7 @@ else
     bottom = top+height
     
     var whiles = 0
-    while (right > view_xview+view_wview) and whiles < 1000
+    while (left > WVIEW+1) and whiles < 1000
     {
         whiles++
         right--
