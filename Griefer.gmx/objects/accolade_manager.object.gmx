@@ -35,7 +35,7 @@ match_end_accs = false
 
 //in match offsets
 match_xoff = 64*1.15
-match_yoff = 64*3.5
+match_yoff = 64*2.75
 acc_width = sprite_get_width(acc_dub_kill)+24
 match_hsep = 24
 grid_hsep = match_hsep
@@ -231,7 +231,7 @@ if in_match() and match_ending() and not spawned_grid
         printf("::: creating match end accolade grid")
         with accolade_generic instance_destroy()
         
-        create_accolade_grid(48,48,match_xoff+acc_width*3+match_hsep*2,HVIEW,fa_left,fa_center,5,COL_MATCH_TOTAL)
+        create_accolade_grid(64*1.5,64*1.5,match_xoff+acc_width*3+match_hsep*2,HVIEW,fa_left,fa_center,5,COL_MATCH_TOTAL)
     }
 }
 </string>

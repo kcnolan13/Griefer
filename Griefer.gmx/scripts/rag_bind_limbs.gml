@@ -76,4 +76,5 @@ by = branch.y+trigy(point_distance(0,0,branch.joint_xs[bjoint],branch.joint_ys[b
 jx = average2(tx,bx)
 jy = average2(ty,by)
 
-physics_joint_revolute_create(trunk,branch,jx,jy,-1*rot_freedom,rot_freedom,true,0,0,0,false)
+trunk.joints[trunk.joint_ind] = physics_joint_revolute_create(trunk,branch,jx,jy,-1*rot_freedom,rot_freedom,true,0,0,0,false)
+trunk.joint_ind ++

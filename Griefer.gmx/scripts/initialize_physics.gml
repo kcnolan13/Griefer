@@ -17,7 +17,7 @@ continue_standing = false
 was_standing = false
 
 //custom movement variables
-speed_walk = 10
+speed_walk = 12
 accel_walk = 5
 speed_crawl = 7
 accel_crawl = 3

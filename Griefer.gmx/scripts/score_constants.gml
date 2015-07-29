@@ -24,11 +24,12 @@ var major = 90
 var minor = 30
 var you = 10
 var sat_scaler = 0.75
+var val_scaler = 0.75
 
-global.team_colors[0] = web_hsv(232,74*sat_scaler,100)  //blue      //make_colour_rgb(minor,minor,major)
-global.team_colors[1] = web_hsv(0,91*sat_scaler,50)    //red       //make_colour_rgb(major,minor,minor)
-global.team_colors[2] = web_hsv(158,87*sat_scaler,61)  //green     //make_colour_rgb(minor,major,minor)
-global.team_colors[3] = web_hsv(44,52*sat_scaler,94) //yellow    //make_colour_rgb(minor,major,major)
+global.team_colors[0] = web_hsv(232,74*sat_scaler,100*val_scaler)  //blue      //make_colour_rgb(minor,minor,major)
+global.team_colors[1] = web_hsv(0,91*sat_scaler,50*val_scaler)    //red       //make_colour_rgb(major,minor,minor)
+global.team_colors[2] = web_hsv(158,87*sat_scaler,61*val_scaler)  //green     //make_colour_rgb(minor,major,minor)
+global.team_colors[3] = web_hsv(284,100*sat_scaler,100*val_scaler) //purple    //make_colour_rgb(minor,major,major)
 global.you_colors[0] = make_colour_rgb(minor+you,minor+you,major+you)
 global.you_colors[1] = make_colour_rgb(major+you,minor+you,minor+you)
 global.you_colors[2] = make_colour_rgb(minor+you,major+you,minor+you)

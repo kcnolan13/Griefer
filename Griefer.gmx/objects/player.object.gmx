@@ -1377,10 +1377,35 @@ if (varRead("controllable")) or objVarRead(net_manager,"end_match_coming")
     {animation_crawl() varWrite("animation_speed",0)}
     
     //make damn well sure he's crawling
-    if sprite_index = spr_player_crawl and varRead("animation") != "crawl" and rolling = 0 and varRead("animation") != "roll"
+    if sprite_index = spr_player_crawl and varRead("animation") != "crawl" and rolling = 0 and varRead("animation") != "roll" 
     {
-        printf("::: FORCING ANIMATION CRAWL")
-        animation_crawl()
+        if not in_air or collision_rectangle(bbox_left,bbox_top-50,bbox_right,bbox_bottom-40,block,true,true)
+               
+        {
+            printf("::: FORCING CRAWL")
+            animation_crawl()
+        }
+        else
+        {
+            printf("::: FORCING JUMP")
+            animation_walk()
+            var ysub = 47
+            if not standing_2way and not floating_2way
+                ysub = 47
+                
+            varSub("myY",ysub)
+            y = varRead("myY")
+            sprite_index = spr_player
+            
+            x = varRead("myX")
+            scr_unstick_guy()
+            x = varRead("myX")
+            
+            if standing_2way or floating_2way
+            {
+                scr_pull_up(ysub)
+            }
+        }
     }
     
 }

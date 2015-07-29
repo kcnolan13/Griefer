@@ -110,7 +110,7 @@ active = false
         </arguments>
       </action>
     </event>
-    <event eventtype="8" enumb="0">
+    <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -130,6 +130,9 @@ active = false
             <string>///draw code
 if active and in_match()
 {
+    var draw_x = (cursor.x-view_xview)*WVIEW/view_wview
+    var draw_y = (cursor.y-view_yview)*HVIEW/view_hview
+    
     depth = -98
     if core_active
     {
@@ -140,21 +143,21 @@ if active and in_match()
             
         if core = "circle"
         {
-            for (var i=0; i&lt;core_linewidth; i+=0.25)
+            for (var i=0; i&lt;core_linewidth; i+=0.5)
             {
-                draw_circle(cursor.x,cursor.y,core_radius+i,true)
+                draw_circle(draw_x,draw_y,core_radius+i,true)
             }
         }
         else if core = "square"
         {
-            for (var i=0; i&lt;core_linewidth; i+=0.25)
+            for (var i=0; i&lt;core_linewidth; i+=0.5)
             {
-                draw_rectangle(cursor.x-core_radius-i,cursor.y-core_radius-i,cursor.x+core_radius+i,cursor.y+core_radius+i,true)
+                draw_rectangle(draw_x-core_radius-i,draw_y-core_radius-i,draw_x+core_radius+i,draw_y+core_radius+i,true)
             }
         }
         else
         {
-            draw_sprite_ext(core,-1,cursor.x,cursor.y,core_radius,core_radius,0,core_color,core_alpha)
+            draw_sprite_ext(core,-1,draw_x,draw_y,core_radius,core_radius,0,core_color,core_alpha)
         }
     }
     
@@ -167,7 +170,7 @@ if active and in_match()
     ang = accent_rot
     for (var i=0; i&lt;accent_num; i++)
     {
-        draw_sprite_ext(accent,-1,cursor.x+trigx(accent_radius+accent_xextra,ang),cursor.y+trigy(accent_radius+accent_yextra,ang),accent_scale,accent_scale,ang,accent_color,accent_alpha)
+        draw_sprite_ext(accent,-1,draw_x+trigx(accent_radius+accent_xextra,ang),draw_y+trigy(accent_radius+accent_yextra,ang),accent_scale,accent_scale,ang,accent_color,accent_alpha)
         ang += 360/accent_num
     }
 
@@ -175,6 +178,22 @@ if active and in_match()
 </string>
           </argument>
         </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>425</id>
+        <kind>4</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
       </action>
     </event>
   </events>

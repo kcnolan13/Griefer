@@ -2350,7 +2350,7 @@ if not match_ending()
                     }
             }
     
-            if instance_exists(local_player.weapon_contemplating)
+            if instance_exists(local_player.weapon_contemplating) and not match_starting() and not match_ending()
             {
                 printf("local_player = "+string(local_player))
                 printf("local_player.weapon_contemplating = "+string(local_player.weapon_contemplating))
@@ -2365,13 +2365,13 @@ if not match_ending()
             } //else printf("ERROR: no weapon_contemplating")
         }
         
-        if local_player.weapon_wheel_alpha &gt; 0
+        if local_player.weapon_wheel_alpha &gt; 0 and not match_starting() and not match_ending()
         {
             show_scores = 0
             draw_weapon_wheel(local_player,0+WVIEW/2,0+HVIEW/2,local_player.weapon_wheel_alpha, master_scale)
         }
     
-        if instance_exists(objVarRead(local_player,"active_weapon"))
+        if instance_exists(objVarRead(local_player,"active_weapon")) and not match_starting() and not match_ending()
         {
             border = 16
             draw_weapon_slot(objVarRead(local_player,"active_weapon"),0+WVIEW-sprite_get_width(spr_weapon_slot)/2*master_scale-border,0+(sprite_get_height(spr_weapon_slot)/2+border+8)*master_scale,master_scale,1,FL_NORMAL)

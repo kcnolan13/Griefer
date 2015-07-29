@@ -39,6 +39,7 @@ alarm[0] = 1
 completed = false
 challenge_index = 0
 new = false
+scl = 0.75
 
 auto_frame_offset = ceil(random_range(1,4))
 
@@ -67,7 +68,7 @@ show_number = 0
 
 popup_xoff = 0
 popup_xoff_extra = 0
-popup_yoff_original = -54
+popup_yoff_original = -55
 popup_yoff = popup_yoff_original
 popup_yoff_extra = 0
 popup_hsp = 0
@@ -225,10 +226,10 @@ if in_match() and completed and (not shown_completed or (not tripped_end_match a
         tripped_end_match = true
         
     popup_show = true
-    popup_alpha = popup_alpha_idle
+    popup_alpha = 0.1//popup_alpha_idle
     popup_alpha_target = popup_alpha_highlighted
     sweep_counter = sweep_delay
-    popup_hsp = 5
+    popup_hsp = 0//5
     popup_xoff = 0
     popup_yoff = popup_yoff_original
     shown_completed = true
@@ -236,8 +237,8 @@ if in_match() and completed and (not shown_completed or (not tripped_end_match a
 
 if in_match() and popup_show
 {
-    x = WVIEW-global.challenge_popup_width+popup_xoff+popup_xoff_extra
-    y = HVIEW-global.challenge_popup_height+popup_yoff+popup_yoff_extra
+    x = WVIEW-(global.challenge_popup_width)*scl+popup_xoff+popup_xoff_extra
+    y = HVIEW-(global.challenge_popup_height)*scl+popup_yoff+popup_yoff_extra
     
     show_number = 0
     
@@ -256,14 +257,18 @@ if in_match() and popup_show
     popup_yoff = popup_yoff_original-72*show_number
     
     if sweep_counter
+    {
         sweep_counter --
-        
+    }
+ 
     if not sweep_counter and not match_ending()
     {
+        popup_alpha_target = 0
+        
         popup_xoff_extra += popup_hsp
         popup_yoff_extra += popup_vsp
         
-        if x+popup_xoff+popup_xoff_extra &gt; WVIEW+64
+        if popup_alpha &lt; 0.1
         {
             popup_show = false
             popup_xoff = 0
@@ -471,7 +476,7 @@ if room = rm_menu or room = rm_lobby
                 }
             }
             
-            draw_popup_challenge(cursor.x, cursor.y, name, "", desc, icon, color_complete, 1)
+            draw_popup_challenge(cursor.x, cursor.y, name, "", desc, icon, color_complete, 1,1)
             
             //determine whether to use the surface or not
             //if completed
@@ -546,12 +551,11 @@ if in_match() and popup_show and not is_progression
     var descr = description
     if match_ending()
     {
-        endmatch_offset = 64
-        descr = ""
+        //endmatch_offset = 64
+        //descr = ""
         popup_xoff_extra = 0
     }
-        
-    draw_popup_challenge(x+popup_xoff+popup_xoff_extra+endmatch_offset, y+popup_yoff+popup_yoff_extra, name, "", descr, icon, color, popup_alpha)
+    draw_popup_challenge(x+(popup_xoff+popup_xoff_extra+endmatch_offset)*(1+(1-scl)), y+(popup_yoff+popup_yoff_extra)*scl, name, "", descr, icon, color, popup_alpha,scl)
     printf("::: show_number = "+string(show_number)+", id="+string(id)+", popup_xoff="+string(popup_xoff)+", popup_xoff_extra="+string(popup_xoff_extra))
 }
 </string>

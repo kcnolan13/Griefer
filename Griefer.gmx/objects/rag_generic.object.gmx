@@ -28,6 +28,8 @@
             <string>///CREATE FIXTURE
 fix = physics_fixture_create()
 
+joint_health = 125
+
 life = 0
 
 if object_index != rag_generic and (object_index-rag_head &lt; getLength(global.bpart_limb_types))
@@ -42,6 +44,9 @@ scale = 1
 image_angoff = 0
 do_bind = false
 joint_xs[0] = 30 joint_ys[0] = 24
+
+joints[0] = NO_HANDLE
+joint_ind = 0
 
 joint_dirs[0] = 0
 joint_dirs[1] = 0
@@ -285,10 +290,50 @@ if bullet_pushed
     
 if instance_place(x,y,bullet_generic) and not bullet_pushed
 {
-    ID = instance_place(x,y,bullet_generic)
-    bullet_pushed = 4
-    force = objVarRead(ID,"damage_body")*1.25
-    fdir = real(objVarRead(ID,"direction"))
+    datBullet = instance_place(x,y,bullet_generic)
+    if not instance_exists(datBullet) return false
+    
+    bullet_pushed = 2
+    dmg = objVarRead(datBullet,"damage_body")
+    
+    if datBullet.object_index = bullet_shotgun or datBullet.object_index = bullet_double
+        dmg *= 3
+        
+    //if random(1) &lt; 0.15
+      //  bloodspray_player(x,y,75,objVarRead(datBullet,"direction"),blood_color)
+        
+    bleed_time += dmg
+    joint_health -= dmg
+    force = dmg*1.25
+    fdir = real(objVarRead(datBullet,"direction"))
+    //printf("::: dmg="+string(dmg)+", joint_health="+string(joint_health))
+    
+    if joint_health &lt;= 0 and random(1) &lt; 0.15
+    {
+        var loops = 0
+        //printf("::: trying to disconnect joints ... joints length = "+string(getLength(joints)))
+        for (var i=0; i&lt;getLength(joints); i++)
+        {
+            //printf(":::disconnecting joint "+string(i))
+            if joints[i] != NO_HANDLE
+            {
+                physics_joint_delete(joints[i])
+                bleed_time = random_range(4*room_speed,5*room_speed)
+                bleed_strength_delay = bleed_time*2/3
+                bleed_strength_dec = 0.25
+                bleed_strength = random_range(16,18)
+                joints[i] = NO_HANDLE
+                if not audio_is_playing(snd_gnashed)
+                    audio(snd_gnashed,0.25)
+            }
+            loops++
+            if loops &gt; 10
+                break
+        }
+        joints = 0
+        joints[0] = NO_HANDLE
+    }
+
     physics_apply_force(x,y,trigx(force,fdir),trigy(force,fdir))
 }
 </string>

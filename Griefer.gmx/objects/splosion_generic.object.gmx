@@ -137,8 +137,38 @@ if object_index != splosion_flame and object_index != splosion_smoke
         {
             dat_rag.xfor = trigx(FORCE_SPLOSION*2,point_direction(x,y,dat_rag.x,dat_rag.y))
             dat_rag.yfor = trigy(FORCE_SPLOSION*2,point_direction(x,y,dat_rag.x,dat_rag.y))
+            
+            //if random(1) &lt; 0.2
+              //  bloodspray_player(dat_rag.x,dat_rag.y,75,random(360),dat_rag.blood_color)
+                    
             with (dat_rag)
             {
+                //sometimes fracture
+                if random(1) &lt; 0.25
+                {
+                    var loops = 0
+                    for (var i=0; i&lt;getLength(joints); i++)
+                    {
+                        if joints[i] != NO_HANDLE
+                        {
+                            if not audio_is_playing(snd_gnashed)
+                                audio(snd_gnashed,0.65)
+                            printf(":::disconnecting joint "+string(i))
+                            physics_joint_delete(joints[i])
+                            bleed_time = random_range(4*room_speed,5*room_speed)
+                            bleed_strength_delay = bleed_time*2/3
+                            bleed_strength_dec = 0.25
+                            bleed_strength = random_range(16,18)
+                            joints[i] = NO_HANDLE
+                        }
+                        loops++
+                        if loops &gt; 10
+                            break
+                    }
+                    joints = 0
+                    joints[0] = NO_HANDLE
+                }
+            
                 physics_apply_force(x,y,xfor,yfor)
             }
         }

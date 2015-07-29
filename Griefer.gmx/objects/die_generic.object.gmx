@@ -95,12 +95,12 @@ if not created_rag and varRead("can_die")
     if varRead("die_shotgun")
     {
         rag_force = random_range(2,4)
-        rag_frac_prob = 0.45
+        rag_frac_prob = 0.35
         audio(snd_gnashed,2)
     } else if varRead("die_splosion")
     {
         rag_force = random_range(FORCE_SPLOSION-1,FORCE_SPLOSION+1)
-        rag_frac_prob = 0.3
+        rag_frac_prob = 0.28
         audio(snd_gnashed,2)
         //audio(snd_gnashed,2)
     } else if varRead("die_headshot")

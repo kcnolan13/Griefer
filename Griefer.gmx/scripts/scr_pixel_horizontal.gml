@@ -1,6 +1,9 @@
 amount = argument0
 id_2way_hor = -1
 
+var xi_actual = x
+var yi_actual = y
+
 repeat (abs(hsp))
 {
     if object_index = player
@@ -16,6 +19,16 @@ repeat (abs(hsp))
         hsp = 0 
         break
     }
+    
+    var xtra = 1
+    if point_distance(xi_actual,yi_actual,x,y) > abs(hsp)+xtra
+    {
+        var movdir = point_direction(xi_actual,yi_actual,x,y)
+        x = xi_actual+trigx(abs(hsp)+xtra,movdir)
+        y = yi_actual+trigy(abs(hsp)+xtra,movdir)
+        printf("::: clipped x,y --> movdir = "+string(movdir))
+        break
+    }
 }
 
 //walk down slanted surfaces smoothly
@@ -24,14 +37,14 @@ repeat (abs(hsp))
     var ymax = 80
     if was_standing and not jumping and not collision_rectangle(bbox_left,bbox_bottom,bbox_right,bbox_bottom+sthresh,block,true,false) and not collision_rectangle(bbox_left,bbox_bottom,bbox_right,bbox_bottom+sthresh,block2_top,true,false)
     {
-        printf("::: was standing")
+        //printf("::: was standing")
         while (yinc < ymax)
         {
             yinc ++
             if collision_rectangle(bbox_left,bbox_bottom,bbox_right,bbox_bottom+yinc,block,true,false) or collision_rectangle(bbox_left,bbox_bottom,bbox_right,bbox_bottom+yinc,block2_top,true,false)
             {
                 yinc -= 1
-                printf("::: incremented y by "+string(yinc))
+                //printf("::: incremented y by "+string(yinc))
                 y += yinc
                 break
             }
