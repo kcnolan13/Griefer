@@ -36,6 +36,8 @@ using namespace std;
 extern string retString;
 extern bool debug;
 extern bool integrityCheck;
+extern string serverURL;
+extern double alive;
 
 class genVal
 {

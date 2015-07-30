@@ -439,8 +439,10 @@
           <kind>12</kind>
           <help> initGrieferClient()</help>
           <returnType>2</returnType>
-          <argCount>0</argCount>
-          <args/>
+          <argCount>1</argCount>
+          <args>
+            <arg>1</arg>
+          </args>
         </function>
         <function>
           <name>readObjUpdateOidStr</name>
@@ -579,6 +581,24 @@
             <arg>1</arg>
             <arg>2</arg>
           </args>
+        </function>
+        <function>
+          <name>keepAlive</name>
+          <externalName>keepAlive</externalName>
+          <kind>12</kind>
+          <help>keepAlive()</help>
+          <returnType>2</returnType>
+          <argCount>0</argCount>
+          <args/>
+        </function>
+        <function>
+          <name>isAlive</name>
+          <externalName>isAlive</externalName>
+          <kind>12</kind>
+          <help>isAlive()</help>
+          <returnType>2</returnType>
+          <argCount>0</argCount>
+          <args/>
         </function>
       </functions>
       <constants/>

@@ -8,4 +8,3 @@ var len = 0
 str = string_replace(str,"_"," ")
 
 return capwords(str)
-

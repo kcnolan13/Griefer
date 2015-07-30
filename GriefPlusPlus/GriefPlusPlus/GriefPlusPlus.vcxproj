@@ -87,6 +87,9 @@
       <AdditionalLibraryDirectories>C:\boost\release\lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>boost.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy E:\Griefer\GriefPlusPlus\GriefPlusPlus\Release\GriefPlusPlus.dll E:\Griefer\Griefer.gmx\extensions\griefer_client\GriefPlusPlus.dll /E /C /H /R /K /O /Y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\main.cpp" />

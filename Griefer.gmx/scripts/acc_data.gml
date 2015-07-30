@@ -21,4 +21,3 @@ else
     print_ds_grid(grid)
     return false
 }
-

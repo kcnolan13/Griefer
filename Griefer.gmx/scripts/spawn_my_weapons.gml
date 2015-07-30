@@ -6,6 +6,9 @@ if varRead("weapon0") >= 0 or varRead("weapon1") >= 0 or varRead("weapon2") >= 0
     return false
 }
 
+
+force_switch = true
+
 varWrite("weapon_index",0)
 
 dat_wep_do = instance_create_for_everyone(x,y,weapon_rifle)
@@ -28,5 +31,8 @@ pickup_weapon(dat_wep_do)
 objVarWrite(dat_wep_do,"ammo",0)
 
 next_weapon()
+
+
+force_switch = false
 
 return true

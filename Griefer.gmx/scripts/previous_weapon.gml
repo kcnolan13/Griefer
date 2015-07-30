@@ -4,7 +4,7 @@ if DEBUG
  
  if torque_charging() return false
  
- if weapon_switch_delay and alive_counter > room_speed*3
+ if not force_switch and weapon_switch_delay and alive_counter > room_speed*3
     return false
  
 varWrite("arm_animation_speed",0)

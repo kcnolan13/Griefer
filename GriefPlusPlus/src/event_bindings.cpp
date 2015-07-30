@@ -22,6 +22,13 @@ void bind_events(socket::ptr &socket)
 		_lock.unlock();
 	});
 
+	socket->on("keepalive", [&](string const& name, message::ptr const& data, bool isAck, message::ptr &ack_resp)
+	{
+		_lock.lock();
+		alive = 1;
+		_lock.unlock();
+	});
+
 	socket->on("pkg", [&](string const& name, message::ptr const& data, bool isAck, message::ptr &ack_resp)
 	{
 		_lock.lock();
@@ -126,7 +133,7 @@ void bind_events(socket::ptr &socket)
 	socket->on("disconnect", [&](string const& name, message::ptr const& data, bool isAck, message::ptr &ack_resp)
 	{
 		_lock.lock();
-		console("LOST CONNECTION from the server");
+		console(":::LOST CONNECTION from the server");
 		generalMessages->push_back("disconnect");
 		generalValues->push_back(genVal(1));
 		_lock.unlock();

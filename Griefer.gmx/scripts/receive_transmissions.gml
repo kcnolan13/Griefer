@@ -183,7 +183,7 @@ while (genMessagesWaiting() and wait_counter < 500000)
         break
         
         case "disconnect":
-            printf("RECEIVED SERVER DISCONNECT")
+            printf(":::RECEIVED SERVER DISCONNECT")
             net_manager.server_found = false
             //griefer_restart()
         break
@@ -224,22 +224,22 @@ while (genMessagesWaiting() and wait_counter < 500000)
                 {
                     audio_play_sound(snd_click,2,false)
                     logIn(objVarRead(net_manager,"pName"))
-                    printf("GOOD LOGIN")
+                    printf("::: GOOD LOGIN")
                     room_goto(rm_menu)
                     return 0
                 } else {
                     audio_play_sound(snd_denied,2,false)
-                    bn_login_user.alert = "BAD Username/Password"
+                    bn_login_user.alert = "User Exists. Bad Password."
                     bn_login_user.alert_alpha = 1.5
-                    printf("WRONG USERNAME / PASSWORD")
+                    printf("::: WRONG USERNAME / PASSWORD")
                 }
             }
             else
             {
                 audio_play_sound(snd_denied,2,false)
-                bn_login_user.alert = "Logged In Somewhere Else"
+                bn_login_user.alert = "Logged In Somewhere Else."
                 bn_login_user.alert_alpha = 1.5
-                printf("MULTIPLE LOGINS DETECTED")
+                printf("::: MULTIPLE LOGINS DETECTED")
             }
         break
         
@@ -247,13 +247,11 @@ while (genMessagesWaiting() and wait_counter < 500000)
             if (genVal = true)
             {
                 logIn(objVarRead(net_manager,"pName"))
-                if DEBUG
-                    printf("going to menu")
+                printf("::: USER CREATED ... going to menu")
                 room_goto(rm_menu)
                 return 0
             } else {
-                if DEBUG
-                    printf("USER ALREADY EXISTS")
+                printf("::: USER ALREADY EXISTS")
                 with (processing) instance_destroy()
             }
         break
@@ -262,7 +260,7 @@ while (genMessagesWaiting() and wait_counter < 500000)
             if room != rm_lobby
                 room_goto(rm_lobby)
             //if DEBUG
-                printf("received END MATCH!!")
+                printf("::: received END MATCH!!")
         break
     }
 }

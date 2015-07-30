@@ -84,4 +84,3 @@ draw_sprite_ext(slot_icon,-1,slot_x+wep_xoff,slot_y+wep_yoff-9*slot_scale,wepsca
 
 
 
-

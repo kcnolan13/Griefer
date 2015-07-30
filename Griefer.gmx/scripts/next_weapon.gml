@@ -6,7 +6,7 @@ if torque_charging() return false
 
 varWrite("arm_animation_speed",0)
 
- if weapon_switch_delay and alive_counter > room_speed*3 and (instance_exists(varRead("active_weapon")) and objVarRead(varRead("active_weapon"),"ammo") > 0)
+ if not force_switch and weapon_switch_delay and alive_counter > room_speed*3 and (instance_exists(varRead("active_weapon")) and objVarRead(varRead("active_weapon"),"ammo") > 0)
     return false
 
 if instance_exists(varRead("active_weapon"))

@@ -23,32 +23,27 @@ using namespace std;
 
 void closeConnection()
 {
+	console("::: CLOSING DOWN SOCKET");
 	h.sync_close();
 	h.clear_con_listeners();
 }
 
 //DLL INIT
-GMEXPORT const double initGrieferClient()
+GMEXPORT const double initGrieferClient(string connURL)
 {
 	//attempt connection
+	alive = 1;
+	serverURL = connURL;
 	current_socket = h.socket();
     h.set_open_listener(std::bind(&connection_listener::on_connected, &l));
     h.set_close_listener(std::bind(&connection_listener::on_close, &l,std::placeholders::_1));
     h.set_fail_listener(std::bind(&connection_listener::on_fail, &l));
-    h.connect("http://www.puddlesquid.com:8080");
-	_lock.lock();
-
-	//wait for connection
-    if(!connect_finish)
-    {
-        _cond.wait(_lock);
-    }
-    _lock.unlock();
+    h.connect(serverURL);
 
 	bind_events(current_socket);
 	current_socket->emit("PING");
 	current_socket->emit("JSON_test","{\"val1\": 52}");
-
+	
 	return 0;
 }
 
@@ -65,6 +60,20 @@ GMEXPORT const double sendCmd(char * cmd) {
 	current_socket->emit("PING");
 	current_socket->emit("JSON_test", "{\"val1\": 52}");
 	return 0;
+}
+
+GMEXPORT const double keepAlive() {
+	alive = 0;
+	current_socket->emit("keepalive");
+	return 0;
+}
+
+GMEXPORT const double isAlive() {
+	if (alive == 0)
+	{
+		closeConnection();
+	}
+	return alive;
 }
 
 GMEXPORT const char * getGreeting() {

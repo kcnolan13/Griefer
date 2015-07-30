@@ -11,4 +11,3 @@ if object_index = challenge_generic
     scale *= txt_scale
 
 draw_splats(dx,dy+global.moffset,scale,col,1)
-

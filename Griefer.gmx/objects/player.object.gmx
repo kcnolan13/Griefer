@@ -36,8 +36,23 @@ curs_yoff = 256
 damage_scaler = 0.75
 
 //bot constants
+semi_auto_time_min = 8
+semi_auto_time = 0
+shooting_dist = 0
+overheating = 0
+overheating_max = 0
+auto_shooting = false
+possible_2shoot = true
+shooting_prob = 0
 weapon_time = 0
 weapon_time_min = room_speed
+//for bot weapon switching time?
+switch_time = 0
+switch_time_min = room_speed
+//no idea?
+force_switch = false
+weapon_switch_delay = 0
+weapon_switch_delay_max = room_speed*3
 
 time_since_wepcont = 0
 near_death = false
@@ -65,9 +80,6 @@ spawn_x = 0
 spawn_y = 0
 respawn_delay = room_speed*3
 walking = false
-
-weapon_switch_delay = 0
-weapon_switch_delay_max = room_speed*3
 
 xaim = 0
 yaim = 0
@@ -1379,7 +1391,7 @@ if (varRead("controllable")) or objVarRead(net_manager,"end_match_coming")
     //make damn well sure he's crawling
     if sprite_index = spr_player_crawl and varRead("animation") != "crawl" and rolling = 0 and varRead("animation") != "roll" 
     {
-        if not in_air or collision_rectangle(bbox_left,bbox_top-50,bbox_right,bbox_bottom-40,block,true,true)
+        if not in_air or slide_left or slide_right or collision_rectangle(bbox_left,bbox_top-50,bbox_right,bbox_bottom-40,block,true,true)
                
         {
             printf("::: FORCING CRAWL")

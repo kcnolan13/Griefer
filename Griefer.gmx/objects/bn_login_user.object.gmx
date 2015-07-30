@@ -35,7 +35,7 @@ alert_alpha = 0
 alert_fade = 0.05
 
 time_since_active = 0
-label = "Login"
+label = "Play"
 field_username = instance_create(room_width/2-sprite_get_width(spr_input_field)/2,room_height/2,input_field)
 field_username.label = "Name"
 field_username.input_string = ""
@@ -204,7 +204,7 @@ if instance_place(x,y,cursor) or forced_enter
 {
     forced_enter = false
     clicked = 2
-    printf("MAKING LOGIN ATTEMPT: "+field_username.input_string+" : "+field_password.input_string)
+    printf("MAKING AUTHENTICATION ATTEMPT: "+field_username.input_string+" : "+field_password.input_string)
     if !instance_exists(processing)
     {
         authenticate(field_username.input_string,field_password.input_string)

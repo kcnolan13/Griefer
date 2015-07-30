@@ -154,4 +154,3 @@ if varRead("pName") = objVarRead(net_manager.my_doll,"pName")
     net_manager.view_overscaler_target = net_manager.view_overscaler_dead
     printf("::: set rag_target to: "+string(varRead("pName")+"'s torso"))
 }
-

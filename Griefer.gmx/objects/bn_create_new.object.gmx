@@ -2,7 +2,7 @@
 <object>
   <spriteName>spr_puretxt_placeholder</spriteName>
   <solid>0</solid>
-  <visible>-1</visible>
+  <visible>0</visible>
   <depth>-101</depth>
   <persistent>0</persistent>
   <parentName>button_generic</parentName>
@@ -102,6 +102,20 @@ halign = fa_right
     <event eventtype="6" enumb="53">
       <action>
         <libid>1</libid>
+        <id>425</id>
+        <kind>4</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+      </action>
+      <action>
+        <libid>1</libid>
         <id>603</id>
         <kind>7</kind>
         <userelative>0</userelative>
@@ -119,9 +133,13 @@ halign = fa_right
             <string>if !instance_exists(processing) and instance_place(x,y,cursor)
 {
     audio_play_sound(snd_click,2,false)
-    createUser(bn_login_user.field_username.input_string, bn_login_user.field_password.input_string)
-    objVarWrite(net_manager,"pName",bn_login_user.field_username.input_string)
-    instance_create(room_width/2,room_height/2,processing)
+    printf("MAKING AUTHENTICATION ATTEMPT: "+bn_login_user.field_username.input_string+" : "+bn_login_user.field_password.input_string)
+    if !instance_exists(processing)
+    {
+        authenticate(bn_login_user.field_username.input_string,bn_login_user.field_password.input_string)
+        objVarWrite(net_manager,"pName",bn_login_user.field_username.input_string)
+        instance_create(x,y,processing)
+    }
 }
 </string>
           </argument>

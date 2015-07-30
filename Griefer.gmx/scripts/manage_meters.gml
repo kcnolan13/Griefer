@@ -53,7 +53,7 @@ for (var i=0; i<getLength(meters); i++)
             if i = METER_KDR
             {
                 var temp_kdr = truncate(varRead("kdr"),2)
-                printf("::: kdr="+string(varRead("kdr"))+", temp_kdr="+string(temp_kdr))
+                //printf("::: kdr="+string(varRead("kdr"))+", temp_kdr="+string(temp_kdr))
                 varWrite("kdr",temp_kdr)
                 met.meter_val = varRead("kdr")
                 met.meter_val_places = 2

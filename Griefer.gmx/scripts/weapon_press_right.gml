@@ -37,7 +37,12 @@ if nade_obj
         
         for (var dis_index = 0; dis_index < num_quicktoss_backcycles; dis_index++)
         {
-            with (mi_jugador) next_weapon()
+            with (mi_jugador) 
+            {
+                force_switch = true
+                next_weapon()
+                force_switch = false
+            }
         }
         
         //NADE OBJECT IS NOW SUPPOSEDLY THE ACTIVE WEAPON

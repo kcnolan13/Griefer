@@ -26,10 +26,14 @@
           <argument>
             <kind>1</kind>
             <string>///initialization
+serverURL = "http://192.168.0.3:8080"
 draw_set_swf_aa_level(1)
 draw_enable_swf_aa(true)
 setGppDebug(0)
 display_set_gui_size(WVIEW,HVIEW)
+
+keepalive_timeout = room_speed*1
+keepalive_timer = 15
 
 master_scale = 1
 match_scale = 0.9
@@ -80,7 +84,7 @@ drawing_cache_popup = false
 
 printf("instance_exists(-10) = "+string(instance_exists(-10)))
 
-initGrieferClient()
+initGrieferClient(serverURL)
 printf("CONNECTION ESTABLISHED")
 
 blahname = "Ballsack"
@@ -1036,6 +1040,47 @@ if keyboard_check(vk_control) and keyboard_check(vk_alt) and keyboard_check(vk_b
       </action>
     </event>
     <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///keepalive
+
+if keepalive_timer
+{
+    keepalive_timer --
+    if not keepalive_timer
+    {
+        if isAlive() = 1
+        {
+            //printf(":::IS ALIVE")
+            keepalive_timer = keepalive_timeout
+            server_found = true
+            keepAlive()
+        }
+        else
+        {
+            printf(":::KEEPALIVE TIMEOUT")
+            server_found = false
+        }
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
       <action>
         <libid>1</libid>
         <id>603</id>

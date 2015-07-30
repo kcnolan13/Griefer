@@ -8,6 +8,8 @@
 string retString = "blah";
 bool integrityCheck = false;
 bool debug = false;
+string serverURL = "http://www.puddlesquid.com:8080";
+double alive = 1;
 
 genVal::genVal()
 {

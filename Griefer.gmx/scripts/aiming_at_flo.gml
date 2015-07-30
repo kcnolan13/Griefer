@@ -14,4 +14,3 @@ for(i=0;i<=check_distance;i+=resolution)
 }
 
 return false
-

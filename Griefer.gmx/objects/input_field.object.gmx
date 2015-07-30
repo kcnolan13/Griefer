@@ -106,6 +106,16 @@ if alpha &lt; 0.1
     str_cursor = ""
 }
 
+//detect when two input fields are active at same time
+if room = rm_login and input_active
+{
+    if bn_login_user.field_password.input_active and id != bn_login_user.field_password.id
+    {
+        input_active = false
+        str_cursor = ""
+    }
+}
+
 if global.using_gamepad 
 {
     if gamepad_button_check_pressed(global.devno,global.cvals[C_JUMP]) 
@@ -122,7 +132,6 @@ if global.using_gamepad
 }
 
 if not input_active exit
-
 
 
 if tab_delay &gt; 0
@@ -152,26 +161,18 @@ if input_active
     
     if keyboard_check_pressed(vk_tab) and not tab_delay and room = rm_login
     {
-        if input_active
+        tab_delay = 5
+        input_active = false
+        str_cursor = ""
+        with input_field
         {
-            tab_delay = 5
-            input_active = false
-            str_cursor = ""
-            for (i=0; i&lt;instance_number(input_field); i++)
+            if id != other.id
             {
-                ID = instance_find(input_field,i)
-                if ID.id != id
-                {
-                    with ID
-                    {
-                        tab_delay = 5
-                        input_active = true
-                        keyboard_string = ""
-                        input_string = ""
-                        str_cursor = "|"
-                    }
-                    break
-                }
+                tab_delay = 5
+                input_active = true
+                keyboard_string = ""
+                input_string = ""
+                str_cursor = "|"
             }
         }
     }
@@ -199,6 +200,10 @@ if input_active
           <argument>
             <kind>1</kind>
             <string>///toggle active
+
+//don't let any input_fields auto-start after entry into any input field
+with input_field
+    auto_started = true
 
 if alpha &lt; 0.1 exit
 

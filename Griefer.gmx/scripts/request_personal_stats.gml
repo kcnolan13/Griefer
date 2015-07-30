@@ -4,4 +4,3 @@ var fl = real(argument1)
 
 printf("::: sent personal stats request")
 sendBigMessageStrReal("get_personal_stats",username,fl,FL_NORMAL)
-

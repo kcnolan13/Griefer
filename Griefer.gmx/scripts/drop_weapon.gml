@@ -3,6 +3,8 @@ var wep_2drop = varRead("weapon"+string(num))
 
 if torque_charging() return false
 
+force_switch = true
+
 varWrite("arm_animation_speed",0)
 
 if DEBUG
@@ -27,6 +29,7 @@ if instance_exists(wep_2drop)
     obj_update_real(wep_2drop,"my_player",FL_NORMAL)
     obj_update_real(wep_2drop,"active",FL_NORMAL)
     
+    force_switch = false
     return true
     
 } else 
@@ -34,5 +37,6 @@ if instance_exists(wep_2drop)
     if DEBUG
         printf("tried to drop nonexistent weapon")
     next_weapon()
+    force_switch = false
     return false
 }
