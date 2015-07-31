@@ -1520,6 +1520,7 @@
       </objects>
       <objects name="lobbies">
         <object>objects\bn_leave_matchmaking</object>
+        <object>objects\bn_ready</object>
       </objects>
       <objects name="login">
         <object>objects\bn_login_user</object>

@@ -201,7 +201,7 @@ if in_match()
 }
 else
 {
-    master_scale = 1
+    master_scale = 0.8
     if room = rm_lobby and menmode() = "lobby"
     {
         force_show = true
