@@ -54,15 +54,14 @@ if rar_index = -1
     printf("ERROR: failed to resolve rarity index")
     return false
 }
-    
-printf("   rarity roll: "+string(rar)+", Rarity Index: "+string(rar_index))
 
+printf("   rarity roll: "+string(rar)+", Rarity Index: "+string(rar_index))
 
 var iterations = 0
 while (iterations < 500 and not bpart_spr)
 {
     iterations ++
-    if iterations > 400
+    if iterations > 450
         printf("ERROR: taking too long to roll dice")
         
     var rando_spr = floor(random_range(spr_armor_placeholder1+1,spr_armor_placeholder2-0.1))

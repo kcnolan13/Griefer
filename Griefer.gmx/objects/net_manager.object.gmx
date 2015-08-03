@@ -26,13 +26,13 @@
           <argument>
             <kind>1</kind>
             <string>///initialization
-serverURL = "http://192.168.0.3:8080"
+serverURL = "http://www.puddlesquid.com:8080"
 draw_set_swf_aa_level(1)
 draw_enable_swf_aa(true)
 setGppDebug(0)
 display_set_gui_size(WVIEW,HVIEW)
 
-keepalive_timeout = room_speed*1
+keepalive_timeout = room_speed*2
 keepalive_timer = 15
 
 master_scale = 1
@@ -1063,6 +1063,7 @@ if keepalive_timer
     keepalive_timer --
     if not keepalive_timer
     {
+        //printf("::: checking keepalive")
         if isAlive() = 1
         {
             //printf(":::IS ALIVE")
@@ -1072,9 +1073,10 @@ if keepalive_timer
         }
         else
         {
-            printf(":::KEEPALIVE TIMEOUT")
+            printf("::: KEEPALIVE TIMEOUT")
             server_found = false
         }
+        //printf("::: checked keepalive")
     }
 }
 </string>
@@ -1132,6 +1134,7 @@ for (var i=0; i&lt;instance_number(cursor_generic); i++)
     if ID.active
     active_cursors++
 }
+
 if active_cursors &gt; 1
 {
     printf("deactivating duplicate cursors")
@@ -1139,7 +1142,7 @@ if active_cursors &gt; 1
 }
 
 if instance_exists(NO_HANDLE)
-    printf("\n\nERROR: NO_HANDLE DOES EXIST!!!\n\n")
+    printf("ERROR: NO_HANDLE DOES EXIST!!!\n\n")
 </string>
           </argument>
         </arguments>
@@ -2331,7 +2334,19 @@ if not match_ending()
         draw_text(0+WVIEW/2,0+72,string(game_mode_name(varRead("game_mode")))+" on "+string(global.map_names[room]))
     }
     
-    if draw_killed_by
+    //don't let killed by overlap with promoted text
+    do_draw_killed_by = draw_killed_by
+    
+    if do_draw_killed_by
+    {
+        with action_word
+        {
+            if init_as_promoted
+                net_manager.do_draw_killed_by = false
+        }
+    }
+    
+    if draw_killed_by and do_draw_killed_by
     {
         draw_set_font(fnt_splashscreen)
         draw_set_color(c_white)

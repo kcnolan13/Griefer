@@ -1,7 +1,7 @@
 ///instantiate_all_bots(num_bots)
 var num_bots = argument0
 
-printf("ERROR (not): INSTANTIATING "+string(num_bots)+" bots")
+printf("::: INSTANTIATING "+string(num_bots)+" bots")
 
 //THIS WHOLE ALGORITHM BASICALLY DOESN'T MATTER ANYMORE -- SHUFFLE LOGIC IN AVATAR STEP IS WHAT REALLY MATTERS
 

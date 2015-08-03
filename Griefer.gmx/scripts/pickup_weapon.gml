@@ -104,7 +104,7 @@ if cycle_back_at_end
     var whiles = 0
     while (backcycle_counter) and whiles < 1000
     {
-        printf("::: looping back at end")
+        //printf("::: looping back at end")
         whiles++
         next_weapon()
         backcycle_counter --

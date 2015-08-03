@@ -26,7 +26,7 @@ repeat (abs(hsp))
         var movdir = point_direction(xi_actual,yi_actual,x,y)
         x = xi_actual+trigx(abs(hsp)+xtra,movdir)
         y = yi_actual+trigy(abs(hsp)+xtra,movdir)
-        printf("::: clipped x,y --> movdir = "+string(movdir))
+        //printf("::: clipped x,y --> movdir = "+string(movdir))
         break
     }
 }

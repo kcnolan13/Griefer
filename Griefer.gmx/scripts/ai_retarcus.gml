@@ -25,7 +25,7 @@ var percent_reflexes = argument1
     
     if instance_exists(weapon_contemplating)
     {
-        printf("::: contemplating weapon "+objVarRead(weapon_contemplating,"name")+", id="+string(id)+", myPlayer()="+string(myPlayer()))
+        //printf("::: contemplating weapon "+objVarRead(weapon_contemplating,"name")+", id="+string(id)+", myPlayer()="+string(myPlayer()))
         if random(1) < 0.8 //and id != myPlayer()
         {
             printf("::: bot trying to pick up weapon --> weapon_time="+string(weapon_time)+", weapon_time_min="+string(weapon_time_min))
@@ -34,9 +34,9 @@ var percent_reflexes = argument1
                 weapon_time = 0
                 with (weapon_contemplating) 
                 {
-                    printf("::: bot is pressing space on me: "+string(varRead("name")))
+                   // printf("::: bot is pressing space on me: "+string(varRead("name")))
                     weapon_press_space()
-                    printf("::: bot is done pressing space on me: "+string(varRead("name")))
+                    //printf("::: bot is done pressing space on me: "+string(varRead("name")))
                 }
             }
         }

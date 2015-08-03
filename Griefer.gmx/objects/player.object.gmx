@@ -1394,12 +1394,12 @@ if (varRead("controllable")) or objVarRead(net_manager,"end_match_coming")
         if not in_air or slide_left or slide_right or collision_rectangle(bbox_left,bbox_top-50,bbox_right,bbox_bottom-40,block,true,true)
                
         {
-            printf("::: FORCING CRAWL")
+            ///printf("::: FORCING CRAWL")
             animation_crawl()
         }
         else
         {
-            printf("::: FORCING JUMP")
+            ///printf("::: FORCING JUMP")
             animation_walk()
             var ysub = 47
             if not standing_2way and not floating_2way

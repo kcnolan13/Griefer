@@ -24,8 +24,8 @@ using namespace std;
 void closeConnection()
 {
 	console("::: CLOSING DOWN SOCKET");
-	h.sync_close();
 	h.clear_con_listeners();
+	h.close();
 }
 
 //DLL INIT
@@ -70,8 +70,9 @@ GMEXPORT const double keepAlive() {
 
 GMEXPORT const double isAlive() {
 	if (alive == 0)
-	{
-		closeConnection();
+	{ 
+		console("::: KeepAlive Timeout ... [but not actually closing connection]");
+		//closeConnection();
 	}
 	return alive;
 }
