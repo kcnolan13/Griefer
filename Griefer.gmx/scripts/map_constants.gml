@@ -1,3 +1,7 @@
+
+//invoke parallax constants
+parallax_constants()
+
 global.map_names[rm_debug] = "Lush"
 global.map_names[rm_map2] = "Incline"
 global.map_names[rm_snow] = "Flurry"

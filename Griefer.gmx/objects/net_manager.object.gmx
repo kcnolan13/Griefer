@@ -897,7 +897,7 @@ if match_starting() or match_ending() and not instance_exists(modal_controls)
     
     if room_counter &lt; 7.5*room_speed
     {
-        view_overscaler = 2
+        view_overscaler = 1.65
     }
     else
     { 
@@ -947,10 +947,10 @@ else if (instance_exists(local_player) and is_bot(local_player))
     }
     else
     {
-        view_overscaler = 2.5
+        view_overscaler = 2
         view_xtarget = lerp(view_xview+view_wview/2,room_width/2,view_lerp)
         view_ytarget = lerp(view_yview+view_hview/2,room_height/2,view_lerp)
-        if random(1) &lt; 1/(4*room_speed)
+        if random(1) &lt; 1/(2*room_speed)
         {
             var target_ind = floor(random_range(0,instance_number(player)+0.99))
             bot_focus = instance_find(player,target_ind)

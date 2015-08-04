@@ -635,6 +635,12 @@
       <background>background\bg_animal_overlay</background>
       <background>background\bg_tower_overlay3</background>
     </backgrounds>
+    <backgrounds name="parallax">
+      <background>background\bg_mts1</background>
+      <background>background\bg_mts2</background>
+      <background>background\bg_mts3</background>
+      <background>background\bg_mts4</background>
+    </backgrounds>
     <background>background\tiles_shapes</background>
     <backgrounds name="platforms">
       <background>background\tiles_new</background>
@@ -671,6 +677,7 @@
           <background>background\back_overlay_grass</background>
         </backgrounds>
       </backgrounds>
+      <background>background\bg_none</background>
       <background>background\bg_stone2</background>
       <background>background\bg_stone</background>
       <background>background\bg_red</background>
@@ -695,6 +702,7 @@
     <background>background\bg_menu2</background>
     <background>background\bg_login</background>
     <background>background\tiles_new_raw</background>
+    <background>background\background81</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
@@ -717,9 +725,10 @@
     </scripts>
     <scripts name="constants">
       <script>scripts\more_global_constants.gml</script>
+      <script>scripts\parallax_constants.gml</script>
       <script>scripts\control_constants.gml</script>
-      <script>scripts\splat_constants.gml</script>
       <script>scripts\physics_constants.gml</script>
+      <script>scripts\splat_constants.gml</script>
       <script>scripts\create_master_bparts_map.gml</script>
       <script>scripts\map_constants.gml</script>
       <script>scripts\score_constants.gml</script>
@@ -1048,6 +1057,8 @@
         <script>scripts\draw_sub_table.gml</script>
         <script>scripts\draw_table_row.gml</script>
         <script>scripts\team_kill_total.gml</script>
+        <script>scripts\draw_bg_tiled_hor.gml</script>
+        <script>scripts\draw_surf_tiled_hor.gml</script>
       </scripts>
       <scripts name="meta draw">
         <script>scripts\draw_armory_grid.gml</script>
@@ -1790,11 +1801,11 @@
     <room>rooms\rm_lobby</room>
     <rooms name="maps">
       <room>rooms\map_placeholder1</room>
-      <room>rooms\rm_pillar</room>
+      <room>rooms\rm_double</room>
       <room>rooms\rm_bridge</room>
+      <room>rooms\rm_pillar</room>
       <room>rooms\rm_rocky</room>
       <room>rooms\rm_tower</room>
-      <room>rooms\rm_double</room>
       <room>rooms\rm_snow2</room>
       <room>rooms\rm_map6</room>
       <room>rooms\rm_map2</room>
@@ -1814,7 +1825,7 @@
       <room>rooms\map_placeholder2</room>
     </rooms>
   </rooms>
-  <constants number="144">
+  <constants number="146">
     <constant name="WVIEW">1365</constant>
     <constant name="HVIEW">768</constant>
     <constant name="GC_CHAT_FEED_ALPHA">7</constant>
@@ -1878,6 +1889,8 @@
     <constant name="RAG_TORSO">1</constant>
     <constant name="RAG_HEAD">0</constant>
     <constant name="FL_NO_FORCE">0.001</constant>
+    <constant name="FL_BOTTOM">4</constant>
+    <constant name="FL_TOP">3</constant>
     <constant name="FL_LEFT">2</constant>
     <constant name="FL_RIGHT">1</constant>
     <constant name="C_SWAP_STICKS">19</constant>
