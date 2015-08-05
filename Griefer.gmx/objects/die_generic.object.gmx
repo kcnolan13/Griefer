@@ -80,6 +80,10 @@ created_rag = false
             <kind>1</kind>
             <string>///CREATE THE RAGDOLL!
 
+animation_die()
+varWrite("animation_speed",0)
+varWrite("animation_index",0)
+
 event_inherited()
 
 if not created_rag and varRead("can_die")

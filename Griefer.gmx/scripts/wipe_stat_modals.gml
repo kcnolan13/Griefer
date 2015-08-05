@@ -10,6 +10,7 @@ with stat_manager
     history_chart = NO_HANDLE
     pstat_title = NO_HANDLE
     leaderboards_title = NO_HANDLE
+    pstat_pname = NO_HANDLE
     
     for (var i=0; i<getLength(pstat_labels[i]); i++)
     {

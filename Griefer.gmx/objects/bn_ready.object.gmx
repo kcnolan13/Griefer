@@ -32,7 +32,7 @@ alpha_max = 0
 alpha_highlight = 0
 halign = fa_center
 valign = fa_center
-font = fnt_mod
+font = fnt_hud
 bound_avatar = NO_HANDLE
 snap_2view = false
 sent_ready = false
@@ -52,6 +52,9 @@ if ready
     text = ready_text 
 else text = not_ready_text
 
+ready_font = fnt_mod
+not_ready_font = fnt_hud_big
+
 alarm[0] = 1
 
 exit_child = false
@@ -60,6 +63,8 @@ hue = 0
 sat = 0
 val = 0
 notif_scale = 1.25
+
+visible = false
 </string>
           </argument>
         </arguments>
@@ -121,12 +126,16 @@ if ready
     text = ready_text
     active = true
     text_color = text_color_ready
+    font = ready_font
+    text_yoff = 0
 }
 else 
 {
+    font = not_ready_font
     text = not_ready_text
     active = false
     text_color = text_color_not_ready
+    text_yoff = 3
 }
 
 label = text
@@ -139,12 +148,32 @@ else
 {
     if menmode() = "lobby"
     {
-        //jump to a decent position above the avatar
-        visible = true
-        x = bound_avatar.x
-        y = bound_avatar.y-64*3.5
-        modal_aligns()
-        depth = bound_avatar.depth - 5
+        //jump to a decent position below the avatar
+        if abs(bound_avatar.x - objVarRead(bound_avatar,"dude_x") &lt; 10) and abs(bound_avatar.y - objVarRead(bound_avatar,"dude_y") &lt; 10)
+        {
+            visible = true
+            x = bound_avatar.x
+            y = bound_avatar.y+64*3.1
+            modal_aligns()
+            depth = bound_avatar.depth - 5
+        }
+        else
+        {
+            visible = false
+            x = -999
+            y = -999
+        }
+        
+        if myAvatar() != bound_avatar
+        {
+            ready = objVarRead(bound_avatar,"ready")
+        }
+        
+        if net_manager.match_countdown
+        {
+            objVarWrite(bound_avatar,"ready",ready)
+            ready = true
+        }
         
         if net_manager.bot_match and nth_frame(room_speed) and not sent_ready
         {
@@ -204,7 +233,7 @@ if not visible or bound_avatar != myAvatar() or clicked
     exit
 }
 
-if not modal_highlighted(id)
+if not modal_highlighted(id) or net_manager.lobby_match_countdown
 {
     exit_child = true
     exit
@@ -216,6 +245,7 @@ audio_play_sound(snd_click,2,false)
 //toggle ready
 ready ^= 1
 objVarWrite(bound_avatar,"ready",ready)
+obj_update_real(bound_avatar,"ready",FL_NORMAL)
 
 //start match if possible
 start_match = true

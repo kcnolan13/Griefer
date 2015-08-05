@@ -91,7 +91,7 @@ else
             <kind>1</kind>
             <string>event_inherited()
 
-if exit_child
+if exit_child or net_manager.lobby_match_countdown
 {
     exit_child = false
     exit

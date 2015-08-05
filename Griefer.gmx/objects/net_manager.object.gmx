@@ -38,6 +38,9 @@ keepalive_timer = 15
 master_scale = 1
 match_scale = 0.9
 
+lobby_match_countdown = false
+lobby_match_countdown_time = 10*room_speed
+
 seed = 30
 
 xp_before = 0
@@ -1166,6 +1169,11 @@ if instance_exists(NO_HANDLE)
             <string>///lobby networking and game mode stuff
 if instance_exists(my_doll) and room = rm_lobby
 {
+    if varRead("lobby_wait_time") &lt; lobby_match_countdown_time
+    {
+        lobby_match_countdown = true
+    }
+    
     if objVarRead(my_doll,"pNum") = 0
     {
         if SUPER_DEBUG
@@ -1173,6 +1181,10 @@ if instance_exists(my_doll) and room = rm_lobby
         //send lobby wait time to everyone else @ 1 Hz if you are player 0
         obj_sendval_real(id,"lobby_wait_time",varRead("lobby_wait_time"),FL_NORMAL)
     }
+} 
+else 
+{
+    lobby_match_countdown = false
 }
 
 if is_string(varRead("game_mode")) and not bot_match
@@ -2458,7 +2470,7 @@ if not match_ending()
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///scores and win popups
+            <string>///scores and win popups and starting match countdown
 if win_countdown
     win_countdown --
     
@@ -2610,6 +2622,20 @@ if in_match() and not varRead("end_match_coming") and instance_exists(my_doll) a
     draw_avatar_head(xhead, yhead, av_head0, score0, head_scale*master_scale, 1, FL_NORMAL)
     draw_avatar_head(xhead+head_width*1*master_scale, yhead, av_head1, score1, head_scale*master_scale, -1, FL_NORMAL)
     
+}
+
+if lobby_match_countdown and room = rm_lobby
+{
+    draw_set_color(c_black)
+    draw_set_alpha(0.8 - max(0,(varRead("lobby_wait_time")/room_speed - 3)/10))
+    draw_rectangle_colour(0,0,WVIEW,HVIEW,c_black,c_black,c_white,c_white,false)
+    draw_set_color(c_white)
+    
+    draw_set_alpha(1)
+    draw_set_font(fnt_menu)
+    draw_set_halign(fa_center)
+    draw_set_valign(fa_center)
+    draw_text(WVIEW/2,HVIEW/4,"Match Countdown ... "+string(ceil(varRead("lobby_wait_time")/room_speed)))
 }
 </string>
           </argument>
@@ -3544,6 +3570,29 @@ show_cout ^= 1
       </action>
     </event>
     <event eventtype="9" enumb="46">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///bots play dead
+with player
+    play_dead ^= 1
+</string>
+          </argument>
+        </arguments>
+      </action>
       <action>
         <libid>1</libid>
         <id>425</id>

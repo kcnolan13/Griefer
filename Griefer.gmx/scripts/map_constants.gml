@@ -29,8 +29,8 @@ global.map_colors[rm_tower,1] = make_color_rgb(0,0,0)
 global.map_texs[rm_tower] = bg_stone
 global.col_alphas[rm_tower] = 0.8*/
 
-global.map_colors[rm_tower,0] = make_color_rgb(255,255,255)
-global.map_colors[rm_tower,1] = make_color_rgb(30,30,175)
+global.map_colors[rm_tower,0] = make_color_rgb(255,200,175)
+global.map_colors[rm_tower,1] = make_color_rgb(0,0,0)
 global.map_texs[rm_tower] = bg_stone
 global.col_alphas[rm_tower] = global.col_alpha_default
 
@@ -44,7 +44,7 @@ global.map_colors[rm_rocky,1] = make_color_rgb(30,30,175)
 global.map_texs[rm_rocky] = bg_stone
 global.col_alphas[rm_rocky] = global.col_alpha_default
 
-global.map_colors[rm_torque,0] = make_color_rgb(20,20,20)
+global.map_colors[rm_torque,0] = make_color_rgb(100,200,100)
 global.map_colors[rm_torque,1] = make_color_rgb(20,20,20)
 global.map_texs[rm_torque] = bg_dark
 global.col_alphas[rm_torque] = 0.8
@@ -74,8 +74,8 @@ global.map_colors[rm_tunnel,1] = make_color_rgb(0,0,0)
 global.map_texs[rm_tunnel] = bg_stone
 global.col_alphas[rm_tunnel] = global.col_alpha_default
 
-global.map_colors[rm_snow2,0] = make_color_rgb(100/3,100/3,180/3)
-global.map_colors[rm_snow2,1] = make_color_rgb(0,0,0)
+global.map_colors[rm_snow2,0] = make_color_rgb(255,255,255)
+global.map_colors[rm_snow2,1] = make_color_rgb(30,30,175)
 global.map_texs[rm_snow2] = bg_dark
 global.col_alphas[rm_snow2] = 0.8
 
@@ -114,12 +114,12 @@ global.map_colors[rm_snow,1] = make_color_rgb(20,20,20)
 global.map_texs[rm_snow] = bg_dark
 global.col_alphas[rm_snow] = 0.8
 
-global.map_colors[rm_crosscut,0] = make_color_rgb(0,0,0)
-global.map_colors[rm_crosscut,1] = make_color_rgb(80,0,0)
+global.map_colors[rm_crosscut,0] = make_color_rgb(255,255,255)
+global.map_colors[rm_crosscut,1] = make_color_rgb(175,0,0)
 global.map_texs[rm_crosscut] = bg_dark
 global.col_alphas[rm_crosscut] = global.col_alpha_default
 
-global.map_colors[rm_tree,0] = make_color_rgb(100,200,100)
+global.map_colors[rm_tree,0] = make_color_rgb(150,250,150)
 global.map_colors[rm_tree,1] = make_color_rgb(0,0,0)
 global.map_texs[rm_tree] = bg_stone
 global.col_alphas[rm_tree] = global.col_alpha_default
@@ -129,7 +129,7 @@ global.map_colors[rm_map6,1] = make_color_rgb(0,0,0)
 global.map_texs[rm_map6] = bg_dark2
 global.col_alphas[rm_map6] = 0.85
 
-global.map_colors[rm_bridge,0] = make_color_rgb(120,120,120)
+global.map_colors[rm_bridge,0] = make_color_rgb(255,255,255)
 global.map_colors[rm_bridge,1] = make_color_rgb(0,0,0)
 global.map_texs[rm_bridge] = bg_dark
 global.col_alphas[rm_bridge] = global.col_alpha_default

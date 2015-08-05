@@ -36,6 +36,7 @@ curs_yoff = 256
 damage_scaler = 0.75
 
 //bot constants
+play_dead = false
 semi_auto_time_min = 8
 semi_auto_time = 0
 shooting_dist = 0
@@ -1292,7 +1293,7 @@ if varRead("controllable")
           <argument>
             <kind>1</kind>
             <string>///ARTIFICIAL INTELLIGENCE
-if is_bot(id) and (not instance_exists(modal_controls) or modal_controls.fade_out) and varRead("controllable") and not net_manager.starting_match and varRead("alive")
+if is_bot(id) and not play_dead and (not instance_exists(modal_controls) or modal_controls.fade_out) and varRead("controllable") and not net_manager.starting_match and varRead("alive")
 {
     var dat_rank = varRead("rank")+1
     

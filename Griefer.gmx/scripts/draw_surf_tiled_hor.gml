@@ -18,8 +18,8 @@ var h = surface_get_height(surf)
 
 //draw the first background
 draw_surface_ext(surf, drawx, drawy, xscale, yscale, 0, blend, alpha)
-/*
-var left = drawx
+
+var left = drawx-w
 
 while (left > 0)
 {
@@ -35,4 +35,4 @@ while (left < room_width)
     //draw the ones to the left of the original
     draw_surface_ext(surf, left, drawy, xscale, yscale, 0, blend, alpha)
     left += w
-}*/
+}

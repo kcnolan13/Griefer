@@ -725,12 +725,12 @@
     </scripts>
     <scripts name="constants">
       <script>scripts\more_global_constants.gml</script>
-      <script>scripts\parallax_constants.gml</script>
+      <script>scripts\map_constants.gml</script>
       <script>scripts\control_constants.gml</script>
       <script>scripts\physics_constants.gml</script>
       <script>scripts\splat_constants.gml</script>
       <script>scripts\create_master_bparts_map.gml</script>
-      <script>scripts\map_constants.gml</script>
+      <script>scripts\parallax_constants.gml</script>
       <script>scripts\score_constants.gml</script>
       <script>scripts\rank_constants.gml</script>
       <script>scripts\global_xp_constants.gml</script>
@@ -1118,6 +1118,7 @@
       <script>scripts\am_local.gml</script>
       <script>scripts\is_local_teammate.gml</script>
       <script>scripts\is_local_player.gml</script>
+      <script>scripts\is_local_player_uid.gml</script>
       <script>scripts\are_teammates.gml</script>
       <script>scripts\get_team.gml</script>
       <script>scripts\is_team_leader.gml</script>
@@ -1464,6 +1465,7 @@
     <font>fonts\fnt_pstats</font>
     <font>fonts\fnt_menu</font>
     <font>fonts\fnt_pstats_title</font>
+    <font>fonts\fnt_pname_title</font>
     <font>fonts\fnt_feed</font>
   </fonts>
   <objects name="objects">

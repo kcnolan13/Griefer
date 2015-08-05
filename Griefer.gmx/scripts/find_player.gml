@@ -8,4 +8,5 @@ for (i=0; i<instance_number(player); i++)
         return ID
 }
 
+printf("::: WARNING: find_player could not find player :"+string(pNum))
 return NO_HANDLE

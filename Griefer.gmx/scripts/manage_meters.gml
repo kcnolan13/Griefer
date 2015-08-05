@@ -110,7 +110,7 @@ birthmas = 1
 //recreate title
 if not instance_exists(pstat_title)
 {
-    tit = instance_create(xst+xsep/2,yst-24,bn_slabel)
+    tit = instance_create(xst+xsep/3-10,yst-24+15,bn_slabel)
     pstat_title = tit
     
     if stat_tab = tabs[0]
@@ -123,6 +123,21 @@ if not instance_exists(pstat_title)
     tit.font = fnt_pstats_title
     tit.birth_delay = 2
     tit.text_color = c_dkgray
+}
+
+//recreate pname
+if not instance_exists(pstat_pname)
+{
+    tit = instance_create(xst+xsep/3+64*5.9,yst-24+8,bn_slabel)
+    pstat_pname = tit
+    
+    tit.text = capwords(objVarRead(guy,"pName"))
+        
+    tit.width = 64*8
+    tit.height = 64
+    tit.font = fnt_pname_title
+    tit.birth_delay = 15
+    tit.text_color = c_white
 }
 
 yst += ysep*1.75

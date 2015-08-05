@@ -200,11 +200,7 @@ if input_active
           <argument>
             <kind>1</kind>
             <string>///toggle active
-
-//don't let any input_fields auto-start after entry into any input field
-with input_field
-    auto_started = true
-
+    
 if alpha &lt; 0.1 exit
 
 if !instance_place(x+view_xview,y+view_yview,cursor)
@@ -219,13 +215,16 @@ if !instance_place(x+view_xview,y+view_yview,cursor)
 }
 else
 {
-
-if not audio_is_playing(snd_click) and not input_active
-    audio_play_sound(snd_click,3,false)
-
-input_active = true
-keyboard_string = ""
-str_cursor = "|"
+    //don't let any input_fields auto-start after entry into any input field
+    with input_field
+        auto_started = true
+    
+    if not audio_is_playing(snd_click) and not input_active
+        audio_play_sound(snd_click,3,false)
+    
+    input_active = true
+    keyboard_string = ""
+    str_cursor = "|"
 
     if instantClear = true
     {

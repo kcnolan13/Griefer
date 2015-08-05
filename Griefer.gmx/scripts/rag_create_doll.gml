@@ -12,38 +12,43 @@ var sever_force = force/30
 animation_die()
 varWrite("animation_index",0)
 framely_limb_computations()
-
 calc_limb_draws()
 
-if not varRead("arms_posing")
+/*if not varRead("arms_posing")
 {
     shoulderl_drawx *= varRead("animation_xscale")
     shoulderr_drawx *= varRead("animation_xscale")
     forearml_drawx *= varRead("animation_xscale")
     forearmr_drawx *= varRead("animation_xscale")
-}
+}*/
 
-xs[0] = head_drawx           ys[0] = head_drawy             rots[0] = head_drawr               limb_names[0] = global.bpart_limb_types[0]  depths[0] = depth-1
+xs[0] = head_drawx           ys[0] = head_drawy             rots[0] = head_drawr               limb_names[0] = global.bpart_limb_types[0]  depths[0] = depth-4
 xs[1] = torso_drawx          ys[1] = torso_drawy            rots[1] = torso_drawr              limb_names[1] = global.bpart_limb_types[1]  depths[1] = depth
 xs[2] = legl_drawx           ys[2] = legl_drawy             rots[2] = legl_drawr               limb_names[2] = global.bpart_limb_types[2]  depths[2] = depth+5
-xs[3] = legr_drawx           ys[3] = legr_drawy             rots[3] = legr_drawr               limb_names[3] = global.bpart_limb_types[2]  depths[3] = depth-3
+xs[3] = legr_drawx           ys[3] = legr_drawy             rots[3] = legr_drawr               limb_names[3] = global.bpart_limb_types[2]  depths[3] = depth-1
 xs[4] = shinl_drawx          ys[4] = shinl_drawy            rots[4] = shinl_drawr              limb_names[4] = global.bpart_limb_types[3]  depths[4] = depth+4
-xs[5] = shinr_drawx          ys[5] = shinr_drawy            rots[5] = shinr_drawr              limb_names[5] = global.bpart_limb_types[3]  depths[5] = depth-4
-xs[6] = hat_drawx            ys[6] = hat_drawy              rots[6] = hat_drawr                limb_names[6] = global.bpart_limb_types[4]  depths[6] = depth-2
-xs[7] = shoulderl_drawx      ys[7] = shoulderl_drawy        rots[7] = shoulderl_drawr          limb_names[7] = global.bpart_limb_types[5]  depths[7] = depth+3
-xs[8] = shoulderr_drawx      ys[8] = shoulderr_drawy        rots[8] = shoulderr_drawr          limb_names[8] = global.bpart_limb_types[5]  depths[8] = depth-4
-xs[9] = forearml_drawx       ys[9] = forearml_drawy         rots[9] = forearml_drawr           limb_names[9] = global.bpart_limb_types[6]  depths[9] = depth+4
-xs[10] = forearmr_drawx      ys[10] = forearmr_drawy        rots[10] = forearmr_drawr          limb_names[10] = global.bpart_limb_types[6] depths[10] = depth-3
+xs[5] = shinr_drawx          ys[5] = shinr_drawy            rots[5] = shinr_drawr              limb_names[5] = global.bpart_limb_types[3]  depths[5] = depth-2
+xs[6] = hat_drawx            ys[6] = hat_drawy              rots[6] = hat_drawr                limb_names[6] = global.bpart_limb_types[4]  depths[6] = depth-5
 xs[11] = footl_drawx         ys[11] = footl_drawy           rots[11] = footl_drawr             limb_names[11] = global.bpart_limb_types[7] depths[11] = depth+3
-xs[12] = footr_drawx         ys[12] = footr_drawy           rots[12] = footr_drawr             limb_names[12] = global.bpart_limb_types[7] depths[12] = depth-5
+xs[12] = footr_drawx         ys[12] = footr_drawy           rots[12] = footr_drawr             limb_names[12] = global.bpart_limb_types[7] depths[12] = depth-3
 
-if not varRead("arms_posing")
+//do the arms at xscale 1 always cause there ain't no explanation for why they don't line up with -1
+varWrite("animation_xscale",1)
+framely_limb_computations()
+calc_limb_draws()
+
+xs[7] = shoulderl_drawx      ys[7] = shoulderl_drawy        rots[7] = shoulderl_drawr          limb_names[7] = global.bpart_limb_types[5]  depths[7] = depth+6
+xs[8] = shoulderr_drawx      ys[8] = shoulderr_drawy        rots[8] = shoulderr_drawr          limb_names[8] = global.bpart_limb_types[5]  depths[8] = depth-6
+xs[9] = forearml_drawx       ys[9] = forearml_drawy         rots[9] = forearml_drawr           limb_names[9] = global.bpart_limb_types[6]  depths[9] = depth+7
+xs[10] = forearmr_drawx      ys[10] = forearmr_drawy        rots[10] = forearmr_drawr          limb_names[10] = global.bpart_limb_types[6] depths[10] = depth-6
+
+/*if not varRead("arms_posing")
 {
     shoulderl_drawx /= varRead("animation_xscale")
     shoulderr_drawx /= varRead("animation_xscale")
     forearml_drawx /= varRead("animation_xscale")
     forearmr_drawx /= varRead("animation_xscale")
-}
+}*/
 
 scale = varRead("animation_scale")
 
