@@ -12,10 +12,12 @@ var xp = floor(argument8)
 
 var nr_width = 64*3*scale
 var nr_height = 64*1.75*scale
-var nu_width = nr_width
+var nu_width = nr_width-20*scale
 var nu_height = nr_height
 var xsep = 10*scale
-var rank_sep = 2*scale
+var rank_sep = 2*scale-8
+
+nr_width = nr_width+20*scale
 
 var total_width = (nr_width+nu_width+xsep)
 var total_height = (max(nu_height,nr_height))
@@ -45,8 +47,8 @@ var nu_left = left+nr_width+xsep
 
 draw_set_alpha(0.5*alpha)
 draw_set_color(c_black)
-draw_rectangle(left,top,left+nr_width,top+nr_height,false)
-draw_rectangle(left+nr_width+xsep,top,right,top+nu_height,false)
+draw_rectangle(left,top-5,left+nr_width,top+nr_height,false)
+draw_rectangle(left+nr_width+xsep,top-5,right,top+nu_height,false)
 draw_set_alpha(1*alpha)
 draw_set_color(c_white)
 
@@ -56,20 +58,31 @@ var rank_xp = get_rank_xp(rank)
 var xp_needed = rank_xp-xp
 
 if rank<0 rank = 0
-draw_namerank(rank_name,rank,left+rank_sep+10*scale,top+rank_sep+8*scale,1*scale,c_white)
+
+// DRAW_NAMERANK
+var name = capwords(rank_name)
+var draw_x = left+rank_sep+10*scale
+var draw_y = top+rank_sep+8*scale
+var scale = 1*scale
+color = c_white
+draw_player_rank(rank, draw_x, draw_y, scale)
+draw_set_color(color)
+draw_set_font(fnt_hud)
+draw_set_halign(fa_left)
+draw_set_valign(fa_middle)
+draw_flash_compensate()
+draw_text_ext_transformed(draw_x+5*scale+global.rank_radius*scale*2,draw_y+5,name,0,600,scale,scale,0)
+//END
+
 draw_set_color(text_color)
 draw_set_alpha(0.9*alpha) draw_set_halign(fa_center) draw_set_valign(fa_top)
-draw_set_font(fnt_hud)
+draw_set_font(fnt_hud_big)
 if xp_needed > 0
 {
-    draw_text(left+nr_width/2,top+nr_height*1/2,string(floor(xp_needed)))
-    draw_text(left+nr_width/2,top+nr_height*1/2+24*scale,"XP Remaining")
+    draw_text(left+nr_width/2,top+nr_height*1/3,string(floor(xp_needed)))
+    draw_text(left+nr_width/2,top+nr_height*1/3+20*scale,"XP Remaining")
 }
-
-//lock icon
-draw_set_alpha(0.75*alpha)
-draw_set_color(c_white)
-draw_sprite(icon_lock,-1,nu_left+4,top+4)
+draw_set_font(fnt_hud)
 
 //rank was next rank
 rank--
@@ -85,13 +98,21 @@ if icon != spr_none
     //next unlock text
     draw_set_alpha(alpha)
     draw_set_halign(fa_center) draw_set_valign(fa_top)
-    draw_text(nu_left+nu_width/2,top+rank_sep,"Next Unlock:")
+    draw_text_ext(nu_left+nu_width/2,top+rank_sep,"Next Armor Set:#"+bpart_lookup(get_rank_unlock_sprite(rnum),global.BPART_NAME),18,500)
     
     var slot_width = 72
     var slot_scale = slot_width/72
     
     draw_bpart_slot_complete_ext(id,nu_left+nu_width/2-slot_width/2,top+nu_height*1/3,slot_scale,1*alpha)
-    draw_player_rank(rnum,nu_left+11,top+nu_height*1/2,scale)
+    
+    //lock icon
+    draw_set_alpha(0.75*alpha)
+    draw_set_color(c_white)
+    draw_sprite(icon_lock,-1,nu_left+8,top+45)
+    
+    draw_set_alpha(0.4*alpha)
+    //draw_player_rank(rnum,nu_left+11,top+nu_height*1/2,scale)
+    draw_set_alpha(1)
 }
 
 return true

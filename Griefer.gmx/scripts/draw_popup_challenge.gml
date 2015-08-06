@@ -124,7 +124,7 @@ draw_set_color(c_white)
 draw_text_ext_transformed(left+(net_manager.armory_ysep*3.3+net_manager.armory_sl+txt_pad+10)*scale,top+(txt_pad+8)*scale,dat_title, 24, width/scale-145,scale,scale,0)
 draw_set_font(fnt_hud)
 draw_set_valign(fa_top)
-if progress_varname != "" subtitle = string(progress)+" / "+string(progress_max)
+if progress_varname != "" subtitle = string(progress)+" / "+string(progress_max)+"        +"+string(xp)+" XP"
     draw_text_ext_transformed(left+(net_manager.armory_ysep*3.3+net_manager.armory_sl+txt_pad+10)*scale,top+(32+txt_pad+5)*scale,subtitle, 24, width/scale-145,scale,scale,0)
 
 draw_text_ext_transformed(left+(net_manager.armory_ysep*3.3+net_manager.armory_sl+txt_pad+10)*scale,top+height/2+(txt_pad+5)*scale,descr, 24, width/scale-145,scale,scale,0)

@@ -346,7 +346,7 @@ if xp_needed &lt;= 0 and not earn_pauser and is_my_avatar(net_manager.my_doll)
         ID.birth_delay = birth_delay
         ID.fade_delay = fade_delay - birth_delay
         ID.stick_2view = true
-        ID.txt = "Unlocked:"
+        ID.txt = "Unlocked "+bpart_lookup(get_rank_unlock_sprite(rank),global.BPART_NAME)+" Armor Set!"
         ID.init_as_promoted = true
         
         //Draw The Slot That Was Unlocked

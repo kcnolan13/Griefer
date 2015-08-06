@@ -35,9 +35,12 @@ global.challenge_slot_width = 72
 global.challenge_grid_xstart = 72*5
 global.challenge_grid_ystart = 72*2-13
 
-comp_yoff = room_height*1/4-60
-bot_yoff = room_height*1/2-32
+comp_yoff = room_height*1/2-32-130
 chal_yoff = room_height*1/2+64*1.5-16
+
+
+//deprecated
+bot_yoff = room_height*1/2-64*2
 
 global.challenge_grid_sep = net_manager.armory_ysep
 global.challenge_grid_width = 10
@@ -51,17 +54,17 @@ string_counter_max = room_speed
 
 //hound
 hound_kills = 2
-hound_kills_needed = 5
+hound_kills_needed = 25
 
 //fanatic
 fanatic_kills = 3
-fanatic_kills_needed = 2
+fanatic_kills_needed = 5
 
 //santa_hat
-santa_assists = 6
+santa_assists = 10
 
 //iron
-iron_assists = 4
+iron_assists = 10
 
 //ninja
 ninjas_needed = 5
@@ -70,25 +73,25 @@ ninja_time_needed = 60
 
 //muscle
 near_death_xps = 0
-near_deaths_needed = 5
+near_deaths_needed = 25
 
 //smallvisor2
-smallvisor2_kills = 6
+smallvisor2_kills = 10
 
 //samurai
-samurai_kills = 9
+samurai_kills = 5
 
 //bhunch
-bhunch_kills = 12
+bhunch_kills = 10
 
 //ahunch
-ahunch_kills = 12
+ahunch_kills = 10
 
 //underwear
 underwear_deaths = 10
 
 //assassin
-assassin_spree_needed = 3
+assassin_spree_needed = 10
 
 //pistol prop
 pistol_headshots_needed = 2
@@ -221,7 +224,6 @@ if not in_match()
 {
     //bring all challenge objects back to where they belong in the grid
     snap_challenges_to_grid(FL_PROGRESSION)
-    snap_challenges_to_grid(FL_BOT)
     snap_challenges_to_grid(FL_COMPETITIVE)
     snap_challenges_to_grid(FL_CHALLENGES)
 }
@@ -377,7 +379,7 @@ draw_set_color(c_black)
 draw_set_alpha(net_manager.armory_label_alpha)
 draw_text(global.challenge_grid_xstart+global.challenge_grid_width*(global.challenge_grid_sep+global.challenge_slot_width)/2, global.challenge_grid_ystart-10, "Progression")
 draw_text(global.challenge_grid_xstart+global.challenge_grid_width*(global.challenge_grid_sep+global.challenge_slot_width)/2, global.challenge_grid_ystart-10+comp_yoff, global.cmode+" Challenges")
-draw_text(global.challenge_grid_xstart+global.challenge_grid_width*(global.challenge_grid_sep+global.challenge_slot_width)/2, global.challenge_grid_ystart-10+bot_yoff, global.bmode+" Challenges")
+//draw_text(global.challenge_grid_xstart+global.challenge_grid_width*(global.challenge_grid_sep+global.challenge_slot_width)/2, global.challenge_grid_ystart-10+bot_yoff, global.bmode+" Challenges")
 draw_text(global.challenge_grid_xstart+global.challenge_grid_width*(global.challenge_grid_sep+global.challenge_slot_width)/2, global.challenge_grid_ystart-10+chal_yoff, "General Challenges")
 </string>
           </argument>

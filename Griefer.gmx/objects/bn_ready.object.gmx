@@ -197,6 +197,8 @@ else
     {
         //hide the ready button
         visible = false
+        x = -999
+        y = -999
     }
 }
 </string>

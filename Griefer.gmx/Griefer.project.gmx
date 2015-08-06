@@ -119,7 +119,6 @@
         <sprite>sprites\spr_breather_helmet</sprite>
         <sprite>sprites\spr_exgol_helmet</sprite>
         <sprite>sprites\spr_grenadier_helmet</sprite>
-        <sprite>sprites\spr_marauder_helmet</sprite>
         <sprite>sprites\spr_wraith_helmet</sprite>
         <sprite>sprites\spr_ahunch_helmet</sprite>
         <sprite>sprites\spr_bhunch_helmet</sprite>
@@ -159,31 +158,31 @@
         <sprite>sprites\spr_elf_foot</sprite>
       </sprites>
       <sprites name="assassin">
+        <sprite>sprites\spr_assassin_helmet</sprite>
         <sprite>sprites\spr_assassin_forearm</sprite>
         <sprite>sprites\spr_assassin_shoulder</sprite>
         <sprite>sprites\spr_assassin_foot</sprite>
         <sprite>sprites\spr_assassin_leg</sprite>
         <sprite>sprites\spr_assassin_shin</sprite>
-        <sprite>sprites\spr_assassin_helmet</sprite>
         <sprite>sprites\spr_assassin_torso</sprite>
       </sprites>
       <sprites name="blue">
+        <sprite>sprites\spr_blue_helmet</sprite>
         <sprite>sprites\spr_blue_shoulder</sprite>
         <sprite>sprites\spr_blue_leg</sprite>
         <sprite>sprites\spr_blue_foot</sprite>
         <sprite>sprites\spr_blue_shin</sprite>
         <sprite>sprites\spr_blue_torso</sprite>
-        <sprite>sprites\spr_blue_helmet</sprite>
         <sprite>sprites\spr_blue_forearm</sprite>
       </sprites>
       <sprites name="iron">
-        <sprite>sprites\spr_ironboot_foot</sprite>
+        <sprite>sprites\spr_iron_helmet</sprite>
         <sprite>sprites\spr_iron_leg</sprite>
         <sprite>sprites\spr_iron_shin</sprite>
         <sprite>sprites\spr_iron_forearm</sprite>
         <sprite>sprites\spr_iron_shoulder</sprite>
         <sprite>sprites\spr_iron_torso</sprite>
-        <sprite>sprites\spr_iron_helmet</sprite>
+        <sprite>sprites\spr_ironboot_foot</sprite>
       </sprites>
       <sprites name="orange">
         <sprite>sprites\spr_orange_helmet</sprite>
@@ -195,47 +194,47 @@
         <sprite>sprites\spr_orange_foot</sprite>
       </sprites>
       <sprites name="red">
+        <sprite>sprites\spr_red_helmet</sprite>
         <sprite>sprites\spr_red_forearm</sprite>
         <sprite>sprites\spr_red_shoulder</sprite>
         <sprite>sprites\spr_red_leg</sprite>
         <sprite>sprites\spr_red_shin</sprite>
         <sprite>sprites\spr_red_foot</sprite>
         <sprite>sprites\spr_red_torso</sprite>
-        <sprite>sprites\spr_red_helmet</sprite>
       </sprites>
       <sprites name="shield">
+        <sprite>sprites\spr_shield_helmet</sprite>
         <sprite>sprites\spr_shield_forearm</sprite>
         <sprite>sprites\spr_shield_leg</sprite>
         <sprite>sprites\spr_shield_shin</sprite>
         <sprite>sprites\spr_shield_foot</sprite>
         <sprite>sprites\spr_shield_shoulder</sprite>
         <sprite>sprites\spr_shield_torso</sprite>
-        <sprite>sprites\spr_shield_helmet</sprite>
       </sprites>
       <sprites name="arctic">
+        <sprite>sprites\spr_arctic_helmet</sprite>
         <sprite>sprites\spr_arctic_shoulder</sprite>
         <sprite>sprites\spr_arctic_foot</sprite>
         <sprite>sprites\spr_arctic_shin</sprite>
         <sprite>sprites\spr_arctic_torso</sprite>
-        <sprite>sprites\spr_arctic_helmet</sprite>
         <sprite>sprites\spr_arctic_forearm</sprite>
         <sprite>sprites\spr_arctic_leg</sprite>
       </sprites>
       <sprites name="spiral">
+        <sprite>sprites\spr_spiral_helmet</sprite>
         <sprite>sprites\spr_spiral_leg</sprite>
         <sprite>sprites\spr_spiral_forearm</sprite>
         <sprite>sprites\spr_spiral_shoulder</sprite>
         <sprite>sprites\spr_spiral_shin</sprite>
         <sprite>sprites\spr_spiral_foot</sprite>
         <sprite>sprites\spr_spiral_torso</sprite>
-        <sprite>sprites\spr_spiral_helmet</sprite>
       </sprites>
       <sprites name="ranger">
+        <sprite>sprites\spr_ranger_helmet</sprite>
         <sprite>sprites\spr_ranger_leg</sprite>
         <sprite>sprites\spr_ranger_shin</sprite>
         <sprite>sprites\spr_ranger_forearm</sprite>
         <sprite>sprites\spr_ranger_torso</sprite>
-        <sprite>sprites\spr_ranger_helmet</sprite>
         <sprite>sprites\spr_ranger_shoulder</sprite>
         <sprite>sprites\spr_ranger_foot</sprite>
       </sprites>

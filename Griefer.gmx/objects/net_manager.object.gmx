@@ -64,9 +64,9 @@ show_cout = false
 cout_str = ""
 cout_maxchars = 2000
 
-tdm_kill_limit = 15
-ffa_kill_limit = 10
-versus_kill_limit = 5
+tdm_kill_limit = 20
+ffa_kill_limit = 15
+versus_kill_limit = 10
 kill_limit = 10
 
 ffa_player_limit = 4

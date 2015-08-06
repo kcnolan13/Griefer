@@ -58,7 +58,6 @@ knowledge_base_add(spr_scanner_helmet, "Scanner Helmet", 2, global.default_scale
 knowledge_base_add(spr_breather_helmet, "Rebreather Helmet", 1, global.default_scale, true, global.src_lotto,"helmet")
 knowledge_base_add(spr_exgol_helmet, "Exgol Helmet", 1, global.default_scale, true, global.src_lotto,"helmet")
 knowledge_base_add(spr_grenadier_helmet, "Gol Grenadier Helmet", 1, global.default_scale, true, global.src_lotto,"helmet")
-knowledge_base_add(spr_marauder_helmet, "Marauder Helmet", 1, global.default_scale, true, global.src_lotto,"helmet")
 knowledge_base_add(spr_wraith_helmet, "Wraith Helmet", 1, global.default_scale, true, global.src_lotto,"helmet")
 knowledge_base_add(spr_ahunch_helmet, "War Mongrel", 5, global.default_scale, true, global.src_challenge,"helmet")
     set_hatless(spr_ahunch_helmet)
@@ -136,13 +135,14 @@ knowledge_base_add(spr_elf_foot, "Elf Boot", 2, global.default_scale, true, glob
 
 //desert
 global.armor_sets[0,0] = spr_desert_helmet
-knowledge_base_add(spr_desert_helmet, "Desert", 1, global.default_scale, true, global.src_lotto,"helmet")
-knowledge_base_add(spr_desert_leg, "Desert", 1, global.default_scale, true, global.src_lotto,"leg")
-knowledge_base_add(spr_desert_shin, "Desert", 1, global.default_scale, true, global.src_lotto,"shin")
-knowledge_base_add(spr_displaybuckle_forearm, "GPS Brace", 1, global.default_scale, true, global.src_lotto,"forearm")
-knowledge_base_add(spr_desert_shoulder, "Desert", 1, global.default_scale, true, global.src_lotto,"shoulder")
-knowledge_base_add(spr_desert_foot, "Desert", 1, global.default_scale, true, global.src_lotto,"foot")
-knowledge_base_add(spr_desert_torso, "Desert", 1, global.default_scale, true, global.src_lotto,"torso")
+global.src_desert = global.src_lotto
+knowledge_base_add(spr_desert_helmet, "Desert", 1, global.default_scale, true, global.src_desert,"helmet")
+knowledge_base_add(spr_desert_leg, "Desert", 1, global.default_scale, true, global.src_desert,"leg")
+knowledge_base_add(spr_desert_shin, "Desert", 1, global.default_scale, true, global.src_desert,"shin")
+knowledge_base_add(spr_displaybuckle_forearm, "GPS Brace", 1, global.default_scale, true, global.src_desert,"forearm")
+knowledge_base_add(spr_desert_shoulder, "Desert", 1, global.default_scale, true, global.src_desert,"shoulder")
+knowledge_base_add(spr_desert_foot, "Desert", 1, global.default_scale, true, global.src_desert,"foot")
+knowledge_base_add(spr_desert_torso, "Desert", 1, global.default_scale, true, global.src_desert,"torso")
 global.armor_sets[0,1] = spr_desert_torso
 
 //assassin
@@ -158,32 +158,35 @@ knowledge_base_add(spr_assassin_torso, global.ass_name, 3, global.default_scale,
 global.armor_sets[1,1] = spr_assassin_torso
 
 //blue
-global.armor_sets[2,0] = spr_blue_shoulder
+global.armor_sets[2,0] = spr_blue_helmet
 global.blue_name = "Blue"
-knowledge_base_add(spr_blue_shoulder, global.blue_name, 3, global.default_scale, true, global.src_challenge,"shoulder")
-knowledge_base_add(spr_blue_leg, global.blue_name, 3, global.default_scale, true, global.src_challenge,"leg")
-knowledge_base_add(spr_blue_foot, global.blue_name, 3, global.default_scale, true, global.src_challenge,"foot")
-knowledge_base_add(spr_blue_shin, global.blue_name, 3, global.default_scale, true, global.src_challenge,"shin")
-knowledge_base_add(spr_blue_torso, global.blue_name, 3, global.default_scale, true, global.src_challenge,"torso")
-knowledge_base_add(spr_blue_helmet, global.blue_name, 3, global.default_scale, true, global.src_challenge,"helmet")
-knowledge_base_add(spr_blue_forearm, global.blue_name, 3, global.default_scale, true, global.src_challenge,"forearm")
+global.src_blue = global.src_lotto
+knowledge_base_add(spr_blue_shoulder, global.blue_name, 3, global.default_scale, true, global.src_blue,"shoulder")
+knowledge_base_add(spr_blue_leg, global.blue_name, 3, global.default_scale, true, global.src_blue,"leg")
+knowledge_base_add(spr_blue_foot, global.blue_name, 3, global.default_scale, true, global.src_blue,"foot")
+knowledge_base_add(spr_blue_shin, global.blue_name, 3, global.default_scale, true, global.src_blue,"shin")
+knowledge_base_add(spr_blue_torso, global.blue_name, 3, global.default_scale, true, global.src_blue,"torso")
+knowledge_base_add(spr_blue_helmet, global.blue_name, 3, global.default_scale, true, global.src_blue,"helmet")
+knowledge_base_add(spr_blue_forearm, global.blue_name, 3, global.default_scale, true, global.src_blue,"forearm")
 global.armor_sets[2,0] = spr_blue_forearm
 
 //iron
-global.armor_sets[3,0] = spr_ironboot_foot
+global.armor_sets[3,0] = spr_iron_helmet
 global.iron_name = "Iron"
-knowledge_base_add(spr_ironboot_foot, global.iron_name, 2, global.default_scale, true, global.src_lotto,"foot")
-knowledge_base_add(spr_iron_leg, global.iron_name, 2, global.default_scale, true, global.src_lotto,"leg")
-knowledge_base_add(spr_iron_shin, global.iron_name, 2, global.default_scale, true, global.src_lotto,"shin")
-knowledge_base_add(spr_iron_forearm, global.iron_name, 2, global.default_scale, true, global.src_lotto,"forearm")
-knowledge_base_add(spr_iron_shoulder, global.iron_name, 2, global.default_scale, true, global.src_lotto,"shoulder")
-knowledge_base_add(spr_iron_torso, global.iron_name, 2, global.default_scale, true, global.src_lotto,"torso")
-knowledge_base_add(spr_iron_helmet, global.iron_name, 2, global.default_scale, true, global.src_lotto,"helmet")
-global.armor_sets[2,1] = spr_iron_helmet
+global.src_iron = global.src_challenge
+knowledge_base_add(spr_ironboot_foot, global.iron_name, 2, global.default_scale, true, global.src_iron,"foot")
+knowledge_base_add(spr_iron_leg, global.iron_name, 2, global.default_scale, true, global.src_iron,"leg")
+knowledge_base_add(spr_iron_shin, global.iron_name, 2, global.default_scale, true, global.src_iron,"shin")
+knowledge_base_add(spr_iron_forearm, global.iron_name, 2, global.default_scale, true, global.src_iron,"forearm")
+knowledge_base_add(spr_iron_shoulder, global.iron_name, 2, global.default_scale, true, global.src_iron,"shoulder")
+knowledge_base_add(spr_iron_torso, global.iron_name, 2, global.default_scale, true, global.src_iron,"torso")
+knowledge_base_add(spr_iron_helmet, global.iron_name, 2, global.default_scale, true, global.src_iron,"helmet")
+global.armor_sets[2,1] = spr_ironboot_foot
 
 //red
 global.red_name = "Red"
-global.armor_sets[4,0] = spr_red_forearm
+global.armor_sets[4,0] = spr_red_helmet
+global.src_red = global.src_lotto
 knowledge_base_add(spr_red_forearm, global.red_name, 3, global.default_scale, true, global.src_challenge,"forearm")
 knowledge_base_add(spr_red_shoulder, global.red_name, 3, global.default_scale, true, global.src_challenge,"shoulder")
 knowledge_base_add(spr_red_leg, global.red_name, 3, global.default_scale, true, global.src_challenge,"leg")
@@ -191,95 +194,103 @@ knowledge_base_add(spr_red_shin, global.red_name, 3, global.default_scale, true,
 knowledge_base_add(spr_red_foot, global.red_name, 3, global.default_scale, true, global.src_challenge,"foot")
 knowledge_base_add(spr_red_torso, global.red_name, 3, global.default_scale, true, global.src_challenge,"torso")
 knowledge_base_add(spr_red_helmet, global.red_name, 3, global.default_scale, true, global.src_challenge,"helmet")
-global.armor_sets[4,1] = spr_red_helmet
+global.armor_sets[4,1] = spr_red_torso
 
 //shield
-global.armor_sets[5,0] = spr_shield_forearm
-knowledge_base_add(spr_shield_forearm, "Shield", 2, global.default_scale, true, global.src_lotto,"forearm")
-knowledge_base_add(spr_shield_leg, "Shield", 2, global.default_scale, true, global.src_lotto,"leg")
-knowledge_base_add(spr_shield_shin, "Shield", 2, global.default_scale, true, global.src_lotto,"shin")
-knowledge_base_add(spr_shield_foot, "Shield", 2, global.default_scale, true, global.src_lotto,"foot")
-knowledge_base_add(spr_shield_shoulder, "Shield", 2, global.default_scale, true, global.src_lotto,"shoulder")
-knowledge_base_add(spr_shield_torso, "Shield", 2, global.default_scale, true, global.src_lotto,"torso")
-knowledge_base_add(spr_shield_helmet, "Shield", 2, global.default_scale, true, global.src_lotto,"helmet")
-global.armor_sets[5,1] = spr_shield_helmet
+global.armor_sets[5,0] = spr_shield_helmet
+global.src_shield = global.src_lotto
+knowledge_base_add(spr_shield_forearm, "Shield", 2, global.default_scale, true, global.src_shield,"forearm")
+knowledge_base_add(spr_shield_leg, "Shield", 2, global.default_scale, true, global.src_shield,"leg")
+knowledge_base_add(spr_shield_shin, "Shield", 2, global.default_scale, true, global.src_shield,"shin")
+knowledge_base_add(spr_shield_foot, "Shield", 2, global.default_scale, true, global.src_shield,"foot")
+knowledge_base_add(spr_shield_shoulder, "Shield", 2, global.default_scale, true, global.src_shield,"shoulder")
+knowledge_base_add(spr_shield_torso, "Shield", 2, global.default_scale, true, global.src_shield,"torso")
+knowledge_base_add(spr_shield_helmet, "Shield", 2, global.default_scale, true, global.src_shield,"helmet")
+global.armor_sets[5,1] = spr_shield_torso
 
 //arctic
-global.armor_sets[6,0] = spr_arctic_shoulder
-knowledge_base_add(spr_arctic_shoulder, "Arctic", 1, global.default_scale, true, global.src_lotto,"shoulder")
-knowledge_base_add(spr_arctic_foot, "Arctic", 1, global.default_scale, true, global.src_lotto,"foot")
-knowledge_base_add(spr_arctic_shin, "Arctic", 1, global.default_scale, true, global.src_lotto,"shin")
-knowledge_base_add(spr_arctic_torso, "Arctic", 1, global.default_scale, true, global.src_lotto,"torso")
-knowledge_base_add(spr_arctic_helmet, "Arctic", 1, global.default_scale, true, global.src_lotto,"helmet")
-knowledge_base_add(spr_arctic_forearm, "Arctic", 1, global.default_scale, true, global.src_lotto,"forearm")
-knowledge_base_add(spr_arctic_leg, "Arctic", 1, global.default_scale, true, global.src_lotto,"leg")
+global.armor_sets[6,0] = spr_arctic_helmet
+global.src_arctic = global.src_lotto
+knowledge_base_add(spr_arctic_shoulder, "Arctic", 1, global.default_scale, true, global.src_arctic,"shoulder")
+knowledge_base_add(spr_arctic_foot, "Arctic", 1, global.default_scale, true, global.src_arctic,"foot")
+knowledge_base_add(spr_arctic_shin, "Arctic", 1, global.default_scale, true, global.src_arctic,"shin")
+knowledge_base_add(spr_arctic_torso, "Arctic", 1, global.default_scale, true, global.src_arctic,"torso")
+knowledge_base_add(spr_arctic_helmet, "Arctic", 1, global.default_scale, true, global.src_arctic,"helmet")
+knowledge_base_add(spr_arctic_forearm, "Arctic", 1, global.default_scale, true, global.src_arctic,"forearm")
+knowledge_base_add(spr_arctic_leg, "Arctic", 1, global.default_scale, true, global.src_arctic,"leg")
 global.armor_sets[6,1] = spr_arctic_leg
 
 //spiral
-global.armor_sets[7,0] = spr_spiral_leg
-knowledge_base_add(spr_spiral_leg, "Spiral", 1, global.default_scale, true, global.src_lotto,"leg")
-knowledge_base_add(spr_spiral_shin, "Spiral", 1, global.default_scale, true, global.src_lotto,"shin")
-knowledge_base_add(spr_spiral_forearm, "Spiral", 1, global.default_scale, true, global.src_lotto,"forearm")
-knowledge_base_add(spr_spiral_shoulder, "Spiral", 1, global.default_scale, true, global.src_lotto,"shoulder")
-knowledge_base_add(spr_spiral_torso, "Spiral", 1, global.default_scale, true, global.src_lotto,"torso")
-knowledge_base_add(spr_spiral_helmet, "Spiral", 1, global.default_scale, true, global.src_lotto,"helmet")
-knowledge_base_add(spr_spiral_foot, "Spiral", 1, global.default_scale, true, global.src_lotto,"foot")
-global.armor_sets[7,1] = spr_spiral_helmet
+global.armor_sets[7,0] = spr_spiral_helmet
+global.src_spiral = global.src_lotto
+knowledge_base_add(spr_spiral_leg, "Spiral", 1, global.default_scale, true, global.src_spiral,"leg")
+knowledge_base_add(spr_spiral_shin, "Spiral", 1, global.default_scale, true, global.src_spiral,"shin")
+knowledge_base_add(spr_spiral_forearm, "Spiral", 1, global.default_scale, true, global.src_spiral,"forearm")
+knowledge_base_add(spr_spiral_shoulder, "Spiral", 1, global.default_scale, true, global.src_spiral,"shoulder")
+knowledge_base_add(spr_spiral_torso, "Spiral", 1, global.default_scale, true, global.src_spiral,"torso")
+knowledge_base_add(spr_spiral_helmet, "Spiral", 1, global.default_scale, true, global.src_spiral,"helmet")
+knowledge_base_add(spr_spiral_foot, "Spiral", 1, global.default_scale, true, global.src_spiral,"foot")
+global.armor_sets[7,1] = spr_spiral_torso
 
 //ranger
-global.armor_sets[8,0] = spr_ranger_leg
-knowledge_base_add(spr_ranger_leg, "Ranger", 2, global.default_scale, true, global.src_lotto,"leg")
-knowledge_base_add(spr_ranger_shin, "Ranger", 2, global.default_scale, true, global.src_lotto,"shin")
-knowledge_base_add(spr_ranger_forearm, "Ranger", 2, global.default_scale, true, global.src_lotto,"forearm")
-knowledge_base_add(spr_ranger_torso, "Ranger", 2, global.default_scale, true, global.src_lotto,"torso")
-knowledge_base_add(spr_ranger_helmet, "Ranger", 2, global.default_scale, true, global.src_lotto,"helmet")
-knowledge_base_add(spr_ranger_shoulder, "Ranger", 2, global.default_scale, true, global.src_lotto,"shoulder")
-knowledge_base_add(spr_ranger_foot, "Ranger", 2, global.default_scale, true, global.src_lotto,"foot")
+global.armor_sets[8,0] = spr_ranger_helmet
+global.src_ranger = global.src_lotto
+knowledge_base_add(spr_ranger_leg, "Ranger", 2, global.default_scale, true, global.src_ranger,"leg")
+knowledge_base_add(spr_ranger_shin, "Ranger", 2, global.default_scale, true, global.src_ranger,"shin")
+knowledge_base_add(spr_ranger_forearm, "Ranger", 2, global.default_scale, true, global.src_ranger,"forearm")
+knowledge_base_add(spr_ranger_torso, "Ranger", 2, global.default_scale, true, global.src_ranger,"torso")
+knowledge_base_add(spr_ranger_helmet, "Ranger", 2, global.default_scale, true, global.src_ranger,"helmet")
+knowledge_base_add(spr_ranger_shoulder, "Ranger", 2, global.default_scale, true, global.src_ranger,"shoulder")
+knowledge_base_add(spr_ranger_foot, "Ranger", 2, global.default_scale, true, global.src_ranger,"foot")
 global.armor_sets[8,1] = spr_ranger_foot
 
 //wasp
 global.armor_sets[9,0] = spr_bee_helmet
-knowledge_base_add(spr_bee_helmet, "Wasp", 3, global.default_scale, true, global.src_lotto,"helmet")
-knowledge_base_add(spr_bee_foot, "Wasp", 3, global.default_scale, true, global.src_lotto,"foot")
-knowledge_base_add(spr_bee_torso, "Wasp", 3, global.default_scale, true, global.src_lotto,"torso")
-knowledge_base_add(spr_bee_leg, "Wasp", 3, global.default_scale, true, global.src_lotto,"leg")
-knowledge_base_add(spr_bee_shin, "Wasp", 3, global.default_scale, true, global.src_lotto,"shin")
-knowledge_base_add(spr_wasp_forearm, "Wasp", 3, global.default_scale, true, global.src_lotto,"forearm")
-knowledge_base_add(spr_wasp_shoulder, "Wasp", 3, global.default_scale, true, global.src_lotto,"shoulder")
+global.src_bee = global.src_challenge
+knowledge_base_add(spr_bee_helmet, "Wasp", 3, global.default_scale, true, global.src_bee,"helmet")
+knowledge_base_add(spr_bee_foot, "Wasp", 3, global.default_scale, true, global.src_bee,"foot")
+knowledge_base_add(spr_bee_torso, "Wasp", 3, global.default_scale, true, global.src_bee,"torso")
+knowledge_base_add(spr_bee_leg, "Wasp", 3, global.default_scale, true, global.src_bee,"leg")
+knowledge_base_add(spr_bee_shin, "Wasp", 3, global.default_scale, true, global.src_bee,"shin")
+knowledge_base_add(spr_wasp_forearm, "Wasp", 3, global.default_scale, true, global.src_bee,"forearm")
+knowledge_base_add(spr_wasp_shoulder, "Wasp", 3, global.default_scale, true, global.src_bee,"shoulder")
 global.armor_sets[9,1] = spr_bee_shin
 
 //cursed
 global.armor_sets[10,0] = spr_cursed_helmet
-knowledge_base_add(spr_cursed_helmet, "Cursed", 4, global.default_scale, true, global.src_lotto,"helmet")
-knowledge_base_add(spr_cursed_leg, "Cursed", 4, global.default_scale, true, global.src_lotto,"leg")
-knowledge_base_add(spr_cursed_shin, "Cursed", 4, global.default_scale, true, global.src_lotto,"shin")
-knowledge_base_add(spr_cursed_foot, "Cursed", 4, global.default_scale, true, global.src_lotto,"foot")
-knowledge_base_add(spr_cursed_forearm, "Cursed", 4, global.default_scale, true, global.src_lotto,"forearm")
-knowledge_base_add(spr_cursed_torso, "Cursed", 4, global.default_scale, true, global.src_lotto,"torso")
-knowledge_base_add(spr_cursed_shoulder, "Cursed", 4, global.default_scale, true, global.src_lotto,"shoulder")
+global.src_cursed = global.src_challenge
+knowledge_base_add(spr_cursed_helmet, "Cursed", 4, global.default_scale, true, global.src_cursed,"helmet")
+knowledge_base_add(spr_cursed_leg, "Cursed", 4, global.default_scale, true, global.src_cursed,"leg")
+knowledge_base_add(spr_cursed_shin, "Cursed", 4, global.default_scale, true, global.src_cursed,"shin")
+knowledge_base_add(spr_cursed_foot, "Cursed", 4, global.default_scale, true, global.src_cursed,"foot")
+knowledge_base_add(spr_cursed_forearm, "Cursed", 4, global.default_scale, true, global.src_cursed,"forearm")
+knowledge_base_add(spr_cursed_torso, "Cursed", 4, global.default_scale, true, global.src_cursed,"torso")
+knowledge_base_add(spr_cursed_shoulder, "Cursed", 4, global.default_scale, true, global.src_cursed,"shoulder")
 global.armor_sets[10,1] = spr_cursed_shoulder
 
 //beta
 global.armor_sets[11,0] = spr_beta_head
-knowledge_base_add(spr_beta_head, "Beta", 1, global.default_scale, true, global.src_lotto,"helmet")
-knowledge_base_add(spr_beta_torso, "Beta", 1, global.default_scale, true, global.src_lotto,"torso")
-knowledge_base_add(spr_beta_leg, "Beta", 1, global.default_scale, true, global.src_lotto,"leg")
-knowledge_base_add(spr_beta_shin, "Beta", 1, global.default_scale, true, global.src_lotto,"shin")
-knowledge_base_add(spr_beta_foot, "Beta", 1, global.default_scale, true, global.src_lotto,"foot")
-knowledge_base_add(spr_beta_shoulder, "Beta", 1, global.default_scale, true, global.src_lotto,"shoulder")
-knowledge_base_add(spr_beta_forearm, "Beta", 1, global.default_scale, true, global.src_lotto,"forearm")
+global.src_beta = global.src_lotto
+knowledge_base_add(spr_beta_head, "Beta", 1, global.default_scale, true, global.src_beta,"helmet")
+knowledge_base_add(spr_beta_torso, "Beta", 1, global.default_scale, true, global.src_beta,"torso")
+knowledge_base_add(spr_beta_leg, "Beta", 1, global.default_scale, true, global.src_beta,"leg")
+knowledge_base_add(spr_beta_shin, "Beta", 1, global.default_scale, true, global.src_beta,"shin")
+knowledge_base_add(spr_beta_foot, "Beta", 1, global.default_scale, true, global.src_beta,"foot")
+knowledge_base_add(spr_beta_shoulder, "Beta", 1, global.default_scale, true, global.src_beta,"shoulder")
+knowledge_base_add(spr_beta_forearm, "Beta", 1, global.default_scale, true, global.src_beta,"forearm")
 global.armor_sets[11,1] = spr_beta_forearm
 
 //plague
 global.armor_sets[12,0] = spr_plague_helmet
 global.plague_name = "Plague Doctor"
-knowledge_base_add(spr_plague_helmet, global.plague_name, 2, global.default_scale, true, global.src_lotto,"helmet")
-knowledge_base_add(spr_plague_shoulder, global.plague_name, 2, global.default_scale, true, global.src_lotto,"shoulder")
-knowledge_base_add(spr_plague_forearm, global.plague_name, 2, global.default_scale, true, global.src_lotto,"forearm")
-knowledge_base_add(spr_plague_torso, global.plague_name, 2, global.default_scale, true, global.src_lotto,"torso")
-knowledge_base_add(spr_plague_foot, global.plague_name, 2, global.default_scale, true, global.src_lotto,"foot")
-knowledge_base_add(spr_plague_leg, global.plague_name, 2, global.default_scale, true, global.src_lotto,"leg")
-knowledge_base_add(spr_plague_shin, global.plague_name, 2, global.default_scale, true, global.src_lotto,"shin")
+global.src_plague = global.src_challenge
+knowledge_base_add(spr_plague_helmet, global.plague_name, 2, global.default_scale, true, global.src_plague,"helmet")
+knowledge_base_add(spr_plague_shoulder, global.plague_name, 2, global.default_scale, true, global.src_plague,"shoulder")
+knowledge_base_add(spr_plague_forearm, global.plague_name, 2, global.default_scale, true, global.src_plague,"forearm")
+knowledge_base_add(spr_plague_torso, global.plague_name, 2, global.default_scale, true, global.src_plague,"torso")
+knowledge_base_add(spr_plague_foot, global.plague_name, 2, global.default_scale, true, global.src_plague,"foot")
+knowledge_base_add(spr_plague_leg, global.plague_name, 2, global.default_scale, true, global.src_plague,"leg")
+knowledge_base_add(spr_plague_shin, global.plague_name, 2, global.default_scale, true, global.src_plague,"shin")
 global.armor_sets[12,1] = spr_plague_shin
 
 //aroach
@@ -297,13 +308,14 @@ global.armor_sets[13,1] = spr_aroach_foot
 //glow
 global.glow_name = "Stasis"
 global.armor_sets[14,0] = spr_glow_helmet
-knowledge_base_add(spr_glow_forearm, global.glow_name, 3, global.default_scale, true, global.src_challenge,"forearm")
-knowledge_base_add(spr_glow_shoulder, global.glow_name, 3, global.default_scale, true, global.src_challenge,"shoulder")
-knowledge_base_add(spr_glow_leg, global.glow_name, 3, global.default_scale, true, global.src_challenge,"leg")
-//knowledge_base_add(spr_glow_shin, global.glow_name, 3, global.default_scale, true, global.src_challenge,"shin")
-knowledge_base_add(spr_glow_foot, global.glow_name, 3, global.default_scale, true, global.src_challenge,"foot")
-knowledge_base_add(spr_glow_torso, global.glow_name, 3, global.default_scale, true, global.src_challenge,"torso")
-knowledge_base_add(spr_glow_helmet, global.glow_name, 3, global.default_scale, true, global.src_challenge,"helmet")
+global.src_statis = global.src_lotto
+knowledge_base_add(spr_glow_forearm, global.glow_name, 4, global.default_scale, true, global.src_statis,"forearm")
+knowledge_base_add(spr_glow_shoulder, global.glow_name, 4, global.default_scale, true, global.src_statis,"shoulder")
+knowledge_base_add(spr_glow_leg, global.glow_name, 4, global.default_scale, true, global.src_statis,"leg")
+//knowledge_base_add(spr_glow_shin, global.glow_name, 4, global.default_scale, true, global.src_statis,"shin")
+knowledge_base_add(spr_glow_foot, global.glow_name, 4, global.default_scale, true, global.src_statis,"foot")
+knowledge_base_add(spr_glow_torso, global.glow_name, 4, global.default_scale, true, global.src_statis,"torso")
+knowledge_base_add(spr_glow_helmet, global.glow_name, 4, global.default_scale, true, global.src_statis,"helmet")
 global.armor_sets[14,1] = spr_glow_foot
 
 //gold
@@ -320,9 +332,9 @@ knowledge_base_add(spr_gold_helmet, global.gold_name, global.gold_rarity, global
 global.armor_sets[15,1] = spr_gold_foot
 
 //heavy
-global.heavy_name = "Tron"
+global.heavy_name = "Green Mutha Ucka"
 global.heavy_rarity = 3
-global.heavy_src = global.src_lotto
+global.heavy_src = global.src_challenge
 global.armor_sets[16,0] = spr_heavy_helmet
 knowledge_base_add(spr_heavy_forearm, global.heavy_name, global.heavy_rarity, global.default_scale, true, global.heavy_src,"forearm")
 knowledge_base_add(spr_heavy_shoulder, global.heavy_name, global.heavy_rarity, global.default_scale, true, global.heavy_src,"shoulder")
@@ -358,13 +370,13 @@ knowledge_base_add(spr_leather_leg, global.leather_name, global.leather_rarity, 
 knowledge_base_add(spr_leather_shin, global.leather_name, global.leather_rarity, global.default_scale, true, global.leather_src,"shin")
 knowledge_base_add(spr_leather_foot, global.leather_name, global.leather_rarity, global.default_scale, true, global.leather_src,"foot")
 knowledge_base_add(spr_leather_torso, global.leather_name, global.leather_rarity, global.default_scale, true, global.leather_src,"torso")
-//knowledge_base_add(spr_leather_helmet, global.leather_name, global.leather_rarity, global.default_scale, true, global.leather_src,"helmet")
+knowledge_base_add(spr_leather_helmet, global.leather_name, global.leather_rarity, global.default_scale, true, global.leather_src,"helmet")
 global.armor_sets[18,1] = spr_leather_foot
 
 //med
-global.med_name = "Seeker"
+global.med_name = "Blue Mutha Ucka"
 global.med_rarity = 3
-global.med_src = global.src_lotto
+global.med_src = global.src_challenge
 global.armor_sets[19,0] = spr_med_helmet
 knowledge_base_add(spr_med_forearm, global.med_name, global.med_rarity, global.default_scale, true, global.med_src,"forearm")
 knowledge_base_add(spr_med_shoulder, global.med_name, global.med_rarity, global.default_scale, true, global.med_src,"shoulder")
@@ -406,7 +418,7 @@ global.armor_sets[21,1] = spr_muscle_foot
 //trace
 global.trace_name = "Trace"
 global.trace_rarity = 2
-global.trace_src = global.src_lotto
+global.trace_src = global.src_challenge
 global.armor_sets[22,0] = spr_trace_helmet
 knowledge_base_add(spr_trace_forearm, global.trace_name, global.trace_rarity, global.default_scale, true, global.trace_src,"forearm")
 knowledge_base_add(spr_trace_shoulder, global.trace_name, global.trace_rarity, global.default_scale, true, global.trace_src,"shoulder")
@@ -420,7 +432,7 @@ global.armor_sets[22,1] = spr_trace_foot
 //samurai
 global.samurai_name = "Samurai"
 global.samurai_rarity = 4
-global.samurai_src = global.src_lotto
+global.samurai_src = global.src_challenge
 global.armor_sets[23,0] = spr_samurai_helmet
 knowledge_base_add(spr_samurai_forearm, global.samurai_name, global.samurai_rarity, global.default_scale, true, global.samurai_src,"forearm")
 knowledge_base_add(spr_samurai_shoulder, global.samurai_name, global.samurai_rarity, global.default_scale, true, global.samurai_src,"shoulder")
@@ -434,7 +446,7 @@ global.armor_sets[23,1] = spr_samurai_foot
 //ninja
 global.ninja_name = "Ninja"
 global.ninja_rarity = 3
-global.ninja_src = global.src_lotto
+global.ninja_src = global.src_challenge
 global.armor_sets[24,0] = spr_ninja_helmet
 knowledge_base_add(spr_ninja_forearm, global.ninja_name, global.ninja_rarity, global.default_scale, true, global.ninja_src,"forearm")
 knowledge_base_add(spr_ninja_shoulder, global.ninja_name, global.ninja_rarity, global.default_scale, true, global.ninja_src,"shoulder")

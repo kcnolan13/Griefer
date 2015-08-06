@@ -58,10 +58,10 @@ for (var i=RAG_HEAD; i<= RAG_FOOTR; i++)
     rags[i] = NO_HANDLE
 }
 
-if is_hatless(varRead(limb_names[0]+"0"))
+if is_hatless(real(varRead(limb_names[0]+"0")))
 {
     rag_exclusions[6] = true
-    printf("::: adding hat to ragdoll exclusions in rag_create_doll")
+    //printf("::: adding hat to ragdoll exclusions in rag_create_doll")
 }
 
 
@@ -75,7 +75,7 @@ for (var i=0; i<getLength(limb_names); i++)
     rags[i] = instance_create(x+xs[i],y+ys[i],rag_of_limb_type(limb_names[i]))
     rags[i].depth = depths[i]
     
-    printf("::: created rag type: "+string(object_get_name(rags[i].object_index)))
+    //printf("::: created rag type: "+string(object_get_name(rags[i].object_index)))
     
     limb_names[i] += "0"
     
@@ -152,7 +152,7 @@ for (var i=0; i<2; i++)
 rag_apply_death_impulse(rags[RAG_TORSO],force,fdir)
 
 //tell net_manager to focus on the torso rag
-if varRead("pName") = objVarRead(net_manager.my_doll,"pName")
+if string(varRead("pName")) = string(objVarRead(net_manager.my_doll,"pName"))
 {
     net_manager.rag_target = rags[RAG_TORSO]
     net_manager.view_overscaler = view_hview/768
