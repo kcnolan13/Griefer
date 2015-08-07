@@ -28,7 +28,7 @@ var percent_reflexes = argument1
         //printf("::: contemplating weapon "+objVarRead(weapon_contemplating,"name")+", id="+string(id)+", myPlayer()="+string(myPlayer()))
         if random(1) < 0.8 //and id != myPlayer()
         {
-            printf("::: bot trying to pick up weapon --> weapon_time="+string(weapon_time)+", weapon_time_min="+string(weapon_time_min))
+            //printf("::: bot trying to pick up weapon --> weapon_time="+string(weapon_time)+", weapon_time_min="+string(weapon_time_min))
             if weapon_time > weapon_time_min
             {
                 weapon_time = 0

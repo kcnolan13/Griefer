@@ -22,7 +22,7 @@ var desc_scale = 0.5*scale
 var ang_i = 90
 var ang_f = ang_i-actual_percent_full*360
 var ang_dif = abs(ang_f mod 360 - ang_i mod 360)
-var ang_res = 10
+var ang_res = 8
 var ang_steps = ceil(ang_dif/ang_res)
 var ang_working = ang_i
 
@@ -43,7 +43,7 @@ var ang_working = ang_i
 ang_i = 90
 ang_f = ang_i-backing_percent_full*360
 ang_dif = abs(ang_f mod 360 - ang_i mod 360)
-ang_res = 1
+ang_res = 10
 ang_steps = ang_dif/ang_res
 ang_working = ang_i
 
@@ -88,6 +88,7 @@ draw_set_alpha(current_alpha/5)
         draw_line_width(backing_meter_xs[i],backing_meter_ys[i],backing_meter_xs[i+1],backing_meter_ys[i+1],bar_width/2)
         if i < len-1
             draw_line_width(backing_meter_xs[i],backing_meter_ys[i],backing_meter_xs[i+2],backing_meter_ys[i+2],bar_width/2)
+    
     }
 }
 draw_set_alpha(current_alpha)
@@ -102,6 +103,7 @@ draw_set_alpha(current_alpha)
         draw_line_width(actual_meter_xs[i],actual_meter_ys[i],actual_meter_xs[i+1],actual_meter_ys[i+1],bar_width)
         if i < len-1
             draw_line_width(actual_meter_xs[i],actual_meter_ys[i],actual_meter_xs[i+2],actual_meter_ys[i+2],bar_width)
+        
     }
     //draw_set_blend_mode(bm_normal)
 }

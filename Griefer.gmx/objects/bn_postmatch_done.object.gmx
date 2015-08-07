@@ -31,6 +31,8 @@ event_inherited()
 label = "Done"
 text = "Done"
 active = false
+
+cant_fade = false
 </string>
           </argument>
         </arguments>

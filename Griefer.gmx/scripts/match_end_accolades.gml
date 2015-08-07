@@ -60,7 +60,7 @@ var completed = false
     
     if not tied and playerName(myPlayer()) = maxpname
     {
-        //HIGHEST KDR, BABY!
+        //MVP, BABY!
         complete_accolade("mvp")
         completed = true
     }

@@ -46,5 +46,5 @@ body_text_override += "Click for Stats!"
 draw_popup(xdraw, ydraw, "", rank_name, "", body_text_override, rank_color, 1)
 
 //now just need to draw his player tag in the right spot
-draw_namerank(objVarRead(av,"pName"),rank,pleft+6,ptop+6,1,c_white) //left and top is set in draw_popup
+draw_namerank(capwords(objVarRead(av,"pName")),rank,pleft+6,ptop+6,1,c_white) //left and top is set in draw_popup
 draw_set_alpha(1)

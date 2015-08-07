@@ -296,7 +296,10 @@ if xp_needed &lt;= 0 and not earn_pauser and is_my_avatar(net_manager.my_doll)
         earn_pauser = room_speed*3
         if room = rm_lobby
         {
+            with bn_postmatch_done cant_fade = true
             clear_postmatch_visuals()
+            with bn_postmatch_done cant_fade = false
+            
             alarm[1] = earn_pauser-10
         }
     }

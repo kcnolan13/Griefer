@@ -777,46 +777,6 @@
         <script>scripts\constrict_physics_speed.gml</script>
       </scripts>
     </scripts>
-    <scripts name="control mapping">
-      <script>scripts\gc_ind.gml</script>
-      <script>scripts\regen_cedits.gml</script>
-      <script>scripts\save_setting.gml</script>
-      <script>scripts\refresh_control_scheme.gml</script>
-      <script>scripts\spawn_controls.gml</script>
-      <script>scripts\framely_player_controls.gml</script>
-      <script>scripts\framely_weapon_controls.gml</script>
-      <script>scripts\get_caction_name.gml</script>
-      <script>scripts\get_caction_index.gml</script>
-      <script>scripts\get_input_name.gml</script>
-      <script>scripts\mapped_control.gml</script>
-      <script>scripts\set_gamepad_deadzones.gml</script>
-      <scripts name="input checking">
-        <script>scripts\input_check.gml</script>
-        <script>scripts\input_check_pressed.gml</script>
-        <script>scripts\input_check_released.gml</script>
-        <script>scripts\input_is_keyboard.gml</script>
-        <script>scripts\input_is_mouse.gml</script>
-        <script>scripts\input_is_gamepad_button.gml</script>
-        <script>scripts\input_is_gamepad_axis.gml</script>
-        <script>scripts\gamepad_axis_check.gml</script>
-        <script>scripts\gamepad_axis_check_pressed.gml</script>
-        <script>scripts\gamepad_axis_check_released.gml</script>
-        <script>scripts\control_man_axis_index.gml</script>
-        <script>scripts\handle_swap_sticks.gml</script>
-        <script>scripts\gamepad_stick_dir.gml</script>
-        <script>scripts\gamepad_stick_mag.gml</script>
-        <script>scripts\gamepad_stick_val.gml</script>
-      </scripts>
-      <script>scripts\restore_default_controls.gml</script>
-      <script>scripts\transmit_control_map.gml</script>
-      <script>scripts\map_control.gml</script>
-      <script>scripts\capture_mapping_input.gml</script>
-      <script>scripts\pressing_right.gml</script>
-      <script>scripts\pressing_left.gml</script>
-      <script>scripts\click_pressed.gml</script>
-      <script>scripts\rightclick_pressed.gml</script>
-      <script>scripts\gamepad_cursor_adjustment.gml</script>
-    </scripts>
     <scripts name="compacted">
       <script>scripts\objUpdateReal.gml</script>
       <script>scripts\objUpdateString.gml</script>
@@ -824,6 +784,46 @@
       <script>scripts\objPushBackString.gml</script>
       <script>scripts\extract_object_index.gml</script>
       <script>scripts\extract_uid.gml</script>
+      <scripts name="control mapping">
+        <script>scripts\gc_ind.gml</script>
+        <script>scripts\regen_cedits.gml</script>
+        <script>scripts\save_setting.gml</script>
+        <script>scripts\refresh_control_scheme.gml</script>
+        <script>scripts\spawn_controls.gml</script>
+        <script>scripts\framely_player_controls.gml</script>
+        <script>scripts\framely_weapon_controls.gml</script>
+        <script>scripts\get_caction_name.gml</script>
+        <script>scripts\get_caction_index.gml</script>
+        <script>scripts\get_input_name.gml</script>
+        <script>scripts\mapped_control.gml</script>
+        <script>scripts\set_gamepad_deadzones.gml</script>
+        <scripts name="input checking">
+          <script>scripts\input_check.gml</script>
+          <script>scripts\input_check_pressed.gml</script>
+          <script>scripts\input_check_released.gml</script>
+          <script>scripts\input_is_keyboard.gml</script>
+          <script>scripts\input_is_mouse.gml</script>
+          <script>scripts\input_is_gamepad_button.gml</script>
+          <script>scripts\input_is_gamepad_axis.gml</script>
+          <script>scripts\gamepad_axis_check.gml</script>
+          <script>scripts\gamepad_axis_check_pressed.gml</script>
+          <script>scripts\gamepad_axis_check_released.gml</script>
+          <script>scripts\control_man_axis_index.gml</script>
+          <script>scripts\handle_swap_sticks.gml</script>
+          <script>scripts\gamepad_stick_dir.gml</script>
+          <script>scripts\gamepad_stick_mag.gml</script>
+          <script>scripts\gamepad_stick_val.gml</script>
+        </scripts>
+        <script>scripts\restore_default_controls.gml</script>
+        <script>scripts\transmit_control_map.gml</script>
+        <script>scripts\map_control.gml</script>
+        <script>scripts\capture_mapping_input.gml</script>
+        <script>scripts\pressing_right.gml</script>
+        <script>scripts\pressing_left.gml</script>
+        <script>scripts\click_pressed.gml</script>
+        <script>scripts\rightclick_pressed.gml</script>
+        <script>scripts\gamepad_cursor_adjustment.gml</script>
+      </scripts>
     </scripts>
     <scripts name="audio">
       <script>scripts\audio.gml</script>
@@ -1459,6 +1459,7 @@
     <font>fonts\fnt_promoted</font>
     <font>fonts\fnt_meter</font>
     <font>fonts\fnt_mod</font>
+    <font>fonts\fnt_ready</font>
     <font>fonts\fnt_play</font>
     <font>fonts\fnt_cout</font>
     <font>fonts\fnt_pstats</font>
@@ -1914,7 +1915,7 @@
     <constant name="C_JUMP">2</constant>
     <constant name="C_MOVE_RIGHT">1</constant>
     <constant name="C_MOVE_LEFT">0</constant>
-    <constant name="BOT_XP_SCALER">0.25</constant>
+    <constant name="BOT_XP_SCALER">1</constant>
     <constant name="XPBAR_HEIGHT">16</constant>
     <constant name="XPBAR_WIDTH">64*5</constant>
     <constant name="XPBAR_BOTTOM">16</constant>

@@ -36,4 +36,8 @@ av_txt = NO_HANDLE
 av_namerank = NO_HANDLE
 
 alarm[1] = 0
-with bn_postmatch_done fade_out = true
+with bn_postmatch_done 
+{ 
+    if not cant_fade
+        fade_out = true
+}

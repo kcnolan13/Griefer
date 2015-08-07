@@ -60,7 +60,7 @@ var xp_needed = rank_xp-xp
 if rank<0 rank = 0
 
 // DRAW_NAMERANK
-var name = capwords(rank_name)
+var name = rank_name//capwords(rank_name)
 var draw_x = left+rank_sep+10*scale
 var draw_y = top+rank_sep+8*scale
 var scale = 1*scale

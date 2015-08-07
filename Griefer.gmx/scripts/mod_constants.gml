@@ -70,6 +70,12 @@ global.mod_limbs[i] = spr_mantel_helmet
 global.mod_vars[i] = "blood_color"
 global.mod_vals[i] = global.blood_yellow
 global.mod_descriptions[i] = "Bleeds   Yellow"
+i++
+global.mod_limbvars[i] = "helmet0"
+global.mod_limbs[i] = spr_pyramid_helmet
+global.mod_vars[i] = "blood_color"
+global.mod_vals[i] = c_black
+global.mod_descriptions[i] = "Bleeds   Black"
 /*i++
 global.mod_limbvars[i] = "helmet0"
 global.mod_limbs[i] = spr_smallvisor2_helmet

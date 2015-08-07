@@ -63,32 +63,44 @@ knowledge_base_add(spr_ahunch_helmet, "War Mongrel", 5, global.default_scale, tr
     set_hatless(spr_ahunch_helmet)
 knowledge_base_add(spr_bhunch_helmet, "Hell Hound", 5, global.default_scale, true, global.src_challenge,"helmet")
     set_hatless(spr_bhunch_helmet)
-knowledge_base_add(spr_mantel2_helmet, "Mantel2 Helmet", 3, global.default_scale, true, global.src_lotto,"helmet")
+global.mantel2_name = "Variant Helmet"
+knowledge_base_add(spr_mantel2_helmet, global.mantel2_name, 3, global.default_scale, true, global.src_lotto,"helmet")
 knowledge_base_add(spr_mantel_helmet, "Mantel Helmet", 3, global.default_scale, true, global.src_lotto,"helmet")
-knowledge_base_add(spr_dred_helmet, "Dread Helmet", 4, global.default_scale, true, global.src_lotto,"helmet")
-knowledge_base_add(spr_tadpole_helmet, "Tadpole Helmet", 3, global.default_scale, true, global.src_lotto,"helmet")
+global.dred_name = "Dread Helmet"
+knowledge_base_add(spr_dred_helmet, global.dred_name, 4, global.default_scale, true, global.src_challenge,"helmet")
+global.tadpole_name = "Tadpole Helmet"
+knowledge_base_add(spr_tadpole_helmet, global.tadpole_name, 3, global.default_scale, true, global.src_challenge,"helmet")
 
 global.emile2_name = "Support Helmet"
 knowledge_base_add(spr_emile2_helmet, global.emile2_name, 2, global.default_scale, true, global.src_lotto,"helmet")
 
 knowledge_base_add(spr_emile_helmet, "Eva Helmet", 2, global.default_scale, true, global.src_lotto,"helmet")
-knowledge_base_add(spr_hound_helmet, "Hound Helmet", 3, global.default_scale, true, global.src_lotto,"helmet")
-knowledge_base_add(spr_hound2_helmet, "Hound2 Helmet", 4, global.default_scale, true, global.src_lotto,"helmet")
+knowledge_base_add(spr_hound_helmet, "Hound Helmet", 3, global.default_scale, true, global.src_challenge,"helmet")
+global.hound2_name = "Black Hound Helmet"
+knowledge_base_add(spr_hound2_helmet, global.hound2_name, 4, global.default_scale, true, global.src_challenge,"helmet")
     set_hatless(spr_hound_helmet)
     set_hatless(spr_hound2_helmet)
-knowledge_base_add(spr_rvisor2_helmet, "Fanatic Helmet", 4, global.default_scale, true, global.src_lotto,"helmet")
-knowledge_base_add(spr_pvisor_helmet, "Pvisor Helmet", 2, global.default_scale, true, global.src_lotto,"helmet")
-knowledge_base_add(spr_pvisor2_helmet, "Pvisor2 Helmet", 3, global.default_scale, true, global.src_lotto,"helmet")
-knowledge_base_add(spr_roman_helmet, "Roman Helmet", 4, global.default_scale, true, global.src_lotto,"helmet")
+global.fanatic_name = "Fanatic Helmet"
+knowledge_base_add(spr_rvisor2_helmet, global.fanatic_name, 4, global.default_scale, true, global.src_challenge,"helmet")
+global.pvisor_name = "Deadshot Helmet"
+knowledge_base_add(spr_pvisor_helmet, "Pvisor Helmet", 3, global.default_scale, true, global.src_challenge,"helmet")
+global.pvisor2_name = "Headhunter Helmet"
+knowledge_base_add(spr_pvisor2_helmet, global.pvisor2_name, 3, global.default_scale, true, global.src_challenge,"helmet")
+global.roman_name = "Roman Helmet"
+knowledge_base_add(spr_roman_helmet, global.roman_name, 4, global.default_scale, true, global.src_challenge,"helmet")
     set_hatless(spr_roman_helmet)
 global.smallvisor2_name = "Gravemaker Helmet"
 knowledge_base_add(spr_smallvisor_helmet, "Smallvisor Helmet", 2, global.default_scale, true, global.src_lotto,"helmet")
-knowledge_base_add(spr_smallvisor2_helmet, global.smallvisor2_name, 3, global.default_scale, true, global.src_lotto,"helmet")
-knowledge_base_add(spr_pyramid_helmet, "Pyramid Head", 4, global.default_scale, true, global.src_lotto,"helmet")
+knowledge_base_add(spr_smallvisor2_helmet, global.smallvisor2_name, 3, global.default_scale, true, global.src_challenge,"helmet")
+
+knowledge_base_add(spr_pyramid_helmet, "Pyramid Head", 4, global.default_scale, true, global.src_challenge,"helmet")
     set_hatless(spr_pyramid_helmet)
-knowledge_base_add(spr_rvisor_helmet, "RVisor Helmet", 3, global.default_scale, true, global.src_lotto,"helmet")
-knowledge_base_add(spr_gashog_helmet, "Gas Hog Helmet", 4, global.default_scale, true, global.src_lotto,"helmet")
-    
+
+global.rvisor_name = "Smooth Operator Helmet"
+knowledge_base_add(spr_rvisor_helmet, global.rvisor_name, 3, global.default_scale, true, global.src_challenge,"helmet")
+global.gashog_name = "Gas Hog Helmet"
+knowledge_base_add(spr_gashog_helmet, global.gashog_name, 4, global.default_scale, true, global.src_challenge,"helmet")
+
 //torsos
 
 
@@ -114,7 +126,7 @@ knowledge_base_add(spr_dunce_hat, "Dunce Hat", 0, global.default_scale, true, gl
 knowledge_base_add(spr_admiral_hat, "Admiral Hat", 3, global.default_scale, true, global.src_lotto,"hat")
 knowledge_base_add(spr_aviator_hat, "Aviator Hat", 3, global.default_scale, true, global.src_lotto,"hat")
 knowledge_base_add(spr_bunny_hat, "Bunny Hat", 0, global.default_scale, true, global.src_lotto,"hat")
-knowledge_base_add(spr_santa_hat, "Santa Hat", 4, global.default_scale, true, global.src_lotto,"hat")
+knowledge_base_add(spr_santa_hat, "Santa Hat", 4, global.default_scale, true, global.src_challenge,"hat")
 
 //shoulders
 knowledge_base_add(spr_zoidberg_shoulder, "Ring Shoulder", 2, global.default_scale, true, global.src_lotto,"shoulder")

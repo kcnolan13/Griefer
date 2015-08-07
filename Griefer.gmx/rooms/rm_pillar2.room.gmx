@@ -27,8 +27,8 @@
     <deleteUnderlyingObj>0</deleteUnderlyingObj>
     <deleteUnderlyingTiles>0</deleteUnderlyingTiles>
     <page>4</page>
-    <xoffset>-91</xoffset>
-    <yoffset>-207</yoffset>
+    <xoffset>792</xoffset>
+    <yoffset>651</yoffset>
   </makerSettings>
   <backgrounds>
     <background visible="0" foreground="0" name="" x="0" y="0" htiled="-1" vtiled="-1" hspeed="0" vspeed="0" stretch="0"/>
@@ -302,10 +302,10 @@
     <instance objName="block" x="448" y="1536" name="inst_BE0C5032" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="wedge_right_mirrored" x="2048" y="896" name="inst_664D16EA" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="spawn_point0" x="448" y="1408" name="inst_6AA01E93" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="spawn_point0" x="352" y="1408" name="inst_572C7BA9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="spawn_point0" x="320" y="1408" name="inst_572C7BA9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="wedge_right_mirrored" x="2112" y="960" name="inst_42703B72" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="spawn_point1" x="2176" y="1408" name="inst_EF45C0E3" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="spawn_point1" x="2080" y="1408" name="inst_A56C3E3E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="spawn_point1" x="2048" y="1408" name="inst_A56C3E3E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="spawn_point_neutral" x="262" y="816" name="inst_F1E0F6B6" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="spawn_point_neutral" x="2244" y="824" name="inst_1C06300C" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="spawn_point_neutral" x="840" y="188" name="inst_E71A3AE3" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>

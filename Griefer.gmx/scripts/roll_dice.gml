@@ -41,18 +41,22 @@ else if rar < global.prob_rarity[1]
     rar_index = 1
 
 var iterations = 0
+var rando_spr = spr_none
+
 while (iterations < 500 and not bpart_spr)
 {
     iterations ++
-    if iterations > 450
-        printf("ERROR: taking too long to roll dice")
-        
     var rando_spr = floor(random_range(spr_armor_placeholder1+1,spr_armor_placeholder2-0.1))
     var rarity_candidate = bpart_lookup(rando_spr, global.BPART_RARITY)
     var rando_src = bpart_lookup(rando_spr, global.BPART_SOURCE)
-    if rarity_candidate <= rar_index and (object_index != net_manager or rando_src = global.src_lotto /*or rando_src = global.src_challenge*/)
+    if rarity_candidate = rar_index and (object_index != net_manager or rando_src = global.src_lotto /*or rando_src = global.src_challenge*/)
     {
         printf("      --SELECTED sprite: "+string(rando_spr)+" : "+string(bpart_lookup(rando_spr, global.BPART_NAME)))
         return rando_spr
     }
 }
+
+if iterations > 499
+    printf("ERROR: roll_dice took too long to roll dice")
+
+return rando_spr

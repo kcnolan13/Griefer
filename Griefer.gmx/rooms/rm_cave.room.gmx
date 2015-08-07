@@ -27,8 +27,8 @@
     <deleteUnderlyingObj>0</deleteUnderlyingObj>
     <deleteUnderlyingTiles>0</deleteUnderlyingTiles>
     <page>4</page>
-    <xoffset>-33</xoffset>
-    <yoffset>-10</yoffset>
+    <xoffset>1247</xoffset>
+    <yoffset>180</yoffset>
   </makerSettings>
   <backgrounds>
     <background visible="0" foreground="0" name="" x="0" y="0" htiled="-1" vtiled="-1" hspeed="0" vspeed="0" stretch="0"/>
@@ -701,6 +701,8 @@
     <instance objName="block" x="128" y="2176" name="inst_80FD1993" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="block" x="64" y="2176" name="inst_B09B0057" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="block" x="0" y="2176" name="inst_60713E68" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="spawn_point0" x="506" y="2048" name="inst_13744C86" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="spawn_point1" x="2410" y="902" name="inst_6957580D" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="tiles_yellow_outline" x="64" y="384" w="64" h="64" xo="72" yo="142" id="10012409" name="inst_B7C550E8" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>

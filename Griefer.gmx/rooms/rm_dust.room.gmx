@@ -3,8 +3,8 @@
   <caption></caption>
   <width>2496</width>
   <height>1536</height>
-  <vsnap>64</vsnap>
-  <hsnap>64</hsnap>
+  <vsnap>6</vsnap>
+  <hsnap>6</hsnap>
   <isometric>0</isometric>
   <speed>30</speed>
   <persistent>0</persistent>
@@ -16,19 +16,19 @@
   <clearDisplayBuffer>-1</clearDisplayBuffer>
   <makerSettings>
     <isSet>-1</isSet>
-    <w>1596</w>
-    <h>920</h>
+    <w>1586</w>
+    <h>914</h>
     <showGrid>0</showGrid>
-    <showObjects>0</showObjects>
+    <showObjects>-1</showObjects>
     <showTiles>-1</showTiles>
     <showBackgrounds>-1</showBackgrounds>
     <showForegrounds>-1</showForegrounds>
     <showViews>0</showViews>
     <deleteUnderlyingObj>0</deleteUnderlyingObj>
     <deleteUnderlyingTiles>0</deleteUnderlyingTiles>
-    <page>4</page>
-    <xoffset>-67</xoffset>
-    <yoffset>-66</yoffset>
+    <page>0</page>
+    <xoffset>962</xoffset>
+    <yoffset>632</yoffset>
   </makerSettings>
   <backgrounds>
     <background visible="0" foreground="0" name="" x="0" y="0" htiled="-1" vtiled="-1" hspeed="0" vspeed="0" stretch="0"/>
@@ -291,12 +291,12 @@
     <instance objName="wedge_right_mirrored" x="2304" y="-64" name="inst_B550A1CD" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="wedge_right_mirrored" x="2240" y="-128" name="inst_D27B9FC2" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="wedge_right_mirrored" x="2176" y="-192" name="inst_AB61BC0F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="spawn_point0" x="160" y="1408" name="inst_0B9142DA" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="spawn_point0" x="224" y="1408" name="inst_F6B8ACBF" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="spawn_point0" x="288" y="1408" name="inst_248A1AA3" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="spawn_point1" x="2208" y="1408" name="inst_A2DC16C7" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="spawn_point1" x="2272" y="1408" name="inst_C7DC1BB4" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="spawn_point1" x="2336" y="1408" name="inst_7C8681B9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="spawn_point0" x="142" y="1408" name="inst_0B9142DA" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="spawn_point0" x="222" y="1422" name="inst_F6B8ACBF" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="spawn_point0" x="312" y="1410" name="inst_248A1AA3" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="spawn_point1" x="2190" y="1398" name="inst_A2DC16C7" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="spawn_point1" x="2280" y="1422" name="inst_C7DC1BB4" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="spawn_point1" x="2376" y="1410" name="inst_7C8681B9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="spawn_point_neutral" x="128" y="960" name="inst_082776D7" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="spawn_point_neutral" x="2368" y="960" name="inst_7BFD23FC" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="spawn_point_neutral" x="1792" y="1280" name="inst_1541FAE2" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>

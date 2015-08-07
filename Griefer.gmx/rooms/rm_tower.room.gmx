@@ -3,8 +3,8 @@
   <caption></caption>
   <width>2688</width>
   <height>2688</height>
-  <vsnap>64</vsnap>
-  <hsnap>64</hsnap>
+  <vsnap>4</vsnap>
+  <hsnap>4</hsnap>
   <isometric>0</isometric>
   <speed>30</speed>
   <persistent>0</persistent>
@@ -16,7 +16,7 @@
   <clearDisplayBuffer>-1</clearDisplayBuffer>
   <makerSettings>
     <isSet>-1</isSet>
-    <w>1014</w>
+    <w>1004</w>
     <h>600</h>
     <showGrid>0</showGrid>
     <showObjects>-1</showObjects>
@@ -27,8 +27,8 @@
     <deleteUnderlyingObj>0</deleteUnderlyingObj>
     <deleteUnderlyingTiles>0</deleteUnderlyingTiles>
     <page>4</page>
-    <xoffset>69</xoffset>
-    <yoffset>289</yoffset>
+    <xoffset>2631</xoffset>
+    <yoffset>1921</yoffset>
   </makerSettings>
   <backgrounds>
     <background visible="0" foreground="0" name="" x="0" y="0" htiled="-1" vtiled="-1" hspeed="0" vspeed="0" stretch="0"/>
@@ -81,9 +81,7 @@
     <instance objName="block" x="576" y="1728" name="inst_6196FFE4" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="weapon_drop_tickler" x="1340" y="660" name="inst_D650CD79" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="weapon_drop_smg" x="1018" y="2578" name="inst_24688158" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="spawn_point_neutral" x="320" y="1664" name="inst_A8AC3149" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="spawn_point_neutral" x="2516" y="1286" name="inst_B77C5710" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="spawn_point_neutral" x="2368" y="1664" name="inst_549EFE28" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="block" x="960" y="1728" name="inst_ABFC2D06" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="block" x="1024" y="1728" name="inst_CC2C1F4A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="block" x="0" y="1792" name="inst_6E71521B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
@@ -181,14 +179,14 @@
     <instance objName="wedge_left_mirrored" x="64" y="-64" name="inst_DAEFA203" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="wedge_left_mirrored" x="128" y="-128" name="inst_443BBEC7" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="wedge_left_mirrored" x="192" y="-192" name="inst_E2DA732A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="spawn_point0" x="192" y="1664" name="inst_99A50EB0" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="spawn_point0" x="152" y="1668" name="inst_99A50EB0" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="wedge_left" x="64" y="1664" name="inst_F45825FA" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="block" x="1536" y="1728" name="inst_1D54F2B8" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="block" x="1600" y="1728" name="inst_BCB77B98" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="block" x="1664" y="1728" name="inst_4290CB26" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="spawn_point1" x="2432" y="1664" name="inst_0D57EC9D" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="spawn_point1" x="2496" y="1664" name="inst_97E69B8C" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="spawn_point0" x="256" y="1664" name="inst_97B24192" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="spawn_point1" x="2404" y="1676" name="inst_0D57EC9D" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="spawn_point1" x="2508" y="1676" name="inst_97E69B8C" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="spawn_point0" x="268" y="1672" name="inst_97B24192" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="block" x="192" y="1472" name="inst_9C61E993" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="block" x="128" y="1472" name="inst_E26DDC87" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="block" x="64" y="1472" name="inst_115D944B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
@@ -536,8 +534,8 @@
     <instance objName="block" x="1728" y="2560" name="inst_7B97DD86" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="spawn_point_generic" x="2394" y="2554" name="inst_FBCC7651" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="spawn_point_generic" x="286" y="2558" name="inst_9FB2D54B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="spawn_point0" x="384" y="1664" name="inst_44EB09DF" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="spawn_point1" x="2304" y="1664" name="inst_1301EE0E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="spawn_point0" x="416" y="1672" name="inst_44EB09DF" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="spawn_point1" x="2284" y="1672" name="inst_1301EE0E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="tiles_desert" x="128" y="1728" w="64" h="64" xo="72" yo="2" id="10014427" name="inst_76642F05" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>

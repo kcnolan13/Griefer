@@ -3085,7 +3085,7 @@ for (var i=0; i&lt;instance_number(avatar); i++)
         
         var xoff = 16*string_length(string(objVarRead(ID,"pName")))/2
         draw_set_alpha(1)
-        draw_namerank(objVarRead(ID,"pName"), objVarRead(ID,"rank"), ID.x - xoff,ID.y - yoff, 1, c_black)
+        draw_namerank(capwords(objVarRead(ID,"pName")), objVarRead(ID,"rank"), ID.x - xoff,ID.y - yoff, 1, c_black)
         //draw_text(ID.x,ID.y - 64*3,objVarRead(ID,"pName"))
         
         if DEBUG
@@ -3100,7 +3100,7 @@ for (var i=0; i&lt;instance_number(avatar); i++)
         }
         
         //DRAW THE PLAYER POPUP
-        draw_player_popup_ext(cursor.x,cursor.y,objVarRead(av_popup,"pName"),objVarRead(av_popup,"rank"),objVarRead(av_popup,"global_rank"),objVarRead(av_popup,"true_skill"),
+        draw_player_popup_ext(cursor.x,cursor.y,capwords(objVarRead(av_popup,"pName")),objVarRead(av_popup,"rank"),objVarRead(av_popup,"global_rank"),objVarRead(av_popup,"true_skill"),
             objVarRead(av_popup,"helmet0"),objVarRead(av_popup,"hat0"),1,is_bot(av_popup))
         
         //GET CLICKED!
@@ -3572,6 +3572,20 @@ show_cout ^= 1
     <event eventtype="9" enumb="46">
       <action>
         <libid>1</libid>
+        <id>425</id>
+        <kind>4</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+      </action>
+      <action>
+        <libid>1</libid>
         <id>603</id>
         <kind>7</kind>
         <userelative>0</userelative>
@@ -3592,20 +3606,6 @@ with player
 </string>
           </argument>
         </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>425</id>
-        <kind>4</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>0</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
       </action>
       <action>
         <libid>1</libid>
@@ -3722,6 +3722,20 @@ if instance_exists(local_player)
       </action>
     </event>
     <event eventtype="9" enumb="33">
+      <action>
+        <libid>1</libid>
+        <id>425</id>
+        <kind>4</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+      </action>
       <action>
         <libid>1</libid>
         <id>603</id>

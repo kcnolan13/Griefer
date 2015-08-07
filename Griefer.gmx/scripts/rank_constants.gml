@@ -10,7 +10,7 @@ val_end = 50
 sat_normal = 175
 
 hue_start = 70
-hue_incr = 8
+hue_incr = 8/2
 hue = hue_start
 
 global.rank_interval = 3

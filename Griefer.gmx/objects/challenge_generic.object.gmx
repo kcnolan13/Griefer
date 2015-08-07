@@ -153,7 +153,7 @@ if progress_varname != "" and nth_frame(auto_frame_offset) //reduce frames check
     var grav = net_manager.stat_gravatar
     if instance_exists(grav) and objVarRead(grav,"pName") != objVarRead(net_manager,"pName")
     {
-        printf(":::WARNING: cannot complete challenge while looking at another player ("+string(objVarRead(grav,"pName"))+")'s stats")
+        //printf(":::WARNING: cannot complete challenge while looking at another player ("+string(objVarRead(grav,"pName"))+")'s stats")
     }
     else //yes you can complete this challenge!
     {
@@ -508,7 +508,7 @@ if room = rm_menu or room = rm_lobby
                         surface_reset_target()
                         
                         draw_set_alpha(1)
-                        draw_surface(surf_popup,other.left+(global.challenge_popup_width-global.popup_width),other.top)
+                        draw_surface(surf_popup,other.right-global.popup_width,other.top)
                         
                         var t = global.mod_descriptions[mod_ind]
                         var tcol = c_white

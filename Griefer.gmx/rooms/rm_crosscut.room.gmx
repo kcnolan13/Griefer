@@ -3,8 +3,8 @@
   <caption></caption>
   <width>2624</width>
   <height>2048</height>
-  <vsnap>64</vsnap>
-  <hsnap>64</hsnap>
+  <vsnap>6</vsnap>
+  <hsnap>6</hsnap>
   <isometric>0</isometric>
   <speed>30</speed>
   <persistent>0</persistent>
@@ -27,8 +27,8 @@
     <deleteUnderlyingObj>0</deleteUnderlyingObj>
     <deleteUnderlyingTiles>0</deleteUnderlyingTiles>
     <page>4</page>
-    <xoffset>-29</xoffset>
-    <yoffset>14</yoffset>
+    <xoffset>1573</xoffset>
+    <yoffset>110</yoffset>
   </makerSettings>
   <backgrounds>
     <background visible="0" foreground="0" name="" x="0" y="0" htiled="-1" vtiled="-1" hspeed="0" vspeed="0" stretch="0"/>
@@ -724,12 +724,12 @@
     <instance objName="wedge_left" x="1152" y="1920" name="inst_EBE97324" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="wedge_left" x="2048" y="1856" name="inst_AC0D3E66" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="wedge_left" x="2112" y="1920" name="inst_DD598125" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="spawn_point0" x="96" y="352" name="inst_A40FCD1A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="spawn_point0" x="160" y="416" name="inst_9A37BE86" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="spawn_point0" x="224" y="352" name="inst_DE5B10B6" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="spawn_point1" x="2464" y="416" name="inst_C2D33DA8" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="spawn_point1" x="2528" y="352" name="inst_FB041E08" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="spawn_point1" x="2400" y="352" name="inst_A9EB8B1F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="spawn_point0" x="156" y="390" name="inst_A40FCD1A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="spawn_point0" x="276" y="282" name="inst_9A37BE86" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="spawn_point0" x="420" y="180" name="inst_DE5B10B6" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="spawn_point1" x="2346" y="282" name="inst_C2D33DA8" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="spawn_point1" x="2466" y="390" name="inst_FB041E08" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="spawn_point1" x="2208" y="192" name="inst_A9EB8B1F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="weapon_drop_long" x="318" y="1948" name="inst_65A8EB1F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="weapon_drop_long" x="2238" y="1952" name="inst_8D0B1298" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="weapon_drop_sticky" x="1754" y="662" name="inst_94FED06E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>

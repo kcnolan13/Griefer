@@ -19,18 +19,22 @@ if show_bbp
         with action_word
         {
             if is_xp or string_count("Experience",txt) > 0
+            {
                 y -= 32
+                draw_y -= 32
+            }
         }
     }
     
     bbp = boom_boom_pow("+"+string(amt)+" Experience",global.action_word_color)
-    bbp.draw_x = view_xview+view_wview-XPBAR_WIDTH/2-XPBAR_RIGHT-96
-    bbp.draw_y = view_yview+view_hview-96-XPBAR_BOTTOM
+    bbp.draw_x = WVIEW-XPBAR_WIDTH/2-XPBAR_RIGHT-96
+    bbp.draw_y = HVIEW-96-XPBAR_BOTTOM
     bbp.x = bbp.draw_x
     bbp.y = bbp.draw_y
     bbp.stick_2view = true
     bbp.fnt = fnt_hud
     bbp.is_xp = true
+    bbp.fade_time = 3.5*room_speed
 }
 
 if show_progress

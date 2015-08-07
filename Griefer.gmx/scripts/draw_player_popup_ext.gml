@@ -97,7 +97,7 @@ draw_set_halign(fa_left)
 draw_set_valign(fa_top)
 var nr_xoff = left+net_manager.armory_ysep*3.3+net_manager.armory_sl+txt_pad+10
 var nr_yoff = top+txt_pad+8
-draw_namerank(pname,rank,nr_xoff,nr_yoff,1,c_white)
+draw_namerank(capwords(pname),rank,nr_xoff,nr_yoff,1,c_white)
 
 //draw rank name
 draw_set_font(fnt_hud)

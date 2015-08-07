@@ -2,7 +2,7 @@
 var rank = argument0
 var rar = random(1)
 var rar_index = -1
-rar = step_rand(rar,rank)
+//rar = step_rand(rar,rank)
 
 if rar < global.prob_rarity[5]
   rar_index = 5

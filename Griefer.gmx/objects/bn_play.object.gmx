@@ -209,7 +209,7 @@ if net_manager.menu_mode != "lottery_steal" and not instance_exists(bn_tab) and 
         ID.val = val
         
         ID.text_halign = fa_left
-        ID.text_xoff = 72+5
+        ID.text_xoff = 72
         ID.image = imgs[i]
         
         birth_delay += 3

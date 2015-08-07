@@ -42,8 +42,8 @@ highlightable = true
 ready = false
 ready_text = "Ready"
 not_ready_text = "Not Ready"
-text_color_ready = web_hsv(150,100,100)
-text_color_not_ready = web_hsv(0,0,45)
+text_color_ready = web_hsv(150,100,75)
+text_color_not_ready = web_hsv(0,60,75)
 
 width = 64*3.5
 height = 64
@@ -52,8 +52,8 @@ if ready
     text = ready_text 
 else text = not_ready_text
 
-ready_font = fnt_mod
-not_ready_font = fnt_hud_big
+ready_font = fnt_ready
+not_ready_font = fnt_ready
 
 alarm[0] = 1
 
@@ -149,11 +149,15 @@ else
     if menmode() = "lobby"
     {
         //jump to a decent position below the avatar
-        if abs(bound_avatar.x - objVarRead(bound_avatar,"dude_x") &lt; 10) and abs(bound_avatar.y - objVarRead(bound_avatar,"dude_y") &lt; 10)
+        if abs(bound_avatar.x - objVarRead(bound_avatar,"dude_x") &lt; 10) and abs(bound_avatar.y - objVarRead(bound_avatar,"dude_y") &lt; 10) and bound_avatar.visible and objVarRead(bound_avatar,"visible")
         {
+            var somey = 64*2.95
+            if instance_number(avatar) &lt; 3
+                somey = 64*3.2
+                
             visible = true
             x = bound_avatar.x
-            y = bound_avatar.y+64*3.1
+            y = bound_avatar.y+somey
             modal_aligns()
             depth = bound_avatar.depth - 5
         }
@@ -169,7 +173,7 @@ else
             ready = objVarRead(bound_avatar,"ready")
         }
         
-        if net_manager.match_countdown
+        if net_manager.lobby_match_countdown
         {
             objVarWrite(bound_avatar,"ready",ready)
             ready = true
@@ -259,6 +263,7 @@ with avatar
 
 if start_match and not sent_ready
 {
+    sent_ready = true
     with bn_ready sent_ready = true
     printf("::: SENDING START MATCH NOW")
     sendMessageReal("everyone_ready",FL_NORMAL)
