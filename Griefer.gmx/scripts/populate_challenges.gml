@@ -108,6 +108,12 @@ blah.progress_varname = "20ks"
 blah.xp = 10000
 update_acc_chal_needed("20ks",1)
 
+blah = instantiate_challenge(spr_pimp_hat, "Pimp Hat", "Earn "+string(25)+' "'+acc_name("mvp")+'" '+global.accolade_name+"s")
+blah.is_competitive = true blah.is_challenge = false
+blah.progress_varname = "mvp"
+blah.xp = 10000
+update_acc_chal_needed("mvp",25)
+
 //GENERAL CHALLENGES (COMP OR BOT)
 
 und = instantiate_challenge(spr_underwear_helmet, global.underwear_name, "Die "+string(underwear_deaths)+" Times In One Match")
@@ -123,6 +129,16 @@ blah = instantiate_challenge(spr_santa_hat, "Santa Hat", "Earn "+string(santa_as
 blah.progress_varname = "3ass"
 blah.xp = 4000
 update_acc_chal_needed("3ass",santa_assists)
+
+blah = instantiate_challenge(spr_halo_hat, "Halo", "Earn "+string(5)+' "'+acc_name("5ass")+'" '+global.accolade_name+"s")
+blah.progress_varname = "5ass"
+blah.xp = 5000
+update_acc_chal_needed("5ass",5)
+
+blah = instantiate_challenge(spr_sombrero_hat, "Sombrero", "Earn "+string(5)+' "'+acc_name("flash_bandicoot")+'" '+global.accolade_name+"s")
+blah.progress_varname = "flash_bandicoot"
+blah.xp = 5000
+update_acc_chal_needed("flash_bandicoot",5)
 
 //BOT MODE EXCLUSIVE SUBSECTION OF GENERAL
 

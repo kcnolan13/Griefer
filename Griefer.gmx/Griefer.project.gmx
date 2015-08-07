@@ -256,6 +256,9 @@
         <sprite>sprites\spr_crown_hat</sprite>
         <sprite>sprites\spr_top_hat</sprite>
         <sprite>sprites\spr_tan_brim_hat</sprite>
+        <sprite>sprites\spr_pimp_hat</sprite>
+        <sprite>sprites\spr_night_hat</sprite>
+        <sprite>sprites\spr_halo_hat</sprite>
         <sprite>sprites\spr_black_beanie_hat</sprite>
         <sprite>sprites\spr_military_hat</sprite>
         <sprite>sprites\spr_blue_hat</sprite>

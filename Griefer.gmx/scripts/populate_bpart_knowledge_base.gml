@@ -93,7 +93,7 @@ global.smallvisor2_name = "Gravemaker Helmet"
 knowledge_base_add(spr_smallvisor_helmet, "Smallvisor Helmet", 2, global.default_scale, true, global.src_lotto,"helmet")
 knowledge_base_add(spr_smallvisor2_helmet, global.smallvisor2_name, 3, global.default_scale, true, global.src_challenge,"helmet")
 
-knowledge_base_add(spr_pyramid_helmet, "Pyramid Head", 4, global.default_scale, true, global.src_challenge,"helmet")
+knowledge_base_add(spr_pyramid_helmet, "Pyramid Head", 5, global.default_scale, true, global.src_challenge,"helmet")
     set_hatless(spr_pyramid_helmet)
 
 global.rvisor_name = "Smooth Operator Helmet"
@@ -111,14 +111,16 @@ knowledge_base_add(spr_gashog_helmet, global.gashog_name, 4, global.default_scal
 knowledge_base_add(spr_smooth_shin, "Smooth", 1, global.default_scale, true, global.src_lotto,"shin")
 
 //hats
-knowledge_base_add(spr_hat2, "Flamingo Hat", 3, global.default_scale, true, global.src_lotto,"hat")
+knowledge_base_add(spr_hat2, "Flamingo Cap", 3, global.default_scale, true, global.src_lotto,"hat")
 knowledge_base_add(spr_beret_hat, "Beret", 2, global.default_scale, true, global.src_lotto,"hat")
-knowledge_base_add(spr_sombrero_hat, "Sombrero", 4, global.default_scale, true, global.src_lotto,"hat")
+knowledge_base_add(spr_sombrero_hat, "Sombrero", 4, global.default_scale, true, global.src_challenge,"hat")
 knowledge_base_add(spr_red_cap_hat, "Fez", 3, global.default_scale, true, global.src_lotto,"hat")
 knowledge_base_add(spr_party_hat, "Party Hat", 3, global.default_scale, true, global.src_lotto,"hat")
 knowledge_base_add(spr_crown_hat, "Your Highness", 4, global.default_scale, true, global.src_lotto,"hat")
 knowledge_base_add(spr_top_hat, "Lincolnator", 3, global.default_scale, true, global.src_lotto,"hat")
-knowledge_base_add(spr_tan_brim_hat, "Boater", 3, global.default_scale, true, global.src_lotto,"hat")
+knowledge_base_add(spr_tan_brim_hat, "Boater Hat", 3, global.default_scale, true, global.src_lotto,"hat")
+knowledge_base_add(spr_night_hat, "Night Hat", 3, global.default_scale, true, global.src_lotto,"hat")
+knowledge_base_add(spr_halo_hat, "Halo", 4, global.default_scale, true, global.src_challenge,"hat")
 knowledge_base_add(spr_black_beanie_hat, "Black Beanie", 2, global.default_scale, true, global.src_lotto,"hat")
 knowledge_base_add(spr_military_hat, "Military Cap", 2, global.default_scale, true, global.src_lotto,"hat")
 knowledge_base_add(spr_blue_hat, "Classic Blue", 2, global.default_scale, true, global.src_lotto,"hat")
@@ -127,6 +129,7 @@ knowledge_base_add(spr_admiral_hat, "Admiral Hat", 3, global.default_scale, true
 knowledge_base_add(spr_aviator_hat, "Aviator Hat", 3, global.default_scale, true, global.src_lotto,"hat")
 knowledge_base_add(spr_bunny_hat, "Bunny Hat", 0, global.default_scale, true, global.src_lotto,"hat")
 knowledge_base_add(spr_santa_hat, "Santa Hat", 4, global.default_scale, true, global.src_challenge,"hat")
+knowledge_base_add(spr_pimp_hat, "Pimp Hat", 5, global.default_scale, true, global.src_challenge,"hat")
 
 //shoulders
 knowledge_base_add(spr_zoidberg_shoulder, "Ring Shoulder", 2, global.default_scale, true, global.src_lotto,"shoulder")

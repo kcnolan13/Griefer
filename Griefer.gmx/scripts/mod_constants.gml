@@ -29,6 +29,12 @@ global.mod_vars[i] = "blood_color"
 global.mod_vals[i] = make_colour_hsv(  304   *255/360,    100    *255/100,  100   *255/100)
 global.mod_descriptions[i] = "Bleeds   Pink"
 i++
+global.mod_limbvars[i] = "hat0"
+global.mod_limbs[i] = spr_pimp_hat
+global.mod_vars[i] = "blood_color"
+global.mod_vals[i] = make_colour_hsv(  304   *255/360,    100    *255/100,  100   *255/100)
+global.mod_descriptions[i] = "Bleeds   Pink"
+i++
 global.mod_limbvars[i] = "helmet0"
 global.mod_limbs[i] = spr_glow_helmet
 global.mod_vars[i] = "blood_color"
