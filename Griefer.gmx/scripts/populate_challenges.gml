@@ -38,7 +38,7 @@ blah.xp = wep_chal_scaler*acc_chal_needed("spr_boom")
 blah = instantiate_challenge(spr_boltok, global.boltok, "Get "+string(acc_chal_needed("spr_boltok")) + " Kills with the "+string(global.boltok))
 blah.progress_varname = "spr_boltok" blah.is_competitive = true blah.is_challenge = false
 blah.xp = wep_chal_scaler*acc_chal_needed("spr_boltok")
-blah = instantiate_challenge(spr_smoke, global.smoke, "Throw "+string(acc_chal_needed("spr_smoke")) + " "+string(global.smoke)+"s")
+blah = instantiate_challenge(spr_smoke, global.smoke, "Pop Smoke "+string(acc_chal_needed("spr_smoke")) + " Times")
 blah.progress_varname = "spr_smoke" blah.is_competitive = true blah.is_challenge = false
 blah.xp = wep_chal_scaler*acc_chal_needed("spr_smoke")
 blah = instantiate_challenge(spr_vulcan, global.vulcan, "Get "+string(acc_chal_needed("spr_vulcan")) + " Kills with the "+string(global.vulcan))
@@ -65,7 +65,7 @@ blah.xp = wep_chal_scaler*acc_chal_needed("spr_ink")
 blah = instantiate_challenge(spr_flame, global.flame, "Get "+string(acc_chal_needed("spr_flame")) + " Kills with the "+string(global.flame))
 blah.progress_varname = "spr_flame" blah.is_competitive = true blah.is_challenge = false
 blah.xp = wep_chal_scaler*acc_chal_needed("spr_flame")
-blah = instantiate_challenge(spr_snare, global.snare, "Get "+string(acc_chal_needed("spr_snare")) + " Kills with the "+string(global.snare))
+blah = instantiate_challenge(spr_snare, global.snare, "Trap "+string(acc_chal_needed("spr_snare")) + " Players with the "+string(global.snare))
 blah.progress_varname = "spr_snare" blah.is_competitive = true blah.is_challenge = false
 blah.xp = wep_chal_scaler*acc_chal_needed("spr_snare")
 blah = instantiate_challenge(spr_sticky, global.sticky, "Get "+string(acc_chal_needed("spr_sticky")) + " Kills with the "+string(global.sticky))

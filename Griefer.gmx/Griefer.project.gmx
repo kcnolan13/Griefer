@@ -1918,7 +1918,7 @@
     <constant name="C_JUMP">2</constant>
     <constant name="C_MOVE_RIGHT">1</constant>
     <constant name="C_MOVE_LEFT">0</constant>
-    <constant name="BOT_XP_SCALER">1</constant>
+    <constant name="BOT_XP_SCALER">0.25</constant>
     <constant name="XPBAR_HEIGHT">16</constant>
     <constant name="XPBAR_WIDTH">64*5</constant>
     <constant name="XPBAR_BOTTOM">16</constant>

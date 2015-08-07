@@ -34,6 +34,9 @@ audio(snd_snare,2)
 counter = 0
 part_off = 64*1.5
 
+pnames_snared = 0
+snare_index = 0
+
 speed_multiplier = random_range(0.12,0.15)
 
 snare_radius = 64*3.5
@@ -182,8 +185,18 @@ if varRead("local")
             {
                 if objVarRead(dat_playa,"speed_multiplier") = 1
                 {
-                    if dat_playa != net_manager.local_player and find_player(varRead("senderId")) = net_manager.local_player
+                    var do_snare = true
+                    for (var i=0; i&lt;getLength(pnames_snared); i++)
                     {
+                        if objVarRead(dat_playa,"pName") = pnames_snared[i]
+                            do_snare = false
+                    }
+                    
+                    if do_snare and (dat_playa != net_manager.local_player and find_player(varRead("senderId")) = net_manager.local_player)
+                    {
+                        pnames_snared[snare_index] = objVarRead(dat_playa,"pName")
+                        snare_index++
+                        
                         challenge_manager.snare_kills ++
                         //update snare totals
                         increment_weapon_accolade("spr_snare")

@@ -3,7 +3,7 @@ var ar = argument0
 
 if not is_array(ar)
 {
-    printf("ERROR: length() not passed an array")
+    printf("WARNING: getLength() not passed an array")
     return 0
 }
 
