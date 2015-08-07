@@ -37,7 +37,7 @@ draw_set_font(global.table_font)
 
 //draw the player's name and rank and whatnot
 if pname != "" and prank != -99
-    draw_namerank(pname, prank, xdraw+5, ydraw+global.row_height/4-4, global.table_namerank_scale, c_white)
+    draw_namerank(capwords(pname), prank, xdraw+5, ydraw+global.row_height/4-4, global.table_namerank_scale, c_white)
 
 //draw the text fields passed to this row
 if prank != -99

@@ -330,7 +330,7 @@ while (objUpdatesWaiting() and wait_counter < 1000)
         printf("payload is real: "+string(val))
     }
     
-    if netvar = "pNum" or netvar = "true_skill" or netvar = "global_rank" or netvar = "lobby_wait_time"
+    if netvar = "pNum" or netvar = "true_skill" or netvar = "global_rank" //or netvar = "lobby_wait_time"
         printf("::: IMPORTANT UPDATE for "+oid_str+" ( "+string(obj_index)+" : "+string(unique_id)+" ) ... "+string(netvar)+" = "+string(val))
     
     printf("{O}: reading objUpdate flag")

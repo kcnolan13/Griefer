@@ -104,9 +104,9 @@ update_acc_chal_needed("cant_touch_dis",15)
 
 blah = instantiate_challenge(spr_pyramid_helmet, "Pyramid Head", "Earn "+string(1)+' "'+acc_name("25ks")+'" '+global.accolade_name)
 blah.is_competitive = true blah.is_challenge = false
-blah.progress_varname = "20ks"
+blah.progress_varname = "25ks"
 blah.xp = 10000
-update_acc_chal_needed("20ks",1)
+update_acc_chal_needed("25ks",1)
 
 blah = instantiate_challenge(spr_pimp_hat, "Pimp Hat", "Earn "+string(25)+' "'+acc_name("mvp")+'" '+global.accolade_name+"s")
 blah.is_competitive = true blah.is_challenge = false

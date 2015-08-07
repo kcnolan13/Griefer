@@ -91,7 +91,7 @@ if dgrid != grid_header
         varWrite("helmet0",helm)
         varWrite("hat0",hat)
         draw_avatar_head(rxdraw+3+24,rydraw+global.row_height/4-4+24,id,0,0.375,1,FL_NOBAR)
-        draw_namerank(pname, prank, rxdraw+25+xoff_causeav, rydraw+global.row_height/4-1, global.table_namerank_scale, c_white)
+        draw_namerank(capwords(pname), prank, rxdraw+25+xoff_causeav, rydraw+global.row_height/4-1, global.table_namerank_scale, c_white)
     }
 }
 else

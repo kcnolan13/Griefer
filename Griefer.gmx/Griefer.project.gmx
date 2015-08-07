@@ -1394,12 +1394,12 @@
       <script>scripts\match_starting.gml</script>
     </scripts>
     <scripts name="general utilities">
+      <script>scripts\printf.gml</script>
       <script>scripts\hash_string.gml</script>
       <script>scripts\keep_view_in_bounds.gml</script>
       <script>scripts\score_grid_valid.gml</script>
       <script>scripts\inside_room.gml</script>
       <script>scripts\in_view.gml</script>
-      <script>scripts\printf.gml</script>
       <script>scripts\rtime.gml</script>
       <script>scripts\modal_highlighted.gml</script>
       <script>scripts\round_nearest.gml</script>

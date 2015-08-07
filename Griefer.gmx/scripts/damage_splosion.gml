@@ -101,7 +101,7 @@ else if object_index = splosion_flame or object_index = splosion_flame_instant
             
             if object_index = splosion_flashbang
             {
-                if not is_local_teammate(dat_playa) and dmg > 50 and from_player = net_manager.local_player
+                if not is_local_teammate(dat_playa) and dmg > 50 and from_player = myPlayer() and dat_playa != myPlayer()
                 {   
                     //award points for flash
                     award_points = ceil(POINTS_FLASH*dmg/100)

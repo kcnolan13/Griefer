@@ -1035,7 +1035,7 @@ if do_zoom
             <string>///fill with random gear if you want
 if keyboard_check(vk_control) and keyboard_check(vk_alt) and keyboard_check(vk_backspace)
 {
-    fill_with_random_gear()
+   // fill_with_random_gear()
 }
 </string>
           </argument>
@@ -3695,6 +3695,20 @@ splat_constants(seed)
     <event eventtype="9" enumb="35">
       <action>
         <libid>1</libid>
+        <id>425</id>
+        <kind>4</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+      </action>
+      <action>
+        <libid>1</libid>
         <id>603</id>
         <kind>7</kind>
         <userelative>0</userelative>
@@ -3709,7 +3723,9 @@ splat_constants(seed)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>bot_override ^= 1
+            <string>///bot override
+
+bot_override ^= 1
 
 if instance_exists(local_player)
 {
