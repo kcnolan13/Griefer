@@ -91,31 +91,31 @@ wep_kills_needed = 1
 evil_row_num = row_num
 init_grid_row('spr_flame','text','descr',acc_dub_kill,0,25*wep_kills_needed,25*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
 init_grid_row('spr_ink','text','descr',acc_dub_kill,0,25*wep_kills_needed,25*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_snare','text','descr',acc_dub_kill,0,25*wep_kills_needed,25*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_smoke','text','descr',acc_dub_kill,0,50*wep_kills_needed,50*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_flashbang','text','descr',acc_dub_kill,0,50*wep_kills_needed,50*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_pistol','text','descr',acc_dub_kill,0,50*wep_kills_needed,50*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_carbine','text','descr',acc_dub_kill,0,25*wep_kills_needed,25*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_rifle','text','descr',acc_dub_kill,0,75*wep_kills_needed,75*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_tickler','text','descr',acc_dub_kill,0,25*wep_kills_needed,25*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_smg','text','descr',acc_dub_kill,0,25*wep_kills_needed,25*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_snare','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_smoke','text','descr',acc_dub_kill,0,10*wep_kills_needed,10*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_flashbang','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_pistol','text','descr',acc_dub_kill,0,5*wep_kills_needed,5*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_carbine','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_rifle','text','descr',acc_dub_kill,0,10*wep_kills_needed,10*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_tickler','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_smg','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
 init_grid_row('spr_sticky','text','descr',acc_dub_kill,0,25*wep_kills_needed,25*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_lmg','text','descr',acc_dub_kill,0,25*wep_kills_needed,25*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_longshot','text','descr',acc_dub_kill,0,25*wep_kills_needed,25*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_vulcan','text','descr',acc_dub_kill,0,25*wep_kills_needed,25*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_torque','text','descr',acc_dub_kill,0,25*wep_kills_needed,25*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_thumper','text','descr',acc_dub_kill,0,25*wep_kills_needed,25*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_boltok','text','descr',acc_dub_kill,0,25*wep_kills_needed,25*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_shotgun','text','descr',acc_dub_kill,0,100*wep_kills_needed,100*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_stomper','text','descr',acc_dub_kill,0,25*wep_kills_needed,25*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_boom','text','descr',acc_dub_kill,0,25*wep_kills_needed,25*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_frag','text','descr',acc_dub_kill,0,25*wep_kills_needed,25*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_rocket','text','descr',acc_dub_kill,0,25*wep_kills_needed,25*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_double','text','descr',acc_dub_kill,0,25*wep_kills_needed,25*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_wep1','text','descr',acc_dub_kill,0,25*wep_kills_needed,25*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_wep2','text','descr',acc_dub_kill,0,25*wep_kills_needed,25*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_wep3','text','descr',acc_dub_kill,0,25*wep_kills_needed,25*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_wep4','text','descr',acc_dub_kill,0,25*wep_kills_needed,25*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_lmg','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_longshot','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_vulcan','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_torque','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_thumper','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_boltok','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_shotgun','text','descr',acc_dub_kill,0,50*wep_kills_needed,50*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_stomper','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_boom','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_frag','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_rocket','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_double','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_wep1','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_wep2','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_wep3','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_wep4','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
 </string>
           </argument>
         </arguments>

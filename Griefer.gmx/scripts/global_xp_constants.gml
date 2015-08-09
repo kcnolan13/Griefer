@@ -3,14 +3,38 @@
 var rank_xp_mult = 1.5
 global.rank_xp[0] = 0
 global.rank_xp[1] = 1000
-global.rank_xp[2] = 1500
-global.rank_xp[3] = 2000
-global.rank_xp[4] = 2500
-global.rank_xp[5] = 3000
 
-for (var i=6; i<getLength(global.rank_names); i++)
+var needed = 500
+var total_xp = 0
+
+printf("::: XP["+string(0)+"],"+string(global.rank_xp[0])+", XP for Level "+string(0)+" : "+string(global.rank_names[0])) 
+printf("::: XP["+string(1)+"],"+string(global.rank_xp[1])+", XP for Level "+string(1)+" : "+string(global.rank_names[1])) 
+
+
+for (var i=2; i<getLength(global.rank_names); i++)
 {
-    global.rank_xp[i] = 2*global.rank_xp[i-1]+300  //61*305*5/2
+    global.rank_xp[i] = global.rank_xp[i-1]+needed  //61*305*5/2
+    total_xp = global.rank_xp[i]
+    printf("::: XP["+string(i)+"],"+string(total_xp)+", XP for Level "+string(i)+" : "+string(global.rank_names[i])) 
+    
+    if (i-1) mod 3 = 0
+    {
+        needed += 100
+        
+        if (i-1) mod 6 = 0
+        {
+            if i <= 9
+                needed += 25
+            else if i <= 29
+                needed += 100
+            else if i <= 39
+                needed += 150
+            else if  i <= 49
+                needed += 200
+            else
+                needed += 350
+        }
+    }
 }
 
 global.num_ranks = getLength(global.rank_names)

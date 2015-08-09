@@ -57,15 +57,16 @@ knowledge_base_add(spr_boxer_helmet, "Boxer Helmet", 2, global.default_scale, tr
 knowledge_base_add(spr_scanner_helmet, "Scanner Helmet", 2, global.default_scale, true, global.src_lotto,"helmet")
 knowledge_base_add(spr_breather_helmet, "Rebreather Helmet", 1, global.default_scale, true, global.src_lotto,"helmet")
 knowledge_base_add(spr_exgol_helmet, "Exgol Helmet", 1, global.default_scale, true, global.src_lotto,"helmet")
-knowledge_base_add(spr_grenadier_helmet, "Gol Grenadier Helmet", 1, global.default_scale, true, global.src_lotto,"helmet")
+knowledge_base_add(spr_grenadier_helmet, "Gol Grenadier Helmet", 3, global.default_scale, true, global.src_lotto,"helmet")
 knowledge_base_add(spr_wraith_helmet, "Wraith Helmet", 1, global.default_scale, true, global.src_lotto,"helmet")
 knowledge_base_add(spr_ahunch_helmet, "War Mongrel", 5, global.default_scale, true, global.src_challenge,"helmet")
     set_hatless(spr_ahunch_helmet)
 knowledge_base_add(spr_bhunch_helmet, "Hell Hound", 5, global.default_scale, true, global.src_challenge,"helmet")
     set_hatless(spr_bhunch_helmet)
 global.mantel2_name = "Variant Helmet"
-knowledge_base_add(spr_mantel2_helmet, global.mantel2_name, 3, global.default_scale, true, global.src_lotto,"helmet")
-knowledge_base_add(spr_mantel_helmet, "Mantel Helmet", 3, global.default_scale, true, global.src_lotto,"helmet")
+knowledge_base_add(spr_mantel2_helmet, global.mantel2_name, 3, global.default_scale, true, global.src_challenge,"helmet")
+global.mantel_name = "Mantel Helmet"
+knowledge_base_add(spr_mantel_helmet, global.mantel_name, 3, global.default_scale, true, global.src_challenge,"helmet")
 global.dred_name = "Dread Helmet"
 knowledge_base_add(spr_dred_helmet, global.dred_name, 4, global.default_scale, true, global.src_challenge,"helmet")
 global.tadpole_name = "Tadpole Helmet"
@@ -81,7 +82,7 @@ knowledge_base_add(spr_hound2_helmet, global.hound2_name, 4, global.default_scal
     set_hatless(spr_hound_helmet)
     set_hatless(spr_hound2_helmet)
 global.fanatic_name = "Fanatic Helmet"
-knowledge_base_add(spr_rvisor2_helmet, global.fanatic_name, 4, global.default_scale, true, global.src_challenge,"helmet")
+knowledge_base_add(spr_rvisor2_helmet, global.fanatic_name, 4, global.default_scale, true, global.src_lotto,"helmet")
 global.pvisor_name = "Deadshot Helmet"
 knowledge_base_add(spr_pvisor_helmet, "Pvisor Helmet", 3, global.default_scale, true, global.src_challenge,"helmet")
 global.pvisor2_name = "Headhunter Helmet"
@@ -89,14 +90,14 @@ knowledge_base_add(spr_pvisor2_helmet, global.pvisor2_name, 3, global.default_sc
 global.roman_name = "Roman Helmet"
 knowledge_base_add(spr_roman_helmet, global.roman_name, 4, global.default_scale, true, global.src_challenge,"helmet")
     set_hatless(spr_roman_helmet)
-global.smallvisor2_name = "Gravemaker Helmet"
+global.smallvisor2_name = "Candy-Cane Helmet"
 knowledge_base_add(spr_smallvisor_helmet, "Smallvisor Helmet", 2, global.default_scale, true, global.src_lotto,"helmet")
-knowledge_base_add(spr_smallvisor2_helmet, global.smallvisor2_name, 3, global.default_scale, true, global.src_challenge,"helmet")
+knowledge_base_add(spr_smallvisor2_helmet, global.smallvisor2_name, 3, global.default_scale, true, global.src_lotto,"helmet")
 
 knowledge_base_add(spr_pyramid_helmet, "Pyramid Head", 5, global.default_scale, true, global.src_challenge,"helmet")
     set_hatless(spr_pyramid_helmet)
 
-global.rvisor_name = "Smooth Operator Helmet"
+global.rvisor_name = "Crimson Helmet"
 knowledge_base_add(spr_rvisor_helmet, global.rvisor_name, 3, global.default_scale, true, global.src_challenge,"helmet")
 global.gashog_name = "Gas Hog Helmet"
 knowledge_base_add(spr_gashog_helmet, global.gashog_name, 4, global.default_scale, true, global.src_challenge,"helmet")
@@ -321,9 +322,9 @@ knowledge_base_add(spr_aroach_helmet, global.aroach_name, 3, global.default_scal
 global.armor_sets[13,1] = spr_aroach_foot
 
 //glow
-global.glow_name = "Stasis"
+global.glow_name = "Gravemaker"
 global.armor_sets[14,0] = spr_glow_helmet
-global.src_statis = global.src_lotto
+global.src_statis = global.src_challenge
 knowledge_base_add(spr_glow_forearm, global.glow_name, 4, global.default_scale, true, global.src_statis,"forearm")
 knowledge_base_add(spr_glow_shoulder, global.glow_name, 4, global.default_scale, true, global.src_statis,"shoulder")
 knowledge_base_add(spr_glow_leg, global.glow_name, 4, global.default_scale, true, global.src_statis,"leg")

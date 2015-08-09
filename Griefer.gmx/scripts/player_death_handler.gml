@@ -26,9 +26,10 @@ if is_my_avatar(id)
         spree_assists = 0
         life_longshot_headshots = 0
         match_deaths++
+        spree_deaths++
         near_death_xps = 0
         near_death = false
-        if match_deaths >= underwear_deaths and not challenge_is_complete(global.underwear_name)
+        if spree_deaths >= underwear_deaths and not challenge_is_complete(global.underwear_name)
             complete_challenge(global.underwear_name)
     }
 }

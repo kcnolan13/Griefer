@@ -61,10 +61,10 @@ var completed = false
     if not tied and playerName(myPlayer()) = maxpname
     {
         //MVP, BABY!
+        printf("::: trying to get MVP")
         complete_accolade("mvp")
         completed = true
     }
-
 }
 
 return completed

@@ -54,20 +54,20 @@ string_counter_max = room_speed
 
 //hound
 hound_kills = 2
-hound_kills_needed = 25
+hound_kills_needed = 10
 
 //fanatic
 fanatic_kills = 3
-fanatic_kills_needed = 5
+fanatic_kills_needed = 3
 
 //santa_hat
-santa_assists = 10
+santa_assists = 3
 
 //iron
-iron_assists = 10
+iron_assists = 5
 
 //ninja
-ninjas_needed = 5
+ninjas_needed = 2
 ninja_time = 0
 ninja_time_needed = 60
 
@@ -79,19 +79,19 @@ near_deaths_needed = 25
 smallvisor2_kills = 10
 
 //samurai
-samurai_kills = 5
+samurai_kills = 3
 
 //bhunch
-bhunch_kills = 10
+bhunch_kills = 5
 
 //ahunch
-ahunch_kills = 10
+ahunch_kills = 5
 
 //underwear
-underwear_deaths = 10
+underwear_deaths = 6
 
 //assassin
-assassin_spree_needed = 10
+assassin_spree_needed = 5
 
 //pistol prop
 pistol_headshots_needed = 2
@@ -297,6 +297,7 @@ match_kills = 0
 match_assists = 0
 spree_assists = 0
 spree_kills = 0
+spree_deaths = 0
 match_deaths = 0
 near_death_xps = 0
 string_kills = 0

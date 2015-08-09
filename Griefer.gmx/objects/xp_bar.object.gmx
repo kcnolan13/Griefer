@@ -235,8 +235,12 @@ if xp_2earn &gt; 0
             xp_2earn = lerp(xp_2earn,0,earn_lerp)
         else
         {
-            printf("ERROR: xp_2earn = "+string(xp_2earn))
-            xp_2earn -= 20
+            //printf("::: xp_2earn = "+string(xp_2earn))
+            if rank+1 &lt; getLength(global.rank_names)
+                xp_2earn -= (global.rank_xp[rank+1] = global.rank_xp[rank])/30
+            else
+                xp_2earn -= 200
+                
             if xp_2earn &lt; 0
                 xp_2earn = 0
         }

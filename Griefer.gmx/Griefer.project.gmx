@@ -891,10 +891,10 @@
       <script>scripts\framely_limb_computations.gml</script>
     </scripts>
     <scripts name="challenges">
+      <script>scripts\populate_challenges.gml</script>
       <script>scripts\instantiate_challenge.gml</script>
       <script>scripts\draw_popup_challenge.gml</script>
       <script>scripts\draw_challenge_unlock_bar.gml</script>
-      <script>scripts\populate_challenges.gml</script>
       <script>scripts\populate_progression_challenges.gml</script>
       <script>scripts\find_challenge.gml</script>
       <script>scripts\find_challenge_description.gml</script>

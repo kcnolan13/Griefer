@@ -5,8 +5,8 @@
 glr_get_illumination_update();
 
 //Player coordinates in screen space
-var px = obj_player.x - view_xview;
-var py = obj_player.y - view_yview;
+var px = 0//obj_player.x - view_xview;
+var py = 0//obj_player.y - view_yview;
 
 var illum = 0;
 

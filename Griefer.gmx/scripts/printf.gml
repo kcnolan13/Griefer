@@ -5,7 +5,7 @@ str = str+" :: "+string(object_get_name(object_index))
 if (true)
 {
     //ONLY PRINT ERRORS RIGHT NOW
-    if string_count("ERROR",str) > 0
+    //if string_count("ERROR",str) > 0
         printf_external(str)
     if net_manager.show_cout
     {

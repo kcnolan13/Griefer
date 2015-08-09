@@ -16,7 +16,7 @@ for (var M=0; M<10; M++)
         {
             if SUPER_DEBUG
                 printf("NOT instantiating: "+global.bpart_limb_types[N]+string(M)+" = "+string(spr))
-            num_skipped ++
+            //num_skipped ++
             continue
         }
         var src = varRead(global.bpart_limb_types[N]+M+"_src")
@@ -24,7 +24,7 @@ for (var M=0; M<10; M++)
         {
             if SUPER_DEBUG
                 printf("NOT instantiating: "+global.bpart_limb_types[N]+string(M)+"_src"+" = "+string(src))
-            num_skipped ++
+           // num_skipped ++
             continue
         }
         

@@ -172,6 +172,13 @@ if in_match() and net_manager.bot_match
     stat_flag = FL_BOT
 else
     stat_flag = FL_COMPETITIVE
+    
+if in_match()
+{
+    //make sure you're working with the right accolades/stats grid
+    request_personal_stats(grav_name,stat_flag)
+    request_accolades(grav_name,stat_flag)
+}
 </string>
           </argument>
         </arguments>
@@ -410,35 +417,6 @@ if update_ppl and varRead("points_valid") and varRead("deaths_valid")
         </arguments>
       </action>
     </event>
-    <event eventtype="7" enumb="5">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///match end stat updates
-
-/* this is done in compute_winloss now
-if in_match()
-{
-    match_end_stat_updates()
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="7" enumb="4">
       <action>
         <libid>1</libid>
@@ -467,9 +445,11 @@ if in_match()
     time_match_start = current_time
     if instance_exists(net_manager.stat_gravatar)
     {
-        grav_name = objVarRead(net_manager.stat_gravatar,"pName")
-    }
-}   
+        objVarWrite(net_manager.stat_gravatar,"pName",objVarRead(myAvatar(),"pName"))
+        grav_name = objVarRead(myAvatar(),"pName")
+    } else printf("ERROR: stat_manager room start cannot find net_manager.stat_gravatar")
+}
+
 </string>
           </argument>
         </arguments>

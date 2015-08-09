@@ -29,7 +29,7 @@
 event_inherited()
 
 //visuals
-sprite = spr_light_mask_hitscan;
+sprite = spr_none//spr_light_mask_hitscan;
 intensity = 1.25
 xscale = 1
 yscale = 0.5

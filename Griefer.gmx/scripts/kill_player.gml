@@ -71,6 +71,8 @@ if dead_homes != net_manager.local_player and killer = net_manager.local_player
     stat_update_real("points",objVarRead(killer,"points"),stat_manager.stat_flag)
     
     //UPDATE KILL_STREAK POTENTIALLY
+    challenge_manager.spree_deaths = 0
+    
     spree = challenge_manager.spree_kills
     spree += max(0,varRead("rollover_kstreak"))
     

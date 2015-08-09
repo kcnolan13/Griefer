@@ -29,7 +29,7 @@
 event_inherited()
 
 //MUST BE DEFINED IN CHILD
-sprite = spr_light_mask_hitscan;
+sprite = spr_none//spr_light_mask_hitscan;
 intensity = 2
 xscale = 1
 yscale = 1
