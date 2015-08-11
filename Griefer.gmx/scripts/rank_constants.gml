@@ -13,7 +13,7 @@ hue_start = 70
 hue_incr = 8/2
 hue = hue_start
 
-global.rank_interval = 3
+global.rank_interval = 1
 
 {
         names[0] = "Literal Garbage"
@@ -53,12 +53,12 @@ global.rank_interval = 3
                 val = val_start-i*(val_start-val_end)/global.rank_interval
                 
                 numeral=""
-                if i<3
+                /*if i<3
                 {
                     repeat(i+1) numeral += "I"
                 }
                 else if i=3 numeral += "IV"
-                else if i=4 numeral += "V"
+                else if i=4 numeral += "V"*/
                 
                 global.rank_names[rank] = names[rank_cat]+" "+numeral
                 global.rank_colors[rank] = make_colour_hsv(hue, sat, val)

@@ -762,6 +762,10 @@
         <script>scripts\scr_initial_collision_check.gml</script>
         <script>scripts\scr_dont_shoot_through_shit.gml</script>
         <script>scripts\point_inside_bbox.gml</script>
+        <script>scripts\real_time_init.gml</script>
+        <script>scripts\real_time_step.gml</script>
+        <script>scripts\real_speed.gml</script>
+        <script>scripts\sub_real.gml</script>
       </scripts>
       <scripts name="gm_physics">
         <script>scripts\init_physics.gml</script>
@@ -1052,6 +1056,9 @@
       <script>scripts\gravatar_wipe.gml</script>
       <script>scripts\wipe_stat_modals.gml</script>
       <script>scripts\show_player_stats.gml</script>
+      <script>scripts\score_grid_valid.gml</script>
+      <script>scripts\populate_team_data_structures.gml</script>
+      <script>scripts\validate_score_grids.gml</script>
     </scripts>
     <scripts name="draw">
       <scripts name="score_table">
@@ -1397,7 +1404,6 @@
       <script>scripts\printf.gml</script>
       <script>scripts\hash_string.gml</script>
       <script>scripts\keep_view_in_bounds.gml</script>
-      <script>scripts\score_grid_valid.gml</script>
       <script>scripts\inside_room.gml</script>
       <script>scripts\in_view.gml</script>
       <script>scripts\rtime.gml</script>

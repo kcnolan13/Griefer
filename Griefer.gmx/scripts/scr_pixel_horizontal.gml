@@ -4,7 +4,7 @@ id_2way_hor = -1
 var xi_actual = x
 var yi_actual = y
 
-repeat (abs(hsp))
+repeat (abs(real_speed(hsp)))
 {
     if object_index = player
         res = 1

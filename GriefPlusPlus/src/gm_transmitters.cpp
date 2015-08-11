@@ -9,8 +9,8 @@ void pkgOrSend(string emitString, string msgJSON)
 {
 	if (bigPkg == NULL)
 	{
-		if (emitString == "obj_update")
-			console("emitting obj_update: "+msgJSON);
+		//if (emitString == "obj_update")
+			//console("emitting obj_update: "+msgJSON);
 		current_socket->emit(emitString, msgJSON);
 	}
 	else {
@@ -62,7 +62,7 @@ GMEXPORT const double pkgCreate()
 		return 0;
 	}
 	else {
-		console("creating pkg!");
+		//console("creating pkg!");
 		bigPkg = new pkg();
 	}
 	_lock.unlock();
@@ -72,13 +72,13 @@ GMEXPORT const double pkgSend()
 	_lock.lock();
 	if (bigPkg == NULL)
 	{
-		console("ERROR: PKG SEND: no existing package to send");
+		//console("ERROR: PKG SEND: no existing package to send");
 		_lock.unlock();
 		return 0;
 	}
 	else {
 		bigPkg->closePkg();
-		console("sending pkg: " + bigPkg->json);
+		//console("sending pkg: " + bigPkg->json);
 		current_socket->emit("pkg", bigPkg->json);
 		delete bigPkg;
 		bigPkg = NULL;
@@ -99,7 +99,7 @@ GMEXPORT const double statUpdateStr(char *stat, char *value, double flag)
 {
 	_lock.lock();
 	string obj = "{" + field("name", "statUpdate") + ", " + field("netvar", stat) + ", " + field("val", value) + ", " + field("flag", flag) + "}";
-	console("\nprepared stat update: \n\t" + obj);
+	//console("\nprepared stat update: \n\t" + obj);
 	current_socket->emit("stat_update", obj);
 	_lock.unlock();
 	return 0;
@@ -173,7 +173,7 @@ GMEXPORT const double startMatchMaking(char * gameMode)
 {
 	_lock.lock();
 	string gm(gameMode);
-	console("joining " + gm + " lobby");
+	//console("joining " + gm + " lobby");
 	current_socket->emit("start_matchmaking", gm);
 	_lock.unlock();
 	return 0;
@@ -181,7 +181,7 @@ GMEXPORT const double startMatchMaking(char * gameMode)
 GMEXPORT const double leaveMatchMaking()
 {
 	_lock.lock();
-	console("leaving matchmaking");
+	//console("leaving matchmaking");
 	current_socket->emit("cancel_matchmaking");
 	_lock.unlock();
 	return 0;

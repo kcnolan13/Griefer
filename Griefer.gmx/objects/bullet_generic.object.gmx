@@ -255,8 +255,9 @@ if not varRead("hitscan")
             varWrite("speed",point_distance(x,y,x+hsp,y+vsp))
             if abs(hsp) &gt; 0.05 and abs(vsp) &gt; 0.05
                 varWrite("direction",point_direction(x,y,x+hsp,y+vsp))
-            add_x = hsp
-            add_y = vsp
+            
+            add_x = real_speed(hsp)
+            add_y = real_speed(vsp)
         }
     } else 
     {

@@ -7,4 +7,7 @@ xp_needed = xp_next - (xp-xp_2earn)
 
 //compute fraction --> no division by zero, thank you!
 if xp_this_rank > 0
+{
     fraction_full = (xp_earned)/xp_this_rank
+    fraction_really_full = min(1,(xp_earned+xp_2earn)/xp_this_rank)
+}

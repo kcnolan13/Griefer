@@ -24,7 +24,8 @@ for (var dat_index=0; dat_index < instance_number(spawn_point_generic); dat_inde
         //rule out opposing spawn points at the beginning of the match
         var my_team = get_team(player_object)
         
-        if objVarRead(net_manager,"using_teams") and ((my_team = 1 and candidate.object_index = spawn_point0) 
+        if net_manager.team > -1 and 
+              ((my_team = 1 and candidate.object_index = spawn_point0) 
             or (my_team = 0 and candidate.object_index = spawn_point1))
         {
             if DEBUG

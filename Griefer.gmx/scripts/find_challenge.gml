@@ -18,6 +18,6 @@ if instance_exists(candidate) and candidate.object_index = challenge_generic
 }
 else
 {
-    printf("ERROR: unable to find challenge with name: "+name+". ds_map_find_value returned "+string(candidate))
+    printf("WARNING: unable to find challenge with name: "+name+". ds_map_find_value returned "+string(candidate))
     return NO_HANDLE
 }

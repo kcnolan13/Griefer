@@ -6,7 +6,7 @@ if instance_exists(cha)
 {
     if not challenge_is_complete(cha.name)
     {
-        printf("ERROR: acquiring rank unlock gear for rank "+string(rank))
+        printf("::: acquiring rank unlock gear for rank "+string(rank))
         complete_challenge(cha.name)
     }
 } 

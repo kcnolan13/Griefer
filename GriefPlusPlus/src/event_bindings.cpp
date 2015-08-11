@@ -9,18 +9,6 @@ double pong_counter = 0;
 
 void bind_events(socket::ptr &socket)
 {
-	socket->on("JSON_test", [&](string const& name, message::ptr const& data, bool isAck, message::ptr &ack_resp)
-	{
-		_lock.lock();
-		console("JSON TEST!");
-		double dfl = static_cast<double>(data->get_flag());
-		console("flag = " + dubString(dfl));
-		/*double dfl2 = static_cast<double>(data->get_map()["val2"]->get_flag());
-		console("flag2 = " + dubString(dfl2));
-		double val2 = getMapReal(data, "val2");
-		console("val2 = " + dubString(val2));*/
-		_lock.unlock();
-	});
 
 	socket->on("keepalive", [&](string const& name, message::ptr const& data, bool isAck, message::ptr &ack_resp)
 	{

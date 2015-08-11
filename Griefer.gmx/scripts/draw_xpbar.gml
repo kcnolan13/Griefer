@@ -1,15 +1,16 @@
-///draw_xpbar(x,y,fraction_full,scale,halign,valign,text_color,unused)
+///draw_xpbar(x,y,fraction_full,fraction_really_full,scale,halign,valign,text_color,unused)
 
 //default alignment is fa_left, fa_top
 
 var dx = argument0
 var dy = argument1
 var fraction = argument2
-var scale = argument3
-var halign = argument4
-var valign = argument5
-var text_color = argument6
-var unused = argument7
+var fraction_real = argument3
+var scale = argument4
+var halign = argument5
+var valign = argument6
+var text_color = argument7
+var unused = argument8
 
 var rank_scaler = 1.5
 var rank_width = 40*rank_scaler
@@ -37,8 +38,14 @@ var bar_left = left+rank_width+rank_spacer
 var bar_top = top
 
 draw_player_rank(xp_bar.rank,left+rank_width/2,top-rank_width*scale/4,rank_scaler*scale)
+//backing
 draw_set_color(c_dkgray)
 draw_rectangle(bar_left,bar_top,bar_left+XPBAR_WIDTH*scale,top+XPBAR_HEIGHT*scale,false)
+//fraction really full
+draw_set_color(web_hsv(48,100,100))
+draw_rectangle(bar_left,bar_top,bar_left+fraction_real*XPBAR_WIDTH*scale,top+XPBAR_HEIGHT*scale,false)
+
+//fraction full
 draw_set_color(c_white)
 draw_flash_compensate()
 draw_rectangle(bar_left,bar_top,bar_left+fraction*XPBAR_WIDTH*scale,top+XPBAR_HEIGHT*scale,false)

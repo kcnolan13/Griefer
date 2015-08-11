@@ -378,7 +378,7 @@ if is_string(varRead("myX")) or is_string(varRead("myY"))
             <string>///compute limb and weapon offsets for every frame
 
 //either add to or subtract from the animation index
-varAdd("animation_index", varRead("animation_speed")*varRead("animation_direction"))
+varAdd("animation_index", real_speed(varRead("animation_speed")*varRead("animation_direction")))
 
 //printf(varRead("animation_index")+" : "+varRead("animation_speed")+" : "+varRead("animation_direction"))
 

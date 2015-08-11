@@ -39,8 +39,11 @@ lobby_scale_decrementor = 0.2
 prescaled = false
 anim_prescaled = 1
 
+spam_pnum = 0
+
 event_inherited()
 printf("A DUDE IS BEING MADE")
+varWrite("pNum_override",-1)
 varWrite("pNum",0)
 varWrite("animation_scale",3)
 varWrite("player_quit",false)
@@ -226,9 +229,48 @@ printf("::: "+string(varRead("pName"))+" was instantiated with uniqueId #"+strin
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///pNum_override
+
+/*if spam_pnum
+{
+    spam_pnum --
+    printf("::: SPAM -- "+string(varRead("pName"))+"'s avatar has pNum="+string(varRead("pNum"))+", override="+string(varRead("pNum_override")))
+}
+*/
+if varRead("pNum_override") &gt; -1
+{
+    if varRead("pNum") != varRead("pNum_override")
+    {
+        printf("::: "+varRead("pName")+"'s Avatar is overwriting pNum: "+string(varRead("pNum"))+" ---&gt; "+string(varRead("pNum_override")))
+        varWrite("pNum",varRead("pNum_override"))
+    }
+}
+/*
+if keyboard_check_pressed(vk_enter)
+{
+    printf("::: "+varRead("pName")+"'s avatar has pNum "+string(varRead("pNum")))
+}*/
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///shuffling
-
-
 if shuffling //and x &gt; 0 and x &lt; room_width
 {
     shuffling--
@@ -467,9 +509,9 @@ if not is_bot(id) and instance_exists(net_manager.local_player) and in_match() a
     varWrite("match_kills",objVarRead(net_manager.local_player,"match_kills"))
     varWrite("match_deaths",objVarRead(net_manager.local_player,"match_deaths"))
     varWrite("match_assists",objVarRead(net_manager.local_player,"match_assists"))
-    //send these at 4 Hz, no need for 30 Hz
-    if nth_frame(10)
-    {  
+    //send these at 2 Hz, no need for 30 Hz
+    if nth_frame(15)
+    {
         obj_update_real(id,"match_points",FL_NORMAL)
         obj_update_real(id,"match_kills",FL_NORMAL)
         obj_update_real(id,"match_deaths",FL_NORMAL)
@@ -586,8 +628,8 @@ if room = rm_lobby and net_manager.room_counter &gt; room_speed
         if nth_frame(3) obj_pname_update_real(id,"active_weapon_prescaler",FL_NORMAL)
         if nth_frame(1) obj_pname_update_real(id,"animation_xscale",FL_NORMAL)
         if nth_frame(3) obj_pname_update_string(id,"arm_pose",FL_NORMAL)
-        if nth_frame(10) obj_pname_update_real(id,"true_skill",FL_NORMAL)
-        if nth_frame(10) obj_pname_update_real(id,"global_rank",FL_NORMAL)
+        if nth_frame(room_speed) obj_pname_update_real(id,"true_skill",FL_NORMAL)
+        if nth_frame(room_speed) obj_pname_update_real(id,"global_rank",FL_NORMAL)
     }
 
 }

@@ -49,7 +49,7 @@ void pkg::newEntry(string json_str)
 void pkg::closePkg()
 {
 	json += "]";
-	console("pkg prepared for blastoff: " + json);
+	//console("pkg prepared for blastoff: " + json);
 }
 
 object_update_container *object_updates = new object_update_container();
@@ -73,7 +73,7 @@ bool closeDown = false;
 
 double maintainDeckIntegrity()
 {
-	console("{O}: checking deck integrity");
+	//console("{O}: checking deck integrity");
 	size_t minsize = 10000000000;
 	bool corrupted = false;
 
@@ -100,31 +100,31 @@ double maintainDeckIntegrity()
 
 	if (corrupted)
 	{
-		console("ERROR: obj_update decks corrupted");
+		/*console("ERROR: obj_update decks corrupted");
 		std::string str = "ERROR: ";
 		str = str+"oid_strings: " + dubString(static_cast<int>(object_updates->oid_strings->size()));
 		str = str+", netvars: " + dubString(static_cast<int>(object_updates->netvars->size()));
 		str = str + ", vals: " + dubString(static_cast<int>(object_updates->vals->size()));
 		str = str + ", flags: " + dubString(static_cast<int>(object_updates->flags->size()));
-		console(str);
+		console(str);*/
 		if (minsize < 0)
 		{
 			minsize = 0;
 		}
 		
-		console("ERROR: would have chopped decks to size " + dubString(static_cast<int>(minsize)));
+		//console("ERROR: would have chopped decks to size " + dubString(static_cast<int>(minsize)));
 		/*chopDeck(static_cast<double>(minsize), object_updates->oid_strings);
 		chopDeck(static_cast<double>(minsize), object_updates->netvars);
 		chopDeck(static_cast<double>(minsize), object_updates->vals);*/
 	}
-	console("{O}: done checking deck integrity");
+	//console("{O}: done checking deck integrity");
 	return 0;
 
 }
 
 void processObjUpdate(message::ptr const& message)
 {
-	console("{O}: processing obj_update");
+	//console("{O}: processing obj_update");
 
 	//validate message as object
 	if (message->get_flag() != message::flag_object) { 
@@ -150,7 +150,7 @@ void processObjUpdate(message::ptr const& message)
 		object_updates->vals->push_back(genVal(getMapReal(message, "val")));
 
 	object_updates->flags->push_back(getMapReal(message, "flag"));
-	console("{O}: done processing obj_update");
+	//console("{O}: done processing obj_update");
 }
 
 void processObjCreate(message::ptr const& message)
@@ -191,7 +191,7 @@ GMEXPORT const double objPushBackStr(char * oid_string, char *netVar, char *valu
 {
 	_lock.lock();
 	string s(oid_string), nv(netVar), v(value);
-	console("ERROR: objPushBack(string) for oid " + s);
+	console("WARNING: objPushBack(string) for oid " + s);
 	object_updates->oid_strings->push_back(s);
 	object_updates->netvars->push_back(nv);
 	object_updates->vals->push_back(genVal(v));
@@ -204,7 +204,7 @@ GMEXPORT const double objPushBackReal(char * oid_string, char * netVar, double v
 {
 	_lock.lock();
 	string s(oid_string), nv(netVar);
-	console("EROR: objPushBack(real) for obj_index  " + s);
+	console("WARNING: objPushBack(real) for obj_index  " + s);
 	object_updates->oid_strings->push_back(s);
 	object_updates->netvars->push_back(nv);
 	object_updates->vals->push_back(genVal(value));

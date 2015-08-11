@@ -62,9 +62,13 @@ pos_was_occupied = false
             <string>///spawn weapons when ready ---&gt; ONLY PLAYER 0 ACTUALLY DOES THIS
 if not instance_exists(net_manager.local_player) 
 {
-    printf("ERROR: local player does not exist")
+    if rtime() &gt; room_speed*3
+        printf("ERROR: local player does not exist")
+        
+    //always exit
     exit
 }
+
 if net_manager.local_player.object_index != player
     printf("ERROR: net_manager.local_player.object_index = "+string(net_manager.local_player.object_index))
 if not (objVarRead(net_manager.local_player,"uniqueId") = 0)

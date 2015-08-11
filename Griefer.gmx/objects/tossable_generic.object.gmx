@@ -328,8 +328,8 @@ if spd &gt; 0
 }
 else if not stuck
 {
-        varAdd("myX",hsp)
-        varAdd("myY",vsp)
+        varAdd("myX",real_speed(hsp))
+        varAdd("myY",real_speed(vsp))
         if SUPER_DEBUG
             printf("no speed, unsticking")
         scr_unstick_tossable()

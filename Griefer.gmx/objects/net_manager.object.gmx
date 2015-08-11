@@ -32,6 +32,10 @@ draw_enable_swf_aa(true)
 setGppDebug(0)
 display_set_gui_size(WVIEW,HVIEW)
 
+real_time_init()
+
+show_debug_overlay(false)
+
 keepalive_timeout = room_speed*2
 keepalive_timer = 15
 
@@ -53,6 +57,8 @@ view_overscaler_target = 0
 view_overscaler_dead = 0.45
 draw_killed_by = false
 
+force_recompute_scores = false
+
 full_screen = false
 global.rank_colors = 0
 global.rank_names = 0
@@ -64,7 +70,7 @@ show_cout = false
 cout_str = ""
 cout_maxchars = 2000
 
-tdm_kill_limit = 20
+tdm_kill_limit = 3//20
 ffa_kill_limit = 15
 versus_kill_limit = 10
 kill_limit = 10
@@ -542,58 +548,7 @@ if ds_exists(netvars,ds_type_map)
           <argument>
             <kind>1</kind>
             <string>///populate team data structures
-
-if varRead("game_mode") = "tdm"
-{
-    added_t0 = 0
-    added_t1 = 0
-    //using two teams
-    for (var i=0; i&lt;instance_number(avatar); i++)
-    {
-        ID = instance_find(avatar,i)
-        if get_team(ID) = 0
-        {
-            printf("")
-            printf("")
-            //printf("added "+objVarRead(ID,"pName")+"to team at y="+added_t0)
-            ds_grid_set(team0,0,added_t0,0) //match_kills
-            ds_grid_set(team0,1,added_t0,ID) //avatar ids
-            ds_grid_set(team0,2,added_t0,0) //match_points
-            added_t0++
-        }
-        else if get_team(ID) = 1
-        {
-            printf("")
-            printf("")
-            //printf("added "+objVarRead(ID,"pName")+"to team 1 at y="+added_t1)
-            ds_grid_set(team1,0,added_t1,0)
-            ds_grid_set(team1,1,added_t1,ID)
-            ds_grid_set(team1,2,added_t1,0)
-            added_t1++
-        }
-    }
-}
-else
-{
-    added = 0
-    //using one team
-    for (var i=0; i&lt;instance_number(avatar); i++)
-    {
-        ID = instance_find(avatar,i)
-        ds_grid_set(team_all,0,added,0)
-        ds_grid_set(team_all,1,added,ID)
-        ds_grid_set(team_all,2,added,0)
-        added++
-    }
-}
-
-printf("contents of team0: ")
-print_ds_grid(team0)
-printf("contents of team1: ")
-print_ds_grid(team1)
-printf("contents of team_all: ")
-print_ds_grid(team_all)
-
+populate_team_data_structures()
 </string>
           </argument>
         </arguments>
@@ -934,7 +889,10 @@ else if (instance_exists(local_player) and is_bot(local_player))
 {
     do_zoom = true
     if bot_focus_counter
-        bot_focus_counter --
+        bot_focus_counter -= real_speed(1)
+        
+    if bot_focus_counter &lt; 1
+        bot_focus_counter = 0
         
     view_lerp = 0.06
     
@@ -1037,6 +995,28 @@ if keyboard_check(vk_control) and keyboard_check(vk_alt) and keyboard_check(vk_b
 {
    // fill_with_random_gear()
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///real time step
+real_time_step()
 </string>
           </argument>
         </arguments>
@@ -1169,19 +1149,18 @@ if instance_exists(NO_HANDLE)
             <string>///lobby networking and game mode stuff
 if instance_exists(my_doll) and room = rm_lobby
 {
-    if varRead("lobby_wait_time") &lt; lobby_match_countdown_time
+    if varRead("lobby_wait_time") &lt;= lobby_match_countdown_time
     {
         lobby_match_countdown = true
     }
-    
-    if objVarRead(my_doll,"pNum") = 0
+    else if objVarRead(my_doll,"pNum") = 0
     {
         if SUPER_DEBUG
             printf("sending lobby wait time")
         //send lobby wait time to everyone else @ 1 Hz if you are player 0
         obj_sendval_real(id,"lobby_wait_time",varRead("lobby_wait_time"),FL_NORMAL)
     }
-} 
+}
 else 
 {
     lobby_match_countdown = false
@@ -1285,7 +1264,11 @@ if room = rm_lobby
 {
     if mode_counter
     {
-        mode_counter --
+        mode_counter -= real_speed(1)
+        
+        if mode_counter &lt; 1
+            mode_counter = 0
+            
         if not mode_counter
         {
             /*with bn_play event_perform(ev_mouse,ev_left_press)
@@ -1411,9 +1394,13 @@ if room = rm_lobby
         }
     }
     
-    if varRead("lobby_wait_time")
+    if varRead("lobby_wait_time") &gt; 0
     {
-        varSub("lobby_wait_time",1)
+        varSub("lobby_wait_time",real_speed(1))
+    }
+    else
+    {
+        varWrite("lobby_wait_time",0)
     }
 }
 
@@ -1424,7 +1411,7 @@ if room = rm_menu or room = rm_lobby
         
     if saving_armor
     {
-        saving_armor --
+        saving_armor = sub_real(saving_armor,1)
         if not saving_armor and saving_armor_reboot
         {
             griefer_restart()
@@ -1569,7 +1556,7 @@ if (room = rm_menu or room = rm_lobby) and (room_counter &gt; room_speed/2 and (
     my_doll = find_pname_avatar(varRead("pName"))
     if my_doll != noone
     {
-        printf(":::FOUND LOCAL AVATAR")
+        printf("::: FOUND LOCAL AVATAR")
         objVarWrite(my_doll,"rank",varRead("rank"))
         objVarWrite(my_doll,"global_rank",varRead("global_rank"))
         if DEBUG
@@ -1584,7 +1571,7 @@ if (room = rm_menu or room = rm_lobby) and (room_counter &gt; room_speed/2 and (
         my_doll.x = dude_x
         my_doll.y = 0
         
-        printf(":::creating stat gravatar")
+        printf("::: creating stat gravatar")
         stat_gravatar = instance_create(0,0,gravatar)
         stat_manager.grav_name = varRead("pName")
         objVarWrite(stat_gravatar,"pName",varRead("pName"))
@@ -1648,7 +1635,10 @@ if room = rm_lobby
 
 if starting_match 
 {
-    starting_match --
+    starting_match -= real_speed(1)
+    
+    if starting_match &lt; 1
+        starting_match = 0
     
     if starting_match and starting_match &lt; room_speed and not varRead("match_started")
     {
@@ -1764,7 +1754,9 @@ if instance_number(player) &gt; 0 and room_counter &gt; 10*room_speed
             }
         }
         
-        match_countdown --
+        match_countdown -= real_speed(1)
+        if match_countdown &lt; 1
+            match_countdown = 0
         
         if (match_countdown = 0)
         {
@@ -1901,7 +1893,7 @@ if varRead("end_match_coming")
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///SCORES -- SORT, HIDE, SHOW
+            <string>///SCORES -- SORT, HIDE, SHOW, RECOMPUTE
 if (keyboard_check_pressed(vk_tab) or (global.using_gamepad and gamepad_button_check_pressed(global.devno,gp_select))) and instance_number(player) &gt; 0 and room_counter &gt; room_speed
 {
     //printf("hiding scores")
@@ -1931,13 +1923,18 @@ for (var i=0; i&lt;instance_number(player); i++)
     }
 }
 
-if in_match() and room_counter%(room_speed/2) = 0 and sort_worthy and not disable_scores
+if in_match() and force_recompute_scores or ( rtime() mod (room_speed/2) = 0 and sort_worthy and not disable_scores )
 {
 
     //pull in the match kills for each avatar (which you need to sync from his player)
     for (var i=0; i&lt;instance_number(player); i++)
     {
         var pID = instance_find(player,i)
+        if objVarRead(pID,"player_quit")
+        {
+            printf(":::WARNING: cannot recompute scores for "+playerName(pID)+" because player has quit")
+            continue
+        }
         //printf("found player (object "+pID.object_index+"): "+objVarRead(pID,"pName"))
         //printf(objVarRead(pID,"pName")+"'s match_kills = "+objVarRead(pID,"match_kills"))
         var avID = find_pname_avatar(objVarRead(pID,"pName"))
@@ -1976,7 +1973,7 @@ if in_match() and room_counter%(room_speed/2) = 0 and sort_worthy and not disabl
         }
         else dat_team_do = team_all
         
-        //we now know what grid this player belongs on --&gt; find his avatar ID and update match kills
+        //we now know what grid this player belongs on --&gt; find his avatar ID and update match kills + match points
         if ds_grid_value_disk_exists(dat_team_do,1,0,2*ds_grid_height(dat_team_do),avID)
         {
             //SET POINTS IN SCORE TABLE GRID
@@ -1985,6 +1982,7 @@ if in_match() and room_counter%(room_speed/2) = 0 and sort_worthy and not disabl
             {
                 ds_grid_set(dat_team_do,2,av_gridy,mpoints)
             }
+            
             //SET KILLS IN SCORE TABLE GRID
             av_gridy = ds_grid_value_disk_y(dat_team_do,1,0, 2*ds_grid_height(dat_team_do), avID)
             if not ds_grid_value_x(dat_team_do,0,av_gridy,0,av_gridy,mkills)
@@ -1994,7 +1992,7 @@ if in_match() and room_counter%(room_speed/2) = 0 and sort_worthy and not disabl
         }
         else 
         {
-            printf("ERROR: TEAM GRID: unable to find avatar id "+avID+" for player "+objVarRead(avID,"pName")+" in the team grid")
+            printf("ERROR: TEAM GRID: unable to find avatar id "+string(avID)+" for player "+string(objVarRead(avID,"pName"))+" in the team grid")
             return false
         }
     }
@@ -2003,16 +2001,19 @@ if in_match() and room_counter%(room_speed/2) = 0 and sort_worthy and not disabl
     if ds_grid_height(team0) &gt; 0
     {
         ds_grid_sort(team0, 2, false)
+        print_ds_grid(team0)
     }
     
     if ds_grid_height(team1) &gt; 0
     {
         ds_grid_sort(team1, 2, false)
+        print_ds_grid(team1)
     }
     
     if ds_grid_height(team_all) &gt; 0
     {
         ds_grid_sort(team_all, 0, false)
+        print_ds_grid(team_all)
     }
     
 }
@@ -2206,9 +2207,9 @@ if in_match()
     ds_grid_destroy(team_all)
     ds_grid_destroy(team0)
     ds_grid_destroy(team1)
-    team_all = ds_grid_create(2,instance_number(avatar))
-    team1 = ds_grid_create(2,floor(instance_number(avatar)/2))
-    team0 = ds_grid_create(2,ceil(instance_number(avatar)/2))
+    team_all = ds_grid_create(3,instance_number(avatar))
+    team1 = ds_grid_create(3,floor(instance_number(avatar)/2))
+    team0 = ds_grid_create(3,ceil(instance_number(avatar)/2))
     
     //give 3 seconds before populating team datastructures
     alarm[6] = 3*room_speed
@@ -2315,6 +2316,50 @@ random_set_seed(random(1000000))
       </action>
     </event>
     <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///debug
+if 1=0
+{
+    draw_set_color(c_white)
+    draw_flash_compensate()
+    draw_set_font(fnt_hud)
+    draw_set_halign(fa_left)
+    draw_set_valign(fa_middle)
+    
+    pinc = 0
+    with player
+    {
+        draw_text(WVIEW*2/3,HVIEW*1/4+32*other.pinc,"Player "+playerName(id)+" pNum = "+string(varRead("pNum")))
+        other.pinc ++
+    }
+    
+    pinc = 0
+    with avatar
+    {
+        draw_text(WVIEW*1/4,HVIEW*1/4+32*other.pinc,"Avatar "+playerName(id)+" pNum = "+string(varRead("pNum"))+", override = "+string(varRead("pNum_override")))
+        other.pinc ++
+    }
+}
+
+</string>
+          </argument>
+        </arguments>
+      </action>
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -2571,13 +2616,13 @@ if varRead("end_match_coming")
     
 }
 
-if room = rm_lobby and came_from_match and menu_mode != "lottery_steal" and menu_mode != "armory" and menu_mode != "challenges" and menu_mode != "settings" and menu_mode != "stats"
+if room = rm_lobby and came_from_match and not lobby_match_countdown and  menu_mode != "lottery_steal" and menu_mode != "armory" and menu_mode != "challenges" and menu_mode != "settings" and menu_mode != "stats"
 {
     if not disable_scores
         draw_score_table(armory_ysep, 64+armory_ysep+12)
 }
 
-if in_match() and not varRead("end_match_coming") and instance_exists(my_doll) and room_counter &gt; room_speed*3
+if in_match() and not varRead("end_match_coming") and instance_exists(myAvatar()) and room_counter &gt; room_speed*3
 {
     var av_head0, av_head1
     var score0, score1
@@ -3693,20 +3738,6 @@ splat_constants(seed)
       </action>
     </event>
     <event eventtype="9" enumb="35">
-      <action>
-        <libid>1</libid>
-        <id>425</id>
-        <kind>4</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>0</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-      </action>
       <action>
         <libid>1</libid>
         <id>603</id>

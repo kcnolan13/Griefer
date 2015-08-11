@@ -42,7 +42,6 @@ GMEXPORT const double initGrieferClient(string connURL)
 
 	bind_events(current_socket);
 	current_socket->emit("PING");
-	current_socket->emit("JSON_test","{\"val1\": 52}");
 	
 	return 0;
 }

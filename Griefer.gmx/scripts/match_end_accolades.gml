@@ -1,11 +1,11 @@
 ///match_end_accolades()
 
-if not instance_exists(net_manager.local_player) exit
+if not instance_exists(myAvatar()) exit
 
 var completed = false
 {
     //10 kills, 0 deaths
-    if objVarRead(myPlayer(),"match_kills") >= 10 and objVarRead(myPlayer(),"match_deaths") = 0
+    if objVarRead(myAvatar(),"match_kills") >= 10 and objVarRead(myAvatar(),"match_deaths") = 0
     {
         complete_accolade("10kd")
         completed = true
@@ -15,9 +15,9 @@ var completed = false
     var maxkdr = 0
     var maxpname = ""
     var tied = false
-    for (var i=0; i<instance_number(player); i++)
+    for (var i=0; i<instance_number(avatar); i++)
     {
-        plyr = instance_find(player,i)
+        plyr = instance_find(avatar,i)
         var cand = objVarRead(plyr,"match_kills")/max(1,objVarRead(plyr,"match_deaths"))
         if cand > maxkdr
         {
@@ -31,7 +31,7 @@ var completed = false
         }
     }
     
-    if not tied and playerName(myPlayer()) = maxpname
+    if not tied and playerName(myAvatar()) = maxpname
     {
         //HIGHEST KDR, BABY!
         complete_accolade("highest_kd")
@@ -42,9 +42,9 @@ var completed = false
     var maxpoints = 0
     var maxpname = ""
     var tied = false
-    for (var i=0; i<instance_number(player); i++)
+    for (var i=0; i<instance_number(avatar); i++)
     {
-        plyr = instance_find(player,i)
+        plyr = instance_find(avatar,i)
         var cand = objVarRead(plyr,"match_points")
         if cand > maxpoints
         {
@@ -58,12 +58,15 @@ var completed = false
         }
     }
     
-    if not tied and playerName(myPlayer()) = maxpname
+    if not tied and playerName(myAvatar()) = maxpname
     {
         //MVP, BABY!
         printf("::: trying to get MVP")
         complete_accolade("mvp")
         completed = true
+    } else if tied
+    {
+        printf("::: mvp accolade was tied between" + string(maxpname)+" and someone else...")
     }
 }
 

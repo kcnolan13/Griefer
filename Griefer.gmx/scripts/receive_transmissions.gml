@@ -27,7 +27,7 @@ while (bigMessagesWaiting() and wait_counter < 500000)
     switch (bigMessage)
     {
         case "control_map":
-            printf("::: RECEIVED a Control Mapping")
+            printf("::: Received a Control Mapping")
             
             if genVal3 = 0
             {
@@ -49,7 +49,7 @@ while (bigMessagesWaiting() and wait_counter < 500000)
         break
         
         case "load_setting":
-            printf("::: RECEIVED a Setting: "+string(genVal1)+", "+string(genVal2)+", "+string(genVal3))
+            printf("::: Received a Setting: "+string(genVal1)+", "+string(genVal2)+", "+string(genVal3))
             var ind = gc_ind(genVal1)
             if ind > -1
             {
@@ -69,7 +69,7 @@ while (bigMessagesWaiting() and wait_counter < 500000)
             var acc_val = genVal2
             var stat_fl = genVal3
             
-            printf("::: RECEIVED Accolade: "+string(dat_acc_name)+" = "+string(acc_val))
+            printf("::: Received Accolade: "+string(dat_acc_name)+" = "+string(acc_val))
             update_accolade_total(string(dat_acc_name),acc_val,stat_fl,false)
         break
         
@@ -77,7 +77,7 @@ while (bigMessagesWaiting() and wait_counter < 500000)
             var player_name = string(genVal1)
             var stat_name = string(genVal2)
             var stat_val = genVal3
-            printf("::: RECEIVED Personal Stat: "+string(player_name)+" -- "+string(stat_name)+" = "+string(stat_val))
+            printf("::: Received Personal Stat: "+string(player_name)+" -- "+string(stat_name)+" = "+string(stat_val))
             if not objVarRead(stat_manager,stat_name+"_valid")
             {
                 objVarWrite(stat_manager,stat_name+"_valid",true)
@@ -90,14 +90,14 @@ while (bigMessagesWaiting() and wait_counter < 500000)
             var player_name = string(genVal1)
             var stat_name = string(genVal2)
             var stat_val = genVal3
-            printf("::: RECEIVED Global Stat: "+string(player_name)+" -- "+string(stat_name)+" = "+string(stat_val))
+            printf("::: Received Global Stat: "+string(player_name)+" -- "+string(stat_name)+" = "+string(stat_val))
             insert_global_stat(player_name,stat_name,stat_val)
         break
         
         case "leaderboard_dimensions":
             var rows = real(genVal1)
             var cols = real(genVal2)
-            printf("::: RECEIVED leaderboard dimensions: "+string(rows)+" X "+string(cols))
+            printf("::: Received leaderboard dimensions: "+string(rows)+" X "+string(cols))
             if instance_exists(modal_table)
             {
                 modal_table.rows = rows //to make room for the header
@@ -112,12 +112,12 @@ while (bigMessagesWaiting() and wait_counter < 500000)
         break
         
         case "kill_feed":
-            printf("::: RECEIVED kill feed message!")
+            printf("::: Received kill feed message!")
             new_kill_feed_message(genVal1,genVal2,genVal3)
         break
         
         case "chat_feed":
-            printf("::: RECEIVED chat feed message!")
+            printf("::: Received chat feed message!")
             new_chat_feed_message(genVal1,genVal2,genVal3)
         break
     }
@@ -173,7 +173,7 @@ while (genMessagesWaiting() and wait_counter < 500000)
         case "goto_lobby":
             room_goto(rm_lobby)
             if DEBUG
-                printf("received GOTO LOBBY!!")
+                printf("Received GOTO LOBBY!!")
             return 0
         break
         
@@ -210,7 +210,9 @@ while (genMessagesWaiting() and wait_counter < 500000)
                 }
                 his_playa = find_player_by_pname(genVal)
                 if instance_exists(his_playa)
-                objVarWrite(his_playa,"player_quit",true)
+                    objVarWrite(his_playa,"player_quit",true)
+                
+                validate_score_grids()
             }
         break
         
@@ -278,8 +280,8 @@ while (objCreatesWaiting() and wait_counter < 50)
     my_y = readObjCreateMyY()
     
     //ID = instance_create(room_width/2,room_height/2,input_field)
-    if DEBUG
-        printf("create: "+obj_index+", id="+unique_id+", "+my_x+", "+my_y)
+    //if DEBUG
+      //  printf("create: "+obj_index+", id="+unique_id+", "+my_x+", "+my_y)
     //if room != rm_match_end
     {
         ID = instance_create(my_x, my_y, obj_index)
@@ -290,8 +292,8 @@ while (objCreatesWaiting() and wait_counter < 50)
         
         //printf("create obj: "+ID.id+", at "+ID.x+", "+ID.y+" ---> uniqueId: "+unique_id);
         objVarWrite(ID,"uniqueId",unique_id)
-        if SUPER_DEBUG
-            printf("created (object "+ID.object_index+") with uniqueId "+objVarRead(ID,"uniqueId"))
+       // if SUPER_DEBUG
+         //   printf("created (object "+ID.object_index+") with uniqueId "+objVarRead(ID,"uniqueId"))
     }
 }
 //printf("done objCreates")
@@ -306,34 +308,31 @@ while (objUpdatesWaiting() and wait_counter < 1000)
     //obj_index = readObjUpdateIndex()
     //unique_id = readObjUpdateUniqueId()
     //printf("obj update! reading oid_str")
-    printf("{O}: reading objUpdate oid string")
+    //printf("{O}: reading objUpdate oid string")
     oid_str = readObjUpdateOidStr()
     obj_index = extract_object_index(oid_str)
     unique_id = extract_uid(oid_str)
     
-    printf("{O}: reading objUpdate netvar")
+   // printf("{O}: reading objUpdate netvar")
     netvar = readObjUpdateNetvar()
     
     strVal = false
     
     if (isString("objUpdate"))
     {
-        printf("{O}: reading objUpdate string val")
+        //printf("{O}: reading objUpdate string val")
         val = readObjUpdateValStr()
         strVal = true
-        printf("payload is str: "+string(val))
+       // printf("payload is str: "+string(val))
     }
     else
     {
-        printf("{O}: reading objUpdate real val")
+       // printf("{O}: reading objUpdate real val")
         val = readObjUpdateValReal()
-        printf("payload is real: "+string(val))
+       // printf("payload is real: "+string(val))
     }
-    
-    if netvar = "pNum" or netvar = "true_skill" or netvar = "global_rank" //or netvar = "lobby_wait_time"
-        printf("::: IMPORTANT UPDATE for "+oid_str+" ( "+string(obj_index)+" : "+string(unique_id)+" ) ... "+string(netvar)+" = "+string(val))
-    
-    printf("{O}: reading objUpdate flag")
+        
+    //printf("{O}: reading objUpdate flag")
     flag = readObjUpdateFlag()
     
     //printf("flag is: "+flag)
@@ -341,7 +340,7 @@ while (objUpdatesWaiting() and wait_counter < 1000)
     ID = find_obj_with_id(obj_index,unique_id)
     
     if netvar = "winning_pName"
-                printf("ERROR (not): caught winning_pName: "+string(val))
+                printf("::: caught winning_pName: "+string(val))
     
     //push back objects that don't exist yet
     if ID  = NO_HANDLE
@@ -356,6 +355,7 @@ while (objUpdatesWaiting() and wait_counter < 1000)
                 printf("MISSION ABORT! MISSION ABORT!")
                 griefer_restart()
             }*/
+            
             if DEBUG
                 printf("::: PUSH BACK: update: "+string(obj_index)+", id="+string(unique_id)+", "+string(netvar)+", "+string(val))
            
@@ -387,8 +387,8 @@ while (objUpdatesWaiting() and wait_counter < 1000)
         break
         
         case FL_INSTANCE_DESTROY:
-            if DEBUG
-                printf("DESTROYING (object "+ID.object_index+") with uniqueId "+objVarRead(ID,"uniqueId")+". Remote kill signal.")
+            //if DEBUG
+              //  printf("DESTROYING (object "+ID.object_index+") with uniqueId "+objVarRead(ID,"uniqueId")+". Remote kill signal.")
             with (ID) 
             {
                 instance_destroy()
@@ -397,23 +397,56 @@ while (objUpdatesWaiting() and wait_counter < 1000)
         break
         
         default:
-        
-            if netvar = "pName"
-                printf("update pName = "+string(val)+" for uniqueId #"+string(objVarRead(ID,"uniqueId")))
                 
             if netvar = "winning_pName"
-                printf("ERROR (not): caught winning_pName: "+string(val))
+                printf("::: caught winning_pName: "+string(val))
                 
             if (netvar="global_rank" or netvar="rank" or netvar="uniqueId") and ((is_my_avatar(ID) and ID.object_index != player) or ID.object_index = net_manager)
             {
                 //if ID.object_index != net_manager //and ID != net_manager.my_doll
                // objVarWrite(ID,netvar,val)
                 
-                printf("CAUGHT GLOBAL STAT: "+netvar)
+                //printf("Caught Global Stat: "+netvar)
                 //mega_stat_update(netvar,val)
                 update_global_stat(ID,netvar,val)
             }
-            else objVarWrite(ID,netvar,val)
+            else 
+            {
+                do_obj_update = true
+                
+                if netvar = "lobby_wait_time"
+                {
+                    printf("::: Important Update for "+string(ID.object_index)+" : "+string(netvar)+" = "+string(val))
+                    
+                    //DON'T DO THE UPDATE IF THE COUNTDOWN HAS STARTED OR IS ABOUT TO
+                    if room = rm_lobby and val > lobby_match_countdown_time
+                    {
+                        with bn_ready
+                        {
+                            if sent_ready
+                                other.do_obj_update = false
+                        }
+                    }
+                }
+                
+                if do_obj_update
+                    objVarWrite(ID,netvar,val)
+                
+                if netvar = "pNum" /*or netvar = "true_skill" or netvar = "global_rank" and room != rm_lobby *///or netvar = "lobby_wait_time"
+                {
+                    var bound_av = find_pname_avatar(objVarRead(ID,"pName"))
+                    if bound_av != noone
+                    {
+                        printf("::: updating bound av"+playerName(bound_av)+"'s pNum: "+string(objVarRead(bound_av,"pNum"))+" ---> "+string(val))
+                        objVarWrite(bound_av,"pNum",val)
+                    }
+                    printf("::: PNUM UPDATE for "+string(objVarRead(ID,"pName"))+" : "+string(netvar)+" = "+string(val))
+                    objVarWrite(ID,"pNum_override",val)
+                    //ID.spam_pnum = 4
+                    //with ID
+                    //    printf("::: SPAM -- "+string(varRead("pName"))+"'s avatar has pNum="+string(varRead("pNum"))+", override="+string(varRead("pNum_override")))
+                }
+            }
             
         break
     
@@ -421,6 +454,6 @@ while (objUpdatesWaiting() and wait_counter < 1000)
     
     //if (obj_index != 1)
     //if /*SUPER_DEBUG and */((obj_index != 1) or (obj_index = 1 and obj_index.debug_counter < 3*room_speed))
-        printf("{O}: PROCESSED UPDATE : "+string(obj_index)+"[uId "+string(unique_id)+"] -> " +string(netvar)+" = "+string(objVarRead(ID,netvar)))
+       // printf("{O}: PROCESSED UPDATE : "+string(obj_index)+"[uId "+string(unique_id)+"] -> " +string(netvar)+" = "+string(objVarRead(ID,netvar)))
 }
 //printf("done objUpdates")

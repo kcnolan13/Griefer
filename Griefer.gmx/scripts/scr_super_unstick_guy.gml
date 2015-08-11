@@ -1,13 +1,10 @@
-//don't drop things down infinite chasms
-/*pass = false
-for (i=0;i<(room_height-y)/20;i+=20)
-{
-    if collision_rectangle(bbox_left,bbox_top+i,bbox_right,bbox_bottom+i,block,true,true)
-    pass = true
-}
-if pass = false
-return false*/
-//unstick from any blocks that may be overlapping upon creation
+///scr_super_unstick_guy
+
+//bad programming at its finest
+if object_index = weapon_ink
+    return true
+
+//the normal script
 printf("::: super unstick guy")
 for (i=0;i<128;i+=4)
 {

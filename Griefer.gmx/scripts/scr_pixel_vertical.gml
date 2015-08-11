@@ -7,7 +7,7 @@ if id_moving > 0
     {standing_2way = true return true}
 }*/
 
-repeat(abs(vsp))
+repeat(abs(real_speed(vsp)))
     {
         id_two_way = collision_rectangle(bbox_left,bbox_bottom-5+amount*sign(vsp),bbox_right,bbox_bottom+1+amount*sign(vsp),block2_top_true,true,true)
         if id_two_way > 1

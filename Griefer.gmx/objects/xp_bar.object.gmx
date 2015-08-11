@@ -53,6 +53,7 @@ scale = 1
 earn_lerp = 0.125
 alpha_lerp = 0.1
 fraction_full = 0
+fraction_really_full = 0
 real_xp = 0
 xp = 0
 rank = 0
@@ -237,7 +238,7 @@ if xp_2earn &gt; 0
         {
             //printf("::: xp_2earn = "+string(xp_2earn))
             if rank+1 &lt; getLength(global.rank_names)
-                xp_2earn -= (global.rank_xp[rank+1] = global.rank_xp[rank])/30
+                xp_2earn -= (global.rank_xp[rank+1] - global.rank_xp[rank])/30
             else
                 xp_2earn -= 200
                 
@@ -591,7 +592,7 @@ if instance_exists(modal_controls)
         scale = 1
         alpha_override = true
         alpha = 1
-        draw_xpbar((modal_controls.left-view_xview)+modal_controls.width/2,(modal_controls.top-view_yview)+modal_controls.height,fraction_full,scale,fa_center,fa_bottom,c_white,false)
+        draw_xpbar((modal_controls.left-view_xview)+modal_controls.width/2,(modal_controls.top-view_yview)+modal_controls.height,fraction_full,fraction_full,scale,fa_center,fa_bottom,c_white,false)
     }
 }
 
@@ -605,7 +606,7 @@ if room = rm_menu and net_manager.menu_mode = "play"
         alpha_override = true
         draw_set_alpha(alpha)
         scale = 1
-        draw_xpbar(net_manager.dude_x-20,HVIEW-XPBAR_BOTTOM-64*2.35-12,fraction_full,scale,fa_center,fa_bottom,c_black,false)
+        draw_xpbar(net_manager.dude_x-20,HVIEW-XPBAR_BOTTOM-64*2.35-12,fraction_full,fraction_full,scale,fa_center,fa_bottom,c_black,false)
         draw_xp_progression(net_manager.dude_x,HVIEW-XPBAR_BOTTOM-64*2-12,1,fa_center,fa_top,c_white,alpha,rank,xp)
     }
     else
@@ -625,7 +626,7 @@ else if room = rm_lobby and net_manager.menu_mode = "lottery_steal"
         draw_set_alpha(alpha)
         var yoff = -64*0.8-24
         scale = 1.25
-        draw_xpbar(room_width/2-20,yoff+HVIEW-XPBAR_BOTTOM-64*2.35-12,fraction_full,scale,fa_center,fa_bottom,c_black,false)
+        draw_xpbar(room_width/2-20,yoff+HVIEW-XPBAR_BOTTOM-64*2.35-12,fraction_full,fraction_full,scale,fa_center,fa_bottom,c_black,false)
         draw_xp_progression(room_width/2,yoff+HVIEW-XPBAR_BOTTOM-64*2-12,1,fa_center,fa_top,c_white,alpha,rank,xp)
     }
     else
@@ -643,7 +644,7 @@ else
 
 if in_match() and alpha &gt; 0 and rtime() &gt; room_speed and not instance_exists(modal_controls) and truthval(global.gc[GC_SHOW_XP,1])
 {
-    draw_xpbar(WVIEW-XPBAR_RIGHT,HVIEW-XPBAR_BOTTOM,fraction_full,scale,fa_right,fa_bottom,c_white,false)
+    draw_xpbar(WVIEW-XPBAR_RIGHT,HVIEW-XPBAR_BOTTOM,fraction_full,fraction_full,scale,fa_right,fa_bottom,c_white,false)
 }
 
 draw_set_alpha(1)
@@ -693,20 +694,6 @@ simple_popup("Mark Distance",string(round(point_distance(xmark1,ymark1,xmark2,ym
       </action>
     </event>
     <event eventtype="9" enumb="13">
-      <action>
-        <libid>1</libid>
-        <id>425</id>
-        <kind>4</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>0</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-      </action>
       <action>
         <libid>1</libid>
         <id>603</id>

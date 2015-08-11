@@ -343,7 +343,7 @@ if object_index = weapon_vulcan
         varAdd("cant_shoot_max",1)
     }
 }
-    
+
 //UNIVERSAL BEHAVIOR
 if varRead("draw_trajectory")
     visible = true
@@ -356,67 +356,68 @@ if lobby_leader()
 }
 
 dat_jugador = find_player(varRead("my_player"))
-    if dat_jugador &gt; -1
-    {
-         varWrite("myX",objVarRead(dat_jugador,"myX"))
-         varWrite("myY",objVarRead(dat_jugador,"myY"))
-         varWrite("visible",false)
-    } 
-    else 
-    {
-        //bail on reloading
-        bail_on_reloading()
-        
-        //bail on charging
-        bail_on_charging()
+
+if dat_jugador &gt; -1
+{
+     varWrite("myX",objVarRead(dat_jugador,"myX"))
+     varWrite("myY",objVarRead(dat_jugador,"myY"))
+     varWrite("visible",false)
+} 
+else 
+{
+    //bail on reloading
+    bail_on_reloading()
     
-        varWrite("visible",true)
-        image_xscale = PLAYER_SCALE*varRead("scale")
-        image_yscale = PLAYER_SCALE*varRead("scale")
-        
-        //only apply physics if this weapon has been dropped by a player
-        if varRead("been_picked_up")
-            scr_basic_physics()
-        
-        if varRead("can_disappear") and varRead("disappear_counter") &gt; 0
-        {
-            //DISAPPEAR EMPTY WEAPONS --&gt; ONLY PLAYER 0 IS ALLOWED TO DO THIS
-            varSub("disappear_counter",1)
-            if varRead("disappear_counter") = 0 and lobby_leader()
-            {
-                if DEBUG
-                    printf("disappearing weapon: "+varRead("uniqueId")+" : "+varRead("name"))
-                    
-                instance_destroy_for_everyone(id)
-                exit
-            }
-        }
-        
-        //DESTROY EMPTY WEAPONS --&gt; ONLY PLAYER 0 IS ALLOWED TO DO THIS
-        if varRead("ammo") &lt; 1 and varRead("clip") &lt; 1 and lobby_leader()
+    //bail on charging
+    bail_on_charging()
+
+    varWrite("visible",true)
+    image_xscale = PLAYER_SCALE*varRead("scale")
+    image_yscale = PLAYER_SCALE*varRead("scale")
+    
+    //only apply physics if this weapon has been dropped by a player
+    if varRead("been_picked_up")
+        scr_basic_physics()
+    
+    if varRead("can_disappear") and varRead("disappear_counter") &gt; 0
+    {
+        //DISAPPEAR EMPTY WEAPONS --&gt; ONLY PLAYER 0 IS ALLOWED TO DO THIS
+        varSub("disappear_counter",1)
+        if varRead("disappear_counter") = 0 and lobby_leader()
         {
             if DEBUG
-                printf("destroying empty weapon: "+varRead("uniqueId")+" : "+varRead("name"))
+                printf("disappearing weapon: "+varRead("uniqueId")+" : "+varRead("name"))
                 
             instance_destroy_for_everyone(id)
             exit
         }
     }
     
-    //sync up real vars with net vars
-    //visible = varRead("visible")
-    x = varRead("myX")
-    y = varRead("myY")
-    
-    //inaccuracy and handling
-    if varRead("inaccuracy") &gt; 0
+    //DESTROY EMPTY WEAPONS --&gt; ONLY PLAYER 0 IS ALLOWED TO DO THIS
+    if varRead("ammo") &lt; 1 and varRead("clip") &lt; 1 and lobby_leader()
     {
-        var temp = varRead("inaccuracy")/varRead("handling")
-        if temp &lt; 0.25
-            varWrite("inaccuracy",0)
-        else
-            varWrite("inaccuracy",temp)
+        if DEBUG
+            printf("destroying empty weapon: "+varRead("uniqueId")+" : "+varRead("name"))
+            
+        instance_destroy_for_everyone(id)
+        exit
     }
+}
+
+//sync up real vars with net vars
+//visible = varRead("visible")
+x = varRead("myX")
+y = varRead("myY")
+
+//inaccuracy and handling
+if varRead("inaccuracy") &gt; 0
+{
+    var temp = varRead("inaccuracy")/(real_speed(varRead("handling")))
+    if temp &lt; 0.25
+        varWrite("inaccuracy",0)
+    else
+        varWrite("inaccuracy",temp)
+}
 
 //LOCAL BEHAVIOR
     if varRead("active")
@@ -476,7 +477,10 @@ dat_jugador = find_player(varRead("my_player"))
         }
     
         if varRead("cant_shoot")
-            varSub("cant_shoot",1)
+            varSub("cant_shoot",real_speed(1))
+        
+        if varRead("cant_shoot") &lt; 0
+            varWrite("cant_shoot",0)
             
         //trigger a reload if empty (and enough time has passed)
         if varRead("clip") &lt; varRead("clip_decrement") and varRead("ammo") &gt; 0 and varRead("reload_counter") &lt; 0

@@ -34,7 +34,6 @@ for (var i=0; i<ds_grid_height(pgrid); i++)
         var kdr = ks
         
     var pts = objVarRead(av,"match_points")
-        
     var ass = objVarRead(av,"match_assists")
     
     bgcolor = team_color_pname(objVarRead(av,"pName"))

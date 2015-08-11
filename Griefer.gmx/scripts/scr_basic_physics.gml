@@ -48,7 +48,7 @@ if !position_meeting(x,bbox_bottom+1,block)
     else grav = 2
     
     if vsp < 40 and not in_snare(id)
-        vsp += grav
+        vsp += real_speed(grav)
 }
 
 //friction
@@ -60,18 +60,18 @@ if position_meeting(x,bbox_bottom+3,block) || standing_2way = true
     {
         gfric = 1
         //make sure you don't damp past zero
-        if abs(hsp) <= 2
+        if abs(real_speed(hsp)) <= 2
         {
-            if abs(hsp) <= 0.5
+            if abs(real_speed(hsp)) <= 0.5
             hsp = 0
             else
             hsp /= 2
         }
         //damp
         if hsp>0
-        hsp -= gfric
+        hsp -= real_speed(gfric)
         if hsp<0
-        hsp += gfric
+        hsp += real_speed(gfric)
         //exit
     }
 }
@@ -85,18 +85,18 @@ if collision_rectangle(bbox_left,bbox_top,bbox_right,bbox_bottom+5,block,true,tr
     {
         gfric = gfric_max
         //make sure you don't damp past zero
-        if abs(hsp) <= 2
+        if abs(real_speed(hsp)) <= 2
         {
-            if abs(hsp) <= 0.5
+            if abs(real_speed(hsp)) <= 0.5
             hsp = 0
             else
             hsp /= 2
         }
         //damp
         if hsp>0
-        hsp -= gfric
+        hsp -= real_speed(gfric)
         if hsp<0
-        hsp += gfric
+        hsp += real_speed(gfric)
         //exit
     }
 }

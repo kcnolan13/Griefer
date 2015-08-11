@@ -72,7 +72,7 @@ wall_delay = 0
 hold = false
 
 //spawn-related stuff
-respawn_counter = 20+ceil(random_range(0,room_speed*2))
+respawn_counter = room_speed*1.5+ceil(random_range(0,room_speed*1))
 double_spawn_counter =0
 respawn_flag = FL_NORMAL
 double_spawn_window = 5
@@ -789,6 +789,7 @@ framely_view_adjust()
           <argument>
             <kind>1</kind>
             <string>///bparts_ready
+
 debug_counter++
 if not bparts_ready and is_string(varRead("helmet0"))
 {       
@@ -876,11 +877,14 @@ if is_bot(id) and net_manager.room_counter &gt; 5
             <kind>1</kind>
             <string>///counters and get assist and player quit
 if not instance_exists(weapon_contemplating)
-    time_since_wepcont ++
+    time_since_wepcont += real_speed(1)
 else time_since_wepcont = 0
 
 if weapon_switch_delay
-    weapon_switch_delay--
+    weapon_switch_delay -= real_speed(1)
+
+if weapon_switch_delay &lt; 0
+    weapon_switch_delay = 0
     
 
 //if alive_counter % room_speed = 0 and net_manager.local_player = id
@@ -908,7 +912,7 @@ if net_manager.local_player = id
     {
         with challenge_manager
         {
-            ninja_time++
+            ninja_time += real_speed(1)
             if ninja_time &gt; acc_data("ninja",COL_NEEDED)*room_speed
             {
                 //printf("::: ninja acc completed -- data in col_needed was: "+string(acc_data("ninja",COL_NEEDED)))
@@ -1079,7 +1083,11 @@ if initial_weapon_spawn_delay
 
 if recovery_delay_counter
 {
-    recovery_delay_counter--
+    recovery_delay_counter -= real_speed(1)
+    
+    if recovery_delay_counter &lt; 1
+        recovery_delay_counter = 0
+        
 } else if varRead("hp") &lt; 100
 {
     varAdd("hp",100/recovery_time)
@@ -1096,7 +1104,11 @@ if recovery_delay_counter
 
 if flash_recovery_delay_counter
 {
-    flash_recovery_delay_counter--
+    flash_recovery_delay_counter -= real_speed(1)
+    
+    if flash_recovery_delay_counter &lt; 1
+        flash_recovery_delay_counter = 0
+        
 } else if varRead("flash_hp") &lt; 100
 {
     varAdd("flash_hp",100/flash_recovery_time)
@@ -1108,11 +1120,14 @@ if flash_recovery_delay_counter
         varWrite("flash_hp",100)
     }
 }
+
 flash_hp_previous = varRead("flash_hp")
 hp_previous = varRead("hp")
 
 if die_timer &gt; 0
-die_timer --
+    die_timer -= real_speed(1)
+else
+    die_timer = 0
 
 if weapon_wheel_alpha &gt; 0
 {
@@ -1123,7 +1138,7 @@ if weapon_wheel_alpha &gt; 0
 }
 
 if mouse_wheel_delay &gt; 0
-mouse_wheel_delay --
+    mouse_wheel_delay --
 
 if weapon_contemplating &gt; -1
     weapon_contemplation_time ++
