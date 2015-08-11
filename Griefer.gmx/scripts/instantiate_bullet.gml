@@ -5,7 +5,7 @@
 if bounces = 0
     audio(varRead("sound"),1)
 
-if (not is_local_player_uid(varRead("senderId")) and not object_index = bullet_torque) and not is_bot(find_player(varRead("senderId")))
+if (not is_local_player_uid(varRead("senderId")) and (not object_index = bullet_torque)) and (not is_bot(find_player(varRead("senderId"))))
     return false
     
 //if object_index = bullet_torque printf("instantiating torque bullet: speed = "+varRead("speed")+", direction = "+varRead("direction"))
@@ -13,7 +13,7 @@ if (not is_local_player_uid(varRead("senderId")) and not object_index = bullet_t
 image_angle = varRead("direction")
 
 //initial collision check
-if not varRead("is_bullet")
+if (not varRead("is_bullet"))
 {
     /*//we are dealing with a tossable
     hsp = trigx(varRead("speed"),varRead("direction"))

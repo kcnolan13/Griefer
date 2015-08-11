@@ -258,7 +258,7 @@ if in_match() and popup_show
     
     if sweep_counter
     {
-        sweep_counter --
+        sweep_counter = sub_real(sweep_counter,1)
     }
  
     if not sweep_counter and not match_ending()

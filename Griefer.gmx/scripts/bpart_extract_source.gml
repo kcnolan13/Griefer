@@ -9,7 +9,7 @@ if not is_string(bpart_string)
     bpart_string = string(bpart_string)
 }
 
-if not string_length(bpart_string) > 4
+if not (string_length(bpart_string) > 4)
 {
     if DEBUG
     printf("ERROR: this does not appear to be a bpart_string")

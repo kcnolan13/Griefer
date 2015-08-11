@@ -21,11 +21,11 @@ repeat (abs(real_speed(hsp)))
     }
     
     var xtra = 1
-    if point_distance(xi_actual,yi_actual,x,y) > abs(hsp)+xtra
+    if point_distance(xi_actual,yi_actual,x,y) > abs(real_speed(hsp))+xtra
     {
         var movdir = point_direction(xi_actual,yi_actual,x,y)
-        x = xi_actual+trigx(abs(hsp)+xtra,movdir)
-        y = yi_actual+trigy(abs(hsp)+xtra,movdir)
+        x = xi_actual+trigx(abs(real_speed(hsp))+xtra,movdir)
+        y = yi_actual+trigy(abs(real_speed(hsp))+xtra,movdir)
         //printf("::: clipped x,y --> movdir = "+string(movdir))
         break
     }

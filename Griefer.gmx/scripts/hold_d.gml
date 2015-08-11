@@ -23,7 +23,7 @@ if x < room_width and slide_left = 0 and redirect_counter = 0
     {
         var accel = accel_walk
         if in_air accel *= accel_air_scaler
-        if hsp < speed_walk/mass hsp += ceil(accel/mass)
+        if hsp < speed_walk/mass hsp += ceil(real_speed(accel/mass))
             
         if varRead("speed_multiplier") < 1
         {
@@ -38,7 +38,7 @@ if x < room_width and slide_left = 0 and redirect_counter = 0
     {
         var accel = accel_crawl
         if in_air accel *= accel_air_scaler
-        if hsp < speed_crawl/mass hsp += ceil(accel/mass)
+        if hsp < speed_crawl/mass hsp += ceil(real_speed(accel/mass))
         
         if varRead("speed_multiplier") < 1
         {

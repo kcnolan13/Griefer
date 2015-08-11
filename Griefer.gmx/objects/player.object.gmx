@@ -457,7 +457,7 @@ if respawn_counter &gt; 0 and (is_my_avatar(id) or is_bot(id))
 {
     if is_bot(id) and DEBUG printf("bot respawn counting down")
     
-    respawn_counter --
+    respawn_counter = sub_real(respawn_counter, 1)
     
     if not respawn_counter
     {
@@ -1463,13 +1463,13 @@ if (varRead("controllable")) or objVarRead(net_manager,"end_match_coming")
     ///walljumping
     if wall_delay &gt; 0 
     {
-        wall_delay --
+        wall_delay = sub_real(wall_delay,1)
         return false
     }
     
     if bail_slide_timer
     {
-        bail_slide_timer --
+        bail_slide_timer = sub_real(bail_slide_timer,1)
     }
     
     can_slide = true
@@ -1552,7 +1552,8 @@ if (varRead("controllable")) or objVarRead(net_manager,"end_match_coming")
             <string>///come out of combat rolls + roll_timer
 if roll_timer
 {
-    roll_timer --
+    roll_timer = sub_real(roll_timer,1)
+    
     if slide_left or slide_right
         roll_timer = 0
 }
@@ -1560,7 +1561,7 @@ if (varRead("controllable")) or objVarRead(net_manager,"end_match_coming")
 {
     if redirect_counter &gt; 0
     {
-        redirect_counter -= 1
+        redirect_counter = sub_real(redirect_counter,1)
         
         if varRead("speed_multiplier") &lt; 1 and rolling = 1
         {

@@ -502,7 +502,7 @@ if varRead("inaccuracy") &gt; 0
             
         if varRead("reload_counter") &gt; 0
         {
-            varSub("reload_counter",1)
+            varWrite("reload_counter",sub_real(varRead("reload_counter"),1))
             if varRead("reload_incremental")
             {
                 if (varRead("reload_time") - varRead("reload_counter") &gt; (varRead("reload_time")/varRead("clip_cap"))*(1+varRead("clip")))

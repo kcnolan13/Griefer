@@ -44,8 +44,8 @@ global.map_colors[rm_rocky,1] = make_color_rgb(30,30,175)
 global.map_texs[rm_rocky] = bg_stone
 global.col_alphas[rm_rocky] = global.col_alpha_default
 
-global.map_colors[rm_torque,0] = make_color_rgb(100,200,100)
-global.map_colors[rm_torque,1] = make_color_rgb(20,20,20)
+global.map_colors[rm_torque,0] = make_color_rgb(100/5,200/5,100/5)
+global.map_colors[rm_torque,1] = make_color_rgb(0,0,0)
 global.map_texs[rm_torque] = bg_dark
 global.col_alphas[rm_torque] = 0.8
 

@@ -281,7 +281,7 @@ if snap_2view = true and snapped = false and counter &gt; 1 and not is_gui
 
 if fade_delay
 {
-    fade_delay --
+    fade_delay = sub_real(fade_delay,1)
     if not fade_delay
     {
         fade_out = true
@@ -290,7 +290,7 @@ if fade_delay
 
 if birth_delay &gt; 0
 {
-    birth_delay --
+    birth_delay = sub_real(birth_delay,1)
     
     if fade_out
         instance_destroy()
@@ -324,7 +324,7 @@ if not popped_in and abs(scale - 1) &lt;= 0.05
 
 if fade_out = true and popped_in
 {
-    alpha -= dec
+    alpha = sub_real(alpha,dec)
     if alpha &lt; 1
     {
         scale = lerp(scale,scale_die,scale_lerp)
@@ -338,6 +338,7 @@ if fade_out = true and popped_in
 if modal_highlighted(id)
 {
     hover_counter ++
+    
     if hover_counter &gt; hover_delay
         show_popup = true
         
