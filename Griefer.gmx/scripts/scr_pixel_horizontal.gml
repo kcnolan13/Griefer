@@ -34,7 +34,7 @@ repeat (abs(real_speed(hsp)))
 //walk down slanted surfaces smoothly
 {
     var yinc = 0
-    var ymax = 80
+    var ymax = real_speed(80)
     if was_standing and not jumping and not collision_rectangle(bbox_left,bbox_bottom,bbox_right,bbox_bottom+sthresh,block,true,false) and not collision_rectangle(bbox_left,bbox_bottom,bbox_right,bbox_bottom+sthresh,block2_top,true,false)
     {
         //printf("::: was standing")

@@ -1042,6 +1042,7 @@
       <script>scripts\acc_total.gml</script>
     </scripts>
     <scripts name="stats">
+      <script>scripts\match_end_stat_updates.gml</script>
       <script>scripts\draw_stat_history_chart.gml</script>
       <script>scripts\draw_stat_meter.gml</script>
       <script>scripts\manage_meters.gml</script>
@@ -1391,7 +1392,6 @@
     </scripts>
     <scripts name="matchmaking">
       <script>scripts\compute_winloss.gml</script>
-      <script>scripts\match_end_stat_updates.gml</script>
       <script>scripts\leave_matchmaking.gml</script>
       <script>scripts\start_matchmaking.gml</script>
       <script>scripts\game_mode_name.gml</script>

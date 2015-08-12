@@ -52,7 +52,7 @@ for (var i=0; i<getLength(meters); i++)
             //keep each meter up-to-date with stats
             if i = METER_KDR
             {
-                var temp_kdr = truncate(varRead("kdr"),2)
+                var temp_kdr = truncate(varRead("kdr"),2)//truncate(varRead("kills") / max(1,varRead("deaths")),2)
                 //printf("::: kdr="+string(varRead("kdr"))+", temp_kdr="+string(temp_kdr))
                 varWrite("kdr",temp_kdr)
                 met.meter_val = varRead("kdr")

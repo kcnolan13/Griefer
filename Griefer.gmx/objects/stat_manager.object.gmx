@@ -447,6 +447,7 @@ if in_match()
     {
         objVarWrite(net_manager.stat_gravatar,"pName",objVarRead(myAvatar(),"pName"))
         grav_name = objVarRead(myAvatar(),"pName")
+        request_personal_stats(objVarRead(myAvatar(),"pName"),stat_flag)
     } else printf("ERROR: stat_manager room start cannot find net_manager.stat_gravatar")
 }
 
