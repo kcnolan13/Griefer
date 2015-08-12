@@ -69,6 +69,11 @@ surf_tex = -99
 {
     free_level_surfaces()
     regen_level_surfaces()
+    
+    //regen challenge slot surfaces
+    with challenge_generic
+        alarm[1] = random_range(1,room_speed/2)
+        
     background_drawer.recompute_parallax = true
 }
 </string>

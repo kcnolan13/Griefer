@@ -337,7 +337,7 @@ if fade_out = true and popped_in
 
 if modal_highlighted(id)
 {
-    hover_counter ++
+    hover_counter += real_speed(1)
     
     if hover_counter &gt; hover_delay
         show_popup = true

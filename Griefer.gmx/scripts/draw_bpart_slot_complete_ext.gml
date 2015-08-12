@@ -12,24 +12,37 @@ if bpart_obj.disabled
     draw_bpart_slot_disabled_ext(bpart_x,bpart_y, scale, bpart_alpha)
 else
 {
-    draw_bpart_slot_ext(bpart_x, bpart_y, scale, bpart_obj.color, bpart_alpha)
+    if bpart_obj.object_index != challenge_generic
+        draw_bpart_slot_ext(bpart_x, bpart_y, scale, bpart_obj.color, bpart_alpha)
+        
     if bpart_obj.object_index != challenge_generic and bpart_obj.object_index != net_manager and bpart_obj.object_index != xp_bar and bpart_obj.object_index != action_word
         draw_bpart_icon_ext(bpart_obj,bpart_x,bpart_y, scale, bpart_alpha)
     else
     {
-        var drawspr = bpart_obj.icon
-        var square_xmid = 72/2*scale
-        var square_ymid = 72/2*scale
-        var proper_scale = scale*scale_2icon(drawspr)//*64/72
-        var spr_xoff = (sprite_get_width(drawspr)/2-sprite_get_xoffset(drawspr))*proper_scale
-        var spr_yoff = (sprite_get_height(drawspr)/2-sprite_get_yoffset(drawspr))*proper_scale
-        
         var dalph = 1
         if object_index = xp_bar or object_index = action_word
             dalph = bpart_alpha
             
-        draw_sprite_ext(drawspr,-1,bpart_x+square_xmid-spr_xoff,bpart_y+square_ymid-spr_yoff,proper_scale,proper_scale,0,c_white,dalph)    
-            
+        if bpart_obj.object_index = challenge_generic and surface_exists(surf_slot)
+        {
+            draw_enable_alphablend(false)
+            draw_surface_ext(surf_slot,bpart_x,bpart_y,scale/2,scale/2,0,c_white,1)    
+            draw_enable_alphablend(true)
+        }
+        else
+        {
+            var drawspr = bpart_obj.icon
+            var square_xmid = 72/2*scale
+            var square_ymid = 72/2*scale
+            var proper_scale = scale*scale_2icon(drawspr)//*64/72
+            var spr_xoff = (sprite_get_width(drawspr)/2-sprite_get_xoffset(drawspr))*proper_scale
+            var spr_yoff = (sprite_get_height(drawspr)/2-sprite_get_yoffset(drawspr))*proper_scale
+            draw_sprite_ext(drawspr,-1,bpart_x+square_xmid-spr_xoff,bpart_y+square_ymid-spr_yoff,proper_scale,proper_scale,0,c_white,dalph)
+        }
+        
+        var square_xmid = 72/2
+        var square_ymid = 72/2
+        
         if bpart_obj.object_index = challenge_generic
         {
             if not bpart_obj.completed

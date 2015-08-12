@@ -253,7 +253,7 @@ counter++
 
 if not stuck //and (not sticky or varRead("local"))
 {
-    vsp += grav
+    vsp += real_speed(grav)
     recalc_tossable_vector()
 }
 
@@ -269,8 +269,8 @@ if not stuck and object_index = bullet_torque
 if spd &gt; 0
 {
     if object_index = bullet_smoke or object_index = bullet_boom or object_index = bullet_thumper or object_index = bullet_rocket or object_index = bullet_flashbang or sticky or object_index = bullet_flame or object_index = bullet_snare or object_index = bullet_ink
-        var inst = hitscan_targets(varRead("myX"), varRead("myY"), varRead("myX") + hsp, varRead("myY") + vsp, shootable_generic, true,false,find_player(varRead("senderId")))
-    else var inst = collision_line_first(varRead("myX"), varRead("myY"), varRead("myX") + hsp, varRead("myY") + vsp, solid_generic, true,true)
+        var inst = hitscan_targets(varRead("myX"), varRead("myY"), varRead("myX") + real_speed(hsp), varRead("myY") + real_speed(vsp), shootable_generic, true,false,find_player(varRead("senderId")))
+    else var inst = collision_line_first(varRead("myX"), varRead("myY"), varRead("myX") + real_speed(hsp), varRead("myY") + real_speed(vsp), solid_generic, true,true)
     if inst //and not have_hit_target
     {
         if DEBUG
@@ -322,8 +322,8 @@ if spd &gt; 0
     }
     else
     {
-        varAdd("myX",hsp)
-        varAdd("myY",vsp)
+        varAdd("myX",real_speed(hsp))
+        varAdd("myY",real_speed(vsp))
     }
 }
 else if not stuck

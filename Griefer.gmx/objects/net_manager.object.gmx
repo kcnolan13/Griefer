@@ -34,7 +34,7 @@ display_set_gui_size(WVIEW,HVIEW)
 
 real_time_init()
 
-show_debug_overlay(false)
+show_debug_overlay(true)
 
 keepalive_timeout = room_speed*2
 keepalive_timer = 15
@@ -1125,7 +1125,7 @@ if instance_exists(NO_HANDLE)
           <argument>
             <kind>1</kind>
             <string>///lobby networking and game mode stuff
-if instance_exists(my_doll) and room = rm_lobby
+if room = rm_lobby and instance_exists(my_doll) 
 {
     if varRead("lobby_wait_time") &lt;= lobby_match_countdown_time
     {
@@ -1144,7 +1144,7 @@ else
     lobby_match_countdown = false
 }
 
-if is_string(varRead("game_mode")) and not bot_match
+if not bot_match and is_string(varRead("game_mode")) 
 {
     if string_count("bot",varRead("game_mode"))
     {
