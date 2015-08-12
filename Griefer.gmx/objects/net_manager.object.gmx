@@ -1903,7 +1903,7 @@ for (var i=0; i&lt;instance_number(player); i++)
 
 if in_match() and force_recompute_scores or ( rtime() mod (room_speed/2) = 0 and sort_worthy and not disable_scores )
 {
-
+    force_recompute_scores = false
     //pull in the match kills for each avatar (which you need to sync from his player)
     for (var i=0; i&lt;instance_number(player); i++)
     {

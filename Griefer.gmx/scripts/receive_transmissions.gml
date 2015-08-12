@@ -165,9 +165,12 @@ while (genMessagesWaiting() and wait_counter < 500000)
         
         case "lock_armory":
             lock_armory = true
+            
             if instance_exists(bn_play_tab)
                 bn_play_tab.active = true
+                
             net_manager.menu_mode = "lobby"
+            varWrite("lobby_wait_time",lobby_match_countdown_time)
         break
         
         case "goto_lobby":
@@ -419,7 +422,7 @@ while (objUpdatesWaiting() and wait_counter < 1000)
                     printf("::: Important Update for "+string(ID.object_index)+" : "+string(netvar)+" = "+string(val))
                     
                     //DON'T DO THE UPDATE IF THE COUNTDOWN HAS STARTED OR IS ABOUT TO
-                    if room = rm_lobby and val > lobby_match_countdown_time
+                    if room = rm_lobby and val > lobby_match_countdown_time+30
                     {
                         with bn_ready
                         {
