@@ -530,6 +530,30 @@ if ds_exists(netvars,ds_type_map)
         </arguments>
       </action>
     </event>
+    <event eventtype="2" enumb="7">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///max room speed
+room_speed = 60
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="2" enumb="6">
       <action>
         <libid>1</libid>
@@ -1597,7 +1621,7 @@ if (room = rm_menu or room = rm_lobby) and (room_counter &gt; room_speed/2 and (
           <argument>
             <kind>1</kind>
             <string>///counters and var syncing to server
-room_counter++
+room_counter += real_speed(1)
 
 if room = rm_lobby
 {
@@ -2070,7 +2094,9 @@ if room = rm_lobby
           <argument>
             <kind>1</kind>
             <string>///DO LOTS OF STUFF
-room_speed = 30
+
+//room_speed = 60 --&gt; now do this after objects that have init based on room speed have a chance to go
+alarm[7] = 2
 
 init_physics()
 
@@ -2524,7 +2550,7 @@ if varRead("end_match_coming") and win_countdown &lt; -90
     win_countdown = match_countdown_max
 }
     
-if ((show_scores &gt; 0) and not varRead("end_match_coming") or (room_counter &gt; room_speed*2 and room_counter &lt; room_speed*7)) and (in_match() and room_counter &gt; room_speed*3)//or room=rm_match_end
+if ((show_scores &gt; 0) and not varRead("end_match_coming") or (room_counter &gt; 30*2 and room_counter &lt; 30*7)) and (in_match() and room_counter &gt; 30*3)//or room=rm_match_end
 {
     var sy = HVIEW/2 - global.row_height*(instance_number(avatar)/2+2)
     var do_draw = true
@@ -2622,7 +2648,7 @@ if room = rm_lobby and came_from_match and not lobby_match_countdown and  menu_m
         draw_score_table(armory_ysep, 64+armory_ysep+12)
 }
 
-if in_match() and not varRead("end_match_coming") and instance_exists(myAvatar()) and room_counter &gt; room_speed*3
+if in_match() and not varRead("end_match_coming") and instance_exists(myAvatar()) and room_counter &gt; 30*3
 {
     var av_head0, av_head1
     var score0, score1
@@ -2672,7 +2698,7 @@ if in_match() and not varRead("end_match_coming") and instance_exists(myAvatar()
 if lobby_match_countdown and room = rm_lobby
 {
     draw_set_color(c_black)
-    draw_set_alpha(0.8 - max(0,(varRead("lobby_wait_time")/room_speed - 3)/10))
+    draw_set_alpha(0.8 - max(0,(varRead("lobby_wait_time")/30 - 3)/10))
     draw_rectangle_colour(0,0,WVIEW,HVIEW,c_black,c_black,c_white,c_white,false)
     draw_set_color(c_white)
     
@@ -2680,7 +2706,7 @@ if lobby_match_countdown and room = rm_lobby
     draw_set_font(fnt_menu)
     draw_set_halign(fa_center)
     draw_set_valign(fa_center)
-    draw_text(WVIEW/2,HVIEW/4,"Match Countdown ... "+string(ceil(varRead("lobby_wait_time")/room_speed)))
+    draw_text(WVIEW/2,HVIEW/4,"Match Countdown ... "+string(ceil(varRead("lobby_wait_time")/30)))
 }
 </string>
           </argument>
@@ -2720,7 +2746,7 @@ if room = rm_menu or room = rm_lobby
         draw_set_valign(fa_bottom)
         draw_text(draw_edge_padding,room_height-draw_edge_padding,game_mode_name(varRead("game_mode")))
         draw_set_halign(fa_center)
-        if room_counter &gt; room_speed*5
+        if room_counter &gt; 30*5
             draw_text(room_width/2,room_height-draw_edge_padding,"Next Map: "+string(global.map_names[map_placeholder1+1+real(varRead("next_map"))]))
     }
      /*   
@@ -2734,14 +2760,14 @@ if room = rm_menu or room = rm_lobby
     draw_set_valign(fa_center)
     draw_set_color(c_black)
     
-    if room = rm_lobby and room_counter &gt; room_speed*3
+    if room = rm_lobby and room_counter &gt; 30*3
     {
         draw_set_halign(fa_right)
         draw_set_valign(fa_bottom)
-        draw_text(room_width-draw_edge_padding,room_height-draw_edge_padding,"Intermission ... "+string(ceil(varRead("lobby_wait_time")/room_speed)))
+        draw_text(room_width-draw_edge_padding,room_height-draw_edge_padding,"Intermission ... "+string(ceil(varRead("lobby_wait_time")/30)))
     }
     
-    if room = rm_menu and room_counter &gt; room_speed*2
+    if room = rm_menu and room_counter &gt; 30*2
     {
         draw_set_halign(fa_left)
         draw_set_valign(fa_bottom)

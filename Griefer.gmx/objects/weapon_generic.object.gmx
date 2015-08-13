@@ -412,7 +412,7 @@ y = varRead("myY")
 //inaccuracy and handling
 if varRead("inaccuracy") &gt; 0
 {
-    var temp = varRead("inaccuracy")/(real_speed(varRead("handling")))
+    var temp = div_real(varRead("inaccuracy"),varRead("handling"))
     if temp &lt; 0.25
         varWrite("inaccuracy",0)
     else
@@ -457,7 +457,9 @@ if varRead("inaccuracy") &gt; 0
     
         if varRead("quicktoss_timer")
         {
-            varSub("quicktoss_timer",1)
+            varSub("quicktoss_timer",real_speed(1))
+            if varRead("quicktoss_timer") &lt; 1
+                varWrite("quicktoss_timer",0)
         }
     
         if varRead("is_nade")
@@ -489,7 +491,7 @@ if varRead("inaccuracy") &gt; 0
             {
                 varWrite("reload_empty_counter",varRead("reload_empty_delay"))
             } else {
-                varSub("reload_empty_counter",1)
+                varSub("reload_empty_counter",sub_real(varRead("reload_empty_counter"),1))
                 if varRead("reload_empty_counter") = 0
                 {
                     //trigger the reload
@@ -502,6 +504,7 @@ if varRead("inaccuracy") &gt; 0
             
         if varRead("reload_counter") &gt; 0
         {
+            printf("::: sub_real(varRead('reload_counter'),1) = "+string(sub_real(varRead("reload_counter"),1)))
             varWrite("reload_counter",sub_real(varRead("reload_counter"),1))
             if varRead("reload_incremental")
             {
