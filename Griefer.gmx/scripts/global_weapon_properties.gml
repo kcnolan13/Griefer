@@ -1,4 +1,4 @@
-global.wspawn_default = 30*room_speed
+global.wspawn_default = 30*30
 global.vulcan = "Vulcan"
 global.pistol = "Derringer"
 global.rifle = "Spitfire"

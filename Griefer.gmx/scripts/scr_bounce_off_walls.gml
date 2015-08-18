@@ -1,7 +1,7 @@
 bounce_type = argument0
 bounce_obj = argument1
 
-//room_speed = 1
+//30 = 1
 if bounce_obj.object_index = block2_top
 scr_move_contact_object(block2_top,direction+180,speed,1)
 else

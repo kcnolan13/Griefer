@@ -1,7 +1,7 @@
 ///sync_my_doll()
 
 if not local_dollsync
-armor_modified = true
+    armor_modified = true
 
 with net_manager
 {
@@ -39,6 +39,7 @@ with net_manager
                 printf("    --not syncing this slot; doesn't exist")
                 continue
             }
+            
             varWrite(var_strs[i]+"0",slot0.icon)
             varWrite(var_strs[i]+"0_src",slot0.source)
             
@@ -47,6 +48,7 @@ with net_manager
             
             obj_pname_update_real(my_doll,var_strs[i]+"0",FL_NORMAL)
             obj_pname_update_real(my_doll,var_strs[i]+"0",FL_NORMAL) //was slot0.icon for some reason
+            
         } else 
         {
             printf("ERROR: cannot sync doll. BAD ARMORY_LIST handle")

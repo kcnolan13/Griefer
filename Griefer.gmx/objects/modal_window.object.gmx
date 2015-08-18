@@ -113,7 +113,7 @@ scale = scale_born
 scale_die = 0.4
 
 scale_highlighted = 1.1
-scale_lerp = 0.7
+scale_lerp_real = 0.7
 
 font = fnt_hud
 text = ""
@@ -327,7 +327,7 @@ if fade_out = true and popped_in
     alpha = sub_real(alpha,dec)
     if alpha &lt; 1
     {
-        scale = lerp(scale,scale_die,scale_lerp)
+        scale = lerp_real(scale,scale_die,scale_lerp_real)
     }
     if alpha &lt; 0.05
         instance_destroy()
@@ -342,23 +342,23 @@ if modal_highlighted(id)
     if hover_counter &gt; hover_delay
         show_popup = true
         
-    scale = lerp(scale,scale_highlighted,scale_lerp)
+    scale = lerp_real(scale,scale_highlighted,scale_lerp_real)
     if not fade_out
     {
-        alpha = lerp(alpha,alpha_highlight,scale_lerp)
+        alpha = lerp_real(alpha,alpha_highlight,scale_lerp_real)
     }
 }
 else
 {
     hover_counter = 0
     show_popup = false
-    scale = lerp(scale,1,scale_lerp)
+    scale = lerp_real(scale,1,scale_lerp_real)
     if not fade_out
     {
         if not active
-            alpha = lerp(alpha,alpha_max,scale_lerp)
+            alpha = lerp_real(alpha,alpha_max,scale_lerp_real)
         else
-            alpha = lerp(alpha,alpha_highlight,scale_lerp)
+            alpha = lerp_real(alpha,alpha_highlight,scale_lerp_real)
     }
 }
 </string>

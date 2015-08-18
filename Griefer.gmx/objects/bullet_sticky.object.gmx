@@ -30,7 +30,7 @@ event_inherited()
 sprite_2draw = spr_sticky
 varWrite("is_bullet",false)
 splosion = splosion_sticky
-cook_time = room_speed*2
+cook_time = 30*2
 start_cook_on_hit = true
 varWrite("sound",snd_jump)
     bullet_sound()
@@ -162,7 +162,7 @@ if myFlash = noone and (stuck or spd &lt; 3)
 {
     noflash_counter ++
     
-    if noflash_counter &gt; room_speed/5
+    if noflash_counter &gt; 30/5
     {
         myFlash = instance_create(x,y,flash_sticky)
         objVarWrite(myFlash,"angle",1)

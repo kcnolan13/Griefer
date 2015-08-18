@@ -31,7 +31,7 @@ intensity_max = 6
 intensity_min = 1
 intensity = intensity_min
 intensity_dir = 1
-intensity_lerp = 0.15
+intensity_lerp_real = 0.15
 
 light = glr_lightsimple_create(spr_light_mask_point,-1, x, y-sprite_get_height(sprite_index)/3, color, 1,  intensity)
 light.yscale = 0.0375
@@ -69,7 +69,7 @@ if intensity_dir = 1
 else
     intensity_target = intensity_min
     
-intensity = lerp(intensity, intensity_target, intensity_lerp)
+intensity = lerp_real(intensity, intensity_target, intensity_lerp_real)
 
 if abs(intensity-intensity_target) &lt; 0.005
     intensity_dir *= -1
@@ -131,7 +131,7 @@ for (var i=0; i&lt;instance_number(rag_generic); i++)
         //printf("launch_angle_before = "+launch_angle)
         
         //add some more verticality to the launch
-        launch_angle = lerp(launch_angle,90,0.5)
+        launch_angle = lerp_real(launch_angle,90,0.5)
         
         //printf("launch_angle REAL = "+launch_angle)
         
@@ -185,7 +185,7 @@ for (var i=0; i&lt;instance_number(player); i++)
         //printf("launch_angle_before = "+launch_angle)
         
         //add some more verticality to the launch
-        launch_angle = lerp(launch_angle,90,0.5)
+        launch_angle = lerp_real(launch_angle,90,0.5)
         
         //printf("launch_angle REAL = "+launch_angle)
         
@@ -235,7 +235,7 @@ for (var i=0; i&lt;instance_number(tossable_generic); i++)
         //printf("launch_angle_before = "+launch_angle)
         
         //add some more verticality to the launch
-        launch_angle = lerp(launch_angle,90,0.5)
+        launch_angle = lerp_real(launch_angle,90,0.5)
         
         //printf("launch_angle REAL = "+launch_angle)
         

@@ -181,7 +181,7 @@ while (genMessagesWaiting() and wait_counter < 500000)
         break
         
         case "force_sync_doll":
-            printf("FORCE-SYNCING DOLL")
+            printf(":::FORCE-SYNCING DOLL")
             with net_manager sync_my_doll()
         break
         
@@ -456,7 +456,7 @@ while (objUpdatesWaiting() and wait_counter < 1000)
     }
     
     //if (obj_index != 1)
-    //if /*SUPER_DEBUG and */((obj_index != 1) or (obj_index = 1 and obj_index.debug_counter < 3*room_speed))
+    //if /*SUPER_DEBUG and */((obj_index != 1) or (obj_index = 1 and obj_index.debug_counter < 3*30))
        // printf("{O}: PROCESSED UPDATE : "+string(obj_index)+"[uId "+string(unique_id)+"] -> " +string(netvar)+" = "+string(objVarRead(ID,netvar)))
 }
 //printf("done objUpdates")

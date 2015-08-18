@@ -79,7 +79,7 @@ alpha_scaler_max = 1
 alpha_scaler = alpha_scaler_max
 alpha_dec = 0.025
 alpha_dec_delay = 0
-alpha_dec_delay_max = room_speed*2
+alpha_dec_delay_max = 30*2
 
 snap_2view = false //does its own
 
@@ -144,10 +144,10 @@ msg_text_width = msg_width - msg_avhead_scale*2*160
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///set lerp targets for all messages
+            <string>///set lerp_real targets for all messages
 event_inherited()
 
-if nth_frame(room_speed)
+if nth_frame(30)
 {
     alpha_scaler_max = 1//average2(global.gc[GC_CHAT_FEED_ALPHA,1],1)
     alpha_max = alpha_max_original//*global.gc[GC_CHAT_FEED_ALPHA,1]
@@ -220,7 +220,7 @@ else
     }
 }
 
-if instance_exists(modal_controls) or rtime() &lt; room_speed
+if instance_exists(modal_controls) or rtime() &lt; 30
     alpha_scaler = 0
 </string>
           </argument>

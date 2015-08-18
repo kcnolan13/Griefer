@@ -1,2 +1,2 @@
 ///rtime()
-return net_manager.room_counter
+return floor(net_manager.room_counter)

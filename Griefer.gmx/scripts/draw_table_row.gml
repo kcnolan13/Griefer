@@ -15,7 +15,7 @@ var deaths = argument9
 var kdr = argument10
 var assists = argument11
 
-var txt_alpha = 1//lerp(global.table_alpha,1,0.5)
+var txt_alpha = 1//lerp_real(global.table_alpha,1,0.5)
 
 draw_set_alpha(global.table_alpha)
 

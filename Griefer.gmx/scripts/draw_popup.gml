@@ -35,8 +35,8 @@ if object_index = popup_drawer
 
 if draw_normal
 {
-    if nth_frame(15)
-    printf("::: drawing not from popup_drawer")
+    //if nth_frame(15)
+      //  printf("::: drawing not from popup_drawer")
     if draw_x = mouse_x and draw_y = mouse_y and global.using_gamepad
     {
         draw_x = cursor.x

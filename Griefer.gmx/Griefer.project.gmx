@@ -637,12 +637,6 @@
       <background>background\bg_animal_overlay</background>
       <background>background\bg_tower_overlay3</background>
     </backgrounds>
-    <backgrounds name="parallax">
-      <background>background\bg_mts1</background>
-      <background>background\bg_mts2</background>
-      <background>background\bg_mts3</background>
-      <background>background\bg_mts4</background>
-    </backgrounds>
     <background>background\tiles_shapes</background>
     <backgrounds name="platforms">
       <background>background\tiles_new</background>
@@ -746,6 +740,9 @@
         <script>scripts\sub_real.gml</script>
         <script>scripts\div_real.gml</script>
         <script>scripts\lerp_real.gml</script>
+        <script>scripts\lerp_real_new.gml</script>
+        <script>scripts\random_real.gml</script>
+        <script>scripts\dice_real.gml</script>
         <script>scripts\scr_bounce_off_walls.gml</script>
         <script>scripts\scr_pull_up.gml</script>
         <script>scripts\unstick_in_direction.gml</script>

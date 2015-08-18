@@ -28,7 +28,7 @@
             <string>///Initialize
 instance_create(x,y,lighting)
 
-fade_time = 5*room_speed
+fade_time = 5*30
 //blend for source blood pixel color
 blood_src =  bm_src_alpha  
 //blend for destination pixel color (pixel to be drawn to)
@@ -41,8 +41,10 @@ draw_app_surface = 1
 draw_surf_mode = 0
 
 bfade_delay = 0
-bfade_max = room_speed*3
+bfade_max = 30*3
 surf_tex = -99
+
+draw_mode = 0
 </string>
           </argument>
         </arguments>
@@ -69,10 +71,6 @@ surf_tex = -99
 {
     free_level_surfaces()
     regen_level_surfaces()
-    
-    //regen challenge slot surfaces
-    with challenge_generic
-        alarm[1] = random_range(1,room_speed/2)
         
     background_drawer.recompute_parallax = true
 }
@@ -174,9 +172,9 @@ free_level_surfaces()
 if not net_manager.tg_blood.active return false
 
 if bfade_delay
-    bfade_delay--
+    bfade_delay--    
 
-if surface_exists(surf_blood) and surface_exists(surf_blocks_inverse) and surface_exists(surf_tex)
+if (surface_exists(surf_blood) and surface_exists(surf_blocks_inverse) and surface_exists(surf_tex))
 {
     if draw_surf_mode = 0 {
         surface_set_target(surf_tex)
@@ -217,21 +215,49 @@ if surface_exists(surf_blood) and surface_exists(surf_blocks_inverse) and surfac
     }
 
 }
-
-if DEBUG
-{
-    draw_set_font(fnt_hud)
-    draw_set_color(c_white)
-    draw_set_halign(fa_left)
-    draw_set_valign(fa_top)
-    draw_text(view_xview,view_yview+8,"blood_src = "+string(blood_src))
-    draw_text(view_xview,view_yview+28,"blood_dest = "+string(blood_dest))
-    draw_text(view_xview,view_yview+48,"blood_surf_src = "+string(blood_surf_src))
-    draw_text(view_xview,view_yview+68,"blood_surf_dest = "+string(blood_surf_dest))
-}
 </string>
           </argument>
         </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="79">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///draw mode
+draw_mode ++
+if draw_mode &gt; 2
+    draw_mode = 0
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>425</id>
+        <kind>4</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
       </action>
     </event>
     <event eventtype="9" enumb="76">

@@ -43,7 +43,7 @@ alpha_scaler_max = 1
 alpha_scaler = alpha_scaler_max
 alpha_dec = 0.025
 alpha_dec_delay = 0
-alpha_dec_delay_max = room_speed*2
+alpha_dec_delay_max = 30*2
 
 snap_2view = false //does its own
 
@@ -111,10 +111,10 @@ msg_text_width = msg_width - msg_avhead_scale*2*120
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///set lerp targets for all messages
+            <string>///set lerp_real targets for all messages
 event_inherited()
 
-if nth_frame(room_speed)
+if nth_frame(30)
 {
     alpha_scaler_max = 1//average2(global.gc[GC_KILL_FEED_ALPHA,1],1)
     alpha_max = alpha_max_original//*global.gc[GC_KILL_FEED_ALPHA,1]
@@ -167,10 +167,10 @@ if not in_match()
         spr = floor(random_range(spr_weapon_placeholder1,spr_weapon_placeholder2+0.99))
     }
 
-    if nth_frame(room_speed*3)
+    if nth_frame(30*3)
         new_kill_feed_message("kyle","kyle",spr)
         
-    if nth_frame(room_speed*5)
+    if nth_frame(30*5)
         new_kill_feed_message("kyle",0,"10 Kill Streak")
     */
 }

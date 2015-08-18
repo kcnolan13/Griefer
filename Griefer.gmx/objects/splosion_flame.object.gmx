@@ -44,9 +44,9 @@ part_off = 64*2
 speed_multiplier = 1//random_range(0.9,0.91)
 damage_burning = 0.25*6.5/8
 
-life = room_speed*8/4
+life = 30*8/4
 part_life = particle_controller.flame_part_life
-linger_time = 10*room_speed // was 10
+linger_time = 10*30 // was 10
 
 em = part_emitter_create(particle_controller.sys_flame)
 part_emitter_region(particle_controller.sys_flame,em,x-random(part_off),x+random(part_off),y-random(part_off),y+random(part_off),ps_shape_ellipse,ps_distr_gaussian)
@@ -152,7 +152,7 @@ if not part_system_exists(particle_controller.sys_flame)
     exit
 }
 
-counter++
+counter += real_speed(1)
 
 part_emitter_region(particle_controller.sys_flame,em,x-random(part_off),x+random(part_off),y-random(part_off),y+random(part_off),ps_shape_ellipse,ps_distr_gaussian)
 
@@ -175,7 +175,7 @@ if varRead("local")
     {
         dat_playa = instance_find(player,ind)
         
-        if ((counter &lt; life+part_life/3 and in_my_flame(dat_playa)) or objVarRead(dat_playa,"fire_counter")) and objVarRead(dat_playa,"alive") and objVarRead(dat_playa,"hp") &gt; 0 and dat_playa.alive_counter &gt; room_speed*2
+        if ((counter &lt; life+part_life/3 and in_my_flame(dat_playa)) or objVarRead(dat_playa,"fire_counter")) and objVarRead(dat_playa,"alive") and objVarRead(dat_playa,"hp") &gt; 0 and dat_playa.alive_counter &gt; 30*2
         {
             //objVarWrite(dat_playa,"speed_multiplier",speed_multiplier)
             //obj_update_real(dat_playa,"speed_multiplier",FL_NORMAL)

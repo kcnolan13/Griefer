@@ -102,7 +102,7 @@ for (var i=0; i<NUM_PROPS-1; i++)
                 
                 if hovering > hover_delay
                 {
-                    popup_alpha = lerp(popup_alpha,1,popup_lerp)
+                    popup_alpha = lerp_real(popup_alpha,1,popup_lerp_real)
                     if not contemplating_scrap
                     {   
                         draw_popup_with_drawer(x,y,name,global.name_rarity[rarity]+" "+lookup_limb_type_name(limb_type),source,compute_body_text_override(id),color,1,icon)

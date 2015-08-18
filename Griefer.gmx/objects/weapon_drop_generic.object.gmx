@@ -29,7 +29,7 @@
 
 //properties
 weapon = weapon_frag
-respawn_delay = 5*room_speed
+respawn_delay = 5*30
 wait_till_weapon_gone = false
 
 
@@ -62,7 +62,7 @@ pos_was_occupied = false
             <string>///spawn weapons when ready ---&gt; ONLY PLAYER 0 ACTUALLY DOES THIS
 if not instance_exists(net_manager.local_player) 
 {
-    if rtime() &gt; room_speed*3
+    if rtime() &gt; 30*3
         printf("ERROR: local player does not exist")
         
     //always exit
@@ -113,7 +113,7 @@ if respawn_counter
                         if DEBUG
                             printf("unable to respawn weapon --&gt; already one at drop ... trying again in 10 sec.")
 
-                        respawn_counter = room_speed*10
+                        respawn_counter = 30*10
                     }
                 }
                 else
@@ -127,7 +127,7 @@ if respawn_counter
                 if DEBUG
                     printf("unable to respawn weapon --&gt; still usable ... trying again in 10 seconds")
 
-                respawn_counter = room_speed*10
+                respawn_counter = 30*10
             }
         }
     }

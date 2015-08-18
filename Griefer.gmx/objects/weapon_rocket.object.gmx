@@ -63,7 +63,7 @@ varWrite("clip",varRead("clip_cap"))
 varWrite("starting_ammo",4*varRead("clip_cap"))
 varWrite("max_ammo",8*varRead("clip_cap"))
 varWrite("ammo",varRead("starting_ammo"))
-varWrite("reload_time",ceil(2*room_speed))
+varWrite("reload_time",ceil(2*30))
 
 //shooting mechanics
 varWrite("view_scale",1.2)

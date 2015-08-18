@@ -36,14 +36,16 @@ real_time_init()
 
 show_debug_overlay(true)
 
-keepalive_timeout = room_speed*2
+force_sync_countdown = 0
+
+keepalive_timeout = 30*2
 keepalive_timer = 15
 
 master_scale = 1
 match_scale = 0.9
 
 lobby_match_countdown = false
-lobby_match_countdown_time = 10*room_speed
+lobby_match_countdown_time = 10*30
 
 seed = 30
 
@@ -121,7 +123,7 @@ packets_received = 0
 frames_elapsed = 0
 lossless_resolution = 10
 test_complete_counter = 0
-intertest_delay = room_speed
+intertest_delay = 30
 
 //transmission rates
 show_trans_rate = false
@@ -191,11 +193,11 @@ av_xbd = 36
 av_ybd = 48
 
 //META GAME
-alarm[4] = room_speed*5
-lottery_time = 6*room_speed
-lottery_calc_time = 3*room_speed
-steal_time = 5*room_speed
-steal_calc_time = 3*room_speed
+alarm[4] = 30*5
+lottery_time = 6*30
+lottery_calc_time = 3*30
+steal_time = 5*30
+steal_calc_time = 3*30
 mode_total = lottery_time+steal_time
 lotto_comein_offset = 15
 slot_scale_deciding = 1
@@ -207,7 +209,7 @@ lotto_slot_scale[2] = slot_scale_init
 steal_slot_scale = slot_scale_init
 purge_pending = false
 
-slot_lerp = 0.1
+slot_lerp_real = 0.1
 
 computed_winloss = false
 
@@ -220,11 +222,11 @@ mode_counter = 0
 
 came_from_match = false
 draw_edge_padding = 8
-lobby_wait_time = 45*room_speed
+lobby_wait_time = 45*30
 lock_armory = false
 num_players = 1
 saving_armor = 0
-saving_armor_max = 2*room_speed
+saving_armor_max = 2*30
 saving_armor_reboot = false
 show_avatar = false
 local_dollsync = false
@@ -389,7 +391,7 @@ debug_autoplay = false
 show_scores = 0
 
 starting_match = 0
-starting_match_delay = 12*room_speed
+starting_match_delay = 12*30
 
 hide_spawn_text = false
 
@@ -416,9 +418,9 @@ room_counter = 0
 
 //stuff that should be reset when you enter a match
 respawn_counter = 0
-respawn_delay = room_speed*3
+respawn_delay = 30*3
 match_countdown = -99
-match_countdown_max = room_speed*10
+match_countdown_max = 30*10
 gear_lost = false
 
 p1Stats = ds_map_create()
@@ -684,7 +686,7 @@ else
         printf("knowledge base intact")
 }
 
-alarm[4] = room_speed*5
+alarm[4] = 30*5
 </string>
           </argument>
         </arguments>
@@ -805,7 +807,7 @@ if varRead("game_mode") = "bot_versus"
 
 if varRead("game_mode") = "tdm"
 {
-    respawn_delay = room_speed*5
+    respawn_delay = 30*5
     varWrite("using_teams",true)
     kill_limit = tdm_kill_limit
     if objVarRead(local_player,"pNum") &gt;= ceil(num_players/2)
@@ -859,7 +861,7 @@ else if varRead("game_mode") = "versus"
           <argument>
             <kind>1</kind>
             <string>///view zooming
-if room_counter &lt; room_speed*15 and nth_frame(10) and instance_exists(local_player)
+if room_counter &lt; 30*15 and nth_frame(10) and instance_exists(local_player)
 {
     objVarWrite(local_player,"bot",bot_override)  
     //printf("ERROR (not): writing local_player.bot to "+string(bot_override))
@@ -873,11 +875,11 @@ draw_killed_by = false
 if match_starting() or match_ending() and not instance_exists(modal_controls)
 {
     do_zoom = true
-    view_lerp = 0.06
+    view_lerp_real = 0.06
     view_xtarget = room_width/2
     view_ytarget = room_height/2
     
-    if room_counter &lt; 7.5*room_speed
+    if room_counter &lt; 7.5*30
     {
         view_overscaler = 1.65
     }
@@ -885,17 +887,17 @@ if match_starting() or match_ending() and not instance_exists(modal_controls)
     { 
         if instance_exists(local_player) and objVarRead(local_player,"visible") and objVarRead(local_player,"alive")
         {
-            view_xtarget = lerp(view_xview+view_wview/2,local_player.x,view_lerp) //objVarRead(local_player,"myX")
-            view_ytarget = lerp(view_yview+view_hview/2,local_player.y,view_lerp) //objVarRead(local_player,"myY")
+            view_xtarget = lerp_real(view_xview+view_wview/2,local_player.x,view_lerp_real) //objVarRead(local_player,"myX")
+            view_ytarget = lerp_real(view_yview+view_hview/2,local_player.y,view_lerp_real) //objVarRead(local_player,"myY")
             //printf("targeting local_player: "+objVarRead(local_player,"pName")+": @ ("+view_xtarget+", "+view_ytarget+")")
         }
         else
         {
-            view_xtarget = lerp(view_xview+view_wview/2,room_width/2,view_lerp)
-            view_ytarget = lerp(view_yview+view_hview/2,room_height/2,view_lerp)
+            view_xtarget = lerp_real(view_xview+view_wview/2,room_width/2,view_lerp_real)
+            view_ytarget = lerp_real(view_yview+view_hview/2,room_height/2,view_lerp_real)
         }
         
-        if room_counter &lt; 10.5*room_speed and instance_exists(local_player) and objVarRead(local_player,"visible")
+        if room_counter &lt; 10.5*30 and instance_exists(local_player) and objVarRead(local_player,"visible")
         {
             view_overscaler = 0.55
         }
@@ -918,13 +920,13 @@ else if (instance_exists(local_player) and is_bot(local_player))
     if bot_focus_counter &lt; 1
         bot_focus_counter = 0
         
-    view_lerp = 0.06
+    view_lerp_real = 0.06
     
     if bot_focus_counter and instance_exists(bot_focus)
     {
         view_overscaler = 0.85
-        view_xtarget = lerp(view_xview+view_wview/2,bot_focus.x,view_lerp)
-        view_ytarget = lerp(view_yview+view_hview/2,bot_focus.y,view_lerp)
+        view_xtarget = lerp_real(view_xview+view_wview/2,bot_focus.x,view_lerp_real)
+        view_ytarget = lerp_real(view_yview+view_hview/2,bot_focus.y,view_lerp_real)
         if not objVarRead(bot_focus,"alive")
         {
             bot_focus_counter = 0
@@ -933,9 +935,9 @@ else if (instance_exists(local_player) and is_bot(local_player))
     else
     {
         view_overscaler = 2
-        view_xtarget = lerp(view_xview+view_wview/2,room_width/2,view_lerp)
-        view_ytarget = lerp(view_yview+view_hview/2,room_height/2,view_lerp)
-        if random(1) &lt; 1/(2*room_speed)
+        view_xtarget = lerp_real(view_xview+view_wview/2,room_width/2,view_lerp_real)
+        view_ytarget = lerp_real(view_yview+view_hview/2,room_height/2,view_lerp_real)
+        if random(1) &lt; 1/(2*30)
         {
             var target_ind = floor(random_range(0,instance_number(player)+0.99))
             bot_focus = instance_find(player,target_ind)
@@ -945,7 +947,7 @@ else if (instance_exists(local_player) and is_bot(local_player))
             else
             {
                 printf("ERROR (not): focusing on new bot")
-                bot_focus_counter = random_range(4*room_speed,6*room_speed)
+                bot_focus_counter = random_range(4*30,6*30)
             }
         }
     }
@@ -955,10 +957,10 @@ else if instance_exists(local_player) and not objVarRead(local_player,"alive") a
 {
     draw_killed_by = true
     do_zoom = true
-    view_lerp = 0.25
-    view_overscaler = lerp(view_overscaler,view_overscaler_target,0.05)
-    view_xtarget = lerp(view_xview+view_wview/2,rag_target.x,view_lerp)
-    view_ytarget = lerp(view_yview+view_hview/2,rag_target.y,view_lerp)
+    view_lerp_real = 0.25
+    view_overscaler = lerp_real(view_overscaler,view_overscaler_target,0.05)
+    view_xtarget = lerp_real(view_xview+view_wview/2,rag_target.x,view_lerp_real)
+    view_ytarget = lerp_real(view_yview+view_hview/2,rag_target.y,view_lerp_real)
 }
 
 //view zooming
@@ -977,8 +979,8 @@ if do_zoom
         view_hwidth = 16/9*view_vwidth
     }
     
-    view_wview = ceil(lerp(view_wview,view_hwidth,view_lerp))
-    view_hview = ceil(lerp(view_hview,view_vwidth,view_lerp))
+    view_wview = ceil(lerp_real(view_wview,view_hwidth,view_lerp_real))
+    view_hview = ceil(lerp_real(view_hview,view_vwidth,view_lerp_real))
     
     if instance_exists(modal_controls) and in_match()
     {
@@ -986,8 +988,8 @@ if do_zoom
         view_hview = 9/16*1365
     }
     
-    view_xview = view_xtarget - view_wview/2//lerp(view_xview, view_xtarget - view_wview/2,view_lerp)
-    view_yview = view_ytarget - view_hview/2//lerp(view_xview, view_ytarget - view_hview/2,view_lerp)
+    view_xview = view_xtarget - view_wview/2//lerp_real(view_xview, view_xtarget - view_wview/2,view_lerp_real)
+    view_yview = view_ytarget - view_hview/2//lerp_real(view_xview, view_ytarget - view_hview/2,view_lerp_real)
     
     keep_view_in_bounds()
 }
@@ -1041,7 +1043,17 @@ if keyboard_check(vk_control) and keyboard_check(vk_alt) and keyboard_check(vk_b
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///keepalive
+            <string>///keepalive and force sync
+
+if force_sync_countdown
+{
+    force_sync_countdown --
+    if not force_sync_countdown
+    {
+        sync_my_doll()
+        sendMessageReal("force_sync_doll",1)
+    }
+}
 
 if keepalive_timer
 {
@@ -1155,12 +1167,21 @@ if room = rm_lobby and instance_exists(my_doll)
     {
         lobby_match_countdown = true
     }
-    else if objVarRead(my_doll,"pNum") = 0
+    else
     {
-        if SUPER_DEBUG
-            printf("sending lobby wait time")
-        //send lobby wait time to everyone else @ 1 Hz if you are player 0
-        obj_sendval_real(id,"lobby_wait_time",varRead("lobby_wait_time"),FL_NORMAL)
+        //override whatever the lobby_wait_time thinks it is if you got a lock_armory
+        if lock_armory
+        {
+            varWrite("lobby_wait_time",lobby_match_countdown_time)
+        }
+        
+        if objVarRead(my_doll,"pNum") = 0
+        {
+            if SUPER_DEBUG
+                printf("sending lobby wait time")
+            //send lobby wait time to everyone else @ 1 Hz if you are player 0
+            obj_sendval_real(id,"lobby_wait_time",varRead("lobby_wait_time"),FL_NORMAL)
+        }
     }
 }
 else 
@@ -1242,13 +1263,13 @@ if room = rm_menu and instance_exists(my_doll) and instance_exists(stat_gravatar
         
     var curscale = objVarRead(datObj,"animation_scale")
         
-        //avatar popups and scale lerping
+        //avatar popups and scale lerp_realing
         if av_popup != noone or not collision_rectangle(datObj.x-curscale*av_xbd, datObj.y-curscale*av_ybd, datObj.x+curscale*av_xbd, datObj.y+curscale*av_ybd, cursor, false, false)
         {
             if menu_mode != "armory"
-                objVarWrite(datObj,"animation_scale",lerp(objVarRead(datObj,"animation_scale"),av_scale_play,0.1))
+                objVarWrite(datObj,"animation_scale",lerp_real(objVarRead(datObj,"animation_scale"),av_scale_play,0.1))
             else
-                objVarWrite(datObj,"animation_scale",lerp(objVarRead(datObj,"animation_scale"),av_scale_menu,0.1))
+                objVarWrite(datObj,"animation_scale",lerp_real(objVarRead(datObj,"animation_scale"),av_scale_menu,0.1))
         }
         else
         {
@@ -1258,7 +1279,7 @@ if room = rm_menu and instance_exists(my_doll) and instance_exists(stat_gravatar
                 av_scale_highlighted = av_scale_highlighted_normal*(av_scale_play/av_scale_menu)
             else av_scale_highlighted = av_scale_highlighted_normal
             
-            objVarWrite(datObj,"animation_scale",lerp(objVarRead(datObj,"animation_scale"),av_scale_highlighted,0.25))
+            objVarWrite(datObj,"animation_scale",lerp_real(objVarRead(datObj,"animation_scale"),av_scale_highlighted,0.25))
         }
 }
 
@@ -1301,13 +1322,13 @@ if room = rm_lobby
         
         var curscale = objVarRead(ID,"animation_scale")
         
-        //avatar popups and scale lerping
+        //avatar popups and scale lerp_realing
         if av_popup != noone or not collision_rectangle(ID.x-curscale*av_xbd, ID.y-curscale*av_ybd, ID.x+curscale*av_xbd, ID.y+curscale*av_ybd, cursor, false, false)
         {
             if menu_mode != "armory" or not is_my_avatar(ID)
-                objVarWrite(ID,"animation_scale",lerp(objVarRead(ID,"animation_scale"),av_scale_lobby,0.1))
+                objVarWrite(ID,"animation_scale",lerp_real(objVarRead(ID,"animation_scale"),av_scale_lobby,0.1))
             else
-                objVarWrite(ID,"animation_scale",lerp(objVarRead(ID,"animation_scale"),av_scale_menu,0.1))
+                objVarWrite(ID,"animation_scale",lerp_real(objVarRead(ID,"animation_scale"),av_scale_menu,0.1))
         }
         else
         {
@@ -1316,7 +1337,7 @@ if room = rm_lobby
             if menu_mode = "armory"
                 av_scale_highlighted = av_scale_highlighted_normal*(av_scale_menu/av_scale_lobby)
             
-            objVarWrite(ID,"animation_scale",lerp(objVarRead(ID,"animation_scale"),av_scale_highlighted,0.25))
+            objVarWrite(ID,"animation_scale",lerp_real(objVarRead(ID,"animation_scale"),av_scale_highlighted,0.25))
         }
         
         switch (menu_mode)
@@ -1553,7 +1574,7 @@ for (var i=0; i&lt;NUM_BPARTS; i++)
           <argument>
             <kind>1</kind>
             <string>///create menu avatars
-if (room = rm_menu or room = rm_lobby) and (room_counter &gt; room_speed/2 and (not show_avatar or my_doll = noone) and bparts_all_ready())
+if (room = rm_menu or room = rm_lobby) and (room_counter &gt; 30/2 and (not show_avatar or my_doll = noone) and bparts_all_ready())
 {
     my_doll = find_pname_avatar(varRead("pName"))
     if my_doll != noone
@@ -1642,7 +1663,7 @@ if starting_match
     if starting_match &lt; 1
         starting_match = 0
     
-    if starting_match and starting_match &lt; room_speed and not varRead("match_started")
+    if starting_match and starting_match &lt; 30 and not varRead("match_started")
     {
         obj_sendval_real(id, "match_started", 1, FL_NORMAL)
         varWrite("match_started",2)
@@ -1650,7 +1671,7 @@ if starting_match
     
     if varRead("match_started") = 1 and starting_match
     {
-        starting_match = room_speed
+        starting_match = 30
         varWrite("match_started",2)
     }
     
@@ -1696,7 +1717,7 @@ rank_before = varRead("rank")
             <string>///dat networking do
 if instance_exists(local_player)
 {
-    //if room_counter &gt; room_speed*2
+    //if room_counter &gt; 30*2
     //sort_players()
    // printf("sending frame")
     send_frame()
@@ -1726,7 +1747,7 @@ receive_transmissions()
             <kind>1</kind>
             <string>///END MATCH CONDITION -- gear stealing and lottery and whatnot
 
-if instance_number(player) &gt; 0 and room_counter &gt; 10*room_speed
+if instance_number(player) &gt; 0 and room_counter &gt; 10*30
 {
     if (match_countdown &gt; 0)
     {
@@ -1896,7 +1917,7 @@ if varRead("end_match_coming")
           <argument>
             <kind>1</kind>
             <string>///SCORES -- SORT, HIDE, SHOW, RECOMPUTE
-if (keyboard_check_pressed(vk_tab) or (global.using_gamepad and gamepad_button_check_pressed(global.devno,gp_select))) and instance_number(player) &gt; 0 and room_counter &gt; room_speed
+if (keyboard_check_pressed(vk_tab) or (global.using_gamepad and gamepad_button_check_pressed(global.devno,gp_select))) and instance_number(player) &gt; 0 and room_counter &gt; 30
 {
     //printf("hiding scores")
     show_scores ^= 1
@@ -1925,7 +1946,7 @@ for (var i=0; i&lt;instance_number(player); i++)
     }
 }
 
-if in_match() and force_recompute_scores or ( rtime() mod (room_speed/2) = 0 and sort_worthy and not disable_scores )
+if in_match() and force_recompute_scores or ( rtime() mod (30/2) = 0 and sort_worthy and not disable_scores )
 {
     force_recompute_scores = false
     //pull in the match kills for each avatar (which you need to sync from his player)
@@ -2095,7 +2116,7 @@ if room = rm_lobby
             <kind>1</kind>
             <string>///DO LOTS OF STUFF
 
-//room_speed = 60 --&gt; now do this after objects that have init based on room speed have a chance to go
+//30 = 60 --&gt; now do this after objects that have init based on room speed have a chance to go
 alarm[7] = 2
 
 init_physics()
@@ -2125,7 +2146,7 @@ win_popup_scale = 0.5
 win_popup_scale_max = 1.5
 win_popup_width = 72*3.25
 win_popup_height = 72*3
-win_popup_lerp = 0.035//25
+win_popup_lerp_real = 0.035//25
 win_color = c_white
 win_popup_alpha = 0
 win_popup_alpha_max = 0.75
@@ -2141,10 +2162,10 @@ if room = rm_lobby
         instantiate_all_bots(get_player_limit(varRead("game_mode"))-1)
     }
     
-    alarm[3] = room_speed*5
-    //alarm[3] = floor(random_range(room_speed*4,room_speed*8))
+    alarm[3] = 30*5
+    //alarm[3] = floor(random_range(30*4,30*8))
     saving_armor = false
-    if varRead("lobby_wait_time") &lt; room_speed*20
+    if varRead("lobby_wait_time") &lt; 30*20
         varWrite("lobby_wait_time",lobby_wait_time)
     lock_armory = false
     menu_mode = "lobby"
@@ -2216,7 +2237,7 @@ if in_match()
     team0 = ds_grid_create(3,ceil(instance_number(avatar)/2))
     
     //give 3 seconds before populating team datastructures
-    alarm[6] = 3*room_speed
+    alarm[6] = 3*30
     
 
     varWrite("match_flag",FL_NEUTRAL)
@@ -2413,7 +2434,7 @@ if not match_ending()
         draw_set_color(c_white)
         draw_set_halign(fa_center)
         draw_set_valign(fa_center)
-        draw_text(0+WVIEW/2,0+HVIEW*1/4,"Starting Match . . . "+string(ceil(starting_match/room_speed)))
+        draw_text(0+WVIEW/2,0+HVIEW*1/4,"Starting Match . . . "+string(ceil(starting_match/30)))
         draw_text(0+WVIEW/2,0+72,string(game_mode_name(varRead("game_mode")))+" on "+string(global.map_names[room]))
     }
     
@@ -2460,8 +2481,8 @@ if not match_ending()
     
     if bot_override
     {
-        /*if instance_exists(local_player) and in_match() and rtime() &gt; room_speed 
-            and nth_frame(5*room_speed)
+        /*if instance_exists(local_player) and in_match() and rtime() &gt; 30 
+            and nth_frame(5*30)
         {
             objVarWrite(local_player,"rank",ceil(random_range(5,25)))   
         }*/
@@ -2487,9 +2508,9 @@ if not match_ending()
                         draw_set_halign(fa_center)
                         draw_set_valign(fa_center)
                         if local_player.spawn_fail_message = ""
-                            draw_text(0+WVIEW/2,0+HVIEW/2,"Respawning . . . "+string(ceil(local_player.respawn_counter/room_speed)))
+                            draw_text(0+WVIEW/2,0+HVIEW/2,"Respawning . . . "+string(ceil(local_player.respawn_counter/30)))
                         else
-                            draw_text(0+WVIEW/2,0+HVIEW/2,local_player.spawn_fail_message+" "+string(ceil(local_player.respawn_counter/room_speed)))
+                            draw_text(0+WVIEW/2,0+HVIEW/2,local_player.spawn_fail_message+" "+string(ceil(local_player.respawn_counter/30)))
                     }
             }
     
@@ -2628,8 +2649,8 @@ if varRead("end_match_coming")
             }
         }
         
-        win_popup_scale = lerp(win_popup_scale,win_popup_scale_max,win_popup_lerp)
-        win_popup_alpha = lerp(win_popup_alpha,win_popup_alpha_max,win_popup_lerp)
+        win_popup_scale = lerp_real(win_popup_scale,win_popup_scale_max,win_popup_lerp_real)
+        win_popup_alpha = lerp_real(win_popup_alpha,win_popup_alpha_max,win_popup_lerp_real)
         draw_set_font(fnt_hud_big)
         //NOW DRAW THE WIN POPUP
         draw_win_popup_centered(WVIEW/2,HVIEW/2,win_popup_width,win_popup_height,win_color,win_popup_scale,win_popup_alpha,av_head,titulo,subtitulo)
@@ -2879,7 +2900,7 @@ if room = rm_login
     draw_set_color(c_black)
     draw_set_halign(fa_center)
     draw_set_valign(fa_center)
-    var ts_lerp = 0.5
+    var ts_lerp_real = 0.5
     var ts_target = 1
     
     if instance_place(cursor.x,cursor.y,title)
@@ -2887,7 +2908,7 @@ if room = rm_login
     else
         ts_target = title_scale_min
         
-    title_scale = lerp(title_scale,ts_target,ts_lerp)
+    title_scale = lerp_real(title_scale,ts_target,ts_lerp_real)
     
     if abs(title_scale - ts_target) &lt; 0.05
         title_scale = ts_target
@@ -2972,7 +2993,7 @@ if (room = rm_menu or room = rm_lobby) and string(menu_mode) = "armory" and inst
                     hovering ++
                     if hovering &gt; hover_delay
                     {
-                        popup_alpha = lerp(popup_alpha,1,popup_lerp)
+                        popup_alpha = lerp_real(popup_alpha,1,popup_lerp_real)
                         if other.id.armory_disabled[i] = false
                             draw_popup_with_drawer(x,y,name,string(global.name_rarity[rarity])+" "+lookup_limb_type_name(limb_type),source,compute_body_text_override(id),color,1,icon)
                         else with other.id
@@ -3026,7 +3047,7 @@ if (room = rm_menu or room = rm_lobby) and string(menu_mode) = "armory" and inst
                         if not armory_alphas[i] = 1
                             audio_play_sound(snd_scroll,2,false)
                             
-                        armory_alphas[i] = 1//lerp(armory_alphas[i],1,0.25)
+                        armory_alphas[i] = 1//lerp_real(armory_alphas[i],1,0.25)
                         //compute grid coordinates
                         if first_bpart.x &lt; my_doll.x
                         {
@@ -3058,7 +3079,7 @@ if (room = rm_menu or room = rm_lobby) and string(menu_mode) = "armory" and inst
                         //should fade
                         tol = 5
                         if cursor.x &lt; grid_left-tol or cursor.x &gt; grid_right+tol or cursor.y &lt; grid_top-tol or cursor.y &gt; grid_bottom+tol
-                        armory_alphas[i] = 0//lerp(armory_alphas[i],0,0.25)   
+                        armory_alphas[i] = 0//lerp_real(armory_alphas[i],0,0.25)   
                     }
                 }
             }
@@ -3246,7 +3267,7 @@ if lotto_counter &gt; lotto_delay and instance_exists(xp_bar.aw)
                 if mode_counter &gt; lottery_time-lottery_calc_time-lotto_slot_index*lotto_comein_offset
                 {
                     //draw the slot in progress
-                    lotto_slot_scale[lotto_slot_index] = lerp(lotto_slot_scale[lotto_slot_index],slot_scale_deciding,slot_lerp)
+                    lotto_slot_scale[lotto_slot_index] = lerp_real(lotto_slot_scale[lotto_slot_index],slot_scale_deciding,slot_lerp_real)
                     draw_lotsteal_slot_thinking(slot_xoff,slot_yoff,lotto_slot_scale[lotto_slot_index],1,dat_spr_do)
                     if not audio_is_playing(snd_scroll3)
                         audio_play_sound(snd_scroll3,1,false)
@@ -3260,7 +3281,7 @@ if lotto_counter &gt; lotto_delay and instance_exists(xp_bar.aw)
                         else
                             audio_play_sound(snd_item_new,3,false)
                     }
-                    lotto_slot_scale[lotto_slot_index] = lerp(lotto_slot_scale[lotto_slot_index],slot_scale_decided,slot_lerp)
+                    lotto_slot_scale[lotto_slot_index] = lerp_real(lotto_slot_scale[lotto_slot_index],slot_scale_decided,slot_lerp_real)
                     //draw the finalized slot
                     if not instance_exists(bpart_lotto[lotto_slot_index])
                     {

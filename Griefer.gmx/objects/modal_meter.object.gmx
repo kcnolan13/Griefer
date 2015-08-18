@@ -30,9 +30,9 @@ event_inherited()
 
 //modal meter stuff
 meter_backing_percent = 0
-meter_backing_lerp = 0.2
+meter_backing_lerp_real = 0.2
 
-meter_lerp = 0.075
+meter_lerp_real = 0.075
 meter_actual_percent = 0
 meter_percent = 0
 meter_val = 0
@@ -64,7 +64,7 @@ radius = 0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///lerp meter bar
+            <string>///lerp_real meter bar
 
 //inherited modal behavior
 event_inherited()
@@ -77,7 +77,7 @@ if popped_in
         meter_percent = 1
     else
     {
-        var cand_percent = lerp(meter_percent,meter_actual_percent,meter_lerp)
+        var cand_percent = lerp_real(meter_percent,meter_actual_percent,meter_lerp_real)
         if dif(meter_percent, cand_percent) &gt; 0.025
             meter_percent = cand_percent
         else
@@ -89,7 +89,7 @@ if popped_in
     if dif(meter_backing_percent,1) &lt; 0.01
         meter_backing_percent = 1
     else 
-        meter_backing_percent = lerp(meter_backing_percent,1,meter_backing_lerp)
+        meter_backing_percent = lerp_real(meter_backing_percent,1,meter_backing_lerp_real)
 }
 </string>
           </argument>

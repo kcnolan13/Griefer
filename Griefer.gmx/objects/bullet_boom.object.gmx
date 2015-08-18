@@ -36,7 +36,7 @@ splosion = splosion_boom
 sprite_2draw = spr_none
 varWrite("is_bullet",false)
 splosion = splosion_boom
-cook_time = room_speed*0.5
+cook_time = 30*0.5
 start_cook_on_hit = true
 
 //engine

@@ -16,7 +16,7 @@ if not is_bot(id)
             
             if varRead("alive")
             {
-                var ang_lerp = 1
+                var ang_lerp_real = 1
                 
                 var addx = floor(global.cvals[C_LOOK_SENS]*gamepad_stick_val(gp_axisrh))
                 var addy = floor(global.cvals[C_LOOK_SENS]*gamepad_stick_val(gp_axisrv))
@@ -29,7 +29,7 @@ if not is_bot(id)
                 }
                 else
                 {
-                    var new_ang = lerp(global.cursor_dir,ang,ang_lerp)
+                    var new_ang = lerp_real(global.cursor_dir,ang,ang_lerp_real)
                     curs_xoff = floor(trigx(global.cursor_offset,new_ang))
                     curs_yoff = floor(trigy(global.cursor_offset,new_ang))
                 }

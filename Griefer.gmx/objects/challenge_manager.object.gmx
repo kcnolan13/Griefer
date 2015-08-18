@@ -50,7 +50,7 @@ global.ds_challenges = ds_map_create()
 
 //CHALLENGE VARIABLES
 string_counter = 0
-string_counter_max = room_speed
+string_counter_max = 30
 
 //hound
 hound_kills = 2
@@ -180,13 +180,13 @@ match_points = 0
 
 //gnasher prop
 shotgun_gib_timer = 0
-shotgun_gib_timer_max = room_speed*2
+shotgun_gib_timer_max = 30*2
 shotgun_gib_spree = 0
 shotgun_spree_needed = 2
 
 //double prop
 double_gib_timer = 0
-double_gib_timer_max = room_speed*2
+double_gib_timer_max = 30*2
 double_gib_spree = 0
 double_spree_needed = 2
 

@@ -77,7 +77,7 @@ else if object_index = splosion_flame or object_index = splosion_flame_instant
                 //don't go flying
                 kill_force = 0
                 
-                dmg = damage*player.damage_scaler
+                dmg = real_speed(damage*player.damage_scaler)
             }
             
             if object_index = splosion_flame
@@ -88,7 +88,7 @@ else if object_index = splosion_flame or object_index = splosion_flame_instant
                 if in_my_flame(dat_playa)
                 {
                     //in flame damage
-                    dmg = damage*player.damage_scaler
+                    dmg = real_speed(damage*player.damage_scaler)
                     objVarAdd(dat_playa,"fire_counter",7)
                     obj_update_real(dat_playa,"fire_counter",FL_NORMAL)
                 }
@@ -202,7 +202,7 @@ else if object_index = splosion_flame or object_index = splosion_flame_instant
                     }
                     
                     //prevent from making multiple kill requests
-                    dat_playa.die_timer = room_speed
+                    dat_playa.die_timer = 30
                     
                     //increment local player's kills
                     if dat_playa != net_manager.local_player and from_player = net_manager.local_player

@@ -16,16 +16,16 @@ if point_distance(cursor.x,cursor.y,grid_left,grid_ymid) < sradius
     //scroll left
     with accolade_generic
     {
-        x += other.sspeed
-        left += other.sspeed
+        x += real_speed(other.sspeed)
+        left += real_speed(other.sspeed)
     }
 } else if point_distance(cursor.x,cursor.y,grid_right,grid_ymid) < sradius
 {
     //scroll right
     with accolade_generic
     {
-        x -= other.sspeed
-        left -= other.sspeed
+        x -= real_speed(other.sspeed)
+        left -= real_speed(other.sspeed)
     }
 }
 
@@ -41,10 +41,10 @@ with accolade_generic
     if x < other.grid_left
     {
         var xdif = abs(other.grid_left-x)
-        alpha_scroll_scaler = lerp(1,0,xdif/other.sep)
+        alpha_scroll_scaler = lerp_real(1,0,xdif/other.sep)
     } else if x > other.grid_right
     {
         var xdif = abs(x - other.grid_right)
-        alpha_scroll_scaler = lerp(1,0,xdif/other.sep)
+        alpha_scroll_scaler = lerp_real(1,0,xdif/other.sep)
     } else alpha_scroll_scaler = 1
 }

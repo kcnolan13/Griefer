@@ -124,7 +124,7 @@ for (var k=kst; k < ds_grid_width(dgrid)-extra_stats; k++)
     
     if is_string(cell)
     {
-        if k < 5 and k > 2
+        if k < 7 and k > 2
         {
             cell = string_upper(cell)
         }
@@ -136,11 +136,10 @@ for (var k=kst; k < ds_grid_width(dgrid)-extra_stats; k++)
                 cell = capwords_super(cell)
         }
     }
-        
+
     draw_text(dx, txt_y, string(cell))
 
     dx += x_incr
-
 }
 
 //draw the row number

@@ -28,12 +28,14 @@
             <string>///initialize
 netvars = NO_HANDLE
 
+asked_force_sync = false
+
 bound_bn_ready = instance_create(x,y,bn_ready)
 bound_bn_ready.bound_avatar = id
 
 shuffling = 0
-shuffling_max = room_speed*2
-shuffling_toff = room_speed
+shuffling_max = 30*2
+shuffling_toff = 30
 
 lobby_scale_decrementor = 0.2
 prescaled = false
@@ -91,11 +93,11 @@ varWrite("visible",false)
 varWrite("animation_speed",SPD_STAND)
 varWrite("ready",false)
 visible = false
-alarm[0] = room_speed*10
+alarm[0] = 30*10
 alarm[1] = 1
-alarm[2] = room_speed
+alarm[2] = 30
 //set xy to reasonable numbers
-//alarm[3] = room_speed
+//alarm[3] = 30
 </string>
           </argument>
         </arguments>
@@ -182,7 +184,7 @@ if not in_match()
     sync_mod_vars()
 }
 
-alarm[2] = room_speed*5
+alarm[2] = 30*5
 </string>
           </argument>
         </arguments>
@@ -205,8 +207,22 @@ alarm[2] = room_speed*5
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///print debug
+            <string>///force-sync
 printf("::: "+string(varRead("pName"))+" was instantiated with uniqueId #"+string(varRead("uniqueId")))
+
+if is_string(varRead("pName")) and instance_exists(myAvatar())
+{
+    if varRead("pName") != objVarRead(myAvatar(),"pName")
+    {
+        printf("::: new avatar -- let's force sync everybody!")
+        net_manager.force_sync_countdown = 3
+    }
+}
+else
+{
+    printf(":::WARNING: avatar instance "+string(id)+" with pName "+string(varRead("pName"))+" has non-string pName.... alarm[1] = 1")
+    alarm[1] = 1
+}
 </string>
           </argument>
         </arguments>
@@ -273,7 +289,9 @@ if keyboard_check_pressed(vk_enter)
             <string>///shuffling
 if shuffling //and x &gt; 0 and x &lt; room_width
 {
-    shuffling--
+    //printf("::: shuffling = "+string(shuffling))
+    shuffling = sub_real(shuffling,1)
+    
     event_perform(ev_alarm,2)
     alarm[2] = 5
     
@@ -286,9 +304,9 @@ if shuffling //and x &gt; 0 and x &lt; room_width
     }
     
     //scale down while shuffling
-    varWrite("animation_scale",lerp(varRead("animation_scale"),2.15,1))
+    varWrite("animation_scale",lerp_real(varRead("animation_scale"),2.15,1))
     
-    var shuffle_frames = ceil(lerp(0.05,3,(shuffling_max-shuffling)/shuffling_max))
+    var shuffle_frames = ceil(lerp_real(0.05,3,(shuffling_max-shuffling)/shuffling_max))
     
     if shuffle_frames = 0
         shuffle_frames = 1
@@ -392,7 +410,7 @@ if room = rm_lobby
 if instance_exists(net_manager.my_doll) and net_manager.my_doll != id and string(varRead("pName")) = string(objVarRead(net_manager,"pName")) and room = rm_lobby
 {
     printf("DUPLICATE DOLL DETECTED")
-    /*if net_manager.room_counter &gt; room_speed*3
+    /*if net_manager.room_counter &gt; 30*3
     {
         printf("DUPLICATE DOLL DESTROYED")
         instance_destroy()
@@ -453,13 +471,35 @@ if varRead("player_quit")
           <argument>
             <kind>1</kind>
             <string>///all dat ish
+
+if real(varRead("helmet0")) = spr_head and real(varRead("hat0")) = spr_head and real(varRead("foot0")) = spr_head
+{
+    if not asked_force_sync and room = rm_lobby and dummy_counter &gt; 5
+    {
+        asked_force_sync = true
+        printf("::: "+varRead("pName")+"'s avatars is messed up ... requesting force-sync")
+        sendMessageReal("force_sync_doll",1)
+
+        //write default limb vals as placeholders until the real data comes in
+        varWrite("helmet0",spr_head)
+        varWrite("torso0",spr_torso)
+        varWrite("leg0",spr_leg)
+        varWrite("shin0",spr_shin)
+        varWrite("foot0",spr_foot)
+        varWrite("hat0",spr_hat)
+        varWrite("shoulder0",spr_shoulder)
+        varWrite("forearm0",spr_forearm)
+        varWrite("prop0",spr_prop_none)
+    }
+}
+
 if mouse_wheel_delay &gt; 0
 mouse_wheel_delay --
 
 //talk sometimes
 if is_bot(id)
 {
-    if random(1) &lt; 1/(room_speed*120)
+    if random(1) &lt; 1/(30*120)
     {
         //new_chat_feed_message(varRead("pName"),"","Are you sucking my cock or is it just me?")
     }
@@ -496,14 +536,14 @@ printf("visible="+visible)
 printf("helmet0="+varRead("helmet0"))
 printf("leg0="+varRead("leg0"))*/
 
-if ( room = rm_menu or room = rm_lobby) and visible = false and net_manager.room_counter &gt; room_speed*1
+if ( room = rm_menu or room = rm_lobby) and visible = false and net_manager.room_counter &gt; 30*1
 {
     varWrite("visible",true)
     visible = true
 }
 
 //sync match stats with local players
-if not is_bot(id) and instance_exists(net_manager.local_player) and in_match() and net_manager.room_counter &gt; room_speed*2 and varRead("pName") = objVarRead(net_manager,"pName")
+if not is_bot(id) and instance_exists(net_manager.local_player) and in_match() and net_manager.room_counter &gt; 30*2 and varRead("pName") = objVarRead(net_manager,"pName")
 {
     varWrite("match_points",objVarRead(net_manager.local_player,"match_points"))
     varWrite("match_kills",objVarRead(net_manager.local_player,"match_kills"))
@@ -523,7 +563,7 @@ if not is_bot(id) and instance_exists(net_manager.local_player) and in_match() a
     varWrite("deaths",objVarRead(net_manager.local_player,"deaths"))
 }
 
-if is_bot(id) and instance_exists(my_bot) and in_match() and net_manager.room_counter &gt; room_speed*2
+if is_bot(id) and instance_exists(my_bot) and in_match() and net_manager.room_counter &gt; 30*2
 {
     syncVarFrom(my_bot,"match_points")
     syncVarFrom(my_bot,"match_kills")
@@ -537,7 +577,7 @@ if is_bot(id) and instance_exists(my_bot) and in_match() and net_manager.room_co
 //NO LOITERING!!
 if room = rm_menu and id != net_manager.my_doll
 {
-    if net_manager.room_counter &gt; room_speed*3 or net_manager.previous_room = rm_lobby or net_manager.came_from_match
+    if net_manager.room_counter &gt; 30*3 or net_manager.previous_room = rm_lobby or net_manager.came_from_match
     {
         printf("destroying avatar for loitering")
         printf("avatar's pName: "+string(varRead("pName"))+", net_man's pName: "+string(objVarRead(net_manager,"pName")))
@@ -595,7 +635,7 @@ if not bparts_ready[0]
     }
 }
 
-if rtime() &lt; room_speed
+if rtime() &lt; 30
     with net_manager
     {
         if other.id != my_doll
@@ -613,7 +653,7 @@ if rtime() &lt; room_speed
         }
     }
 
-if room = rm_lobby and net_manager.room_counter &gt; room_speed
+if room = rm_lobby and net_manager.room_counter &gt; 30
 {
     if is_my_avatar(id)
     {
@@ -628,8 +668,8 @@ if room = rm_lobby and net_manager.room_counter &gt; room_speed
         if nth_frame(3) obj_pname_update_real(id,"active_weapon_prescaler",FL_NORMAL)
         if nth_frame(1) obj_pname_update_real(id,"animation_xscale",FL_NORMAL)
         if nth_frame(3) obj_pname_update_string(id,"arm_pose",FL_NORMAL)
-        if nth_frame(room_speed) obj_pname_update_real(id,"true_skill",FL_NORMAL)
-        if nth_frame(room_speed) obj_pname_update_real(id,"global_rank",FL_NORMAL)
+        if nth_frame(30) obj_pname_update_real(id,"true_skill",FL_NORMAL)
+        if nth_frame(30) obj_pname_update_real(id,"global_rank",FL_NORMAL)
     }
 
 }
@@ -883,7 +923,7 @@ if in_match()
 }
 else
 {
-    alarm[0] = room_speed
+    alarm[0] = 30
 }
     
 if room = rm_menu
@@ -985,7 +1025,7 @@ if net_manager.show_cout
     draw_text(x,y-230,"uniqueId: "+string(varRead("uniqueId")))
     draw_text(x,y-200,"pNum: "+string(varRead("pNum")))
     //draw_text(x,y-200,"player_quit: "+varRead("player_quit"))
-    if net_manager.show_cout or room = rm_lobby and rtime() &lt; room_speed*3
+    if net_manager.show_cout or room = rm_lobby and rtime() &lt; 30*3
         printf("::: AVATAR "+string(varRead("pName"))+": uniqueId = "+string(varRead("uniqueId"))+", pNum = "+string(varRead("pNum"))+", x="+string(x)+", y="+string(y))
 }
 

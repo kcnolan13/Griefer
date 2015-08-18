@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>///initialize player
-
+perform_step = 0
 my_doll = NO_HANDLE
 alarm[1] = 2
 
@@ -46,14 +46,14 @@ auto_shooting = false
 possible_2shoot = true
 shooting_prob = 0
 weapon_time = 0
-weapon_time_min = room_speed
+weapon_time_min = 30
 //for bot weapon switching time?
 switch_time = 0
-switch_time_min = room_speed
+switch_time_min = 30
 //no idea?
 force_switch = false
 weapon_switch_delay = 0
-weapon_switch_delay_max = room_speed*3
+weapon_switch_delay_max = 30*3
 
 time_since_wepcont = 0
 near_death = false
@@ -72,14 +72,14 @@ wall_delay = 0
 hold = false
 
 //spawn-related stuff
-respawn_counter = room_speed*1.5+ceil(random_range(0,room_speed*1))
+respawn_counter = 30*1.5+ceil(random_range(0,30*1))
 double_spawn_counter =0
 respawn_flag = FL_NORMAL
 double_spawn_window = 5
 spawn_fail_message = ""
 spawn_x = 0
 spawn_y = 0
-respawn_delay = room_speed*3
+respawn_delay = 30*3
 walking = false
 
 xaim = 0
@@ -88,7 +88,7 @@ yaim = 0
 //inherit from character generic
 event_inherited()
 debug_counter = 0
-alarm[1] = room_speed*5
+alarm[1] = 30*5
 bparts_ready = false
 
 varWrite("blood_color",global.blood_color)//make_colour_hsv(random(255),255,200))
@@ -113,7 +113,7 @@ view_shake_long = 0
 view_shake_medium = 0
 view_shake_short = 0
 
-initial_weapon_spawn_delay = random(3*room_speed)
+initial_weapon_spawn_delay = random(3*30)
 
 weapon_wheel_alpha_max = 4
 weapon_wheel_alpha = 0
@@ -124,14 +124,14 @@ mouse_wheel_delay_max = 2
 
 weapon_contemplating = NO_HANDLE
 weapon_contemplation_time = 0
-weapon_contemplation_time_max = 1*room_speed
+weapon_contemplation_time_max = 1*30
 
-recovery_time = 4*room_speed
-recovery_delay = 2*room_speed
+recovery_time = 4*30
+recovery_delay = 2*30
 recovery_delay_counter = 0
 hp_previous = 100
-flash_recovery_time = 1.5*room_speed
-flash_recovery_delay = 2*room_speed
+flash_recovery_time = 1.5*30
+flash_recovery_delay = 2*30
 flash_recovery_delay_counter = 0
 flash_hp_previous = 100
 
@@ -157,7 +157,7 @@ varWrite("active_weapon",NO_HANDLE)
 varWrite("you_dead_son",false)
 varWrite("trigger_update_ignore",false)
 varWrite("update_ignore_counter",0)
-varWrite("update_ignore_counter_max",room_speed)
+varWrite("update_ignore_counter_max",30)
 varWrite("drop_weapon_x",0)
 varWrite("drop_weapon_y",0)
 
@@ -360,6 +360,29 @@ net_manager.alarm[0] = 10
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///perform step
+if perform_step != 0
+    exit
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///sync position and set previous stats periodically
 if not varRead("trigger_update_ignore")
 {
@@ -368,7 +391,7 @@ if not varRead("trigger_update_ignore")
 }
 
 //update match_kills_previous @ 8 Hz
-if net_manager.room_counter % room_speed/8 = 0
+if net_manager.room_counter % 30/8 = 0
 {
     varWrite("match_points_previous",varRead("match_points"))
     varWrite("match_kills_previous",varRead("match_kills"))
@@ -444,8 +467,53 @@ framely_view_adjust()
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///perform step
+if perform_step != 0
+    exit
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///exit
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///RESPAWN HANDLER
-if net_manager.local_player = id and alive_counter &lt; room_speed and not pressing_left() and not pressing_right() and not rolling and not jumping and not crawling
+if net_manager.local_player = id and alive_counter &lt; 30 and not pressing_left() and not pressing_right() and not rolling and not jumping and not crawling
     animation_stand()
 
 if is_bot(id) and SUPER_DEBUG
@@ -579,7 +647,7 @@ if not respawn_counter and net_manager.starting_match
     {
         printf("Overlapping Players! Another.id spawn computation is in order ... ")
         //another.id respawn coordinate computation is needed --&gt; allow a little delay time to be safe
-        respawn_counter = random_range(1,room_speed)
+        respawn_counter = random_range(1,30)
     }
 }
 </string>
@@ -688,7 +756,7 @@ if not is_bot(id)
         {
             if varRead("alive")
             {
-                var ang_lerp = 1
+                var ang_lerp_real = 1
                 
                 var addx = floor(global.cvals[C_LOOK_SENS]*gamepad_stick_val(gp_axisrh))
                 var addy = floor(global.cvals[C_LOOK_SENS]*gamepad_stick_val(gp_axisrv))
@@ -701,7 +769,7 @@ if not is_bot(id)
                 }
                 else
                 {
-                    var new_ang = lerp(global.cursor_dir,ang,ang_lerp)
+                    var new_ang = lerp_real(global.cursor_dir,ang,ang_lerp_real)
                     curs_xoff = floor(trigx(global.cursor_offset,new_ang))
                     curs_yoff = floor(trigy(global.cursor_offset,new_ang))
                 }
@@ -772,6 +840,29 @@ framely_view_adjust()
       </action>
     </event>
     <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///perform step
+if perform_step != 0
+    exit
+</string>
+          </argument>
+        </arguments>
+      </action>
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -887,7 +978,7 @@ if weapon_switch_delay &lt; 0
     weapon_switch_delay = 0
     
 
-//if alive_counter % room_speed = 0 and net_manager.local_player = id
+//if alive_counter % 30 = 0 and net_manager.local_player = id
 //    printf("hp = "+varRead("hp"))
     
 if varRead("player_quit")
@@ -913,7 +1004,7 @@ if net_manager.local_player = id
         with challenge_manager
         {
             ninja_time += real_speed(1)
-            if ninja_time &gt; acc_data("ninja",COL_NEEDED)*room_speed
+            if ninja_time &gt; acc_data("ninja",COL_NEEDED)*30
             {
                 //printf("::: ninja acc completed -- data in col_needed was: "+string(acc_data("ninja",COL_NEEDED)))
                 complete_accolade("ninja")
@@ -949,7 +1040,7 @@ if net_manager.local_player = id
     {
         obj_update_real(id,"fire_counter",FL_NORMAL)
         if varRead("fire_counter")
-            varSub("fire_counter",1)
+            varWrite("fire_counter",sub_real(varRead("fire_counter"),1))
     }
 
         if not input_check(mapped_control(C_MOVE_LEFT)) and not input_check(mapped_control(C_MOVE_RIGHT)) and varRead("animation") = "walk"
@@ -978,7 +1069,7 @@ if varRead("alive")
     }
     
     alive_counter++
-    if alive_counter &lt; room_speed*1.5 and (net_manager.local_player = id or is_bot(id))
+    if alive_counter &lt; 30*1.5 and (net_manager.local_player = id or is_bot(id))
     {
         //guarantee that you spawn with your starting weapons
         ensure_weapons_spawned()
@@ -1903,7 +1994,7 @@ for (var i=0; i&lt;instance_number(bullet_generic); i++)
                         } //else printf("decided against it")
                     
                         //prevent from making multiple kill requests
-                        die_timer = room_speed
+                        die_timer = 30
                         
                         if not is_bot(from_player)
                         {
@@ -2107,7 +2198,7 @@ if net_manager.local_player = id or is_local_teammate(id) or net_manager.bot_ove
     
 }
 
-if (net_manager.room_counter &gt; room_speed/4)
+if (net_manager.room_counter &gt; 30/4)
 {
     
     draw_set_color(c_white)
@@ -2291,6 +2382,30 @@ press_s()
 if not varRead("controllable") or is_bot(id) exit
 
 press_e()
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="80">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///perform_step
+perform_step ^= 1
 </string>
           </argument>
         </arguments>

@@ -33,7 +33,7 @@ ymark2 = 0
 markind = 0
 
 xp_done_counter = 0
-xp_done_counter_max = room_speed*15
+xp_done_counter_max = 30*15
 
 lottery_x = room_width*5/6+28
 lottery_y = room_height*1/5
@@ -50,8 +50,8 @@ alpha = 0
 fade_delay = 0
 dec = 0.025
 scale = 1
-earn_lerp = 0.125
-alpha_lerp = 0.1
+earn_lerp_real = 0.125
+alpha_lerp_real = 0.1
 fraction_full = 0
 fraction_really_full = 0
 real_xp = 0
@@ -146,7 +146,7 @@ rank_before_match = rank
           <argument>
             <kind>1</kind>
             <string>///disable xp_replay if not in lottery_steal mode
-if net_manager.menu_mode != "lottery_steal" and xp_replay and rtime() &gt; room_speed
+if net_manager.menu_mode != "lottery_steal" and xp_replay and rtime() &gt; 30
 {
     xp_replay = false
     xp = objVarRead(net_manager,"xp")
@@ -233,7 +233,7 @@ if xp_2earn &gt; 0
     if not earn_pauser
     {
         if rank = objVarRead(net_manager,"rank") and (xp_next - xp) &gt; -100
-            xp_2earn = lerp(xp_2earn,0,earn_lerp)
+            xp_2earn = lerp_real(xp_2earn,0,earn_lerp_real)
         else
         {
             //printf("::: xp_2earn = "+string(xp_2earn))
@@ -295,10 +295,10 @@ if xp_needed &lt;= 0 and not earn_pauser and is_my_avatar(net_manager.my_doll)
     xp_2earn = xp-xp_prev
     
     if in_match()
-        earn_pauser = room_speed*3
+        earn_pauser = 30*3
     else
     {
-        earn_pauser = room_speed*3
+        earn_pauser = 30*3
         if room = rm_lobby
         {
             with bn_postmatch_done cant_fade = true
@@ -337,7 +337,7 @@ if xp_needed &lt;= 0 and not earn_pauser and is_my_avatar(net_manager.my_doll)
     
     fade_delay = 0 // ---&gt; updated in promoted_modal()
     promoted_modal(WVIEW/2,HVIEW/4+tyoff,fa_center,fa_top,1,net_manager.my_doll)
-    birth_delay = 1*room_speed
+    birth_delay = 1*30
     
     slot_width = 72
     slot_scale = 1.5*slot_width/72
@@ -437,7 +437,7 @@ if net_manager.menu_mode = "lottery_steal" and not instance_exists(bn_postmatch_
     bn.height = 64*1.75
     bn.alpha_max = 0.7
     bn.color = make_colour_hsv(300,0,0)
-    bn.birth_delay = room_speed*3
+    bn.birth_delay = 30*3
     bn.font = fnt_hud_big
     bn.text_valign = fa_center
     
@@ -642,7 +642,7 @@ else
         alpha_override = false
 }
 
-if in_match() and alpha &gt; 0 and rtime() &gt; room_speed and not instance_exists(modal_controls) and truthval(global.gc[GC_SHOW_XP,1])
+if in_match() and alpha &gt; 0 and rtime() &gt; 30 and not instance_exists(modal_controls) and truthval(global.gc[GC_SHOW_XP,1])
 {
     draw_xpbar(WVIEW-XPBAR_RIGHT,HVIEW-XPBAR_BOTTOM,fraction_full,fraction_full,scale,fa_right,fa_bottom,c_white,false)
 }

@@ -24,7 +24,7 @@ var xoff = sep*instance_number(accolade_generic)
 if not match_ending()
 datAcc = create_accolade(xst+xoff,yst,name,COL_MATCH_TOTAL)
 //if match_ending()
-  //  datAcc.fade_delay = room_speed*1
+  //  datAcc.fade_delay = 30*1
 
 //get xp for the accolade
 add_xp(acc_data(name,COL_POINTS)*ACC_XP_SCALER,true,true,false)

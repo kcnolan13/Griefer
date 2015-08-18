@@ -159,7 +159,7 @@ if not is_sens
     else
         capture_timer ++
 
-    if capturing and capture_timer &gt; room_speed/2
+    if capturing and capture_timer &gt; 30/2
     {
         capture_mapping_input()
     }

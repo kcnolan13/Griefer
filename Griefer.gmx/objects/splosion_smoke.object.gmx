@@ -33,8 +33,8 @@ audio(snd_smoke,2)
 counter = 0
 part_off = 64*2
 
-life = room_speed*15/2
-part_life = 10*room_speed
+life = 30*15/2
+part_life = 10*30
 
 sys_smoke = part_system_create()
 
@@ -45,7 +45,6 @@ part_type_colour_mix(ps,make_color_rgb(0,0,0),make_color_rgb(200,200,200))
 part_type_life(ps,3/4*part_life,part_life)
 part_type_size(ps,10,30,0.025,0)
 part_type_direction(ps,60,120,0,0.25)
-part_type_speed(ps,0,3,0.015,0.1)
 part_system_depth(sys_smoke,depth)
 
 em = part_emitter_create(sys_smoke)
@@ -106,7 +105,7 @@ ds_map_destroy(netvars)
             <kind>1</kind>
             <string>///do physics and make particles
 
-counter++
+counter += real_speed(1)
 
 printf("smoke splosion!")
 if counter = 2 and find_player(varRead("senderId")) = net_manager.local_player
@@ -121,6 +120,7 @@ part_emitter_region(sys_smoke,em,x-random(part_off),x+random(part_off),y-random(
 
 if counter &lt; life
 {
+    part_type_speed(ps,0,real_speed(3),real_speed(0.015),real_speed(0.1))
     if random(1) &lt; 0.035
         part_emitter_burst(sys_smoke,em,ps,1)
 }

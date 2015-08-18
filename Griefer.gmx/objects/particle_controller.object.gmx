@@ -29,7 +29,7 @@
 counter = 0
 
 sys_flame = part_system_create()
-flame_part_life = 5*room_speed
+flame_part_life = 5*30
 part_flame = part_type_create()
 part_system_depth(sys_flame,-82)
 part_type_alpha3(part_flame,0.25,1,0)
@@ -38,7 +38,6 @@ part_type_colour_mix(part_flame,make_color_rgb(60,40,0),make_color_rgb(255,90,40
 part_type_life(part_flame,3/4*flame_part_life,flame_part_life)
 part_type_size(part_flame,0.1,7,0.025,0)
 part_type_direction(part_flame,45,135,0,0.25)
-part_type_speed(part_flame,0,4,0.015,0.1)
 part_type_blend(part_flame,true)
 
 part_flame_small = part_type_create()
@@ -202,11 +201,13 @@ if instance_exists(snow)
             <string>///burst all particles
 counter ++
 
+part_type_speed(part_flame,0,real_speed(4),real_speed(0.015),real_speed(0.1))
+
 for (var i=0; i&lt;instance_number(player); i++)
 {
     dat_playa = instance_find(player,i)
-        
-    if objVarRead(dat_playa,"fire_counter") and objVarRead(dat_playa,"alive") and objVarRead(dat_playa,"hp") &gt; 0 and dat_playa.alive_counter &gt; room_speed*2
+
+    if objVarRead(dat_playa,"fire_counter") and objVarRead(dat_playa,"alive") and objVarRead(dat_playa,"hp") &gt; 0 and dat_playa.alive_counter &gt; 30*2
     {
         var xoff = random_range(-24,24)
         var yoff = random_range(-48,48)
@@ -254,14 +255,14 @@ for (var i=0; i&lt;instance_number(die_generic); i++)
 
 }
 
-if instance_exists(snow)
+if instance_exists(snow) and fps &gt;= 25
 {
     if random(1) &lt; 0.2
         part_particles_create(sys_snow,0+random(room_width),-10,snow_part1,1)
 }
 
 if instance_exists(fog) or instance_exists(dust) or instance_exists(purple_haze) or instance_exists(green_haze)
-if counter &gt; room_speed*1.5
+if counter &gt; 30*1.5 and fps &gt;= 25
  {
      if random(1) &lt; 0.2
         part_particles_create(sys_fog,random(room_width),random(room_height),fog_part1,1)

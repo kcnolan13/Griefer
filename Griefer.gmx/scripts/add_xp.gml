@@ -34,7 +34,7 @@ if show_bbp
     bbp.stick_2view = true
     bbp.fnt = fnt_hud
     bbp.is_xp = true
-    bbp.fade_time = 3.5*room_speed
+    bbp.fade_time = 3.5*30
 }
 
 if show_progress

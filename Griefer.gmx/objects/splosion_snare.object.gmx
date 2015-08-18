@@ -41,8 +41,8 @@ speed_multiplier = random_range(0.12,0.15)
 
 snare_radius = 64*3.5
 
-life = room_speed*6
-part_life = 5*room_speed
+life = 30*6
+part_life = 5*30
 
 sys_smoke = part_system_create()
 
@@ -53,7 +53,7 @@ part_type_colour_mix(ps,make_color_rgb(0,0,0),make_color_rgb(50,110,210))
 part_type_life(ps,3/4*part_life,part_life)
 part_type_size(ps,1,8,0.025,0)
 part_type_direction(ps,0,360,0,0.25)
-part_type_speed(ps,0,0.75,0.015,0.1)
+
 part_type_blend(ps,true)
 part_system_depth(sys_smoke,depth)
 
@@ -157,14 +157,21 @@ event_inherited()
             <kind>1</kind>
             <string>///do physics and make particles
 
-counter++
+counter += real_speed(1)
 
 part_emitter_region(sys_smoke,em,x-random(part_off),x+random(part_off),y-random(part_off),y+random(part_off),ps_shape_ellipse,ps_distr_gaussian)
 
 if counter &lt; life
 {
-    if random(1) &lt; 0.15
+    part_type_speed(ps,0,real_speed(0.75),real_speed(0.015),real_speed(0.1))
+    if fps &gt;= 25
+    {
+        if random(1) &lt; 0.15
+            part_emitter_burst(sys_smoke,em,ps,1)
+    } else if random(1) &lt; 0.075
+    {   
         part_emitter_burst(sys_smoke,em,ps,1)
+    }
 }
 
 if counter &gt; life+part_life
@@ -179,7 +186,7 @@ if varRead("local")
     for (ind=0; ind&lt;instance_number(player); ind++)
     {
         dat_playa = instance_find(player,ind)
-        if counter &lt; life+part_life/4 and in_my_snare(dat_playa) and objVarRead(dat_playa,"alive") and objVarRead(dat_playa,"hp") &gt; 0 and dat_playa.alive_counter &gt; room_speed*2
+        if counter &lt; life+part_life/4 and in_my_snare(dat_playa) and objVarRead(dat_playa,"alive") and objVarRead(dat_playa,"hp") &gt; 0 and dat_playa.alive_counter &gt; 30*2
         {
             if point_distance(x,y,dat_playa.x,dat_playa.y) &lt;= point_distance(x,y,dat_playa.x+dat_playa.hsp,dat_playa.y)//+dat_playa.vsp)
             {

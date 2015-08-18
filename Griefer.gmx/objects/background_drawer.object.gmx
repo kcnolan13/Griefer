@@ -207,10 +207,10 @@ if recompute_parallax
             global.map_texs[rm_double] = bg_none
             global.col_alphas[rm_double] = 1
             
-            layers[0] = bg_mts1 tbottoms[0] = FL_BOTTOM xoffables[0] = 0.6
-            layers[1] = bg_mts2 tbottoms[1] = FL_BOTTOM xoffables[1] = 0.3
-            layers[2] = bg_mts3 tbottoms[2] = FL_BOTTOM xoffables[2] = 0.15
-            layers[3] = bg_mts4 tbottoms[3] = FL_BOTTOM xoffables[3] = 0.05
+            //layers[0] = bg_mts1 tbottoms[0] = FL_BOTTOM xoffables[0] = 0.6
+            //layers[1] = bg_mts2 tbottoms[1] = FL_BOTTOM xoffables[1] = 0.3
+            //layers[2] = bg_mts3 tbottoms[2] = FL_BOTTOM xoffables[2] = 0.15
+            //layers[3] = bg_mts4 tbottoms[3] = FL_BOTTOM xoffables[3] = 0.05
             yoffable_scale = 1.5
             
             hue = 348 sat = 12 val = 17
@@ -243,7 +243,7 @@ if recompute_parallax
         yoffables[i] = xoffables[i]*yoffable_scale
         
         tex_alphas[i] = tex_alpha + i*tex_alpha_inc
-        tex_scales[i] = tex_scale * lerp(tex_scale,xoffables[i]/xoffables[0],tex_scale_scaler)
+        tex_scales[i] = tex_scale * lerp_real(tex_scale,xoffables[i]/xoffables[0],tex_scale_scaler)
         
         surfs[i] = surface_create(WVIEW,HVIEW)
         surf_inverses[i] = surface_create(WVIEW,HVIEW)

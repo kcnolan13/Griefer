@@ -19,8 +19,8 @@ with (chat_feed)
     ID.avhead_scale = msg_avhead_scale
     ID.font = fnt_hud
     ID.depth = depth-1
-    ID.lerp_ytarget = msg_starty
-    ID.lerp_ycurrent = ID.lerp_ytarget
+    ID.lerp_real_ytarget = msg_starty
+    ID.lerp_real_ycurrent = ID.lerp_real_ytarget
     ID.text_color = c_white
     ID.draw_rect = true
     ID.max_length = 15
@@ -30,7 +30,7 @@ with (chat_feed)
     ID.color = team_color_pname(name1)
     ID.rect_yextra = 18
     ID.rect_alpha = 0.85
-    ID.notif_time = room_speed*2
+    ID.notif_time = 30*2
     ID.notif_color = ID.color
     ID.master_scale = master_scale
     
@@ -79,7 +79,7 @@ with (chat_feed)
     //shift all the other messages down
     for (var i=getLength(msgs)-1; i>=0; i--)
     {
-        msgs[i].lerp_ytarget -= msg_height+msg_ysep
+        msgs[i].lerp_real_ytarget -= msg_height+msg_ysep
         msgs[i].alph_max -= 0.05
         msgs[i].rect_alpha -= 0.05
         

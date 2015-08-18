@@ -1,5 +1,5 @@
 ///real_time_init()
-previous_delta_time = room_speed
+previous_delta_time = 30
 ms_per_sec = 1000
 sec0 = current_second
 sec1 = sec0

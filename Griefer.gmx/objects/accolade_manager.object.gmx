@@ -51,7 +51,7 @@ sradius = 64
 sindex = 0
 sindex_min = 0
 sindex_max = 0
-sspeed = 12
+sspeed = 18
 
 //accolade grid ---&gt; | name | text | description | image | points | match_total | competitive_total | bot_mode_total | needed | challenge_needed | challenge_stat_flag | sound
 grid = ds_grid_create(12,num_accolades+91-65+1)
@@ -166,7 +166,7 @@ if ds_exists(grid,ds_type_grid)
             <kind>1</kind>
             <string>///print grid to screen sometimes
 
-if nth_frame(5*room_speed)
+if nth_frame(5*30)
 {
     //print_ds_grid(grid)
 }
@@ -218,7 +218,7 @@ if in_match() and match_ending() and not spawned_grid
         match_end_accs = true
         //note that this function actually awards the accolades as needed
         match_end_accolades()
-        spawn_grid_delay = 1*room_speed
+        spawn_grid_delay = 1*30
     }
     
     if spawn_grid_delay &gt; 0

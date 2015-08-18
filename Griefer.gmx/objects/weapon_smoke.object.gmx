@@ -77,7 +77,7 @@ varWrite("max_ammo",5*varRead("clip_cap"))
 varWrite("ammo",varRead("starting_ammo"))
 varWrite("reload_time",2)
 
-varWrite("charge_delay",room_speed/2)
+varWrite("charge_delay",30/2)
 varWrite("charge_weight",2)
 varWrite("discharge_delay_max",5)
 

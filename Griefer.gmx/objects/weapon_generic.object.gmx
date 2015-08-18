@@ -82,8 +82,8 @@ varWrite("starting_ammo",3*varRead("clip_cap"))
 varWrite("max_ammo",5*varRead("clip_cap"))
 varWrite("ammo",varRead("starting_ammo"))
 varWrite("clip_decrement",1)            //how much to subtract with each trigger pull
-varWrite("reload_time",1*room_speed)
-varWrite("charge_delay",room_speed)     //length of time to full charge
+varWrite("reload_time",1*30)
+varWrite("charge_delay",30)     //length of time to full charge
 varWrite("charge_weight",2)             //charge % = ((charge_delay-charge_counter)+charge_delay*charge_weight)/(1+charge_weight)
 varWrite("charge_counter",-1)
 varWrite("charge",0)                    //charge % --&gt; 0 to 1
@@ -119,10 +119,10 @@ varWrite("my_player",-1)                //uniqueId of bonded player
 varWrite("control_type","left_press")   //fire button left_press, left_hold, or left_charge
 varWrite("can_disappear",true)          //disappear from the battlefield after a while
 varWrite("disappear_counter",-1)         
-varWrite("disappear_delay",room_speed*10)
+varWrite("disappear_delay",30*10)
 varWrite("reload_counter",-1)
 varWrite("reload_incremental",false)
-varWrite("reload_empty_delay",room_speed/2)
+varWrite("reload_empty_delay",30/2)
 varWrite("reload_empty_counter",-1)
 varWrite("quicktoss_backcycles",0)
 varWrite("quicktoss_time_between",4)
@@ -338,7 +338,7 @@ if instance_exists(myCursor) and ((instance_exists(dat_jugador) and not is_bot(d
 if object_index = weapon_vulcan
 {
     time_since_shot++
-    if time_since_shot &gt; room_speed and varRead("cant_shoot_max") &lt; varRead("cant_shoot_max_original")
+    if time_since_shot &gt; 30 and varRead("cant_shoot_max") &lt; varRead("cant_shoot_max_original")
     {
         varAdd("cant_shoot_max",1)
     }
@@ -491,8 +491,8 @@ if varRead("inaccuracy") &gt; 0
             {
                 varWrite("reload_empty_counter",varRead("reload_empty_delay"))
             } else {
-                varSub("reload_empty_counter",sub_real(varRead("reload_empty_counter"),1))
-                if varRead("reload_empty_counter") = 0
+                varWrite("reload_empty_counter",sub_real(varRead("reload_empty_counter"),1))
+                if not varRead("reload_empty_counter")
                 {
                     //trigger the reload
                     trigger_reload()
@@ -504,7 +504,7 @@ if varRead("inaccuracy") &gt; 0
             
         if varRead("reload_counter") &gt; 0
         {
-            printf("::: sub_real(varRead('reload_counter'),1) = "+string(sub_real(varRead("reload_counter"),1)))
+            //printf("::: sub_real(varRead('reload_counter'),1) = "+string(sub_real(varRead("reload_counter"),1)))
             varWrite("reload_counter",sub_real(varRead("reload_counter"),1))
             if varRead("reload_incremental")
             {

@@ -4,12 +4,12 @@ rank = rank_before_match
 xp_replay = true
 xp_2earn = xp-xp_before_match
 
-earn_pauser = room_speed
+earn_pauser = 30
 
 printf("ERROR: XP_2EARN = "+string(xp_2earn))
 printf("ERROR: RANK = "+string(rank))
 
-birth_delay = room_speed*1.5
+birth_delay = 30*1.5
 
 mw = instance_create(room_width/2,room_height/2,modal_window)
 mw.halign = fa_center

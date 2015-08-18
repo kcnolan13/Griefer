@@ -111,6 +111,8 @@ update_kdr = false
 update_wl = false
 update_ppl = false
 
+update_flag = FL_COMPETITIVE
+
 ppl_max = POINTS_KILL*10
 
 //meters
@@ -241,7 +243,7 @@ if net_manager.menu_mode = "stats"
         if instance_exists(bn_logout)
         {
             var l = bn_logout.left+bn_logout.width+5+10
-            var dest = l//lerp(l,room_width,0.5)
+            var dest = l//lerp_real(l,room_width,0.5)
             left = dest+w//bn_stats.left+bn_stats.width/2-w/2-10
             top = bn_logout.height/2+5+h/2
         }
@@ -391,25 +393,28 @@ else if not wiped//not in stats mode
 
 if update_kdr and varRead("kills_valid") and varRead("deaths_valid")
 {
+    if in_match() update_flag = stat_flag
     update_kdr = false
     var kdr = truncate(varRead("kills")/max(1,varRead("deaths")),2)
-    stat_update_real("kdr",kdr,stat_flag)
+    stat_update_real("kdr",kdr,update_flag)
     varWrite("kdr",kdr)
 }
 
 if update_wl and varRead("wins_valid") and varRead("losses_valid")
 {
+    if in_match() update_flag = stat_flag
     update_wl = false
     var wl = truncate(varRead("wins")/max(1,varRead("losses")),2)
-    stat_update_real("wl",wl,stat_flag)
+    stat_update_real("wl",wl,update_flag)
     varWrite("wl",wl)
 }
 
 if update_ppl and varRead("points_valid") and varRead("deaths_valid")
 {
+    if in_match() update_flag = stat_flag
     update_ppl = false
     var ppl = truncate(varRead("points")/max(1,varRead("deaths")),2)
-    stat_update_real("ppl",ppl,stat_flag)
+    stat_update_real("ppl",ppl,update_flag)
     varWrite("ppl",ppl)
 }
 </string>

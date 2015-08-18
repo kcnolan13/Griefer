@@ -32,7 +32,7 @@ event_inherited()
 intensity = 1
 xscale = 1
 yscale = 0.35
-life = 6*room_speed
+life = 6*30
 color = make_color_rgb(100,255,100);
 intensity_divisor = 1.1
 intensity_flicker = 0

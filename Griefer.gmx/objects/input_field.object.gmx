@@ -30,7 +30,7 @@ input_string = "kyle"
 instantClear = false
 input_active = false
 label = "Username"
-alarm[0] = room_speed/3
+alarm[0] = 30/3
 blink = false
 max_length = 20
 str_cursor = ""
@@ -76,7 +76,7 @@ if blink and input_active
 else
     str_cursor = ""
     
-alarm[0] = room_speed/3
+alarm[0] = 30/3
 </string>
           </argument>
         </arguments>

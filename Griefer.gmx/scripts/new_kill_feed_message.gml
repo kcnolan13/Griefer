@@ -19,8 +19,8 @@ with (kill_feed)
     ID.avhead_scale = msg_avhead_scale
     ID.font = fnt_hud
     ID.depth = depth-1
-    ID.lerp_ytarget = msg_starty
-    ID.lerp_ycurrent = ID.lerp_ytarget
+    ID.lerp_real_ytarget = msg_starty
+    ID.lerp_real_ycurrent = ID.lerp_real_ytarget
     ID.text_color = c_white
     ID.draw_rect = false
     ID.master_scale = master_scale
@@ -70,7 +70,7 @@ with (kill_feed)
     //shift all the other messages down
     for (var i=getLength(msgs)-1; i>=0; i--)
     {
-        msgs[i].lerp_ytarget += msg_height+msg_ysep
+        msgs[i].lerp_real_ytarget += msg_height+msg_ysep
         
         if i+1 >= msgs_max
         {

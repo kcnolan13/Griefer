@@ -63,9 +63,9 @@ text_yoff = -15
 text_linesep = 16
 max_length = 9
 
-lerp_ytarget = 0
-lerp_ycurrent = 0
-lerp_ystep = 0.25
+lerp_real_ytarget = 0
+lerp_real_ycurrent = 0
+lerp_real_ystep = 0.25
 highlightable = false
 
 alarm[0] = 1
@@ -129,7 +129,7 @@ if ds_exists(netvars,ds_type_map)
 if instance_exists(snap_obj)
 {
     x = snap_obj.x
-    y = snap_obj.y-snap_obj.master_scale*(snap_obj.height/2-lerp_ycurrent)
+    y = snap_obj.y-snap_obj.master_scale*(snap_obj.height/2-lerp_real_ycurrent)
     master_scale = snap_obj.master_scale
 }
 </string>
@@ -158,7 +158,7 @@ if instance_exists(snap_obj)
 if instance_exists(snap_obj)
 {
     x = snap_obj.x
-    y = snap_obj.y-snap_obj.master_scale*(snap_obj.height/2-lerp_ycurrent)
+    y = snap_obj.y-snap_obj.master_scale*(snap_obj.height/2-lerp_real_ycurrent)
     master_scale = snap_obj.master_scale
 }
 </string>
@@ -204,12 +204,12 @@ if not instance_exists(deadguy) and avname2 != ""
     }
 }
 
-lerp_ycurrent = lerp(lerp_ycurrent,lerp_ytarget,lerp_ystep)
+lerp_real_ycurrent = lerp_real(lerp_real_ycurrent,lerp_real_ytarget,lerp_real_ystep)
 
 if instance_exists(snap_obj)
 {
     x = snap_obj.x
-    y = snap_obj.y-snap_obj.master_scale*(snap_obj.height/2-lerp_ycurrent)
+    y = snap_obj.y-snap_obj.master_scale*(snap_obj.height/2-lerp_real_ycurrent)
     master_scale = snap_obj.master_scale
 }
 

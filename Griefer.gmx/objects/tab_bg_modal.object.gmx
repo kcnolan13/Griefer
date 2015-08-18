@@ -32,8 +32,8 @@ halign = fa_left
 valign = fa_top
 
 color = make_colour_hsv(0,0,0)
-scale_lerp = 1
-alpha_lerp = 0.1
+scale_lerp_real = 1
+alpha_lerp_real = 0.1
 depth = -90
 </string>
           </argument>

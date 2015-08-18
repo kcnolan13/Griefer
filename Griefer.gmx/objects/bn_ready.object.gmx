@@ -179,7 +179,7 @@ else
             ready = true
         }
         
-        if net_manager.bot_match and nth_frame(room_speed) and not sent_ready
+        if net_manager.bot_match and nth_frame(30) and not sent_ready
         {
             start_match = true
             with avatar

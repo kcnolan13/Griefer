@@ -5,6 +5,12 @@ if not instance_exists(net_manager.stat_gravatar)
     return false
 }
 
+if not varRead("kills_valid") or not varRead("deaths_valid") or not varRead("wins_valid") or not varRead("losses_valid") or not varRead("points_valid")
+{
+    printf("WARNING: cannot manage_meters yet -- some required stats have not been validated")
+    return false
+}
+
 var guy = net_manager.stat_gravatar
 
 if getLength(meters) < 1
@@ -14,7 +20,7 @@ if getLength(meters) < 1
 
 if not instance_exists(history_chart) and instance_exists(pstat_title)
 {
-    history_chart = instance_create(pstat_title.x+64*2.25+history_chart_width/2,pstat_title.y+64*2+12+history_chart_height/2,modal_stat_history)
+    history_chart = instance_create(pstat_title.x+64*2.25+history_chart_width/2+20,pstat_title.y+64*2+12+history_chart_height/2,modal_stat_history)
     history_chart.birth_delay = 20
 }
 

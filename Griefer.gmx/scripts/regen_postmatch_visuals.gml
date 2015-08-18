@@ -12,8 +12,8 @@ valign = fa_top
 blah_xoff = -64
 av_head_yoff = view_hview*1/5+48
 
-fade_delay = room_speed*100
-birth_delay = room_speed*1.5
+fade_delay = 30*100
+birth_delay = 30*1.5
 
 myName = objVarRead(net_manager,"pName")
 scale = 1.5

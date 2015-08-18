@@ -51,7 +51,7 @@ else
 
 if in_match() and not match_ending()
 {
-    fade_delay = room_speed*2
+    fade_delay = 30*2
 }
 
 alpha_scroll_scaler = 1

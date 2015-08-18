@@ -344,9 +344,9 @@ if not in_match()
 dummy_counter ++
 if (varRead("visible") or object_index = gravatar) and (varRead("dude_x") or varRead("dude_y"))
 {
-    //printf("lerping")
-    x = lerp(x,varRead("dude_x"),0.3)
-    y = lerp(y,varRead("dude_y"),0.3)
+    //printf("lerp_realing")
+    x = lerp_real(x,varRead("dude_x"),0.3)
+    y = lerp_real(y,varRead("dude_y"),0.3)
 }
 
 if is_string(varRead("myX")) or is_string(varRead("myY"))

@@ -167,7 +167,7 @@ if varRead("local")
         cook_time --
         
         if SUPER_DEBUG
-            printf("Cheffing up a fat one : T-Minus "+cook_time/room_speed+" sec.")
+            printf("Cheffing up a fat one : T-Minus "+cook_time/30+" sec.")
             
         if not cook_time &gt; 0 or splode_now
         {
@@ -383,7 +383,7 @@ if sticky and stuck and varRead("local")
           <argument>
             <kind>1</kind>
             <string>///destroy after a while
-if counter &gt; room_speed*4
+if counter &gt; 30*4
     instance_destroy()
 </string>
           </argument>

@@ -17,9 +17,9 @@ var ypos = dy
 var av_head_yoff = HVIEW*1/4
 var blah_xoff = -64
 if in_match()
-    fade_delay = 3*room_speed
+    fade_delay = 3*30
 else
-    fade_delay = 3*room_speed
+    fade_delay = 3*30
 
 {
     scale = 1.5

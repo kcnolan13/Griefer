@@ -133,7 +133,7 @@ if alert_alpha &gt; 0
 if not field_username.input_active and not field_password.input_active
 {
     time_since_active ++
-    if time_since_active &gt; room_speed*2
+    if time_since_active &gt; 30*2
     {
         field_username.input_string = generate_name(0)
         time_since_active = 0
@@ -147,30 +147,30 @@ if (y-ystart &lt; 2 and ydir = -1) or (ystart+ysweep-y &lt; 2 and ydir = 1)
     ydir *= -1
 }
 
-lerp_amount = 0.035
+lerp_real_amount = 0.035
 
 if ydir = 1
 {
     
     with bn_login_user 
-        y = lerp(y,ystart+other.id.ysweep,other.id.lerp_amount)
+        y = lerp_real(y,ystart+other.id.ysweep,other.id.lerp_real_amount)
     with bn_create_new 
-        y = lerp(y,ystart+other.id.ysweep,other.id.lerp_amount)
+        y = lerp_real(y,ystart+other.id.ysweep,other.id.lerp_real_amount)
     with field_username 
-        y = lerp(y,ystart+other.id.ysweep,other.id.lerp_amount)
+        y = lerp_real(y,ystart+other.id.ysweep,other.id.lerp_real_amount)
     with field_password
-        y = lerp(y,ystart+other.id.ysweep,other.id.lerp_amount)
+        y = lerp_real(y,ystart+other.id.ysweep,other.id.lerp_real_amount)
 }
 else
 {   
     with bn_login_user
-        y = lerp(y,ystart,other.id.lerp_amount)
+        y = lerp_real(y,ystart,other.id.lerp_real_amount)
     with bn_create_new
-        y = lerp(y,ystart,other.id.lerp_amount)
+        y = lerp_real(y,ystart,other.id.lerp_real_amount)
     with field_username
-        y = lerp(y,ystart,other.id.lerp_amount)
+        y = lerp_real(y,ystart,other.id.lerp_real_amount)
     with field_password
-        y = lerp(y,ystart,other.id.lerp_amount)
+        y = lerp_real(y,ystart,other.id.lerp_real_amount)
 }*/
 
 y = bn_create_new.y

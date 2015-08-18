@@ -30,8 +30,8 @@ if not is_bot(id) and not double_spawn_counter and  not respawn_counter and (vis
     //if abs(view_hwidth-view_wview) > 1 and abs(view_vwidth-view_hview) > 1
     if not instance_exists(modal_controls)
     {
-        view_wview = ceil(lerp(view_wview,view_hwidth,0.5))
-        view_hview = ceil(lerp(view_hview,view_vwidth,0.5))
+        view_wview = ceil(lerp_real(view_wview,view_hwidth,0.5))
+        view_hview = ceil(lerp_real(view_hview,view_vwidth,0.5))
     }
     else
     {
