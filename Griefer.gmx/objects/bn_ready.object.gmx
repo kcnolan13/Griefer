@@ -149,7 +149,7 @@ else
     if menmode() = "lobby"
     {
         //jump to a decent position below the avatar
-        if abs(bound_avatar.x - objVarRead(bound_avatar,"dude_x") &lt; 10) and abs(bound_avatar.y - objVarRead(bound_avatar,"dude_y") &lt; 10) and bound_avatar.visible and objVarRead(bound_avatar,"visible")
+        if instance_exists(bn_vote) and abs(bound_avatar.x - objVarRead(bound_avatar,"dude_x") &lt; 10) and abs(bound_avatar.y - objVarRead(bound_avatar,"dude_y") &lt; 10) and bound_avatar.visible and objVarRead(bound_avatar,"visible")
         {
             var somey = 64*2.95
             if instance_number(avatar) &lt; 3
@@ -164,6 +164,7 @@ else
         else
         {
             visible = false
+            alpha = 0
             x = -999
             y = -999
         }

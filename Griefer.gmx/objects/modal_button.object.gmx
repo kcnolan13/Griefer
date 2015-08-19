@@ -31,7 +31,7 @@ active = false
 clicked = false
 is_sens = false
 snap_2view = true
-
+clickable = true
 </string>
           </argument>
         </arguments>

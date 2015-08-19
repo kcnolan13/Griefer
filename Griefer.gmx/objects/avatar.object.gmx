@@ -50,6 +50,7 @@ varWrite("pNum",0)
 varWrite("animation_scale",3)
 varWrite("player_quit",false)
 varWrite("bot",false)
+varWrite("nextMapVote",-1)
 animation_previous = 0
 arm_pose_previous = 0
 my_bot = 0
@@ -991,6 +992,31 @@ if is_bot(id) and room = rm_lobby
     /*cand_rank = floor(random_range(cand_rank-1,cand_rank+1.99))
     if cand_rank &lt; 0 cand_rank = 0
     varWrite("rank",cand_rank)*/
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///voting
+if room = rm_lobby
+{
+    varWrite("nextMapVote",-1)
 }
 </string>
           </argument>

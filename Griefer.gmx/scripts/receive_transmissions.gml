@@ -449,6 +449,11 @@ while (objUpdatesWaiting() and wait_counter < 1000)
                     //with ID
                     //    printf("::: SPAM -- "+string(varRead("pName"))+"'s avatar has pNum="+string(varRead("pNum"))+", override="+string(varRead("pNum_override")))
                 }
+                
+                if netvar = "nextMapVote"
+                {
+                    recompute_votes()
+                }
             }
             
         break
