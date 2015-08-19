@@ -16,13 +16,15 @@ global.CRITICAL = "err"
 global.SOCKETS = "sock"
 
 //globals
+global.fps = 30
 global.num_game_rooms = 8;
 global.num_maps = 21; //21
 global.gravatarObjIndex = 3;
 global.avatarObjIndex = 2;
 global.playerObjIndex = 1;
 global.netManObjIndex = 0;
-global.lobby_wait_time = 60000 //in miliseconds
+global.lobby_wait_time = 120000 //in miliseconds
+global.starting_match_time = 10000 //in miliseconds
 global.default_avatar_uniqueId = -52
 global.default_netman_uniqueId = -1
 global.numTdm = 0;

@@ -14,7 +14,8 @@ var conn;
 
 //WIPE DB AS DESIRED
 var users_2kill = [];
-users_2kill.push(FL_WIPE);
+users_2kill.push("Mr. T", "Squatting Turtle");
+//users_2kill.push(FL_WIPE);
 
 //---- LOAD MODULES ----//
 var app = require('express')();
@@ -62,7 +63,6 @@ io.on('connection', function(socket){
 		socket.myPlayer.uniqueId = composer.hash_string(pName);
 		socket.myPlayer.pNum = -1;
 		socket.myPlayer.timeoutHandle = null;
-
 
 		//join the main_menu group --> aka no matchmaking currently happening
 		socket.myPlayer.room = 'main_menu';
@@ -155,6 +155,11 @@ io.on('connection', function(socket){
 
   });
 
+  //KEEPALIVE
+  socket.on('keepalive', function () {
+  		socket.emit('keepalive');
+  });
+
   socket.on('PING', function () {
         log.log(STD,'PING!');
         log.log(STD,'pong . . .\n');
@@ -208,6 +213,15 @@ io.on('connection', function(socket){
 		{
 			dbman.saveSetting(socket, message.val1, message.val2, message.val3);
 			log.log("verbose", "GENERAL SETTING:\n"+message);
+		} else if (message.msg == "kill_feed")
+		{
+			log.log("verbose", "forwarding KILL_FEED: "+message);
+			socket.broadcast.to(socket.myPlayer.room).emit('big_message',message);
+		}
+		else if (message.msg == "chat_feed")
+		{
+			log.log("verbose", "forwarding CHAT_FEED: "+message);
+			socket.broadcast.to(socket.myPlayer.room).emit('big_message',message);
 		}
 
 	});
@@ -248,15 +262,33 @@ io.on('connection', function(socket){
 	{
 		dbman.getGlobalStats(socket);
 	}
-	else {
-		//OTHERWISE, FORWARD THE MESSAGE TO OTHER PLAYERS
-		socket.broadcast.to(socket.myPlayer.room).emit('general_message',message);
-	}
-
-	if (message.msg == "syncPlayersConnected")
+	else if (message.msg == "syncPlayersConnected")
 	{
 		cupid.manageSockets();
 		cupid.syncPlayersConnected();
+	}
+	else if (message.msg == "everyone_ready") {
+		//initiate match start countdown
+		var obj_room = cupid.room_with_name(socket.myPlayer.room);
+		if (globals.exists(obj_room.match_countdown_timeout) == true)
+		{
+			if (obj_room.match_countdown_timeout != null)
+			{
+				if (globals.exists(obj_room.match_countdown_timeout.change) == true)
+				{
+					log.log(STD,"forcing start match countdown: rescheduling room "+obj_room.groupName+" to start match in: "+Math.round(global.starting_match_time/1000)+" seconds");
+					log.log(STD,"previous time: "+obj_room.match_countdown_timeout.ms);
+          			obj_room.match_countdown_timeout.change(10);
+					obj_room.match_start_timeout.change(global.starting_match_time);
+					log.log(STD,"new time: "+obj_room.match_countdown_timeout.ms);
+
+				} else log.log(CRITICAL,"obj_room.match_countdown_timeout.change does not exist!");
+			} else log.log(CRITICAL,"everyone_ready room has invalid match_countdown_timeout handle");
+		} else log.log(CRITICAL,"everyone_ready has nonexistent match_countdown_timeout var");
+	}
+	else {
+		//OTHERWISE, FORWARD THE MESSAGE TO OTHER PLAYERS
+		socket.broadcast.to(socket.myPlayer.room).emit('general_message',message);
 	}
 
   });
@@ -336,6 +368,12 @@ io.on('connection', function(socket){
   	//deprecated messages
   	if (term=="hats_Fd" || term=="compute_global_rank")
   		return true;
+
+  	//keep track of which map you voted for
+  	if (term == "nextMapVote")
+  	{
+  		socket.myPlayer.nextMapVote = datMessage.val;
+  	}
 
   	//---- FORWARD ON TO OTHER CLIENTS ----//
   	socket.broadcast.to(socket.myPlayer.room).emit('obj_update', datMessage);

@@ -34,8 +34,10 @@ exports.log = function(flag,text) {
 		log_sql.write(util.format(text) + '\n');
 	else if (flag == CUPID)
 		log_cupid.write(util.format(text) + '\n');
-	else if (flag == CRITICAL)
+	else if (flag == CRITICAL) {
 		log_critical.write(util.format(text) + '\n');
+		console.log("ERROR: "+text);
+	}
 	else if (flag == STD)
 		log_std.write(util.format(text) + '\n');
 	else if (flag == SOCKETS)

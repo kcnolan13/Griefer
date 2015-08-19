@@ -592,7 +592,7 @@ var getGravatarAccolades = function(socket, username, flag, retransmit)
 			if (err)
 				log.log(SQL,err);
 
-			if (globals.exists(rows) != true)
+			if (globals.exists(rows[0]) != true)
 			{
 				log.log(CRITICAL,"getGravatarAccolades got no rows back");
 			}
@@ -824,7 +824,7 @@ var rankPlayers = function() {
 					}
 					else
 					{
-						log.log(CRITICAL,"warning: rankPlayers -- bad player name: "+sock.myPlayer.pName);
+						//log.log(CRITICAL,"warning: rankPlayers -- bad player name: "+sock.myPlayer.pName);
 					}
 				}
 				else
@@ -1039,8 +1039,12 @@ var sendCompletePlayerStats = function(socket, gameRoom, objIndex, broadcast_onl
 		var message = composer.objUpdate(objIndex,theDude.uniqueId,"pNum",theDude.pNum,FL_NORMAL);
 		pkgDude.messages.push(message);
 
-		//construct all the object updates and add to package
-		for (var j=0; j<columns.length; j++)
+		if (globals.exists(rows[0]) != true)
+		{
+			log.log(CRITICAL,"sendCompletePlayerStats got no rows back");
+
+		}
+		else for (var j=0; j<columns.length; j++)
 		{
 			var param = columns[j].substring(columns[j].indexOf('.')+1,columns[j].length);
 			var result = rows[0][param];

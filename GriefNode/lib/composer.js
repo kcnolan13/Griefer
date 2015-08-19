@@ -25,13 +25,13 @@ var hash_string = function(string) {
     for (var i = 0; i < string.length; i++) {
         var c = string.charCodeAt(i);
         hash = ((hash<<5)-hash)+c;
-        log.log(STD,"intermediary hash: "+hash)
+        //log.log(STD,"intermediary hash: "+hash)
         hash |= 0; // Convert to 32bit integer
-        log.log(STD,"after anding: "+hash)
+        //log.log(STD,"after anding: "+hash)
     }
-    log.log(STD,"HASHED "+string+" ---> "+hash);
+    //log.log(STD,"HASHED "+string+" ---> "+hash);
 	hash = Math.abs(hash);
-    log.log(STD,"final result: "+hash);
+    //log.log(STD,"final result: "+hash);
     return hash;
 }
 exports.hash_string = hash_string;
@@ -55,7 +55,7 @@ var stripOuterCurlies = function(obj)
 		var stripped = serialized.substring(serialized.indexOf('{'),serialized.lastIndexOf('}'));
 		log.log(STD,'outer curlies stripped: '+stripped)
 		return stripped
-	} 
+	}
 	else 
 	{
 		log.log(STD,'outer curlies stripped: '+serialized);
