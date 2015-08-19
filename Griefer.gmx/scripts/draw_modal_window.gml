@@ -47,7 +47,16 @@ if not surface_exists(surface)
     
     if image != spr_none
     {
-        draw_sprite_ext(image,img_index,left+rect_xoff*scale*master_scale,top+rect_yoff*scale*master_scale,scale*master_scale,scale*master_scale,0,c_white,1)
+        var img_xsc = scale*master_scale
+        var img_ysc = scale*master_scale
+        
+        if image_stretch
+        {
+            img_xsc *= width/sprite_get_width(image)
+            img_ysc *= height/sprite_get_height(image)
+        }
+        
+        draw_sprite_ext(image,img_index,left+rect_xoff*scale*master_scale,top+rect_yoff*scale*master_scale,img_xsc,img_ysc,0,c_white,1)
     }
     
     if text != "" or header_text != ""
@@ -95,7 +104,7 @@ if not surface_exists(surface)
         else
             draw_text_ext_transformed(xpos,ypos,text,text_linesep,(width-text_pad*2)*scale,scale*master_scale,scale*master_scale,0)
         
-        if header_height > 0
+        if header_text != ""
         {
             draw_set_font(header_font)
             draw_set_color(header_text_color)

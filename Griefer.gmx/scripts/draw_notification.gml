@@ -6,6 +6,9 @@ var scale = argument3
 var color = argument4
 var alpha = argument5
 
+if not is_string(num) 
+    num = floor(num)
+
 scale = scale*global.notification_scale
 
 var rad = 14*scale
@@ -27,4 +30,4 @@ draw_circle(dx,dy,rad+1,true)
 draw_set_font(fnt_hud)
 draw_set_halign(fa_center)
 draw_set_valign(fa_middle)
-draw_text_transformed(dx,dy,string(floor(num)),scale,scale,0)
+draw_text_transformed(dx,dy,string(num),scale,scale,0)

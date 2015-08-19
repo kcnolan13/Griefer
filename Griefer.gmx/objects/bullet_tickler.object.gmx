@@ -31,9 +31,9 @@ event_inherited()
 //graphics
 varWrite("sprite",spr_none)
 traj_draw = true
-traj_length = 64*6
+traj_length = 64*2
 traj_intensity = 1
-traj_yscale = 0.4
+traj_yscale = 0.8
 traj_xscale = 0.25
 traj_life = 15
 traj_color = make_color_rgb(255,0,221)

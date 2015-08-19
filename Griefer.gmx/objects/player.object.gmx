@@ -1365,7 +1365,7 @@ if blahd and point_distance(x,y,blahd.x,blahd.y) &lt;= point_distance(x+hsp,y,bl
 
 if varRead("controllable") or (net_manager.starting_match and varRead("myX") &gt; 0 and varRead("myY") &gt; 0) or (objVarRead(net_manager,"end_match_coming") and not position_meeting(x,bbox_bottom+3,solid_generic) and standing_2way = false)
     scr_basic_physics()
-     
+
 if varRead("controllable")
 {
     if vsp &gt; -6

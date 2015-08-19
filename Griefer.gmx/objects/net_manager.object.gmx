@@ -34,6 +34,11 @@ display_set_gui_size(WVIEW,HVIEW)
 
 real_time_init()
 
+//voting
+votes1 = 0
+votes2 = 0
+votes3 = 0
+
 show_debug_overlay(true)
 
 force_sync_countdown = 0
@@ -1344,7 +1349,26 @@ if room = rm_lobby
         {
             case "lobby":
                 objVarWrite(ID,"dude_y",lobby_dude_y)
-                objVarWrite(ID,"dude_x",av_padding*(objVarRead(ID,"pNum")+0.5))
+                var pnum = objVarRead(ID,"pNum")
+                var xtarget = room_width/2
+                var dat_sign = 1
+                
+                if pnum &lt; instance_number(avatar)/2
+                    dat_sign = -1
+                
+                if string_count("versus",varRead("game_mode"))
+                {
+                    xtarget = room_width/2+(64*6.25)*dat_sign
+                } else
+                {
+                    if dat_sign = 1
+                        pnum -= 2
+                        
+                    var avpad = 64*4
+                    xtarget = room_width/2+(64*2.5+avpad*(pnum+0.5))*dat_sign
+                }
+                
+                objVarWrite(ID,"dude_x",xtarget)
             break
             
             case "armory":
@@ -1516,6 +1540,83 @@ if room = rm_menu or room = rm_lobby
     {
         if SUPER_DEBUG and not room = rm_menu
             printf("NOTICE: my_doll does not exist")
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///map voting
+if room = rm_lobby 
+{
+    if not lock_armory and not instance_exists(bn_vote) and rtime() &gt; 30*5 and varRead("next_map1") &gt;= 0 and varRead("next_map2") &gt;= 0 and varRead("next_map3") &gt;= 0
+    {
+        mnums[0] = varRead("next_map1")
+        mnums[1] = varRead("next_map2")
+        mnums[2] = varRead("next_map3")
+        
+        var bdelay = 0
+        var binc = 10
+        
+        for (var i=0; i&lt;getLength(mnums); i++)
+        {
+            ID = instance_create(room_width/2,room_height/2+96+i*64*1.6,bn_vote)
+            ID.map_num = mnums[i]
+            ID.birth_delay = bdelay
+            bdelay += binc
+            
+            //assign images
+            ID.image = mapsnap_base+ID.map_num+1
+            ID.image_stretch = true
+            ID.header_text = string(global.map_names[map_placeholder1+1+ID.map_num])
+    
+            //the random one
+            if i = getLength(mnums)-1
+            {
+                ID.is_random = true
+            }
+        }
+    }
+    else if lock_armory and instance_exists(bn_vote) and varRead("next_map") &gt;= 0
+    {
+        with bn_vote
+        {
+            if map_num != objVarRead(net_manager,"next_map")
+            {
+                if not fade_out
+                    fade_out = true
+            }
+            else
+            {
+                is_random = false
+                header_text = header_text_real
+                image = image_real
+                depth = -9999999999
+                active = false
+                clickable = false
+                x = room_width/2
+                y = lerp(y,room_height/2+96+64*1.6,0.05)
+                width = lerp(width,width_init*2,0.05)
+                height = lerp(height,height_init*2,0.05)
+                modal_aligns()
+            }
+        }
     }
 }
 </string>
@@ -2156,6 +2257,11 @@ varWrite("gearsteal_computed",false)
 
 if room = rm_lobby
 {
+    varWrite("next_map", -54)
+    varWrite("next_map1",-54)
+    varWrite("next_map2",-54)
+    varWrite("next_map3",-54)
+    
     player_limit = get_player_limit(varRead("game_mode"))
     if bot_match and not came_from_match
     {
@@ -2570,6 +2676,23 @@ if varRead("end_match_coming") and win_countdown &lt; -90
 {
     win_countdown = match_countdown_max
 }
+
+if room = rm_lobby
+{
+    draw_set_font(fnt_hud_big)
+    draw_set_color(c_black)
+    draw_set_valign(fa_bottom)
+    draw_set_halign(fa_center)
+    if room_counter &gt; 30*5
+    {
+        if instance_exists(bn_vote)
+        {
+            draw_set_alpha(bn_vote.alpha)
+            draw_text(room_width/2,room_height/2+28,"Vote for Next Map")
+            draw_set_alpha(1)
+        }
+    }
+}
     
 if ((show_scores &gt; 0) and not varRead("end_match_coming") or (room_counter &gt; 30*2 and room_counter &lt; 30*7)) and (in_match() and room_counter &gt; 30*3)//or room=rm_match_end
 {
@@ -2719,10 +2842,12 @@ if in_match() and not varRead("end_match_coming") and instance_exists(myAvatar()
 if lobby_match_countdown and room = rm_lobby
 {
     draw_set_color(c_black)
-    draw_set_alpha(0.8 - max(0,(varRead("lobby_wait_time")/30 - 3)/10))
+    if varRead("lobby_wait_time")/30 &lt; 6
+        draw_set_alpha(0.8 - max(0,(varRead("lobby_wait_time")/30 - 5)/6))
+    else draw_set_alpha(0)
     draw_rectangle_colour(0,0,WVIEW,HVIEW,c_black,c_black,c_white,c_white,false)
-    draw_set_color(c_white)
     
+    draw_set_color(c_white)
     draw_set_alpha(1)
     draw_set_font(fnt_menu)
     draw_set_halign(fa_center)
@@ -2767,8 +2892,6 @@ if room = rm_menu or room = rm_lobby
         draw_set_valign(fa_bottom)
         draw_text(draw_edge_padding,room_height-draw_edge_padding,game_mode_name(varRead("game_mode")))
         draw_set_halign(fa_center)
-        if room_counter &gt; 30*5
-            draw_text(room_width/2,room_height-draw_edge_padding,"Next Map: "+string(global.map_names[map_placeholder1+1+real(varRead("next_map"))]))
     }
      /*   
     draw_set_color(make_color_rgb(60,60,60))

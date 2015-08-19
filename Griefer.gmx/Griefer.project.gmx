@@ -548,6 +548,31 @@
     <sprites name="accolades">
       <sprite>sprites\acc_dub_kill</sprite>
     </sprites>
+    <sprites name="mapsnaps">
+      <sprite>sprites\mapsnap_base</sprite>
+      <sprite>sprites\snap_double</sprite>
+      <sprite>sprites\snap_bridge</sprite>
+      <sprite>sprites\snap_pillar</sprite>
+      <sprite>sprites\snap_rocky</sprite>
+      <sprite>sprites\snap_tower</sprite>
+      <sprite>sprites\snap_snow2</sprite>
+      <sprite>sprites\snap_map6</sprite>
+      <sprite>sprites\snap_map2</sprite>
+      <sprite>sprites\snap_tunnel</sprite>
+      <sprite>sprites\snap_debug</sprite>
+      <sprite>sprites\snap_dust</sprite>
+      <sprite>sprites\snap_pillar2</sprite>
+      <sprite>sprites\snap_torque</sprite>
+      <sprite>sprites\snap_trench</sprite>
+      <sprite>sprites\snap_cave2</sprite>
+      <sprite>sprites\snap_cave</sprite>
+      <sprite>sprites\snap_snow</sprite>
+      <sprite>sprites\snap_orange</sprite>
+      <sprite>sprites\snap_chronic</sprite>
+      <sprite>sprites\snap_tree</sprite>
+      <sprite>sprites\snap_crosscut</sprite>
+      <sprite>sprites\snap_random</sprite>
+    </sprites>
     <sprite>sprites\spr_1pixel</sprite>
     <sprite>sprites\sprite393</sprite>
     <sprite>sprites\sprite392</sprite>
@@ -1390,6 +1415,7 @@
       <script>scripts\compute_boom_delay.gml</script>
     </scripts>
     <scripts name="matchmaking">
+      <script>scripts\recompute_votes.gml</script>
       <script>scripts\compute_winloss.gml</script>
       <script>scripts\leave_matchmaking.gml</script>
       <script>scripts\start_matchmaking.gml</script>
@@ -1542,6 +1568,7 @@
       <objects name="lobbies">
         <object>objects\bn_leave_matchmaking</object>
         <object>objects\bn_ready</object>
+        <object>objects\bn_vote</object>
       </objects>
       <objects name="login">
         <object>objects\bn_login_user</object>
