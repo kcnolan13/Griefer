@@ -91,6 +91,7 @@ varWrite("image_blend",c_white)
 varWrite("deceleration",0)
 varWrite("gravity",0)
 varWrite("min_speed",20)
+init_net_physics()
 hsp = -999
 vsp = -999
 counter = 0
@@ -285,6 +286,7 @@ if not varRead("hitscan")
         var inst = hitscan_targets(varRead("myX"), varRead("myY"), varRead("myX")+trigx(varRead("speed"),varRead("direction")), varRead("myY")+trigy(varRead("speed"),varRead("direction")), shootable_generic, true,true, find_player(varRead("senderId")))
         if inst
         {
+            varWrite("speed",0)
             varWrite("myX",collision_x)
             varWrite("myY",collision_y)
         } else

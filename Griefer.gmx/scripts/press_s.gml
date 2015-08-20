@@ -1,5 +1,7 @@
 if not varRead("controllable") return false
 
+update_physics = true
+
 if (crawling = 1) && !collision_rectangle(bbox_left,bbox_top-55,bbox_right,bbox_bottom-5,block,true,true)
 {
     crawling = 0

@@ -3,7 +3,7 @@ obj = argument0
 variable = argument1
 flag = argument2
 
-if net_manager.bot_match
+if net_manager.bot_match and variable != "nextMapVote"
 {
     return false
 }

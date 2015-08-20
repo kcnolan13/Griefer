@@ -4,6 +4,7 @@ var speed_vwall_inc = 4
 
 if not jumping and (collision_rectangle(bbox_left,bbox_top,bbox_right,bbox_bottom+32,block,true,true) or collision_rectangle(bbox_left,bbox_top,bbox_right,bbox_bottom+32,block2_top,true,true) or standing_2way = true)
 {
+    update_physics = true
     if net_manager.local_player = id
     audio_play_sound(snd_jump,2,false)
 
@@ -28,6 +29,8 @@ if not jumping and (collision_rectangle(bbox_left,bbox_top,bbox_right,bbox_botto
 
 if slide_right = 1
 {
+    update_physics = true
+    
     if not is_bot(id)
         audio_play_sound(snd_jump,2,false)
         
@@ -66,6 +69,8 @@ if slide_right = 1
 
 if slide_left = 1
 {
+    update_physics = true
+    
     if not is_bot(id)
         audio_play_sound(snd_jump,2,false)
         

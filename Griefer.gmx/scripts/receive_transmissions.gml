@@ -432,8 +432,11 @@ while (objUpdatesWaiting() and wait_counter < 1000)
                     }
                 }
                 
-                if do_obj_update
+                if do_obj_update and (ID.object_index != player or not (netvar = "net_hsp" or netvar = "net_vsp" or netvar = "myX" or netvar = "myY"))
+                {
+                    //PERFORM THE ACTUAL UPDATE
                     objVarWrite(ID,netvar,val)
+                }
                 
                 if netvar = "pNum" /*or netvar = "true_skill" or netvar = "global_rank" and room != rm_lobby *///or netvar = "lobby_wait_time"
                 {
@@ -449,10 +452,15 @@ while (objUpdatesWaiting() and wait_counter < 1000)
                     //with ID
                     //    printf("::: SPAM -- "+string(varRead("pName"))+"'s avatar has pNum="+string(varRead("pNum"))+", override="+string(varRead("pNum_override")))
                 }
-                
-                if netvar = "nextMapVote"
+                else if netvar = "nextMapVote"
                 {
                     recompute_votes()
+                }else if ID.object_index = player and (netvar = "net_hsp" or netvar = "net_vsp" or netvar = "myX" or netvar = "myY")
+                {
+                    //SPECIAL UPDATE FOR PHYSICS VARS
+                    objVarWrite(ID,"physics_updated",true)
+                    objVarWrite(ID,netvar+"_true",val)
+                    //printf("::: "+playerName(ID)+"'s physics were updated: "+string(netvar)+"_true = "+string(val))
                 }
             }
             

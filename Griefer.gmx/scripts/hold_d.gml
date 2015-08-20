@@ -18,6 +18,7 @@ if slide_right = 1
 if x < room_width and slide_left = 0 and redirect_counter = 0
 {
     walking = true
+    update_physics = true
     
     if crawling = 0
     {

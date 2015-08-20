@@ -21,6 +21,7 @@ if slide_left = 1
 if x > 0 and slide_right = 0 and redirect_counter = 0
 {
     walking = true
+    update_physics = true
     
     if crawling = 0
     {

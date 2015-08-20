@@ -4,6 +4,8 @@ if not varRead("controllable") or in_snare(id) return false
 ///Roll
 if hold > 0 or roll_timer > 0
     exit
+    
+update_physics = true
 
 //roll
 if pressing_left() or (not pressing_right() and varRead("animation_xscale") = -1)

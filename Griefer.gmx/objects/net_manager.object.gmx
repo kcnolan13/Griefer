@@ -1815,17 +1815,47 @@ rank_before = varRead("rank")
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///dat networking do
-if instance_exists(local_player)
+            <string>///send frames, RECEIVE TRANSMISSIONS, compute player physics
+
+//SEND FRAMELY PLAYER DATA
+if instance_exists(myPlayer())
 {
-    //if room_counter &gt; 30*2
-    //sort_players()
-   // printf("sending frame")
     send_frame()
 }
 
+//clear player physics updated flag
+if in_match()
+{
+    with player
+    {
+        if myPlayer() != id
+        {
+            varWrite("physics_updated",false)
+        }
+    }
+}
 
+//
+//
+//RECEIVE ALL TRANSMISSIONS
 receive_transmissions()
+//
+//
+
+//compute physics for un-updated players
+if in_match()
+{
+    with player
+    {
+        if myPlayer() != id and not varRead("physics_updated")
+        {
+            hsp = varRead("net_hsp_true")
+            vsp = varRead("net_vsp_true")
+            //printf("::: "+playerName(id)+" is simulating with net_hsp_true = "+string(hsp)+", net_vsp_true = "+string(vsp))
+            scr_basic_physics()
+        }
+    }
+}
 </string>
           </argument>
         </arguments>
@@ -2121,25 +2151,27 @@ if in_match() and force_recompute_scores or ( rtime() mod (30/2) = 0 and sort_wo
         }
     }
 
-    //sort all non-empty player grids
-    if ds_grid_height(team0) &gt; 0
+    if not match_ending()
     {
-        ds_grid_sort(team0, 2, false)
-        print_ds_grid(team0)
+        //sort all non-empty player grids
+        if ds_grid_height(team0) &gt; 0
+        {
+            ds_grid_sort(team0, 2, false)
+            print_ds_grid(team0)
+        }
+        
+        if ds_grid_height(team1) &gt; 0
+        {
+            ds_grid_sort(team1, 2, false)
+            print_ds_grid(team1)
+        }
+        
+        if ds_grid_height(team_all) &gt; 0
+        {
+            ds_grid_sort(team_all, 0, false)
+            print_ds_grid(team_all)
+        }
     }
-    
-    if ds_grid_height(team1) &gt; 0
-    {
-        ds_grid_sort(team1, 2, false)
-        print_ds_grid(team1)
-    }
-    
-    if ds_grid_height(team_all) &gt; 0
-    {
-        ds_grid_sort(team_all, 0, false)
-        print_ds_grid(team_all)
-    }
-    
 }
 </string>
           </argument>
@@ -2685,7 +2717,7 @@ if room = rm_lobby
     draw_set_halign(fa_center)
     if room_counter &gt; 30*5
     {
-        if instance_exists(bn_vote)
+        if instance_exists(bn_vote) and menmode() = "lobby"
         {
             draw_set_alpha(bn_vote.alpha)
             draw_text(room_width/2,room_height/2+28,"Vote for Next Map")
@@ -2843,7 +2875,7 @@ if lobby_match_countdown and room = rm_lobby
 {
     draw_set_color(c_black)
     if varRead("lobby_wait_time")/30 &lt; 6
-        draw_set_alpha(0.8 - max(0,(varRead("lobby_wait_time")/30 - 5)/6))
+        draw_set_alpha(0.8 - max(0,(varRead("lobby_wait_time")/30)/6))
     else draw_set_alpha(0)
     draw_rectangle_colour(0,0,WVIEW,HVIEW,c_black,c_black,c_white,c_white,false)
     

@@ -6,6 +6,9 @@ if collision_rectangle(bbox_left,bbox_top+2,bbox_right,bbox_bottom-2,block,true,
 x = varRead("myX")
 y = varRead("myY")
 
+var xbefore = x
+var ybefore = y
+
 gfric_max = 2
 
 if (hsp > 1000) or vsp > 1000
@@ -16,7 +19,7 @@ if (hsp > 1000) or vsp > 1000
 
 was_standing = false
 sthresh = 5
-if continue_standing or collision_rectangle(bbox_left,bbox_bottom,bbox_right,bbox_bottom+sthresh,block,true,false) or standing_2way
+if continue_standing or collision_rectangle(bbox_left,bbox_bottom,bbox_right,bbox_bottom+sthresh,block,true,false) or collision_rectangle(bbox_left,bbox_bottom,bbox_right,bbox_bottom+sthresh,block2_top,true,false) or standing_2way
 {
     was_standing = true
     continue_standing = false
@@ -51,61 +54,66 @@ if !position_meeting(x,bbox_bottom+1,block)
         vsp += real_speed(grav)
 }
 
-//friction
-//original friction code
-if position_meeting(x,bbox_bottom+3,block) || standing_2way = true
+//friction --> only if local player!
+if object_index != player or myPlayer() = id
 {
-    grav = 0
-    if not rolling and not input_check(mapped_control(C_MOVE_LEFT)) and not input_check(mapped_control(C_MOVE_RIGHT))
+    //original friction code
+    if position_meeting(x,bbox_bottom+3,block) || standing_2way = true
     {
-        gfric = 1
-        //make sure you don't damp past zero
-        if abs(hsp) <= 2
+        grav = 0
+        if not rolling and not input_check(mapped_control(C_MOVE_LEFT)) and not input_check(mapped_control(C_MOVE_RIGHT))
         {
-            if abs(hsp) <= 0.5
-            hsp = 0
-            else
-            hsp /= 2
+            gfric = 1
+            //make sure you don't damp past zero
+            if abs(hsp) <= 2
+            {
+                if abs(hsp) <= 0.5
+                hsp = 0
+                else
+                hsp /= 2
+            }
+            //damp
+            if hsp>0
+            hsp -= real_speed(gfric)
+            if hsp<0
+            hsp += real_speed(gfric)
+            //exit
         }
-        //damp
-        if hsp>0
-        hsp -= real_speed(gfric)
-        if hsp<0
-        hsp += real_speed(gfric)
-        //exit
     }
-}
-    
-//code that might help with frictional problems for slanted surfaces
-if collision_rectangle(bbox_left,bbox_top,bbox_right,bbox_bottom+5,block,true,true) || standing_2way = true
-{
-    in_air = false
-    grav = 0
-    if not rolling and not input_check(mapped_control(C_MOVE_LEFT)) and not input_check(mapped_control(C_MOVE_RIGHT))
+        
+    //code that might help with frictional problems for slanted surfaces
+    if collision_rectangle(bbox_left,bbox_top,bbox_right,bbox_bottom+5,block,true,true) || standing_2way = true
     {
-        gfric = gfric_max
-        //make sure you don't damp past zero
-        if abs(hsp) <= 2
+        in_air = false
+        grav = 0
+        if not rolling and not input_check(mapped_control(C_MOVE_LEFT)) and not input_check(mapped_control(C_MOVE_RIGHT))
         {
-            if abs(hsp) <= 0.5
-            hsp = 0
-            else
-            hsp /= 2
+            gfric = gfric_max
+            //make sure you don't damp past zero
+            if abs(hsp) <= 2
+            {
+                if abs(hsp) <= 0.5
+                hsp = 0
+                else
+                hsp /= 2
+            }
+            //damp
+            if hsp>0
+            hsp -= real_speed(gfric)
+            if hsp<0
+            hsp += real_speed(gfric)
+            //exit
         }
-        //damp
-        if hsp>0
-        hsp -= real_speed(gfric)
-        if hsp<0
-        hsp += real_speed(gfric)
-        //exit
     }
-}
-else 
-{
-    gfric = 0
-    in_air = true
+    else 
+    {
+        gfric = 0
+        in_air = true
+    }
 }
 
 //sync up myX and myY again
 varWrite("myX",x)
 varWrite("myY",y)
+varAdd("myX_true",x-xbefore)
+varAdd("myY_true",y-ybefore)

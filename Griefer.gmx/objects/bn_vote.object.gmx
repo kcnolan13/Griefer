@@ -126,6 +126,10 @@ alpha_max = 1
 highlightable = true
 active = true
 
+if menmode() != "lobby"
+    visible = false
+else
+    visible = true
 </string>
           </argument>
         </arguments>

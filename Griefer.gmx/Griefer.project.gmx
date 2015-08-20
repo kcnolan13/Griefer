@@ -761,6 +761,7 @@
     </scripts>
     <scripts name="physics">
       <scripts name="my_physics">
+        <script>scripts\scr_basic_physics.gml</script>
         <script>scripts\real_speed.gml</script>
         <script>scripts\sub_real.gml</script>
         <script>scripts\div_real.gml</script>
@@ -771,7 +772,6 @@
         <script>scripts\scr_bounce_off_walls.gml</script>
         <script>scripts\scr_pull_up.gml</script>
         <script>scripts\unstick_in_direction.gml</script>
-        <script>scripts\scr_basic_physics.gml</script>
         <script>scripts\scr_unstick_tossable_trajectory.gml</script>
         <script>scripts\initialize_physics.gml</script>
         <script>scripts\scr_unstick_guy.gml</script>
@@ -790,6 +790,7 @@
         <script>scripts\real_time_init.gml</script>
         <script>scripts\real_time_step.gml</script>
         <script>scripts\scr_normal_detect.gml</script>
+        <script>scripts\init_net_physics.gml</script>
       </scripts>
       <scripts name="gm_physics">
         <script>scripts\init_physics.gml</script>
@@ -1021,10 +1022,10 @@
     </scripts>
     <scripts name="send/receive">
       <script>scripts\receive_transmissions.gml</script>
+      <script>scripts\send_frame.gml</script>
       <script>scripts\send_all_bpart_stats.gml</script>
       <script>scripts\mega_stat_update.gml</script>
       <script>scripts\update_global_stat.gml</script>
-      <script>scripts\send_frame.gml</script>
       <script>scripts\griefer_restart.gml</script>
       <script>scripts\instance_create_for_everyone.gml</script>
       <script>scripts\instance_destroy_for_everyone.gml</script>

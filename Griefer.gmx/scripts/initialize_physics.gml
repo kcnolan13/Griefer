@@ -4,6 +4,8 @@ varWrite("image_blend",c_white)
 varWrite("visible",true)
 varWrite("myX",x)
 varWrite("myY",y)
+varWrite("myX_true",x)
+varWrite("myY_true",y)
 varWrite("animation_speed",0)
 mass_original = 1
 mass = 1

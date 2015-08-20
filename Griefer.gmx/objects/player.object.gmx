@@ -30,6 +30,31 @@ perform_step = 0
 my_doll = NO_HANDLE
 alarm[1] = 2
 
+//vars that needed to be transmitted framely --&gt; now only when they change!
+xyLerp = 0.35
+xyLerp_counter = 0
+update_physics = false
+sprite_index_transmitted = sprite_index
+animation_transmitted = ""
+match_points_transmitted = 0
+match_deaths_transmitted = 0
+match_kills_transmitted = 0
+match_assists_transmitted = 0
+visible_transmitted = 0
+animation_speed_transmitted = 0
+animation_direction_transmitted = 0
+animation_xscale_transmitted = 0
+animation_index_transmitted = 0
+active_weapon_sprite_transmitted = 0
+arms_posing_transmitted = 0
+arm_pose_transmitted = ""
+arm_animation_length_transmitted = 0
+arm_animation_index_transmitted = 0
+arm_animation_direction_transmitted = 0
+arm_animation_speed_transmitted = 0
+active_weapon_prescaler_transmitted = 0
+//end framely vars
+
 curs_xoff = 256
 curs_yoff = 256
 
@@ -103,6 +128,9 @@ varWrite("alive",false)
 varWrite("player_quit",false)
 varWrite("flash_hp",100)
 varWrite("fire_counter",0)
+
+init_net_physics()
+
 
 varWrite("speed_multiplier",1)
 
@@ -1369,11 +1397,13 @@ if varRead("controllable") or (net_manager.starting_match and varRead("myX") &gt
 if varRead("controllable")
 {
     if vsp &gt; -6
-    jumping = false
+        jumping = false
+        
     varWrite("sprite_index",sprite_index)
     
     if not is_bot(id)
     {
+        update_physics = false
         //THIS IS WHERE SHIT GOES DOWN
         framely_player_controls()
     }
@@ -1750,6 +1780,26 @@ if (varRead("controllable")) or objVarRead(net_manager,"end_match_coming")
         sprite_index = varRead("sprite_index")
         
     sync_poses_and_animations()
+    
+
+    //lerp myX, myY for remote players
+    if myPlayer() != id and not is_bot(id)
+    {
+        if not visible
+            xyLerp_counter = 0
+        else
+            xyLerp_counter++
+            
+        if not match_starting() and not match_ending() and xyLerp_counter &gt; 10
+        {
+            varWrite("myX",lerp(varRead("myX"),varRead("myX_true"),xyLerp))
+            varWrite("myY",lerp(varRead("myY"),varRead("myY_true"),xyLerp))
+        } else
+        {
+            varWrite("myX",varRead("myX_true"))
+            varWrite("myY",varRead("myY_true"))
+        }
+    }
 }
 </string>
           </argument>

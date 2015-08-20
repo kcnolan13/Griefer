@@ -8,6 +8,12 @@ if varRead("animation_index") >= varRead("animation_length") or varRead("animati
         varWrite("animation_index",varRead("animation_length") -1)
 }
 
+if varRead("animation_index") >= getLength(torso_xs)
+{
+    printf(":::WARNING -- character_generic torso_xs about to index out of range")
+    varWrite("animation_index",0)
+}
+
 //CHANGE THE WAY HE'S FACING
 varWrite("animation",string(varRead("animation")))
 varWrite("arm_pose",string(varRead("arm_pose")))
@@ -61,6 +67,12 @@ if (varRead("arms_posing"))
             varWrite("arm_animation_index",0)
         else
             varWrite("arm_animation_index",varRead("arm_animation_length") -1)
+    }
+    
+    if varRead("arm_animation_index") >= getLength(shoulderl_xs)
+    {
+        printf(":::WARNING: shoulderl_xs about to index out of range")
+        varWrite("arm_animation_index",0)
     }
 
     //printf(string(varRead("pName"))+"'s char_gen: "+string(varRead("arm_animation_index"))+" of "+string(varRead("arm_animation_length")))
