@@ -171,6 +171,17 @@ while (genMessagesWaiting() and wait_counter < 500000)
                 
             net_manager.menu_mode = "lobby"
             varWrite("lobby_wait_time",lobby_match_countdown_time)
+            
+            with stat_manager
+            {
+                if instance_exists(net_manager.stat_gravatar)
+                {
+                    objVarWrite(net_manager.stat_gravatar,"pName",playerName(myAvatar()))
+                    grav_name = playerName(myAvatar())
+                    request_personal_stats(playerName(myAvatar()),stat_flag)
+                } else printf("ERROR: stat_manager on received lock armory cannot find net_manager.stat_gravatar")
+            }
+            
         break
         
         case "goto_lobby":
@@ -461,6 +472,9 @@ while (objUpdatesWaiting() and wait_counter < 1000)
                     objVarWrite(ID,"physics_updated",true)
                     objVarWrite(ID,netvar+"_true",val)
                     //printf("::: "+playerName(ID)+"'s physics were updated: "+string(netvar)+"_true = "+string(val))
+                } else if netvar = "my_player"
+                {
+                    printf("::: received my_player = "+string(val)+" update for "+string(objVarRead(ID,"name")))
                 }
             }
             

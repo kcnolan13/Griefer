@@ -71,11 +71,20 @@ if (not varRead("is_bullet"))
             {
                 if bounces >= max_bounces
                 {
-                    //audio_play_sound(snd_sticky_stuck,2,false)
                     stuck = true
                     stuck_xoff = x
                     stuck_yoff = y
                     have_hit_target = true
+                    varWrite("stuck_xoff",x)
+                    varWrite("stuck_yoff",y)
+                    
+                    //get stuck to nothing and tell other players about it
+                    varWrite("stuck_pname","sticky_projectile_stuck_on_block")
+                    varWrite("can_rotate",false)
+                    obj_update_string(id,"stuck_pname",FL_NORMAL)
+                    obj_update_real(id,"stuck_xoff",FL_NORMAL)
+                    obj_update_real(id,"stuck_yoff",FL_NORMAL)
+                    obj_update_real(id,"can_rotate",FL_NORMAL)
                 }
                 else
                 {
@@ -95,31 +104,55 @@ if (not varRead("is_bullet"))
                 }
                 have_hit_target = true
                 stuck_player = inst
-                stuck_xoff = 0//x - inst.x
-                stuck_yoff = y - inst.y
-                stuck_xscaler = objVarRead(inst,"animation_xscale")
                 stuck = true
-                stuck_ang = inst.torso_rot*-1
+                varWrite("stuck_pname",string(playerName(inst)))
+                varWrite("stuck_xoff",0)
+                varWrite("stuck_yoff",y-inst.y)
+                varWrite("stuck_xscaler",objVarRead(inst,"animation_xscale"))
+                varWrite("stuck_ang",inst.torso_rot*-1)
+                varWrite("can_rotate",false)
+                
+                //broadcast to other players that this nade is stuck and to whom it is bound
+                obj_update_string(id,"stuck_pname",FL_NORMAL)
+                obj_update_real(id,"stuck_xoff",FL_NORMAL)
+                obj_update_real(id,"stuck_yoff",FL_NORMAL)
+                obj_update_real(id,"stuck_xscaler",FL_NORMAL)
+                obj_update_real(id,"stuck_ang",FL_NORMAL)
+                obj_update_real(id,"can_rotate",FL_NORMAL)
             }
         }
         else
         {
-            //if bounces > 0
+            //won't need to bounce again
+            if bounces < max_bounces
+                do_next_instantiate = true
+            else
+                do_next_instantiate = false
+                
+            bounces += 100
+            
+            if do_next_instantiate
             {
-                have_hit_target = true
-                stuck = true
-                stuck_xoff = x
-                stuck_yoff = y
-                bounces = max_bounces
+                instantiate_bullet()
             }
-            /*else
+            else
             {
-                if DEBUG
-                printf("no collision found!!")
-                create_hitscan_flash(flash_hitscan_simple_torque,varRead("myX"),varRead("myY"),3072/100,0.5,varRead("direction"))
-                varAdd("myX", lengthdir_x(3072, varRead("direction")))
-                varAdd("myY",lengthdir_y(3072, varRead("direction")))
-            }*/
+                stuck = true
+                stuck_xoff = scanx_i + lengthdir_x(sqrt(room_width*room_width+room_height*room_height), varRead("direction"))
+                stuck_yoff = scany_i + lengthdir_y(sqrt(room_width*room_width+room_height*room_height), varRead("direction"))
+                
+                have_hit_target = true
+                varWrite("stuck_xoff",stuck_xoff)
+                varWrite("stuck_yoff",stuck_yoff)
+                
+                //get stuck to nothing and tell other players about it
+                varWrite("stuck_pname","sticky_projectile_stuck_on_block")
+                varWrite("can_rotate",false)
+                obj_update_string(id,"stuck_pname",FL_NORMAL)
+                obj_update_real(id,"stuck_xoff",FL_NORMAL)
+                obj_update_real(id,"stuck_yoff",FL_NORMAL)
+                obj_update_real(id,"can_rotate",FL_NORMAL)
+            }
         }
     }
 }

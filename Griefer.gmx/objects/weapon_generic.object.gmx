@@ -116,6 +116,7 @@ varWrite("active",false)                //true when in-use by local player
 varWrite("is_nade",false)
 varWrite("is_secondary",false)
 varWrite("my_player",-1)                //uniqueId of bonded player
+varWrite("my_player_name","")
 varWrite("control_type","left_press")   //fire button left_press, left_hold, or left_charge
 varWrite("can_disappear",true)          //disappear from the battlefield after a while
 varWrite("disappear_counter",-1)         
@@ -189,8 +190,7 @@ destroyed = true
             <string>///fix to player and weapon contemplation
 visible = true
 
-dat_jugador = find_player(varRead("my_player"))
-if dat_jugador &gt; -1
+if being_held()
 {
      varWrite("myX",objVarRead(dat_jugador,"myX"))
      varWrite("myY",objVarRead(dat_jugador,"myY"))
@@ -201,9 +201,8 @@ else
     for (var i=0; i&lt;instance_number(player); i++)
     {
         var playa = instance_find(player,i)
-        if (is_bot(playa) or playa = myPlayer()) and varRead("my_player") &lt; 0
+        if (is_bot(playa) or playa = myPlayer()) and not being_held()
         {
-            
             if interactable(playa) and playa.weapon_contemplating &lt; 0
             {
                 with playa
@@ -259,9 +258,7 @@ else
           <argument>
             <kind>1</kind>
             <string>///fix to player
-
-dat_jugador = find_player(varRead("my_player"))
-if dat_jugador &gt; -1
+if being_held()
 {
      varWrite("myX",objVarRead(dat_jugador,"myX"))
      varWrite("myY",objVarRead(dat_jugador,"myY"))
@@ -312,7 +309,7 @@ framely_weapon_controls()
             <kind>1</kind>
             <string>///standard behavior
 
-if mi_jugador = -1
+if mi_jugador = -1 and not being_held()
     mi_jugador = NO_HANDLE
 
 if varRead("active")
@@ -332,8 +329,6 @@ if instance_exists(myCursor) and ((instance_exists(dat_jugador) and not is_bot(d
     }
 } else if instance_exists(dat_jugador) and not is_bot(dat_jugador) 
     printf("ERROR: nonexistant cursor for: "+varRead("name"))
-
-
 
 if object_index = weapon_vulcan
 {
@@ -355,9 +350,12 @@ if lobby_leader()
         net_manager.local_player.weapon_contemplating = NO_HANDLE
 }
 
-dat_jugador = find_player(varRead("my_player"))
+if object_index = weapon_torque
+{
+    printf("::: dat_jugador = "+string(dat_jugador)+", my_player="+string(varRead("my_player")))
+}
 
-if dat_jugador &gt; -1
+if being_held()
 {
      varWrite("myX",objVarRead(dat_jugador,"myX"))
      varWrite("myY",objVarRead(dat_jugador,"myY"))

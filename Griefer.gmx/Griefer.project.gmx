@@ -1401,6 +1401,7 @@
       <script>scripts\torque_charging.gml</script>
       <script>scripts\play_stick_sound.gml</script>
       <script>scripts\weapon_spr_hitforce.gml</script>
+      <script>scripts\being_held.gml</script>
     </scripts>
     <scripts name="fx">
       <script>scripts\build_solid_profile.gml</script>
@@ -1416,6 +1417,7 @@
       <script>scripts\compute_boom_delay.gml</script>
     </scripts>
     <scripts name="matchmaking">
+      <script>scripts\get_ready.gml</script>
       <script>scripts\recompute_votes.gml</script>
       <script>scripts\compute_winloss.gml</script>
       <script>scripts\leave_matchmaking.gml</script>
@@ -1840,6 +1842,8 @@
     <rooms name="maps">
       <room>rooms\map_placeholder1</room>
       <room>rooms\rm_double</room>
+      <room>rooms\rm_torque</room>
+      <room>rooms\rm_orange</room>
       <room>rooms\rm_bridge</room>
       <room>rooms\rm_pillar</room>
       <room>rooms\rm_rocky</room>
@@ -1851,12 +1855,10 @@
       <room>rooms\rm_debug</room>
       <room>rooms\rm_dust</room>
       <room>rooms\rm_pillar2</room>
-      <room>rooms\rm_torque</room>
       <room>rooms\rm_trench</room>
       <room>rooms\rm_cave2</room>
       <room>rooms\rm_cave</room>
       <room>rooms\rm_snow</room>
-      <room>rooms\rm_orange</room>
       <room>rooms\rm_chronic</room>
       <room>rooms\rm_tree</room>
       <room>rooms\rm_crosscut</room>

@@ -2218,10 +2218,10 @@ if not bparts_ready exit
 //draw stupid
 //draw_sprite_ext(sprite_index,image_index,x,y,image_xscale,image_yscale,image_angle,c_white,image_alpha)
 
-if net_manager.show_cout
+if net_manager.show_cout or 1=1
 {
-    draw_text(x,y-140,"uniqueId: "+string(varRead("uniqueId")))
-    draw_text(x,y-100,"pNum: "+string(varRead("pNum")))
+    draw_text(x,y-180,"uniqueId: "+string(varRead("uniqueId")))
+    draw_text(x,y-160,"pNum: "+string(varRead("pNum")))
 }
 
 event_inherited()
@@ -2230,13 +2230,11 @@ draw_set_font(fnt_hud)
 draw_set_halign(fa_center)
 draw_set_valign(fa_center)
 
-
-
 if net_manager.local_player = id or is_local_teammate(id) or net_manager.bot_override
 {
     draw_set_font(fnt_hud_big)
     draw_set_color(c_white)
-    draw_namerank(varRead("pName"),varRead("rank"),x-32,y-100,1,c_white)
+    draw_namerank(capwords(varRead("pName")),varRead("rank"),x-32,y-100,1,c_white)
     draw_set_font(fnt_hud)
     
     /*draw_text(x,y-200,"rank: "+varRead("rank"))

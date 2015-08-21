@@ -235,12 +235,12 @@ rewards[0] = icon
             <kind>1</kind>
             <string>///challenge auto completion
 
-if progress_varname != "" and nth_frame(auto_frame_offset) //reduce frames checked to save performance a bit
+if in_match() and progress_varname != "" and nth_frame(auto_frame_offset) and not match_starting() //reduce frames checked to save performance a bit
 {
     var grav = net_manager.stat_gravatar
-    if not in_match() and (instance_exists(grav) and objVarRead(grav,"pName") != objVarRead(net_manager,"pName"))
+    if instance_exists(grav) and instance_exists(myAvatar()) and playerName(grav) != playerName(myAvatar())
     {
-        //printf(":::WARNING: cannot complete challenge while looking at another player ("+string(objVarRead(grav,"pName"))+")'s stats")
+        printf(":::WARNING: cannot complete challenge while looking at another player ("+playerName(grav)+")'s stats")
     }
     else //yes you can complete this challenge!
     {

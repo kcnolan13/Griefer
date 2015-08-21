@@ -58,6 +58,16 @@ varWrite("image_blend",c_white)
 varWrite("spawner",-1)
 varWrite("been_picked_up",false)
 varWrite("rigidity",3)
+varWrite("can_rotate",true)
+varWrite("stationary",false)
+stationary_counter = 0
+
+varWrite("stuck_pname",-52)
+varWrite("stuck_xoff",0)
+varWrite("stuck_yoff",0)
+varWrite("stuck_xscaler",0)
+varWrite("stuck_ang",0)
+
 rigidity = 3
 splode_now = false
 have_hit_target = false
@@ -104,8 +114,10 @@ init_net_physics()
           <argument>
             <kind>1</kind>
             <string>///sticky stuck
-if sticky and stuck and varRead("local")
+if sticky and is_string(varRead("stuck_pname"))
+{
     sticky_stuck()
+}
 </string>
           </argument>
         </arguments>
@@ -129,8 +141,10 @@ if sticky and stuck and varRead("local")
           <argument>
             <kind>1</kind>
             <string>///sticky stuck
-if sticky and stuck and varRead("local")
+if sticky and is_string(varRead("stuck_pname"))
+{
     sticky_stuck()
+}
 </string>
           </argument>
         </arguments>
@@ -166,7 +180,7 @@ if varRead("local")
 {
     if cook_time &gt; 0 and (not start_cook_on_hit or have_hit_target)
     {
-        cook_time --
+        cook_time = sub_real(cook_time,1)
         
         if SUPER_DEBUG
             printf("Cheffing up a fat one : T-Minus "+cook_time/30+" sec.")
@@ -215,35 +229,33 @@ if varRead("local")
 }
 
 //UNIVERSAL BEHAVIOR
-if (not sticky or (object_index = bullet_sticky and not have_hit_target)) or varRead("local")
+
+if varRead("speed") != -1 and not stuck
 {
-    if varRead("speed") != -1 and not stuck
-    {
-        hsp = trigx(varRead("speed"),varRead("direction"))
-        vsp = trigy(varRead("speed"),varRead("direction"))
-        varWrite("speed",-1)
-    }
-    
-    if varRead("gravity") != -1 and not stuck
-    {
-        grav = varRead("gravity")
-        varWrite("gravity",-1)
-    }
-    
-    if varRead("direction") != -1  and not stuck
-    {
-        dir = varRead("direction")
-        varWrite("direction",-1)
-    }
-    
-    if varRead("rigidity") != -1 and not stuck
-    {
-        rigidity = varRead("rigidity")
-        varWrite("rigidity",-1)
-    }
+    hsp = trigx(varRead("speed"),varRead("direction"))
+    vsp = trigy(varRead("speed"),varRead("direction"))
+    varWrite("speed",-1)
 }
 
-if (sticky and (object_index != bullet_sticky or have_hit_target)) and not varRead("local")
+if varRead("gravity") != -1 and not stuck
+{
+    grav = varRead("gravity")
+    varWrite("gravity",-1)
+}
+
+if varRead("direction") != -1  and not stuck
+{
+    dir = varRead("direction")
+    varWrite("direction",-1)
+}
+
+if varRead("rigidity") != -1 and not stuck
+{
+    rigidity = varRead("rigidity")
+    varWrite("rigidity",-1)
+}
+
+if object_index = bullet_torque and not varRead("local")
 {
     hsp = 0
     vsp = 0
@@ -255,65 +267,112 @@ counter++
 
 if not stuck //and (not sticky or varRead("local"))
 {
-    vsp += real_speed(grav)
-    recalc_tossable_vector()
+    if not varRead("stationary")
+    {
+        vsp += real_speed(grav)
+        recalc_tossable_vector()
+    }
+    else
+    {
+        hsp = 0
+        vsp = 0
+        spd = 0
+        varWrite("can_rotate",false)
+    }
 }
 
-if spd &gt; 0 and not stuck and object_index != bullet_torque
+if spd &gt; 0 and not stuck and varRead("can_rotate") and object_index != bullet_torque
 {
     fakedirection += rspeed*sign(rotation)*random_range(0.1,max(1,spd)/spd)
 }
 
-if not stuck and object_index = bullet_torque
+if not stuck //and object_index = bullet_torque
     dir_perm = point_direction(x,y,x+hsp,y+vsp)
-
 
 if spd &gt; 0
 {
-    if object_index = bullet_smoke or object_index = bullet_boom or object_index = bullet_thumper or object_index = bullet_rocket or object_index = bullet_flashbang or sticky or object_index = bullet_flame or object_index = bullet_snare or object_index = bullet_ink
-        var inst = hitscan_targets(varRead("myX"), varRead("myY"), varRead("myX") + real_speed(hsp), varRead("myY") + real_speed(vsp), shootable_generic, true,false,find_player(varRead("senderId")))
-    else var inst = collision_line_first(varRead("myX"), varRead("myY"), varRead("myX") + real_speed(hsp), varRead("myY") + real_speed(vsp), solid_generic, true,true)
-    if inst //and not have_hit_target
+    var inst = noone
+    
+    if sticky or object_index = bullet_smoke or object_index = bullet_boom or object_index = bullet_thumper 
+        or object_index = bullet_rocket or object_index = bullet_flashbang or object_index = bullet_flame 
+        or object_index = bullet_snare or object_index = bullet_ink
     {
-        if DEBUG
-            printf("HitBouncing Triggered: FROM STEP EVENT")
-            
+        //COLLIDE WITH PLAYERS IN AIR
+        inst = hitscan_targets(varRead("myX"), varRead("myY"), varRead("myX") + real_speed(hsp), varRead("myY") + real_speed(vsp), 
+                                    shootable_generic, true,false,find_player(varRead("senderId")))
+    }
+    else 
+    {
+        //COLLIDE WITH BLOCKS ONLY
+        inst = collision_line_first(varRead("myX"), varRead("myY"), varRead("myX") + real_speed(hsp), varRead("myY") + real_speed(vsp),
+                                         solid_generic, true,true)
+    }
+    
+    if inst
+    {       
         have_hit_target = true
+        
         if not audio_is_playing(varRead("sound_bounce")) and not stuck
             audio(varRead("sound_bounce"),1)
         
         if inst.object_index != player or (object_index = bullet_torque and not varRead("hitscan"))
             hit_bounce_target(inst,collision_x,collision_y)
         
-        if object_index = bullet_smoke or object_index = bullet_boom or (object_index = bullet_thumper and inst.object_index = player) or object_index = bullet_rocket or (object_index = bullet_flashbang and inst.object_index = player) or object_index = bullet_ink or object_index = bullet_flame or object_index = bullet_snare
+        if object_index = bullet_smoke or object_index = bullet_boom or (object_index = bullet_thumper and inst.object_index = player) 
+            or object_index = bullet_rocket or (object_index = bullet_flashbang and inst.object_index = player) 
+            or object_index = bullet_ink or object_index = bullet_flame or object_index = bullet_snare
+        {
+            //EXPLODE IMMEDIATELY WHEN HIT TARGET
             splode_now = true
+        }
 
         if inst.object_index = player and sticky and not stuck and (object_index != bullet_torque or varRead("hitscan"))
         {
             if varRead("local")
             {
+                //STICK PLAYER
+                
                 play_stick_sound()
                 if object_index = bullet_sticky
                     challenge_manager.sticky_kills ++
-                //else if object_index = bullet_torque
-                //    challenge_manager.torque_kills++
+
+                //update stuck vars
+                stuck_player = inst
+                stuck = true
+                varWrite("stuck_pname",string(playerName(inst)))
+                varWrite("stuck_xoff",0)
+                varWrite("stuck_yoff",y-inst.y)
+                varWrite("stuck_xscaler",objVarRead(inst,"animation_xscale"))
+                varWrite("stuck_ang",inst.torso_rot*-1)
+                varWrite("can_rotate",false)
+                
+                //broadcast to other players that this nade is stuck and to whom it is bound
+                obj_update_string(id,"stuck_pname",FL_NORMAL)
+                obj_update_real(id,"stuck_xoff",FL_NORMAL)
+                obj_update_real(id,"stuck_yoff",FL_NORMAL)
+                obj_update_real(id,"stuck_xscaler",FL_NORMAL)
+                obj_update_real(id,"stuck_ang",FL_NORMAL)
+                obj_update_real(id,"can_rotate",FL_NORMAL)
             }
-            //audio_play_sound(snd_sticky_stuck,2,false)
-            printf("STUCK!!!")
-            stuck_player = inst
-            stuck_xoff = 0//x - inst.x
-            stuck_yoff = y - inst.y
-            stuck_xscaler = objVarRead(inst,"animation_xscale")
-            stuck = true
-            stuck_ang = inst.torso_rot*-1
-        } else if object_index = bullet_torque and not stuck and inst.object_index != player and not varRead("hitscan")
+        } 
+        else if object_index = bullet_torque and not stuck and inst.object_index != player and not varRead("hitscan")
         {
             if bounces &gt;= max_bounces
             {
-                //audio_play_sound(snd_sticky_stuck,2,false)
                 stuck = true
-                stuck_xoff = x
-                stuck_yoff = y
+                varWrite("stuck_xoff",x)
+                varWrite("stuck_yoff",y)
+                
+                //get stuck to nothing and tell other players about it
+                if varRead("local")
+                {
+                    varWrite("stuck_pname","sticky_projectile_stuck_on_block")
+                    varWrite("can_rotate",false)
+                    obj_update_string(id,"stuck_pname",FL_NORMAL)
+                    obj_update_real(id,"stuck_xoff",FL_NORMAL)
+                    obj_update_real(id,"stuck_yoff",FL_NORMAL)
+                    obj_update_real(id,"can_rotate",FL_NORMAL)
+                }
             }
             else
             {
@@ -322,47 +381,57 @@ if spd &gt; 0
         }
 
     }
-    else
+    else if not varRead("stationary")
     {
         varAdd("myX",real_speed(hsp))
         varAdd("myY",real_speed(vsp))
     }
 }
-else if not stuck
+else if not stuck and not varRead("stationary")
 {
-        varAdd("myX",real_speed(hsp))
-        varAdd("myY",real_speed(vsp))
-        if SUPER_DEBUG
-            printf("no speed, unsticking")
-        scr_unstick_tossable()
-        if !instance_position(x,bbox_bottom+1,solid_generic)
+    varAdd("myX",real_speed(hsp))
+    varAdd("myY",real_speed(vsp))
+    scr_unstick_tossable()
+    
+    if !instance_position(x,bbox_bottom+1,solid_generic)
         varWrite("gravity",2)
+    else
+        varWrite("gravity",0)
 }
-
 
 x = varRead("myX")
 y = varRead("myY")
-//printf("sticky at "+x+", "+y)
 
-if DEBUG and counter &lt; 5
-    printf("there is a Tossable Generic at "+x+", "+y)
-    
-    
-if not varRead("local")
-{
-    dir_perm = varRead("dir_override")
-    varWrite("direction",dir_perm)
-}
-
-if varRead("local") and nth_frame(1)
+if varRead("local") and nth_frame(5)
 {
     obj_update_real(id,"myX",FL_NORMAL)
     obj_update_real(id,"myY",FL_NORMAL)
-    obj_sendval_real(id,"dir_override",dir_perm,FL_NORMAL)
+    
+    recalc_tossable_vector()
+    obj_sendval_real(id,"direction",dir,FL_NORMAL)
+    
+    if not stuck
+        obj_sendval_real(id,"speed",spd,FL_NORMAL)
+    
 }
 
-if sticky and stuck and varRead("local")
+if sticky and is_string(varRead("stuck_pname"))
+{
     sticky_stuck()
+}
+
+if varRead("local")
+{
+    if x = xprevious and y = yprevious
+    {
+        stationary_counter++
+    } else stationary_counter = 0
+    
+    if stationary_counter &gt; 4
+    {
+        obj_sendval_real(id,"stationary",true,FL_NORMAL)
+    }
+}
 </string>
           </argument>
         </arguments>

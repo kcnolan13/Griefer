@@ -251,20 +251,17 @@ if varRead("charge") = 1
     varWrite("traj_color",col_on)
 } else varWrite("traj_color",col_off)
 
-dat_jugador = find_player(varRead("my_player"))
-
-if instance_exists(dat_jugador) and dat_jugador = net_manager.local_player
+if being_held() and dat_jugador = myPlayer()
 {
     obj_update_real(id,"charge",FL_NORMAL)
     
     if not varRead("active") or varRead("clip") &lt; 1
     {
         varWrite("charge",0)
-    }
-    
+    }   
 }
 
-if varRead("charge") &lt;= 0 and dat_jugador = net_manager.local_player and varRead("sound_on") != -1
+if varRead("charge") &lt;= 0 and dat_jugador = myPlayer() and varRead("sound_on") != -1
 {
     obj_sendval_real(id,"sound_on",false,FL_NORMAL)
     varWrite("sound_on",-1)
@@ -284,7 +281,7 @@ if varRead("sound_on") = 1 and not audio_is_playing(snd_torque_charge)
 
 if varRead("charge") &gt; 0
 {
-    if dat_jugador = net_manager.local_player and not audio_is_playing(snd_torque_charge)
+    if dat_jugador = myPlayer() and not audio_is_playing(snd_torque_charge)
     {
         varWrite("sound_on",1)
         obj_update_real(id,"sound_on",FL_NORMAL)

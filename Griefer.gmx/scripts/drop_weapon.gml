@@ -24,9 +24,11 @@ if instance_exists(wep_2drop)
         objVarWrite(wep_2drop,"disappear_counter",objVarRead(wep_2drop,"disappear_delay"))
         
     objVarWrite(wep_2drop,"my_player",NO_HANDLE)
+    objVarWrite(wep_2drop,"my_player_name","")
     
     obj_update_real(wep_2drop,"disappear_counter",FL_NORMAL)
     obj_update_real(wep_2drop,"my_player",FL_NORMAL)
+    obj_update_string(wep_2drop,"my_player_name",FL_NORMAL)
     obj_update_real(wep_2drop,"active",FL_NORMAL)
     
     force_switch = false

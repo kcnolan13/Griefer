@@ -69,8 +69,9 @@ previous_weapon()
 //printf("::: setting var weapon"+string(varRead("weapon_index"))+" to "+string(wep_2pickup))
 varWrite("weapon"+string(varRead("weapon_index")),wep_2pickup)
 
-//printf("::: "+string(varRead("pName"))+" is picking up: "+string(objVarRead(wep_2pickup,"name"))+" ... myPlayer --> "+string(varRead("uniqueId")))
+printf("::: "+string(varRead("pName"))+" is picking up: "+string(objVarRead(wep_2pickup,"name"))+" ... myPlayer --> "+string(varRead("uniqueId")))
 objVarWrite(wep_2pickup,"my_player",varRead("uniqueId"))
+objVarWrite(wep_2pickup,"my_player_name",playerName(id))
 
 //make sure it wont disappear on you
 objVarWrite(wep_2pickup,"disappear_counter",-1)
@@ -91,7 +92,8 @@ obj_update_real(wep_2pickup,"discharge_delay",FL_NORMAL)
 obj_update_real(wep_2pickup,"been_picked_up",FL_NORMAL)
 
 //printf("::: sending the weapon's my_player var (my uniqueId = "+string(objVarRead(wep_2pickup,"my_player"))+")")
-obj_update_real(wep_2pickup,"my_player",0)
+obj_update_real(wep_2pickup,"my_player",FL_NORMAL)
+obj_update_string(wep_2pickup,"my_player_name",FL_NORMAL)
 
 //printf("::: syncing active weapon...")
 sync_active_weapon()

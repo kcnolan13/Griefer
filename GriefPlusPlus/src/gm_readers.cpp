@@ -235,3 +235,8 @@ GMEXPORT const double readObjCreateMyY()
 	_lock.unlock();
 	return snatchFront(object_creates->myYs);
 }
+
+GMEXPORT const double cleanse_double(double val)
+{
+	return (double)val;
+}

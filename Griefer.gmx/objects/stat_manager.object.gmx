@@ -445,17 +445,18 @@ if update_ppl and varRead("points_valid") and varRead("deaths_valid")
 stat_flag = FL_NORMAL
 alarm[0] = 3
 
+/* THIS IS DONE ON RECEIVED LOCK ARMORY NOW
 if in_match()
 {
     time_match_start = current_time
     if instance_exists(net_manager.stat_gravatar)
     {
-        objVarWrite(net_manager.stat_gravatar,"pName",objVarRead(myAvatar(),"pName"))
-        grav_name = objVarRead(myAvatar(),"pName")
-        request_personal_stats(objVarRead(myAvatar(),"pName"),stat_flag)
+        objVarWrite(net_manager.stat_gravatar,"pName",playerName(myAvatar()))
+        grav_name = playerName(myAvatar())
+        request_personal_stats(playerName(myAvatar()),stat_flag)
     } else printf("ERROR: stat_manager room start cannot find net_manager.stat_gravatar")
 }
-
+*?
 </string>
           </argument>
         </arguments>

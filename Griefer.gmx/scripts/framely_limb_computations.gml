@@ -14,6 +14,11 @@ if varRead("animation_index") >= getLength(torso_xs)
     varWrite("animation_index",0)
 }
 
+if varRead("animation_index") < 0
+{
+    printf(":::WARNING: animation_index was < 0 where it never should be: val was "+string(varRead("animation_index")))
+}
+
 //CHANGE THE WAY HE'S FACING
 varWrite("animation",string(varRead("animation")))
 varWrite("arm_pose",string(varRead("arm_pose")))
@@ -67,6 +72,11 @@ if (varRead("arms_posing"))
             varWrite("arm_animation_index",0)
         else
             varWrite("arm_animation_index",varRead("arm_animation_length") -1)
+    }
+    
+    if varRead("arm_animation_index") < 0
+    {
+        printf(":::WARNING: arm_animation_index was < 0 where it never should be: val was "+string(varRead("arm_animation_index")))
     }
     
     if varRead("arm_animation_index") >= getLength(shoulderl_xs)

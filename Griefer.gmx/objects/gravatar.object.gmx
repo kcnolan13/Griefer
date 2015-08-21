@@ -179,8 +179,8 @@ mouse_wheel_delay --
 
 if in_match()
 {
-    x = room_width+64*8
-    y = -64*8
+    x = room_width+64*12
+    y = -64*12
 }
 else
 {   //sync uniqueId up with your local avatar
@@ -232,7 +232,13 @@ if room = rm_menu or room = rm_lobby
     
     if menmode() != "stats" or stat_manager.stat_tab = stat_manager.tabs[2]
     {
-        varWrite("dude_x",-64*8)
+        varWrite("dude_x",-64*12)
+        varWrite("visible",false)
+        visible = false
+    } else
+    {
+        visible = true
+        varWrite("visible",true)
     }
     
     if not bparts_done_ready
@@ -424,8 +430,6 @@ if real(varRead("prop0")) &gt; 0 and room = rm_menu or room = rm_lobby
             <string>///go invisible if in a match
 event_inherited()
 
-gravatar_wipe(id)
-
 if in_match()
 {
     visible = false
@@ -433,6 +437,7 @@ if in_match()
 }
 else
 {
+    gravatar_wipe(id)
     visible = true
     varWrite("visible",true)
 }
@@ -470,7 +475,9 @@ if net_manager.show_cout
 }
 
 if not in_match()
+{
     event_inherited()
+}
 </string>
           </argument>
         </arguments>

@@ -53,6 +53,7 @@ GMEXPORT const double readObjCreateMyX();
 GMEXPORT const double readObjCreateMyY();
 
 GMEXPORT const double hash_string(char *str);
+GMEXPORT const double cleanse_double(double val);
 
 
 #endif // __GM_READERS_H__
