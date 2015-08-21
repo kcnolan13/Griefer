@@ -45,7 +45,7 @@ GMEXPORT const double objUpdateReal(char * oid_string, char *netVar, double valu
 	_lock.unlock();
 	return 0;
 }
-GMEXPORT const double objCreate(double object_index, double uniqueId, double myX, double myY)
+GMEXPORT const double objCreate(double object_index, char *uniqueId, double myX, double myY)
 {
 	_lock.lock();
 	string msgJSON = objCreateJSON(object_index, uniqueId, myX, myY);

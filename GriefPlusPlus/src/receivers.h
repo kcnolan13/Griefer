@@ -29,7 +29,7 @@ class object_update_container
 {
 public:
 	deque<double> *indices;
-	deque<double> *uniqueIds;
+	deque<string> *uniqueIds;
 	deque<string> *oid_strings;
 	deque<string> *netvars;
 	deque<genVal> *vals;
@@ -41,7 +41,7 @@ class object_create_container
 {
 public:
 	deque<double> *indices;
-	deque<double> *uniqueIds;
+	deque<string> *uniqueIds;
 	deque<double> *myXs;
 	deque<double> *myYs;
 	object_create_container();

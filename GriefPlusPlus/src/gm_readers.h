@@ -38,7 +38,7 @@ deque<genVal> * bigValDeque(double val_num);
 
 GMEXPORT const double objUpdatesWaiting();
 GMEXPORT const double readObjUpdateIndex();
-GMEXPORT const double readObjUpdateUniqueId();
+GMEXPORT const char * readObjUpdateUniqueId();
 GMEXPORT const char * readObjUpdateOidStr();
 GMEXPORT const char * readObjUpdateNetvar();
 GMEXPORT const char * readObjUpdateValType();
@@ -48,7 +48,7 @@ GMEXPORT const double readObjUpdateFlag();
 
 GMEXPORT const double objCreatesWaiting();
 GMEXPORT const double readObjCreateIndex();
-GMEXPORT const double readObjCreateUniqueId();
+GMEXPORT const char * readObjCreateUniqueId();
 GMEXPORT const double readObjCreateMyX();
 GMEXPORT const double readObjCreateMyY();
 

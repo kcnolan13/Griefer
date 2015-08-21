@@ -200,7 +200,7 @@ string objUpdateJSON(char * oid_string, char * netVar, double value, double flag
 	console("JSON Constructed: " + ret);
 	return ret;
 }
-string objCreateJSON(double object_index, double uniqueId, double myX, double myY)
+string objCreateJSON(double object_index, char *uniqueId, double myX, double myY)
 {
 	string ret = "{" + field("name", "objCreate") + ", " + field("object_index", object_index) + ", " + field("uniqueId", uniqueId) + ", ";
 	ret += field("myX", myX) + ", " + field("myY", myY) + "}";

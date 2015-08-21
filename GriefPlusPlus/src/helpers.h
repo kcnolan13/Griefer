@@ -78,7 +78,7 @@ string field(string name, const char *val);
 string field(string name, double val);
 string objUpdateJSON(char * oid_string, char * netVar, char *value, double flag);
 string objUpdateJSON(char * oid_string, char * netVar, double value, double flag);
-string objCreateJSON(double object_index, double uniqueId, double myX, double myY);
+string objCreateJSON(double object_index, char *uniqueId, double myX, double myY);
 string objHeaderJSON(string name, char * oid_string);
 string genMessageJSON(char *message_string, const char *value);
 string genMessageJSON(char *message_string, double value);

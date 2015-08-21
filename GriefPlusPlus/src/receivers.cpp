@@ -8,7 +8,7 @@
 object_update_container::object_update_container()
 {
 	indices = new deque<double>();
-	uniqueIds = new deque<double>();
+	uniqueIds = new deque<string>();
 	oid_strings = new deque<string>();
 	netvars = new deque<string>();
 	vals = new deque<genVal>();
@@ -18,7 +18,7 @@ object_update_container::object_update_container()
 object_create_container::object_create_container()
 {
 	indices = new deque<double>();
-	uniqueIds = new deque<double>();
+	uniqueIds = new deque<string>();
 	myXs = new deque<double>();
 	myYs = new deque<double>();
 }
@@ -160,7 +160,7 @@ void processObjCreate(message::ptr const& message)
 	
 	//process message object
 	object_creates->indices->push_back(getMapReal(message, "object_index"));
-	object_creates->uniqueIds->push_back(getMapReal(message, "uniqueId"));
+	object_creates->uniqueIds->push_back(getMapString(message, "uniqueId"));
 	object_creates->myXs->push_back(getMapReal(message, "myX"));
 	object_creates->myYs->push_back(getMapReal(message, "myY"));
 }

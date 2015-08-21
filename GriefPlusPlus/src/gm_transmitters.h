@@ -27,7 +27,7 @@ GMEXPORT const void myPrintf(char *out);
 
 GMEXPORT const double objUpdateStr(char * oid_string, char *netVar, char *value, double flag);
 GMEXPORT const double objUpdateReal(char * oid_string, char *netVar, double value, double flag);
-GMEXPORT const double objCreate(double object_index, double uniqueId, double myX, double myY);
+GMEXPORT const double objCreate(double object_index, char *uniqueId, double myX, double myY);
 
 GMEXPORT const double pkgCreate();
 GMEXPORT const double pkgSend();
