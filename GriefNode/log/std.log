@@ -1,1 +1,455 @@
 listening on *:8080
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+received authentication request:
+{"username": "kyle", "password": "abc123"}
+correct password
+unique login for: kyle
+kyle: no_mode, main_menu
+sending kyle stats to local net manager
+sending kyle challenge stats
+received authentication request:
+{"username": "titties", "password": "abc123"}
+correct password
+unique login for: titties
+titties: no_mode, main_menu
+sending titties stats to local net manager
+sending titties challenge stats
+kyle moving to: versus_lobby
+titties moving to: versus_lobby
+forcing start match countdown: rescheduling room versus1 to start match in: 10 seconds
+previous time: 50000
+new time: 10
+John Doe: disconnected
+deleting John Doe's socket
+kyle: disconnected
+deleting kyle's socket
+titties Leaving Matchmaking
+John Doe: disconnected
+deleting John Doe's socket
+titties: disconnected
+deleting titties's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+received authentication request:
+{"username": "kyle", "password": "abc123"}
+correct password
+unique login for: kyle
+kyle: no_mode, main_menu
+sending kyle stats to local net manager
+sending kyle challenge stats
+received authentication request:
+{"username": "titties", "password": "abc123"}
+correct password
+unique login for: titties
+titties: no_mode, main_menu
+sending titties stats to local net manager
+sending titties challenge stats
+kyle moving to: versus_lobby
+titties moving to: versus_lobby
+forcing start match countdown: rescheduling room versus1 to start match in: 10 seconds
+previous time: 50000
+new time: 10
+adding perma challenge: Spitfire
+adding perma challenge: Iron
+adding perma challenge: Samurai
+adding perma challenge: Mincer
+adding perma challenge: Executioner
+adding perma challenge: Hound Helmet
+adding perma challenge: Gravemaker
+adding perma challenge: Roman Helmet
+adding perma challenge: Punk 
+adding perma challenge: Contender 
+adding perma challenge: Hellion 
+adding perma challenge: Hot-Head 
+John Doe: disconnected
+deleting John Doe's socket
+titties: disconnected
+deleting titties's socket
+kyle Leaving Matchmaking
+John Doe: disconnected
+deleting John Doe's socket
+kyle: disconnected
+deleting kyle's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+received authentication request:
+{"username": "kyle", "password": "abc123"}
+correct password
+unique login for: kyle
+kyle: no_mode, main_menu
+sending kyle stats to local net manager
+sending kyle challenge stats
+received authentication request:
+{"username": "bitties", "password": "abc123"}
+correct password
+unique login for: bitties
+bitties: no_mode, main_menu
+sending bitties stats to local net manager
+sending bitties challenge stats
+kyle moving to: versus_lobby
+bitties: disconnected
+deleting bitties's socket
+PING!
+pong . . .
+
+received authentication request:
+{"username": "tit christ", "password": "abc123"}
+tit christ: no_mode, main_menu
+sending tit christ stats to local net manager
+sending tit christ challenge stats
+tit christ moving to: versus_lobby
+forcing start match countdown: rescheduling room versus1 to start match in: 10 seconds
+previous time: 50000
+new time: 10
+adding perma challenge: Ninja
+John Doe: disconnected
+deleting John Doe's socket
+kyle: disconnected
+deleting kyle's socket
+tit christ Leaving Matchmaking
+John Doe: disconnected
+deleting John Doe's socket
+tit christ: disconnected
+deleting tit christ's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+received authentication request:
+{"username": "kyle", "password": "abc123"}
+correct password
+unique login for: kyle
+kyle: no_mode, main_menu
+sending kyle stats to local net manager
+sending kyle challenge stats
+received authentication request:
+{"username": "tit christ", "password": "abc123"}
+correct password
+unique login for: tit christ
+tit christ: no_mode, main_menu
+sending tit christ stats to local net manager
+sending tit christ challenge stats
+kyle moving to: versus_lobby
+tit christ moving to: versus_lobby
+forcing start match countdown: rescheduling room versus1 to start match in: 10 seconds
+previous time: 50000
+new time: 10
+adding perma challenge: Mincer
+adding perma challenge: Spitfire
+adding perma challenge: Executioner
+adding perma challenge: Iron
+adding perma challenge: Roman Helmet
+adding perma challenge: Samurai
+adding perma challenge: Hound Helmet
+adding perma challenge: Mantel Helmet
+adding perma challenge: Gravemaker
+adding perma challenge: Literal Garbage 
+adding perma challenge: Figurative Garbage 
+adding perma challenge: Victim 
+adding perma challenge: N00b 
+adding perma challenge: Plebe 
+adding perma challenge: Punk 
+adding perma challenge: Contender 
+adding perma challenge: Hellion 
+adding perma challenge: Hot-Head 
+John Doe: disconnected
+deleting John Doe's socket
+tit christ: disconnected
+deleting tit christ's socket
+kyle Leaving Matchmaking
+John Doe: disconnected
+deleting John Doe's socket
+kyle: disconnected
+deleting kyle's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+received authentication request:
+{"username": "kyle", "password": "abc123"}
+correct password
+unique login for: kyle
+kyle: no_mode, main_menu
+sending kyle stats to local net manager
+sending kyle challenge stats
+received authentication request:
+{"username": "dick christ", "password": "abc123"}
+dick christ: no_mode, main_menu
+sending dick christ stats to local net manager
+sending dick christ challenge stats
+dick christ moving to: versus_lobby
+kyle moving to: versus_lobby
+forcing start match countdown: rescheduling room versus1 to start match in: 10 seconds
+previous time: 50000
+new time: 10
+John Doe: disconnected
+deleting John Doe's socket
+dick christ: disconnected
+deleting dick christ's socket
+kyle Leaving Matchmaking
+John Doe: disconnected
+deleting John Doe's socket
+kyle: disconnected
+deleting kyle's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+received authentication request:
+{"username": "kyle", "password": "abc123"}
+correct password
+unique login for: kyle
+kyle: no_mode, main_menu
+sending kyle stats to local net manager
+sending kyle challenge stats
+kyle moving to: versus_lobby
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+received authentication request:
+{"username": "dick christ", "password": "abc123"}
+correct password
+unique login for: dick christ
+dick christ: no_mode, main_menu
+sending dick christ stats to local net manager
+sending dick christ challenge stats
+dick christ moving to: versus_lobby
+forcing start match countdown: rescheduling room versus1 to start match in: 10 seconds
+previous time: 50000
+new time: 10
+adding perma challenge: Ninja
+John Doe: disconnected
+deleting John Doe's socket
+kyle: disconnected
+deleting kyle's socket
+dick christ Leaving Matchmaking
+John Doe: disconnected
+deleting John Doe's socket
+dick christ: disconnected
+deleting dick christ's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+received authentication request:
+{"username": "dick christ", "password": "abc123"}
+correct password
+unique login for: dick christ
+dick christ: no_mode, main_menu
+sending dick christ stats to local net manager
+sending dick christ challenge stats
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+dick christ moving to: versus_lobby
+received authentication request:
+{"username": "kyle", "password": "abc123"}
+correct password
+unique login for: kyle
+kyle: no_mode, main_menu
+sending kyle stats to local net manager
+sending kyle challenge stats
+kyle moving to: versus_lobby
+forcing start match countdown: rescheduling room versus1 to start match in: 10 seconds
+previous time: 50000
+new time: 10
+adding perma challenge: Literal Garbage 
+adding perma challenge: Figurative Garbage 
+John Doe: disconnected
+deleting John Doe's socket
+dick christ: disconnected
+deleting dick christ's socket
+kyle Leaving Matchmaking
+John Doe: disconnected
+deleting John Doe's socket
+kyle: disconnected
+deleting kyle's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+received authentication request:
+{"username": "dick christ", "password": "abc123"}
+correct password
+unique login for: dick christ
+dick christ: no_mode, main_menu
+sending dick christ stats to local net manager
+sending dick christ challenge stats
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+dick christ moving to: versus_lobby
+received authentication request:
+{"username": "kyle", "password": "abc123"}
+correct password
+unique login for: kyle
+kyle: no_mode, main_menu
+sending kyle stats to local net manager
+sending kyle challenge stats
+kyle moving to: versus_lobby
+forcing start match countdown: rescheduling room versus1 to start match in: 10 seconds
+previous time: 50000
+new time: 10
+John Doe: disconnected
+deleting John Doe's socket
+dick christ: disconnected
+deleting dick christ's socket
+kyle Leaving Matchmaking
+John Doe: disconnected
+deleting John Doe's socket
+kyle: disconnected
+deleting kyle's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+received authentication request:
+{"username": "kyle", "password": "abc123"}
+correct password
+unique login for: kyle
+kyle: no_mode, main_menu
+sending kyle stats to local net manager
+sending kyle challenge stats
+received authentication request:
+{"username": "dick christ", "password": "abc123"}
+correct password
+unique login for: dick christ
+dick christ: no_mode, main_menu
+sending dick christ stats to local net manager
+sending dick christ challenge stats
+kyle moving to: versus_lobby
+dick christ moving to: versus_lobby
+forcing start match countdown: rescheduling room versus1 to start match in: 10 seconds
+previous time: 50000
+new time: 10
+dick christ Leaving Matchmaking
+kyle Leaving Matchmaking
+dick christ: disconnected
+deleting dick christ's socket
+PING!
+pong . . .
+
+kyle: disconnected
+deleting kyle's socket
+PING!
+pong . . .
+
+received authentication request:
+{"username": "dick christ", "password": "abc123"}
+correct password
+unique login for: dick christ
+dick christ: versus, main_menu
+sending dick christ stats to local net manager
+sending dick christ challenge stats
+received authentication request:
+{"username": "kyle", "password": "abc123"}
+correct password
+unique login for: kyle
+kyle: versus, main_menu
+sending kyle stats to local net manager
+sending kyle challenge stats
+kyle moving to: versus_lobby
+dick christ moving to: versus_lobby
+forcing start match countdown: rescheduling room versus1 to start match in: 10 seconds
+previous time: 50000
+new time: 10
+John Doe: disconnected
+deleting John Doe's socket
+kyle: disconnected
+deleting kyle's socket
+dick christ Leaving Matchmaking
+John Doe: disconnected
+deleting John Doe's socket
+dick christ: disconnected
+deleting dick christ's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+received authentication request:
+{"username": "dick christ", "password": "abc123"}
+correct password
+unique login for: dick christ
+dick christ: no_mode, main_menu
+sending dick christ stats to local net manager
+sending dick christ challenge stats
+received authentication request:
+{"username": "kyle", "password": "abc123"}
+correct password
+unique login for: kyle
+kyle: no_mode, main_menu
+sending kyle stats to local net manager
+sending kyle challenge stats
+kyle moving to: versus_lobby
+dick christ moving to: versus_lobby
+forcing start match countdown: rescheduling room versus1 to start match in: 10 seconds
+previous time: 50000
+new time: 10
+adding perma challenge: Victim 
+John Doe: disconnected
+deleting John Doe's socket
+dick christ: disconnected
+deleting dick christ's socket
+kyle Leaving Matchmaking
+John Doe: disconnected
+deleting John Doe's socket
+kyle: disconnected
+deleting kyle's socket

@@ -19,7 +19,8 @@ var log = require('./logger.js');
 
 //EXPORTS
 var hash_string = function(string) {
-	//return dealer.hash(string);
+	return string;
+	/*
     var hash = 0;
     if (string.length == 0) return hash;
     for (var i = 0; i < string.length; i++) {
@@ -33,6 +34,7 @@ var hash_string = function(string) {
 	hash = Math.abs(hash);
     //log.log(STD,"final result: "+hash);
     return hash;
+    */
 }
 exports.hash_string = hash_string;
 

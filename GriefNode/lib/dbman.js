@@ -57,7 +57,7 @@ exports.cdefaults = cdefaults;
 exports.cindices = cindices;
 
 //how to remake the users table when you need to
-var statement = 'create table users (username VARCHAR(20), userhash real, password VARCHAR(32), ';
+var statement = 'create table users (username VARCHAR(20), password VARCHAR(32), ';
 var parts = ['hat','helmet','torso','shoulder','forearm','leg','shin','foot','prop'];
 for (var i=0; i<NUM_BPARTS; i++)
 {
@@ -265,7 +265,7 @@ exports.correctPassword = correctPassword
 
 var authUnameExists = function(socket, username, password, callback)
 {
-	var statement = "SELECT * from users WHERE username="+conn.escape(username)+" OR userhash="+conn.escape(composer.hash_string(username));
+	var statement = "SELECT * from users WHERE username="+conn.escape(username);
 	var result = 0;
 	log.log(SQL,statement);
 
@@ -330,7 +330,7 @@ exports.userDelete = userDelete
 var userCreate = function(socket, username, password)
 {
 	//compose the query
-	var columns = ['username','userhash','password'];
+	var columns = ['username','password'];
 	var parts = ['hat','helmet','torso','shoulder','forearm','leg','shin','foot','prop'];
 	for (var i=0; i<NUM_BPARTS; i++)
 	{
@@ -361,7 +361,7 @@ var userCreate = function(socket, username, password)
 
 	log.log(SQL,"\n\nincoming new username: "+conn.escape(username)+" : "+username+"\n\n");
 
-	var vals = "("+conn.escape(username)+", "+conn.escape(composer.hash_string(username))+", MD5("+conn.escape(password)+"), "; //5,-1,-1,0,-1,-1,1,-1,-1,6,-1,-1,7,-1,-1,2,-1,-1,3,-1,-1,4,-1,-1)";
+	var vals = "("+conn.escape(username)+", MD5("+conn.escape(password)+"), "; //5,-1,-1,0,-1,-1,1,-1,-1,6,-1,-1,7,-1,-1,2,-1,-1,3,-1,-1,4,-1,-1)";
 	vals += str_starting_limbs+')'
 
 	//username, password, and default limbs

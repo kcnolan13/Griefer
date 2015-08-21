@@ -32,7 +32,7 @@ var player = function(){
 	this.pName = "John Doe";
 	this.gameMode = "no_mode"; //can be ffa, tdm, or versus
 	this.room = "no_room";
-	this.uniqueId = -1;
+	this.uniqueId = "-1";
 	this.uniqueMatchId = -51;
 	this.nextMap1 = -54;
 	this.nextMap2 = -54;
@@ -543,6 +543,7 @@ var configure_match = function(playerSubGroup, gameRoom, wait_time) {
 		for (var p=0; p<playerSubGroup.length; p++)
 		{
 			var playa = playerSubGroup[p].myPlayer;
+			log.log(CUPID,"nextMapVote = "+playa.nextMapVote+"nextMap1 = "+playa.nextMap1+", nextMap2 = "+playa.nextMap2+", nextMap3 = "+playa.nextMap3);
 			if (playa.nextMapVote == playa.nextMap1)
 			{
 				votes1++;
@@ -731,10 +732,6 @@ var join_match = function(playerSubGroup, gameRoom)
 
 				message = composer.objUpdate(avatarObjIndex,eachSocket.myPlayer.uniqueId,"pNum",eachSocket.myPlayer.pNum,0);
 				io.to(gameRoom).emit('obj_update',message);
-
-				//update the avatar's uniqueId locally
-				/*message = composer.objUpdate(avatarObjIndex,eachSocket.myPlayer.uniqueId,"uniqueId",eachSocket.myPlayer.uniqueId,0);
-				eachSocket.emit('obj_update',message);*/
 
 				//send complete AVATAR statistics to everyone
 				dbman.sendCompletePlayerStats(eachSocket, gameRoom, avatarObjIndex, true);
@@ -931,9 +928,6 @@ var makeMatches = function(){
 
 											message = composer.objUpdate(avatarObjIndex,eachSocket.myPlayer.uniqueId,"pNum",eachSocket.myPlayer.pNum,FL_NORMAL);
 											io.to(gameRoom).emit('obj_update',message);
-											//update the avatar's uniqueId locally
-											/*message = composer.objUpdate(avatarObjIndex,default_avatar_uniqueId,"uniqueId",s,FL_NORMAL);
-											eachSocket.emit('obj_update',message);*/
 
 											//send complete AVATAR statistics to everyone
 											dbman.sendCompletePlayerStats(eachSocket, gameRoom, avatarObjIndex, true);
