@@ -136,10 +136,40 @@ var execute = function(statement)
 {
 	conn.query(statement, function(err,rows) {
 		if (err)
-			log.log(SQL,err);
+			log.log(CRITICAL,err);
 	});
 }
-exports.execute = execute
+exports.execute = execute;
+
+var updateCalcColumns = function() {
+	log.log(SQL,"updating calculated columns");
+	globals.calcColumnsTimeout = null;
+
+	var statement = "update stats set kdr = ROUND(ifnull(kills/deaths, kills/(deaths+1)),2); ";
+	//console.log(statement);
+	execute(statement);
+
+	var statement = "update bot_stats set kdr = ROUND(ifnull(kills/deaths, kills/(deaths+1)),2); ";
+	//console.log(statement);
+	execute(statement);
+
+	var statement = "update stats set wl = ROUND(ifnull(wins/losses, wins/(losses+1)),2); ";
+	//console.log(statement);
+	execute(statement);
+
+	var statement = "update bot_stats set wl = ROUND(ifnull(wins/losses, wins/(losses+1)),2); ";
+	//console.log(statement);
+	execute(statement);
+
+	var statement = "update stats set ppl = ROUND(ifnull(points/deaths, points/(deaths+1))); ";
+	//console.log(statement);
+	execute(statement);
+
+	var statement = "update bot_stats set ppl = ROUND(ifnull(points/deaths, points/(deaths+1))); ";
+	//console.log(statement);
+	execute(statement);
+};
+exports.updateCalcColumns = updateCalcColumns;
 
 
 var updateStat = function(username, stat, value, flag)

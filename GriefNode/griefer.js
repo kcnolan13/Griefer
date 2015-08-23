@@ -60,7 +60,7 @@ io.on('connection', function(socket){
 
 		//create a player object to house all data needed for this socket/player
 		socket.myPlayer.pName = pName;
-		socket.myPlayer.uniqueId = composer.hash_string(pName);
+		socket.myPlayer.uniqueId = pName;//composer.hash_string(pName);
 		socket.myPlayer.pNum = -1;
 		socket.myPlayer.timeoutHandle = null;
 
@@ -343,19 +343,41 @@ io.on('connection', function(socket){
   	{
   		dbman.appendHistoryStat(socket,term,datMessage.val,datMessage.flag);
   	}
-  	else if (datMessage.flag ==FL_SQL)
-  	{
-  		dbman.updateStat(socket.myPlayer.pName, term, datMessage.val, FL_SQL);
-  	}
   	else
   	{
-  		dbman.updateStat(socket.myPlayer.pName, term, datMessage.val, datMessage.flag);
+  		if (global.calcColumns.indexOf(term) > -1 && global.calcColumnsTimeout == null)
+  		{
+  			//console.log("setting calc column timeout");
+  			global.calcColumnsTimeout = setTimeout(dbman.updateCalcColumns,2500);
+  		}
+	  	else 
+  		{
+  			//console.log(term+" not in: ");
+	  		//console.log(global.calcColumns);
+
+			if (datMessage.flag == FL_SQL)
+		  	{
+		  		dbman.updateStat(socket.myPlayer.pName, term, datMessage.val, FL_SQL);
+		  	}
+		  	else
+		  	{
+		  		dbman.updateStat(socket.myPlayer.pName, term, datMessage.val, datMessage.flag);
+		  	}
+	  	}
   	}
   });
 
   socket.on('other_player_stat_update', function(datMessage) {
   	var term = datMessage.netvar;
-  	dbman.updateStat(datMessage.pname, term, datMessage.val, datMessage.flag);
+  	if (term in global.calcColumns && global.calcColumnsTimeout == null)
+	{
+		console.log("setting calc column timeout");
+		global.calcColumnsTimeout = setTimeout(dbman.updateCalcColumns,2500);
+	}
+	else
+	{
+		dbman.updateStat(datMessage.pname, term, datMessage.val, datMessage.flag);
+	}
   });
 
   //---- TRANSPORT GRIEFPLUSPLUS MESSAGES TO OTHER CLIENTS ----//
@@ -377,15 +399,6 @@ io.on('connection', function(socket){
 
   	//---- FORWARD ON TO OTHER CLIENTS ----//
   	socket.broadcast.to(socket.myPlayer.room).emit('obj_update', datMessage);
-
-	  //---- POSSIBLY UPDATE A DATABASE STAT ----//
-	  for (var i=0; i<dbman.stats.length; i++)
-	  {
-	  	if (term==dbman.stats[i] && 1==0)
-	  	{
-			dbman.updateStat(socket.myPlayer.pName, term, datMessage.val, FL_NORMAL);
-	  	}
-	  }
   });
 
   socket.on('obj_create', function(datMessage) {

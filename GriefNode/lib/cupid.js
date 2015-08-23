@@ -186,6 +186,30 @@ var roomOfMode = function(mode_name) {
 }
 exports.roomOfMode = roomOfMode;
 
+var room_player1 = function(gameRoom)
+{
+	var playerSubGroup = socketsInRoom(gameRoom);
+
+	if (playerSubGroup.length > 0)
+	{
+		return playerSubGroup[0].myPlayer;
+	} else return null;
+	
+	/*var p1 = null;
+
+	for (var i=0; i<playerSubGroup.length; i++)
+	{
+		if (playerSubGroup[i].myPlayer.pNum == 0)
+		{
+			p1 = playerSubGroup[i].myPlayer;
+			return p1;
+		}
+	}
+
+	return null;*/
+} 
+exports.room_player1 = room_player1;
+
 exports.initGameRooms = function() {
 	//create several game socket groups and 1 lobby socket group for each game mode
 	for (var i=0; i<6; i++)
@@ -804,21 +828,29 @@ var join_match = function(playerSubGroup, gameRoom)
 	},50,gameRoom);
 
 	//update that stuff that was set for everyone else in match_configure
-	setTimeout(function(p1, playerSubGroup) {
+	setTimeout(function(playerSubGroup, gameRoom) {
+		var p1 = room_player1(gameRoom);
+		if (p1 != null)
+		{
 			//update next_map
-			for (var i=0; i< playerSubGroup.length; i++)
+			for (var i=0; i<playerSubGroup.length; i++)
 			{
 				var eachSocket = playerSubGroup[i];
 				//update next_map
-				var message = composer.objUpdate(netManObjIndex,default_netman_uniqueId,"next_map1",mapNum1,FL_NORMAL);
+				var message = composer.objUpdate(netManObjIndex,default_netman_uniqueId,"next_map1",p1.nextMap1,FL_NORMAL);
 				eachSocket.emit('obj_update',message);
-				message = composer.objUpdate(netManObjIndex,default_netman_uniqueId,"next_map2",mapNum2,FL_NORMAL);
+				message = composer.objUpdate(netManObjIndex,default_netman_uniqueId,"next_map2",p1.nextMap2,FL_NORMAL);
 				eachSocket.emit('obj_update',message);
-				message = composer.objUpdate(netManObjIndex,default_netman_uniqueId,"next_map3",mapNum3,FL_NORMAL);
+				message = composer.objUpdate(netManObjIndex,default_netman_uniqueId,"next_map3",p1.nextMap3,FL_NORMAL);
 				eachSocket.emit('obj_update',message);
 			}
-		}, 1000, p1, playerSubGroup);
-
+		}
+		else
+		{
+			log.log(CRITICAL,"cannot update next map options for joining players --> p1 = "+p1);
+		}	
+	}, 1000, playerSubGroup, gameRoom);
+		
 }
 exports.join_match = join_match
 

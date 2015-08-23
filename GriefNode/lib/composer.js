@@ -77,7 +77,7 @@ var objUpdate = function(obj_index, unique_id, var_name, value, fl) {
 			name: "objUpdate",
 			oid_string: obj_index.toString()+":"+unique_id.toString(),
 			object_index: obj_index,
-			uniqueId: unique_id,
+			uniqueId: unique_id.toString(),
 			netvar: var_name,
 			val: value,
 			flag: fl

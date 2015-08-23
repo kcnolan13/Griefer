@@ -43,6 +43,9 @@ global.clients = [];
 global.rooms = [];
 global.conn_ready = false;
 
+global.calcColumns = ["kdr", "wl", "ppl"];
+global.calcColumnsTimeout = null;
+
 var exists = function(maybeObj)
 {
 	if (typeof maybeObj != "undefined") 
