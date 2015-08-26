@@ -28,6 +28,9 @@
             <string>///initialize
 netvars = NO_HANDLE
 
+//call for compute lowest pnum
+alarm[4] = room_speed
+
 asked_force_sync = false
 
 bound_bn_ready = instance_create(x,y,bn_ready)
@@ -126,6 +129,30 @@ if instance_exists(bound_bn_ready)
 {
     with bound_bn_ready instance_destroy()
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///compute lowest pnum
+compute_lowest_pnum()
 </string>
           </argument>
         </arguments>
@@ -439,7 +466,7 @@ if net_manager.my_doll = id
   
 if varRead("player_quit")
 {
-    printf("DESTROYING PLAYER WHO QUIT: "+varRead("pName"))
+    printf(":::DESTROYING AVATAR WHO QUIT: "+varRead("pName"))
     instance_destroy()
     exit
     

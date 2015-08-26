@@ -12,13 +12,14 @@ for (var i=0; i<ds_grid_height(grid); i++)
         printf("ERROR: ds_grid entry #"+string(i)+" has nonexistent avatar_obj ... attempting to remove this ds_grid row")
         ds_grid_clear(grid,0)
         var h = instance_number(avatar)
-        if grid = team1 or grid = team0
-            h /= 2
+        if grid = team1 
+            h = floor(h/2)
+        else if grid = team0
+            h = ceil(h/2)
+            
         ds_grid_resize(grid,3,h)
         populate_team_data_structures()
         force_recompute_scores = true
-        //disable the score display
-        //net_manager.disable_scores = true
         return false
     }
     

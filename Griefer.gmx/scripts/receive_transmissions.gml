@@ -210,24 +210,49 @@ while (genMessagesWaiting() and wait_counter < 500000)
             
             if (in_match() or (room = rm_lobby)) and instance_number(avatar) <= 2
             {
-                printf("MISSION ABORT! MISSION ABORT!")
-                abort_match()
-            } else if (in_match() or (room = rm_lobby)) and genVal != varRead("pName")
+                /*printf(":::MISSION ABORT! MISSION ABORT!")
+                abort_match()*/
+                net_manager.match_collapsed = true
+                net_manager.collapsed_pname = genVal
+            }
+            
+            if (in_match() or (room = rm_lobby)) and genVal != varRead("pName")
             {
-                printf("PLAYER QUIT: "+genVal)
+                printf(":::PLAYER QUIT: "+genVal)
                 his_av = find_pname_avatar(genVal)
                 if instance_exists(his_av)
                 {
                     objVarWrite(his_av,"player_quit",true)
                     if in_match()
-                    with his_av instance_destroy()
+                    {
+                        printf("::: destroying avatar who quit: "+string(playerName(his_av)))
+                        with his_av instance_destroy()
+                    }
+                }
+                else
+                {
+                    printf("ERROR: unable to find avatar obj for player who quit: "+genVal)
                 }
                 
                 his_playa = find_player_by_pname(genVal)
                 if instance_exists(his_playa)
+                {
                     objVarWrite(his_playa,"player_quit",true)
+                    objVarWrite(his_playa,"pNum",-1)
+                    his_playa.x = -500
+                    his_playa.y = -500
+                    //objVarWrite(his_playa,"controllable",false)
+                    objVarWrite(his_playa,"visible",false)
+                    his_playa.visible = false
+                    printf("::: identified player who quit: "+string(playerName(his_playa)))
+                }
+                else
+                {
+                    printf("ERROR: unable to find player obj for player who quit: "+genVal)
+                }
                 
                 validate_score_grids()
+                compute_lowest_pnum()
             }
         break
         

@@ -1427,6 +1427,7 @@
       <script>scripts\get_player_limit.gml</script>
       <script>scripts\match_ending.gml</script>
       <script>scripts\match_starting.gml</script>
+      <script>scripts\compute_lowest_pnum.gml</script>
     </scripts>
     <scripts name="general utilities">
       <script>scripts\printf.gml</script>

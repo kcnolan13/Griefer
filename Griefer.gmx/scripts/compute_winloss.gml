@@ -1,5 +1,11 @@
 ///compute_winloss()
 
+if net_manager.default_winner != ""
+{
+    printf("::: defaulting winning pName to "+string(default_winner))
+    varWrite("winning_pName",default_winner)
+}
+
 //kill streak rollover
 var guy = net_manager.local_player
 if instance_exists(guy)
@@ -105,8 +111,6 @@ if not computed_winloss and string(varRead("winning_pName")) != ""
             }
         }
         
-        //ask for a new global rank
-        obj_sendval_real(id,"compute_global_rank",true,varRead("rank"))
     }
 } else if varRead("winning_pName") = "" and varRead("end_match_coming")
 {

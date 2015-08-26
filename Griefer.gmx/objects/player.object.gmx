@@ -30,6 +30,9 @@ perform_step = 0
 my_doll = NO_HANDLE
 alarm[1] = 2
 
+//recompute lowest pnums and whatnot
+alarm[2] = room_speed
+
 //vars that needed to be transmitted framely --&gt; now only when they change!
 xyLerp = 0.35
 xyLerp_counter = 0
@@ -260,6 +263,30 @@ printf("player created")
         </arguments>
       </action>
     </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///compute lowest pnum
+compute_lowest_pnum()
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="2" enumb="1">
       <action>
         <libid>1</libid>
@@ -419,7 +446,7 @@ if not varRead("trigger_update_ignore")
 }
 
 //update previous grid stats every now and again
-if nth_frame(8)
+if nth_frame(1)
 {
     varWrite("match_points_previous",varRead("match_points"))
     varWrite("match_kills_previous",varRead("match_kills"))
@@ -997,7 +1024,7 @@ if varRead("player_quit")
     varWrite("myX",-50)
     varWrite("myY",-50)
     varWrite("visible",false)
-    varWrite("controllable",false)
+    //varWrite("controllable",false)
     visible = false
 }
 
@@ -2221,7 +2248,7 @@ draw_set_font(fnt_hud)
 draw_set_halign(fa_center)
 draw_set_valign(fa_center)
 
-if net_manager.local_player = id or is_local_teammate(id) or net_manager.bot_override
+if not varRead("player_quit") and (net_manager.local_player = id or is_local_teammate(id) or net_manager.bot_override)
 {
     draw_set_font(fnt_hud_big)
     draw_set_color(c_white)

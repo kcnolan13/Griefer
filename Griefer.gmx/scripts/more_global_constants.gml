@@ -5,6 +5,9 @@ global.tskill = "True Skill"
 global.accolade_name = "Medal"
 global.time_played = "Career Time"
 
+global.lowest_pnum = 0
+global.lowest_pnum_team2 = 2
+
 global.col_alpha_default = 0.6
 global.challenge_index = 0
 global.cache_description = "Click to Equip!"

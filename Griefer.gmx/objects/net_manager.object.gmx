@@ -34,6 +34,10 @@ display_set_gui_size(WVIEW,HVIEW)
 
 real_time_init()
 physics_going = true
+sort_worthy = false
+default_winner = ""
+match_collapsed = false
+collapsed_pname = ""
 
 //voting
 votes1 = 0
@@ -103,12 +107,6 @@ printf("instance_exists(-10) = "+string(instance_exists(-10)))
 
 initGrieferClient(serverURL)
 printf("CONNECTION ESTABLISHED")
-
-blahname = "Ballsack"
-printf("string(real(Ballsack)) = "+string(hash_string(blahname)))
-printf("2 is "+string(2))
-printf("hash of abc is "+string(hash_string("abc")))
-printf("hash of a is "+string(hash_string("a")))
 
 //login screen
 title_scale = 1
@@ -479,38 +477,6 @@ instance_create(x,y,xp_bar)
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>305</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_timeline_set</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>14</kind>
-            <timeline>-100</timeline>
-          </argument>
-          <argument>
-            <kind>0</kind>
-            <string>0</string>
-          </argument>
-          <argument>
-            <kind>4</kind>
-            <string>0</string>
-          </argument>
-          <argument>
-            <kind>4</kind>
-            <string>0</string>
-          </argument>
-        </arguments>
       </action>
     </event>
     <event eventtype="1" enumb="0">
@@ -1221,7 +1187,7 @@ if room = rm_lobby and instance_exists(my_doll)
             varWrite("lobby_wait_time",lobby_match_countdown_time)
         }
         
-        if objVarRead(my_doll,"pNum") = 0
+        if objVarRead(my_doll,"pNum") = global.lowest_pnum and nth_frame(15)
         {
             if SUPER_DEBUG
                 printf("sending lobby wait time")
@@ -1990,7 +1956,7 @@ if instance_number(player) &gt; 0 and room_counter &gt; 10*30
             for (i=0; i&lt;instance_number(player); i++)
             {
                 ID = instance_find(player,i)
-                if is_local_teammate(ID)
+                if is_local_teammate(ID) and not objVarRead(ID,"player_quit")
                     team_kills += objVarRead(ID,"match_kills")//get_netstat_pnum(objVarRead(ID,"uniqueId"),"kills")
             }
             
@@ -2002,7 +1968,7 @@ if instance_number(player) &gt; 0 and room_counter &gt; 10*30
                 for (var n=0; n&lt;instance_number(player); n++)
                 {
                     guy = instance_find(player,n)
-                    //if objVarRead(guy,"bot")
+                    if not objVarRead(guy,"player_quit")
                     {
                         if get_team(guy) = 0
                             team0_kills += objVarRead(guy,"match_kills")
@@ -2036,6 +2002,42 @@ if instance_number(player) &gt; 0 and room_counter &gt; 10*30
                 }
             }
             
+            //has everyone on the othe team quit?
+            everyone_quit = true
+            with player
+            {
+                if not varRead("player_quit") and get_team(id) != get_team(myPlayer())
+                    other.everyone_quit = false
+            }
+            
+            if everyone_quit
+            {
+                match_countdown = match_countdown_max
+                var dat_team = get_team(myPlayer())
+                if dat_team &gt; -1 and dat_team &lt; 2
+                    default_winner = playerName(ds_grid_get(dat_team,1,0))
+                else
+                    default_winner = playerName(myPlayer())
+            }
+            
+        }
+        else
+        {
+            //ffa or versus
+            
+            //has everyone on the othe team quit?
+            everyone_quit = true
+            with player
+            {
+                if not varRead("player_quit") and playerName(id) != playerName(myPlayer())
+                    other.everyone_quit = false
+            }
+            
+            if everyone_quit
+            {
+                match_countdown = match_countdown_max
+                default_winner = playerName(myPlayer())
+            }
         }
         
         if team_kills &gt;= kill_limit
@@ -2104,21 +2106,21 @@ if in_match() and instance_exists(modal_controls)
 
 //sort scores @ 2 Hz
 //see if anything sort-worthy has happened
-sort_worthy = false
 for (var i=0; i&lt;instance_number(player); i++)
 {
     var ID = instance_find(player,i)
     if objVarRead(ID, "match_points_previous") != objVarRead(ID,"match_points") or objVarRead(ID, "match_kills_previous") != objVarRead(ID,"match_kills") or objVarRead(ID, "match_deaths_previous") != objVarRead(ID,"match_deaths") or objVarRead(ID, "match_assists_previous") != objVarRead(ID,"match_assists")
     {
-        if DEBUG
-            printf("sortworthy!")
+        //if DEBUG
+            printf(":::sortworthy!")
         sort_worthy = true
         break
     }
 }
 
-if in_match() and force_recompute_scores or ( rtime() mod (30/2) = 0 and sort_worthy and not disable_scores )
+if in_match() and force_recompute_scores or ( rtime() mod (10) = 0 and sort_worthy and not disable_scores )
 {
+    sort_worthy = false
     force_recompute_scores = false
     //pull in the match kills for each avatar (which you need to sync from his player)
     for (var i=0; i&lt;instance_number(player); i++)
@@ -2297,6 +2299,12 @@ init_physics()
 if room = rm_menu
 {
     bot_match = false
+    if match_collapsed
+    {
+        popup_okay(WVIEW/2,HVIEW/2,string(collapsed_pname)+" has Rage Quit. You have been awarded the win, and "+string(collapsed_pname)+" has been penalized.",scr_none)
+        match_collapsed = false
+        collapsed_pname = ""
+    }
 }
     
 view_hport[0] = 768
@@ -2306,7 +2314,7 @@ view_wview[0] = 1365
 
 if in_match()
 {
-    
+    default_winner = ""
     part_controller = instance_create(x,y,particle_controller)
     map_previous = global.map_names[room]
     disable_scores = false
@@ -2457,6 +2465,35 @@ if in_match()
     team = -1
     team_kills = 0
 }
+
+
+if room = rm_lobby and match_collapsed
+{
+    abort_match()
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///compute lowest pnum
+if room != rm_login
+    compute_lowest_pnum()
 </string>
           </argument>
         </arguments>
@@ -2889,7 +2926,7 @@ if in_match() and not varRead("end_match_coming") and instance_exists(myAvatar()
         av_head1 = ds_grid_get(team_all,1,0)
         if objVarRead(av_head1,"pName") = objVarRead(my_doll,"pName")
             av_head1 = ds_grid_get(team_all,1,1)
-            
+        
         score1 = objVarRead(av_head1,"match_kills")
         
         //printf("av_head1 is "+objVarRead(av_head1,"pName"))
@@ -2908,7 +2945,6 @@ if in_match() and not varRead("end_match_coming") and instance_exists(myAvatar()
     
     draw_avatar_head(xhead, yhead, av_head0, score0, head_scale*master_scale, 1, FL_NORMAL)
     draw_avatar_head(xhead+head_width*1*master_scale, yhead, av_head1, score1, head_scale*master_scale, -1, FL_NORMAL)
-    
 }
 
 if lobby_match_countdown and room = rm_lobby

@@ -1,4 +1,6 @@
 ///populate_team_data_structures()
+printf("::: REPOPULATING TEAM DATA GRIDS")
+
 if varRead("game_mode") = "tdm"
 {
     added_t0 = 0
@@ -9,8 +11,7 @@ if varRead("game_mode") = "tdm"
         ID = instance_find(avatar,i)
         if get_team(ID) = 0
         {
-            printf("")
-            printf("")
+            printf("::: added "+playerName(ID)+" to team0")
             //printf("added "+objVarRead(ID,"pName")+"to team at y="+added_t0)
             ds_grid_set(team0,0,added_t0,0) //match_kills
             ds_grid_set(team0,1,added_t0,ID) //avatar ids
@@ -19,8 +20,7 @@ if varRead("game_mode") = "tdm"
         }
         else if get_team(ID) = 1
         {
-            printf("")
-            printf("")
+            printf("::: added "+playerName(ID)+" to team1")
             //printf("added "+objVarRead(ID,"pName")+"to team 1 at y="+added_t1)
             ds_grid_set(team1,0,added_t1,0)
             ds_grid_set(team1,1,added_t1,ID)
@@ -32,6 +32,7 @@ if varRead("game_mode") = "tdm"
 else
 {
     added = 0
+    printf("::: added "+playerName(ID)+" to team_all")
     //using one team
     for (var i=0; i<instance_number(avatar); i++)
     {
@@ -43,10 +44,9 @@ else
     }
 }
 
-printf("contents of team0: ")
+printf("::: final contents of team0: ")
 print_ds_grid(team0)
-printf("contents of team1: ")
+printf("::: final contents of team1: ")
 print_ds_grid(team1)
-printf("contents of team_all: ")
+printf("::: final contents of team_all: ")
 print_ds_grid(team_all)
-
