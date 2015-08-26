@@ -222,6 +222,7 @@ while (genMessagesWaiting() and wait_counter < 500000)
                     if in_match()
                     with his_av instance_destroy()
                 }
+                
                 his_playa = find_player_by_pname(genVal)
                 if instance_exists(his_playa)
                     objVarWrite(his_playa,"player_quit",true)
@@ -236,14 +237,22 @@ while (genMessagesWaiting() and wait_counter < 500000)
             
             if genVal != FL_MULTIPLE
             {
-                if (genVal = true)
+                if (genVal = 1)
                 {
                     audio_play_sound(snd_click,2,false)
                     logIn(objVarRead(net_manager,"pName"))
                     printf("::: GOOD LOGIN")
                     room_goto(rm_menu)
                     return 0
-                } else {
+                } 
+                else if (genVal = 2)
+                {
+                    var blah = popup_yesno(WVIEW/2,HVIEW/2,"Create Player: "+string(objVarRead(net_manager,"pName"))+"?",scr_create_user,scr_none)
+                    {
+                        blah.header_color = web_hsv(224,54,71)
+                    }
+                } 
+                else {
                     audio_play_sound(snd_denied,2,false)
                     bn_login_user.alert = "User Exists. Bad Password."
                     bn_login_user.alert_alpha = 1.5
@@ -290,6 +299,7 @@ while (objCreatesWaiting() and wait_counter < 50)
     wait_counter++
     obj_index = readObjCreateIndex()
     unique_id = readObjCreateUniqueId()
+    printf("::: objCreateUniqueId: "+string(unique_id))
     my_x = readObjCreateMyX()
     my_y = readObjCreateMyY()
     

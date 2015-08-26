@@ -255,14 +255,14 @@ for (var i=0; i&lt;instance_number(die_generic); i++)
 
 }
 
-if instance_exists(snow) and fps &gt;= 25
+if instance_exists(snow) and fps &gt;= 25 and truthval(global.gc[GC_PARTICLES,1])
 {
     if random(1) &lt; 0.2
         part_particles_create(sys_snow,0+random(room_width),-10,snow_part1,1)
 }
 
 if instance_exists(fog) or instance_exists(dust) or instance_exists(purple_haze) or instance_exists(green_haze)
-if counter &gt; 30*1.5 and fps &gt;= 25
+if counter &gt; 30*1.5 and fps &gt;= 25 and truthval(global.gc[GC_PARTICLES,1])
  {
      if random(1) &lt; 0.2
         part_particles_create(sys_fog,random(room_width),random(room_height),fog_part1,1)

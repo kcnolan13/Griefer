@@ -55,7 +55,7 @@ blend = c_white
           <argument>
             <kind>1</kind>
             <string>///draw in air or to surface
-if surface_exists(fx.surf_blood)
+if surface_exists(fx.surf_blood)  and truthval(global.gc[GC_SURFACES,1])
 {
     surface_set_target(fx.surf_blood)
     draw_set_blend_mode_ext(fx.blood_src,fx.blood_dest)

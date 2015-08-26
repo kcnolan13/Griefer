@@ -71,10 +71,6 @@ if not instance_exists(net_manager.local_player)
 
 if net_manager.local_player.object_index != player
     printf("ERROR: net_manager.local_player.object_index = "+string(net_manager.local_player.object_index))
-if not (objVarRead(net_manager.local_player,"uniqueId") = 0)
-{
-    printf("WARNING: net_manager.local_player has non-zero uniqueId")
-}
 
 var wep_at_pos = instance_place(x,y,weapon)
 if wep_at_pos = noone and not respawn_counter

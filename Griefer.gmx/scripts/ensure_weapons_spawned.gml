@@ -10,7 +10,7 @@ if not instance_exists(varRead("weapon0"))
     dat_wep_do = instance_create_for_everyone(x,y,weapon_rifle)
     pickup_weapon(dat_wep_do)
     objVarWrite(dat_wep_do,"active",false)
-    printf("RESPAWNING RIFLE (failed on first attempt)")
+    printf("::: "+playerName(id)+" RESPAWNING RIFLE (failed on first attempt)")
 }
 
 if not instance_exists(varRead("weapon1"))
@@ -19,7 +19,7 @@ if not instance_exists(varRead("weapon1"))
     dat_wep_do = instance_create_for_everyone(x,y,weapon_pistol)
     pickup_weapon(dat_wep_do)
     objVarWrite(dat_wep_do,"active",false)
-    printf("RESPAWNING PISTOL (failed on first attempt)")
+    printf("::: "+playerName(id)+" RESPAWNING PISTOL (failed on first attempt)")
 }
 
 if not instance_exists(varRead("weapon2"))
@@ -28,7 +28,7 @@ if not instance_exists(varRead("weapon2"))
     dat_wep_do = instance_create_for_everyone(x,y,weapon_shotgun)
     pickup_weapon(dat_wep_do)
     objVarWrite(dat_wep_do,"active",false)
-    printf("RESPAWNING SHOTGUN (failed on first attempt)")
+    printf("::: "+playerName(id)+" RESPAWNING SHOTGUN (failed on first attempt)")
 }
 
 if not instance_exists(varRead("weapon3"))
@@ -37,7 +37,7 @@ if not instance_exists(varRead("weapon3"))
     dat_wep_do = instance_create_for_everyone(x,y,weapon_flashbang)
     pickup_weapon(dat_wep_do)
     objVarWrite(dat_wep_do,"active",false)
-    printf("RESPAWNING FRAG (failed on first attempt)")
+    printf("::: "+playerName(id)+" RESPAWNING FRAG (failed on first attempt)")
 }
 
 varWrite("weapon_index",cur_index)

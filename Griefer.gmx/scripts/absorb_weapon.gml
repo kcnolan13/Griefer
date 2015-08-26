@@ -17,7 +17,7 @@ if objVarRead(wep_2absorb,"spawner") > -1
 {
     if DEBUG
         printf("preparing to absorb --> overriding current spawner id with new one")
-        
+
     objVarWrite(my_wep,"spawner",objVarRead(wep_2absorb,"spawner"))
     obj_update_real(my_wep,"spawner",FL_NORMAL)
 }
@@ -31,11 +31,10 @@ if objVarRead(my_wep,"ammo") > objVarRead(my_wep,"max_ammo")
     objVarWrite(my_wep,"ammo",objVarRead(my_wep,"max_ammo"))
 }
 
-if DEBUG
-    printf("absorbed weapon: "+wep_2absorb+" : "+objVarRead(wep_2absorb,"name"))
+printf("::: absorbed weapon: "+string(wep_2absorb)+" : "+objVarRead(wep_2absorb,"name"))
 
 if net_manager.local_player = id
     audio_play_sound(snd_pickup2,2,false)
-    
+
 instance_destroy_for_everyone(wep_2absorb)
 with (wep_2absorb) {exit}

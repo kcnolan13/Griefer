@@ -427,11 +427,11 @@ draw_modal_row(left,ydraw,header_color,header_text_color,alpha,0,grid_header)
 
 ydraw += row_height*1.5
 
-var ist = round_nearest(s_index,row_height)/row_height
+row_offset = round_nearest(s_index,row_height)/row_height
 
 //all the rows
 row_draw_num = 0
-for (var i=ist; i&lt;ds_grid_height(grid); i++)
+for (var i=row_offset; i&lt;ds_grid_height(grid); i++)
 {
     draw_modal_row(left,ydraw,color,text_color,alpha,i,grid)
     ydraw += row_height+row_vsep
@@ -495,7 +495,19 @@ else
 
 draw_rectangle(s_left,s_curs_top,s_right,s_curs_bottom,false)
 
+//draw popups
+if hovrow &gt; -1 and show_hovrow
+{
+    //show popup
 
+    draw_player_popup_ext(cursor.x,cursor.y,ds_grid_get(grid,0,hovrow),
+        ds_grid_get(grid,1,hovrow),ds_grid_get(grid,13,hovrow),ds_grid_get(grid,2,hovrow),real(ds_grid_get(grid,14,hovrow)),real(ds_grid_get(grid,15,hovrow)),1,false)
+    
+    if input_check_pressed(mapped_control(C_JUMP)) or mouse_check_button_pressed(mb_left)
+    {
+        show_player_stats(ds_grid_get(grid,0,hovrow))
+    }
+}
 
 //printf("::: s_left="+string(s_left)+", s_curs_top="+string(s_curs_top)+", s_right="+string(s_right)+", s_curs_bottom="+string(s_curs_bottom))
 </string>

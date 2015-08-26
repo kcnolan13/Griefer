@@ -82,7 +82,7 @@ knowledge_base_add(spr_hound2_helmet, global.hound2_name, 4, global.default_scal
     set_hatless(spr_hound_helmet)
     set_hatless(spr_hound2_helmet)
 global.fanatic_name = "Fanatic Helmet"
-knowledge_base_add(spr_rvisor2_helmet, global.fanatic_name, 4, global.default_scale, true, global.src_lotto,"helmet")
+knowledge_base_add(spr_rvisor2_helmet, global.fanatic_name, 4, global.default_scale, true, global.src_challenge,"helmet")
 global.pvisor_name = "Deadshot Helmet"
 knowledge_base_add(spr_pvisor_helmet, "Pvisor Helmet", 3, global.default_scale, true, global.src_challenge,"helmet")
 global.pvisor2_name = "Headhunter Helmet"

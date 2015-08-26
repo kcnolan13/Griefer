@@ -37,7 +37,7 @@ if object_index != rag_generic and (object_index-rag_head &lt; getLength(global.
     limb_type = global.bpart_limb_types[object_index-rag_head]
 }
 
-max_speed = 35
+max_speed = 40
 max_vang = 360
 
 scale = 1
@@ -116,54 +116,6 @@ physics_fixture_delete(fix)
         </arguments>
       </action>
     </event>
-    <event eventtype="3" enumb="2">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///constrict speed
-constrict_physics_speed(real_speed(max_speed),real_speed(max_vang))
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="3" enumb="1">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///constrict speed
-constrict_physics_speed(real_speed(max_speed),real_speed(max_vang))
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
@@ -181,7 +133,7 @@ constrict_physics_speed(real_speed(max_speed),real_speed(max_vang))
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///fade out and bleed, constrict speed
+            <string>///fade out and bleed
 event_inherited()
 
 life++
@@ -351,6 +303,28 @@ if instance_place(x,y,bullet_generic) and not bullet_pushed
 
     physics_apply_force(x,y,trigx(force,fdir),trigy(force,fdir))
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///constrict physics speed
+constrict_physics_speed(real_speed(max_speed),real_speed(max_vang))
 </string>
           </argument>
         </arguments>

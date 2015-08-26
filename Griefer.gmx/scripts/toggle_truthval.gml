@@ -15,8 +15,12 @@ else if string_upper(str) = "NEVER"
     return "On Action"
 else if string_upper(str) = "ON ACTION"
     return "Always"
+else if string_upper(str) = string_upper(global.optimize_graphics)
+    return global.optimize_fps
+else if string_upper(str) = string_upper(global.optimize_fps)
+    return global.optimize_graphics
 else
 {
     printf("ERROR: toggle_truthval passed: "+string(str))
-    return false
+    return str
 }

@@ -194,7 +194,7 @@ varWrite("animation_speed",SPD_STAND)
 pose_rifle()
 
 varWrite("controllable",false)
-varWrite("uniqueId",0)
+varWrite("uniqueId","0")
 varWrite("image_alpha",1)
 varWrite("image_blend",c_white)
 varWrite("pName","Bob The Squirrel")
@@ -418,8 +418,8 @@ if not varRead("trigger_update_ignore")
     y = varRead("myY")
 }
 
-//update match_kills_previous @ 8 Hz
-if net_manager.room_counter % 30/8 = 0
+//update previous grid stats every now and again
+if nth_frame(8)
 {
     varWrite("match_points_previous",varRead("match_points"))
     varWrite("match_kills_previous",varRead("match_kills"))
@@ -518,35 +518,14 @@ if perform_step != 0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///exit
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
             <string>///RESPAWN HANDLER
+
 if net_manager.local_player = id and alive_counter &lt; 30 and not pressing_left() and not pressing_right() and not rolling and not jumping and not crawling
     animation_stand()
 
 if is_bot(id) and SUPER_DEBUG
 {
-    printf(varRead("pName")+" is a BOT! respawning in: "+respawn_counter)
+    printf("::: "+playerName(id)+" is a BOT! respawning in: "+string(respawn_counter))
 }   
 
 if respawn_counter &gt; 0 and (is_my_avatar(id) or is_bot(id))
@@ -557,6 +536,8 @@ if respawn_counter &gt; 0 and (is_my_avatar(id) or is_bot(id))
     
     if not respawn_counter
     {
+        
+        printf("::: Respawning Player "+playerName(id))
         
         //FIGURE OUT WHERE TO RESPAWN
         compute_respawn_coordinates(id, respawn_flag)   //computes spawn_x, spawn_y
@@ -660,7 +641,7 @@ if double_spawn_counter and (is_my_avatar(id) or is_bot(id))
             double_spawn_counter = 0
             if is_my_avatar(id)
                 net_manager.hide_spawn_text = true
-            printf("Overlapping Players! Another.id spawn computation is in order ... ")
+            printf("::: Overlapping Players! Another spawn computation is in order ... ")
             //another.id respawn coordinate computation is needed --&gt; allow a little delay time to be safe
             respawn_counter = random_range(1,15)
             respawn_flag = FL_RANDOM
@@ -673,7 +654,7 @@ if not respawn_counter and net_manager.starting_match
 {
     if collision_rectangle(bbox_left,bbox_top,bbox_right,bbox_bottom,player,true,true) and varRead("myX") &gt; 0 and varRead("myY") &gt; 0
     {
-        printf("Overlapping Players! Another.id spawn computation is in order ... ")
+        printf("::: Overlapping Players! Another spawn computation is in order ... ")
         //another.id respawn coordinate computation is needed --&gt; allow a little delay time to be safe
         respawn_counter = random_range(1,30)
     }
@@ -1011,10 +992,13 @@ if weapon_switch_delay &lt; 0
     
 if varRead("player_quit")
 {
+    x = -50
+    y = -50
     varWrite("myX",-50)
     varWrite("myY",-50)
     varWrite("visible",false)
     varWrite("controllable",false)
+    visible = false
 }
 
 
@@ -1773,7 +1757,7 @@ if (varRead("controllable")) or objVarRead(net_manager,"end_match_coming")
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///pose and animation syncing
+            <string>///XY_LERP and pose and animation syncing
 //if not varRead("controllable")
 {
     if not varRead("controllable") and not objVarRead(net_manager,"end_match_coming")
@@ -1785,12 +1769,12 @@ if (varRead("controllable")) or objVarRead(net_manager,"end_match_coming")
     //lerp myX, myY for remote players
     if myPlayer() != id and not is_bot(id)
     {
-        if not visible
+        if not visible or not varRead("visible") or not varRead("alive") or (x &lt; 0 and y &lt; 0)
             xyLerp_counter = 0
         else
             xyLerp_counter++
-            
-        if not match_starting() and not match_ending() and xyLerp_counter &gt; 10
+
+        if not match_starting() and not match_ending() and xyLerp_counter &gt; 30
         {
             varWrite("myX",lerp(varRead("myX"),varRead("myX_true"),xyLerp))
             varWrite("myY",lerp(varRead("myY"),varRead("myY_true"),xyLerp))
@@ -2218,10 +2202,17 @@ if not bparts_ready exit
 //draw stupid
 //draw_sprite_ext(sprite_index,image_index,x,y,image_xscale,image_yscale,image_angle,c_white,image_alpha)
 
-if net_manager.show_cout or 1=1
+if net_manager.show_cout or false
 {
+    draw_set_font(fnt_hud)
     draw_text(x,y-180,"uniqueId: "+string(varRead("uniqueId")))
     draw_text(x,y-160,"pNum: "+string(varRead("pNum")))
+        
+    if nth_frame(30)
+    {
+        printf("::: player uniqueId: "+string(varRead("uniqueId"))+", pName="+string(varRead("pName")))
+    }
+    
 }
 
 event_inherited()

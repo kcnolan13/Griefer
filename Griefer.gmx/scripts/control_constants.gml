@@ -1,4 +1,9 @@
 //general control constants
+
+global.optimize_graphics = "Graphics"
+global.optimize_fps = "Frame Rate"
+global.txt_restore = "[Click to Restore]"
+
 global.gc[GC_SHOW_XP,0] = "Show XP In Match"
 global.gc[GC_SHOW_XP,1] = "On"
 global.gc[GC_SHOW_XP,2] = false //is_sens
@@ -23,6 +28,29 @@ global.gc[GC_CHAT_FEED,2] = false
 global.gc[GC_CHAT_FEED_ALPHA,0] = "Chat Feed Size"
 global.gc[GC_CHAT_FEED_ALPHA,1] = 0.55
 global.gc[GC_CHAT_FEED_ALPHA,2] = true //is_sens
+global.gc[GC_SURFACES,0] = "Surface Effects"
+global.gc[GC_SURFACES,1] = "On"
+global.gc[GC_SURFACES,2] = false //is_sens
+global.gc[GC_PARTICLES,0] = "Particle Effects"
+global.gc[GC_PARTICLES,1] = "On"
+global.gc[GC_PARTICLES,2] = false //is_sens
+global.gc[GC_RAGDOLLS,0] = "Ragdoll Physics"
+global.gc[GC_RAGDOLLS,1] = "On"
+global.gc[GC_RAGDOLLS,2] = false //is_sens
+global.gc[GC_FPS,0] = "Optimize For: "
+global.gc[GC_FPS,1] = global.optimize_graphics
+global.gc[GC_FPS,2] = false //is_sens
+global.gc[GC_DEFAULTS,0] = "Restore Defaults"
+global.gc[GC_DEFAULTS,1] = global.txt_restore
+global.gc[GC_DEFAULTS,2] = false //is_sens
+
+for (var i=0; i<array_height_2d(global.gc); i++)
+{
+    for (var j=0; j<3; j++)
+    {
+        global.gc_defaults[i,j] = global.gc[i,j]
+    }
+}
 
 global.dismembered = "Dismembered"
 global.dismembered_tame = "Explosive"

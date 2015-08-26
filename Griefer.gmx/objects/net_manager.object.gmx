@@ -33,6 +33,7 @@ setGppDebug(0)
 display_set_gui_size(WVIEW,HVIEW)
 
 real_time_init()
+physics_going = true
 
 //voting
 votes1 = 0
@@ -410,7 +411,7 @@ varWrite("ffa_lobby","rm_ffa_lobby")
 varWrite("versus_lobby","rm_versus_lobby")
 varWrite("rm_map1",rm_map2)
 varWrite("game_mode","no_mode")
-varWrite("uniqueId",-1)
+varWrite("uniqueId","-1")
 varWrite("end_match_coming",false)
 varWrite("using_teams",false)
 varWrite("lobby_wait_time",45)
@@ -1101,6 +1102,46 @@ if keepalive_timer
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///adjust physics speed to match frame rate...?
+if in_match()
+{
+    physics_world_gravity(0,real_speed(global.phys_world_grav))
+    //physics_world_update_speed(max(global.phys_world_spd,real_speed(global.phys_world_spd)))
+
+    if nth_frame(15)
+    {
+        if physics_going and not truthval(global.gc[GC_RAGDOLLS,1])
+        {
+            physics_pause_enable(true)
+            net_manager.physics_going = false
+        }
+        else if not physics_going and truthval(global.gc[GC_RAGDOLLS,1])
+        {
+            physics_pause_enable(false)
+            net_manager.physics_going = true
+        }
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///testing
 
 if nth_frame(15)
@@ -1139,7 +1180,7 @@ for (var i=0; i&lt;instance_number(cursor_generic); i++)
 
 if active_cursors &gt; 1
 {
-    printf("deactivating duplicate cursors")
+    printf(":::deactivating duplicate cursors")
     cursor_generic.active = false
 }
 
@@ -1356,7 +1397,7 @@ if room = rm_lobby
                 if pnum &lt; instance_number(avatar)/2
                     dat_sign = -1
                 
-                if string_count("versus",varRead("game_mode"))
+                if instance_number(avatar) &lt; 3
                 {
                     xtarget = room_width/2+(64*6.25)*dat_sign
                 } else
@@ -1607,7 +1648,6 @@ if room = rm_lobby
                 is_random = false
                 header_text = header_text_real
                 image = image_real
-                depth = -9999999999
                 active = false
                 clickable = false
                 x = room_width/2
@@ -1815,7 +1855,7 @@ rank_before = varRead("rank")
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///send frames, RECEIVE TRANSMISSIONS, compute player physics
+            <string>///player physics, send frames, RECEIVE TRANSMISSIONS
 
 //SEND FRAMELY PLAYER DATA
 if instance_exists(myPlayer())
@@ -1828,7 +1868,7 @@ if in_match()
 {
     with player
     {
-        if myPlayer() != id
+        if myPlayer() != id and not is_bot(id)
         {
             varWrite("physics_updated",false)
         }
@@ -1847,7 +1887,7 @@ if in_match()
 {
     with player
     {
-        if myPlayer() != id and not varRead("physics_updated")
+        if myPlayer() != id and not is_bot(id) and not varRead("physics_updated")
         {
             hsp = varRead("net_hsp_true")
             vsp = varRead("net_vsp_true")
@@ -2345,7 +2385,7 @@ if room = rm_menu
     bpart_lotto[2] = noone
     saving_armor = false
     lock_armory = false
-    varWrite("uniqueId",-1)
+    varWrite("uniqueId","-1")
     menu_mode = "play"
     varWrite("game_mode","no_mode")
 

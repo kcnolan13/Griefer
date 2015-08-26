@@ -14,19 +14,48 @@ for (var i=0; i<num_bots; i++)
     var pnum = i+1
     
     //select name and rank
-    var name = string(generate_name(0.01))
+    bot_name = string(generate_name(0.01))
     
     if not instance_exists(myAvatar())
     {
-        printf("ERROR: cannot instantiate_all_bots --> no myAvatar() to cross-check name hashes with")
+        printf("ERROR: cannot instantiate_all_bots --> no myAvatar() to cross-check bot_name hashes with")
         return false
     }
-    
-    if hash_string(name) = objVarRead(myAvatar(),"uniqueId")
+
+    continue_while = false
+
+    with avatar
     {
-        while (hash_string(name) = objVarRead(myAvatar(),"uniqueId"))
+        if varRead("pName") = other.bot_name
+            other.continue_while = true
+    }
+
+    if continue_while
+    {
+        var loops = 0
+        while (loops < 1000)
         {
-            name = string(generate_name(0.01))
+            loops ++
+            
+            bot_name = string(generate_name(0.01))
+            continue_while = false
+
+            with avatar
+            {
+                if varRead("pName") = other.bot_name
+                    other.continue_while = true
+            }
+
+            if not continue_while
+                break
+        }
+    }
+
+    if hash_string(bot_name) = objVarRead(myAvatar(),"uniqueId")
+    {
+        while (hash_string(bot_name) = objVarRead(myAvatar(),"uniqueId"))
+        {
+            bot_name = string(generate_name(0.01))
         }
     }
     
@@ -48,9 +77,9 @@ for (var i=0; i<num_bots; i++)
     ID = instance_create(room_width/2,-4*room_height,avatar)
     
     objVarWrite(ID,"bot",true)
-    objVarWrite(ID,"uniqueId",hash_string(name))
+    objVarWrite(ID,"uniqueId",hash_string(bot_name))
     objVarWrite(ID,"pNum",pnum)
-    objVarWrite(ID,"pName",name)
+    objVarWrite(ID,"pName",bot_name)
     objVarWrite(ID,"rank",rank)
     objVarWrite(ID,"global_rank",global_rank)
     

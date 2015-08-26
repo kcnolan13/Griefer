@@ -115,8 +115,7 @@ varWrite("cant_shoot",false)
 varWrite("active",false)                //true when in-use by local player
 varWrite("is_nade",false)
 varWrite("is_secondary",false)
-varWrite("my_player",-1)                //uniqueId of bonded player
-varWrite("my_player_name","")
+varWrite("my_player",MY_PLAYER_NULL)                //uniqueId of bonded player
 varWrite("control_type","left_press")   //fire button left_press, left_hold, or left_charge
 varWrite("can_disappear",true)          //disappear from the battlefield after a while
 varWrite("disappear_counter",-1)         
@@ -128,6 +127,8 @@ varWrite("reload_empty_counter",-1)
 varWrite("quicktoss_backcycles",0)
 varWrite("quicktoss_time_between",4)
 varWrite("quicktoss_timer",0)
+varWrite("clip_previous",0)
+varWrite("ammo_previous",0)
 
 //dummy var
 varWrite("flash_hitscan",flash_hitscan_simple_long)
@@ -160,6 +161,9 @@ initialize_physics()
           <argument>
             <kind>1</kind>
             <string>///free net vars
+
+printf("::: destroying weapon "+string(varRead("name"))+", my_player="+string(varRead("my_player")))
+
 if instance_exists(myCursor)
     myCursor.active = false
     
@@ -350,11 +354,6 @@ if lobby_leader()
         net_manager.local_player.weapon_contemplating = NO_HANDLE
 }
 
-if object_index = weapon_torque
-{
-    printf("::: dat_jugador = "+string(dat_jugador)+", my_player="+string(varRead("my_player")))
-}
-
 if being_held()
 {
      varWrite("myX",objVarRead(dat_jugador,"myX"))
@@ -383,22 +382,25 @@ else
         varSub("disappear_counter",1)
         if varRead("disappear_counter") = 0 and lobby_leader()
         {
-            if DEBUG
-                printf("disappearing weapon: "+varRead("uniqueId")+" : "+varRead("name"))
-                
+            printf("::: disappearing weapon: "+string(varRead("uniqueId"))+" : "+varRead("name"))
             instance_destroy_for_everyone(id)
             exit
         }
     }
     
     //DESTROY EMPTY WEAPONS --&gt; ONLY PLAYER 0 IS ALLOWED TO DO THIS
-    if varRead("ammo") &lt; 1 and varRead("clip") &lt; 1 and lobby_leader()
+    if varRead("ammo") &lt; 1 and varRead("clip") &lt; 1
     {
-        if DEBUG
-            printf("destroying empty weapon: "+varRead("uniqueId")+" : "+varRead("name"))
-            
-        instance_destroy_for_everyone(id)
-        exit
+        if lobby_leader()
+        {
+            printf("::: destroying empty weapon: "+string(string(varRead("uniqueId")))+" : "+varRead("name"))
+            instance_destroy_for_everyone(id)
+            exit
+        }
+        else
+        {
+            printf("::: "+varRead("name")+" is empty, but not lobby_leader() so can't destroy it")   
+        }
     }
 }
 
@@ -451,6 +453,11 @@ if varRead("inaccuracy") &gt; 0
         if not varRead("charge") &gt; 0 or is_bot(dat_jugador)
         {
             varWrite("draw_trajectory",false)
+            
+            if match_ending() and torque_charging() 
+            {
+                weapon_release_left()
+            }
         }
     
         if varRead("quicktoss_timer")
@@ -533,10 +540,18 @@ if varRead("inaccuracy") &gt; 0
         }
             
         //SEND NETWORK VARS
-        pkgCreate()
-            obj_update_real(id,"clip",0)
-            obj_update_real(id,"ammo",0)
-        pkgSend()
+        if varRead("ammo_previous") != varRead("ammo") or varRead("clip_previous") != varRead("clip")
+        {
+            pkgCreate()
+                obj_update_real(id,"clip",0)
+                obj_update_real(id,"ammo",0)
+                
+                varWrite("ammo_previous",varRead("ammo"))
+                varWrite("clip_previous",varRead("clip"))
+                obj_update_real(id,"clip_previous",0)
+                obj_update_real(id,"ammo_previous",0)
+            pkgSend()
+        }
         
     } else {
         //bail on reloading()
@@ -544,177 +559,6 @@ if varRead("inaccuracy") &gt; 0
         //bail on charging
         bail_on_charging()
     }
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="6" enumb="56">
-      <action>
-        <libid>1</libid>
-        <id>425</id>
-        <kind>4</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>0</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///throw (if active)
-mi_jugador = find_player(varRead("my_player"))
-if mi_jugador &lt; 0 or is_bot(mi_jugador) exit
-
-weapon_release_left()
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="6" enumb="54">
-      <action>
-        <libid>1</libid>
-        <id>425</id>
-        <kind>4</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>0</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///quicktoss --&gt; this is tricky
-if varRead("active") and not varRead("quicktoss_timer")
-{
-    mi_jugador = find_player(varRead("my_player"))
-    
-    //BAIL CONDITIONS
-    if mi_jugador &lt; 0 or is_bot(mi_jugador) exit
-    if not objVarRead(mi_jugador,"controllable") exit
-    
-    weapon_press_right()
-
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="6" enumb="53">
-      <action>
-        <libid>1</libid>
-        <id>425</id>
-        <kind>4</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>0</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///shoot (if active)
-mi_jugador = find_player(varRead("my_player"))
-if mi_jugador &lt; 0 or is_bot(mi_jugador) exit
-
-weapon_press_left()
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="6" enumb="50">
-      <action>
-        <libid>1</libid>
-        <id>425</id>
-        <kind>4</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>0</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///shoot (if active)
-mi_jugador = find_player(varRead("my_player"))
-if mi_jugador &lt; 0 or is_bot(mi_jugador) exit
-
-weapon_hold_left()
 </string>
           </argument>
         </arguments>
@@ -740,8 +584,13 @@ weapon_hold_left()
             <string>///draw code + trajectories
 if !instance_exists(id) exit
 
-if varRead("my_player") &lt; 0
+if string(varRead("my_player")) = MY_PLAYER_NULL
     draw_sprite_ext(varRead("sprite"),image_index,x,y,image_xscale*WEAPON_SCALE,image_xscale*WEAPON_SCALE,image_angle,image_blend,image_alpha)
+    
+if not is_string(varRead("my_player"))
+{
+    printf("WARNING: draw ev weapon_generic: my_player not a string val: "+string(varRead("my_player")))    
+}
     
 if net_manager.starting_match exit
 
@@ -791,86 +640,6 @@ var alpha3 = varRead("traj_alpha3")
 var flag = varRead("traj_flag")
 
 draw_trajectory(xi, yi, spd, dir, grav, rigidity, color, width, resolution, length, highlight, highlight_interval, alpha1, alpha2, alpha3, flag)
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="9" enumb="82">
-      <action>
-        <libid>1</libid>
-        <id>425</id>
-        <kind>4</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>0</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///reload
-mi_jugador = find_player(varRead("my_player"))
-if mi_jugador = net_manager.local_player
-    weapon_press_r() 
-else printf("weapon's player is: "+string(mi_jugador))
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="9" enumb="32">
-      <action>
-        <libid>1</libid>
-        <id>425</id>
-        <kind>4</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>0</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///pick up the weapon
-exclude_bots = true
-weapon_press_space()
 </string>
           </argument>
         </arguments>

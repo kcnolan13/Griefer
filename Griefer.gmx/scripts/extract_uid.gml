@@ -10,4 +10,4 @@ if pos < 1
 
 var res = 0
 
-return real(string_copy(oid_str,pos+1,string_length(oid_str)-pos))
+return string(string_copy(oid_str,pos+1,string_length(oid_str)-pos))

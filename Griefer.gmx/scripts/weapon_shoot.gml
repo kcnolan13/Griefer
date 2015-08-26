@@ -82,7 +82,7 @@ for (var i=0; i<varRead("spread_count"); i++)
     //send bullet properties to remote players
     obj_update_real(new_bullet,"speed",FL_NORMAL)
     obj_update_real(new_bullet,"direction",FL_NORMAL)
-    obj_update_real(new_bullet,"senderId",FL_NORMAL) //was varRead("uniqueId") for last param -- why??
+    obj_update_string(new_bullet,"senderId",FL_NORMAL) //was varRead("uniqueId") for last param -- why??
     obj_update_real(new_bullet,"startX",FL_NORMAL)
     obj_update_real(new_bullet,"startY",FL_NORMAL)
     pkgSend()

@@ -158,8 +158,9 @@ GMEXPORT const double readObjUpdateIndex()
 GMEXPORT const char * readObjUpdateUniqueId()
 {
 	_lock.lock();
+	retString = snatchFront(object_updates->uniqueIds);
 	_lock.unlock();
-	return (snatchFront(object_updates->uniqueIds));
+	return retString.c_str();
 }
 GMEXPORT const char * readObjUpdateNetvar()
 {
@@ -220,8 +221,9 @@ GMEXPORT const double readObjCreateIndex()
 GMEXPORT const char * readObjCreateUniqueId()
 {
 	_lock.lock();
+	retString = snatchFront(object_creates->uniqueIds);
 	_lock.unlock();
-	return snatchFront(object_creates->uniqueIds);
+	return retString.c_str();
 }
 GMEXPORT const double readObjCreateMyX()
 {

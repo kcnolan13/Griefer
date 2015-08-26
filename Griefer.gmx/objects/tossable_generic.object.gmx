@@ -205,14 +205,14 @@ if varRead("local")
             }
             objVarWrite(ID,"senderId",varRead("senderId"))
             objVarWrite(ID,"local",true)
-            obj_update_real(ID,"senderId",FL_NORMAL)
+            obj_update_string(ID,"senderId",FL_NORMAL)
             
             if object_index = bullet_flame
             {
                 ID2 = instance_create_for_everyone(varRead("myX"),varRead("myY"),splosion_flame_instant)
                 objVarWrite(ID2,"senderId",varRead("senderId"))
                 objVarWrite(ID2,"local",true)
-                obj_update_real(ID2,"senderId",FL_NORMAL)
+                obj_update_string(ID2,"senderId",FL_NORMAL)
             }
             
             if stuck
@@ -255,6 +255,12 @@ if varRead("rigidity") != -1 and not stuck
     varWrite("rigidity",-1)
 }
 
+if varRead("dir_perm") != -1 and not varRead("local")
+{
+    dir_perm = varRead("dir_perm")
+    varWrite("dir_perm",-1)
+}
+
 if object_index = bullet_torque and not varRead("local")
 {
     hsp = 0
@@ -286,7 +292,7 @@ if spd &gt; 0 and not stuck and varRead("can_rotate") and object_index != bullet
     fakedirection += rspeed*sign(rotation)*random_range(0.1,max(1,spd)/spd)
 }
 
-if not stuck //and object_index = bullet_torque
+if not stuck and varRead("local") //and object_index = bullet_torque
     dir_perm = point_direction(x,y,x+hsp,y+vsp)
 
 if spd &gt; 0
@@ -353,6 +359,7 @@ if spd &gt; 0
                 obj_update_real(id,"stuck_xscaler",FL_NORMAL)
                 obj_update_real(id,"stuck_ang",FL_NORMAL)
                 obj_update_real(id,"can_rotate",FL_NORMAL)
+                varWrite("dir_perm",dir_perm) obj_update_real(id,"dir_perm",FL_NORMAL)
             }
         } 
         else if object_index = bullet_torque and not stuck and inst.object_index != player and not varRead("hitscan")
@@ -372,6 +379,7 @@ if spd &gt; 0
                     obj_update_real(id,"stuck_xoff",FL_NORMAL)
                     obj_update_real(id,"stuck_yoff",FL_NORMAL)
                     obj_update_real(id,"can_rotate",FL_NORMAL)
+                    varWrite("dir_perm",dir_perm) obj_update_real(id,"dir_perm",FL_NORMAL)
                 }
             }
             else
@@ -406,6 +414,8 @@ if varRead("local") and nth_frame(5)
 {
     obj_update_real(id,"myX",FL_NORMAL)
     obj_update_real(id,"myY",FL_NORMAL)
+    
+    if object_index = bullet_torque
     
     recalc_tossable_vector()
     obj_sendval_real(id,"direction",dir,FL_NORMAL)

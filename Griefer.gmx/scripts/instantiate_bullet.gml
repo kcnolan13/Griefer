@@ -4,8 +4,13 @@
 
 if bounces = 0
     audio(varRead("sound"),1)
+    
+if not is_string(varRead("senderId"))
+{
+    printf("WARNING: "+object_get_name(object_index)+" has non-string senderId: "+string(varRead("senderId")))
+}
 
-if (not is_local_player_uid(varRead("senderId")) and (not object_index = bullet_torque)) and (not is_bot(find_player(varRead("senderId"))))
+if (not is_local_player(varRead("senderId")) and (not object_index = bullet_torque)) and (not is_bot(find_player(varRead("senderId"))))
     return false
     
 //if object_index = bullet_torque printf("instantiating torque bullet: speed = "+varRead("speed")+", direction = "+varRead("direction"))

@@ -166,7 +166,9 @@ else
         ID2.width = ewidth
         ID2.height = eheight
         ID2.text = cnames[i]
-        if string_upper(ID2.text) = "ON" or string_upper(ID2.text) = "OFF" or string_upper(ID2.text) = "ON ACTION" or string_upper(ID2.text) = "ALWAYS" or string_upper(ID2.text) = "NEVER"
+        if string_upper(ID2.text) = "ON" or string_upper(ID2.text) = "OFF" or string_upper(ID2.text) = "ON ACTION" 
+        or string_upper(ID2.text) = "ALWAYS" or string_upper(ID2.text) = "NEVER" or string_upper(ID2.text) = string_upper(global.optimize_graphics) 
+        or string_upper(ID2.text) = string_upper(global.optimize_fps) or string_upper(ID2.text) = string_upper(global.txt_restore)
             ID2.is_onoff = true
         else if string_upper(ID2.text) = "YES" or string_upper(ID2.text) = "NO" 
             ID2.is_yesno = true

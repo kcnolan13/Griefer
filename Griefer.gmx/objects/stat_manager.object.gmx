@@ -107,7 +107,7 @@ varWrite("assists_valid",false)
 varWrite("wins_valid",false)
 varWrite("losses_valid",false)
 varWrite("points_valid",false)
-update_kdr = false
+update_kdr = true
 update_wl = false
 update_ppl = false
 

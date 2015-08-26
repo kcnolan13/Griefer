@@ -53,6 +53,11 @@ rect_xextra = 0
 rect_alpha = 1
 draw_rect = true
 draw_fade = false
+draw_gradient = false
+grad1 = c_white
+grad2 = c_white
+grad3 = c_black
+grad4 = c_black
 fade_color = c_black
 fade_alpha = 0.65
 
@@ -389,11 +394,14 @@ else
 if birth_delay &gt; 0 or not is_gui
     exit
 
-if draw_fade
+if draw_fade or draw_gradient
 {
     draw_set_alpha(fade_alpha*alpha*alpha_scaler)
     draw_set_color(fade_color)
-    draw_rectangle(0,0,WVIEW,HVIEW,false)
+    if not draw_gradient    
+        draw_rectangle(0,0,WVIEW,HVIEW,false)
+    else
+        draw_rectangle_colour(0,0,WVIEW,HVIEW, grad1, grad2, grad3, grad4, false)
 }    
 
 draw_set_alpha(alpha*alpha_scaler)

@@ -94,13 +94,16 @@ for (var i=0; i &lt; ceil(MAX_PARTICLES*size/time); i++)
     
     //printf("    creating blood particle")
     particles_spawned++
-    ID = instance_create(x+random_range(-xy_variance,xy_variance),y+random_range(-xy_variance,xy_variance),blood_particle)
-    ID.dir = dir+random_range(-dir_variance,dir_variance)
-    ID.spd = spd+random_range(-spd_variance,spd_variance)
-    ID.hsp = trigx(ID.spd,ID.dir)
-    ID.vsp = trigy(ID.spd,ID.dir)
-    ID.grav = grav
-    ID.blend = blood_color
+    if truthval(global.gc[GC_PARTICLES,1])
+    {
+        ID = instance_create(x+random_range(-xy_variance,xy_variance),y+random_range(-xy_variance,xy_variance),blood_particle)
+        ID.dir = dir+random_range(-dir_variance,dir_variance)
+        ID.spd = spd+random_range(-spd_variance,spd_variance)
+        ID.hsp = trigx(ID.spd,ID.dir)
+        ID.vsp = trigy(ID.spd,ID.dir)
+        ID.grav = grav
+        ID.blend = blood_color
+    }
 }
 </string>
           </argument>

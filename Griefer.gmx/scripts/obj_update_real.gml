@@ -20,4 +20,4 @@ if flag != FL_INSTANCE_DESTROY
 
 with (net_manager) {if show_trans_rate transmissions++}
 
-objUpdateReal(obj.object_index,real(objVarRead(obj,"uniqueId")),string(variable),real(netvar_val),flag)
+objUpdateReal(obj.object_index,string(objVarRead(obj,"uniqueId")),string(variable),real(netvar_val),flag)

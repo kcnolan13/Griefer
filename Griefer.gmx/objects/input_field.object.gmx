@@ -116,7 +116,7 @@ if room = rm_login and input_active
     }
 }
 
-if global.using_gamepad 
+if global.using_gamepad
 {
     if gamepad_button_check_pressed(global.devno,global.cvals[C_JUMP]) 
     or gamepad_button_check_pressed(global.devno,global.cvals[C_SHOOT])
@@ -201,7 +201,7 @@ if input_active
             <kind>1</kind>
             <string>///toggle active
     
-if alpha &lt; 0.1 exit
+if alpha &lt; 0.1 or instance_exists(modal_dialogue) exit
 
 if !instance_place(x+view_xview,y+view_yview,cursor)
 {

@@ -64,7 +64,7 @@ varWrite("gear_to_lose",false)
 varWrite("gear_to_steal",false)
 varWrite("stolen_gear_source",global.src_empty)
 varWrite("lost_gear_source",global.src_empty)
-varWrite("uniqueId",-52)
+varWrite("uniqueId","-52")
 varWrite("true_skill",-1)
 varWrite("global_rank",-1)
 
@@ -211,19 +211,23 @@ alarm[2] = 30*5
             <string>///force-sync
 printf("::: "+string(varRead("pName"))+" was instantiated with uniqueId #"+string(varRead("uniqueId")))
 
-if is_string(varRead("pName")) and instance_exists(myAvatar())
+if instance_exists(myAvatar())
 {
-    if varRead("pName") != objVarRead(myAvatar(),"pName")
+    if is_string(varRead("pName"))
     {
-        printf("::: new avatar -- let's force sync everybody!")
-        net_manager.force_sync_countdown = 3
+        if varRead("pName") != objVarRead(myAvatar(),"pName")
+        {
+            printf("::: new avatar -- let's force sync everybody!")
+            net_manager.force_sync_countdown = 3
+        }
+    }
+    else
+    {
+        printf(":::WARNING: avatar instance "+string(id)+" with pName "+string(varRead("pName"))+" has non-string pName.... alarm[1] = 1")
+        alarm[1] = 1
     }
 }
-else
-{
-    printf(":::WARNING: avatar instance "+string(id)+" with pName "+string(varRead("pName"))+" has non-string pName.... alarm[1] = 1")
-    alarm[1] = 1
-}
+else alarm[1] = 1
 </string>
           </argument>
         </arguments>
@@ -431,7 +435,8 @@ if net_manager.my_doll = id
     printf("visible = "+visible)
     printf("myX = "+varRead("myX"))
     printf("myY = "+varRead("myY"))*/
-}   
+} 
+  
 if varRead("player_quit")
 {
     printf("DESTROYING PLAYER WHO QUIT: "+varRead("pName"))
@@ -444,8 +449,20 @@ if varRead("player_quit")
     varWrite("myX",-600)
     varWrite("myY",-600)
     varWrite("visible",false)
+    
     if (in_match() or room = rm_menu)
     {
+        with player
+        {
+            if playerName(id) = playerName(other.id)
+            {
+                x = -2000
+                y = -2000
+                varWrite("myX",-2000)
+                varWrite("myY",-2000)
+                visible = false
+            }
+        }
         printf("DESTROYING PLAYER WHO QUIT: "+varRead("pName"))
         instance_destroy()
         exit
@@ -682,7 +699,7 @@ if room = rm_menu or room = rm_lobby
     sync_poses_and_animations()
 }
 
-if room = rm_lobby and force_jumped = false and varRead("uniqueId") &gt; -30
+if room = rm_lobby and force_jumped = false and varRead("uniqueId") != "-52"
 {
     force_jumped = true
     with net_manager
@@ -929,7 +946,7 @@ else
     
 if room = rm_menu
 {
-    //varWrite("uniqueId",-52)
+    //varWrite("uniqueId","-52")
     y = -64*5
     x = room_width*4/5
 }
@@ -1044,15 +1061,15 @@ if room = rm_lobby
 //if varRead("player_quit") exit
 //printf("dude_x = "+string(varRead("dude_x"))+", dude_y = "+string(varRead("dude_y"))+", x = "+string(x)+", y = "+string(y))
 
-if net_manager.show_cout or 1=1
+if net_manager.show_cout or false
 {
     //draw_text(x,y-290,"global_rank: "+varRead("global_rank"))
     //draw_text(x,y-260,"rank: "+varRead("rank"))
     draw_text(x,y-230,"uniqueId: "+string(varRead("uniqueId")))
     draw_text(x,y-200,"pNum: "+string(varRead("pNum")))
     //draw_text(x,y-200,"player_quit: "+varRead("player_quit"))
-    if net_manager.show_cout or room = rm_lobby and rtime() &lt; 30*3
-        printf("::: AVATAR "+string(varRead("pName"))+": uniqueId = "+string(varRead("uniqueId"))+", pNum = "+string(varRead("pNum"))+", x="+string(x)+", y="+string(y))
+    //if net_manager.show_cout or room = rm_lobby and rtime() &lt; 30*3
+    //    printf("::: AVATAR "+string(varRead("pName"))+": uniqueId = "+string(varRead("uniqueId"))+", pNum = "+string(varRead("pNum"))+", x="+string(x)+", y="+string(y))
 }
 
 prescaled = false

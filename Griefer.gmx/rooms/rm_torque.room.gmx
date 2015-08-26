@@ -4,7 +4,7 @@
   <width>2688</width>
   <height>2176</height>
   <vsnap>64</vsnap>
-  <hsnap>64</hsnap>
+  <hsnap>2</hsnap>
   <isometric>0</isometric>
   <speed>30</speed>
   <persistent>0</persistent>
@@ -16,8 +16,8 @@
   <clearDisplayBuffer>-1</clearDisplayBuffer>
   <makerSettings>
     <isSet>-1</isSet>
-    <w>1936</w>
-    <h>1056</h>
+    <w>1014</w>
+    <h>600</h>
     <showGrid>0</showGrid>
     <showObjects>-1</showObjects>
     <showTiles>-1</showTiles>
@@ -27,8 +27,8 @@
     <deleteUnderlyingObj>0</deleteUnderlyingObj>
     <deleteUnderlyingTiles>0</deleteUnderlyingTiles>
     <page>0</page>
-    <xoffset>-223</xoffset>
-    <yoffset>-468</yoffset>
+    <xoffset>273</xoffset>
+    <yoffset>222</yoffset>
   </makerSettings>
   <backgrounds>
     <background visible="0" foreground="0" name="" x="0" y="0" htiled="-1" vtiled="-1" hspeed="0" vspeed="0" stretch="0"/>
@@ -585,6 +585,7 @@
     <instance objName="block" x="2432" y="-320" name="inst_AC4FD035" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="block" x="2432" y="-256" name="inst_7C7706AA" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="block" x="2432" y="-192" name="inst_25C64057" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="weapon_drop_torque" x="760" y="768" name="inst_FCF643EE" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="tiles_torque" x="1152" y="768" w="64" h="64" xo="142" yo="282" id="10015903" name="inst_9AAD771A" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>

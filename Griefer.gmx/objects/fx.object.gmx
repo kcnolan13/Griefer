@@ -67,11 +67,10 @@ draw_mode = 0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if in_match() and not surface_exists(surf_blood)
+            <string>if in_match() and not surface_exists(surf_blood) and truthval(global.gc[GC_SURFACES,1])
 {
     free_level_surfaces()
     regen_level_surfaces()
-        
     background_drawer.recompute_parallax = true
 }
 </string>
@@ -121,7 +120,8 @@ free_level_surfaces()
           <argument>
             <kind>1</kind>
             <string>///level surfaces
-regen_level_surfaces()
+if room = rm_login or truthval(global.gc[GC_SURFACES,1])
+    regen_level_surfaces()
 </string>
           </argument>
         </arguments>
@@ -176,44 +176,50 @@ if bfade_delay
 
 if (surface_exists(surf_blood) and surface_exists(surf_blocks_inverse) and surface_exists(surf_tex))
 {
-    if draw_surf_mode = 0 {
-        surface_set_target(surf_tex)
-        draw_set_blend_mode(bm_subtract)
-        draw_surface_ext(surf_blocks_inverse,0,0,1,1,0,c_black,1)
-        surface_reset_target()
-        
-        surface_set_target(surf_blood)
-        draw_set_blend_mode(bm_subtract)
-        draw_surface_ext(surf_blocks_inverse,0,0,1,1,0,c_black,1)
-        
-        draw_set_color(c_black)
-        if bfade_delay
-            draw_set_alpha(7/fade_time)
-        else
-            draw_set_alpha(12/fade_time)
-
-        if nth_frame(5)
-           draw_rectangle(0,0,room_width,room_height,false)
-
-        draw_set_alpha(1)
-        draw_set_color(c_white)
-        draw_set_blend_mode(bm_normal)
-        
-        surface_reset_target()
-        
-        //draw_surface_ext(surf_blocks_inverse,0,0,1,1,0,c_white,1)
-        //draw_set_blend_mode_ext(blood_surf_src,blood_surf_dest)
-        draw_surface_part_ext(surf_tex,view_xview,view_yview,view_wview,view_hview,view_xview,view_yview,1,1,c_white,1)
-        draw_surface_part_ext(surf_blood,view_xview,view_yview,view_wview,view_hview,view_xview,view_yview,1,1,c_white,1)
-        draw_set_blend_mode(bm_normal)
-    } else if draw_surf_mode =  1 {
-        draw_surface_part_ext(surf_blocks,view_xview,view_yview,view_wview,view_hview,view_xview,view_yview,1,1,c_white,1)
-    } else if draw_surf_mode =  2 {
-        draw_surface_part_ext(surf_blocks_inverse,view_xview,view_yview,view_wview,view_hview,view_xview,view_yview,1,1,c_white,1)
-    } else if draw_surf_mode =  3 {
-        draw_surface_part_ext(surf_blood,view_xview,view_yview,view_wview,view_hview,view_xview,view_yview,1,1,c_white,1)
+    if room = rm_login or truthval(global.gc[GC_SURFACES,1])
+    {
+        if draw_surf_mode = 0 {
+            surface_set_target(surf_tex)
+            draw_set_blend_mode(bm_subtract)
+            draw_surface_ext(surf_blocks_inverse,0,0,1,1,0,c_black,1)
+            surface_reset_target()
+            
+            surface_set_target(surf_blood)
+            draw_set_blend_mode(bm_subtract)
+            draw_surface_ext(surf_blocks_inverse,0,0,1,1,0,c_black,1)
+            
+            draw_set_color(c_black)
+            if bfade_delay
+                draw_set_alpha(7/fade_time)
+            else
+                draw_set_alpha(12/fade_time)
+    
+            if nth_frame(5)
+               draw_rectangle(0,0,room_width,room_height,false)
+    
+            draw_set_alpha(1)
+            draw_set_color(c_white)
+            draw_set_blend_mode(bm_normal)
+            
+            surface_reset_target()
+            
+            //draw_surface_ext(surf_blocks_inverse,0,0,1,1,0,c_white,1)
+            //draw_set_blend_mode_ext(blood_surf_src,blood_surf_dest)
+            draw_surface_part_ext(surf_tex,view_xview,view_yview,view_wview,view_hview,view_xview,view_yview,1,1,c_white,1)
+            draw_surface_part_ext(surf_blood,view_xview,view_yview,view_wview,view_hview,view_xview,view_yview,1,1,c_white,1)
+            draw_set_blend_mode(bm_normal)
+        } else if draw_surf_mode =  1 {
+            draw_surface_part_ext(surf_blocks,view_xview,view_yview,view_wview,view_hview,view_xview,view_yview,1,1,c_white,1)
+        } else if draw_surf_mode =  2 {
+            draw_surface_part_ext(surf_blocks_inverse,view_xview,view_yview,view_wview,view_hview,view_xview,view_yview,1,1,c_white,1)
+        } else if draw_surf_mode =  3 {
+            draw_surface_part_ext(surf_blood,view_xview,view_yview,view_wview,view_hview,view_xview,view_yview,1,1,c_white,1)
+        }
     }
-
+    else
+    {
+        free_level_surfaces()
+    }
 }
 </string>
           </argument>

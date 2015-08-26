@@ -14,6 +14,7 @@
     <ProjectGuid>{990374F2-039A-401D-AF59-9997B52238AB}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>GriefPlusPlus</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -25,9 +26,9 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -78,6 +79,8 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>C:\boost</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <ExceptionHandling>Sync</ExceptionHandling>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -88,7 +91,7 @@
       <AdditionalDependencies>boost.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy C:\Users\Kyle\Griefer\GriefPlusPlus\GriefPlusPlus\Release\GriefPlusPlus.dll C:\Users\Kyle\Griefer\Griefer.gmx\extensions\griefer_client\GriefPlusPlus.dll /E /C /H /R /K /O /Y</Command>
+      <Command>xcopy C:\Users\Kyle\Games\Griefer\GriefPlusPlus\GriefPlusPlus\Release\GriefPlusPlus.dll C:\Users\Kyle\Games\Griefer\Griefer.gmx\extensions\griefer_client\GriefPlusPlus.dll /E /C /H /R /K /O /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

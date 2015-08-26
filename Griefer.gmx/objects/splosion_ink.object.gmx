@@ -188,12 +188,12 @@ if counter &lt; life
 {
     part_type_speed(ps,0,real_speed(3),real_speed(0.015),real_speed(0.1))
     
-    if fps &lt; 25
+    if fps &lt; 25 and truthval(global.gc[GC_PARTICLES,1])
         part_type_alpha3(ps,0.25,1,0)
     else
         part_type_alpha3(ps,0.25,3,0)
     
-    if fps &gt;= 25
+    if fps &gt;= 25 and truthval(global.gc[GC_PARTICLES,1])
     {
         if random(1) &lt; 0.15
             part_emitter_burst(sys_smoke,em,ps,1)

@@ -33,6 +33,8 @@ is_competitive = false
 is_bot_mode = false
 dat_blend_mode = bm_normal
 
+regen_delay= 0
+
 surf_slot = surface_create(72*2,72*2)
 alarm[1] = random_range(30/2,30*2)
 
@@ -420,10 +422,16 @@ if hovering
           <argument>
             <kind>1</kind>
             <string>///regen surface when needed
-if not surface_exists(surf_slot)
+if not surface_exists(surf_slot) and not regen_delay
 {
     //regen challenge slot surfaces
-    alarm[1] = ceil(random_range(1,30/2))
+    alarm[1] = ceil(random_range(5,15))
+    regen_delay = 30
+    printf("::: calling for a challenge surface regen")
+}
+else if regen_delay
+{
+    regen_delay --
 }
 </string>
           </argument>

@@ -55,7 +55,7 @@ scale_flicker = 0.05
 
 //engine
 alarm[0] = 1
-varWrite("senderId",-1)
+varWrite("senderId",MY_PLAYER_NULL)
 varWrite("local",false)
 varWrite("body_death_type","die")
 varWrite("gib_distance",radius/4)

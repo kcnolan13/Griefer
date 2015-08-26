@@ -133,7 +133,7 @@ if alert_alpha &gt; 0
 if not field_username.input_active and not field_password.input_active
 {
     time_since_active ++
-    if time_since_active &gt; 30*2
+    if time_since_active &gt; 30*2 and not instance_exists(modal_dialogue)
     {
         field_username.input_string = generate_name(0)
         time_since_active = 0
@@ -198,7 +198,7 @@ event_inherited()
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if clicked exit
+            <string>if clicked or instance_exists(modal_dialogue) exit
 
 if instance_place(x,y,cursor) or forced_enter
 {

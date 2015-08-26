@@ -29,6 +29,7 @@
 netvars = ds_map_create()
 
 varWrite("bot",false)
+varWrite("player_quit",false)
 
 surf_splat = NO_HANDLE
 create_splat_surface()
@@ -509,7 +510,7 @@ free_splat_surface()
           <argument>
             <kind>1</kind>
             <string>///draw all limbs at appropriate position based on animation_index
-if not varRead("visible") exit
+if not varRead("visible") or varRead("player_quit") exit
 
 if object_index = die_generic and dummy_counter &lt; 2 exit
 

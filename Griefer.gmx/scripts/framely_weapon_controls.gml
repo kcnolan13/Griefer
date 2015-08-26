@@ -11,7 +11,7 @@ if input_check(mapped_control(C_SHOOT))
     if not (mi_jugador < 0 or is_bot(mi_jugador))
         weapon_hold_left()
 }
-    
+
     
 //BUTTON PRESSES
 if input_check_pressed(mapped_control(C_SHOOT))

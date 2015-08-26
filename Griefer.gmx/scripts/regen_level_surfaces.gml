@@ -1,6 +1,9 @@
 index1 = bm_src_alpha
 index2 = bm_inv_src_alpha
 
+if room != rm_login and not truthval(global.gc[GC_SURFACES,1])
+    return false
+
 if net_manager.tg_blood.active
 {
     

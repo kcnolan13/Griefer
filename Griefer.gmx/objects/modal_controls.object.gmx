@@ -34,6 +34,8 @@ halign = fa_center
 valign = fa_center
 life = 0
 
+draw_gradient = true
+
 width = view_wview*2/3+64
 height = view_hview*2/3
 extra_height = 50

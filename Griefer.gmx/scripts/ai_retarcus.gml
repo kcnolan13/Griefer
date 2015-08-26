@@ -34,9 +34,9 @@ var percent_reflexes = argument1
                 weapon_time = 0
                 with (weapon_contemplating) 
                 {
-                   // printf("::: bot is pressing space on me: "+string(varRead("name")))
+                    printf("::: bot is pressing space on me: "+string(varRead("name")))
                     weapon_press_space()
-                    //printf("::: bot is done pressing space on me: "+string(varRead("name")))
+                    printf("::: bot is done pressing space on me: "+string(varRead("name")))
                 }
             }
         }

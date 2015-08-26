@@ -58,7 +58,7 @@ varWrite("is_nade",false)
 varWrite("is_secondary",true)
 
 //specs
-varWrite("clip_cap",36)
+varWrite("clip_cap",28)
 varWrite("clip",varRead("clip_cap"))
 varWrite("starting_ammo",3*varRead("clip_cap"))
 varWrite("max_ammo",5*varRead("clip_cap"))

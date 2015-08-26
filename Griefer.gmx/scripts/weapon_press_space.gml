@@ -1,4 +1,4 @@
-if varRead("my_player") < 0
+if varRead("my_player") = MY_PLAYER_NULL
 {
     for (var i=0; i<instance_number(player); i++)
     {

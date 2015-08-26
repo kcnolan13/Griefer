@@ -11,6 +11,8 @@ var hat_spr = real(argument7)
 var alpha = argument8
 var tis_bot = argument9
 
+rank = constrict(rank, 0, getLength(global.rank_names)-1)
+
 var rank_name = global.rank_names[rank]
 var rank_color = global.rank_colors[rank]
 

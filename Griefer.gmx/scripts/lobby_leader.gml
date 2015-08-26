@@ -1,7 +1,7 @@
 //lobby_leader()
-if instance_exists(net_manager.local_player)
+if instance_exists(myPlayer())
 {
-    if objVarRead(net_manager.local_player,"pNum") = 0
+    if objVarRead(myPlayer(),"pNum") = 0 or net_manager.bot_match
         return true
     else return false
 }

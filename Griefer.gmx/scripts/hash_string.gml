@@ -1,13 +1,25 @@
-///hash_string_gml(string)
+///hash_string(string)
 var str = argument0
+
+return str
+
+
+
+/* V2.0
 var result = 0
 
 result = hash_string_gpp(str)
 if net_manager.show_cout
     printf("::: hashed string "+string(str)+" ---> "+string(result))
 return result
+*/
 
-/*var max_length = 15
+
+
+
+
+/* V1.0
+var max_length = 15
 //printf("hashing string "+str)
 for (i=0; i<string_length(str); i++)
 {

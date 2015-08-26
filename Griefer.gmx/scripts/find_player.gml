@@ -1,9 +1,9 @@
-///find_player(pNum)
-pNum = argument0
+///find_player(uniqueId)
+uId = argument0
 for (i=0; i<instance_number(player); i++)
 {
     ID = instance_find(player,i)
-    if real(objVarRead(ID,"uniqueId") = real(pNum)) or (object_index = weapon_generic and playerName(ID) = varRead("my_player_name"))
+    if string(objVarRead(ID,"uniqueId")) = string(uId)
         return ID
 }
 

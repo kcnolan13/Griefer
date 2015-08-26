@@ -59,23 +59,23 @@ if dgrid != grid_header
     
     if rect_highlighted(rxdraw,rydraw,rxdraw+width,rydraw+row_height)
     {
-        if row_draw_num != hovrow
+        if row_draw_num != hovrow-row_offset
         {
             hovrow_counter = 0
             show_hovrow = false
         }
-        hovrow = row_draw_num
+        hovrow = row_draw_num+row_offset
     }
     else //moused out of area
     {
-        if row_draw_num = hovrow
+        if row_draw_num = hovrow-row_offset
         {
             hovrow_counter = 0
             show_hovrow = false
             hovrow = -1
         }
     }
-    if hovrow = row_draw_num
+    if hovrow-row_offset = row_draw_num
     {
         draw_set_color(c_ltgray)
         draw_rectangle(rxdraw,rydraw,rxdraw+width,rydraw+row_height,false)
@@ -86,8 +86,14 @@ if dgrid != grid_header
     {
         //DRAW LITTLE AVATAR HEAD
         var xoff_causeav = 24
-        var helm = ds_grid_get(grid,14,row_draw_num)
-        var hat = ds_grid_get(grid,15,row_draw_num)
+        var helm = ds_grid_get(grid,14,row_draw_num+row_offset)
+        var hat = ds_grid_get(grid,15,row_draw_num+row_offset)
+        
+        if is_string(helm)
+            helm = bpart_extract_sprite(helm)
+        if is_string(hat)
+            hat = bpart_extract_sprite(hat)
+            
         varWrite("helmet0",helm)
         varWrite("hat0",hat)
         draw_avatar_head(rxdraw+3+24,rydraw+global.row_height/4-4+24,id,0,0.375,1,FL_NOBAR)
@@ -151,14 +157,3 @@ if dgrid = grid
 }
 
 draw_set_alpha(1)
-
-if hovrow > -1 and show_hovrow
-{
-    //show popup
-    draw_player_popup_ext(cursor.x,cursor.y,ds_grid_get(grid,0,hovrow),
-        ds_grid_get(grid,1,hovrow),ds_grid_get(grid,13,hovrow),ds_grid_get(grid,2,hovrow),real(ds_grid_get(grid,14,hovrow)),real(ds_grid_get(grid,15,hovrow)),1,false)
-    if input_check_pressed(mapped_control(C_JUMP)) or mouse_check_button_pressed(mb_left)
-    {
-        show_player_stats(ds_grid_get(grid,0,hovrow))
-    }
-}

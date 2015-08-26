@@ -1,7 +1,8 @@
 ///modal_pressed(modal_id)
 var m = argument0
-
 if not instance_exists(m) return false
+
+if instance_exists(modal_dialogue) and m.object_index != modal_dialogue and m.object_index != bn_dialogue return false
 if not m.visible or not m.highlightable return false
 
 var xpos = cursor.x
