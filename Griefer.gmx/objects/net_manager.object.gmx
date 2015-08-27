@@ -39,6 +39,7 @@ default_winner = ""
 match_collapsed = false
 collapsed_pname = ""
 collapsed_numplayers = 0
+collapsed_pluralize = 0
 everyone_quit = false
 
 //voting
@@ -2017,10 +2018,12 @@ if instance_number(player) &gt; 0 and room_counter &gt; 10*30
             {
                 match_collapsed = true
                 obj_sendval_real(id,"everyone_quit",true,FL_NORMAL)
+                collapsed_pluralize = 0
                 with player
                 {
                     if varRead("player_quit")
                     {
+                        other.collapsed_pluralize ++
                         if string_length(net_manager.collapsed_pname) &lt; 2
                             net_manager.collapsed_pname = capwords(playerName(id))
                         else
@@ -2051,6 +2054,20 @@ if instance_number(player) &gt; 0 and room_counter &gt; 10*30
             if everyone_quit
             {
                 obj_sendval_real(id,"everyone_quit",true,FL_NORMAL)
+                collapsed_pluralize = 0
+                
+                with player
+                {
+                    if varRead("player_quit")
+                    {
+                        other.collapsed_pluralize++
+                        if string_length(net_manager.collapsed_pname) &lt; 2
+                            net_manager.collapsed_pname = capwords(playerName(id))
+                        else
+                            net_manager.collapsed_pname += " and "+capwords(playerName(id))
+                    }
+                }
+                
                 match_countdown = match_countdown_max
                 default_winner = playerName(myPlayer())
             }
@@ -2073,10 +2090,13 @@ if varRead("everyone_quit")
         everyone_quit = true
         default_winner = playerName(myPlayer())
         match_collapsed = true
+        collapsed_pluralize = 0
+        
         with player
         {
             if varRead("player_quit")
             {
+                other.collapsed_pluralize ++
                 if string_length(net_manager.collapsed_pname) &lt; 2
                     net_manager.collapsed_pname = capwords(playerName(id))
                 else
@@ -2344,9 +2364,10 @@ if room = rm_menu
     bot_match = false
     if match_collapsed
     {
-        popup_okay(WVIEW/2,HVIEW/2,pluralize("Rage Quitter",collapsed_numplayers), string(collapsed_pname)+" "+pluralize("has",collapsed_numplayers)+" Rage Quit. You have been awarded the win, and "+string(collapsed_pname)+" "+pluralize("has",collapsed_numplayers)+" been penalized.",scr_none)
+        popup_okay(WVIEW/2,HVIEW/2,pluralize("Rage Quitter",collapsed_pluralize), string(collapsed_pname)+" "+pluralize("has",collapsed_pluralize)+" Rage Quit. You have been awarded the win, and "+string(collapsed_pname)+" "+pluralize("has",collapsed_pluralize)+" been penalized.",scr_none)
         match_collapsed = false
         collapsed_numplayers = 0
+        collapsed_pluralize = 0
         collapsed_pname = ""
         varWrite("everyone_quit",false)
     }
@@ -2362,6 +2383,7 @@ if in_match()
     default_winner = ""
     match_collapsed = false
     collapsed_numplayers = 0
+    collapsed_pluralize = 0
     collapsed_pname = ""
     everyone_quit = false
     varWrite("everyone_quit",false)

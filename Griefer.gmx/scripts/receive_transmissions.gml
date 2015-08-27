@@ -270,11 +270,11 @@ while (genMessagesWaiting() and wait_counter < 500000)
                 
                     if instance_exists(his_playa)
                     {
-                        popup_alert(WVIEW/2,64*4,"Rage Quitter",genVal+" has Rage Quit and Will Be Penalized.")
+                        popup_alert(WVIEW/2,64*2.5,"Rage Quitter",capwords(genVal)+" has Rage Quit and Will Be Penalized.")
                     }
                     else
                     {
-                        with popup_alert(WVIEW/2,64*4,"Network Error",genVal+" has Rage Quit, but has not been penalized due to a network error.")
+                        with popup_alert(WVIEW/2,64*2.5,"Network Error",capwords(genVal)+" has Rage Quit, but has not been penalized due to a network error.")
                             critical = true
                     }
                     
