@@ -100,10 +100,11 @@ if not surface_exists(surface)
         ypos += text_yoff*scale*master_scale
         
         if text_halign = fa_center
-            draw_text_ext_transformed(xpos+text_pad,ypos,text,text_linesep,(width-text_pad*2)*scale,scale*master_scale,scale*master_scale,0)
+            draw_text_ext_transformed(xpos,ypos,text,text_linesep,(width-text_pad*2),scale*master_scale,scale*master_scale,0)
+        else if text_halign = fa_left
+            draw_text_ext_transformed(xpos+text_pad,ypos,text,text_linesep,(width-text_pad*2),scale*master_scale,scale*master_scale,0)
         else
-            draw_text_ext_transformed(xpos,ypos,text,text_linesep,(width-text_pad*2)*scale,scale*master_scale,scale*master_scale,0)
-        
+            draw_text_ext_transformed(xpos-text_pad,ypos,text,text_linesep,(width-text_pad*2),scale*master_scale,scale*master_scale,0)
         if header_text != ""
         {
             draw_set_font(header_font)

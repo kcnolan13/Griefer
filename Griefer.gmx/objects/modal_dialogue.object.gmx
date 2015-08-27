@@ -131,6 +131,7 @@ modal_aligns()
 header_height = height/4
 bdelay = 10
 binc = 5
+text_pad = width/12
 
 if critical
 {
@@ -160,7 +161,7 @@ if is_yesno
 }
 else if not is_alert
 {
-    bn_okay = instance_create(x-width/4,y+height/2*3/4,bn_dialogue)
+    bn_okay = instance_create(x,y+height/2*3/4,bn_dialogue)
     bn_okay.text = "Okay"
     bn_okay.script = scr_okay
     bn_okay.depth = depth -10
