@@ -107,7 +107,7 @@ GMEXPORT const double statUpdateStr(char *stat, char *value, double flag)
 GMEXPORT const double otherPlayerStatUpdateReal(char *player_name, char *stat, double value, double flag)
 {
 	_lock.lock();
-	string obj = "{" + field("name", "otherPlayerStatUpdate") + ", " + field("netvar", stat) + ", " + field("val", value) + ", " + field("flag", flag) + "}";
+	string obj = "{" + field("name", "otherPlayerStatUpdate") + ", " + field("pname", player_name) + ", " + field("netvar", stat) + ", " + field("val", value) + ", " + field("flag", flag) + "}";
 	current_socket->emit("other_player_stat_update", obj);
 	_lock.unlock();
 	return 0;
@@ -115,7 +115,7 @@ GMEXPORT const double otherPlayerStatUpdateReal(char *player_name, char *stat, d
 GMEXPORT const double otherPlayerStatUpdateStr(char *player_name, char *stat, char *value, double flag)
 {
 	_lock.lock();
-	string obj = "{" + field("name", "otherPlayerStatUpdate") + ", " + field("netvar", stat) + ", " + field("val", value) + ", " + field("flag", flag) + "}";
+	string obj = "{" + field("name", "otherPlayerStatUpdate") + ", " + field("pname", player_name) + ", " + field("netvar", stat) + ", " + field("val", value) + ", " + field("flag", flag) + "}";
 	current_socket->emit("other_player_stat_update", obj);
 	_lock.unlock();
 	return 0;

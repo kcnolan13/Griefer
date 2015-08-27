@@ -201,7 +201,7 @@ if input_active
             <kind>1</kind>
             <string>///toggle active
     
-if alpha &lt; 0.1 or instance_exists(modal_dialogue) exit
+if alpha &lt; 0.1 or popup_exists() exit
 
 if !instance_place(x+view_xview,y+view_yview,cursor)
 {

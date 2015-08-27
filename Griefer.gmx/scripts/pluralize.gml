@@ -4,7 +4,16 @@ var num = argument1
 
 if num != 1
 {
-    str += "s"
+    if str = "has"
+        str = "have"
+    else if str = "is"
+        str = "are"
+    else if str = "was"
+        str = "were"
+    else if str = "he"
+        str = "they"
+    else
+        str += "s"
 }
 
 return str

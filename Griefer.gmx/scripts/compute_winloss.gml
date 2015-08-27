@@ -1,5 +1,8 @@
 ///compute_winloss()
 
+//make sure the score grid is updated with the latest data
+force_recompute_scores = true
+
 if net_manager.default_winner != ""
 {
     printf("::: defaulting winning pName to "+string(default_winner))

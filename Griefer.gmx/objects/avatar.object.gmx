@@ -1099,6 +1099,9 @@ if net_manager.show_cout or false
     //    printf("::: AVATAR "+string(varRead("pName"))+": uniqueId = "+string(varRead("uniqueId"))+", pNum = "+string(varRead("pNum"))+", x="+string(x)+", y="+string(y))
 }
 
+if nth_frame(60)
+    printf("::: "+playerName(id)+": pNum = "+string(varRead("pNum")))
+
 prescaled = false
 if room = rm_lobby and net_manager.menu_mode = "lobby"
 {

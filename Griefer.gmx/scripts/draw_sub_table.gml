@@ -20,7 +20,7 @@ for (var i=0; i<ds_grid_height(pgrid); i++)
     var playa = find_player_by_pname(objVarRead(av,"pName"))
     if instance_exists(playa) and not objVarRead(net_manager,"end_match_coming")
     {
-        var alive = objVarRead(playa,"controllable")
+        var alive = objVarRead(playa,"alive")
     }
     else var alive = true
 
@@ -32,7 +32,7 @@ for (var i=0; i<ds_grid_height(pgrid); i++)
         var kdr = ks/ds
     else
         var kdr = ks
-        
+
     var pts = objVarRead(av,"match_points")
     var ass = objVarRead(av,"match_assists")
     

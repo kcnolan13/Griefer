@@ -3,7 +3,7 @@
   <spriteName>spr_col3</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-999999999</depth>
   <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -133,7 +133,7 @@ if active and in_match()
     var draw_x = (cursor.x-view_xview)*WVIEW/view_wview
     var draw_y = (cursor.y-view_yview)*HVIEW/view_hview
     
-    depth = -98
+    depth = -999999999
     if core_active
     {
         draw_set_color(core_color)

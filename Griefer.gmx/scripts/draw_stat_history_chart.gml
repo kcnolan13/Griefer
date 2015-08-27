@@ -116,7 +116,7 @@ if recalculate
     
     var ymax = getMax(ys)
     var ymin = getMin(ys)
-    var prescaler = abs(max(ymax,ymin))/(graph_height/2)
+    var prescaler = abs(max(ymax,abs(ymin)))/(graph_height/2)
     //printf(":::ymax = "+string(ymax)+", ymin = "+string(ymin)+", prescaler="+string(prescaler))
     //normalize data to fit graph height
     for (var i=0; i<getLength(draw_ys); i++)

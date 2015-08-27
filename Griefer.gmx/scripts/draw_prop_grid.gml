@@ -24,7 +24,7 @@ for (var i=0; i<NUM_PROPS-1; i++)
     if instance_exists(bpart) and bpart.object_index = bpart_generic
     with bpart
     {
-        if instance_place(x,y,cursor) and click_pressed() and not swap_counter
+        if instance_place(x,y,cursor) and not popup_exists() and click_pressed() and not swap_counter
         {
             audio_play_sound(snd_click_armory,2,false)
             swap_counter = 5
@@ -51,7 +51,7 @@ for (var i=0; i<NUM_PROPS-1; i++)
                 }
             }
         }
-        else if instance_place(x,y,cursor) and rightclick_pressed() and not swap_counter
+        else if instance_place(x,y,cursor) and not popup_exists() and rightclick_pressed() and not swap_counter
         {
             audio_play_sound(snd_pickup2,2,false)
             if not contemplating_scrap

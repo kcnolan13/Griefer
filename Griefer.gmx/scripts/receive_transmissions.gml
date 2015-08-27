@@ -203,17 +203,22 @@ while (genMessagesWaiting() and wait_counter < 500000)
         break
         
         case "player_quit":
-            /*if not delete_avatar_by_name(genVal)
-            {
-                printf("ERROR: player quit and failed to destroy his avatar")
-            }*/
             
-            if (in_match() or (room = rm_lobby)) and instance_number(avatar) <= 2
+            //be 100% sure the player name is a string
+            genVal = string(genVal)
+            compute_lowest_pnum()
+            
+            if instance_number(avatar) <= 2
             {
-                /*printf(":::MISSION ABORT! MISSION ABORT!")
-                abort_match()*/
-                net_manager.match_collapsed = true
-                net_manager.collapsed_pname = genVal
+                if in_match()
+                {
+                    net_manager.match_collapsed = true
+                }
+                else
+                {
+                    printf(":::MISSION ABORT! MISSION ABORT!")
+                    abort_match()
+                }
             }
             
             if (in_match() or (room = rm_lobby)) and genVal != varRead("pName")
@@ -234,25 +239,47 @@ while (genMessagesWaiting() and wait_counter < 500000)
                     printf("ERROR: unable to find avatar obj for player who quit: "+genVal)
                 }
                 
-                his_playa = find_player_by_pname(genVal)
-                if instance_exists(his_playa)
+                if in_match()
                 {
-                    objVarWrite(his_playa,"player_quit",true)
-                    objVarWrite(his_playa,"pNum",-1)
-                    his_playa.x = -500
-                    his_playa.y = -500
-                    //objVarWrite(his_playa,"controllable",false)
-                    objVarWrite(his_playa,"visible",false)
-                    his_playa.visible = false
-                    printf("::: identified player who quit: "+string(playerName(his_playa)))
-                }
-                else
-                {
-                    printf("ERROR: unable to find player obj for player who quit: "+genVal)
-                }
+                    net_manager.collapsed_numplayers ++
+                    his_playa = find_player_by_pname(genVal)
+                    if instance_exists(his_playa)
+                    {
+                        objVarWrite(his_playa,"player_quit",true)
+                        objVarWrite(his_playa,"pNum",-1)
+                        his_playa.x = -500
+                        his_playa.y = -500
+                        //objVarWrite(his_playa,"controllable",false)
+                        objVarWrite(his_playa,"visible",false)
+                        his_playa.visible = false
+                        printf("::: pacifying player who quit: "+string(playerName(his_playa)))
+                    }
+                    else
+                    {
+                        printf("ERROR: unable to find player obj for player who quit: "+genVal)
+                    }
                 
-                validate_score_grids()
-                compute_lowest_pnum()
+                    validate_score_grids()
+                
+                    if instance_exists(his_playa)
+                    {
+                        popup_alert(WVIEW/2,64*4,"Rage Quitter",genVal+" has Rage Quit and Will Be Penalized.")
+                    }
+                    else
+                    {
+                        with popup_alert(WVIEW/2,64*4,"Network Error",genVal+" has Rage Quit, but has not been penalized due to a network error.")
+                            critical = true
+                    }
+                    
+                    //PENALIZE!!
+                    if lobby_leader()
+                    {
+                        if instance_exists(his_playa)
+                        {
+                            player_quit_stat_updates(his_playa)
+                        }
+                    }
+                }
             }
         break
         
@@ -272,9 +299,9 @@ while (genMessagesWaiting() and wait_counter < 500000)
                 } 
                 else if (genVal = 2)
                 {
-                    var blah = popup_yesno(WVIEW/2,HVIEW/2,"Create Player: "+string(objVarRead(net_manager,"pName"))+"?",scr_create_user,scr_none)
+                    with popup_yesno(WVIEW/2,HVIEW/2,"Create Player", "Create new player "+string(objVarRead(net_manager,"pName"))+"?",scr_create_user,scr_none)
                     {
-                        blah.header_color = web_hsv(224,54,71)
+                        header_color = web_hsv(224,54,71)
                     }
                 } 
                 else {

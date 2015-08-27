@@ -42,6 +42,11 @@ alpha_max = 1
 scale_highlighted = 1.025
 halign = fa_center
 valign = fa_center
+
+text_valign = fa_top
+text_halign = fa_center
+text_yoff = 96
+
 snap_2view = true
 
 alarm[0] = 1
@@ -51,6 +56,7 @@ exit_child = false
 parent_dialogue = noone
 
 is_yesno = false
+is_alert = false
 
 bn_yes = noone
 bn_no = noone
@@ -70,6 +76,8 @@ scale_lerp_real = 0.4
 color = web_hsv(0,0,18)
 
 depth = -99999999
+
+critical = false
 </string>
           </argument>
         </arguments>
@@ -124,6 +132,12 @@ header_height = height/4
 bdelay = 10
 binc = 5
 
+if critical
+{
+    header_color = c_red
+}
+    
+
 if is_yesno
 {
     bn_yes = instance_create(x-width/4,y+height/2*3/4,bn_dialogue)
@@ -144,7 +158,7 @@ if is_yesno
     bn_no.birth_delay = bdelay
     bdelay += binc
 }
-else
+else if not is_alert
 {
     bn_okay = instance_create(x-width/4,y+height/2*3/4,bn_dialogue)
     bn_okay.text = "Okay"
@@ -154,6 +168,12 @@ else
     bn_okay.scale_lerp_real = scale_lerp_real
     bn_okay.birth_delay = bdelay
     bdelay += binc
+}
+
+if is_alert
+{
+    text_valign = fa_center
+    text_yoff = 0
 }
 </string>
           </argument>

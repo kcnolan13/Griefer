@@ -1068,6 +1068,7 @@
     </scripts>
     <scripts name="stats">
       <script>scripts\match_end_stat_updates.gml</script>
+      <script>scripts\player_quit_stat_updates.gml</script>
       <script>scripts\draw_stat_history_chart.gml</script>
       <script>scripts\draw_stat_meter.gml</script>
       <script>scripts\manage_meters.gml</script>
@@ -1465,12 +1466,14 @@
       <script>scripts\new_chat_feed_message.gml</script>
     </scripts>
     <scripts name="ui">
-      <script>scripts\scr_none.gml</script>
+      <script>scripts\popup_alert.gml</script>
       <script>scripts\popup_okay.gml</script>
       <script>scripts\popup_yesno.gml</script>
+      <script>scripts\popup_exists.gml</script>
       <script>scripts\modal_highlighted.gml</script>
       <script>scripts\scr_create_user.gml</script>
       <script>scripts\regen_control_ui.gml</script>
+      <script>scripts\scr_none.gml</script>
     </scripts>
   </scripts>
   <shaders name="shaders">

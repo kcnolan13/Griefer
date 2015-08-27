@@ -38,6 +38,7 @@ sort_worthy = false
 default_winner = ""
 match_collapsed = false
 collapsed_pname = ""
+collapsed_numplayers = 0
 
 //voting
 votes1 = 0
@@ -2012,6 +2013,17 @@ if instance_number(player) &gt; 0 and room_counter &gt; 10*30
             
             if everyone_quit
             {
+                match_collapsed = true
+                with player
+                {
+                    if varRead("player_quit")
+                    {
+                        if string_length(net_manager.collapsed_pname) &lt; 2
+                            net_manager.collapsed_pname = capwords(playerName(id))
+                        else
+                            net_manager.collapsed_pname += " and "+capwords(playerName(id))
+                    }
+                }
                 match_countdown = match_countdown_max
                 var dat_team = get_team(myPlayer())
                 if dat_team &gt; -1 and dat_team &lt; 2
@@ -2056,6 +2068,7 @@ if varRead("end_match_coming")
         respawn_counter = 0
         
     came_from_match = true
+    
     if not computed_winloss
         compute_winloss()
     
@@ -2106,6 +2119,7 @@ if in_match() and instance_exists(modal_controls)
 
 //sort scores @ 2 Hz
 //see if anything sort-worthy has happened
+
 for (var i=0; i&lt;instance_number(player); i++)
 {
     var ID = instance_find(player,i)
@@ -2118,7 +2132,7 @@ for (var i=0; i&lt;instance_number(player); i++)
     }
 }
 
-if in_match() and force_recompute_scores or ( rtime() mod (10) = 0 and sort_worthy and not disable_scores )
+if in_match() and force_recompute_scores or (nth_frame(10) and sort_worthy and not disable_scores )
 {
     sort_worthy = false
     force_recompute_scores = false
@@ -2128,7 +2142,7 @@ if in_match() and force_recompute_scores or ( rtime() mod (10) = 0 and sort_wort
         var pID = instance_find(player,i)
         if objVarRead(pID,"player_quit")
         {
-            printf(":::WARNING: cannot recompute scores for "+playerName(pID)+" because player has quit")
+            printf("WARNING: cannot recompute scores for "+playerName(pID)+" because player has quit")
             continue
         }
         //printf("found player (object "+pID.object_index+"): "+objVarRead(pID,"pName"))
@@ -2301,8 +2315,9 @@ if room = rm_menu
     bot_match = false
     if match_collapsed
     {
-        popup_okay(WVIEW/2,HVIEW/2,string(collapsed_pname)+" has Rage Quit. You have been awarded the win, and "+string(collapsed_pname)+" has been penalized.",scr_none)
+        popup_okay(WVIEW/2,HVIEW/2,pluralize("Rage Quitter",collapsed_numplayers), string(collapsed_pname)+" "+pluralize("has",collapsed_numplayers)+" Rage Quit. You have been awarded the win, and "+string(collapsed_pname)+" "+pluralize("has",collapsed_numplayers)+" been penalized.",scr_none)
         match_collapsed = false
+        collapsed_numplayers = 0
         collapsed_pname = ""
     }
 }
@@ -2315,6 +2330,9 @@ view_wview[0] = 1365
 if in_match()
 {
     default_winner = ""
+    match_collapsed = false
+    collapsed_numplayers = 0
+    collapsed_pname = ""
     part_controller = instance_create(x,y,particle_controller)
     map_previous = global.map_names[room]
     disable_scores = false
@@ -2837,47 +2855,83 @@ if varRead("end_match_coming")
         
         if varRead("game_mode") = "tdm"
         {
-            if team_kill_total(team0) &gt; team_kill_total(team1)
+            if match_collapsed
             {
-                av_head = ds_grid_get(team0, 1, 0)
-                win_color = global.team0_color
-            } else if team_kill_total(team1) &gt; team_kill_total(team0)
-            {
-                av_head = ds_grid_get(team1, 1, 0)
-                win_color = global.team1_color
-            } else 
-            {
-                av_head = noone
-                win_color = global.team_all_color
+                av_head = find_pname_avatar(playerName(myPlayer()))
+                
+                if av_head != noone
+                {
+                    titulo = ""+objVarRead(av_head,"pName")+"'s Team"
+                    subtitulo = "Won The Match"
+                } else
+                {
+                    printf("ERROR: should not be getting tied match in draw_GUI_4 when match collapsed")
+                    titulo = "The Match Is A Tie"
+                    subtitulo = ""
+                }
             }
-            
-            if av_head != noone
+            else
             {
-                titulo = ""+objVarRead(av_head,"pName")+"'s Team"
-                subtitulo = "Won The Match"
-            } else
-            {
-                titulo = "The Match Is A Tie"
-                subtitulo = ""
+                if team_kill_total(team0) &gt; team_kill_total(team1)
+                {
+                    av_head = ds_grid_get(team0, 1, 0)
+                    win_color = global.team0_color
+                } else if team_kill_total(team1) &gt; team_kill_total(team0)
+                {
+                    av_head = ds_grid_get(team1, 1, 0)
+                    win_color = global.team1_color
+                } else 
+                {
+                    av_head = noone
+                    win_color = global.team_all_color
+                }
+                
+                if av_head != noone
+                {
+                    titulo = ""+objVarRead(av_head,"pName")+"'s Team"
+                    subtitulo = "Won The Match"
+                } else
+                {
+                    titulo = "The Match Is A Tie"
+                    subtitulo = ""
+                }
             }
         }
         else
         {
-            av_head = ds_grid_get(team_all,1,0)
-            win_color = global.team_all_color
-            if ds_grid_get(team_all,0,0) = ds_grid_get(team_all,1,0)
+             if match_collapsed
             {
-                av_head = noone
-            }
-            if av_head != noone
-            {
-                titulo = ""+objVarRead(av_head,"pName")
-                subtitulo = "Won The Match"
+                av_head = find_pname_avatar(playerName(myPlayer()))
+                
+                if instance_exists(av_head)
+                {
+                    titulo = ""+objVarRead(av_head,"pName")
+                    subtitulo = "Won The Match"
+                } else
+                {
+                    printf("ERROR: should not be getting tied match (FFA) in draw_GUI_4 when match collapsed")
+                    titulo = "The Match Is A Tie"
+                    subtitulo = ""
+                }
             }
             else
             {
-                titulo = "The Match Is A Tie"
-                subtitulo = ""
+                av_head = ds_grid_get(team_all,1,0)
+                win_color = global.team_all_color
+                if ds_grid_get(team_all,0,0) = ds_grid_get(team_all,1,0)
+                {
+                    av_head = noone
+                }
+                if av_head != noone
+                {
+                    titulo = ""+objVarRead(av_head,"pName")
+                    subtitulo = "Won The Match"
+                }
+                else
+                {
+                    titulo = "The Match Is A Tie"
+                    subtitulo = ""
+                }
             }
         }
         
@@ -3238,7 +3292,7 @@ if (room = rm_menu or room = rm_lobby) and string(menu_mode) = "armory" and inst
                         }
                     }
                         
-                    if rightclick_pressed() 
+                    if rightclick_pressed() and not popup_exists() 
                     {
                     
                         //if not audio_is_playing(snd_pickup2)
@@ -3427,7 +3481,7 @@ for (var i=0; i&lt;instance_number(avatar); i++)
             objVarRead(av_popup,"helmet0"),objVarRead(av_popup,"hat0"),1,is_bot(av_popup))
         
         //GET CLICKED!
-        if not is_bot(ID) and (input_check_pressed(mapped_control(C_JUMP)) or mouse_check_button_pressed(mb_left)) and not lock_armory and menmode() != "armory"
+        if not is_bot(ID) and not popup_exists() and (input_check_pressed(mapped_control(C_JUMP)) or mouse_check_button_pressed(mb_left)) and not lock_armory and menmode() != "armory"
         {
             show_player_stats(objVarRead(ID,"pName"))
         }

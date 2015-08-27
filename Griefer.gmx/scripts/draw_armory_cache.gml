@@ -124,7 +124,7 @@ for (var i=0; i<num_slots; i++)
     if instance_exists(bpart) and bpart.object_index = bpart_generic
     with bpart
     {
-        if instance_place(x,y,cursor) and click_pressed() and not swap_counter and dis_slot_alpha > 0.2 
+        if instance_place(x,y,cursor) and not popup_exists()  and click_pressed() and not swap_counter and dis_slot_alpha > 0.2 
         {
             swap_counter = 5
             with other.id //other.id is actually net_manager
@@ -170,7 +170,7 @@ for (var i=0; i<num_slots; i++)
                 }
             }
         }
-        else if instance_place(x,y,cursor) and rightclick_pressed() and not swap_counter and dis_slot_alpha > 0.2 
+        else if instance_place(x,y,cursor) and not popup_exists()  and rightclick_pressed() and not swap_counter and dis_slot_alpha > 0.2 
         {
             audio_play_sound(snd_pickup2,2,false)
                             

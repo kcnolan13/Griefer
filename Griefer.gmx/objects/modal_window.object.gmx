@@ -331,7 +331,8 @@ if not popped_in and abs(scale - 1) &lt;= 0.05
 
 if fade_out = true and popped_in
 {
-    alpha = sub_real(alpha,dec)
+    alpha -= real_speed(dec)
+    
     if alpha &lt; 1
     {
         scale = lerp_real(scale,scale_die,scale_lerp_real)
