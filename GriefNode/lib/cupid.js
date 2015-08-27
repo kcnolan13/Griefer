@@ -583,7 +583,7 @@ var configure_match = function(playerSubGroup, gameRoom, wait_time) {
 		//determine next map
 
 		//default to first map
-		if (votes1 == votes2 && votes2 == votes3)
+		if (votes1 == votes2 && votes2 >= votes3)
 			next_map = playerSubGroup[0].myPlayer.nextMap1;
 		else
 		{

@@ -137,21 +137,22 @@ io.on('connection', function(socket){
 
   //---- A PLAYER DISCONNECTS FROM THE SERVER ----//
   socket.on('disconnect', function() {
-  	global.clients.splice(global.clients.indexOf(socket),1);
-  	log.log(STD,socket.myPlayer.pName+": disconnected");
-  	socket.broadcast.to(socket.myPlayer.room).emit('disconnected_player_from_server', socket.myPlayer);
-	socket.myPlayer.uniqueMatchId = -51;
+    	global.clients.splice(global.clients.indexOf(socket),1);
+    	log.log(STD,socket.myPlayer.pName+": disconnected");
+    	socket.broadcast.to(socket.myPlayer.room).emit('disconnected_player_from_server', socket.myPlayer);
+    	socket.myPlayer.uniqueMatchId = -51;
 
-  	log.log(STD,"deleting "+socket.myPlayer.pName+"'s socket");
-  	socket.myPlayer.room = "main_menu";
-  	socket.join('main_menu');
-  	socket.myPlayer.pName = "John Doe";
-  	//socket.disconnect('unauthorized');
-  	delete socket; 
+    	log.log(STD,"deleting "+socket.myPlayer.pName+"'s socket");
+    	socket.myPlayer.room = "main_menu";
+    	socket.join('main_menu');
+    	socket.myPlayer.pName = "John Doe";
+    	//socket.disconnect('unauthorized');
 
-  	//sync connected players for everyone... cause why not
-	cupid.manageSockets();
-	cupid.syncPlayersConnected();
+    	delete socket; 
+
+    	//sync connected players for everyone... cause why not
+    	cupid.manageSockets();
+    	cupid.syncPlayersConnected();
 
   });
 
@@ -165,24 +166,6 @@ io.on('connection', function(socket){
         log.log(STD,'pong . . .\n');
         socket.emit('PONG');
       });
-
-  socket.on('JSON_test', function(message) {
-  	log.log(STD,"\nReceived JSON Test");
-  	log.log(STD,"original message: "+message);
-
-  	if (typeof message == "string")
-  	{
-  		log.log(STD,"string JSON detected");
-  		message = JSON.parse(message);
-  	}
-  	
-  	log.log(STD,"val1 = "+message.val1);
-
-  	var reply = [{name: "generalMessage", msg: "greetings", val: 99},{name: "generalMessage", msg: "blah", val: "plaza"},"stringBean"];
-  	log.log(STD,reply);
-  	socket.emit('JSON_test',reply);
-  	socket.emit('pkg',reply);
-  });
 
   //---- BIG MESSAGES ----//
   socket.on('big_message', function(message) {
@@ -203,26 +186,33 @@ io.on('connection', function(socket){
 	  			dbman.updateAccolade(socket.myPlayer.pName, message.val1, message.val2, message.val3);
 	  	}
 	  	else if (message.msg == "get_accolades")
-		{
-			dbman.getGravatarAccolades(socket,message.val1,message.val2,true)
-		}
-		else if (message.msg == "get_personal_stats")
-		{
-			dbman.getGravatarStats(socket,message.val1,message.val2);
-		} else if (message.msg == "save_setting")
-		{
-			dbman.saveSetting(socket, message.val1, message.val2, message.val3);
-			log.log("verbose", "GENERAL SETTING:\n"+message);
-		} else if (message.msg == "kill_feed")
-		{
-			log.log("verbose", "forwarding KILL_FEED: "+message);
-			socket.broadcast.to(socket.myPlayer.room).emit('big_message',message);
-		}
-		else if (message.msg == "chat_feed")
-		{
-			log.log("verbose", "forwarding CHAT_FEED: "+message);
-			socket.broadcast.to(socket.myPlayer.room).emit('big_message',message);
-		}
+  		{
+  			dbman.getGravatarAccolades(socket,message.val1,message.val2,true)
+  		}
+  		else if (message.msg == "get_personal_stats")
+  		{
+  			dbman.getGravatarStats(socket,message.val1,message.val2);
+  		} 
+      else if (message.msg == "save_setting")
+  		{
+  			dbman.saveSetting(socket, message.val1, message.val2, message.val3);
+  			log.log("verbose", "GENERAL SETTING:\n"+message);
+  		} 
+      else if (message.msg == "kill_feed")
+  		{
+  			log.log("verbose", "forwarding KILL_FEED: "+message);
+  			socket.broadcast.to(socket.myPlayer.room).emit('big_message',message);
+  		}
+  		else if (message.msg == "chat_feed")
+  		{
+  			log.log("verbose", "forwarding CHAT_FEED: "+message);
+  			socket.broadcast.to(socket.myPlayer.room).emit('big_message',message);
+  		}
+      else if (message.msg == "user_try_create")
+      {
+        log.log(STD, "received user_try_create: "+message.val1+", "+message.val2+", "+message.val3);
+        dbman.userTryCreate(socket, message.val1, message.val2);
+      }
 
 	});
 
@@ -253,7 +243,34 @@ io.on('connection', function(socket){
 		};
 		socket.emit('ping',response);
 		//log.log(STD,"\nPING\n");
-	} else if (message.msg == "perma_challenge")
+	}
+	else if (message.msg == "shuffle_pnums")
+	{
+		console.log("Player 0 Has Quit. Reshuffling pNum's");
+
+		//shuffle around people's uniqueIds based on who is still in the match
+		var possible_nums = []
+		var playerSubGroup = cupid.socketsInRoom(socket.myPlayer.room)
+		for (var i=0; i<playerSubGroup.length; i++)
+		{
+			possible_nums.push(i);
+		}
+
+		for (var i=0; i<playerSubGroup.length; i++)
+		{
+			var ind = Math.floor(Math.random()*(possible_nums.length-0.0000001));
+
+			var dirty_num = possible_nums.splice(ind,1);
+			var num = dirty_num[0]
+
+			log.log(CUPID,"Reassigning pNum for "+playerSubGroup[i].myPlayer.pName+" : "+playerSubGroup[i].myPlayer.pNum+" ---> "+num);
+			playerSubGroup[i].myPlayer.pNum = num;
+			var message = composer.objUpdate(avatarObjIndex,playerSubGroup[i].myPlayer.uniqueId,"pNum",playerSubGroup[i].myPlayer.pNum,FL_NORMAL);
+			log.log("verbose",message);
+			io.to(socket.myPlayer.room).emit('obj_update',message);
+		}
+	} 
+	else if (message.msg == "perma_challenge")
 	{
 		log.log(STD,"adding perma challenge: "+message.val);
 		dbman.addPermaChallenge(socket,message.val);
@@ -329,7 +346,10 @@ io.on('connection', function(socket){
   			socket.emit('general_message',message);
   		} else if (result==2)
   		{
-  			//user did not exist --> log him right in
+  			//user did not exist --> try to create?
+        log.log(STD, "sending 2 as authentication result (can create user)");
+        message.val = 2;
+        socket.emit('general_message',message);
   		}
   	});
 
@@ -341,7 +361,7 @@ io.on('connection', function(socket){
   	var term = datMessage.netvar;
   	if (term.indexOf("history") != -1)
   	{
-  		dbman.appendHistoryStat(socket,term,datMessage.val,datMessage.flag);
+  		dbman.appendHistoryStat(socket.myPlayer.pName,term,datMessage.val,datMessage.flag);
   	}
   	else
   	{
@@ -368,16 +388,24 @@ io.on('connection', function(socket){
   });
 
   socket.on('other_player_stat_update', function(datMessage) {
+  	datMessage = composer.ensureJSON(datMessage);
   	var term = datMessage.netvar;
-  	if (term in global.calcColumns && global.calcColumnsTimeout == null)
-	{
-		console.log("setting calc column timeout");
-		global.calcColumnsTimeout = setTimeout(dbman.updateCalcColumns,2500);
-	}
-	else
-	{
-		dbman.updateStat(datMessage.pname, term, datMessage.val, datMessage.flag);
-	}
+  	if (term.indexOf("history") != -1)
+  	{
+  		dbman.appendHistoryStat(datMessage.pname,term,datMessage.val,datMessage.flag);
+  	}
+  	else
+  	{
+	  	if (term in global.calcColumns && global.calcColumnsTimeout == null)
+	  	{
+	  		console.log("setting calc column timeout");
+	  		global.calcColumnsTimeout = setTimeout(dbman.updateCalcColumns,2500);
+	  	}
+	  	else
+	  	{
+	  		dbman.updateStat(datMessage.pname, term, datMessage.val, datMessage.flag);
+	  	}
+  	}
   });
 
   //---- TRANSPORT GRIEFPLUSPLUS MESSAGES TO OTHER CLIENTS ----//
@@ -418,7 +446,6 @@ io.on('connection', function(socket){
 
 
 //---- LISTEN ON PORT 8080 ----//
-
-http.listen(8080, function(){
-  log.log(STD,'listening on *:8080');
+http.listen(global.gamePort, function(){
+  log.log(STD,'listening on *:'+global.gamePort);
 });

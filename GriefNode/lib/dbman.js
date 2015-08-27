@@ -180,7 +180,18 @@ var updateStat = function(username, stat, value, flag)
 
 	if (flag==FL_BOT)
 		table = "bot_stats"
-	statement = "UPDATE "+table+" SET "+stat+" = '"+value+"' WHERE username="+conn.escape(username);
+
+	if (typeof value == "string")
+		value = "'"+value+"'";
+
+	if (flag == global.FL_DECREMENT)
+		value = stat+" - "+value;
+	else if (flag == global.FL_INCREMENT)
+		value = stat+" + "+value;
+
+
+
+	statement = "UPDATE "+table+" SET "+stat+" = "+value+" WHERE username="+conn.escape(username);
 
 	if (flag==FL_SQL)
 		statement = stat;
@@ -267,7 +278,7 @@ var correctPassword = function(socket, username, password, callback)
 		//log.log(SQL,"rows.length = "+rows.length);
 		if (!rows)
 		{
-			log.log(CRITICAL,"correctPassword return no rows!")
+			log.log(CRITICAL,"correctPassword returned no rows!")
 			cupid.genMessage(socket,"user_create_result",0);
 		}
 
@@ -281,7 +292,6 @@ var correctPassword = function(socket, username, password, callback)
 
 			//trigger player re-ranking
   			setTimeout(rankPlayers,2000);
-
 			callback(result);
 		} else {
 			log.log(SQL,"bad password for user: "+username);
@@ -299,30 +309,22 @@ var authUnameExists = function(socket, username, password, callback)
 	var result = 0;
 	log.log(SQL,statement);
 
-		conn.query(statement, function (err, rows) {
-			result = rows.length;
+	conn.query(statement, function (err, rows) {
+		result = rows.length;
 
-			if (rows.length > 0)
-			{
-				log.log(SQL,"authUname Exists");
-				result = 0;
-				callback(result);
-			} else {
+		if (rows.length > 0)
+		{
+			log.log(SQL,"authUname Exists");
+			result = 0;
+			callback(result);
+		} else {
 
-				log.log(SQL,"authUname Does Not Exist");
-				result = 2;
-
-				//trigger player re-ranking
-  				setTimeout(rankPlayers,2000);
-
-				var message = composer.genMessage("user_create_result",0);
-			  	log.log(SQL,'sending first user: '+username);
-		  		userCreate(socket, username, password);
-		  		message.val = 1;
-		  		socket.emit('general_message',message);
-			}
-			
-		});
+			log.log(SQL,"authUname Does Not Exist");
+			result = 2;
+			callback(result);
+		}
+		
+	});
 }
 exports.authUnameExists = authUnameExists
 
@@ -357,6 +359,39 @@ var userDelete = function(username)
 }
 exports.userDelete = userDelete
 
+var userTryCreate = function(socket, username, password)
+{
+	authUnameExists(socket, username, password, function (result) {
+  		if (result == 0)
+  		{
+  			log.log(STD,"INCORRECT password -- did 2 people try to create this account @ same time?");
+
+  			var message = {
+		  		name: "generalMessage",
+		  		msg: "authentication_result",
+		  		val: 0
+		  	};
+
+  			socket.emit('general_message',message);
+  		}
+  		else if (result == 2)
+  		{
+			//user still does not exist --> CREATE USER!
+
+			//trigger player re-ranking
+		  	setTimeout(rankPlayers,2000);
+
+			userCreate(socket, username, password);
+			var message = composer.genMessage("user_create_result",0);
+			message.val = 1;
+			socket.emit('general_message',message);
+			log.log(STD,'sending user create success to: '+username);	
+	  	}
+  	});
+
+}
+exports.userTryCreate = userTryCreate
+
 var userCreate = function(socket, username, password)
 {
 	//compose the query
@@ -389,7 +424,7 @@ var userCreate = function(socket, username, password)
 		}
 	}
 
-	log.log(SQL,"\n\nincoming new username: "+conn.escape(username)+" : "+username+"\n\n");
+	log.log(STD,"\n\ncreating new user: "+conn.escape(username)+" : "+username+"\n\n");
 
 	var vals = "("+conn.escape(username)+", MD5("+conn.escape(password)+"), "; //5,-1,-1,0,-1,-1,1,-1,-1,6,-1,-1,7,-1,-1,2,-1,-1,3,-1,-1,4,-1,-1)";
 	vals += str_starting_limbs+')'
@@ -453,11 +488,10 @@ var userCreate = function(socket, username, password)
 exports.userCreate = userCreate;
 
 
-var appendHistoryStat = function(socket,stat,val,flag)
+var appendHistoryStat = function(pName,stat,val,flag)
 {
 	//this really "appends" to the FRONT
-	var theDude = socket.myPlayer;
-	var username = socket.myPlayer.pName;
+	var username = pName;
 	var history_max = 100
 	var table = "bot_stats"
 

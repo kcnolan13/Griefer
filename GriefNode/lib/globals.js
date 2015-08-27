@@ -4,9 +4,10 @@ global.FL_DECREMENT = 1;
 global.FL_INSTANCE_DESTROY = 2;
 global.FL_SQL = 9;
 global.FL_BOT = 15;
-global.FL_MULTIPLE = 2;
+global.FL_MULTIPLE = 3;
 global.FL_COMPETITIVE = 22;
 global.FL_WIPE = "DeleteEveryDamnNoGoodUngratefulPlayer"
+global.FL_INCREMENT = 8;
 
 //log flags
 global.SQL = "sql"
@@ -16,6 +17,7 @@ global.CRITICAL = "err"
 global.SOCKETS = "sock"
 
 //globals
+global.gamePort = 8080;
 global.fps = 30
 global.num_game_rooms = 8;
 global.num_maps = 3; //21
