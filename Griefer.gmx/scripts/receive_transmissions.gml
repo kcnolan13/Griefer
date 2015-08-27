@@ -203,10 +203,11 @@ while (genMessagesWaiting() and wait_counter < 500000)
         break
         
         case "player_quit":
+        
+            possible_shuffle = false
             
             //be 100% sure the player name is a string
             genVal = string(genVal)
-            compute_lowest_pnum()
             
             if instance_number(avatar) <= 2
             {
@@ -228,16 +229,22 @@ while (genMessagesWaiting() and wait_counter < 500000)
                 if instance_exists(his_av)
                 {
                     objVarWrite(his_av,"player_quit",true)
-                    if in_match()
+                    
+                    if not in_match()
                     {
-                        printf("::: destroying avatar who quit: "+string(playerName(his_av)))
-                        with his_av instance_destroy()
+                        if objVarRead(his_av,"pNum") = 0
+                            possible_shuffle = true
                     }
+               
+                    printf("::: destroying avatar who quit: "+string(playerName(his_av)))
+                    with his_av instance_destroy()
                 }
                 else
                 {
                     printf("ERROR: unable to find avatar obj for player who quit: "+genVal)
                 }
+                
+                compute_lowest_pnum()
                 
                 if in_match()
                 {
@@ -277,6 +284,19 @@ while (genMessagesWaiting() and wait_counter < 500000)
                         if instance_exists(his_playa)
                         {
                             player_quit_stat_updates(his_playa)
+                        }
+                    }
+                }
+                else
+                {
+                    //possibly shuffle pnum's around
+                    if possible_shuffle
+                    { 
+                        printf("::: possible shuffle needed here")
+                        if instance_exists(myAvatar()) and objVarRead(myAvatar(),"pNum") = global.lowest_pnum
+                        {
+                            printf("::: asking for pNum shuffle: player 0 quit while in lobby")
+                            sendMessageReal("shuffle_pnums",true)   
                         }
                     }
                 }

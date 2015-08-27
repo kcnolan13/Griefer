@@ -39,6 +39,7 @@ default_winner = ""
 match_collapsed = false
 collapsed_pname = ""
 collapsed_numplayers = 0
+everyone_quit = false
 
 //voting
 votes1 = 0
@@ -366,6 +367,7 @@ varWrite("ffa_players_online",3)
 varWrite("tdm_players_online",4)
 varWrite("bot_versus_players_online",5)
 varWrite("players_online",14)
+varWrite("everyone_quit",false)
 var cdiv = 3
 varWrite("versus_color",make_color_rgb(255/cdiv,200/cdiv,200/cdiv))
 varWrite("ffa_color",make_color_rgb(200/cdiv,200/cdiv,255/cdiv))
@@ -2014,6 +2016,7 @@ if instance_number(player) &gt; 0 and room_counter &gt; 10*30
             if everyone_quit
             {
                 match_collapsed = true
+                obj_sendval_real(id,"everyone_quit",true,FL_NORMAL)
                 with player
                 {
                     if varRead("player_quit")
@@ -2047,6 +2050,7 @@ if instance_number(player) &gt; 0 and room_counter &gt; 10*30
             
             if everyone_quit
             {
+                obj_sendval_real(id,"everyone_quit",true,FL_NORMAL)
                 match_countdown = match_countdown_max
                 default_winner = playerName(myPlayer())
             }
@@ -2060,6 +2064,31 @@ if instance_number(player) &gt; 0 and room_counter &gt; 10*30
     }
 }
 
+if varRead("everyone_quit")
+{
+    varWrite("everyone_quit",false)
+    
+    if not everyone_quit
+    {
+        everyone_quit = true
+        default_winner = playerName(myPlayer())
+        match_collapsed = true
+        with player
+        {
+            if varRead("player_quit")
+            {
+                if string_length(net_manager.collapsed_pname) &lt; 2
+                    net_manager.collapsed_pname = capwords(playerName(id))
+                else
+                    net_manager.collapsed_pname += " and "+capwords(playerName(id))
+            }
+        }
+    }
+    else
+    {
+        varWrite("everyone_quit",false)
+    }
+}
 
 if varRead("end_match_coming") 
 {
@@ -2319,6 +2348,7 @@ if room = rm_menu
         match_collapsed = false
         collapsed_numplayers = 0
         collapsed_pname = ""
+        varWrite("everyone_quit",false)
     }
 }
     
@@ -2333,6 +2363,8 @@ if in_match()
     match_collapsed = false
     collapsed_numplayers = 0
     collapsed_pname = ""
+    everyone_quit = false
+    varWrite("everyone_quit",false)
     part_controller = instance_create(x,y,particle_controller)
     map_previous = global.map_names[room]
     disable_scores = false
