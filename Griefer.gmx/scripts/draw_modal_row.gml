@@ -128,6 +128,12 @@ for (var k=kst; k < ds_grid_width(dgrid)-extra_stats; k++)
 {
     var cell = ds_grid_get(dgrid,k,grid_y)
     
+    if not is_string(cell) and k = 7
+    {
+        cell = time_ms_2string(cell,true)
+    }
+    
+    //format column names (only str columns?)
     if is_string(cell)
     {
         if k < 7 and k > 2

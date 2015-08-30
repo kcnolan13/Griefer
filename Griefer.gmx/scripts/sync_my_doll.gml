@@ -36,7 +36,7 @@ with net_manager
             var slot0 = ds_list_find_value(handle,0)
             if not instance_exists(slot0)
             {
-                printf("    --not syncing this slot; doesn't exist")
+                printf(":::    --not syncing this slot; doesn't exist")
                 continue
             }
             

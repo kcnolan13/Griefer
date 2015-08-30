@@ -917,6 +917,7 @@
       <script>scripts\boot_loitering_avatars.gml</script>
       <script>scripts\test_hat.gml</script>
       <script>scripts\fill_with_random_gear.gml</script>
+      <script>scripts\delete_invisible_gear.gml</script>
       <script>scripts\framely_limb_computations.gml</script>
     </scripts>
     <scripts name="challenges">
@@ -974,6 +975,7 @@
       <scripts name="initialization">
         <script>scripts\bparts_get_ready.gml</script>
         <script>scripts\bparts_all_ready.gml</script>
+        <script>scripts\bparts_first_ready.gml</script>
       </scripts>
       <scripts name="conversion">
         <script>scripts\is_sprite_none.gml</script>
@@ -1981,7 +1983,7 @@
     <constant name="MIN_ENEMY_SPAWN_DIST">512</constant>
     <constant name="MY_PLAYER_NULL">"-123456"</constant>
     <constant name="NO_HANDLE">-69</constant>
-    <constant name="NUM_BPARTS">13</constant>
+    <constant name="NUM_BPARTS">25</constant>
     <constant name="NUM_LIMBS">9</constant>
     <constant name="NUM_PROPS">11</constant>
     <constant name="PBUG">1</constant>

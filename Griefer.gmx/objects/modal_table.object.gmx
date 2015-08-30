@@ -244,7 +244,7 @@ if grid = NO_HANDLE
     //create ascending array
     for (var i=0; i&lt;ds_grid_width(grid); i++)
     {
-        ascending[i] = true
+        ascending[i] = false
     }
     
 }

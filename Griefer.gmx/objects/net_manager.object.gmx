@@ -44,6 +44,11 @@ collapsed_numplayers = 0
 collapsed_pluralize = 0
 everyone_quit = false
 
+show_grid_counter_needed = 0
+show_grid_counter = 0
+show_grid = NO_HANDLE
+drew_armory_grid = false
+
 //voting
 votes1 = 0
 votes2 = 0
@@ -382,19 +387,10 @@ varWrite("bot_tdm_color",make_color_rgb(230/cdiv,255/cdiv,230/cdiv))
 
 //bparts
 bparts_all_init()
-bparts_ready[0] = false
-bparts_ready[1] = false
-bparts_ready[2] = false
-bparts_ready[3] = false
-bparts_ready[4] = false
-bparts_ready[5] = false
-bparts_ready[6] = false
-bparts_ready[7] = false
-bparts_ready[8] = false
-bparts_ready[9] = false
-bparts_ready[10] = false
-bparts_ready[11] = false
-bparts_ready[12] = false
+for (var i=0; i&lt;NUM_BPARTS; i++)
+{
+    bparts_ready[i] = false
+}
 
 debug_autoplay = false
 
@@ -1000,8 +996,38 @@ if do_zoom and not view_adjust_delay
             <string>///fill with random gear if you want
 if keyboard_check(vk_control) and keyboard_check(vk_alt) and keyboard_check(vk_backspace)
 {
-   // fill_with_random_gear()
+   fill_with_random_gear()
 }
+
+if keyboard_check(vk_control) and keyboard_check(vk_alt) and keyboard_check(vk_end)
+{
+   delete_invisible_gear()
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///whateva
+
+drew_armory_grid = false
 </string>
           </argument>
         </arguments>
@@ -2967,7 +2993,7 @@ if varRead("end_match_coming")
                 av_head = find_pname_avatar(playerName(myPlayer()))
                 
                 var le_player = find_player_by_pname(playerName(av_head))
-                var le_team = get_team(datplaya)
+                var le_team = get_team(le_player)
                 if le_team &lt; getLength(global.team_colors) and le_team &gt;= 0
                 {
                     win_color = global.team_colors[le_team]
@@ -2990,7 +3016,7 @@ if varRead("end_match_coming")
                 av_head = ds_grid_get(team_all,1,0)
                 
                 var le_player = find_player_by_pname(playerName(av_head))
-                var le_team = get_team(datplaya)
+                var le_team = get_team(le_player)
                 if le_team &lt; getLength(global.team_colors) and le_team &gt;= 0
                 {
                     win_color = global.team_colors[le_team]
@@ -3152,7 +3178,7 @@ if room = rm_menu or room = rm_lobby
         draw_text(room_width-draw_edge_padding,room_height-draw_edge_padding,"Intermission ... "+string(ceil(varRead("lobby_wait_time")/30)))
     }
     
-    if room = rm_menu and room_counter &gt; 30*2
+    if room = rm_menu and room_counter &gt; 30*2 and menmode() != "armory"
     {
         draw_set_halign(fa_left)
         draw_set_valign(fa_bottom)
@@ -3326,7 +3352,10 @@ if (room = rm_menu or room = rm_lobby) and string(menu_mode) = "armory" and inst
         {
             handle = armory_lists[| i]
             first_bpart = handle[| 0]
-            if not instance_exists(first_bpart)
+            bpart_ysync = armory_lists[| 0]
+            bpart_ysync = bpart_ysync[| 0]
+            
+            if not instance_exists(first_bpart) or not instance_exists(bpart_ysync)
             {
                 printf("ERROR: NO FIRST ARMORY BPART")
                 return false
@@ -3416,14 +3445,14 @@ if (room = rm_menu or room = rm_lobby) and string(menu_mode) = "armory" and inst
                         if first_bpart.x &lt; my_doll.x
                         {
                             grid_right = first_bpart.x
-                            grid_top = first_bpart.y
+                            grid_top = bpart_ysync.y
                             grid_left = 0//first_bpart.x-4*armory_sl-4*armory_ysep
-                            grid_bottom = grid_top+3*armory_sl+3*armory_ysep
+                            grid_bottom = grid_top+6*(armory_sl+armory_ysep)
                         } else {
                             grid_left = first_bpart.x+armory_sl
-                            grid_top = first_bpart.y
+                            grid_top = bpart_ysync.y
                             grid_right = room_width//grid_left+4*armory_sl+4*armory_ysep
-                            grid_bottom = grid_top+3*armory_sl+3*armory_ysep
+                            grid_bottom = grid_top+6*(armory_sl+armory_ysep)
                         }
                         
                         if i=8
@@ -3456,7 +3485,9 @@ if (room = rm_menu or room = rm_lobby) and string(menu_mode) = "armory" and inst
                 draw_set_valign(fa_center)
                 draw_set_color(c_black)
                 draw_set_alpha(armory_label_alpha)
-                yoff = -32
+                
+                yoff = -14
+                
                 if first_bpart.x &gt; my_doll.x
                     xoff = armory_sl*2.5+2*armory_ysep
                 else
@@ -3468,12 +3499,22 @@ if (room = rm_menu or room = rm_lobby) and string(menu_mode) = "armory" and inst
                     xoff = armory_sl/2
                 }
                     
-                draw_text(first_bpart.x+xoff,first_bpart.y+yoff,lookup_limb_type_name(first_bpart.limb_type))
+                draw_text(first_bpart.x+xoff,grid_top+yoff,lookup_limb_type_name(first_bpart.limb_type))
                 draw_set_alpha(1)
+                if show_grid != armory_lists[| i]
+                {
+                    show_grid_counter = 0
+                    show_grid = armory_lists[| i]
+                }
+                
                 if (i&lt;NUM_LIMBS-1)
-                    draw_armory_grid(armory_lists[| i],first_bpart.x,first_bpart.y,armory_sl, armory_ysep, armory_alphas[i])
+                {
+                    draw_armory_grid(armory_lists[| i],first_bpart.x,bpart_ysync.y,armory_sl, armory_ysep, armory_alphas[i])
+                }
                 else
+                {
                     draw_prop_grid(armory_lists[| i], first_bpart.x, first_bpart.y, armory_sl, armory_ysep, armory_alphas[i])
+                }
             }
             
             sloty += armory_sl+armory_ysep
@@ -3490,7 +3531,7 @@ if (room = rm_menu or room = rm_lobby) and string(menu_mode) = "armory" and inst
             }
             
         }
-    }
+    }    
 }
 </string>
           </argument>

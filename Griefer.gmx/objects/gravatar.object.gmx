@@ -51,16 +51,12 @@ varWrite("controllable",true)
 
 //bparts
 bparts_all_init()
-bparts_ready[0] = false
-bparts_ready[1] = false
-bparts_ready[2] = false
-bparts_ready[3] = false
-bparts_ready[4] = false
-bparts_ready[5] = false
-bparts_ready[6] = false
-bparts_ready[7] = false
-bparts_ready[8] = false
-bparts_ready[9] = false
+
+for (var i=0; i&lt;NUM_BPARTS; i++)
+{
+    bparts_ready[i] = false
+}
+
 bparts_done_ready = false
 
 randomize()

@@ -38,7 +38,7 @@ height = 64*5
 alpha_max = 0.9
 col_bg = web_hsv(0,0,5)
 col_axes = c_ltgray
-point_rad = 15*scale
+point_rad = 15
 line_width = 4
 axis_line_width = 5
 div_line_width = 1
@@ -120,6 +120,21 @@ if not history_synced
 {
     history_synced = true
     history_string = histories[0]
+}
+
+switch (record_count)
+{
+    case 50:
+        point_rad = 5
+    break
+    
+    case 100:
+        point_rad = 5
+    break
+    
+    default:
+        point_rad = 7
+    break
 }
 
 //inherited modal behavior

@@ -45,6 +45,7 @@ popup_lerp_real = 0.25
 new = false
 col_new = net_manager.col_new
 txt_new = net_manager.txt_new
+
 </string>
           </argument>
         </arguments>

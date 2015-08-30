@@ -33,6 +33,8 @@ depth = -95
 stationary_counter = 0
 have_hit_target = false
 spr_light_mask_hitscan_simple = 0
+no_from_player = false
+from_player = noone
 
 //dummy vars
 bounces = 0
@@ -215,10 +217,16 @@ y = varRead("myY")
 image_angle = varRead("direction")
 counter ++
 
+if counter &lt; 3 and varRead("local")
+{
+    //really make it known who the sender was
+    obj_update_real(id,"senderId",true)
+}
+
 if traj_draw
     visible = true
 
-if varRead("speed") = 0
+if abs(varRead("speed")) &lt; 0.05
 {
     stationary_counter ++
     if stationary_counter &gt; 2
@@ -266,9 +274,13 @@ if not varRead("hitscan")
         add_y = 0
     }
     
-    if is_local_player(varRead("senderId")) and counter &gt; 1
+    from_player = find_player(varRead("senderId"))
+    
+    if is_local_player(from_player) and counter &gt; 1 and instance_exists(from_player) and from_player.object_index = player
     {
-        var inst = hitscan_targets(varRead("myX"), varRead("myY"), varRead("myX")+trigx(varRead("speed"),varRead("direction")), varRead("myY")+trigy(varRead("speed"),varRead("direction")), shootable_generic, true,true, find_player(varRead("senderId")))
+        no_from_player = false
+        
+        var inst = hitscan_targets(varRead("myX"), varRead("myY"), varRead("myX")+trigx(varRead("speed"),varRead("direction")), varRead("myY")+trigy(varRead("speed"),varRead("direction")), shootable_generic, true,true, from_player)
         if inst and not have_hit_target
         {
             if SUPER_DEBUG
@@ -281,9 +293,11 @@ if not varRead("hitscan")
             varAdd("myY",add_y)
         }
     }
-    else
+    else if instance_exists(from_player) and from_player.object_index = player
     {
-        var inst = hitscan_targets(varRead("myX"), varRead("myY"), varRead("myX")+trigx(varRead("speed"),varRead("direction")), varRead("myY")+trigy(varRead("speed"),varRead("direction")), shootable_generic, true,true, find_player(varRead("senderId")))
+        no_from_player = false
+        
+        var inst = hitscan_targets(varRead("myX"), varRead("myY"), varRead("myX")+trigx(varRead("speed"),varRead("direction")), varRead("myY")+trigy(varRead("speed"),varRead("direction")), shootable_generic, true,true, from_player)
         if inst
         {
             varWrite("speed",0)
@@ -294,6 +308,11 @@ if not varRead("hitscan")
             varAdd("myX",add_x)
             varAdd("myY",add_y)
         }
+    }
+    else
+    {
+        printf("ERROR: from_player does not exist in bullet_generic step ... senderId="+string(varRead("senderId"))+", from_player="+string(from_player))
+        no_from_player = true
     }
 }
 
@@ -423,6 +442,12 @@ if not instance_exists(id)
             <kind>1</kind>
             <string>///draw sprite + direction + trajectory (maybe)
 depth = -96
+
+if no_from_player
+{
+    printf("ERROR: cannot draw bullet_generic -- no_from_player")
+    exit
+}
 
 if traj_draw
     image_blend = traj_color

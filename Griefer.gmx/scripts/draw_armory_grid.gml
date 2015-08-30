@@ -22,14 +22,15 @@ else
 
 //draw the ones in the grid
 index = 1
-for (var i=0; i<3; i++)
+
+for (var i=0; i<6; i++)
 {
     for (var j=0; j<4; j++)
-    {
+    {   
         bpart = list[| index]
         
         //get clicked, son
-        if instance_exists(bpart) and bpart.object_index = bpart_generic
+        if instance_exists(bpart) and bpart.object_index = bpart_generic 
         with bpart
         {
             if instance_place(x,y,cursor) and not popup_exists() and click_pressed() and not swap_counter
@@ -123,6 +124,8 @@ for (var i=0; i<3; i++)
         {
             draw_bpart_slot_empty(xs+j*(sl+padding),ys+i*(sl+padding),1)
         }
+        
+        
         index++
     }
 }

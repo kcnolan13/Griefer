@@ -47,8 +47,12 @@ if (not varRead("is_bullet"))
         var scany_i =  varRead("myY")+trigy(muzzle_off,varRead("direction"))
         var scanx_f = varRead("myX")+trigx(varRead("speed"),varRead("direction"))
         var scany_f = varRead("myY")+trigy(varRead("speed"),varRead("direction"))
-    
-        var inst = hitscan_targets(scanx_i,scany_i, scanx_i + lengthdir_x(sqrt(room_width*room_width+room_height*room_height), varRead("direction")), scany_i + lengthdir_y(sqrt(room_width*room_width+room_height*room_height), varRead("direction")), shootable_generic, true,true, find_player(varRead("senderId")))
+        var from_player = find_player(varRead("senderId"))
+        var inst = noone
+        if instance_exists(from_player) and from_player.object_index = player
+        {
+            inst = hitscan_targets(scanx_i,scany_i, scanx_i + lengthdir_x(sqrt(room_width*room_width+room_height*room_height), varRead("direction")), scany_i + lengthdir_y(sqrt(room_width*room_width+room_height*room_height), varRead("direction")), shootable_generic, true,true, from_player)
+        } else printf("ERROR: hitscan during instantiate bullet trying to use from_player="+string(from_player))
         
         if inst
         {
@@ -190,8 +194,14 @@ else
             ID.image_blend = c_red
             objVarWrite(ID,"image_blend",c_red)
         }
+        var from_player = find_player(varRead("senderId"))
+        var inst = noone
         
-        var inst = hitscan_targets(scanx_i, scany_i, scanx_f, scany_f, shootable_generic, true,true, find_player(varRead("senderId")))
+        if instance_exists(from_player) and from_player.object_index = player
+        {
+            inst = hitscan_targets(scanx_i, scany_i, scanx_f, scany_f, shootable_generic, true,true, from_player)
+        } else printf("ERROR: hitscan during instantiate bullet trying to use from_player="+string(from_player))
+        
         if inst
         {
             if DEBUG
@@ -206,7 +216,14 @@ else
     }
     else
     {
-        var inst = hitscan_targets(scanx_i, scany_i, scanx_i + lengthdir_x(sqrt(room_width*room_width+room_height*room_height), varRead("direction")), scany_i + lengthdir_y(sqrt(room_width*room_width+room_height*room_height), varRead("direction")), shootable_generic, true, true, find_player(varRead("senderId")))
+        var from_player = find_player(varRead("senderId"))
+        var inst = noone
+        
+        if instance_exists(from_player) and from_player.object_index = player
+        {
+          inst = hitscan_targets(scanx_i, scany_i, scanx_i + lengthdir_x(sqrt(room_width*room_width+room_height*room_height), varRead("direction")), scany_i + lengthdir_y(sqrt(room_width*room_width+room_height*room_height), varRead("direction")), shootable_generic, true, true, from_player)
+        } else printf("ERROR: hitscan during instantiate bullet trying to use from_player="+string(from_player))
+        
         if inst
         {
             printf(":::INITIAL COLLISION HIT with object "+string(inst.object_index)+" @ ("+string(collision_x)+", "+string(collision_y)+")")

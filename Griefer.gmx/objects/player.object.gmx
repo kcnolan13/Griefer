@@ -58,6 +58,17 @@ arm_animation_speed_transmitted = 0
 active_weapon_prescaler_transmitted = 0
 //end framely vars
 
+//hitscan vars
+hitscan_xi = 0
+hitscan_yi = 0
+hitscan_xf = 0
+hitscan_yf = 0
+hitscan_obj = 0
+hitscan_prec = 0
+hitscan_notme = 0
+
+
+
 curs_xoff = 256
 curs_yoff = 256
 

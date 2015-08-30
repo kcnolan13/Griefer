@@ -10,7 +10,7 @@ val_end = 50
 sat_normal = 175
 
 hue_start = 70
-hue_incr = (240-70)/18
+hue_incr = (240-70)/15
 hue = hue_start
 
 global.rank_interval = 1
@@ -65,7 +65,7 @@ global.rank_interval = 1
                 printf(""+string(rank)+": "+global.rank_names[rank]+": h="+string(hue)+" s="+string(sat)+" v="+string(val))
                 
                 hue += hue_incr
-                if hue > 240
+                if hue > 250
                 {
                     hue = 0
                     hue_looped = true

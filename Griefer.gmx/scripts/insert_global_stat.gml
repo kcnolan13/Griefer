@@ -3,6 +3,9 @@ var pname = argument0
 var stat = argument1
 var val = argument2
 
+if stat = "ppl"
+    val = truncate(val,0)
+
 if not instance_exists(modal_table)
 {
     printf("ERROR: cannot insert_global_stat... modal table does not exist")
@@ -48,6 +51,8 @@ printf("::: writing to grid @("+string(row)+","+string(col))
 
 //Success!! Add the stat to the table
 if string(stat) = "time"
-    val = time_ms_2string(val,true)
+{
+    //val = time_ms_2string(val,true)
+}
     
 ds_grid_set(m.grid,col,row,val)

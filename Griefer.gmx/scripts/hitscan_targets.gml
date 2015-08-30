@@ -4,7 +4,12 @@ var dx, dy, first_instance, temp, is_same_team
 instance = noone
 
 var from_player = argument7
-printf(":::STARTING HITSCAN ... from_player = "+string(from_player)+" ("+playerName(from_player)+")")
+
+if not instance_exists(from_player) or from_player.object_index != player
+{
+    printf("ERROR: cannot hitscan_targets because from_player="+string(from_player))
+    return noone
+}
 
 if counter < 1 col = c_green else col = c_blue
 
@@ -31,19 +36,16 @@ while ((abs(dx) >= 1 or abs(dy) >= 1) and loops < 10000)
     from_player.hitscan_prec = argument5
     from_player.hitscan_notme = argument6
     
-    
     with from_player
     {
         other.instance = collision_line(hitscan_xi, hitscan_yi, hitscan_xf, hitscan_yf, hitscan_obj, hitscan_prec, hitscan_notme)
-    } 
-       
+    }
+   
     if (instance != noone)
     {
     
-        if instance.object_index > 0
-            printf("::: loop! instance = "+string(object_get_name(instance.object_index)))
-        else
-            printf(":::WARNING: instance "+string(instance)+" has object_index "+string(instance.object_index))
+        if not instance.object_index > 0
+            printf(":::WARNING: hitscan_targets says instance "+string(instance)+" has object_index "+string(instance.object_index))
     
         if instance.object_index != player or (instance.id != from_player.id and not are_teammates(instance, from_player))
         {
@@ -68,12 +70,12 @@ while ((abs(dx) >= 1 or abs(dy) >= 1) and loops < 10000)
 
 if is_same_team
 {
-    printf("::: is_same_team was true")
+    //printf("::: is_same_team was true")
     first_instance = noone
 }
 else
 {
-    printf("::: is_same_team was false")
+    //printf("::: is_same_team was false")
 }
 
 collision_x = argument2-dx
