@@ -354,13 +354,14 @@ if shuffling //and x &gt; 0 and x &lt; room_width
             return false
         }
     
-        rank = floor(max(0,min(random_range(0,global.num_ranks-1),global.num_ranks-1)))
-        if random(1) &lt; 0.5
-            rank = floor(rank/2)
-        if rank &gt; global.num_ranks - 10 and random(1) &lt; 0.5
-            rank -= 15
-        if rank &lt; 5 and random(1) &lt; 0.5
-            rank += 5
+        var rank = objVarRead(myAvatar(),"rank")
+        
+        if num_bots != 1
+        {
+            rank += floor(random_range(-2,2))
+        }
+        
+        rank = constrict(rank,0,getLength(global.rank_names)-1)
             
         if hash_string(name) = objVarRead(myAvatar(),"uniqueId")
         {
@@ -386,7 +387,7 @@ if shuffling //and x &gt; 0 and x &lt; room_width
         {
             var new_limb
             
-            if j=4 and random(1) &gt; 0.15+rank/array_length_1d(global.rank_names)
+            if j=4 and random(1) &gt; 0.25+rank/global.rank_max_theoretical
                 new_limb = spr_hat
             else
             {

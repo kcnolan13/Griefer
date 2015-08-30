@@ -42,6 +42,12 @@ if instance_exists(cursor) and varRead("animation") != "die" and varRead("animat
 }
 
 //TORSO
+if floor(varRead("animation_index")) >= getLength(torso_xs) or floor(varRead("animation_index")) < 0
+{
+    printf("ERROR: indexing outside of torso_xs")
+    return false
+}
+
 torso_x = varRead("animation_scale")*varRead("animation_xscale")*torso_xs[floor(varRead("animation_index"))]
 torso_y = varRead("animation_scale")*torso_ys[floor(varRead("animation_index"))]
 torso_rot = torso_rots[floor(varRead("animation_index"))]

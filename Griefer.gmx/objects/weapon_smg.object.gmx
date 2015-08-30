@@ -41,6 +41,13 @@
             <kind>1</kind>
             <string>///Weapon Constants
 
+//bot weapon selection
+varWrite("lethality",6)
+varWrite("range_rating",0)
+varWrite("range_trump",true)
+varWrite("range_trump_distance",64*9)
+varWrite("range_trump_extra_lethality",10)
+
 //graphics
 myCursor = cursor_smg
 varWrite("sprite",spr_smg)

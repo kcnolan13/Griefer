@@ -903,6 +903,7 @@
       <script>scripts\shuffle_nouns.gml</script>
       <script>scripts\shuffle_adjs.gml</script>
       <script>scripts\print_list.gml</script>
+      <script>scripts\draw_best_weapon.gml</script>
     </scripts>
     <scripts name="avatar">
       <script>scripts\team_color_pname.gml</script>
@@ -1880,7 +1881,8 @@
       <room>rooms\map_placeholder2</room>
     </rooms>
   </rooms>
-  <constants number="152">
+  <constants number="153">
+    <constant name="TRUMP">10</constant>
     <constant name="ACC_XP_SCALER">2</constant>
     <constant name="BAD_READ">-99.1234</constant>
     <constant name="BOT_XP_SCALER">0.25</constant>

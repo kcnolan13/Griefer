@@ -58,19 +58,15 @@ for (var i=0; i<num_bots; i++)
             bot_name = string(generate_name(0.01))
         }
     }
-    
-    var rank = floor(max(0,min(random_range(0,global.num_ranks-1),global.num_ranks-1)))
-    
-    if random(1) < 0.5
-        rank = floor(rank/2)
-    
-    if rank > global.num_ranks - 10 and random(1) < 0.5
-        rank -= 15
+
+    var rank = objVarRead(myAvatar(),"rank")
         
-    if rank < 5 and random(1) < 0.5
-        rank += 5
-        
-    points -= rank
+    if num_bots != 1
+    {
+        rank += floor(random_range(-2,2))
+    }
+    
+    rank = constrict(rank,0,getLength(global.rank_names)-1)
     
     var global_rank = 99999
     
@@ -88,9 +84,9 @@ for (var i=0; i<num_bots; i++)
         shuffling = shuffling_max+shuffling_toff*(varRead("pNum")-1)
     }
     
-    printf(objVarRead(ID,"pName")+" IN DA HOOUUSE")
+    printf(+"::: "+objVarRead(ID,"pName")+" IN DA HOOUUSE")
     
-    same_armor_probability = random_range(0,1.5)
+    same_armor_probability = random_range(0,1.9)
     armor_set = armor_set_diceroll(rank)
     
     //select some gear for the bot to wear
@@ -98,7 +94,7 @@ for (var i=0; i<num_bots; i++)
     {
         var new_limb
         
-        if j=4 and random(1) > 0.15+rank/array_length_1d(global.rank_names)
+        if j=4 and random(1) > 0.35+rank/(global.rank_max_theoretical+5)
             new_limb = spr_hat
         else
         {

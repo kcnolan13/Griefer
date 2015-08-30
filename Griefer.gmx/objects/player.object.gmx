@@ -76,7 +76,7 @@ damage_scaler = 0.75
 
 //bot constants
 play_dead = false
-semi_auto_time_min = 8
+semi_auto_time_min = 12
 semi_auto_time = 0
 shooting_dist = 0
 overheating = 0
@@ -1460,18 +1460,47 @@ if varRead("controllable")
 if is_bot(id) and not play_dead and (not instance_exists(modal_controls) or modal_controls.fade_out) and varRead("controllable") and not net_manager.starting_match and varRead("alive")
 {
     var dat_rank = varRead("rank")+1
+    var max_rank = global.rank_max_theoretical
     
     //AI override adjustment
     if myPlayer() = id
     {
-        dat_rank += 10
-        if dat_rank &gt; 25
-            dat_rank = 25
+        dat_rank += 15
+        if dat_rank &gt; max_rank
+            dat_rank = max_rank
     }
     
-    var max_rank = array_length_1d(global.rank_names)
-    var per_active = dat_rank/max_rank*1.5
-    var per_reflexes = dat_rank/max_rank*2
+    if dat_rank &lt; 1
+    {
+        atarget = 0.035
+        rtarget = 0.025
+        aamt = 0.8
+    }
+    else if dat_rank &lt; 5
+    {
+        atarget = 0.05
+        rtarget = 0.05
+        aamt = 0.75
+    } else if dat_rank &lt; 10
+    {
+        atarget = 0.1
+        rtarget = 0.1
+        aamt = 0.5
+    } else if dat_rank &lt; 15
+    {
+        atarget = 0.6
+        rtarget = 0.45
+        aamt = 0.25
+    } else
+    {
+        atarget = 1
+        rtarget = 1
+        aamt = 0.6
+    }
+    
+    var per_active = lerp(dat_rank/max_rank,atarget,aamt)
+    var per_reflexes = lerp(dat_rank/max_rank,rtarget,aamt)
+    
     ai_retarcus(per_active, per_reflexes)
 }
 </string>
@@ -2254,8 +2283,9 @@ if not bparts_ready exit
 if net_manager.show_cout or false
 {
     draw_set_font(fnt_hud)
-    draw_text(x,y-180,"uniqueId: "+string(varRead("uniqueId")))
-    draw_text(x,y-160,"pNum: "+string(varRead("pNum")))
+    draw_text(x,y-200,"uId: "+string(varRead("uniqueId")))
+    draw_text(x,y-180,"pNum: "+string(varRead("pNum")))
+    draw_text(x,y-160,"rank: "+string(varRead("rank")))
         
     if nth_frame(30)
     {
@@ -2729,6 +2759,98 @@ if net_manager.local_player = id
 </string>
           </argument>
         </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="40">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///bot rank down
+if varRead("bot")
+{
+    varSub("rank",1)
+    var av = find_pname_avatar(playerName(id))
+    if instance_exists(av)
+    {
+        objVarSub(av,"rank",1)
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>425</id>
+        <kind>4</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+      </action>
+    </event>
+    <event eventtype="9" enumb="38">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///bot rank up
+if varRead("bot")
+{
+    varAdd("rank",1)
+    var av = find_pname_avatar(playerName(id))
+    if instance_exists(av)
+    {
+        objVarAdd(av,"rank",1)
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>425</id>
+        <kind>4</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
       </action>
     </event>
     <event eventtype="9" enumb="32">

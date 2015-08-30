@@ -25,7 +25,7 @@ while (string_length(name) > 20) and whiles < 1000
     {
         ind = floor(random_range(0,array_length_1d(list1)-0.1))
         var adj = list1[ind]
-    } until (not is_undefined(adj))
+    } until (string(adj) != "0")
     
     //pick a noun
     do
@@ -33,7 +33,7 @@ while (string_length(name) > 20) and whiles < 1000
         ind = floor(random_range(0,array_length_1d(list2)-0.1))
         ind = floor(random_range(0,array_length_1d(list2)-0.1))
         var noun = list2[ind]
-    } until (not is_undefined(noun))
+    } until (string(noun) != "0")
     
     var prob_extra = 0.3
     if random(1) < 0.1
@@ -42,7 +42,13 @@ while (string_length(name) > 20) and whiles < 1000
         prob_extra = 1
     }
     
-    name = string(adj)+" "+string(noun)
+    name = ""
+    
+    if string(adj) != "0"
+        name += string(adj)
+    
+    if string(noun) != "0"
+        name += " "+string(noun)
     
     //maybe an extra noun
     if random(1) < prob_extra
@@ -63,7 +69,7 @@ while (string_length(name) > 20) and whiles < 1000
             noun = global.nouns[ind]
             if SUPER_DEBUG printf("    noun = "+string(noun))
             
-            if string_length(name+" "+string(noun)) > 20 or is_undefined(noun)
+            if string_length(name+" "+string(noun)) > 20 or string(noun) = "0"
                 continue
             
             name += " "+string(noun)

@@ -12,36 +12,41 @@ var percent_reflexes = argument1
     
     percent_active += 0.05
     
-    if varRead("flash_hp") < 75
+    if varRead("flash_hp") < 75-lerp(0,60,varRead("rank")/global.rank_max_theoretical)
         return false
     
     //point the cursor at a random player
     target = nearest_enemy(id)
-    if instance_exists(target) and varRead("flash_hp") > 75 and not in_smoke(target)
+    if instance_exists(target) and varRead("flash_hp") > 75-lerp(0,20,varRead("rank")/global.rank_max_theoretical) and not in_smoke(target)
     {
         xaim = lerp_real(xaim,target.x, percent_reflexes)
         yaim = lerp_real(yaim,target.y, percent_reflexes)
     }
     
+    //TAKE OUT THE BEST WEAPON FOR THE SITUATION
+    if instance_exists(target) and dice_real(percent_active/2)
+    {
+        draw_best_weapon(point_distance(x,y,target.x,target.y), percent_active)
+    }
+    
     if instance_exists(weapon_contemplating)
     {
-        //printf("::: contemplating weapon "+objVarRead(weapon_contemplating,"name")+", id="+string(id)+", myPlayer()="+string(myPlayer()))
-        if dice_real(0.8) //and id != myPlayer()
+        if dice_real(0.8) and objVarRead(weapon_contemplating,"lethality") > 1 //and id != myPlayer()
         {
-            //printf("::: bot trying to pick up weapon --> weapon_time="+string(weapon_time)+", weapon_time_min="+string(weapon_time_min))
             if weapon_time > weapon_time_min
             {
                 weapon_time = 0
                 with (weapon_contemplating) 
                 {
-                    printf("::: bot is pressing space on me: "+string(varRead("name")))
+                    //printf("::: bot is pressing space on me: "+string(varRead("name")))
                     weapon_press_space()
-                    printf("::: bot is done pressing space on me: "+string(varRead("name")))
+                    //printf("::: bot is done pressing space on me: "+string(varRead("name")))
                 }
             }
         }
     }
     
+    //PERFORMING RANDOM ACTIONS
     if dice_real(percent_active)
     {
         do_me = floor(random_range(player_controls_placeholder1+1,player_controls_placeholder2-0.1))
@@ -68,24 +73,37 @@ var percent_reflexes = argument1
             if (do_me = weapon_press_right) and (dice_real(0.8) or not instance_exists(target) or collision_line(x,y,other.id.target.x,other.id.target.y,solid_generic,true,false))
                 do_me +=3
                 
-            shooting_dist = 768+512*varRead("rank")/array_length_1d(global.rank_names)
-            shooting_prob = varRead("rank")/array_length_1d(global.rank_names)+0.3
+            shooting_dist = 512+768*varRead("rank")/global.rank_max_theoretical
+            shooting_prob = max(0,varRead("rank")-5)/global.rank_max_theoretical+0.075
+            
+            if varRead("rank") >= 5
+                shooting_prob += 0.1
+            
+            if varRead("rank") >= 10
+                shooting_prob += 0.1
+                
+            if varRead("rank") >= 15
+                shooting_prob += 0.4
+            
+            printf("::: new shooting_prob = "+string(shooting_prob))
             
             with varRead("active_weapon")
             {
                 if other.id.do_me != weapon_press_left and other.id.do_me != weapon_hold_left
                     script_execute(other.id.do_me)
             }
-        
         }
         
     }
     
+    //WEAPON SHOOTING
     if instance_exists(varRead("active_weapon"))
     {
         with varRead("active_weapon")
         {
-            if instance_exists(other.id.target) and (not in_smoke(other.id.target)) and not collision_line(x,y,other.id.target.x,other.id.target.y,solid_generic,true,false) and point_distance(x,y,other.id.target.x,other.id.target.y) < other.id.shooting_dist
+            if instance_exists(other.id.target) and (not in_smoke(other.id.target)) 
+            and not collision_line(x,y,other.id.target.x,other.id.target.y,solid_generic,true,false)
+            and (point_distance(x,y,other.id.target.x,other.id.target.y) < other.id.shooting_dist or dice_real(0.1))
                 other.id.possible_2shoot = true
             else
                 other.id.possible_2shoot = false
@@ -112,7 +130,7 @@ var percent_reflexes = argument1
                     other.id.possible_2shoot = false
             }
                 
-            if other.id.possible_2shoot and ( dice_real(other.id.shooting_prob or other.id.auto_shooting) )
+            if other.id.possible_2shoot and ( dice_real(other.id.shooting_prob) or other.id.auto_shooting )
             {
                 script_execute(weapon_press_left)
                 script_execute(weapon_hold_left)
@@ -122,10 +140,16 @@ var percent_reflexes = argument1
                     other.id.semi_auto_time = 0
                 }
             }
+            else
+            {
+                //if not other.id.possible_2shoot and nth_frame(30)
+                  //  printf("::: not possible to shoot -- shooting_prob: "+string(other.id.shooting_prob)+", percent_active: "+string(percent_active)+", percent_reflexes: "+string(percent_reflexes))
+            }
         }
     }
     else
     {
+        //MAKE HIM TAKE OUT A WEAPON IF HE ISN'T HOLDING ONE
         if nth_frame(30*2)
         {
             force_switch = true

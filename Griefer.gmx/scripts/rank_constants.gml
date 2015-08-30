@@ -1,5 +1,6 @@
 //RANKS + COLORS + NAMES
 global.rank_radius = 16
+global.rank_max_theoretical = 20
 
 //poop brown for rank 0
 global.rank_colors[0] = make_colour_hsv(16,69,78)
