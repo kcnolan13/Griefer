@@ -517,7 +517,7 @@ if varRead("player_quit")
             <kind>1</kind>
             <string>///all dat ish
 
-if real(varRead("helmet0")) = spr_head and real(varRead("hat0")) = spr_head and real(varRead("foot0")) = spr_head
+if real(varRead("hat0")) = spr_head or real(varRead("foot0")) = spr_head or real(varRead("shin0")) = spr_head
 {
     if not asked_force_sync and room = rm_lobby and dummy_counter &gt; 5
     {

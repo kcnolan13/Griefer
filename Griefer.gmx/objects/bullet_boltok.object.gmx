@@ -29,6 +29,7 @@
 event_inherited()
 
 //graphics
+varWrite("flash_hitscan",flash_hitscan_simple_long)
 varWrite("sprite",spr_none)//spr_bullet_lmg
 traj_draw = true
 traj_length = 64*8

@@ -258,6 +258,7 @@ if varRead("rigidity") != -1 and not stuck
 if varRead("dir_perm") != -1 and not varRead("local")
 {
     dir_perm = varRead("dir_perm")
+    
     varWrite("dir_perm",-1)
 }
 
@@ -266,7 +267,6 @@ if object_index = bullet_torque and not varRead("local")
     hsp = 0
     vsp = 0
     grav = 0
-    dir = varRead("direction")
 }
 
 counter++
@@ -359,6 +359,7 @@ if spd &gt; 0
                 obj_update_real(id,"stuck_xscaler",FL_NORMAL)
                 obj_update_real(id,"stuck_ang",FL_NORMAL)
                 obj_update_real(id,"can_rotate",FL_NORMAL)
+                obj_sendval_real(id,"dir_perm",dir_perm,FL_NORMAL)
                 varWrite("dir_perm",dir_perm) obj_update_real(id,"dir_perm",FL_NORMAL)
             }
         } 
@@ -379,6 +380,7 @@ if spd &gt; 0
                     obj_update_real(id,"stuck_xoff",FL_NORMAL)
                     obj_update_real(id,"stuck_yoff",FL_NORMAL)
                     obj_update_real(id,"can_rotate",FL_NORMAL)
+                    obj_sendval_real(id,"dir_perm",dir_perm,FL_NORMAL)
                     varWrite("dir_perm",dir_perm) obj_update_real(id,"dir_perm",FL_NORMAL)
                 }
             }
@@ -416,13 +418,16 @@ if varRead("local") and nth_frame(5)
     obj_update_real(id,"myY",FL_NORMAL)
     
     if object_index = bullet_torque
-    
-    recalc_tossable_vector()
-    obj_sendval_real(id,"direction",dir,FL_NORMAL)
+    {
+        obj_sendval_real(id,"dir_perm",dir_perm,FL_NORMAL)
+    }
     
     if not stuck
+    {
+        recalc_tossable_vector()
+        obj_sendval_real(id,"direction",dir,FL_NORMAL)
         obj_sendval_real(id,"speed",spd,FL_NORMAL)
-    
+    }
 }
 
 if sticky and is_string(varRead("stuck_pname"))
@@ -437,8 +442,9 @@ if varRead("local")
         stationary_counter++
     } else stationary_counter = 0
     
-    if stationary_counter &gt; 4
+    if stationary_counter &gt; 4 and (not varRead("stationary") or nth_frame(5))
     {
+        varWrite("stationary",true)
         obj_sendval_real(id,"stationary",true,FL_NORMAL)
     }
 }

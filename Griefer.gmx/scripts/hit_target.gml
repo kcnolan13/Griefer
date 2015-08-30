@@ -4,8 +4,8 @@ var target = argument0
 var collision_x = argument1
 var collision_y = argument2
 
-if DEBUG
-    printf("hitting target!")
+if target.object_index > 0
+    printf(":::hitting target: "+string(object_get_name(target.object_index)))
 
 varWrite("myX",collision_x)
 varWrite("myY",collision_y)

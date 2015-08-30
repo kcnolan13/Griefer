@@ -11,15 +11,16 @@ if nth_frame(1) or (cursor.x != cursor.xprevious or cursor.y != cursor.yprevious
 //SPRITE INDEX
 if local_player.sprite_index_transmitted != local_player.sprite_index
 {
-    obj_update_real(local_player,"sprite_index",0)
+    objVarWrite(local_player,"sprite_index",local_player.sprite_index)
+    obj_update_real(local_player,"sprite_index",FL_NORMAL)
     local_player.sprite_index_transmitted = local_player.sprite_index
 }
 
 //PHYSICS
 if nth_frame(1) or local_player.update_physics
 {
-    obj_update_real(local_player,"myX",0)
-    obj_update_real(local_player,"myY",0)
+    obj_update_real(local_player,"myX",FL_NORMAL)
+    obj_update_real(local_player,"myY",FL_NORMAL)
 }
 
 if nth_frame(4) or local_player.update_physics

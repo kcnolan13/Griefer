@@ -37,7 +37,7 @@ alarm[2] = room_speed
 xyLerp = 0.35
 xyLerp_counter = 0
 update_physics = false
-sprite_index_transmitted = sprite_index
+sprite_index_transmitted = 0
 animation_transmitted = ""
 match_points_transmitted = 0
 match_deaths_transmitted = 0
@@ -1003,6 +1003,12 @@ if is_bot(id) and net_manager.room_counter &gt; 5
           <argument>
             <kind>1</kind>
             <string>///counters and get assist and player quit
+if rtime() &gt; room_speed*5 and is_real(varRead("pName")) and real(varRead("pName")) = BAD_READ
+{
+    printf("ERROR: "+string(varRead("uniqueId"))+" has pName="+string(varRead("pName"))+". Reconciling with uniqueId")
+    varWrite("pName",varRead("uniqueId"))
+}
+
 if not instance_exists(weapon_contemplating)
     time_since_wepcont += real_speed(1)
 else time_since_wepcont = 0
@@ -1590,7 +1596,7 @@ if (varRead("controllable")) or objVarRead(net_manager,"end_match_coming")
           <argument>
             <kind>1</kind>
             <string>///wall sliding
-if (varRead("controllable")) or objVarRead(net_manager,"end_match_coming")
+if (varRead("controllable")) or match_ending()
 {
     ///walljumping
     if wall_delay &gt; 0 
@@ -1787,9 +1793,9 @@ if (varRead("controllable")) or objVarRead(net_manager,"end_match_coming")
             <string>///XY_LERP and pose and animation syncing
 //if not varRead("controllable")
 {
-    if not varRead("controllable") and not objVarRead(net_manager,"end_match_coming")
+    if not varRead("controllable") and not match_ending()
         sprite_index = varRead("sprite_index")
-        
+
     sync_poses_and_animations()
     
 
@@ -1858,8 +1864,13 @@ if objVarRead(net_manager,"end_match_coming")
     varWrite("controllable",false)
     //varWrite("image_alpha",0.1)
     //varWrite("image_blend",c_blue)
-    varWrite("animation_speed",SPD_STAND)
-    animation_stand()
+    
+    if not slide_right and not slide_left
+    {
+        varWrite("animation_speed",SPD_STAND)
+        animation_stand()
+    }
+    
     if crawling or rolling
     {
         varSub("myY",35)
@@ -1890,7 +1901,7 @@ if objVarRead(net_manager,"end_match_coming")
             <kind>1</kind>
             <string>///stuck detection and correction
 if collision_rectangle(bbox_left,bbox_top+2,bbox_right,bbox_bottom-2,block,true,true) and not slide_left and not slide_right
-scr_unstick_guy()
+    scr_unstick_guy()
 </string>
           </argument>
         </arguments>

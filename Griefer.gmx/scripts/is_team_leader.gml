@@ -11,7 +11,7 @@ if net_manager.team > -1
     {
         if objVarRead(player_obj,"pNum") = global.lowest_pnum_team2 //ceil(net_manager.num_players/2)
         {
-            printf("::: "+playerName(player_obj)+" is team leader of team 2 with pNum "+string(objVarRead(player_obj,"pNum")))
+            //printf("::: "+playerName(player_obj)+" is team leader of team 2 with pNum "+string(objVarRead(player_obj,"pNum")))
             return true
         }
         else

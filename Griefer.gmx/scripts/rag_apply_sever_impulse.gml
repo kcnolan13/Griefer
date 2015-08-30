@@ -14,5 +14,5 @@ rag.sever_dir = sever_dir
 with rag
 {
     physics_apply_impulse(x,y,trigx(f,sever_dir),trigy(f,sever_dir))
-    physics_apply_angular_impulse(random_range(-1*f,f))
+    physics_apply_angular_impulse(random_range(-1*f/4,f/4))
 }

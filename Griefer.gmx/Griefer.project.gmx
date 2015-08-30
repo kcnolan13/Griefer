@@ -1045,6 +1045,7 @@
       <script>scripts\get_netstat_pnum.gml</script>
     </scripts>
     <scripts name="accolades">
+      <script>scripts\match_end_accolades.gml</script>
       <script>scripts\complete_accolade.gml</script>
       <script>scripts\request_accolades.gml</script>
       <script>scripts\draw_accolade.gml</script>
@@ -1058,7 +1059,6 @@
       <script>scripts\create_accolade_grid.gml</script>
       <script>scripts\accolades_received.gml</script>
       <script>scripts\update_scrollable_accolade_grid.gml</script>
-      <script>scripts\match_end_accolades.gml</script>
       <script>scripts\acc_name.gml</script>
       <script>scripts\increment_weapon_accolade.gml</script>
       <script>scripts\acc_chal_needed.gml</script>
@@ -1973,7 +1973,7 @@
     <constant name="HIT_MAG_SCALER">0.0075</constant>
     <constant name="HVIEW">768</constant>
     <constant name="MATCH_TOTAL">1</constant>
-    <constant name="MAX_PARTS">75</constant>
+    <constant name="MAX_PARTS">65</constant>
     <constant name="METER_KDR">2</constant>
     <constant name="METER_PPL">1</constant>
     <constant name="METER_RANK">0</constant>

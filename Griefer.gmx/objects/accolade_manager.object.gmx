@@ -31,6 +31,7 @@ spawned_grid = false
 
 netvars = ds_map_create()
 
+computed_match_end_accs = false
 match_end_accs = false
 
 //in match offsets
@@ -213,7 +214,7 @@ if nth_frame(5*30)
             <string>///manage end-of-match accolades
 if in_match() and match_ending() and not spawned_grid
 {
-    if not match_end_accs 
+    if not match_end_accs and computed_match_end_accs
     {
         match_end_accs = true
         //note that this function actually awards the accolades as needed
@@ -336,6 +337,7 @@ if not in_match() and room != rm_login
             <string>///clear accolade match totals
 spawned_grid = false
 spawn_grid_delay = 0
+computed_match_end_accs = false
 
 if in_match()
 {

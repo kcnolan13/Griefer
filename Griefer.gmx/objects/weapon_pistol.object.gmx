@@ -74,7 +74,7 @@ varWrite("control_type","left_press")
 varWrite("cant_shoot_max",3)
 varWrite("spread_count",1)
 varWrite("spread_swath",0)
-varWrite("recoil",8)
+varWrite("recoil",2)
 //varWrite("handling",1.25)
 varWrite("view_shake_duration","short") //short, medium, long
 varWrite("view_shake",5)

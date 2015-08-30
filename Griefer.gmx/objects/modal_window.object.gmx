@@ -46,6 +46,8 @@ is_gui = false
 gui_xoff = x
 gui_yoff = y
 
+scale_die = 0
+
 rect_xoff = 0
 rect_yoff = 0
 rect_yextra = 0

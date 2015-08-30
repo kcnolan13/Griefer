@@ -32,6 +32,8 @@ draw_enable_swf_aa(true)
 setGppDebug(0)
 display_set_gui_size(WVIEW,HVIEW)
 
+view_adjust_delay = 0
+
 real_time_init()
 physics_going = true
 sort_worthy = false
@@ -843,12 +845,15 @@ if room_counter &lt; 30*15 and nth_frame(10) and instance_exists(local_player)
     //printf("ERROR (not): writing local_player.bot to "+string(bot_override))
 }
 
+if view_adjust_delay
+    view_adjust_delay --
+
 
 do_zoom = false
 draw_killed_by = false
 
 //match starting or ending
-if match_starting() or match_ending() and not instance_exists(modal_controls)
+if match_starting() or match_ending() and not instance_exists(modal_controls) and not view_adjust_delay
 {
     do_zoom = true
     view_lerp_real = 0.06
@@ -887,7 +892,7 @@ if match_starting() or match_ending() and not instance_exists(modal_controls)
     }
 }
 //local player is bot
-else if (instance_exists(local_player) and is_bot(local_player))
+else if (instance_exists(local_player) and is_bot(local_player)) and not view_adjust_delay
 {
     do_zoom = true
     if bot_focus_counter
@@ -929,7 +934,7 @@ else if (instance_exists(local_player) and is_bot(local_player))
     }
 }
 //YOU HAVE BEEN KILLED
-else if instance_exists(local_player) and not objVarRead(local_player,"alive") and instance_exists(rag_target)
+else if instance_exists(local_player) and not objVarRead(local_player,"alive") and instance_exists(rag_target) and not view_adjust_delay
 {
     draw_killed_by = true
     do_zoom = true
@@ -940,7 +945,7 @@ else if instance_exists(local_player) and not objVarRead(local_player,"alive") a
 }
 
 //view zooming
-if do_zoom
+if do_zoom and not view_adjust_delay
 {
     view_hwidth = 1365*view_overscaler*VIEW_SCALE
     
@@ -2917,6 +2922,10 @@ if varRead("end_match_coming")
                 {
                     titulo = ""+objVarRead(av_head,"pName")+"'s Team"
                     subtitulo = "Won The Match"
+                    if get_team(myPlayer()) = 0
+                        win_color = global.team0_color
+                    else
+                        win_color = global.team1_color
                 } else
                 {
                     printf("ERROR: should not be getting tied match in draw_GUI_4 when match collapsed")
@@ -2957,6 +2966,14 @@ if varRead("end_match_coming")
             {
                 av_head = find_pname_avatar(playerName(myPlayer()))
                 
+                var le_player = find_player_by_pname(playerName(av_head))
+                var le_team = get_team(datplaya)
+                if le_team &lt; getLength(global.team_colors) and le_team &gt;= 0
+                {
+                    win_color = global.team_colors[le_team]
+                }
+                else printf("ERROR: le_team is out of bounds: "+string(le_team))
+                
                 if instance_exists(av_head)
                 {
                     titulo = ""+objVarRead(av_head,"pName")
@@ -2971,7 +2988,15 @@ if varRead("end_match_coming")
             else
             {
                 av_head = ds_grid_get(team_all,1,0)
-                win_color = global.team_all_color
+                
+                var le_player = find_player_by_pname(playerName(av_head))
+                var le_team = get_team(datplaya)
+                if le_team &lt; getLength(global.team_colors) and le_team &gt;= 0
+                {
+                    win_color = global.team_colors[le_team]
+                }
+                else printf("ERROR: le_team is out of bounds: "+string(le_team))
+                
                 if ds_grid_get(team_all,0,0) = ds_grid_get(team_all,1,0)
                 {
                     av_head = noone
@@ -4239,7 +4264,7 @@ if not instance_exists(modal_controls) and in_match() and not match_ending()
     view_yoffset = sign(view_yoffset)
     
     // add up to 1/3 of the view's height/width depending on offset percentages
-    if instance_exists(local_player)
+    if instance_exists(local_player) and not match_starting()
     {
         xtest = floor(local_player.x+16-floor(view_wview/2)+floor(view_xoffset*view_wview*1/3*view_scaler))
         ytest = floor(local_player.y+16-floor(view_hview/2)+floor(view_yoffset*view_hview*1/3*view_scaler))

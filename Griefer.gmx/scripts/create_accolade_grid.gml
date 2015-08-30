@@ -71,6 +71,18 @@ var dbug = true
     
     if dbug printf("::: num_2create = "+string(num_2create))
     
+    //end of match accolade grid should get wider if too many accs to show in 2 cols
+    if num_2create > 8 and in_match()
+    {
+        l -= 64/2
+        r += accolade_manager.acc_width
+        
+        w = abs(r - l)
+        h = abs(b - t)
+        xmid = l+w/2
+        ymid = t+h/2
+    }
+    
     //figure out how many rows there need to be
     var num_rows = ceil((acc_width+hsep)*num_2create / w)
     var num_per_row = floor(w/(acc_width+hsep))

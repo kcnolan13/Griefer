@@ -16,8 +16,7 @@ obj_update_real(new_flash,"angle",FL_NORMAL)
 
 if new_flash.object_index != flash_none
 {
-    with new_flash
-        glr_lightsimple_set_rotation(light,varRead("angle"))
+    new_flash.rot = angle
 }
 
 return new_flash

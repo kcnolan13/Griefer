@@ -206,19 +206,17 @@ else
     }
     else
     {
-        var inst = hitscan_targets(scanx_i,scany_i, scanx_i + lengthdir_x(sqrt(room_width*room_width+room_height*room_height), varRead("direction")), scany_i + lengthdir_y(sqrt(room_width*room_width+room_height*room_height), varRead("direction")), shootable_generic, true,true, find_player(varRead("senderId")))
+        var inst = hitscan_targets(scanx_i, scany_i, scanx_i + lengthdir_x(sqrt(room_width*room_width+room_height*room_height), varRead("direction")), scany_i + lengthdir_y(sqrt(room_width*room_width+room_height*room_height), varRead("direction")), shootable_generic, true, true, find_player(varRead("senderId")))
         if inst
         {
-            if DEBUG
-                printf("INITIAL COLLISION HIT with object "+inst.object_index+" @ ("+collision_x+", "+collision_y+")")
+            printf(":::INITIAL COLLISION HIT with object "+string(inst.object_index)+" @ ("+string(collision_x)+", "+string(collision_y)+")")
             dist = point_distance(x, y, collision_x, collision_y)
             create_hitscan_flash(varRead("flash_hitscan"),varRead("myX"),varRead("myY"),dist/100,0.5,varRead("direction"))
             hit_target(inst,collision_x,collision_y)
         }
         else
         {
-            if DEBUG
-                printf("no collision found!!")
+            printf("::: no collision found...")
             create_hitscan_flash(varRead("flash_hitscan"),varRead("myX"),varRead("myY"),3072/100,0.5,varRead("direction"))
             varAdd("myX", lengthdir_x(3072, varRead("direction")))
             varAdd("myY",lengthdir_y(3072, varRead("direction")))

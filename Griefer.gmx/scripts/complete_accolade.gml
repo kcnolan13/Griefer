@@ -21,8 +21,9 @@ var yst = accolade_manager.match_yoff
 var sep = accolade_manager.match_hsep+accolade_manager.acc_width
 
 var xoff = sep*instance_number(accolade_generic)
+
 if not match_ending()
-datAcc = create_accolade(xst+xoff,yst,name,COL_MATCH_TOTAL)
+    datAcc = create_accolade(xst+xoff,yst,name,COL_MATCH_TOTAL)
 //if match_ending()
   //  datAcc.fade_delay = 30*1
 

@@ -42,10 +42,12 @@ var completed = false
     var maxpoints = 0
     var maxpname = ""
     var tied = false
+    printf("::: CALCULATING MVP")
     for (var i=0; i<instance_number(avatar); i++)
     {
         plyr = instance_find(avatar,i)
         var cand = objVarRead(plyr,"match_points")
+        printf("::: "+playerName(plyr)+" : "+string(cand)+" Points")
         if cand > maxpoints
         {
             tied = false
@@ -58,6 +60,8 @@ var completed = false
         }
     }
     
+    printf("::: maxpname: "+string(maxpname))
+    
     if not tied and playerName(myAvatar()) = maxpname
     {
         //MVP, BABY!
@@ -67,7 +71,12 @@ var completed = false
     } else if tied
     {
         printf("::: mvp accolade was tied between" + string(maxpname)+" and someone else...")
+    } else 
+    {
+        printf("::: playerName(myAvatar()), which is "+playerName(myAvatar())+" != "+string(maxpname))
     }
 }
+
+accolade_manager.computed_match_end_accs = true
 
 return completed

@@ -1,59 +1,79 @@
 ///hitscan_targets(x1, y1, x2, y2, target, prec, notme, from_player)
-var dx, dy, instance, first_instance, temp
+var dx, dy, first_instance, temp, is_same_team
+
+instance = noone
 
 var from_player = argument7
+printf(":::STARTING HITSCAN ... from_player = "+string(from_player)+" ("+playerName(from_player)+")")
 
-if counter < 1
-col = c_green
-else
-col = c_blue
-
-/*if counter < 1
-{
-    blah = instance_create(argument0,argument1,hit_marker)
-    objVarWrite(blah,"image_blend",col)
-    blah.image_blend = col
-    
-    blah = instance_create(argument2,argument3,hit_marker)
-    objVarWrite(blah,"image_blend",col)
-    blah.image_blend = col
-}*/
-
-dx=0
-dy=0
+if counter < 1 col = c_green else col = c_blue
 
 first_instance = noone
+is_same_team = true
+is_block = false
 
-temp = collision_line(argument0, argument1, argument2, argument3, argument4, argument5, argument6)
-if (temp != noone)
+dx = argument2 - argument0
+dy = argument3 - argument1
+
+var loops = 0
+while ((abs(dx) >= 1 or abs(dy) >= 1) and loops < 10000)
 {
-    if temp.object_index != player or (temp != from_player and not are_teammates(temp, from_player))
+    loops++
+    
+    dx /= 2
+    dy /= 2
+    
+    from_player.hitscan_xi = argument0
+    from_player.hitscan_yi = argument1
+    from_player.hitscan_xf = argument2-dx
+    from_player.hitscan_yf = argument3-dy
+    from_player.hitscan_obj = argument4
+    from_player.hitscan_prec = argument5
+    from_player.hitscan_notme = argument6
+    
+    
+    with from_player
     {
-        first_instance = temp
+        other.instance = collision_line(hitscan_xi, hitscan_yi, hitscan_xf, hitscan_yf, hitscan_obj, hitscan_prec, hitscan_notme)
+    } 
+       
+    if (instance != noone)
+    {
+    
+        if instance.object_index > 0
+            printf("::: loop! instance = "+string(object_get_name(instance.object_index)))
+        else
+            printf(":::WARNING: instance "+string(instance)+" has object_index "+string(instance.object_index))
+    
+        if instance.object_index != player or (instance.id != from_player.id and not are_teammates(instance, from_player))
+        {
+            is_same_team = false
+            first_instance = instance
+            argument2 -= dx
+            argument3 -= dy
+        }
+        else
+        {
+            if instance.id = from_player.id
+                printf(":::WARNING: hitscanning ran into from_player: "+playerName(from_player)+" = "+string(playerName(instance)))
+            else if are_teammates(instance, from_player)
+            {
+                printf(":::WARNING: hitscaning passing through teammate")
+                argument0 += trigx(point_distance(argument0,argument1,instance.x,instance.y)+5,point_direction(argument0,argument1,argument2,argument3))
+                argument1 += trigy(point_distance(argument0,argument1,instance.x,instance.y)+5,point_direction(argument0,argument1,argument2,argument3))
+            }
+        }
     }
 }
 
-if(first_instance != noone)
+if is_same_team
 {
-    dx = argument2 - argument0
-    dy = argument3 - argument1
-    var whiles = 0
-    while (abs(dx) >= 1 or abs(dy) >= 1) and whiles < 10000
-        {
-            whiles++
-            dx /= 2
-            dy /= 2
-            instance = collision_line(argument0, argument1, argument2-dx, argument3-dy, argument4, argument5, argument6)
-            if (instance != noone)
-            {
-                if instance.object_index != player or (instance != from_player and not are_teammates(instance, from_player))
-                {
-                    first_instance = instance
-                    argument2 -= dx
-                    argument3 -= dy
-                }
-            }
-        }
+    printf("::: is_same_team was true")
+    first_instance = noone
+}
+else
+{
+    printf("::: is_same_team was false")
 }
 
 collision_x = argument2-dx

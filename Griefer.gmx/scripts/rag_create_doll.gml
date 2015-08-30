@@ -98,19 +98,19 @@ for (var i=0; i<getLength(limb_names); i++)
 //BIND FIXTURES
 
 //bind hat to head
-if random(1) > frac_prob*1.5
+if random(1) > frac_prob
     rag_bind_limbs(rags[RAG_HEAD],rags[RAG_HAT])
 else rag_apply_sever_impulse(rags[6],sever_force,fdir)
 
 //bind head to torso
-if random(1) > frac_prob*0.75
+if random(1) > frac_prob
     rag_bind_limbs(rags[RAG_TORSO],rags[RAG_HEAD])
 else rag_apply_sever_impulse(rags[0],sever_force,fdir)
 
 //bind shoulders to torso
 for (var i=0; i<2; i++)
 {
-    if random(1) > frac_prob*2.5
+    if random(1) > frac_prob
         rag_bind_limbs(rags[1],rags[7+i])
     else rag_apply_sever_impulse(rags[7+i],sever_force,fdir)
 }
@@ -118,7 +118,7 @@ for (var i=0; i<2; i++)
 //bind forearms to shoulders
 for (var i=0; i<2; i++)
 {
-    if random(1) > frac_prob*0.3
+    if random(1) > frac_prob
         rag_bind_limbs(rags[7+i],rags[9+i])
     else rag_apply_sever_impulse(rags[9+i],sever_force,fdir)
 }
@@ -126,7 +126,7 @@ for (var i=0; i<2; i++)
 //bind legs to torso
 for (var i=0; i<2; i++)
 {
-    if random(1) > frac_prob*2
+    if random(1) > frac_prob
         rag_bind_limbs(rags[1],rags[2+i])
     else rag_apply_sever_impulse(rags[2+i],sever_force,fdir)
 }
@@ -134,7 +134,7 @@ for (var i=0; i<2; i++)
 //bind shins to legs
 for (var i=0; i<2; i++)
 {
-    if random(1) > frac_prob*0.3
+    if random(1) > frac_prob
         rag_bind_limbs(rags[2+i],rags[4+i])
     else rag_apply_sever_impulse(rags[4+i],sever_force,fdir)
 }
@@ -142,7 +142,7 @@ for (var i=0; i<2; i++)
 //bind feet to shins
 for (var i=0; i<2; i++)
 {
-    if random(1) > frac_prob*0.3
+    if random(1) > frac_prob
         rag_bind_limbs(rags[4+i],rags[11+i])
     else rag_apply_sever_impulse(rags[11+i],sever_force,fdir)
 }
