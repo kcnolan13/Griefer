@@ -730,6 +730,33 @@ var getGravatarOutfit = function(socket, username, flag)
 }
 exports.getGravatarOutfit = getGravatarOutfit
 
+var getLoginGravatar = function(socket, username, pkg)
+{
+	var theDude = socket.myPlayer;
+	var pstats = ['rank','true_skill','global_rank','xp'];
+	var table = "stats";
+
+	var statement = "SELECT "+pstats+" from "+table+" where username='"+username+"'";
+
+	conn.query(statement, function(err,rows) {
+		if (err)
+			log.log(SQL,err);
+
+		for (var i=0; i<rows.length; i++)
+			{
+				for (var j=0; j<pstats.length; j++)
+				{
+					var stat_val = rows[i][pstats[j]];
+
+					var msg = composer.objUpdate(gravatarObjIndex,username,pstats[j],stat_val,FL_NORMAL);
+					pkg.messages.push(msg);
+				}
+			}
+
+	});
+} exports.getLoginGravatar = getLoginGravatar;
+
+
 
 var getGravatarStats = function(socket, username, flag)
 {

@@ -4,22 +4,50 @@ NEW CLIENT
 PING!
 pong . . .
 
+NEW CLIENT
+NEW CLIENT
+received authentication request:
+{"username": "kyle", "password": "abc123"}
+correct password
+unique login for: kyle
+kyle: no_mode, main_menu
+sending kyle stats to local net manager
 PING!
 pong . . .
 
+sending kyle challenge stats
+received authentication request:
+{"username": "marcel", "password": "abc123"}
+correct password
+unique login for: marcel
+marcel: no_mode, main_menu
+sending marcel stats to local net manager
+sending marcel challenge stats
+kyle moving to: ffa_lobby
+marcel moving to: ffa_lobby
+forcing start match countdown: rescheduling room ffa1 to start match in: 10 seconds
+previous time: 50000
+new time: 10
+adding perma challenge: Underwear
+John Doe: disconnected
+deleting John Doe's socket
+kyle: disconnected
+deleting kyle's socket
+marcel Leaving Matchmaking
 NEW CLIENT
 NEW CLIENT
 PING!
 pong . . .
 
-PING!
-pong . . .
-
+received authentication request:
+{"username": "kyle", "password": "abc123"}
+correct password
+unique login for: kyle
+kyle: no_mode, main_menu
+sending kyle stats to local net manager
+sending kyle challenge stats
 NEW CLIENT
 NEW CLIENT
-PING!
-pong . . .
-
 PING!
 pong . . .
 
@@ -30,464 +58,96 @@ unique login for: titties
 titties: no_mode, main_menu
 sending titties stats to local net manager
 sending titties challenge stats
-received authentication request:
-{"username": "gritties", "password": "abc123"}
-correct password
-unique login for: gritties
-gritties: no_mode, main_menu
-sending gritties stats to local net manager
-sending gritties challenge stats
-received authentication request:
-{"username": "kyle", "password": "abc123"}
-correct password
-unique login for: kyle
-kyle: no_mode, main_menu
-sending kyle stats to local net manager
-sending kyle challenge stats
-kyle moving to: tdm_lobby
-gritties moving to: tdm_lobby
-titties moving to: tdm_lobby
-titties Leaving Matchmaking
-titties moving to: tdm_lobby
-titties Leaving Matchmaking
-titties moving to: tdm_lobby
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-received authentication request:
-{"username": "bitties", "password": "abc123"}
-correct password
-unique login for: bitties
-bitties: no_mode, main_menu
-sending bitties stats to local net manager
-sending bitties challenge stats
-bitties moving to: tdm_lobby
-bitties Leaving Matchmaking
-bitties moving to: ffa_lobby
-bitties Leaving Matchmaking
-bitties moving to: ffa_lobby
-bitties Leaving Matchmaking
-bitties moving to: versus_lobby
-bitties Leaving Matchmaking
-bitties moving to: ffa_lobby
-bitties Leaving Matchmaking
-bitties moving to: versus_lobby
-titties Leaving Matchmaking
-gritties Leaving Matchmaking
-kyle Leaving Matchmaking
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-titties moving to: tdm_lobby
-titties Leaving Matchmaking
+kyle moving to: versus_lobby
 titties moving to: versus_lobby
-titties Leaving Matchmaking
-titties moving to: versus_lobby
-bitties Leaving Matchmaking
-titties Leaving Matchmaking
-titties moving to: tdm_lobby
-bitties moving to: tdm_lobby
-gritties moving to: tdm_lobby
-kyle moving to: tdm_lobby
-bitties Leaving Matchmaking
-kyle Leaving Matchmaking
-kyle moving to: tdm_lobby
-bitties moving to: tdm_lobby
-forcing start match countdown: rescheduling room tdm1 to start match in: 10 seconds
-previous time: 50000
-new time: 10
-John Doe: disconnected
-deleting John Doe's socket
-gritties: disconnected
-deleting gritties's socket
-kyle Leaving Matchmaking
-titties Leaving Matchmaking
-bitties Leaving Matchmaking
-bitties moving to: tdm_lobby
-titties moving to: tdm_lobby
-kyle moving to: tdm_lobby
-forcing start match countdown: rescheduling room tdm1 to start match in: 10 seconds
-previous time: 50000
-new time: 10
-kyle Leaving Matchmaking
-bitties Leaving Matchmaking
-titties Leaving Matchmaking
-John Doe: disconnected
-deleting John Doe's socket
-kyle: disconnected
-deleting kyle's socket
-John Doe: disconnected
-deleting John Doe's socket
-bitties: disconnected
-deleting bitties's socket
-John Doe: disconnected
-deleting John Doe's socket
-titties: disconnected
-deleting titties's socket
-NEW CLIENT
-PING!
-pong . . .
-
-NEW CLIENT
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-received authentication request:
-{"username": "bitties", "password": "abc123"}
-correct password
-unique login for: bitties
-bitties: no_mode, main_menu
-sending bitties stats to local net manager
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-sending bitties challenge stats
-received authentication request:
-{"username": "titties", "password": "abc123"}
-correct password
-unique login for: titties
-titties: no_mode, main_menu
-sending titties stats to local net manager
-sending titties challenge stats
-received authentication request:
-{"username": "gritties", "password": "abc123"}
-correct password
-unique login for: gritties
-gritties: no_mode, main_menu
-sending gritties stats to local net manager
-sending gritties challenge stats
-received authentication request:
-{"username": "kyle", "password": "abc123"}
-correct password
-unique login for: kyle
-kyle: no_mode, main_menu
-sending kyle stats to local net manager
-sending kyle challenge stats
-kyle moving to: tdm_lobby
-bitties moving to: tdm_lobby
-titties moving to: tdm_lobby
-gritties moving to: tdm_lobby
-gritties Leaving Matchmaking
-gritties moving to: tdm_lobby
-forcing start match countdown: rescheduling room tdm1 to start match in: 10 seconds
-previous time: 50000
-new time: 10
-John Doe: disconnected
-deleting John Doe's socket
-titties: disconnected
-deleting titties's socket
-gritties Leaving Matchmaking
-kyle Leaving Matchmaking
-bitties Leaving Matchmaking
-John Doe: disconnected
-deleting John Doe's socket
-bitties: disconnected
-deleting bitties's socket
-John Doe: disconnected
-deleting John Doe's socket
-kyle: disconnected
-deleting kyle's socket
-John Doe: disconnected
-deleting John Doe's socket
-gritties: disconnected
-deleting gritties's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-received authentication request:
-{"username": "titties", "password": "abc123"}
-correct password
-unique login for: titties
-titties: no_mode, main_menu
-sending titties stats to local net manager
-sending titties challenge stats
-received authentication request:
-{"username": "bitties", "password": "abc123"}
-correct password
-unique login for: bitties
-bitties: no_mode, main_menu
-sending bitties stats to local net manager
-sending bitties challenge stats
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-received authentication request:
-{"username": "gritties", "password": "abc123"}
-correct password
-unique login for: gritties
-gritties: no_mode, main_menu
-sending gritties stats to local net manager
-sending gritties challenge stats
-received authentication request:
-{"username": "kyle", "password": "abc123"}
-correct password
-unique login for: kyle
-kyle: no_mode, main_menu
-sending kyle stats to local net manager
-sending kyle challenge stats
-titties moving to: tdm_lobby
-bitties moving to: tdm_lobby
-gritties moving to: tdm_lobby
-kyle moving to: tdm_lobby
-kyle Leaving Matchmaking
-kyle moving to: tdm_lobby
-forcing start match countdown: rescheduling room tdm1 to start match in: 10 seconds
-previous time: 50000
-new time: 10
-John Doe: disconnected
-deleting John Doe's socket
-titties: disconnected
-deleting titties's socket
-gritties Leaving Matchmaking
-bitties Leaving Matchmaking
-kyle Leaving Matchmaking
-John Doe: disconnected
-deleting John Doe's socket
-gritties: disconnected
-deleting gritties's socket
-John Doe: disconnected
-deleting John Doe's socket
-kyle: disconnected
-deleting kyle's socket
-John Doe: disconnected
-deleting John Doe's socket
-bitties: disconnected
-deleting bitties's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-received authentication request:
-{"username": "titties", "password": "abc123"}
-correct password
-unique login for: titties
-titties: no_mode, main_menu
-sending titties stats to local net manager
-sending titties challenge stats
-received authentication request:
-{"username": "bitties", "password": "abc123"}
-correct password
-unique login for: bitties
-bitties: no_mode, main_menu
-sending bitties stats to local net manager
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-sending bitties challenge stats
-received authentication request:
-{"username": "gritties", "password": "abc123"}
-correct password
-unique login for: gritties
-gritties: no_mode, main_menu
-sending gritties stats to local net manager
-sending gritties challenge stats
-bitties moving to: tdm_lobby
-titties moving to: tdm_lobby
-gritties moving to: tdm_lobby
-received authentication request:
-{"username": "yle", "password": "abc123"}
-sending 2 as authentication result (can create user)
-received authentication request:
-{"username": "kye", "password": "abc123"}
-correct password
-unique login for: kye
-kye: no_mode, main_menu
-sending kye stats to local net manager
-sending kye challenge stats
-kye: disconnected
-deleting kye's socket
-PING!
-pong . . .
-
-received authentication request:
-{"username": "kyle", "password": "abc123"}
-correct password
-unique login for: kyle
-kyle: no_mode, main_menu
-sending kyle stats to local net manager
-sending kyle challenge stats
-kyle moving to: tdm_lobby
-forcing start match countdown: rescheduling room tdm1 to start match in: 10 seconds
-previous time: 50000
-new time: 10
-gritties Leaving Matchmaking
-bitties Leaving Matchmaking
-titties Leaving Matchmaking
-John Doe: disconnected
-deleting John Doe's socket
-kyle: disconnected
-deleting kyle's socket
-John Doe: disconnected
-deleting John Doe's socket
-gritties: disconnected
-deleting gritties's socket
-John Doe: disconnected
-deleting John Doe's socket
-bitties: disconnected
-deleting bitties's socket
-John Doe: disconnected
-deleting John Doe's socket
-titties: disconnected
-deleting titties's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-received authentication request:
-{"username": "bitties", "password": "abc123"}
-correct password
-unique login for: bitties
-bitties: no_mode, main_menu
-sending bitties stats to local net manager
-sending bitties challenge stats
-received authentication request:
-{"username": "titties", "password": "abc123"}
-correct password
-unique login for: titties
-titties: no_mode, main_menu
-sending titties stats to local net manager
-sending titties challenge stats
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-received authentication request:
-{"username": "gritties", "password": "abc123"}
-correct password
-unique login for: gritties
-gritties: no_mode, main_menu
-sending gritties stats to local net manager
-sending gritties challenge stats
-bitties moving to: tdm_lobby
-titties moving to: tdm_lobby
-gritties moving to: tdm_lobby
-received authentication request:
-{"username": "kyle", "password": "abc123"}
-correct password
-unique login for: kyle
-kyle: no_mode, main_menu
-sending kyle stats to local net manager
-sending kyle challenge stats
-kyle moving to: tdm_lobby
-forcing start match countdown: rescheduling room tdm1 to start match in: 10 seconds
-previous time: 50000
-new time: 10
-bitties Leaving Matchmaking
-titties Leaving Matchmaking
-gritties Leaving Matchmaking
-kyle Leaving Matchmaking
-John Doe: disconnected
-deleting John Doe's socket
-titties: disconnected
-deleting titties's socket
-bitties moving to: tdm_lobby
-bitties Leaving Matchmaking
-bitties moving to: versus_lobby
-gritties moving to: versus_lobby
-kyle moving to: versus_lobby
-kyle Leaving Matchmaking
-bitties Leaving Matchmaking
-gritties Leaving Matchmaking
-kyle moving to: versus_lobby
-bitties moving to: versus_lobby
-gritties moving to: versus_lobby
-gritties Leaving Matchmaking
-bitties Leaving Matchmaking
-bitties moving to: versus_lobby
-gritties moving to: bot_ffa_lobby
-gritties Leaving Matchmaking
-gritties moving to: bot_ffa_lobby
 forcing start match countdown: rescheduling room versus1 to start match in: 10 seconds
 previous time: 50000
 new time: 10
-forcing start match countdown: rescheduling room bot_ffa1 to start match in: 10 seconds
-previous time: 50000
-new time: 10
-bitties Leaving Matchmaking
-kyle Leaving Matchmaking
 John Doe: disconnected
 deleting John Doe's socket
 kyle: disconnected
 deleting kyle's socket
 John Doe: disconnected
 deleting John Doe's socket
-bitties: disconnected
-deleting bitties's socket
+titties: disconnected
+deleting titties's socket
 John Doe: disconnected
 deleting John Doe's socket
-gritties: disconnected
-deleting gritties's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-NEW CLIENT
+marcel: disconnected
+deleting marcel's socket
 NEW CLIENT
 PING!
 pong . . .
 
 NEW CLIENT
+received authentication request:
+{"username": "kyle", "password": "abc123"}
+correct password
+unique login for: kyle
+kyle: no_mode, main_menu
+sending kyle stats to local net manager
+sending kyle challenge stats
+kyle moving to: ffa_lobby
+NEW CLIENT
 NEW CLIENT
 PING!
 pong . . .
 
+received authentication request:
+{"username": "marcel", "password": "abc123"}
+correct password
+unique login for: marcel
+marcel: no_mode, main_menu
+sending marcel stats to local net manager
+sending marcel challenge stats
+marcel moving to: ffa_lobby
+forcing start match countdown: rescheduling room ffa1 to start match in: 10 seconds
+previous time: 50000
+new time: 10
+adding perma challenge: Contender 
+adding perma challenge: Gravemaker
+adding perma challenge: Hellion 
+forcing start match countdown: rescheduling room ffa1 to start match in: 10 seconds
+previous time: 110000
+new time: 10
+adding perma challenge: Literal Garbage 
+adding perma challenge: Figurative Garbage 
+adding perma challenge: Swol
+marcel Leaving Matchmaking
+kyle Leaving Matchmaking
+marcel: disconnected
+deleting marcel's socket
+PING!
+pong . . .
+
+John Doe: disconnected
+deleting John Doe's socket
+John Doe: disconnected
+deleting John Doe's socket
+John Doe: disconnected
+deleting John Doe's socket
+kyle: disconnected
+deleting kyle's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+received authentication request:
+{"username": "kyle", "password": "abc123"}
+correct password
+unique login for: kyle
+kyle: no_mode, main_menu
+sending kyle stats to local net manager
+sending kyle challenge stats
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+kyle moving to: versus_lobby
+kyle Leaving Matchmaking
+kyle moving to: tdm_lobby
 received authentication request:
 {"username": "titties", "password": "abc123"}
 correct password
@@ -495,151 +155,22 @@ unique login for: titties
 titties: no_mode, main_menu
 sending titties stats to local net manager
 sending titties challenge stats
-received authentication request:
-{"username": "bitties", "password": "abc123"}
-correct password
-unique login for: bitties
-bitties: no_mode, main_menu
-sending bitties stats to local net manager
-sending bitties challenge stats
-received authentication request:
-{"username": "gritties", "password": "abc123"}
-correct password
-unique login for: gritties
-gritties: no_mode, main_menu
-sending gritties stats to local net manager
-sending gritties challenge stats
-gritties moving to: tdm_lobby
 titties moving to: tdm_lobby
-bitties moving to: tdm_lobby
 forcing start match countdown: rescheduling room tdm1 to start match in: 10 seconds
 previous time: 50000
 new time: 10
-bitties Leaving Matchmaking
-gritties Leaving Matchmaking
-gritties moving to: tdm_lobby
-bitties moving to: tdm_lobby
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-received authentication request:
-{"username": "titties", "password": "abc123"}
-correct password
-login failure: titties
 John Doe: disconnected
 deleting John Doe's socket
 titties: disconnected
 deleting titties's socket
-received authentication request:
-{"username": "titties", "password": "abc123"}
-correct password
-unique login for: titties
-titties: no_mode, main_menu
-sending titties stats to local net manager
-sending titties challenge stats
-titties moving to: tdm_lobby
-forcing start match countdown: rescheduling room tdm2 to start match in: 10 seconds
-previous time: 50000
-new time: 10
-titties Leaving Matchmaking
-gritties Leaving Matchmaking
-bitties Leaving Matchmaking
-bitties: disconnected
-deleting bitties's socket
+kyle Leaving Matchmaking
 PING!
 pong . . .
 
-received authentication request:
-{"username": "bitties", "password": "abc123"}
-correct password
-unique login for: bitties
-bitties: tdm, main_menu
-sending bitties stats to local net manager
-sending bitties challenge stats
-gritties: disconnected
-deleting gritties's socket
-PING!
-pong . . .
-
-received authentication request:
-{"username": "gritties", "password": "abc123"}
-correct password
-unique login for: gritties
-gritties: tdm, main_menu
-sending gritties stats to local net manager
-sending gritties challenge stats
-titties moving to: tdm_lobby
-bitties moving to: tdm_lobby
-gritties moving to: tdm_lobby
-forcing start match countdown: rescheduling room tdm1 to start match in: 10 seconds
-previous time: 50000
-new time: 10
-gritties Leaving Matchmaking
-bitties Leaving Matchmaking
-titties Leaving Matchmaking
-John Doe: disconnected
-deleting John Doe's socket
-gritties: disconnected
-deleting gritties's socket
-John Doe: disconnected
-deleting John Doe's socket
-bitties: disconnected
-deleting bitties's socket
-John Doe: disconnected
-deleting John Doe's socket
-titties: disconnected
-deleting titties's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-received authentication request:
-{"username": "Ass Jag-weeds", "password": "abc123"}
-sending 2 as authentication result (can create user)
-received authentication request:
-{"username": "Saucy Droop Season", "password": "abc123"}
-sending 2 as authentication result (can create user)
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-received authentication request:
-{"username": "Fecund Abduction", "password": "abc123"}
-sending 2 as authentication result (can create user)
-received authentication request:
-{"username": "Mr. Offender Ox", "password": "abc123"}
-sending 2 as authentication result (can create user)
-received authentication request:
-{"username": "Hungry Pajamas", "password": "abc123"}
-sending 2 as authentication result (can create user)
 received authentication request:
 {"username": "kyle", "password": "abc123"}
 correct password
-unique login for: kyle
-kyle: no_mode, main_menu
-sending kyle stats to local net manager
-sending kyle challenge stats
-received user_try_create: Hungry Pajamas, abc123, lez get it on
-
-
-creating new user: 'Hungry Pajamas' : Hungry Pajamas
-
-
-sending user create success to: Hungry Pajamas
-Hungry Pajamas: no_mode, main_menu
-sending Hungry Pajamas stats to local net manager
-sending Hungry Pajamas challenge stats
-kyle moving to: tdm_lobby
-Hungry Pajamas moving to: tdm_lobby
-forcing start match countdown: rescheduling room tdm1 to start match in: 10 seconds
-previous time: 50000
-new time: 10
-Hungry Pajamas Leaving Matchmaking
-kyle Leaving Matchmaking
+login failure: kyle
 John Doe: disconnected
 deleting John Doe's socket
 kyle: disconnected
@@ -650,25 +181,327 @@ PING!
 pong . . .
 
 received authentication request:
-{"username": "kyle", "password": "abc123"}
-correct password
-unique login for: kyle
-kyle: no_mode, main_menu
-sending kyle stats to local net manager
-sending kyle challenge stats
-kyle moving to: tdm_lobby
-Hungry Pajamas moving to: versus_lobby
-kyle Leaving Matchmaking
-kyle moving to: versus_lobby
-forcing start match countdown: rescheduling room versus1 to start match in: 10 seconds
-previous time: 50000
-new time: 10
-Hungry Pajamas Leaving Matchmaking
-kyle Leaving Matchmaking
+{"username": " Boob Smurf", "password": "abc123"}
+sending 2 as authentication result (can create user)
+received authentication request:
+{"username": "Gallon Of Star Fruit", "password": "abc123"}
+sending 2 as authentication result (can create user)
+received authentication request:
+{"username": "d", "password": "abc123"}
+sending 2 as authentication result (can create user)
+received authentication request:
+{"username": "Paraplegic Tomato", "password": "abc123"}
+sending 2 as authentication result (can create user)
 John Doe: disconnected
 deleting John Doe's socket
-kyle: disconnected
-deleting kyle's socket
+John Doe: disconnected
+deleting John Doe's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+John Doe: disconnected
+deleting John Doe's socket
+John Doe: disconnected
+deleting John Doe's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+John Doe: disconnected
+deleting John Doe's socket
+John Doe: disconnected
+deleting John Doe's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+John Doe: disconnected
+deleting John Doe's socket
+John Doe: disconnected
+deleting John Doe's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+John Doe: disconnected
+deleting John Doe's socket
+John Doe: disconnected
+deleting John Doe's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+John Doe: disconnected
+deleting John Doe's socket
+John Doe: disconnected
+deleting John Doe's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+John Doe: disconnected
+deleting John Doe's socket
+John Doe: disconnected
+deleting John Doe's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+John Doe: disconnected
+deleting John Doe's socket
+John Doe: disconnected
+deleting John Doe's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+John Doe: disconnected
+deleting John Doe's socket
+John Doe: disconnected
+deleting John Doe's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+John Doe: disconnected
+deleting John Doe's socket
+John Doe: disconnected
+deleting John Doe's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+John Doe: disconnected
+deleting John Doe's socket
+John Doe: disconnected
+deleting John Doe's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+John Doe: disconnected
+deleting John Doe's socket
+John Doe: disconnected
+deleting John Doe's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+John Doe: disconnected
+deleting John Doe's socket
+John Doe: disconnected
+deleting John Doe's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+John Doe: disconnected
+deleting John Doe's socket
+John Doe: disconnected
+deleting John Doe's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+John Doe: disconnected
+deleting John Doe's socket
+John Doe: disconnected
+deleting John Doe's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+John Doe: disconnected
+deleting John Doe's socket
+John Doe: disconnected
+deleting John Doe's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+John Doe: disconnected
+deleting John Doe's socket
+John Doe: disconnected
+deleting John Doe's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+John Doe: disconnected
+deleting John Doe's socket
+John Doe: disconnected
+deleting John Doe's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+John Doe: disconnected
+deleting John Doe's socket
+John Doe: disconnected
+deleting John Doe's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+John Doe: disconnected
+deleting John Doe's socket
+John Doe: disconnected
+deleting John Doe's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+John Doe: disconnected
+deleting John Doe's socket
+John Doe: disconnected
+deleting John Doe's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+John Doe: disconnected
+deleting John Doe's socket
+John Doe: disconnected
+deleting John Doe's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+John Doe: disconnected
+deleting John Doe's socket
+John Doe: disconnected
+deleting John Doe's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+John Doe: disconnected
+deleting John Doe's socket
+John Doe: disconnected
+deleting John Doe's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+John Doe: disconnected
+deleting John Doe's socket
+John Doe: disconnected
+deleting John Doe's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+John Doe: disconnected
+deleting John Doe's socket
+John Doe: disconnected
+deleting John Doe's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+John Doe: disconnected
+deleting John Doe's socket
+John Doe: disconnected
+deleting John Doe's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+John Doe: disconnected
+deleting John Doe's socket
+John Doe: disconnected
+deleting John Doe's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+John Doe: disconnected
+deleting John Doe's socket
+John Doe: disconnected
+deleting John Doe's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+John Doe: disconnected
+deleting John Doe's socket
+John Doe: disconnected
+deleting John Doe's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+John Doe: disconnected
+deleting John Doe's socket
+John Doe: disconnected
+deleting John Doe's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+John Doe: disconnected
+deleting John Doe's socket
+John Doe: disconnected
+deleting John Doe's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+John Doe: disconnected
+deleting John Doe's socket
+John Doe: disconnected
+deleting John Doe's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+John Doe: disconnected
+deleting John Doe's socket
+John Doe: disconnected
+deleting John Doe's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+John Doe: disconnected
+deleting John Doe's socket
+John Doe: disconnected
+deleting John Doe's socket
 NEW CLIENT
 NEW CLIENT
 PING!
@@ -681,20 +514,76 @@ unique login for: kyle
 kyle: no_mode, main_menu
 sending kyle stats to local net manager
 sending kyle challenge stats
-kyle moving to: tdm_lobby
-Hungry Pajamas moving to: versus_lobby
-kyle Leaving Matchmaking
-kyle moving to: versus_lobby
-forcing start match countdown: rescheduling room versus1 to start match in: 10 seconds
-previous time: 50000
-new time: 10
-Hungry Pajamas Leaving Matchmaking
-kyle Leaving Matchmaking
 John Doe: disconnected
 deleting John Doe's socket
 kyle: disconnected
 deleting kyle's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
 John Doe: disconnected
 deleting John Doe's socket
-Hungry Pajamas: disconnected
-deleting Hungry Pajamas's socket
+John Doe: disconnected
+deleting John Doe's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+John Doe: disconnected
+deleting John Doe's socket
+John Doe: disconnected
+deleting John Doe's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+John Doe: disconnected
+deleting John Doe's socket
+John Doe: disconnected
+deleting John Doe's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+John Doe: disconnected
+deleting John Doe's socket
+John Doe: disconnected
+deleting John Doe's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+John Doe: disconnected
+deleting John Doe's socket
+John Doe: disconnected
+deleting John Doe's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+received authentication request:
+{"username": "kyle", "password": "abc123"}
+correct password
+unique login for: kyle
+kyle: no_mode, main_menu
+sending kyle stats to local net manager
+sending kyle challenge stats
+kyle: disconnected
+deleting kyle's socket
+PING!
+pong . . .
+
+received authentication request:
+{"username": "kyle", "password": "abc1234"}
+INCORRECT password
+John Doe: disconnected
+deleting John Doe's socket
+John Doe: disconnected
+deleting John Doe's socket

@@ -20,7 +20,7 @@ global.SOCKETS = "sock"
 global.gamePort = 8080;
 global.fps = 30
 global.num_game_rooms = 8;
-global.num_maps = 3; //21
+global.num_maps = 21; //21
 global.gravatarObjIndex = 3;
 global.avatarObjIndex = 2;
 global.playerObjIndex = 1;
@@ -38,7 +38,7 @@ global.numSockets = 0;
 global.numBotFfa = 0;
 global.numBotTdm = 0;
 
-global.NUM_BPARTS = 13
+global.NUM_BPARTS = 25
 global.NUM_STATS = 13
 
 global.clients = [];
