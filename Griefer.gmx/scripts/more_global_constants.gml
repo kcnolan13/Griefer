@@ -5,6 +5,8 @@ global.tskill = "True Skill"
 global.accolade_name = "Medal"
 global.time_played = "Career Time"
 
+global.xoff = 0
+
 global.lowest_pnum = 0
 global.lowest_pnum_team2 = 2
 

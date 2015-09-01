@@ -59,7 +59,7 @@ if not surface_exists(surface)
         draw_sprite_ext(image,img_index,left+rect_xoff*scale*master_scale,top+rect_yoff*scale*master_scale,img_xsc,img_ysc,0,c_white,1)
     }
     
-    if text != "" or header_text != ""
+    if text != "" or header_text != "" or (object_index = bn_input_field and string_length(str_cursor) > 0)
     {
         if text_alpha_override
         draw_set_alpha(1*alpha_scaler)
@@ -99,12 +99,16 @@ if not surface_exists(surface)
         xpos += text_xoff*scale*master_scale
         ypos += text_yoff*scale*master_scale
         
+        var text_2draw = text
+        if object_index = bn_input_field and active
+            text_2draw += string(str_cursor)
+        
         if text_halign = fa_center
-            draw_text_ext_transformed(xpos,ypos,text,text_linesep,(width-text_pad*2),scale*master_scale,scale*master_scale,0)
+            draw_text_ext_transformed(xpos,ypos,text_2draw,text_linesep,(width-text_pad*2),scale*master_scale,scale*master_scale,0)
         else if text_halign = fa_left
-            draw_text_ext_transformed(xpos+text_pad,ypos,text,text_linesep,(width-text_pad*2),scale*master_scale,scale*master_scale,0)
+            draw_text_ext_transformed(xpos+text_pad,ypos,text_2draw,text_linesep,(width-text_pad*2),scale*master_scale,scale*master_scale,0)
         else
-            draw_text_ext_transformed(xpos-text_pad,ypos,text,text_linesep,(width-text_pad*2),scale*master_scale,scale*master_scale,0)
+            draw_text_ext_transformed(xpos-text_pad,ypos,text_2draw,text_linesep,(width-text_pad*2),scale*master_scale,scale*master_scale,0)
         if header_text != ""
         {
             draw_set_font(header_font)

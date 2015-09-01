@@ -1432,6 +1432,7 @@
       <script>scripts\match_ending.gml</script>
       <script>scripts\match_starting.gml</script>
       <script>scripts\compute_lowest_pnum.gml</script>
+      <script>scripts\refresh_scoregrid.gml</script>
     </scripts>
     <scripts name="general utilities">
       <script>scripts\printf.gml</script>
@@ -1477,6 +1478,9 @@
       <script>scripts\scr_create_user.gml</script>
       <script>scripts\regen_control_ui.gml</script>
       <script>scripts\scr_none.gml</script>
+      <script>scripts\modal_recalculate_snap.gml</script>
+      <script>scripts\scr_submit_play.gml</script>
+      <script>scripts\draw_modal_splat.gml</script>
     </scripts>
   </scripts>
   <shaders name="shaders">
@@ -1518,6 +1522,7 @@
     <font>fonts\fnt_pstats_title</font>
     <font>fonts\fnt_pname_title</font>
     <font>fonts\fnt_feed</font>
+    <font>fonts\fnt_input</font>
   </fonts>
   <objects name="objects">
     <objects name="DONT MOVE ME">
@@ -1561,6 +1566,8 @@
       <object>objects\modal_button</object>
       <object>objects\modal_dialogue</object>
       <object>objects\bn_dialogue</object>
+      <object>objects\bn_typical</object>
+      <object>objects\modal_splat</object>
       <objects name="feeds">
         <object>objects\kill_feed</object>
         <object>objects\chat_feed</object>
@@ -1590,9 +1597,12 @@
         <object>objects\bn_vote</object>
       </objects>
       <objects name="login">
-        <object>objects\bn_login_user</object>
-        <object>objects\bn_create_new</object>
-        <object>objects\randomize_name</object>
+        <objects name="deprecated">
+          <object>objects\bn_create_new</object>
+          <object>objects\bn_login_user</object>
+          <object>objects\randomize_name</object>
+        </objects>
+        <object>objects\bn_input_field</object>
       </objects>
       <objects name="autoplay">
         <object>objects\autoplay_d</object>

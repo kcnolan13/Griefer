@@ -46,7 +46,16 @@ is_gui = false
 gui_xoff = x
 gui_yoff = y
 
-scale_die = 0
+bind_to_global_xoff = false
+bind_global_xoff_to_translation_x = false
+
+performed_aligns = false
+
+translation_x = 0
+translation_xtarget = 0
+translation_y = 0
+translation_ytarget = 0
+translation_lerp = 0.1
 
 rect_xoff = 0
 rect_yoff = 0
@@ -114,6 +123,7 @@ fade_out = false
 fade_delay = 0
 dec = 0.25
 
+scale_die = 0
 scale_born = 0.4
 scale = scale_born
 
@@ -211,11 +221,15 @@ if not is_gui
     {
         x = view_xview+view_xpercent*view_wview
         y = view_yview+view_ypercent*view_hview
+        if bind_to_global_xoff
+            x += global.xoff
     }
     else if snapped
     {
         x = view_xview+view_xoff
         y = view_yview+view_yoff
+        if bind_to_global_xoff
+            x += global.xoff
     }   
 }
 </string>
@@ -247,11 +261,15 @@ if not is_gui
     {
         x = view_xview+view_xpercent*view_wview
         y = view_yview+view_ypercent*view_hview
+        if bind_to_global_xoff
+            x += global.xoff
     }
     else if snapped
     {
         x = view_xview+view_xoff
         y = view_yview+view_yoff
+        if bind_to_global_xoff
+            x += global.xoff
     }   
 }
 </string>
@@ -279,13 +297,9 @@ if not is_gui
             <string>///all dat ish
 counter ++
 
-if snap_2view = true and snapped = false and counter &gt; 1 and not is_gui
+if snapped = false
 {
-    snapped = true
-    view_xoff = x - view_xview
-    view_yoff = y - view_yview
-    view_xpercent = abs(view_xoff/view_wview)
-    view_ypercent = abs(view_yoff/view_hview)
+    modal_recalculate_snap()
 }
 
 if fade_delay
@@ -300,11 +314,35 @@ if fade_delay
 if birth_delay &gt; 0
 {
     birth_delay = sub_real(birth_delay,1)
+
     
     if fade_out
         instance_destroy()
     
     exit
+}
+
+//TRANSLATION
+if translation_x != translation_xtarget or translation_y != translation_ytarget
+{
+    x += lerp(translation_x, translation_xtarget, translation_lerp) - translation_x
+    y += lerp(translation_y, translation_ytarget, translation_lerp) - translation_y
+    
+    translation_x = lerp(translation_x, translation_xtarget, translation_lerp)
+    translation_y = lerp(translation_y, translation_ytarget, translation_lerp)
+    
+    modal_recalculate_snap()
+    
+    if abs(translation_y - translation_ytarget) &lt; 0.5
+        translation_y = translation_ytarget
+        
+    if abs(translation_x - translation_xtarget) &lt; 0.5
+        translation_x = translation_xtarget
+        
+    if bind_global_xoff_to_translation_x
+    {
+        global.xoff = translation_x/2
+    }
 }
 
 if not is_gui
@@ -313,18 +351,22 @@ if not is_gui
     {
         x = view_xview+view_xpercent*view_wview
         y = view_yview+view_ypercent*view_hview
+        if bind_to_global_xoff
+            x += global.xoff
     }
     else if snapped
     {
         x = view_xview+view_xoff
         y = view_yview+view_yoff
+        if bind_to_global_xoff
+            x += global.xoff
     } 
 }  
 
 image_xscale = width
 image_yscale = height
 
-if not popped_in and abs(scale - 1) &lt;= 0.05
+if not popped_in and abs(scale - 1) &lt;= 0.05 and translation_x = translation_xtarget and translation_y = translation_ytarget
 {
    popped_in = true
    if pop_sound != snd_none
@@ -432,6 +474,12 @@ if object_index = modal_stat_history
     exit
 }
 
+if object_index = modal_splat
+{
+    draw_modal_splat()
+    exit
+}   
+
 draw_modal_window()
 </string>
           </argument>
@@ -489,6 +537,12 @@ if object_index = modal_stat_history
     draw_stat_history_chart(x,y,scale*master_scale,col_pos,col_neg,y_threshold,history_string,record_count)
     exit
 }
+
+if object_index = modal_splat
+{
+    draw_modal_splat()
+    exit
+}   
 
 draw_modal_window()
 </string>

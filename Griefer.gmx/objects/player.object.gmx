@@ -1147,6 +1147,8 @@ if (varRead("get_assist") &gt; 0) and (net_manager.local_player = id or master_o
     obj_update_real(id,"match_assits",FL_NORMAL)
     obj_update_real(id,"match_points",FL_NORMAL)
     
+    refresh_scoregrid()
+    
     if myPlayer().id = id
     with challenge_manager
     {

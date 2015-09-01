@@ -220,13 +220,13 @@ counter ++
 if counter &lt; 3 and varRead("local")
 {
     //really make it known who the sender was
-    obj_update_real(id,"senderId",true)
+    obj_update_string(id,"senderId",FL_NORMAL)
 }
 
 if traj_draw
     visible = true
 
-if abs(varRead("speed")) &lt; 0.05
+if abs(varRead("speed")) &lt; 0.05 or (no_from_player and counter &gt; 12)
 {
     stationary_counter ++
     if stationary_counter &gt; 2
@@ -309,7 +309,7 @@ if not varRead("hitscan")
             varAdd("myY",add_y)
         }
     }
-    else
+    else if counter &gt; 10
     {
         printf("ERROR: from_player does not exist in bullet_generic step ... senderId="+string(varRead("senderId"))+", from_player="+string(from_player))
         no_from_player = true

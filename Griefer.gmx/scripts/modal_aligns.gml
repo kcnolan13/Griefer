@@ -1,6 +1,7 @@
 ///modal_aligns()
 left = x
 top = y
+performed_aligns = true
 
 if halign = fa_center
     left -= width*scale/2

@@ -32,6 +32,8 @@ clicked = false
 is_sens = false
 snap_2view = true
 clickable = true
+submit_action = scr_none
+can_press_enter = false
 </string>
           </argument>
         </arguments>
@@ -72,6 +74,13 @@ if global.using_gamepad
     }
 }
 
+if keyboard_check(vk_enter) and can_press_enter
+{
+    cursor.x = x
+    cursor.y = y
+    event_perform(ev_mouse,ev_global_left_press)
+}
+
 if clicked
     clicked --
 </string>
@@ -99,6 +108,11 @@ if clicked
             <string>///bail if there is a modal dialogue and this isn't part of it
 if instance_exists(modal_dialogue) and object_index != bn_dialogue
     exit
+
+if modal_highlighted(id) and submit_action != scr_none and script_exists(submit_action)
+{
+    script_execute(submit_action)
+}
 </string>
           </argument>
         </arguments>

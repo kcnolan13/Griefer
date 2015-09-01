@@ -341,12 +341,19 @@ if in_match()
     draw_set_alpha(0.25)
     draw_rectangle_color(view_xview-64*3,view_yview-64*3,view_xview+view_wview+64*3,view_yview+view_hview+64*3,c_black,c_black,c_black,c_black,false)
     draw_set_alpha(1)
-} else
+} else if room != rm_login
 {
     background_colour = global.bg_color
     background_showcolour = true
     background_visible[0] = true
-}  
+}
+else
+{
+    var color1 = web_hsv(0,0,100)
+    var color2 = web_hsv(0,0,38)
+    
+    draw_rectangle_colour(0,HVIEW/6,WVIEW,HVIEW,color1,color1,color2,color2,false)
+}
 </string>
           </argument>
         </arguments>

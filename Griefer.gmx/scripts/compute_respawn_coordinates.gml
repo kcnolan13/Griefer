@@ -56,6 +56,12 @@ for (var dat_index=0; dat_index < instance_number(spawn_point_generic); dat_inde
         continue
     }
     
+    //rule out spawn points too close to explosions
+    if in_ink(candidate) or in_flame(candidate) or in_snare(candidate)
+    {
+        continue
+    }
+    
     //---- BUILD DS MAPS FROM FILTERED CANDIDATES ----//
     
     //does this spawn point have LOS to an enemy?

@@ -1,5 +1,7 @@
 varWrite("you_dead_son",false) //true triggers this script --> no multiple deaths please
 
+refresh_scoregrid()
+
 varWrite("alive",false)
 obj_update_real(id,"alive",FL_NORMAL)
 

@@ -69,7 +69,7 @@ for (var i=0; i<ds_grid_height(grid); i++)
         or ds_grid_get(grid,0,i) = BAD_READ
         or ds_grid_get(grid,2,i) = BAD_READ
         {
-            printf("ERROR: ds_grid entry for player: "+objVarRead(av,"pName")+" ("+string(av)+"): has BAD_READS")
+            printf("ERROR: ds_grid entry for player: "+objVarRead(av,"pName")+" ("+string(av.id)+"): has BAD_READS")
             return false
         }
     }

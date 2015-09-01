@@ -4,7 +4,7 @@ var decr = argument1
 
 if is_string(orig)
 {
-    return orig-string(decr)
+    return orig+string(decr)
 } else
 {
     return real(orig)-real(decr)

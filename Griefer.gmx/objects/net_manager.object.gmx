@@ -1923,10 +1923,11 @@ if instance_number(player) &gt; 0 and room_counter &gt; 10*30
 {
     if (match_countdown &gt; 0)
     {
-        if (match_countdown = match_countdown_max) and not varRead("gearsteal_computed")
+        if not varRead("gearsteal_computed")
         {
+            printf("::: SENDING END_MATCH_COMING")
             varWrite("end_match_coming",true)
-            obj_update_real(id,"end_match_coming",0)
+            obj_update_real(id,"end_match_coming",FL_NORMAL)
             
             //THIS GUY (AND HIS TEAM) WON --&gt; TIME TO STEAL GEAR!!!
             if varRead("game_mode") != "tdm"
@@ -2107,7 +2108,8 @@ if instance_number(player) &gt; 0 and room_counter &gt; 10*30
         if team_kills &gt;= kill_limit
         {
             match_countdown = match_countdown_max
-            printf("team/player has enough kills to end match: "+string(team_kills))
+            printf("::: team/player has enough kills to end match: "+string(team_kills))
+            printf("::: SETTING MATCH COUNTDOWN")
         }
     }
 }
@@ -2200,13 +2202,18 @@ if in_match() and instance_exists(modal_controls)
 //sort scores @ 2 Hz
 //see if anything sort-worthy has happened
 
+if varRead("force_recompute_scores")
+{
+    varWrite("force_recompute_scores",false)
+    force_recompute_scores = true
+}
+
 for (var i=0; i&lt;instance_number(player); i++)
 {
     var ID = instance_find(player,i)
     if objVarRead(ID, "match_points_previous") != objVarRead(ID,"match_points") or objVarRead(ID, "match_kills_previous") != objVarRead(ID,"match_kills") or objVarRead(ID, "match_deaths_previous") != objVarRead(ID,"match_deaths") or objVarRead(ID, "match_assists_previous") != objVarRead(ID,"match_assists")
     {
-        //if DEBUG
-            printf(":::sortworthy!")
+        printf(":::sortworthy!")
         sort_worthy = true
         break
     }
@@ -2387,6 +2394,8 @@ if room = rm_lobby
 
 //30 = 60 --&gt; now do this after objects that have init based on room speed have a chance to go
 alarm[7] = 2
+
+global.xoff = 0
 
 init_physics()
 
@@ -2601,6 +2610,108 @@ if room != rm_login
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///create login UI elements
+
+if room = rm_login
+{
+    var login_col_width = WVIEW/5
+    var login_col_bdelay = room_speed*5
+    var bn_yoff = HVIEW*1/3
+    var bn_ysep = 64*1
+    var bn_height = 64*0.8
+    var translation_lerp = 0.08
+    {
+        //LEFT HAND COLUMN
+        login_col = instance_create(-1*login_col_width,0,modal_window)
+        login_col.width = login_col_width
+        login_col.height = HVIEW
+        login_col.text_halign = fa_center
+        login_col.text_valign = fa_top
+        login_col.text_yoff = 64*1.5
+        login_col.font = fnt_boom
+        login_col.birth_delay = login_col_bdelay
+        login_col.color = web_hsv(220,38,54)
+        login_col.text_color = c_white
+        login_col.translation_xtarget = login_col_width
+        login_col.translation_lerp = translation_lerp
+        login_col.depth = 0
+        login_col.highlightable = false
+        login_col.text = "Log In"
+        login_col.bind_global_xoff_to_translation_x = true
+        login_col.alpha_max = 0.75
+        
+        //username input
+        uname = instance_create(-1*login_col_width/2,bn_yoff+(bn_height+bn_ysep)*0,bn_input_field)
+        uname.width = login_col_width*2/3
+        uname.height = bn_height
+        uname.max_length = 20
+        uname.birth_delay = login_col_bdelay
+        uname.sequence = 1
+        uname.randomize_username = true
+        uname.is_username = true
+        uname.text_default = "Player Name"
+        uname.text = uname.text_default
+        uname.translation_xtarget = login_col_width
+        uname.translation_lerp = translation_lerp
+        uname.depth = -10
+        uname.color = web_hsv(220,10,80)
+        uname.active_color = web_hsv(220,40,100)
+        with uname modal_aligns()
+        
+        //password input
+        pword = instance_create(-1*login_col_width/2,bn_yoff+(bn_height+bn_ysep)*1,bn_input_field)
+        pword.width = login_col_width*2/3
+        pword.height = bn_height
+        pword.max_length = 20
+        pword.birth_delay = login_col_bdelay
+        pword.sequence = 2
+        pword.is_password = true
+        pword.text_default = "Password"
+        pword.text = pword.text_default
+        pword.translation_xtarget = login_col_width
+        pword.translation_lerp = translation_lerp
+        pword.min_length = 6
+        pword.depth = -10
+        pword.auto_start = false
+        pword.color = uname.color
+        pword.active_color = uname.active_color
+        with pword modal_aligns()
+        
+        //play button
+        play = instance_create(-1*login_col_width/2,bn_yoff+(bn_height+bn_ysep)*2,bn_typical)
+        play.width = login_col_width*2/3
+        play.height = bn_height
+        play.max_length = 20
+        play.birth_delay = login_col_bdelay
+        play.translation_xtarget = login_col_width
+        play.translation_lerp = translation_lerp
+        play.submit_action = scr_submit_play
+        play.can_press_enter = true
+        play.depth = -10
+        play.color = web_hsv(220,90,54)
+        with play modal_aligns()
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="7" enumb="3">
       <action>
@@ -2650,9 +2761,6 @@ global.rank_names = 0
             <string>///randomize seed
 cout_str = ""
 cout_maxchars = 2000
-
-randomize()
-random_set_seed(random(1000000))
 </string>
           </argument>
         </arguments>
@@ -2906,7 +3014,7 @@ if room = rm_lobby
     }
 }
     
-if ((show_scores &gt; 0) and not varRead("end_match_coming") or (room_counter &gt; 30*2 and room_counter &lt; 30*7)) and (in_match() and room_counter &gt; 30*3)//or room=rm_match_end
+if ((show_scores &gt; 0) and not match_ending() or (room_counter &gt; 30*2 and room_counter &lt; 30*7)) and (in_match() and room_counter &gt; 30*3)//or room=rm_match_end
 {
     var sy = HVIEW/2 - global.row_height*(instance_number(avatar)/2+2)
     var do_draw = true
@@ -2931,7 +3039,7 @@ if ((show_scores &gt; 0) and not varRead("end_match_coming") or (room_counter &g
     //draw_scores(64,16)
 }
 
-if varRead("end_match_coming")
+if match_ending()
 {
     if win_countdown &gt; match_countdown_max/2
     {
@@ -2948,15 +3056,13 @@ if varRead("end_match_coming")
                 {
                     titulo = ""+objVarRead(av_head,"pName")+"'s Team"
                     subtitulo = "Won The Match"
-                    if get_team(myPlayer()) = 0
-                        win_color = global.team0_color
-                    else
-                        win_color = global.team1_color
+                    win_color = team_color_pname(playerName(av_head))
                 } else
                 {
                     printf("ERROR: should not be getting tied match in draw_GUI_4 when match collapsed")
                     titulo = "The Match Is A Tie"
                     subtitulo = ""
+                    win_color = c_dkgray
                 }
             }
             else
@@ -2964,25 +3070,25 @@ if varRead("end_match_coming")
                 if team_kill_total(team0) &gt; team_kill_total(team1)
                 {
                     av_head = ds_grid_get(team0, 1, 0)
-                    win_color = global.team0_color
                 } else if team_kill_total(team1) &gt; team_kill_total(team0)
                 {
                     av_head = ds_grid_get(team1, 1, 0)
-                    win_color = global.team1_color
                 } else 
                 {
                     av_head = noone
-                    win_color = global.team_all_color
+                    win_color = c_dkgray
                 }
                 
                 if av_head != noone
                 {
+                    win_color = team_color_pname(playerName(av_head))
                     titulo = ""+objVarRead(av_head,"pName")+"'s Team"
                     subtitulo = "Won The Match"
                 } else
                 {
                     titulo = "The Match Is A Tie"
                     subtitulo = ""
+                    win_color = c_dkgray
                 }
             }
         }
@@ -2992,36 +3098,22 @@ if varRead("end_match_coming")
             {
                 av_head = find_pname_avatar(playerName(myPlayer()))
                 
-                var le_player = find_player_by_pname(playerName(av_head))
-                var le_team = get_team(le_player)
-                if le_team &lt; getLength(global.team_colors) and le_team &gt;= 0
-                {
-                    win_color = global.team_colors[le_team]
-                }
-                else printf("ERROR: le_team is out of bounds: "+string(le_team))
-                
                 if instance_exists(av_head)
                 {
                     titulo = ""+objVarRead(av_head,"pName")
                     subtitulo = "Won The Match"
+                    win_color = team_color_pname(playerName(av_head))
                 } else
                 {
                     printf("ERROR: should not be getting tied match (FFA) in draw_GUI_4 when match collapsed")
                     titulo = "The Match Is A Tie"
                     subtitulo = ""
+                    win_color = c_dkgray
                 }
             }
             else
             {
                 av_head = ds_grid_get(team_all,1,0)
-                
-                var le_player = find_player_by_pname(playerName(av_head))
-                var le_team = get_team(le_player)
-                if le_team &lt; getLength(global.team_colors) and le_team &gt;= 0
-                {
-                    win_color = global.team_colors[le_team]
-                }
-                else printf("ERROR: le_team is out of bounds: "+string(le_team))
                 
                 if ds_grid_get(team_all,0,0) = ds_grid_get(team_all,1,0)
                 {
@@ -3031,11 +3123,13 @@ if varRead("end_match_coming")
                 {
                     titulo = ""+objVarRead(av_head,"pName")
                     subtitulo = "Won The Match"
+                    win_color = team_color_pname(playerName(av_head))
                 }
                 else
                 {
                     titulo = "The Match Is A Tie"
                     subtitulo = ""
+                    win_color = c_dkgray
                 }
             }
         }
@@ -3060,7 +3154,7 @@ if room = rm_lobby and came_from_match and not lobby_match_countdown and  menu_m
         draw_score_table(armory_ysep, 64+armory_ysep+12)
 }
 
-if in_match() and not varRead("end_match_coming") and instance_exists(myAvatar()) and room_counter &gt; 30*3
+if in_match() and not match_ending() and instance_exists(myAvatar()) and room_counter &gt; 30*3
 {
     var av_head0, av_head1
     var score0, score1
@@ -3073,6 +3167,7 @@ if in_match() and not varRead("end_match_coming") and instance_exists(myAvatar()
         
         av_head1 = ds_grid_get(team1,1,0)  
         score1 = team_kill_total(team1) 
+            
     }
     else
     {
@@ -3127,6 +3222,101 @@ if lobby_match_countdown and room = rm_lobby
       </action>
     </event>
     <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///login screen
+if room = rm_login
+{
+    draw_set_font(fnt_title)
+    draw_set_color(c_white)
+    draw_set_halign(fa_center)
+    draw_set_valign(fa_center)
+    var ts_lerp_real = 0.5
+    var ts_target = 1
+    
+    var tit_y = 64*1.5
+    
+    title.x = room_width/2+global.xoff
+    title.y = tit_y
+    
+    if instance_place(cursor.x,cursor.y,title)
+        ts_target = title_scale_max
+    else
+        ts_target = title_scale_min
+        
+    title_scale = lerp_real(title_scale,ts_target,ts_lerp_real)
+    
+    if abs(title_scale - ts_target) &lt; 0.05
+        title_scale = ts_target
+        
+    draw_text_ext_transformed(room_width/2+global.xoff,tit_y,"GRIEFER",32,room_width/2,title_scale,title_scale,0)
+    
+    if title_scale = title_scale_max
+    {
+        title_text_timer ++
+        if title_text_timer &gt; 5
+        {
+            draw_set_font(fnt_hud)
+            draw_set_color(c_black)
+            draw_text_transformed(room_width/2+global.xoff,tit_y+64*1.5,"Grief Your Enemies . . . Grief Your Friends . . . Grief Yourself",global.notification_scale,global.notification_scale,0)
+        }
+    } else title_text_timer = 0
+
+    if not instance_exists(modal_splat)
+    {
+        //create the splats
+        random_set_seed(69)
+        var total_splats = 60
+        var splats = 0
+        var splats_per_step = 1
+        var bdelay = 1
+        var binc = 1
+        var xextra = 64*2.5
+        var yextra = -24
+        var l = title.x-sprite_get_width(spr_title)/2-xextra
+        var r = title.x+sprite_get_width(spr_title)/2+xextra
+        var t = title.y-sprite_get_height(spr_title)/2-yextra
+        var b = title.y+sprite_get_height(spr_title)/2+yextra
+        
+        while (splats &lt; total_splats)
+        {
+            repeat (splats_per_step)
+            {
+                splats++
+                
+                splat = instance_create(random_range(l,r),random_range(t,b),modal_splat)
+                splat.bind_to_global_xoff = true
+                splat.birth_delay = bdelay
+                splat.depth = 1
+                splat.scale_born = 0
+                scale_lerp_real = 0.3
+            }
+            bdelay += binc
+        }
+        
+        //RANDOMIZE THE GAME!
+        randomize()
+        random_set_seed(random(1000000))
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -3262,58 +3452,6 @@ if room = rm_menu or room = rm_lobby
     draw_set_halign(fa_right)
     draw_set_valign(fa_bottom)
     draw_text(room_width-draw_edge_padding,room_height-4.5*draw_edge_padding,armor_msg)
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///login screen
-if room = rm_login
-{
-    draw_set_font(fnt_title)
-    draw_set_color(c_black)
-    draw_set_halign(fa_center)
-    draw_set_valign(fa_center)
-    var ts_lerp_real = 0.5
-    var ts_target = 1
-    
-    if instance_place(cursor.x,cursor.y,title)
-        ts_target = title_scale_max
-    else
-        ts_target = title_scale_min
-        
-    title_scale = lerp_real(title_scale,ts_target,ts_lerp_real)
-    
-    if abs(title_scale - ts_target) &lt; 0.05
-        title_scale = ts_target
-        
-    draw_text_ext_transformed(room_width/2,64*2,"GRIEFER",32,room_width,title_scale,title_scale,0)
-    
-    if title_scale = title_scale_max
-    {
-        title_text_timer ++
-        if title_text_timer &gt; 5
-        {
-            draw_set_font(fnt_hud)
-            draw_text(room_width/2,64*3.25,"Grief Your Enemies . . . Grief Your Friends . . . Grief Yourid")
-        }
-    } else title_text_timer = 0
 }
 </string>
           </argument>

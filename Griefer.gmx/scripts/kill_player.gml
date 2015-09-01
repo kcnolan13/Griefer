@@ -48,6 +48,10 @@ if killer = net_manager.local_player or net_manager.bot_match
 
 if dead_homes != net_manager.local_player and killer = net_manager.local_player
 {
+    //YOU KILLED HIM
+    
+    refresh_scoregrid()
+    
     audio_play_sound(snd_kill,1,false)
     delay_spacer = 2
     boom_delay = compute_boom_delay()
