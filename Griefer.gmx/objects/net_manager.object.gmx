@@ -32,6 +32,7 @@ draw_enable_swf_aa(true)
 setGppDebug(0)
 display_set_gui_size(WVIEW,HVIEW)
 
+random_seed = 210//164
 login_when_ready = false
 view_adjust_delay = 0
 drawing_grav_popup = false
@@ -61,7 +62,7 @@ show_debug_overlay(true)
 
 force_sync_countdown = 0
 
-keepalive_timeout = 30*2
+keepalive_timeout = room_speed*3
 keepalive_timer = 15
 
 master_scale = 1
@@ -3317,16 +3318,16 @@ if room = rm_login
     if not instance_exists(modal_splat) and not login_when_ready
     {
         //create the splats
-        random_set_seed(69)
-        var total_splats = 65
+        random_set_seed(random_seed)
+        var total_splats = 12
         var splats = 0
         var splats_per_step = 1
-        var bdelay = 3
-        var binc = 1
+        var bdelay = 6
+        var binc = 4
         var xextra = 64*3
         var yextra = 0
-        var l = title.x-sprite_get_width(spr_title)/2-xextra
-        var r = title.x+sprite_get_width(spr_title)/2+xextra
+        var l = title.x-sprite_get_width(spr_title)/2-xextra-global.xoff
+        var r = title.x+sprite_get_width(spr_title)/2+xextra-global.xoff
         var t = title.y-sprite_get_height(spr_title)/2-yextra
         var b = title.y+sprite_get_height(spr_title)/2+yextra
         
@@ -3338,10 +3339,14 @@ if room = rm_login
                 
                 splat = instance_create(random_range(l,r),random_range(t,b),modal_splat)
                 splat.bind_to_global_xoff = true
+
+                //if rtime() &gt; 30*5
+                //    bdelay = 0
+
                 splat.birth_delay = bdelay
                 splat.depth = 1
                 splat.scale_born = 0
-                scale_lerp_real = 0.3
+                splat.scale_lerp_real = 0.1
             }
             bdelay += binc
         }
@@ -4367,6 +4372,53 @@ splat_constants(seed)
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
+      </action>
+    </event>
+    <event eventtype="9" enumb="38">
+      <action>
+        <libid>1</libid>
+        <id>425</id>
+        <kind>4</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///randomizer
+if room = rm_login
+{
+    random_seed++
+    printf("::: ADJUSTED RANDOM_SEED --&gt; "+string(random_seed))
+    
+    random_set_seed(random_seed)
+    
+    with modal_splat
+        instance_destroy()
+}
+</string>
+          </argument>
+        </arguments>
       </action>
     </event>
     <event eventtype="9" enumb="37">

@@ -504,7 +504,7 @@
       <sprite>sprites\spr_blood_particle</sprite>
       <sprite>sprites\spr_blood2</sprite>
       <sprite>sprites\spr_splat</sprite>
-      <sprite>sprites\spr_splat_vector</sprite>
+      <sprite>sprites\spr_splat_modal</sprite>
       <sprite>sprites\spr_doll_shadow</sprite>
     </sprites>
     <sprites name="lighting">

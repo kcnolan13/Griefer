@@ -265,6 +265,25 @@ if in_match() and progress_varname != "" and nth_frame(auto_frame_offset) and no
         }
     }
 }
+
+if nth_frame(120) and room = rm_lobby or room = rm_menu and progress_varname != "" and menmode() = "challenges"
+{
+    var grav = net_manager.stat_gravatar
+    if not (instance_exists(grav) and instance_exists(myAvatar()) and playerName(grav) != playerName(myAvatar()))
+    {
+        if is_competitive
+            progress = acc_data(progress_varname,COL_TOTAL)
+        else if is_bot_mode
+            progress = acc_data(progress_varname,COL_BOT_TOTAL)
+        else if is_challenge
+            progress = acc_data(progress_varname,COL_TOTAL) + acc_data(progress_varname,COL_BOT_TOTAL)
+        
+        progress_max = acc_data(progress_varname,COL_CHAL_NEEDED)
+        
+        if progress &gt; progress_max or completed
+            progress = progress_max   
+    }
+}
 </string>
           </argument>
         </arguments>

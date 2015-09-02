@@ -326,7 +326,8 @@ while (genMessagesWaiting() and wait_counter < 500000)
                             if object_index = modal_splat
                             {   
                                 fade_out = false
-                                fade_delay = ceil(random_range(1,10))
+                                fade_delay = ceil(random_range(1,15))
+                                scale_lerp = 0.2
                             }
                         }
                     }
