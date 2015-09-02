@@ -34,6 +34,10 @@ varWrite("player_quit",false)
 surf_splat = NO_HANDLE
 create_splat_surface()
 
+dude_lerp = 0.3
+dude_instalerp_x = false
+dude_instalerp_y = false
+
 //dummy vars
 shoulderl_xoffset_temp = 0
 shoulderl_yoffset_temp = 0
@@ -127,6 +131,7 @@ varWrite("active_weapon_prescaler",1)
 varWrite("active_weapon",NO_HANDLE)
 varWrite("nades",0)
 varWrite("controllable",false)
+varWrite("lerp_delay",0)
 
 varWrite("dude_x",0)
 varWrite("dude_y",0)
@@ -345,9 +350,26 @@ if not in_match()
 dummy_counter ++
 if (varRead("visible") or object_index = gravatar) and (varRead("dude_x") or varRead("dude_y"))
 {
+    if varRead("lerp_delay")
+    varWrite("lerp_delay",sub_real(varRead("lerp_delay"),1))
+    
     //printf("lerp_realing")
-    x = lerp_real(x,varRead("dude_x"),0.3)
-    y = lerp_real(y,varRead("dude_y"),0.3)
+    if not varRead("lerp_delay")
+    {
+        x = lerp_real(x,varRead("dude_x"),dude_lerp)
+        y = lerp_real(y,varRead("dude_y"),dude_lerp)
+    }
+    
+    if dude_instalerp_x
+    {
+        x = varRead("dude_x")
+        dude_instalerp_x = false
+    }
+    if dude_instalerp_y
+    {
+        y = varRead("dude_y")
+        dude_instalerp_y = false
+    }
 }
 
 if is_string(varRead("myX")) or is_string(varRead("myY"))
@@ -514,7 +536,7 @@ if not varRead("visible") or varRead("player_quit") exit
 
 if object_index = die_generic and dummy_counter &lt; 2 exit
 
-if not in_match()
+if not in_match() and room != rm_login
 {
     if varRead("animation_index") &lt; 12
         shadow_scale = 0.5+0.05*varRead("animation_index")/12

@@ -129,6 +129,7 @@ scale = scale_born
 
 scale_die = 0.4
 
+scale_normal = 1
 scale_highlighted = 1.1
 scale_lerp_real = 0.7
 
@@ -366,14 +367,14 @@ if not is_gui
 image_xscale = width
 image_yscale = height
 
-if not popped_in and abs(scale - 1) &lt;= 0.05 and translation_x = translation_xtarget and translation_y = translation_ytarget
+if not popped_in and abs(scale - 1) &lt;= 0.05 
 {
    popped_in = true
    if pop_sound != snd_none
    audio(pop_sound,1)
 }
 
-if fade_out = true and popped_in
+if fade_out = true and popped_in and translation_x = translation_xtarget and translation_y = translation_ytarget
 {
     alpha -= real_speed(dec)
     
@@ -404,7 +405,7 @@ else
 {
     hover_counter = 0
     show_popup = false
-    scale = lerp_real(scale,1,scale_lerp_real)
+    scale = lerp_real(scale,scale_normal,scale_lerp_real)
     if not fade_out
     {
         if not active
@@ -507,12 +508,13 @@ draw_modal_window()
 if birth_delay &gt; 0 or is_gui
     exit
 
-if draw_fade
+if draw_fade or draw_gradient
 {
     draw_set_alpha(fade_alpha*alpha*alpha_scaler)
     draw_set_color(fade_color)
-    draw_rectangle(view_xview,view_yview,view_xview+view_wview,view_yview+view_hview,false)
-}    
+    if not draw_gradient    
+        draw_rectangle(0,0,WVIEW,HVIEW,false)
+}  
 
 draw_set_alpha(alpha*alpha_scaler)
 

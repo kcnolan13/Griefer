@@ -33,7 +33,10 @@ if not surface_exists(surface)
     {
         var alph = draw_get_alpha()
         draw_set_alpha(alph*rect_alpha*alpha_scaler)
-        draw_rectangle(left+rect_xoff*scale*master_scale-rect_xextra*scale*master_scale/2,top+rect_yoff*scale*master_scale-rect_yextra*scale*master_scale/2,left+width*scale*master_scale+rect_xoff*scale*master_scale+rect_xextra*scale*master_scale/2,top+(height+extra_height)*scale*master_scale+rect_yoff*scale*master_scale+rect_yextra*scale*master_scale/2,false)
+        if is_gui or not draw_gradient
+            draw_rectangle(left+rect_xoff*scale*master_scale-rect_xextra*scale*master_scale/2,top+rect_yoff*scale*master_scale-rect_yextra*scale*master_scale/2,left+width*scale*master_scale+rect_xoff*scale*master_scale+rect_xextra*scale*master_scale/2,top+(height+extra_height)*scale*master_scale+rect_yoff*scale*master_scale+rect_yextra*scale*master_scale/2,false)
+        else
+            draw_rectangle_colour(left+rect_xoff*scale*master_scale-rect_xextra*scale*master_scale/2,top+rect_yoff*scale*master_scale-rect_yextra*scale*master_scale/2,left+width*scale*master_scale+rect_xoff*scale*master_scale+rect_xextra*scale*master_scale/2,top+(height+extra_height)*scale*master_scale+rect_yoff*scale*master_scale+rect_yextra*scale*master_scale/2,grad1,grad2,grad3,grad4,false)
         draw_set_alpha(alph)
     }
     drew_left = left
@@ -115,7 +118,7 @@ if not surface_exists(surface)
             draw_set_color(header_text_color)
             draw_set_halign(text_halign)
             draw_set_valign(fa_center)
-            draw_text_ext_transformed(xpos+header_xoff,top+header_yoff+header_height*scale*master_scale/2,header_text,text_linesep,width*scale,scale*master_scale,scale*master_scale,0)
+            draw_text_ext_transformed(xpos+header_xoff,top+header_yoff+header_height*scale*master_scale/2,header_text,text_linesep,width,scale*master_scale,scale*master_scale,0)
         }
         
         draw_set_alpha(alpha*alpha_scaler)

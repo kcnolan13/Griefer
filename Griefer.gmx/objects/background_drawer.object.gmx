@@ -350,7 +350,7 @@ if in_match()
 else
 {
     var color1 = web_hsv(0,0,100)
-    var color2 = web_hsv(0,0,38)
+    var color2 = web_hsv(0,0,50)
     
     draw_rectangle_colour(0,HVIEW/6,WVIEW,HVIEW,color1,color1,color2,color2,false)
 }

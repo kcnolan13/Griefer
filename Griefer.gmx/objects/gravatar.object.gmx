@@ -35,12 +35,23 @@ anim_prescaled = 1
 event_inherited()
 printf("A DUDE IS BEING MADE")
 varWrite("pNum",0)
+varWrite("login_delay",30)
 varWrite("animation_scale",3)
 varWrite("player_quit",false)
 varWrite("bot",false)
+
+scale_normal = 1.5
+scale_highlight = 1.8
+scale_lerp = 0.18
+login_lerp_delay_base = 30*3
+login_lerp_delay = 15
+login_dude_lerp = 0.2
+
 animation_previous = 0
 arm_pose_previous = 0
 force_jumped = false
+hover_counter = 0
+hover_delay = 10
 
 mouse_wheel_delay = 0
 mouse_wheel_delay_max = 2
@@ -61,8 +72,6 @@ bparts_done_ready = false
 
 randomize()
 
-wep_index = ceil(random_range(weapon_placeholder1+1,weapon_placeholder2-1))
-assume_weapon(wep_index)
 animation_stand()
 varWrite("visible",false)
 varWrite("animation_speed",SPD_STAND)
@@ -173,18 +182,80 @@ printf("::: "+string(varRead("pName"))+" gravatr was instantiated with uniqueId 
 if mouse_wheel_delay &gt; 0
 mouse_wheel_delay --
 
+if nth_frame(60)
+{
+    if room = rm_login
+    {
+        dude_lerp = login_dude_lerp
+    } 
+    else
+    {
+        dude_lerp = 0.3
+    }
+}
+
+
 if in_match()
 {
     x = room_width+64*12
     y = -64*12
 }
-else
-{   //sync uniqueId up with your local avatar
+else if room = rm_lobby or room = rm_menu
+{   
+    //sync uniqueId up with your local avatar
     if instance_exists(net_manager.my_doll)
     {
         varWrite("uniqueId",objVarRead(net_manager.my_doll,"uniqueId"))
     }
     varWrite("pName",stat_manager.grav_name)
+}
+else if room = rm_login
+{
+    var dude_x_new = room_width/2+global.xoff
+    var pnum = varRead("pNum")
+    var spacer = 64*2.75
+    
+    if pnum &gt; 1 and pnum mod 2 = 0
+    {
+        dude_x_new -= pnum/2*spacer
+    }
+    else
+    {
+        dude_x_new += (pnum-1)/2*spacer
+    }
+    
+    varWrite("dude_x",dude_x_new)
+    
+    if not bparts_done_ready or varRead("login_delay")
+    {
+        varWrite("login_delay",sub_real(varRead("login_delay"),1))
+        varWrite("dude_y",1200)
+    }
+    else
+    {
+        if not net_manager.login_when_ready
+            varWrite("dude_y",room_height*4/5-48*(5-varRead("pNum")))
+        else
+        {
+            varWrite("dude_y",HVIEW+64*8)
+        }
+        
+        if varRead("lerp_delay")
+            y = 1200
+    }
+}
+
+if point_distance(x,y,cursor.x,cursor.y) &lt; 64
+{
+    hover_counter++
+    if room = rm_login
+        varWrite("animation_scale",lerp(varRead("animation_scale"),scale_highlight,scale_lerp))
+}
+else
+{
+    hover_counter = 0
+    if room = rm_login
+        varWrite("animation_scale",lerp(varRead("animation_scale"),scale_normal,scale_lerp))
 }
 
 varWrite("animation_speed",SPD_STAND)
@@ -193,7 +264,7 @@ if not bparts_done_ready
 {
     for (var i=0; i&lt;1; i++)
     {
-        if not bparts_ready[i] and room != rm_login
+        if not bparts_ready[i] and (room != rm_login or id != net_manager.stat_gravatar)
         {
             bparts_ready[i] = bparts_get_ready(i)
         }
@@ -209,12 +280,22 @@ if not bparts_done_ready
     
     if bparts_done_ready 
     {
-        printf("::: all bparts ready for grav --&gt; enable grav_ready in stat man!")
-        stat_manager.grav_ready = true
-        if (net_manager.stat_gravatar != id)
+    
+        if room = rm_login
         {
-            printf(":::WARNING: gravatar expected netman.stat_gravatar to be equal to his id in step_1")
+            varWrite("lerp_delay",login_lerp_delay_base+login_lerp_delay*varRead("pNum"))
+            dude_instalerp_x = true
+        }    
+        else
+        {
+            stat_manager.grav_ready = true
+            if (net_manager.stat_gravatar != id)
+            {
+                printf(":::WARNING: gravatar expected netman.stat_gravatar to be equal to his id in step_1")
+            }
         }
+        
+        printf("::: all bparts ready for grav --&gt; enable grav_ready in stat man!")
         varWrite("visible",true)
         visible = true
     }
@@ -269,7 +350,15 @@ event_inherited()
           <argument>
             <kind>1</kind>
             <string>///sync prop with active_weapon_sprite and arm_pose
-if real(varRead("prop0")) &gt; 0 and room = rm_menu or room = rm_lobby
+
+if room = rm_menu or room = rm_lobby or room = rm_login
+{
+    varWrite("arm_animation_speed",0)
+    varWrite("arm_animation_index",0)
+    sync_poses_and_animations()
+}
+
+if real(varRead("prop0")) &gt; 0 and room = rm_menu or room = rm_lobby or room = rm_login
 {
     varWrite("active_weapon_sprite",varRead("prop0"))
     
@@ -406,6 +495,31 @@ if real(varRead("prop0")) &gt; 0 and room = rm_menu or room = rm_lobby
         </arguments>
       </action>
     </event>
+    <event eventtype="7" enumb="5">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///destroy login gravatars
+if room = rm_login and id != net_manager.stat_gravatar
+    instance_destroy()
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="7" enumb="4">
       <action>
         <libid>1</libid>
@@ -468,6 +582,34 @@ if net_manager.show_cout
     draw_text(x,y-200,string(varRead("pName"))+" ["+string(varRead("pNum"))+"]")
     if net_manager.show_cout or room = rm_lobby and rtime() &lt; 30*3
         printf("::: GRAVATAR "+string(varRead("pName"))+": uniqueId = "+string(varRead("uniqueId"))+", pNum = "+string(varRead("pNum"))+", x="+string(x)+", y="+string(y))
+}
+
+if room = rm_login
+{
+    var wplat = 72
+    var val_min = 16
+    var val_max = 90
+    var val_step = (val_max-val_min)/5
+    
+    for (var i=5; i&gt;1; i--)
+    {
+        platcolors[i] = web_hsv(0,0,8)
+        plattopcolors[i] = web_hsv(0,0,max(0,val_max-i*val_step))
+    }
+    platcolors[1] = web_hsv(46,10,17)
+    plattopcolors[1] = web_hsv(46,85,100)
+    
+    var pnum = varRead("pNum")
+    pnum = constrict(pnum,1,getLength(platcolors)-1)
+    var platcolor = platcolors[pnum]
+    var plattopcolor = plattopcolors[pnum]
+    
+    var drawy = y+64*3.35*varRead("animation_scale")/3
+    draw_rectangle_colour(x-wplat/2,drawy,x+wplat/2,room_height+5,plattopcolor,plattopcolor,platcolor,platcolor,false)
+    draw_set_font(fnt_pstats)
+    draw_set_color(c_white)
+    draw_text(x,drawy+32,global_rank_2str(pnum))
+    
 }
 
 if not in_match()

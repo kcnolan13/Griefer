@@ -504,6 +504,7 @@
       <sprite>sprites\spr_blood_particle</sprite>
       <sprite>sprites\spr_blood2</sprite>
       <sprite>sprites\spr_splat</sprite>
+      <sprite>sprites\spr_splat_vector</sprite>
       <sprite>sprites\spr_doll_shadow</sprite>
     </sprites>
     <sprites name="lighting">
@@ -762,6 +763,7 @@
     <scripts name="physics">
       <scripts name="my_physics">
         <script>scripts\scr_basic_physics.gml</script>
+        <script>scripts\real_current_time.gml</script>
         <script>scripts\real_speed.gml</script>
         <script>scripts\sub_real.gml</script>
         <script>scripts\div_real.gml</script>
@@ -1516,6 +1518,7 @@
     <font>fonts\fnt_mod</font>
     <font>fonts\fnt_ready</font>
     <font>fonts\fnt_play</font>
+    <font>fonts\fnt_login</font>
     <font>fonts\fnt_cout</font>
     <font>fonts\fnt_pstats</font>
     <font>fonts\fnt_menu</font>

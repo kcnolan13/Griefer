@@ -49,6 +49,7 @@ text_xoff = 5
 
 auto_clear = true
 auto_start = true
+auto_capitalize = false
 
 random_counter = 0
 random_delay = room_speed*5
@@ -63,13 +64,13 @@ is_password = false
 
 text = text_default
 text_color_input = c_black
-text_color_default = c_gray
+text_color_default = c_dkgray
 
 alpha_max = 0.75
 halign = fa_center
 valign = fa_center
 
-backspace_delay = 10
+backspace_delay = 5
 backspace_counter = 0
 tab_delay = 20
 tab_counter = 0
@@ -128,6 +129,11 @@ modal_aligns()
             <string>///all dat ish
 event_inherited()
 
+if auto_capitalize or is_username
+{
+    text = capwords(text)
+}
+
 if active
 {
     //PRESS BACKSPACE
@@ -145,7 +151,7 @@ if active
         if backspace_counter &gt; backspace_delay
             backspace_counter = 0
     }
-    else backspace_counter = 0
+    else backspace_counter = sub_real(backspace_counter,1)
     
     //PRESS TAB
     if keyboard_check_pressed(vk_tab)
@@ -182,7 +188,14 @@ if active
 }
 
 if active
+{
     can_randomize = false
+    text_color = text_color_input
+}
+else
+{
+    text_color = text_color_default
+}
 
 //randomize username
 random_counter ++
@@ -227,9 +240,6 @@ if not str_cursor_counter
     else
         str_cursor = "|"
 }
-
-if active
-    printf(":::str_cursor = "+string(str_cursor))
 
 if clicked
     clicked --
@@ -303,6 +313,9 @@ keyboard_string = text
           <argument>
             <kind>1</kind>
             <string>///add text
+
+if keyboard_check(vk_backspace)
+    exit
 
 if not active and auto_start and popped_in
 {

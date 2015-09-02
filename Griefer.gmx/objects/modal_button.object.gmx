@@ -34,6 +34,7 @@ snap_2view = true
 clickable = true
 submit_action = scr_none
 can_press_enter = false
+pressed_enter = false
 </string>
           </argument>
         </arguments>
@@ -74,11 +75,12 @@ if global.using_gamepad
     }
 }
 
-if keyboard_check(vk_enter) and can_press_enter
+if keyboard_check(vk_enter) and can_press_enter and popped_in and not pressed_enter
 {
     cursor.x = x
     cursor.y = y
     event_perform(ev_mouse,ev_global_left_press)
+    pressed_enter = true
 }
 
 if clicked

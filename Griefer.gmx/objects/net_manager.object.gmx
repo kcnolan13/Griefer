@@ -32,7 +32,10 @@ draw_enable_swf_aa(true)
 setGppDebug(0)
 display_set_gui_size(WVIEW,HVIEW)
 
+login_when_ready = false
 view_adjust_delay = 0
+drawing_grav_popup = false
+current_time_offset = 0
 
 real_time_init()
 physics_going = true
@@ -1291,7 +1294,20 @@ if not bot_match and is_string(varRead("game_mode"))
           <argument>
             <kind>1</kind>
             <string>///META STUFF
-
+if drawing_grav_popup   
+    drawing_grav_popup --
+    
+if login_when_ready
+{
+    if not instance_exists(modal_splat)
+    {
+        login_when_ready = false
+        logIn(objVarRead(net_manager,"pName"))
+        printf("::: LOGGING IN")
+        room_goto(rm_menu)
+    }
+}
+    
 av_popup = noone
 
 if room = rm_menu
@@ -2626,15 +2642,19 @@ if room != rm_login
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///create login UI elements
-
+            <string>///login screen ----&gt; create login UI elements
 if room = rm_login
 {
+    room_speed = 60
+    
+    sendMessageReal("get_top_gravatars",1)
+    
     var login_col_width = WVIEW/5
-    var login_col_bdelay = room_speed*5
+    var login_col_bdelay = 30*7
     var bn_yoff = HVIEW*1/3
     var bn_ysep = 64*1
     var bn_height = 64*0.8
+    var bn_width = login_col_width*4/5
     var translation_lerp = 0.08
     {
         //LEFT HAND COLUMN
@@ -2644,9 +2664,12 @@ if room = rm_login
         login_col.text_halign = fa_center
         login_col.text_valign = fa_top
         login_col.text_yoff = 64*1.5
-        login_col.font = fnt_boom
+        login_col.font = fnt_login
+        login_col.header_height = 0//bn_height*2
         login_col.birth_delay = login_col_bdelay
-        login_col.color = web_hsv(220,38,54)
+        login_col.color = web_hsv(220,0,20)
+        //login_col.header_color = web_hsv(220,50,20)
+        //login_col.header_text_color = c_white
         login_col.text_color = c_white
         login_col.translation_xtarget = login_col_width
         login_col.translation_lerp = translation_lerp
@@ -2654,11 +2677,18 @@ if room = rm_login
         login_col.highlightable = false
         login_col.text = "Log In"
         login_col.bind_global_xoff_to_translation_x = true
-        login_col.alpha_max = 0.75
+        login_col.alpha_max = 1
+        
+        //gradient?
+        login_col.draw_gradient = true
+        login_col.grad1 = web_hsv(220,0,55)
+        login_col.grad2 = login_col.grad1
+        login_col.grad3 = web_hsv(220,0,10)
+        login_col.grad4 = login_col.grad3
         
         //username input
         uname = instance_create(-1*login_col_width/2,bn_yoff+(bn_height+bn_ysep)*0,bn_input_field)
-        uname.width = login_col_width*2/3
+        uname.width = bn_width
         uname.height = bn_height
         uname.max_length = 20
         uname.birth_delay = login_col_bdelay
@@ -2670,13 +2700,15 @@ if room = rm_login
         uname.translation_xtarget = login_col_width
         uname.translation_lerp = translation_lerp
         uname.depth = -10
-        uname.color = web_hsv(220,10,80)
-        uname.active_color = web_hsv(220,40,100)
+        uname.color = web_hsv(220,0,55)
+        uname.active_color = web_hsv(235,0,85)
+        uname.text_color_input = c_black
+        uname.text_color_default = c_white
         with uname modal_aligns()
         
         //password input
         pword = instance_create(-1*login_col_width/2,bn_yoff+(bn_height+bn_ysep)*1,bn_input_field)
-        pword.width = login_col_width*2/3
+        pword.width = bn_width
         pword.height = bn_height
         pword.max_length = 20
         pword.birth_delay = login_col_bdelay
@@ -2691,11 +2723,13 @@ if room = rm_login
         pword.auto_start = false
         pword.color = uname.color
         pword.active_color = uname.active_color
+        pword.text_color_input = uname.text_color_input
+        pword.text_color_default = uname.text_color_default
         with pword modal_aligns()
         
         //play button
         play = instance_create(-1*login_col_width/2,bn_yoff+(bn_height+bn_ysep)*2,bn_typical)
-        play.width = login_col_width*2/3
+        play.width = bn_width
         play.height = bn_height
         play.max_length = 20
         play.birth_delay = login_col_bdelay
@@ -2704,7 +2738,8 @@ if room = rm_login
         play.submit_action = scr_submit_play
         play.can_press_enter = true
         play.depth = -10
-        play.color = web_hsv(220,90,54)
+        play.color = web_hsv(220,80,5)
+        play.alpha_max = 0.925
         with play modal_aligns()
     }
 }
@@ -2761,6 +2796,9 @@ global.rank_names = 0
             <string>///randomize seed
 cout_str = ""
 cout_maxchars = 2000
+
+printf("::: GAME START CURRENT_TIME = "+string(current_time))
+current_time_offset = current_time
 </string>
           </argument>
         </arguments>
@@ -3253,9 +3291,9 @@ if room = rm_login
     title.x = room_width/2+global.xoff
     title.y = tit_y
     
-    if instance_place(cursor.x,cursor.y,title)
+    /*if instance_place(cursor.x,cursor.y,title)
         ts_target = title_scale_max
-    else
+    else*/
         ts_target = title_scale_min
         
     title_scale = lerp_real(title_scale,ts_target,ts_lerp_real)
@@ -3276,17 +3314,17 @@ if room = rm_login
         }
     } else title_text_timer = 0
 
-    if not instance_exists(modal_splat)
+    if not instance_exists(modal_splat) and not login_when_ready
     {
         //create the splats
         random_set_seed(69)
-        var total_splats = 60
+        var total_splats = 65
         var splats = 0
         var splats_per_step = 1
-        var bdelay = 1
+        var bdelay = 3
         var binc = 1
-        var xextra = 64*2.5
-        var yextra = -24
+        var xextra = 64*3
+        var yextra = 0
         var l = title.x-sprite_get_width(spr_title)/2-xextra
         var r = title.x+sprite_get_width(spr_title)/2+xextra
         var t = title.y-sprite_get_height(spr_title)/2-yextra
@@ -3703,6 +3741,40 @@ if av_popup = noone
     av_popup_drawn = false
     
 menu_mode = string(menu_mode)
+
+if room = rm_login
+{
+    with gravatar
+    {
+        var yoff = 64*3.2-30
+        var xoff = 16*string_length(string(varRead("pName")))/2
+    
+        draw_set_alpha(1)
+        draw_namerank(capwords(varRead("pName")), varRead("rank"), x - xoff,y - yoff, 1, c_black)
+    }
+
+    for (var i=0; i&lt;instance_number(gravatar); i++)
+    {
+        ID = instance_find(gravatar,i)
+        
+        var yoff = 64*3.2-30
+        var xoff = 16*string_length(string(objVarRead(ID,"pName")))/2
+    
+        if ID.hover_counter &gt; ID.hover_delay
+        {
+            if not drawing_grav_popup
+            {
+                audio_play_sound(snd_scroll3,2,false)
+            }
+            
+            drawing_grav_popup = 2
+            
+            //DRAW THE PLAYER POPUP
+            draw_player_popup_ext(cursor.x,cursor.y,capwords(objVarRead(ID,"pName")),objVarRead(ID,"rank"),objVarRead(ID,"global_rank"),objVarRead(ID,"true_skill"),
+                objVarRead(ID,"helmet0"),objVarRead(ID,"hat0"),1,is_bot(ID))
+        }
+    }
+}
 
 for (var i=0; i&lt;instance_number(avatar); i++)
 {

@@ -41,7 +41,8 @@ active = false
 highlightable = true
 
 alpha_max = 1
-scale_highlighted = 1.025
+scale_normal = 1.25
+scale_highlighted = 1.025*scale_normal
 halign = fa_center
 valign = fa_center
 

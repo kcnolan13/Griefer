@@ -270,11 +270,11 @@ while (genMessagesWaiting() and wait_counter < 500000)
                 
                     if instance_exists(his_playa)
                     {
-                        popup_alert(WVIEW/2,64*2.5,"Rage Quitter",capwords(genVal)+" has Rage Quit and Will Be Penalized.")
+                        popup_alert(WVIEW/2+global.xoff,64*2.5,"Rage Quitter",capwords(genVal)+" has Rage Quit and Will Be Penalized.")
                     }
                     else
                     {
-                        with popup_alert(WVIEW/2,64*2.5,"Network Error",capwords(genVal)+" has Rage Quit, but has not been penalized due to a network error.")
+                        with popup_alert(WVIEW/2+global.xoff,64*2.5,"Network Error",capwords(genVal)+" has Rage Quit, but has not been penalized due to a network error.")
                             critical = true
                     }
                     
@@ -311,32 +311,50 @@ while (genMessagesWaiting() and wait_counter < 500000)
             {
                 if (genVal = 1)
                 {
-                    audio_play_sound(snd_click,2,false)
-                    logIn(objVarRead(net_manager,"pName"))
                     printf("::: GOOD LOGIN")
-                    room_goto(rm_menu)
-                    return 0
-                } 
+                    audio_play_sound(snd_click,2,false)
+                    net_manager.login_when_ready = true
+                    with modal_window
+                    {
+                        if translation_x != 0 or object_index = modal_splat
+                        {
+                            if id = net_manager.uname or id = net_manager.pword or id = net_manager.play
+                                fade_out = true
+                            else
+                                translation_xtarget = 0
+                                
+                            if object_index = modal_splat
+                            {   
+                                fade_out = false
+                                fade_delay = ceil(random_range(1,10))
+                            }
+                        }
+                    }
+                }
                 else if (genVal = 2)
                 {
-                    with popup_yesno(WVIEW/2,HVIEW/2,"Create Player", "Create new player "+string(objVarRead(net_manager,"pName"))+"?",scr_create_user,scr_none)
+                    with popup_yesno(WVIEW/2,HVIEW/2,"Create Player", "Create new player "+string(capwords(objVarRead(net_manager,"pName")))+"?",scr_create_user,scr_none)
                     {
                         header_color = web_hsv(224,54,71)
                     }
                 } 
                 else {
                     audio_play_sound(snd_denied,2,false)
-                    bn_login_user.alert = "User Exists. Bad Password."
-                    bn_login_user.alert_alpha = 1.5
-                    printf("::: WRONG USERNAME / PASSWORD")
+                    with popup_alert(WVIEW/2+global.xoff,HVIEW/2,"User Exists / Wrong Password","That is not the correct password for "+string(capwords(objVarRead(net_manager,"pName")))+".")
+                    {
+                        header_color = web_hsv(0,100,85)
+                        header_text_color = c_white
+                    }
                 }
             }
             else
             {
                 audio_play_sound(snd_denied,2,false)
-                bn_login_user.alert = "Logged In Somewhere Else."
-                bn_login_user.alert_alpha = 1.5
-                printf("::: MULTIPLE LOGINS DETECTED")
+                with popup_alert(WVIEW/2+global.xoff,HVIEW/2,"Already Logged In",string(capwords(objVarRead(net_manager,"pName")))+" is logged in somewhere else.")
+                {
+                    header_color = web_hsv(0,100,85)
+                    header_text_color = c_white
+                }
             }
         break
         
@@ -371,7 +389,7 @@ while (objCreatesWaiting() and wait_counter < 50)
     wait_counter++
     obj_index = readObjCreateIndex()
     unique_id = readObjCreateUniqueId()
-    printf("::: objCreateUniqueId: "+string(unique_id))
+    printf("::: objCreate: "+string(unique_id)+": "+string(object_get_name(obj_index)))
     my_x = readObjCreateMyX()
     my_y = readObjCreateMyY()
     
@@ -388,6 +406,7 @@ while (objCreatesWaiting() and wait_counter < 50)
         
         //printf("create obj: "+ID.id+", at "+ID.x+", "+ID.y+" ---> uniqueId: "+unique_id);
         objVarWrite(ID,"uniqueId",unique_id)
+        objVarWrite(ID,"pName",unique_id)
        // if SUPER_DEBUG
          //   printf("created (object "+ID.object_index+") with uniqueId "+objVarRead(ID,"uniqueId"))
     }
@@ -399,7 +418,6 @@ push_count = 0
 while (objUpdatesWaiting() and wait_counter < 1000)
 {
     net_manager.receptions++
-    
     wait_counter++
     //obj_index = readObjUpdateIndex()
     //unique_id = readObjUpdateUniqueId()

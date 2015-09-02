@@ -55,7 +55,8 @@ submit_action = scr_none
 text_color = c_white
 color = web_hsv(216,63,100)
 
-is_gui = true
+is_gui = false
+snap_2view = true
 color = c_black
 can_press_enter = false
 </string>

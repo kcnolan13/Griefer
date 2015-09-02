@@ -2,7 +2,7 @@
 var ideal = argument0
 
 //give 5 seconds for game to boot up
-if current_time < 1000*5
+if real_current_time() < 1000*10 and fps < 55
 {
     return ideal
 }
@@ -11,7 +11,7 @@ if current_time < 1000*5
 var ret = ideal * abs(delta_time*30/(net_manager.ms_per_sec))
 //printf("::: real_speed = "+string(ret))
 
-if ret > 5*ideal
+if ret > 5*ideal and real_current_time() < 1000*30
     ret = 5*ideal
 
 return ret
