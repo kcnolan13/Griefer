@@ -34,14 +34,15 @@ halign = fa_center
 valign = fa_center
 life = 0
 
-draw_gradient = true
-
 width = view_wview*2/3+64
 height = view_hview*2/3
 extra_height = 50
 
 if in_match()
 {
+    draw_gradient = true
+    draw_fade = true
+    
     mode_index = 0
     view_wview = 1365
     view_hview = 9/16*1365
@@ -57,7 +58,7 @@ y = view_yview+view_hview/2+36
 behave_match = in_match()
 
 y_adder = 22
-x_adder_menus = 64*1.5
+x_adder_menus = 0//64*1.5
 
 if not behave_match
     x_adder = x_adder_menus
@@ -183,46 +184,34 @@ x_adder -= width/2
 var bdelay = 1
 var binc = 2
 
-if behave_match
-{
-    w = 72*4
-    hspacer = w+36
-    xoff = -150
-}
-else
-    {
-    w = 72*4.5
-    hspacer = w*2/3
-    xoff = 68+x_adder
-}
+w = 72*4
+hspacer = w+36
+xoff = -150
 
 h = 72
 yoff = top-(h+12)+72
-//64*4
-
-//GET/MATCH SETTINGS
-var obj = bn_match_settings
-if not behave_match
-    obj = bn_gen_settings
-blah = instance_create(left+width*4/5-hspacer+xoff,yoff,obj)
-blah.width = w
-blah.height = h
-blah.depth = depth-1
-blah.birth_delay = bdelay
-blah.hue = 20
-blah.sat = 0
-blah.val = 30
-blah.color = web_hsv(chue,csat,cval)
-blah.active_color = web_hsv(chue*chue_mult,csat*csat_mult,cval*cval_mult)
-blah.text_halign = fa_left
-blah.text_xoff = 72+5
-blah.text_color = text_color
-blah.image = icon_settings
-bdelay += binc
 
 //POSSIBLY GEN SETTINGS IN MIDDLE
 if behave_match
 {
+    //MATCH SETTINGS
+    blah = instance_create(left+width*4/5-hspacer+xoff,yoff,bn_match_settings)
+    blah.width = w
+    blah.height = h
+    blah.depth = depth-1
+    blah.birth_delay = bdelay
+    blah.hue = 20
+    blah.sat = 0
+    blah.val = 30
+    blah.color = web_hsv(chue,csat,cval)
+    blah.active_color = web_hsv(chue*chue_mult,csat*csat_mult,cval*cval_mult)
+    blah.text_halign = fa_left
+    blah.text_xoff = 72+5
+    blah.text_color = text_color
+    blah.image = icon_settings
+    bdelay += binc
+    
+    //GEN SETTINGS
     blah = instance_create(left+width*4/5+xoff,yoff,bn_gen_settings)
     blah.width = w
     blah.height = h
@@ -238,24 +227,79 @@ if behave_match
     blah.text_color = text_color
     blah.image = icon_settings
     bdelay += binc
+    
+    //CONTROL SETTINGS
+    blah = instance_create(left+width*4/5+hspacer+xoff,yoff,bn_control_settings)
+    blah.width = w
+    blah.height = h
+    blah.depth = depth-1
+    blah.birth_delay = bdelay
+    blah.hue = 20
+    blah.sat = 0
+    blah.val = 30
+    blah.color = web_hsv(chue,csat,cval)
+    blah.active_color = web_hsv(chue*chue_mult,csat*csat_mult,cval*cval_mult)
+    blah.text_halign = fa_left
+    blah.text_xoff = 72+5
+    blah.text_color = text_color
+    blah.image = icon_settings
+    bdelay += binc
+}
+else
+{
+    //GEN SETTINGS
+    blah = instance_create(left+width*4/5-hspacer+xoff,yoff,bn_gen_settings)
+    blah.width = w
+    blah.height = h
+    blah.depth = depth-1
+    blah.birth_delay = bdelay
+    blah.hue = 20
+    blah.sat = 0
+    blah.val = 30
+    blah.color = web_hsv(chue,csat,cval)
+    blah.active_color = web_hsv(chue*chue_mult,csat*csat_mult,cval*cval_mult)
+    blah.text_halign = fa_left
+    blah.text_xoff = 72+5
+    blah.text_color = text_color
+    blah.image = icon_settings
+    bdelay += binc
+
+    //CONTROL SETTINGS
+    blah = instance_create(left+width*4/5+xoff,yoff,bn_control_settings)
+    blah.width = w
+    blah.height = h
+    blah.depth = depth-1
+    blah.birth_delay = bdelay
+    blah.hue = 20
+    blah.sat = 0
+    blah.val = 30
+    blah.color = web_hsv(chue,csat,cval)
+    blah.active_color = web_hsv(chue*chue_mult,csat*csat_mult,cval*cval_mult)
+    blah.text_halign = fa_left
+    blah.text_xoff = 72+5
+    blah.text_color = text_color
+    blah.image = icon_settings
+    bdelay += binc
+    
+    //LOG OUT
+    blah = instance_create(left+width*4/5+hspacer+xoff,yoff,bn_logout_settings)
+    blah.width = w
+    blah.height = h
+    blah.depth = depth-1
+    blah.birth_delay = bdelay
+    blah.hue = 20
+    blah.sat = 0
+    blah.val = 30
+    blah.color = web_hsv(chue,csat,cval)
+    blah.active_color = web_hsv(chue*chue_mult,csat*csat_mult,cval*cval_mult)
+    blah.text_halign = fa_left
+    blah.text_xoff = 72+5
+    blah.text_color = text_color
+    blah.image = icon_quit
+    bdelay += binc
 }
 
-//CONTROL SETTINGS
-blah = instance_create(left+width*4/5+hspacer+xoff,yoff,bn_control_settings)
-blah.width = w
-blah.height = h
-blah.depth = depth-1
-blah.birth_delay = bdelay
-blah.hue = 20
-blah.sat = 0
-blah.val = 30
-blah.color = web_hsv(chue,csat,cval)
-blah.active_color = web_hsv(chue*chue_mult,csat*csat_mult,cval*cval_mult)
-blah.text_halign = fa_left
-blah.text_xoff = 72+5
-blah.text_color = text_color
-blah.image = icon_settings
-bdelay += binc
+
 
 </string>
           </argument>
@@ -301,6 +345,7 @@ if fade_out or (not behave_match and menmode() != "settings")
     with bn_match_quit fade_out = true
     with bn_gen_settings fade_out = true
     with bn_control_settings fade_out = true
+    with bn_logout_settings fade_out = true
 }
 else if life &gt; 20
 { 

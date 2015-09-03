@@ -195,6 +195,11 @@ if active
 else
 {
     text_color = text_color_default
+    if text = ""
+    {
+        text = text_default
+        auto_clear = true
+    }
 }
 
 //randomize username

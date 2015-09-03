@@ -226,6 +226,7 @@ if in_match()
             <string>///manage stat tabs ---&gt; MUST BE FIRST IN STEP TO EXIT PROPERLY
 if in_match() or room = rm_login exit
 
+/*
 if net_manager.menu_mode = "stats"
 {
     if not instance_exists(bn_stat_tab) and grav_ready
@@ -279,7 +280,7 @@ else //not in stats mode
 {
     fade_modal(bn_stat_tab)
 }
-
+*/
 </string>
           </argument>
         </arguments>

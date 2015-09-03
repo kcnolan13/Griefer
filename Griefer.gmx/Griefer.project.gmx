@@ -1621,6 +1621,7 @@
         <object>objects\bn_gen_settings</object>
         <object>objects\bn_match_settings</object>
         <object>objects\bn_control_settings</object>
+        <object>objects\bn_logout_settings</object>
         <object>objects\bn_match_quit</object>
         <object>objects\bn_cedit</object>
         <object>objects\bn_clabel</object>

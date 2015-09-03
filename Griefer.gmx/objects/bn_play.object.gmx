@@ -146,31 +146,38 @@ if net_manager.menu_mode != "lottery_steal" and not instance_exists(bn_tab) and 
     tabs[1] = bn_armory
     tabs[2] = bn_challenges
     tabs[3] = bn_stats
-    tabs[4] = bn_settings
-    tabs[5] = bn_logout
+    tabs[4] = bn_stats
+    tabs[5] = bn_stats
+    tabs[6] = bn_settings
     
     imgs[0] = icon_play
     imgs[1] = icon_armory
     imgs[2] = icon_challenges
     imgs[3] = icon_friends
-    imgs[4] = icon_settings
-    imgs[5] = icon_quit
+    imgs[4] = icon_friends
+    imgs[5] = icon_friends
+    imgs[6] = icon_settings
+    
+    stats_start_index = 3
     
     hues[0] = 255*3.5/4
     hues[1] = 255
     hues[2] = 255*2.5/4
     hues[3] = 255*1.5/4
-    hues[4] = 0
-    hues[5] = 0
+    hues[4] = 255*1.5/4
+    hues[5] = 255*1.5/4
+    hues[6] = 0
     
     hue = 0
     val = 0
     
     left = 10
     top = 5
-    width = 72*2
     height = 72
-    spacer = 10//room_width - (width*(array_length_1d(tabs)-1) + 3*left)
+    spacer = 10
+    width = (WVIEW-(getLength(tabs)*spacer)-spacer)/getLength(tabs)
+    
+    //room_width - (width*(array_length_1d(tabs)-1) + 3*left)
     //spacer /= array_length_1d(tabs)
     birth_delay = 4
     
@@ -188,18 +195,20 @@ if net_manager.menu_mode != "lottery_steal" and not instance_exists(bn_tab) and 
         ID.height = height
         ID.birth_delay = birth_delay
         
-        if i = 0 or i=array_length_1d(tabs)-1 or i=4
+        if i = 0 or i=array_length_1d(tabs)-1 or i=6
         {
             val = 50
             sat = 0
-            
-            if i=4
-                val = 140
         }
         else
         {
             val = 100
             sat = 50
+        }
+        
+        if i &gt;= stats_start_index and i &lt;= stats_start_index+2
+        {
+            ID.stat_tab = stat_manager.tabs[i-stats_start_index]       
         }
         
         ID.color = make_colour_hsv(hues[i],sat,val)
@@ -250,45 +259,39 @@ if net_manager.menu_mode = "lottery_steal" and instance_exists(bn_tab)
             <string>///create randomize modal and post-match modal
 if net_manager.menu_mode = "armory" and not instance_exists(bn_randomize)
 {
-    tabs[0] = bn_randomize
-
-    if instance_exists(bn_logout)
-        left = bn_logout.x + 32 + bn_logout.width
-        
-    top = 5
-    width = 72*3.25
+    tab = bn_randomize
+    
+    width = 72*2.5
     height = 72
     birth_delay = 1
+    
+    left = WVIEW-10-width
+    top = HVIEW-10-height
     
     hue = 255
     sat = 0
     val = 0
     
-    for (var i=0; i&lt;1; i++)
-    {
-        ID = instance_create(left,top,tabs[i])
-        ID.width = width
-        ID.height = height
-        ID.birth_delay = birth_delay
-        
-        ID.color = make_colour_hsv(hue,sat,val)
-        ID.active_color = make_colour_hsv(hue,sat*4,125)
-        
-        ID.text_halign = fa_left
-        ID.text_xoff = 72+5
-        ID.image = icon_dice
-        
-        birth_delay += 10
-    }
+    ID = instance_create(left,top,tab)
+    ID.width = width
+    ID.height = height
+    ID.birth_delay = birth_delay
+    
+    ID.color = make_colour_hsv(hue,sat,val)
+    ID.active_color = make_colour_hsv(hue,sat*4,125)
+    
+    ID.text_halign = fa_left
+    ID.text_xoff = 72+5
+    ID.image = icon_dice
 }
 
-if room = rm_lobby and net_manager.menu_mode = "lobby"  and net_manager.came_from_match and not instance_exists(bn_postmatch) and instance_exists(bn_logout)
+if room = rm_lobby and net_manager.menu_mode = "lobby"  and net_manager.came_from_match and not instance_exists(bn_postmatch) and instance_exists(bn_settings)
 {
-    if bn_logout.popped_in
+    if bn_settings.popped_in
     {
-        tabs[0] = bn_postmatch
+        tab = bn_postmatch
         
-        left = bn_logout.x + 80
+        left = bn_settings.x + 80
             
         top = 164
         width = 72*3.25
@@ -299,22 +302,17 @@ if room = rm_lobby and net_manager.menu_mode = "lobby"  and net_manager.came_fro
         sat = 30
         val = 70
         
-        for (var i=0; i&lt;1; i++)
-        {
-            ID = instance_create(left,top,tabs[i])
-            ID.width = width
-            ID.height = height
-            ID.birth_delay = birth_delay
-            
-            ID.color = make_colour_hsv(hue,sat,val)
-            ID.active_color = make_colour_hsv(hue,sat*4,val*2)
-            
-            ID.text_halign = fa_left
-            ID.text_xoff = 72+5
-            ID.image = icon_postmatch
-            
-            birth_delay += 10
-        }
+        ID = instance_create(left,top,tab)
+        ID.width = width
+        ID.height = height
+        ID.birth_delay = birth_delay
+        
+        ID.color = make_colour_hsv(hue,sat,val)
+        ID.active_color = make_colour_hsv(hue,sat*4,val*2)
+        
+        ID.text_halign = fa_left
+        ID.text_xoff = 72+5
+        ID.image = icon_postmatch
     }
 }
 

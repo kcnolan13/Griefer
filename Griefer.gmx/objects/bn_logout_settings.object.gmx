@@ -28,14 +28,14 @@
             <string>///inherit and define properties
 life = 0
 event_inherited()
-text = "Control Mappings"
 alpha_max = 0.75
 halign = fa_center
 valign = fa_center
 
-gamepad_yes = "Using Gamepad"
-gamepad_no = "Use Gamepad"
-gamepad_disconnected = "[No Gamepad Detected]"
+label = "Log Out"
+txt_logout = "Log Out"
+txt_leave_match = "Leave"
+text = "Log Out"
 
 alarm[0] = 1
 
@@ -45,9 +45,6 @@ hue = 0
 sat = 0
 val = 0
 notif_scale = 1.25
-
-label_name = "Use Gamepad"
-using_gamepad = false
 
 active_color = make_colour_hsv(0,0,150)
 </string>
@@ -109,12 +106,20 @@ life++
 alpha_max = 1
 highlightable = true
 
-if instance_exists(modal_controls)
+if objVarRead(net_manager,"game_mode") = "no_mode" or room = rm_menu
 {
-if modal_controls.mode_index = 2
-    active = true
-else active = false
+    text = txt_logout
+    image = icon_quit
 }
+else
+{
+    text = txt_leave_match
+    image = icon_back
+}
+
+if not instance_exists(modal_controls)
+    fade_out = true
+
 </string>
           </argument>
         </arguments>
@@ -144,19 +149,38 @@ if not modal_highlighted(id)
     exit
 }
 
-if clicked exit
-    clicked = 2
-
-if instance_exists(modal_controls)
+if exit_child or net_manager.lobby_match_countdown
 {
-    modal_controls.mode_index = 2
-    with bn_cedit fade_out = true
-    with bn_clabel fade_out = true
-    with bn_match_quit fade_out = true
-    with modal_controls
+    exit_child = false
+    exit
+}
+
+if label = txt_logout or room = rm_menu
+{
+    if net_manager.armor_modified = false and not net_manager.saving_armor
     {
-        regen_cedits(FL_NORMAL)
+        if objVarRead(net_manager,"game_mode") != "no_mode"
+        {
+            leave_matchmaking()
+            sendMessageReal("syncPlayersConnected",FL_NORMAL)
+        }
+        logOut()
+        griefer_restart()
+    } else {
+        if not net_manager.saving_armor
+            net_manager.saving_armor = net_manager.saving_armor_max
+            
+        net_manager.saving_armor_reboot = true
+        
+        with net_manager send_all_bpart_stats()
     }
+} else
+{
+    net_manager.party_leader = false
+    net_manager.in_party = false
+    net_manager.bot_match = false
+    leave_matchmaking()
+    sendMessageReal("syncPlayersConnected",FL_NORMAL)
 }
 </string>
           </argument>

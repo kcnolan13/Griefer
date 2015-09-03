@@ -27,6 +27,8 @@
             <kind>1</kind>
             <string>///initialization
 serverURL = "http://www.puddlesquid.com:8080"
+show_debug_stats = true
+show_debug_overlay(show_debug_stats)
 draw_set_swf_aa_level(1)
 draw_enable_swf_aa(true)
 setGppDebug(0)
@@ -57,8 +59,6 @@ drew_armory_grid = false
 votes1 = 0
 votes2 = 0
 votes3 = 0
-
-show_debug_overlay(true)
 
 force_sync_countdown = 0
 
@@ -1561,15 +1561,15 @@ if room = rm_menu or room = rm_lobby
         case "stats":
             if instance_exists(stat_gravatar)
             {
-                objVarWrite(stat_gravatar,"dude_x",room_width*1/5)
+                objVarWrite(stat_gravatar,"dude_x",room_width*1/9)
                 objVarWrite(stat_gravatar,"dude_y",room_height*1.75/3-32)
             }
-            dude_x = -8*64
+            dude_x = -9*64
             dude_y = room_height*1.75/3-64
         break
         
         case "settings":
-            dude_x = room_width*1/9
+            dude_x = -9*64
             dude_y = room_height*1.75/3-64
         break
         
@@ -1579,7 +1579,7 @@ if room = rm_menu or room = rm_lobby
         break
         
         case "leaderboards":
-            dude_x = -8*64
+            dude_x = -9*64
             dude_y = room_height*1.75/3-64
         break
         
@@ -4116,6 +4116,31 @@ if show_cout
     draw_text_ext(20,10,cout_str,14,room_width/2-35)
     draw_set_alpha(1)
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="122">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///toggle debug stats
+show_debug_stats ^= 1
+show_debug_overlay(show_debug_stats)
 </string>
           </argument>
         </arguments>

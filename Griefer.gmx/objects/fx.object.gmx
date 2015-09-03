@@ -43,6 +43,9 @@ draw_surf_mode = 0
 bfade_delay = 0
 bfade_max = 30*3
 surf_tex = -99
+surf_blood = NO_HANDLE
+surf_blocks = NO_HANDLE
+surf_blocks_inverse = NO_HANDLE
 
 draw_mode = 0
 </string>

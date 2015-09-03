@@ -28,8 +28,8 @@
             <string>///inherit and specify new label
 event_inherited()
 
-label = "Randomize Armor"
-text = "Randomize Armor"
+label = "Randomize"
+text = "Randomize"
 active = false
 </string>
           </argument>

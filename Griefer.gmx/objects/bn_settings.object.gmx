@@ -28,8 +28,8 @@
             <string>///inherit and specify new label
 event_inherited()
 
-label = "Settings"
-text = "Settings"
+label = "Options"
+text = label
 active = false
 </string>
           </argument>

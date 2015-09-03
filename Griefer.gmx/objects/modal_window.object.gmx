@@ -40,7 +40,15 @@ active = false
 active_color = c_gray
 color_highlighted = GARBAGE
 highlightable = true
+
 surface = NO_HANDLE
+
+surf_3d = NO_HANDLE
+surf_3d_ready = false
+is_3d = false
+rot_3d = 0
+tex_3d = NO_HANDLE
+
 master_scale = 1
 is_gui = false
 gui_xoff = x
@@ -193,6 +201,9 @@ top = y
             <string>///free surface
 if surface_exists(surface)
     surface_free(surface)
+
+if surface_exists(surf_3d)
+    surface_free(surf_3d)
 </string>
           </argument>
         </arguments>
@@ -414,6 +425,34 @@ else
             alpha = lerp_real(alpha,alpha_highlight,scale_lerp_real)
     }
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="3">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///free surface
+if surface_exists(surface)
+    surface_free(surface)
+
+if surface_exists(surf_3d)
+    surface_free(surf_3d)
 </string>
           </argument>
         </arguments>
