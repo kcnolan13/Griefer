@@ -39,7 +39,8 @@ meter_val = 0
 meter_desc = 0
 meter_col_out = c_blue
 meter_col_in = c_aqua
-alpha_max = 0.95
+alpha_max = 1
+highlightable = false
 
 radius = 0
 </string>

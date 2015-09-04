@@ -18,14 +18,17 @@ if getLength(meters) < 1
     printf("ERROR: manage_meters cannot seem to locate meters array")
 }
 
-if not instance_exists(history_chart) and instance_exists(pstat_title)
+if not instance_exists(history_chart)
 {
-    history_chart = instance_create(pstat_title.x+64*2.25+history_chart_width/2+20,pstat_title.y+64*2+12+history_chart_height/2,modal_stat_history)
+    history_chart = instance_create(WVIEW/2-32,HVIEW/2+64*1.75,modal_stat_history)
     history_chart.birth_delay = 20
 }
 
 var bdelay = 3
 var birthmas = 3
+
+var met_xst = WVIEW/2-history_chart.width/2-32
+var met_yst = 64*2+32
 
 for (var i=0; i<getLength(meters); i++)
 {
@@ -48,8 +51,9 @@ for (var i=0; i<getLength(meters); i++)
     
     met = meters[i]
     
-    met.x = met_x
-    met.y = met_y
+    met.x = met_xst
+    met_xst += 64*2.25
+    met.y = met_yst
     
     if instance_exists(met)
     {
@@ -102,108 +106,73 @@ for (var i=0; i<getLength(meters); i++)
     
 }
 
-var xst = room_width*1/2
-var yst = 72+64
+var xst = room_width*3/4+32
+var xst_original = xst
+var yst = 72+20
 var xsep = 128
-var ysep = 40
+var ysep = 120
 
 var w = 64*3
 var h = 36
 
-bdelay = bdelay
-birthmas = 1
-
-//recreate title
-if not instance_exists(pstat_title)
 {
-    tit = instance_create(xst+xsep/3-10,yst-24+15,bn_slabel)
-    pstat_title = tit
+
+    bdelay = bdelay
+    birthmas = 1
     
-    if stat_tab = tabs[0]
-        tit.text = "Competitive   Stats"
-    else
-        tit.text = "Bot   Mode   Stats"
-        
-    tit.width = 64*8
-    tit.height = 64
-    tit.font = fnt_pstats_title
-    tit.birth_delay = 2
-    tit.text_color = c_dkgray
-}
-
-//recreate pname
-if not instance_exists(pstat_pname)
-{
-    tit = instance_create(xst+xsep/3+64*5.9,yst-24+8,bn_slabel)
-    pstat_pname = tit
+    yst += ysep*1.75
     
-    tit.text = capwords(objVarRead(guy,"pName"))
-        
-    tit.width = 64*8
-    tit.height = 64
-    tit.font = fnt_pname_title
-    tit.birth_delay = 15
-    tit.text_color = c_white
-}
-
-yst += ysep*1.75
-
-for (var i=0; i<getLength(pstats); i++)
-{
-    if not instance_exists(pstat_labels[i])
+    for (var i=0; i<getLength(pstats); i++)
     {
-        lab = instance_create(xst-48,yst,bn_slabel)
-        lab.text = capwords_super(pstats[i])+":"
-        
-        if pstats[i] = "time"
+        if not instance_exists(pstat_labels[i])
         {
-            lab.text = global.time_played
+            lab = instance_create(xst-48,yst,bn_slabel)
+            
+            //the stat title!
+            lab.header_text = capwords_super(pstats[i])+":"
+            
+            if pstats[i] = "time"
+            {
+                lab.header_text = global.time_played
+            }
+            
+            printf("::: lab text: "+string(lab.header_text))
+            lab.text_color = c_white
+            lab.label = lab.header_text
+            lab.birth_delay = bdelay
+            bdelay += birthmas
+            pstat_labels[i] = lab
+            pstat_vals[i] = lab
+            lab.color = web_hsv(235,50,50)
+            
+            //the stat value!
+            strval = string(varRead(pstats[i]))
+            if pstats[i] = "time"
+            {
+                printf("::: Time Stat [in manage meters]: "+string(real(varRead("time"))))
+                strval = time_ms_2string(real(varRead("time")),true)
+                printf("::: time string: "+strval)
+            }
+            lab.text = strval
         }
         
-        printf("::: lab text: "+string(lab.text))
-        lab.text_color = c_dkgray
-        lab.width = w
-        lab.height = h
-        lab.label = lab.text
-        lab.birth_delay = bdelay
-        lab.font = fnt_pstats
-        bdelay += birthmas
-        pstat_labels[i] = lab
-    }
-    
-    if not instance_exists(pstat_vals[i])
-    {
-        val = instance_create(xst+xsep,yst,bn_slabel)
+        xst += ysep
         
-        strval = string(varRead(pstats[i]))
-        if pstats[i] = "time"
+        if (i+1) mod 3 = 0
         {
-            printf("::: Time Stat [in manage meters]: "+string(real(varRead("time"))))
-            strval = time_ms_2string(real(varRead("time")),true)
-            printf("::: time string: "+strval)
+            yst += ysep
+            xst = xst_original
         }
-        val.text = strval
-        printf("::: val text: "+string(val.text))
-        
-        val.text_color = c_black
-        val.width = w
-        val.height = h
-        val.label = val.text
-        val.font = fnt_pstats
-        val.birth_delay = bdelay
-        bdelay += birthmas
-        pstat_vals[i] = val
+            
+        lab = pstat_vals[i]
+        //keep vals up-to-date
+        if instance_exists(lab)
+        {
+            strval = string(varRead(pstats[i]))
+            if pstats[i] = "time"
+                strval = time_ms_2string(real(varRead("time")),true)
+            lab.text = strval 
+        }
     }
-    
-    yst += ysep
-    val = pstat_vals[i]
-    //keep vals up-to-date
-    if instance_exists(val)
-    {
-        strval = string(varRead(pstats[i]))
-        if pstats[i] = "time"
-            strval = time_ms_2string(real(varRead("time")),true)
-        val.text = strval
-        val.label = val.text   
-    }
+
 }

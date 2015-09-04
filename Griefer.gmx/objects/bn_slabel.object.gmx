@@ -29,11 +29,18 @@
 event_inherited()
 text = ""
 alpha = 0
-alpha_max = 0
-alpha_highlight = 0
+alpha_max = 1
+alpha_highlight = 1
 halign = fa_center
 valign = fa_center
-font = fnt_hud_big
+font = fnt_hud
+header_font = fnt_hud_small
+text_halign = fa_center
+text_valign = fa_center
+highlightable = 0
+
+width = 105
+height = width
 
 alarm[0] = 1
 
@@ -67,6 +74,9 @@ notif_scale = 1.25
             <kind>1</kind>
             <string>///adjust for aligns
 modal_aligns()
+
+header_color = color
+header_height = height/5
 </string>
           </argument>
         </arguments>

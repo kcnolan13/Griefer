@@ -11,6 +11,7 @@ with stat_manager
     pstat_title = NO_HANDLE
     leaderboards_title = NO_HANDLE
     pstat_pname = NO_HANDLE
+    ts = NO_HANDLE
     
     for (var i=0; i<getLength(pstat_labels[i]); i++)
     {

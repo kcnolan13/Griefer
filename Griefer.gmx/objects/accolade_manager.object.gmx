@@ -43,9 +43,9 @@ grid_hsep = match_hsep
 grid_vsep = grid_hsep
 
 //stat mode scrolling variables
-grid_left = room_width/2-64*3.5
-grid_right = room_width-48
-grid_ymid = room_height/2+64*4
+grid_left = room_width/2-64*3.25
+grid_right = room_width-64
+grid_ymid = room_height/2+64*4.5
 grid_xmid = average2(grid_left,grid_right)
 grid_width = abs(grid_right-grid_left)
 sradius = 64

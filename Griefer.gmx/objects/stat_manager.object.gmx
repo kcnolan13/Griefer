@@ -27,6 +27,7 @@
             <kind>1</kind>
             <string>///init
 stat_flag = FL_NORMAL
+ts = NO_HANDLE
 
 grav_name = "GoshDarnNoOne"
 grav_ready = false
@@ -67,6 +68,7 @@ varWrite("rank",-1)
 varWrite("xp",-1)
 varWrite("time",-1)
 varWrite("points",-1)
+varWrite("true_skill",-1)
 
 //arrays for YOUR personal stat labels
 pstats[PSTAT_KILLS] = "kills"
@@ -77,6 +79,7 @@ pstats[PSTAT_LOSSES] = "losses"
 pstats[PSTAT_KILL_STREAK] = "kill_streak"
 pstats[PSTAT_WIN_STREAK] = "win_streak"
 pstats[PSTAT_TIME] = "time"
+pstats[2] = "true_skill"
 
 len = getLength(pstats)
 
@@ -361,6 +364,7 @@ if net_manager.menu_mode = "stats"
                 tit.font = fnt_pstats_title
                 tit.birth_delay = 10
                 tit.text_color = c_dkgray
+                tit.alpha_max = 0
             }
         break
     }

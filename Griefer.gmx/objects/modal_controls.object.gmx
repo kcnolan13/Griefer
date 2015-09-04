@@ -60,10 +60,7 @@ behave_match = in_match()
 y_adder = 22
 x_adder_menus = 0//64*1.5
 
-if not behave_match
-    x_adder = x_adder_menus
-else
-    x_adder = 0
+x_adder = 0
 
 y += y_adder
 x += x_adder

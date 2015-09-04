@@ -26,7 +26,7 @@ else
     h = 55
     hspacer = w+36
     yoff = top+62
-    xoff = 40+xadder
+    xoff = 40+x_adder
     
     //make local copy of global control names (for no reason)
     if fl = FL_GEN_SETTINGS

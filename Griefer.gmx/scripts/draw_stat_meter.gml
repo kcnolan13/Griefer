@@ -9,7 +9,7 @@ var scale = argument6
 var backing_percent_full = argument7
 var actual_percent_full = argument8
 
-radius = 64*scale
+radius = 58*scale
 var rim_width = 4*scale
 var bar_width = 18*scale
 var rim_gap = 4*scale

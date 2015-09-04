@@ -30,12 +30,12 @@ event_inherited()
 
 halign = fa_center
 valign = fa_center
+modal_aligns()
 
 width = 64*7
 height = 64*5
 
 //color scheme
-alpha_max = 0.9
 col_bg = web_hsv(0,0,5)
 col_axes = c_ltgray
 point_rad = 15
@@ -47,6 +47,9 @@ drop_color_highlighted = c_dkgray
 drop_alpha_scaler = 0.8
 line_alpha_scaler = 0.6
 axes_alpha_scaler = 0.4
+highlightable = false
+alpha_max = 1
+scale_normal = 1.1
 
 //important vars
 col_pos = c_aqua

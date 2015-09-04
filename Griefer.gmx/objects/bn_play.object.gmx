@@ -187,6 +187,7 @@ if net_manager.menu_mode != "lottery_steal" and not instance_exists(bn_tab) and 
     ID.width = left+(width+spacer)*array_length_1d(tabs)
     ID.height = height+top*2
     ID.highlightable = false
+    ID.scale_born = 1
     
     for (var i=0; i&lt;array_length_1d(tabs); i++)
     {
