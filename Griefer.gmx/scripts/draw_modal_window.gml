@@ -134,6 +134,7 @@ if not surface_exists(surface)
                 draw_text_ext_transformed(xpos+text_pad,ypos,text_2draw,text_linesep,(width-text_pad*2),scale*master_scale,scale*master_scale,0)
             else
                 draw_text_ext_transformed(xpos-text_pad,ypos,text_2draw,text_linesep,(width-text_pad*2),scale*master_scale,scale*master_scale,0)
+            
             if header_text != ""
             {
                 draw_set_font(header_font)

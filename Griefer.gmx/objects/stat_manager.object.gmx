@@ -142,7 +142,7 @@ meter_col_ins[METER_RANK] = web_hsv(0,0,0)
 meter_descs[METER_KDR] = "KDR"
 meter_descs[METER_WL] = "W/L"
 meter_descs[METER_PPL] = "PPL"
-meter_descs[METER_RANK] = "Rank"
+meter_descs[METER_RANK] = global.tskill
 
 meter_radius = 64*3.5
 meter_swath = 135

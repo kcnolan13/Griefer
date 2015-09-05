@@ -41,6 +41,9 @@ active_color = c_gray
 color_highlighted = GARBAGE
 highlightable = true
 
+//used for modal_meter
+radius = 20
+
 surface = NO_HANDLE
 
 surf_3d = NO_HANDLE
@@ -79,9 +82,6 @@ grad3 = c_black
 grad4 = c_black
 fade_color = c_black
 fade_alpha = 0.65
-
-header_xoff = 0
-header_yoff = 0
 
 hover_delay = 10
 hover_counter = 0
@@ -162,6 +162,8 @@ header_font = font
 header_text = ""
 header_text_color = text_color
 header_alpha = 1
+header_xoff = 0
+header_yoff = 0
 
 halign = fa_left
 valign = fa_top

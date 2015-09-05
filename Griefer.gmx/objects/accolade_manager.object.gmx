@@ -2,8 +2,8 @@
 <object>
   <spriteName>spr_orange_helmet</spriteName>
   <solid>0</solid>
-  <visible>0</visible>
-  <depth>0</depth>
+  <visible>-1</visible>
+  <depth>-200</depth>
   <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -29,6 +29,12 @@
 num_accolades = 28
 spawned_grid = false
 
+chev_left = NO_HANDLE
+chev_right = NO_HANDLE
+
+x = -100
+y = -100
+
 netvars = ds_map_create()
 
 computed_match_end_accs = false
@@ -39,20 +45,22 @@ match_xoff = 64*1.15
 match_yoff = 64*2.75
 acc_width = sprite_get_width(acc_dub_kill)+24
 match_hsep = 24
+stats_hsep = 0
 grid_hsep = match_hsep
 grid_vsep = grid_hsep
+bg = NO_HANDLE
 
 //stat mode scrolling variables
-grid_left = room_width/2-64*3.25
-grid_right = room_width-64
-grid_ymid = room_height/2+64*4.5
+grid_left = room_width/2-64*3.5+38
+grid_right = room_width-64*2.5
+grid_ymid = room_height/2+64*4.5+10
 grid_xmid = average2(grid_left,grid_right)
 grid_width = abs(grid_right-grid_left)
 sradius = 64
 sindex = 0
 sindex_min = 0
 sindex_max = 0
-sspeed = 18
+sspeed = 4
 
 //accolade grid ---&gt; | name | text | description | image | points | match_total | competitive_total | bot_mode_total | needed | challenge_needed | challenge_stat_flag | sound
 grid = ds_grid_create(12,num_accolades+91-65+1)
@@ -214,7 +222,7 @@ if nth_frame(5*30)
             <string>///manage end-of-match accolades
 if in_match() and match_ending() and not spawned_grid
 {
-    if not match_end_accs and computed_match_end_accs
+    if not match_end_accs and not computed_match_end_accs
     {
         match_end_accs = true
         //note that this function actually awards the accolades as needed
@@ -232,6 +240,7 @@ if in_match() and match_ending() and not spawned_grid
         printf("::: creating match end accolade grid")
         with accolade_generic instance_destroy()
         
+        grid_hsep = match_hsep
         create_accolade_grid(64*1.5,64*1.5,match_xoff+acc_width*3+match_hsep*2,HVIEW,fa_left,fa_center,5,COL_MATCH_TOTAL)
     }
 }
@@ -289,16 +298,65 @@ if not in_match() and room != rm_login
             case "Leaderboards":
                 spawned_grid = false
                 fade_modal(accolade_generic)
+                fade_modal(bg)
+                fade_modal(chev_left)
+                fade_modal(chev_right)
             break
             
             default:
                 if accolades_received() and not spawned_grid
                 {
+                    var bg_yoff = 10
+                    
+                    if not instance_exists(bg)
+                    {
+                        bg = instance_create(grid_xmid,grid_ymid+bg_yoff,modal_window)
+                        bg.highlightable = false
+                        bg.alpha_max = 0.7
+                        bg.halign = fa_center
+                        bg.valign = fa_center
+                        bg.width = grid_width+64
+                        bg.height = 102
+                        with (bg) modal_aligns()
+                        bg.color = c_black
+                        //bg.header_text = global.accolade_name+"s"
+                        bg.header_yoff = 8
+                        bg.header_font = fnt_hud
+                        bg.header_text_color = c_white
+                    }
+                    
+                    var chev_width = bg.height/2
+                   
+                    if not instance_exists(chev_left) and not instance_exists(chev_right)
+                    {
+                        chev_left = instance_create(grid_left-chev_width*1.5,grid_ymid+bg_yoff,bn_typical)
+                        chev_left.submit_action = scroll_accolades
+                        chev_left.chevron_left = true
+                        chev_left.width = chev_width
+                        chev_left.height = bg.height
+                        chev_left.text = ""
+                        chev_left.image = icon_chevron_lr
+                        chev_left.img_index = 0
+                        chev_left.image_stretch = true
+                        
+                        chev_right = instance_create(grid_right+chev_width*1.5,grid_ymid+bg_yoff,bn_typical)
+                        chev_right.submit_action = scroll_accolades
+                        chev_right.chevron_right = true
+                        chev_right.width = chev_width
+                        chev_right.height = bg.height
+                        chev_right.text = ""
+                        chev_right.image = icon_chevron_lr
+                        chev_right.img_index = 1
+                        chev_right.image_stretch = true
+                    }
+                    
                     spawned_grid = true
                     var col = COL_TOTAL
                     if stat_manager.stat_tab = stat_manager.tabs[1]
                        col =  COL_BOT_TOTAL
-                    create_accolade_grid(grid_left,grid_ymid,grid_right,room_height,fa_center,fa_center,0,col)
+                       
+                    grid_hsep = stats_hsep
+                    create_accolade_grid(grid_left+24,grid_ymid,grid_right,room_height,fa_left,fa_center,0,col)
                 }
                 
                 //update that stupid scrollable grid
@@ -310,6 +368,9 @@ if not in_match() and room != rm_login
     {
         spawned_grid = false
         fade_modal(accolade_generic)
+        fade_modal(bg)
+        fade_modal(chev_left)
+        fade_modal(chev_right)
     }
 }
 </string>
@@ -374,7 +435,7 @@ if ds_exists(grid,ds_type_grid)
         </arguments>
       </action>
     </event>
-    <event eventtype="8" enumb="0">
+    <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -391,14 +452,24 @@ if ds_exists(grid,ds_type_grid)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///draw debug
-draw_set_color(c_red)
-draw_circle(grid_xmid-sindex_max,grid_ymid,10,false)
-draw_circle(grid_xmid+sindex_max,grid_ymid,10,false)
+            <string>///draw chevrons and crap
 
-draw_set_color(c_green)
-draw_circle(grid_right,grid_ymid,sradius,false)
-draw_circle(grid_left,grid_ymid,sradius,false)
+/*
+if instance_exists(bg) and bg.popped_in
+{
+    draw_set_color(c_white)
+    var chevscale = 1.5
+    if chevright_highlighted
+        chevscale *= 1.5
+        
+    draw_sprite_ext(chevron,-1,grid_right,grid_ymid,chevscale,chevscale,-90,c_white,1)
+    
+    chevscale = 1.5
+    if chevleft_highlighted
+        chevscale *= 1.5
+    
+    draw_sprite_ext(chevron,-1,grid_left,grid_ymid,chevscale,chevscale,90,c_white,1)
+}*/
 </string>
           </argument>
         </arguments>

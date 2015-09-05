@@ -38,6 +38,7 @@ header_font = fnt_hud_small
 text_halign = fa_center
 text_valign = fa_center
 highlightable = 0
+header_yoff = 12
 
 width = 105
 height = width

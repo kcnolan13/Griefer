@@ -18,6 +18,7 @@ datAcc = instance_create(spawnx,spawny,accolade_generic)
     datAcc.birth_delay = 2
     datAcc.width = sprite_get_width(acc_dub_kill)
     datAcc.height = datAcc.width
+    datAcc.text_color = c_white
     
     if not match_ending() and in_match()
         datAcc.pop_sound = acc_data(name,COL_SOUND)

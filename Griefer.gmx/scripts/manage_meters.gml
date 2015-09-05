@@ -27,8 +27,10 @@ if not instance_exists(history_chart)
 var bdelay = 3
 var birthmas = 3
 
-var met_xst = WVIEW/2-history_chart.width/2-32
+var met_radius = 50
+var met_xst = WVIEW/2-history_chart.width/2
 var met_yst = 64*2+32
+var met_spacer = (history_chart.width-4*met_radius*2)/3+11
 
 for (var i=0; i<getLength(meters); i++)
 {
@@ -41,6 +43,7 @@ for (var i=0; i<getLength(meters); i++)
     {
         met = instance_create(met_x,met_y,modal_meter)
         meters[i] = met
+        met.radius = met_radius
         met.birth_delay = bdelay
         bdelay += birthmas
         
@@ -52,7 +55,7 @@ for (var i=0; i<getLength(meters); i++)
     met = meters[i]
     
     met.x = met_xst
-    met_xst += 64*2.25
+    met_xst += met_radius*2+met_spacer
     met.y = met_yst
     
     if instance_exists(met)
@@ -90,7 +93,7 @@ for (var i=0; i<getLength(meters); i++)
             }
             else if i = METER_RANK
             {
-                met.meter_val = varRead("rank")
+                met.meter_val = varRead("true_skill")
                 if global.num_ranks > -1 and varRead("rank") > -1
                     met.meter_actual_percent = varRead("rank")/global.num_ranks
                 else    

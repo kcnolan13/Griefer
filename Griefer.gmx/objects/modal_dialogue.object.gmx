@@ -36,6 +36,7 @@ height = 64*1.5*2.5
 
 header_text_color = c_white
 header_font = fnt_hud
+font = fnt_hud
 
 active = false
 highlightable = true

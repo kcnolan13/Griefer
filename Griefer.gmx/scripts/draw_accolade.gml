@@ -22,14 +22,21 @@ if in_match()
     draw_flash_compensate()
 }
 else
-    draw_set_color(c_black)
+    draw_set_color(c_white)
 
 var yoff = sprite_offset+2*scale
 var ysep = 20*scale
 
-draw_text_transformed(xdraw,ydraw+yoff,text,scale,scale,0)
+if in_match()
+{
+    draw_text_transformed(xdraw,ydraw+yoff,text,scale,scale,0)
+}
+else
+{
+    ysep = 0
+}
 
-if not in_match() or net_manager.match_countdown
+if not in_match() or match_ending()
 {
     draw_text_transformed(xdraw,ydraw+yoff+ysep,"X "+string(number),scale,scale,0)
 }
@@ -37,5 +44,5 @@ if not in_match() or net_manager.match_countdown
 if show_popup
 {
     depth = depth_show_popup
-    draw_popup(cursor.x,cursor.y,text,"","",description,c_gray,draw_get_alpha())
+    draw_popup(cursor.x,cursor.y,text,"X "+string(number),"",description,c_black,draw_get_alpha())
 } else depth = depth_normal

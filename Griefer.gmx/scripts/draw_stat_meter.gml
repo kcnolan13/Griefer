@@ -9,6 +9,9 @@ var scale = argument6
 var backing_percent_full = argument7
 var actual_percent_full = argument8
 
+draw_stat_meter_square(drawx, drawy, val, desc, col_out, col_in, scale, backing_percent_full, actual_percent_full)
+return true
+
 radius = 58*scale
 var rim_width = 4*scale
 var bar_width = 18*scale

@@ -3845,7 +3845,7 @@ if menmode() = "stats"
         var xoff = 16*string_length(string(varRead("pName")))/2+32
     
         draw_set_alpha(1)
-        draw_namerank(capwords(varRead("pName")), varRead("rank"), x - xoff,y - yoff, 1, c_black)
+        draw_namerank(capwords(varRead("pName")), objVarRead(stat_manager,"rank"), x - xoff,y - yoff, 1, c_black)
     }
 }
 

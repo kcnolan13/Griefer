@@ -39,6 +39,10 @@ highlightable = true
 text_halign = fa_center
 text_valign = fa_center
 
+//just used for chevrons
+chevron_left = false
+chevron_right = false
+
 width = 64*2.75/2
 height = 64*1.5/2
 iwidth = width
