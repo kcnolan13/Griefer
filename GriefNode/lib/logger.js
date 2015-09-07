@@ -104,6 +104,6 @@ var sockets_cleaner = setInterval(function() {
 	//console.log("\n\nLog File Size: "+fsize_mb+" MegaBytes\n\n");
 	if (fsize_mb > 5)
 	{
-		log_sql = fs.createWriteStream(__dirname + '/../log/sockets.log', {flags : 'w'});
+		log_sockets = fs.createWriteStream(__dirname + '/../log/sockets.log', {flags : 'w'});
 	}
 }, 104000);

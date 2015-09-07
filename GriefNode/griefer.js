@@ -303,6 +303,11 @@ io.on('connection', function(socket){
 			} else log.log(CRITICAL,"everyone_ready room has invalid match_countdown_timeout handle");
 		} else log.log(CRITICAL,"everyone_ready has nonexistent match_countdown_timeout var");
 	}
+	 else if (message.msg == "get_top_gravatars")
+	 {
+	    log.log(STD, socket.myPlayer.pName+" asked for get_top_gravatars");
+	    dbman.getTopGravatars(socket);
+	 }
 	else {
 		//OTHERWISE, FORWARD THE MESSAGE TO OTHER PLAYERS
 		socket.broadcast.to(socket.myPlayer.room).emit('general_message',message);

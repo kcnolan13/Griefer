@@ -1,196 +1,27 @@
 listening on *:8080
 NEW CLIENT
-NEW CLIENT
 PING!
 pong . . .
 
 NEW CLIENT
-NEW CLIENT
+John Doe asked for get_top_gravatars
 received authentication request:
-{"username": "kyle", "password": "abc123"}
-correct password
-unique login for: kyle
-kyle: no_mode, main_menu
-sending kyle stats to local net manager
-PING!
-pong . . .
-
-sending kyle challenge stats
-received authentication request:
-{"username": "marcel", "password": "abc123"}
-correct password
-unique login for: marcel
-marcel: no_mode, main_menu
-sending marcel stats to local net manager
-sending marcel challenge stats
-kyle moving to: ffa_lobby
-marcel moving to: ffa_lobby
-forcing start match countdown: rescheduling room ffa1 to start match in: 10 seconds
-previous time: 50000
-new time: 10
-adding perma challenge: Underwear
-John Doe: disconnected
-deleting John Doe's socket
-kyle: disconnected
-deleting kyle's socket
-marcel Leaving Matchmaking
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-received authentication request:
-{"username": "kyle", "password": "abc123"}
-correct password
-unique login for: kyle
-kyle: no_mode, main_menu
-sending kyle stats to local net manager
-sending kyle challenge stats
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-received authentication request:
-{"username": "titties", "password": "abc123"}
-correct password
-unique login for: titties
-titties: no_mode, main_menu
-sending titties stats to local net manager
-sending titties challenge stats
-kyle moving to: versus_lobby
-titties moving to: versus_lobby
-forcing start match countdown: rescheduling room versus1 to start match in: 10 seconds
-previous time: 50000
-new time: 10
-John Doe: disconnected
-deleting John Doe's socket
-kyle: disconnected
-deleting kyle's socket
-John Doe: disconnected
-deleting John Doe's socket
-titties: disconnected
-deleting titties's socket
-John Doe: disconnected
-deleting John Doe's socket
-marcel: disconnected
-deleting marcel's socket
-NEW CLIENT
-PING!
-pong . . .
-
-NEW CLIENT
-received authentication request:
-{"username": "kyle", "password": "abc123"}
-correct password
-unique login for: kyle
-kyle: no_mode, main_menu
-sending kyle stats to local net manager
-sending kyle challenge stats
-kyle moving to: ffa_lobby
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-received authentication request:
-{"username": "marcel", "password": "abc123"}
-correct password
-unique login for: marcel
-marcel: no_mode, main_menu
-sending marcel stats to local net manager
-sending marcel challenge stats
-marcel moving to: ffa_lobby
-forcing start match countdown: rescheduling room ffa1 to start match in: 10 seconds
-previous time: 50000
-new time: 10
-adding perma challenge: Contender 
-adding perma challenge: Gravemaker
-adding perma challenge: Hellion 
-forcing start match countdown: rescheduling room ffa1 to start match in: 10 seconds
-previous time: 110000
-new time: 10
-adding perma challenge: Literal Garbage 
-adding perma challenge: Figurative Garbage 
-adding perma challenge: Swol
-marcel Leaving Matchmaking
-kyle Leaving Matchmaking
-marcel: disconnected
-deleting marcel's socket
-PING!
-pong . . .
-
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-kyle: disconnected
-deleting kyle's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-received authentication request:
-{"username": "kyle", "password": "abc123"}
-correct password
-unique login for: kyle
-kyle: no_mode, main_menu
-sending kyle stats to local net manager
-sending kyle challenge stats
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-kyle moving to: versus_lobby
-kyle Leaving Matchmaking
-kyle moving to: tdm_lobby
-received authentication request:
-{"username": "titties", "password": "abc123"}
-correct password
-unique login for: titties
-titties: no_mode, main_menu
-sending titties stats to local net manager
-sending titties challenge stats
-titties moving to: tdm_lobby
-forcing start match countdown: rescheduling room tdm1 to start match in: 10 seconds
-previous time: 50000
-new time: 10
-John Doe: disconnected
-deleting John Doe's socket
-titties: disconnected
-deleting titties's socket
-kyle Leaving Matchmaking
-PING!
-pong . . .
-
-received authentication request:
-{"username": "kyle", "password": "abc123"}
-correct password
-login failure: kyle
-John Doe: disconnected
-deleting John Doe's socket
-kyle: disconnected
-deleting kyle's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-received authentication request:
-{"username": " Boob Smurf", "password": "abc123"}
+{"username": "Drunk Bushes", "password": "abc123"}
 sending 2 as authentication result (can create user)
+received user_try_create: Player Name, Password, lez get it on
+INCORRECT password -- did 2 people try to create this account @ same time?
+John Doe: disconnected
+deleting John Doe's socket
+John Doe: disconnected
+deleting John Doe's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+John Doe asked for get_top_gravatars
 received authentication request:
-{"username": "Gallon Of Star Fruit", "password": "abc123"}
-sending 2 as authentication result (can create user)
-received authentication request:
-{"username": "d", "password": "abc123"}
-sending 2 as authentication result (can create user)
-received authentication request:
-{"username": "Paraplegic Tomato", "password": "abc123"}
+{"username": "Barbaric Badger Goon", "password": "abc123"}
 sending 2 as authentication result (can create user)
 John Doe: disconnected
 deleting John Doe's socket
@@ -201,389 +32,755 @@ NEW CLIENT
 PING!
 pong . . .
 
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
+John Doe asked for get_top_gravatars
 received authentication request:
-{"username": "kyle", "password": "abc123"}
+{"username": " Booty Skateboard", "password": "abc123"}
+sending 2 as authentication result (can create user)
+received user_try_create: Player Name, Password, lez get it on
+INCORRECT password -- did 2 people try to create this account @ same time?
+received user_try_create: Player Name, Password, lez get it on
+INCORRECT password -- did 2 people try to create this account @ same time?
+John Doe: disconnected
+deleting John Doe's socket
+John Doe: disconnected
+deleting John Doe's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+John Doe asked for get_top_gravatars
+received authentication request:
+{"username": "Paraplegic Goon", "password": "abc123"}
+sending 2 as authentication result (can create user)
+received user_try_create: Paraplegic Goon, abc123, lez get it on
+
+
+creating new user: 'Paraplegic Goon' : Paraplegic Goon
+
+
+sending user create success to: Paraplegic Goon
+Paraplegic Goon: no_mode, main_menu
+sending Paraplegic Goon stats to local net manager
+sending Paraplegic Goon challenge stats
+John Doe: disconnected
+deleting John Doe's socket
+Paraplegic Goon: disconnected
+deleting Paraplegic Goon's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+John Doe asked for get_top_gravatars
+received authentication request:
+{"username": "Hashtag Touch", "password": "abc123"}
+sending 2 as authentication result (can create user)
+received user_try_create: Hashtag Touch, abc123, lez get it on
+
+
+creating new user: 'Hashtag Touch' : Hashtag Touch
+
+
+sending user create success to: Hashtag Touch
+Hashtag Touch: no_mode, main_menu
+sending Hashtag Touch stats to local net manager
+sending Hashtag Touch challenge stats
+PING!
+pong . . .
+
+Hashtag Touch asked for get_top_gravatars
+received authentication request:
+{"username": "Full-Frontal Tapir", "password": "abc123"}
+sending 2 as authentication result (can create user)
+received user_try_create: Full-frontal Tapir, abc123, lez get it on
+
+
+creating new user: 'Full-frontal Tapir' : Full-frontal Tapir
+
+
+sending user create success to: Full-frontal Tapir
+Full-Frontal Tapir: no_mode, main_menu
+sending Full-Frontal Tapir stats to local net manager
+sending Full-Frontal Tapir challenge stats
+PING!
+pong . . .
+
+Full-Frontal Tapir asked for get_top_gravatars
+received authentication request:
+{"username": "Unsuspecting Phonies", "password": "abc123"}
+sending 2 as authentication result (can create user)
+received user_try_create: Unsuspecting Phonies, abc123, lez get it on
+
+
+creating new user: 'Unsuspecting Phonies' : Unsuspecting Phonies
+
+
+sending user create success to: Unsuspecting Phonies
+Unsuspecting Phonies: no_mode, main_menu
+sending Unsuspecting Phonies stats to local net manager
+sending Unsuspecting Phonies challenge stats
+PING!
+pong . . .
+
+Unsuspecting Phonies asked for get_top_gravatars
+received authentication request:
+{"username": "Hands-On Creamsickle", "password": "abc123"}
+sending 2 as authentication result (can create user)
+received user_try_create: Hands-on Creamsickle, abc123, lez get it on
+
+
+creating new user: 'Hands-on Creamsickle' : Hands-on Creamsickle
+
+
+sending user create success to: Hands-on Creamsickle
+Hands-On Creamsickle: no_mode, main_menu
+sending Hands-On Creamsickle stats to local net manager
+sending Hands-On Creamsickle challenge stats
+PING!
+pong . . .
+
+Hands-On Creamsickle asked for get_top_gravatars
+received authentication request:
+{"username": "Undead Accident", "password": "abc123"}
+sending 2 as authentication result (can create user)
+received user_try_create: Undead Accident, abc123, lez get it on
+
+
+creating new user: 'Undead Accident' : Undead Accident
+
+
+sending user create success to: Undead Accident
+Undead Accident: no_mode, main_menu
+sending Undead Accident stats to local net manager
+sending Undead Accident challenge stats
+PING!
+pong . . .
+
+Undead Accident asked for get_top_gravatars
+received authentication request:
+{"username": "Indian Dentist", "password": "abc123"}
+sending 2 as authentication result (can create user)
+received user_try_create: Indian Dentist, abc123, lez get it on
+
+
+creating new user: 'Indian Dentist' : Indian Dentist
+
+
+sending user create success to: Indian Dentist
+Indian Dentist: no_mode, main_menu
+sending Indian Dentist stats to local net manager
+sending Indian Dentist challenge stats
+PING!
+pong . . .
+
+Indian Dentist asked for get_top_gravatars
+received authentication request:
+{"username": "Glitchy Chewbacca", "password": "abc123"}
+sending 2 as authentication result (can create user)
+received user_try_create: Glitchy Chewbacca, abc123, lez get it on
+
+
+creating new user: 'Glitchy Chewbacca' : Glitchy Chewbacca
+
+
+sending user create success to: Glitchy Chewbacca
+Glitchy Chewbacca: no_mode, main_menu
+sending Glitchy Chewbacca stats to local net manager
+sending Glitchy Chewbacca challenge stats
+PING!
+pong . . .
+
+Glitchy Chewbacca asked for get_top_gravatars
+received authentication request:
+{"username": "Unadulterated Warts", "password": "abc123"}
+sending 2 as authentication result (can create user)
+John Doe: disconnected
+deleting John Doe's socket
+Glitchy Chewbacca: disconnected
+deleting Glitchy Chewbacca's socket
+NEW CLIENT
+PING!
+pong . . .
+
+NEW CLIENT
+John Doe asked for get_top_gravatars
+received authentication request:
+{"username": "Fecal Ball-So-Hard", "password": "abc123"}
+sending 2 as authentication result (can create user)
+received user_try_create: Fecal Ball-so-hard, abc123, lez get it on
+
+
+creating new user: 'Fecal Ball-so-hard' : Fecal Ball-so-hard
+
+
+sending user create success to: Fecal Ball-so-hard
+Fecal Ball-So-Hard: no_mode, main_menu
+sending Fecal Ball-So-Hard stats to local net manager
+sending Fecal Ball-So-Hard challenge stats
+PING!
+pong . . .
+
+Fecal Ball-So-Hard asked for get_top_gravatars
+received authentication request:
+{"username": "Concealed Treatment", "password": "abc123"}
+sending 2 as authentication result (can create user)
+received user_try_create: Concealed Treatment, abc123, lez get it on
+
+
+creating new user: 'Concealed Treatment' : Concealed Treatment
+
+
+sending user create success to: Concealed Treatment
+Concealed Treatment: no_mode, main_menu
+sending Concealed Treatment stats to local net manager
+sending Concealed Treatment challenge stats
+PING!
+pong . . .
+
+Concealed Treatment asked for get_top_gravatars
+received authentication request:
+{"username": "Thunder Llama-Dragon", "password": "abc123"}
+sending 2 as authentication result (can create user)
+received user_try_create: Thunder Llama-dragon, abc123, lez get it on
+
+
+creating new user: 'Thunder Llama-dragon' : Thunder Llama-dragon
+
+
+sending user create success to: Thunder Llama-dragon
+Thunder Llama-Dragon: no_mode, main_menu
+sending Thunder Llama-Dragon stats to local net manager
+sending Thunder Llama-Dragon challenge stats
+PING!
+pong . . .
+
+Thunder Llama-Dragon asked for get_top_gravatars
+received authentication request:
+{"username": "Lobster Blanky", "password": "abc123"}
+sending 2 as authentication result (can create user)
+received user_try_create: Lobster Blanky, abc123, lez get it on
+
+
+creating new user: 'Lobster Blanky' : Lobster Blanky
+
+
+sending user create success to: Lobster Blanky
+Lobster Blanky: no_mode, main_menu
+sending Lobster Blanky stats to local net manager
+sending Lobster Blanky challenge stats
+PING!
+pong . . .
+
+Lobster Blanky asked for get_top_gravatars
+received authentication request:
+{"username": "Sex Jail Task-Force", "password": "abc123"}
+sending 2 as authentication result (can create user)
+received user_try_create: Sex Jail Task-force, abc123, lez get it on
+
+
+creating new user: 'Sex Jail Task-force' : Sex Jail Task-force
+
+
+sending user create success to: Sex Jail Task-force
+Sex Jail Task-Force: no_mode, main_menu
+sending Sex Jail Task-Force stats to local net manager
+sending Sex Jail Task-Force challenge stats
+PING!
+pong . . .
+
+Sex Jail Task-Force asked for get_top_gravatars
+received authentication request:
+{"username": "Good Pirate", "password": "abc123"}
+sending 2 as authentication result (can create user)
+received user_try_create: Good Pirate, abc123, lez get it on
+
+
+creating new user: 'Good Pirate' : Good Pirate
+
+
+sending user create success to: Good Pirate
+Good Pirate: no_mode, main_menu
+sending Good Pirate stats to local net manager
+sending Good Pirate challenge stats
+PING!
+pong . . .
+
+Good Pirate asked for get_top_gravatars
+received authentication request:
+{"username": "Dr. Fluid Troll", "password": "abc123"}
+sending 2 as authentication result (can create user)
+received user_try_create: Dr. Fluid Troll, abc123, lez get it on
+
+
+creating new user: 'Dr. Fluid Troll' : Dr. Fluid Troll
+
+
+sending user create success to: Dr. Fluid Troll
+Dr. Fluid Troll: no_mode, main_menu
+sending Dr. Fluid Troll stats to local net manager
+sending Dr. Fluid Troll challenge stats
+PING!
+pong . . .
+
+Dr. Fluid Troll asked for get_top_gravatars
+received authentication request:
+{"username": "Prophetic Dragon Ox", "password": "abc123"}
+sending 2 as authentication result (can create user)
+received user_try_create: Prophetic Dragon Ox, abc123, lez get it on
+
+
+creating new user: 'Prophetic Dragon Ox' : Prophetic Dragon Ox
+
+
+sending user create success to: Prophetic Dragon Ox
+Prophetic Dragon Ox: no_mode, main_menu
+sending Prophetic Dragon Ox stats to local net manager
+sending Prophetic Dragon Ox challenge stats
+PING!
+pong . . .
+
+Prophetic Dragon Ox asked for get_top_gravatars
+received authentication request:
+{"username": "Sargent Demon", "password": "abc123"}
+sending 2 as authentication result (can create user)
+received user_try_create: Sargent Demon, abc123, lez get it on
+
+
+creating new user: 'Sargent Demon' : Sargent Demon
+
+
+sending user create success to: Sargent Demon
+Sargent Demon: no_mode, main_menu
+sending Sargent Demon stats to local net manager
+sending Sargent Demon challenge stats
+PING!
+pong . . .
+
+Sargent Demon asked for get_top_gravatars
+received authentication request:
+{"username": "Ultra Satisfaction", "password": "abc123"}
+sending 2 as authentication result (can create user)
+received user_try_create: Ultra Satisfaction, abc123, lez get it on
+
+
+creating new user: 'Ultra Satisfaction' : Ultra Satisfaction
+
+
+sending user create success to: Ultra Satisfaction
+Ultra Satisfaction: no_mode, main_menu
+sending Ultra Satisfaction stats to local net manager
+sending Ultra Satisfaction challenge stats
+PING!
+pong . . .
+
+Ultra Satisfaction asked for get_top_gravatars
+received authentication request:
+{"username": "Sex Mafia", "password": "abc123"}
+sending 2 as authentication result (can create user)
+received user_try_create: Sex Mafia, abc123, lez get it on
+
+
+creating new user: 'Sex Mafia' : Sex Mafia
+
+
+sending user create success to: Sex Mafia
+Sex Mafia: no_mode, main_menu
+sending Sex Mafia stats to local net manager
+sending Sex Mafia challenge stats
+PING!
+pong . . .
+
+Sex Mafia asked for get_top_gravatars
+received authentication request:
+{"username": "Turnt Lust", "password": "abc123"}
+sending 2 as authentication result (can create user)
+received user_try_create: Turnt Lust, abc123, lez get it on
+
+
+creating new user: 'Turnt Lust' : Turnt Lust
+
+
+sending user create success to: Turnt Lust
+Turnt Lust: no_mode, main_menu
+sending Turnt Lust stats to local net manager
+sending Turnt Lust challenge stats
+PING!
+pong . . .
+
+Turnt Lust asked for get_top_gravatars
+received authentication request:
+{"username": " Monkey Pajamas", "password": "abc123"}
+sending 2 as authentication result (can create user)
+received user_try_create:  Monkey Pajamas, abc123, lez get it on
+
+
+creating new user: ' Monkey Pajamas' :  Monkey Pajamas
+
+
+sending user create success to:  Monkey Pajamas
+ Monkey Pajamas: no_mode, main_menu
+sending  Monkey Pajamas stats to local net manager
+sending  Monkey Pajamas challenge stats
+PING!
+pong . . .
+
+ Monkey Pajamas asked for get_top_gravatars
+received authentication request:
+{"username": "Excessive Scolding", "password": "abc123"}
+sending 2 as authentication result (can create user)
+received user_try_create: Excessive Scolding, abc123, lez get it on
+
+
+creating new user: 'Excessive Scolding' : Excessive Scolding
+
+
+sending user create success to: Excessive Scolding
+Excessive Scolding: no_mode, main_menu
+sending Excessive Scolding stats to local net manager
+sending Excessive Scolding challenge stats
+PING!
+pong . . .
+
+Excessive Scolding asked for get_top_gravatars
+received authentication request:
+{"username": "Kyle", "password": "abc123"}
 correct password
-unique login for: kyle
-kyle: no_mode, main_menu
-sending kyle stats to local net manager
-sending kyle challenge stats
+unique login for: Kyle
+Kyle: no_mode, main_menu
+sending Kyle stats to local net manager
+sending Kyle challenge stats
 John Doe: disconnected
 deleting John Doe's socket
-kyle: disconnected
-deleting kyle's socket
+Kyle: disconnected
+deleting Kyle's socket
 NEW CLIENT
 NEW CLIENT
 PING!
 pong . . .
 
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
+John Doe asked for get_top_gravatars
 received authentication request:
-{"username": "kyle", "password": "abc123"}
+{"username": " Sexbot Treason", "password": "abc123"}
+sending 2 as authentication result (can create user)
+received user_try_create:  Sexbot Treason, abc123, lez get it on
+
+
+creating new user: ' Sexbot Treason' :  Sexbot Treason
+
+
+sending user create success to:  Sexbot Treason
+ Sexbot Treason: no_mode, main_menu
+sending  Sexbot Treason stats to local net manager
+sending  Sexbot Treason challenge stats
+PING!
+pong . . .
+
+ Sexbot Treason asked for get_top_gravatars
+received authentication request:
+{"username": "Kyle", "password": "abc123"}
 correct password
-unique login for: kyle
-kyle: no_mode, main_menu
-sending kyle stats to local net manager
-sending kyle challenge stats
-kyle: disconnected
-deleting kyle's socket
+unique login for: Kyle
+Kyle: no_mode, main_menu
+sending Kyle stats to local net manager
+sending Kyle challenge stats
+Kyle: disconnected
+deleting Kyle's socket
 PING!
 pong . . .
 
+John Doe asked for get_top_gravatars
 received authentication request:
-{"username": "kyle", "password": "abc1234"}
-INCORRECT password
+{"username": "Agitated Nap Time Ox", "password": "abc123"}
+sending 2 as authentication result (can create user)
+received user_try_create: Agitated Nap Time Ox, ABC, lez get it on
+
+
+creating new user: 'Agitated Nap Time Ox' : Agitated Nap Time Ox
+
+
+sending user create success to: Agitated Nap Time Ox
+Agitated Nap Time Ox: no_mode, main_menu
+sending Agitated Nap Time Ox stats to local net manager
+sending Agitated Nap Time Ox challenge stats
+PING!
+pong . . .
+
+Agitated Nap Time Ox asked for get_top_gravatars
+received authentication request:
+{"username": "Kyle", "password": "abc123"}
+correct password
+unique login for: Kyle
+Kyle: no_mode, main_menu
+sending Kyle stats to local net manager
+sending Kyle challenge stats
+Kyle: disconnected
+deleting Kyle's socket
+PING!
+pong . . .
+
+John Doe asked for get_top_gravatars
+received authentication request:
+{"username": "Kyle", "password": "abc123"}
+correct password
+unique login for: Kyle
+Kyle: no_mode, main_menu
+sending Kyle stats to local net manager
+sending Kyle challenge stats
 John Doe: disconnected
 deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
+Kyle: disconnected
+deleting Kyle's socket
+NEW CLIENT
+NEW CLIENT
+PING!
+pong . . .
+
+John Doe asked for get_top_gravatars
+received authentication request:
+{"username": "Kyle", "password": "abc123"}
+correct password
+unique login for: Kyle
+Kyle: no_mode, main_menu
+sending Kyle stats to local net manager
+sending Kyle challenge stats
+Kyle: disconnected
+deleting Kyle's socket
+PING!
+pong . . .
+
+John Doe asked for get_top_gravatars
+received authentication request:
+{"username": "Kyle", "password": "abc123"}
+correct password
+unique login for: Kyle
+Kyle: no_mode, main_menu
+sending Kyle stats to local net manager
+sending Kyle challenge stats
+Kyle: disconnected
+deleting Kyle's socket
+PING!
+pong . . .
+
+John Doe asked for get_top_gravatars
+received authentication request:
+{"username": "Ticklish Freedom Ox", "password": "abc123"}
+sending 2 as authentication result (can create user)
+received user_try_create: Ticklish Freedom Ox, abc123, lez get it on
+
+
+creating new user: 'Ticklish Freedom Ox' : Ticklish Freedom Ox
+
+
+sending user create success to: Ticklish Freedom Ox
+Ticklish Freedom Ox: no_mode, main_menu
+sending Ticklish Freedom Ox stats to local net manager
+sending Ticklish Freedom Ox challenge stats
+PING!
+pong . . .
+
+Ticklish Freedom Ox asked for get_top_gravatars
+received authentication request:
+{"username": "SPACESHIP Riot Acid", "password": "abc123"}
+sending 2 as authentication result (can create user)
+received user_try_create: Spaceship Riot Acid, abc123, lez get it on
+
+
+creating new user: 'Spaceship Riot Acid' : Spaceship Riot Acid
+
+
+sending user create success to: Spaceship Riot Acid
+SPACESHIP Riot Acid: no_mode, main_menu
+sending SPACESHIP Riot Acid stats to local net manager
+sending SPACESHIP Riot Acid challenge stats
+PING!
+pong . . .
+
+SPACESHIP Riot Acid asked for get_top_gravatars
+received authentication request:
+{"username": "Prophetic Blessing", "password": "abc123"}
+sending 2 as authentication result (can create user)
+received user_try_create: Prophetic Blessing, abc123, lez get it on
+
+
+creating new user: 'Prophetic Blessing' : Prophetic Blessing
+
+
+sending user create success to: Prophetic Blessing
+Prophetic Blessing: no_mode, main_menu
+sending Prophetic Blessing stats to local net manager
+sending Prophetic Blessing challenge stats
+PING!
+pong . . .
+
+Prophetic Blessing asked for get_top_gravatars
+received authentication request:
+{"username": "Temptress Backflip", "password": "abc123"}
+sending 2 as authentication result (can create user)
+received user_try_create: Temptress Backflip, abc123, lez get it on
+
+
+creating new user: 'Temptress Backflip' : Temptress Backflip
+
+
+sending user create success to: Temptress Backflip
+Temptress Backflip: no_mode, main_menu
+sending Temptress Backflip stats to local net manager
+sending Temptress Backflip challenge stats
+PING!
+pong . . .
+
+Temptress Backflip asked for get_top_gravatars
+received authentication request:
+{"username": "Demon Rock Rocket", "password": "abc123"}
+sending 2 as authentication result (can create user)
+received user_try_create: Demon Rock Rocket, abc123, lez get it on
+
+
+creating new user: 'Demon Rock Rocket' : Demon Rock Rocket
+
+
+sending user create success to: Demon Rock Rocket
+Demon Rock Rocket: no_mode, main_menu
+sending Demon Rock Rocket stats to local net manager
+sending Demon Rock Rocket challenge stats
+PING!
+pong . . .
+
+Demon Rock Rocket asked for get_top_gravatars
+received authentication request:
+{"username": "Muffled Burglar Hobo", "password": "abc123"}
+sending 2 as authentication result (can create user)
+received user_try_create: Muffled Burglar Hobo, abc123, lez get it on
+
+
+creating new user: 'Muffled Burglar Hobo' : Muffled Burglar Hobo
+
+
+sending user create success to: Muffled Burglar Hobo
+Muffled Burglar Hobo: no_mode, main_menu
+sending Muffled Burglar Hobo stats to local net manager
+sending Muffled Burglar Hobo challenge stats
+PING!
+pong . . .
+
+Muffled Burglar Hobo asked for get_top_gravatars
+received authentication request:
+{"username": "Dr. Zeus", "password": "abc123"}
+sending 2 as authentication result (can create user)
+received user_try_create: Dr. Zeus, abc123, lez get it on
+
+
+creating new user: 'Dr. Zeus' : Dr. Zeus
+
+
+sending user create success to: Dr. Zeus
+Dr. Zeus: no_mode, main_menu
+sending Dr. Zeus stats to local net manager
+sending Dr. Zeus challenge stats
+PING!
+pong . . .
+
+Dr. Zeus asked for get_top_gravatars
+received authentication request:
+{"username": "Shrek Is Love", "password": "abc123"}
+sending 2 as authentication result (can create user)
+received user_try_create: Shrek Is Love, abc123, lez get it on
+
+
+creating new user: 'Shrek Is Love' : Shrek Is Love
+
+
+sending user create success to: Shrek Is Love
+Shrek Is Love: no_mode, main_menu
+sending Shrek Is Love stats to local net manager
+sending Shrek Is Love challenge stats
+PING!
+pong . . .
+
+Shrek Is Love asked for get_top_gravatars
+received authentication request:
+{"username": "Rampant Boob", "password": "abc123"}
+sending 2 as authentication result (can create user)
+received user_try_create: Rampant Boob, abc123, lez get it on
+
+
+creating new user: 'Rampant Boob' : Rampant Boob
+
+
+sending user create success to: Rampant Boob
+Rampant Boob: no_mode, main_menu
+sending Rampant Boob stats to local net manager
+sending Rampant Boob challenge stats
+PING!
+pong . . .
+
+Rampant Boob asked for get_top_gravatars
+received authentication request:
+{"username": "Dentist Squash", "password": "abc123"}
+sending 2 as authentication result (can create user)
+received user_try_create: Dentist Squash, abc123, lez get it on
+
+
+creating new user: 'Dentist Squash' : Dentist Squash
+
+
+sending user create success to: Dentist Squash
+Dentist Squash: no_mode, main_menu
+sending Dentist Squash stats to local net manager
+sending Dentist Squash challenge stats
+PING!
+pong . . .
+
+Dentist Squash asked for get_top_gravatars
+received authentication request:
+{"username": "Night-Light Donkey", "password": "abc123"}
+sending 2 as authentication result (can create user)
+received user_try_create: Night-light Donkey, abc123, lez get it on
+
+
+creating new user: 'Night-light Donkey' : Night-light Donkey
+
+
+sending user create success to: Night-light Donkey
+Night-Light Donkey: no_mode, main_menu
+sending Night-Light Donkey stats to local net manager
+sending Night-Light Donkey challenge stats
+PING!
+pong . . .
+
+Night-Light Donkey asked for get_top_gravatars
+received authentication request:
+{"username": "Disruptive Porcupine", "password": "abc123"}
+sending 2 as authentication result (can create user)
+received user_try_create: Disruptive Porcupine, abc123, lez get it on
+
+
+creating new user: 'Disruptive Porcupine' : Disruptive Porcupine
+
+
+sending user create success to: Disruptive Porcupine
+Disruptive Porcupine: no_mode, main_menu
+sending Disruptive Porcupine stats to local net manager
+sending Disruptive Porcupine challenge stats
+PING!
+pong . . .
+
+Disruptive Porcupine asked for get_top_gravatars
+received authentication request:
+{"username": "Hands-On Donut Butt", "password": "abc123"}
+sending 2 as authentication result (can create user)
+received user_try_create: Hands-on Donut Butt, abc123, lez get it on
+
+
+creating new user: 'Hands-on Donut Butt' : Hands-on Donut Butt
+
+
+sending user create success to: Hands-on Donut Butt
+Hands-On Donut Butt: no_mode, main_menu
+sending Hands-On Donut Butt stats to local net manager
+sending Hands-On Donut Butt challenge stats
+PING!
+pong . . .
+
+Hands-On Donut Butt asked for get_top_gravatars

@@ -183,6 +183,14 @@ var updateStat = function(username, stat, value, flag)
 
 	if (typeof value == "string")
 		value = "'"+value+"'";
+	else
+	{
+		if (value < 0)
+		{
+			log.log(CRITICAL," negative stat value received: FLAGGING "+stat+"="+value+" as bad data and throwing away");
+			return false;
+		}
+	}
 
 	if (flag == global.FL_DECREMENT)
 		value = stat+" - "+value;
@@ -730,33 +738,63 @@ var getGravatarOutfit = function(socket, username, flag)
 }
 exports.getGravatarOutfit = getGravatarOutfit
 
-var getLoginGravatar = function(socket, username, pkg)
+var getTopGravatars = function(socket)
 {
-	var theDude = socket.myPlayer;
-	var pstats = ['rank','true_skill','global_rank','xp'];
-	var table = "stats";
+	var vars = ['stats.username', 'users.helmet0', 'users.hat0', 'users.torso0', 'users.leg0', 
+						'users.shin0', 'users.foot0', 'users.shoulder0', 'users.forearm0', 'users.prop0',
+						'stats.rank', 'stats.true_skill', 'stats.global_rank', 'stats.xp'];
 
-	var statement = "SELECT "+pstats+" from "+table+" where username='"+username+"'";
+	var statement = "SELECT "+vars+" \
+					FROM stats JOIN users ON stats.username=users.username \
+					ORDER BY stats.global_rank ASC LIMIT 5";
 
 	conn.query(statement, function(err,rows) {
+
 		if (err)
 			log.log(SQL,err);
 
-		for (var i=0; i<rows.length; i++)
-			{
-				for (var j=0; j<pstats.length; j++)
-				{
-					var stat_val = rows[i][pstats[j]];
+		if (!globals.exists(rows.length))
+		{
+			log.log(CRITICAL,"no rows retrieved for getTopGravatars");
+			return false;
+		}
 
-					var msg = composer.objUpdate(gravatarObjIndex,username,pstats[j],stat_val,FL_NORMAL);
-					pkg.messages.push(msg);
-				}
+		var datPkg = new composer.createPkg();
+
+		for (var i=0; i<rows.length; i++)
+		{
+			var uname = rows[i][vars[0].split(".")[1]];
+
+			if (globals.exists(uname))
+			{
+				var msg = composer.objCreate(gravatarObjIndex,uname,i*1365/rows.length,1200);
+				datPkg.messages.push(msg);
+
+				var pnum = i+1;
+				msg = composer.objUpdate(gravatarObjIndex,uname,'pNum',pnum,FL_NORMAL);
+				datPkg.messages.push(msg);
+
+			} else 
+			{
+				log.log(CRITICAL, "getTopGravatars indexing into nonexistent username");
 			}
 
+			for (var j=1; j<vars.length; j++)
+			{
+				var datVar = vars[j].split(".")[1];
+				var stat_val = rows[i][datVar];
+
+				var msg = composer.objUpdate(gravatarObjIndex,uname,datVar,stat_val,FL_NORMAL);
+				datPkg.messages.push(msg);
+			}
+		}
+
+		socket.emit('pkg',datPkg.messages);
+		log.log("verbose",datPkg.messages);
+
 	});
-} exports.getLoginGravatar = getLoginGravatar;
-
-
+};
+exports.getTopGravatars = getTopGravatars;
 
 var getGravatarStats = function(socket, username, flag)
 {
@@ -769,6 +807,8 @@ var getGravatarStats = function(socket, username, flag)
 		pstats.push('rank');
 		pstats.push('xp');
 		pstats.push('time');
+		pstats.push('true_skill');
+		pstats.push('global_rank');
 		table = "stats";
 	}
 
@@ -1001,7 +1041,7 @@ var sendControlMaps = function(socket)
 			if (err)
 				log.log(SQL,err);
 
-			if (!rows) return false;
+			if (!rows[0]) return false;
 
 			for (var i=0; i<rows.length; i++)
 			{
@@ -1062,6 +1102,8 @@ var sendNetManPlayerStats = function(socket, objIndex, uniqueId)
 		//log any errors
 		if (err)
 			log.log(SQL,err);
+
+		if (!rows[0]) return false;
 
 		//send pNum
 		var message = composer.objUpdate(objIndex,uniqueId,"pNum",socket.myPlayer.pNum,FL_NORMAL);
