@@ -42,7 +42,7 @@ clicked = false
 is_sens = false
 snap_2view = true
 width = global.table_width*2+32
-height = view_hview*1/2+64*2
+height = view_hview*1/2+64*2.5
 row_height = global.row_height+8
 row_vsep = global.row_vsep+2
 
@@ -456,7 +456,7 @@ if cursor_depressed
     ydif = cursor.y - mouse_lasty
     mouse_lasty = cursor.y
     
-    s_index += ydif*(1+s_curs_percent)
+    s_index += ydif*(s_index_max/s_height)
 }
 
 if mouse_wheel_up()

@@ -34,6 +34,7 @@ snap_2view = true
 clickable = true
 submit_action = scr_none
 can_press_enter = false
+can_press_enter_always = false
 pressed_enter = false
 submit_fade = false
 </string>
@@ -76,7 +77,7 @@ if global.using_gamepad
     }
 }
 
-if keyboard_check(vk_enter) and can_press_enter and popped_in and not pressed_enter
+if keyboard_check(vk_enter) and can_press_enter and popped_in and (not pressed_enter or can_press_enter_always)
 {
     cursor.x = x
     cursor.y = y

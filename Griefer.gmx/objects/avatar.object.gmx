@@ -242,6 +242,11 @@ if instance_exists(myAvatar())
             printf("::: new avatar -- let's force sync everybody!")
             net_manager.force_sync_countdown = 3
         }
+        else
+        {
+            //request personal stats the first time your avatar is instantiated
+            request_personal_stats(stat_manager.grav_name,FL_NORMAL)
+        }
     }
     else
     {

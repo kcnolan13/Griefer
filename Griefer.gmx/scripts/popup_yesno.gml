@@ -13,5 +13,6 @@ var ID = instance_create(xi,yi,modal_dialogue)
     ID.is_yesno = true
     ID.header_text = head
     ID.text = msg
+    
     return ID
 }

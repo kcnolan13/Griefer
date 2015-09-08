@@ -45,6 +45,7 @@ iwidth = width
 iheight = height
 
 alarm[0] = 1
+alarm[1] = room_speed
 
 exit_child = false
 
@@ -57,6 +58,34 @@ script = scr_none
 is_gui = true
 
 color = c_black
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///create user possibly?
+if room = rm_login and net_manager.create_random_users and script = scr_create_user
+{
+    net_manager.uname.text = 
+    script_execute(script) 
+}
 </string>
           </argument>
         </arguments>

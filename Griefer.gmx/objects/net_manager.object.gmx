@@ -34,6 +34,8 @@ draw_enable_swf_aa(true)
 setGppDebug(0)
 display_set_gui_size(WVIEW,HVIEW)
 
+create_random_users = false
+
 random_seed = 210//164
 login_when_ready = false
 view_adjust_delay = 0
@@ -529,6 +531,51 @@ instance_create(x,y,xp_bar)
             <string>///free net vars
 if ds_exists(netvars,ds_type_map)
     ds_map_destroy(netvars)
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="9">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///create_random_users
+if create_random_users
+{
+    if room = rm_login
+    {
+    
+        var pname = generate_name(0.01)
+        var pword = "abc123"
+        
+        net_manager.uname.text = pname
+        net_manager.pword.text = pword
+        
+        authenticate(pname,pword)
+        
+        objVarWrite(net_manager,"pName",pname)
+        instance_create(x,y,processing)
+    
+    }
+    else
+    {
+        griefer_restart()
+    }
+}
 </string>
           </argument>
         </arguments>
@@ -2787,12 +2834,58 @@ if room = rm_login
         play.translation_lerp = translation_lerp
         play.submit_action = scr_submit_play
         play.can_press_enter = true
+        play.can_press_enter_always = true
         play.depth = -10
         play.color = web_hsv(220,80,5)
         play.alpha_max = 0.925
         with play modal_aligns()
     }
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>605</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///random user creation</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///random user creation
+if room = rm_login
+    alarm[9] = 200
+else
+    alarm[9] = room_speed
 </string>
           </argument>
         </arguments>
@@ -4569,6 +4662,11 @@ if instance_exists(local_player)
 {
     objVarWrite(local_player,"bot",bot_override)  
     printf("ERROR (not): writing local_player.bot to "+string(bot_override))
+}
+
+if create_random_users
+{
+    create_random_users = false
 }
 </string>
           </argument>

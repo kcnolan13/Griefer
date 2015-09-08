@@ -79,7 +79,7 @@ pstats[PSTAT_LOSSES] = "losses"
 pstats[PSTAT_KILL_STREAK] = "kill_streak"
 pstats[PSTAT_WIN_STREAK] = "win_streak"
 pstats[PSTAT_TIME] = "time"
-pstats[2] = "true_skill"
+pstats[PSTAT_TSKILL] = "true_skill"
 
 len = getLength(pstats)
 
@@ -349,14 +349,14 @@ if net_manager.menu_mode = "stats"
         case "Leaderboards":
             if not instance_exists(modal_table)
             {
-                leaderboards = instance_create(room_width*1/2,room_height*1/2+96,modal_table)
+                leaderboards = instance_create(room_width*1/2,room_height*1/2+64,modal_table)
                 sendMessageReal("get_global_stats",FL_NORMAL)
             }
             
             if not instance_exists(leaderboards_title)
             {
                 //recreate title
-                tit = instance_create(room_width/2,room_height*1/5,bn_slabel)
+                tit = instance_create(room_width/2,room_height*1/5-32,bn_slabel)
                 leaderboards_title = tit
                 tit.text = "Worldwide   Competitive   Leaderboards"
                 tit.width = 64*17

@@ -72,7 +72,9 @@ else
     //THE RESTORE DEFAULTS BUTTON
     if fl = FL_NORMAL
     {
-        blah = instance_create(left+width*4/5+hspacer+xoff,yoff,bn_restore_defaults)
+        some_extra = 64*1.5
+        
+        blah = instance_create(left+width*4/5+hspacer+xoff+some_extra,yoff,bn_restore_defaults)
         blah.width = w
         blah.height = h
         blah.depth = depth-1
@@ -89,7 +91,7 @@ else
         bdelay += binc
         
         //USE KEYBOARD BUTTON
-        blah = instance_create(left+width*4/5-hspacer+xoff,yoff,bn_use_keyboard)
+        blah = instance_create(left+width*4/5-hspacer+xoff+some_extra,yoff,bn_use_keyboard)
         blah.width = w
         blah.height = h
         blah.depth = depth-1
@@ -106,7 +108,7 @@ else
         bdelay += binc
         
         //USE GAMEPAD BUTTON
-        blah = instance_create(left+width*4/5+xoff,yoff,bn_use_gamepad)
+        blah = instance_create(left+width*4/5+xoff+some_extra,yoff,bn_use_gamepad)
         blah.width = w
         blah.height = h
         blah.depth = depth-1
@@ -129,9 +131,7 @@ else
     var ewidth = lwidth*0.65
     var eheight = lheight
     
-    var xst = left+width/4+lwidth+x_adder
-    if behave_match
-        xst += 64*1.5
+    var xst = left+width/4+lwidth+x_adder+64*1.5
         
     var yst_original = top+header_height+64*3+lheight+y_adder
     var yst = yst_original

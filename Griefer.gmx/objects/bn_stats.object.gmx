@@ -187,6 +187,14 @@ if active = false and not net_manager.lock_armory
         fade_modal(modal_stat_history)
         fade_modal(accolade_generic)
         
+        with accolade_manager
+        {
+            fade_modal(bg)
+            fade_modal(chev_left)
+            fade_modal(chev_right)
+            spawned_grid = false
+        }
+        
         if stat_tab = stat_manager.tabs[2]
         {
             //do nothing

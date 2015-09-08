@@ -76,6 +76,7 @@ rect_alpha = 1
 draw_rect = true
 draw_fade = false
 draw_gradient = false
+omit_internal_gradient = false
 grad1 = c_white
 grad2 = c_white
 grad3 = c_black

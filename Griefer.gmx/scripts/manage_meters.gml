@@ -21,11 +21,11 @@ if getLength(meters) < 1
 if not instance_exists(history_chart)
 {
     history_chart = instance_create(WVIEW/2-32,HVIEW/2+64*1.75,modal_stat_history)
-    history_chart.birth_delay = 20
+    history_chart.birth_delay = 25
 }
 
-var bdelay = 3
-var birthmas = 3
+var bdelay = 5
+var birthmas = 5
 
 var met_radius = 50
 var met_xst = WVIEW/2-history_chart.width/2
@@ -120,8 +120,8 @@ var h = 36
 
 {
 
-    bdelay = bdelay
-    birthmas = 1
+    bdelay = 30
+    birthmas = 3
     
     yst += ysep*1.75
     

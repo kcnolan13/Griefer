@@ -317,6 +317,7 @@ if not in_match() and room != rm_login
                         bg.valign = fa_center
                         bg.width = grid_width+64
                         bg.height = 102
+                        bg.birth_delay = 15
                         with (bg) modal_aligns()
                         bg.color = c_black
                         //bg.header_text = global.accolade_name+"s"
@@ -326,6 +327,7 @@ if not in_match() and room != rm_login
                     }
                     
                     var chev_width = bg.height/2
+                    var chev_delay = 30
                    
                     if not instance_exists(chev_left) and not instance_exists(chev_right)
                     {
@@ -338,6 +340,7 @@ if not in_match() and room != rm_login
                         chev_left.image = icon_chevron_lr
                         chev_left.img_index = 0
                         chev_left.image_stretch = true
+                        chev_left.birth_delay = chev_delay
                         
                         chev_right = instance_create(grid_right+chev_width*1.5,grid_ymid+bg_yoff,bn_typical)
                         chev_right.submit_action = scroll_accolades
@@ -348,6 +351,7 @@ if not in_match() and room != rm_login
                         chev_right.image = icon_chevron_lr
                         chev_right.img_index = 1
                         chev_right.image_stretch = true
+                        chev_right.birth_delay = chev_delay+10
                     }
                     
                     spawned_grid = true
