@@ -76,7 +76,7 @@ log.log(SQL,statement);
 //sql create challenges + friends
 //create table friends (username VARCHAR(20), friend VARCHAR(20));
 //create table challenges (username VARCHAR(20), challenge_name text);
-//create table settings (username VARCHAR(20), setting_name text, val_str text val_real real, is_sens real);
+//create table settings (username VARCHAR(20), setting_name text, val_str text, val_real real, is_sens real);
 //create table controls (username VARCHAR(20), control_name text, control_index real, control_code real, using_gamepad real);
 //create table stats (username VARCHAR(20), rank real, true_skill real, xp real, ppl real, kdr real, wl real, time real, points real, kills real, deaths real, assists real, wins real, losses real, kill_streak real, win_streak real, rollover_kstreak real, rollover_wstreak real, global_rank real, kdr_history text, ppl_history text, win_history text);
 //create table bot_stats (username VARCHAR(20), bot_rank real, ppl real, kdr real, wl real, points real, kills real, deaths real, assists real, wins real, losses real, kill_streak real, win_streak real, rollover_kstreak real, rollover_wstreak real, kdr_history text, ppl_history text, win_history text);
@@ -94,8 +94,8 @@ exports.connect = function(connectMe, callback)
 {
 	connectMe = mysql.createConnection({
 		host	: 	'localhost',
-		user	: 	'kserver',
-		password : 	'boomer92',
+		user	: 	'Kyle',
+		password : 	'm@ntadiabl0',
 		database : 	'griefer'
 	});
 
@@ -869,7 +869,7 @@ var rankPlayers = function() {
 
 		if (!rows)
 		{
-			log.log(CRICICAL,"ERROR: rankPlayers got no rows back!");
+			log.log(CRITICAL,"ERROR: rankPlayers got no rows back!");
 			return false
 		}
 
