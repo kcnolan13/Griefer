@@ -34,7 +34,7 @@ draw_enable_swf_aa(true)
 setGppDebug(0)
 display_set_gui_size(WVIEW,HVIEW)
 
-create_random_users = false
+create_random_users = true
 
 random_seed = 210//164
 login_when_ready = false
@@ -3553,7 +3553,7 @@ if room = rm_menu or room = rm_lobby
         draw_text(room_width-draw_edge_padding,room_height-draw_edge_padding,"Intermission ... "+string(ceil(varRead("lobby_wait_time")/30)))
     }
     
-    if room = rm_menu and room_counter &gt; 30*2 and menmode() != "armory"
+    if room = rm_menu and room_counter &gt; 30*2 and menmode() != "armory" and menmode() != "stats"
     {
         draw_set_halign(fa_left)
         draw_set_valign(fa_bottom)
@@ -4664,9 +4664,9 @@ if instance_exists(local_player)
     printf("ERROR (not): writing local_player.bot to "+string(bot_override))
 }
 
-if create_random_users
+if keyboard_check(vk_shift)
 {
-    create_random_users = false
+    create_random_users ^= 1
 }
 </string>
           </argument>

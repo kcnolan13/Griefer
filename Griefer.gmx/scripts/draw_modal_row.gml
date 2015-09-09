@@ -159,7 +159,7 @@ if dgrid = grid
 {
     draw_set_color(c_black)
     draw_set_halign(fa_right)
-    draw_text(rxdraw-10,rydraw+row_height/2,string(grid_y+1))
+    draw_text(rxdraw-10,rydraw+row_height/2,string(grid_y+1+varRead("row_offset")))
 }
 
 draw_set_alpha(1)

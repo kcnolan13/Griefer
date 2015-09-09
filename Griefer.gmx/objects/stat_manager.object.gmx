@@ -349,8 +349,10 @@ if net_manager.menu_mode = "stats"
         case "Leaderboards":
             if not instance_exists(modal_table)
             {
-                leaderboards = instance_create(room_width*1/2,room_height*1/2+64,modal_table)
-                sendMessageReal("get_global_stats",FL_NORMAL)
+                leaderboards = instance_create(room_width*1/2,room_height*1/2+64+46,modal_table)
+                page_orderby = "stats"+".true_skill"
+                page_flag = FL_FINDME
+                scr_bn_page_leaderboards()
             }
             
             if not instance_exists(leaderboards_title)

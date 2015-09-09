@@ -36,6 +36,12 @@ else
     m.rows_used++
 }
 
+//resize the grid if need be
+if row >= gheight
+{
+    ds_grid_resize(m.grid,ds_grid_width(m.grid),row+1)
+}
+
 //find the column for this stat to insert into
 if ds_grid_value_disk_exists(m.grid_header,2,0,gwidth,stat)
 {

@@ -94,6 +94,23 @@ while (bigMessagesWaiting() and wait_counter < 500000)
             insert_global_stat(player_name,stat_name,stat_val)
         break
         
+        case "leaderboard_page":
+            row_offset = real(genVal1)
+            force_page = real(genVal2)
+            
+            printf("::: LEADERBOARD PAGE INFO RECEIVED")
+            printf("::: row_offset = "+string(row_offset)+", force_pag = "+string(force_page))
+            
+            with (modal_table)
+            {
+                s_index = 0
+                varWrite("row_offset",other.row_offset)
+                varWrite("force_page",other.force_page)
+            }
+        
+        break
+        
+        
         case "leaderboard_dimensions":
             var rows = real(genVal1)
             var cols = real(genVal2)
