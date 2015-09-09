@@ -8,6 +8,13 @@ global.FL_MULTIPLE = 3;
 global.FL_COMPETITIVE = 22;
 global.FL_WIPE = "DeleteEveryDamnNoGoodUngratefulPlayer"
 global.FL_INCREMENT = 8;
+global.FL_FIRST = -30;
+global.FL_LAST = -31;
+global.FL_NEXT = -32;
+global.FL_PREVIOUS = -33;
+global.FL_FINDME = -34;
+
+global.page_length = 50;
 
 //log flags
 global.SQL = "sql"

@@ -358,7 +358,7 @@ var userDelete = function(username)
 	var tables = ['users','stats','bot_stats','challenges','controls','accolades','bot_accolades','settings'];
 	for (var i=0; i<tables.length; i++)
 	{
-		var where = " where username='"+username+"'";
+		var where = " where username="+conn.escape(username);
 		if (username == FL_WIPE)
 			where = ""
 		var statement = "delete from "+tables[i]+where
@@ -499,7 +499,7 @@ exports.userCreate = userCreate;
 var appendHistoryStat = function(pName,stat,val,flag)
 {
 	//this really "appends" to the FRONT
-	var username = pName;
+	var username = conn.escape(pName);
 	var history_max = 100
 	var table = "bot_stats"
 
@@ -556,8 +556,8 @@ exports.appendHistoryStat = appendHistoryStat
 var sendPermaChallenges = function(socket)
 {
 	var theDude = socket.myPlayer;
-	var username = socket.myPlayer.pName;
-	var statement = "SELECT challenge_name from challenges where username='"+username+"'";
+	var username = conn.escape(socket.myPlayer.pName);
+	var statement = "SELECT challenge_name from challenges where username="+username;
 
 	conn.query(statement, function(err,rows) {
 
@@ -566,6 +566,12 @@ var sendPermaChallenges = function(socket)
 			//log any errors
 			if (err)
 				log.log(SQL,err);
+
+			if (!rows)
+			{
+				log.log(CRITICAL, "no rows in sendPermaChallenges... statement: "+statement);
+				return false;
+			}
 
 			for (var i=0; i<rows.length; i++)
 			{
@@ -584,8 +590,8 @@ exports.sendPermaChallenges = sendPermaChallenges
 var loadSettings = function(socket)
 {
 	var theDude = socket.myPlayer;
-	var username = socket.myPlayer.pName;
-	var statement = "SELECT setting_name, val_str, val_real from settings where username='"+username+"'";
+	var username = conn.escape(socket.myPlayer.pName);
+	var statement = "SELECT setting_name, val_str, val_real from settings where username="+username;
 
 	conn.query(statement, function(err,rows) {
 
@@ -594,6 +600,11 @@ var loadSettings = function(socket)
 			//log any errors
 			if (err)
 				log.log(SQL,err);
+
+			if (!rows) {
+				log.log(CRITICAL, "no rows returned in loadSettings... statement was: "+statement);
+				return false;
+			}
 
 			for (var i=0; i<rows.length; i++)
 			{
@@ -613,7 +624,7 @@ exports.loadSettings = loadSettings
 
 var saveSetting = function(socket, setting_name, val_str, val_real)
 {
-	var username = socket.myPlayer.pName;
+	var username = conn.escape(socket.myPlayer.pName);
 	var count = 0;
 	var statement = "SELECT COUNT(*) from settings where username='"+username+"' AND setting_name='"+setting_name+"'";
 	conn.query(statement, function(err,rows) {
@@ -812,7 +823,7 @@ var getGravatarStats = function(socket, username, flag)
 		table = "stats";
 	}
 
-	var statement = "SELECT "+pstats+" from "+table+" where username='"+username+"'";
+	var statement = "SELECT "+pstats+" from "+table+" where username="+conn.escape(username);
 
 	conn.query(statement, function(err,rows) {
 
@@ -822,6 +833,11 @@ var getGravatarStats = function(socket, username, flag)
 			//log any errors
 			if (err)
 				log.log(SQL,err);
+
+			if (!rows) {
+				log.log(CRITICAL, "no rows returned in getGravatarStats... statement was: "+statement);
+				return false;
+			}
 
 			for (var i=0; i<rows.length; i++)
 			{
@@ -969,34 +985,43 @@ var rankPlayers = function() {
 }
 exports.rankPlayers = rankPlayers;
 
-var getGlobalStats = function(socket)
+var getGlobalStats = function(socket, page_orderby, page_flag)
 {
 	var theDude = socket.myPlayer;
 	var username = socket.myPlayer.pName;
 	var pstats = ['stats.username','stats.rank','stats.true_skill','stats.xp','stats.time','stats.ppl','stats.kdr','stats.wl','stats.kills',/*'stats.deaths',*/'stats.assists','stats.wins',/*'stats.losses',*/'stats.kill_streak','stats.win_streak','stats.global_rank','users.helmet0','users.hat0'];
 	var table = "stats join users on stats.username = users.username";
 
-	//send the leaderboard dimensions
-	var statement2 = "SELECT count(*) from users";
+	var statement2 = "SELECT count(*) from stats ORDER BY "+page_orderby+" LIMIT "+global.page_length;
+
+	//create package for this player to receive all his stats
+	var pkgDude = new composer.createPkg();
 
 	conn.query(statement2, function(err,rows) {
 
-		//create package for this player to receive all his stats
-		var pkgDude = new composer.createPkg();
+		log.log(STD, "initial leaderboard count query: "+statement2);
 
-			//log any errors
-			if (err)
-				log.log(SQL,err);
+		//log any errors
+		if (err)
+			log.log(SQL,err);
 
-			var user_count = rows[0]["count(*)"];
-			var msg = composer.bigMessage("leaderboard_dimensions",user_count,pstats.length,0);
-			log.log("verbose",msg);
-			pkgDude.messages.push(msg);
+		var user_count = rows[0]["count(*)"];
+		if (user_count > global.page_length) {
+			user_count = global.page_length;
+		}
+		var msg = composer.bigMessage("leaderboard_dimensions",user_count,pstats.length,0);
+		log.log("verbose",msg);
+		pkgDude.messages.push(msg);
+
+		//calculate the page you need, then do everything else
+		getGlobalStatsPage(socket, page_orderby, page_flag, function(socket, page_orderby, desired_page) {
 
 			//selecting everyone's!
-			var statement = "SELECT "+pstats+" from "+table;
+			var statement = "SELECT "+pstats+" from "+table+" ORDER BY "+page_orderby+" DESC LIMIT "+global.page_length+" OFFSET "+(desired_page-1)*global.page_length;
 
 			conn.query(statement, function(err,rows) {
+
+					log.log(STD,"leaderboard page query: "+statement);
 
 					//log any errors
 					if (err)
@@ -1022,12 +1047,93 @@ var getGlobalStats = function(socket)
 						}
 					}
 
+					var lbpage = composer.bigMessage("leaderboard_page", /*row_offset*/(desired_page-1)*global.page_length, /*force_page*/ desired_page, 0);
+					pkgDude.messages.push(lbpage);
+
+					log.log(STD,"leaderboard_page message:");
+					log.log(STD,lbpage);
+
 					socket.emit('pkg',pkgDude.messages);
 					log.log("verbose",pkgDude.messages);
 			});
+
+		}, socket, page_orderby);
+
 	});
+
 }
 exports.getGlobalStats = getGlobalStats;
+
+var getGlobalStatsPage = function(socket, page_orderby, page_flag, callback, arg1, arg2)
+{
+	var desired_page = page_flag;
+	var page_query = "";
+
+	if (page_flag == global.FL_FIRST)
+	{
+		page_query = "select 1 as result";
+	}
+	else if (page_flag == global.FL_LAST)
+	{
+		page_query = "select ceiling( (select count(*) from stats) / "+global.page_length+") as result";
+	}
+	else if (page_flag == global.FL_FINDME)
+	{
+		page_query = "select ceiling( (select count(*) from stats where "+page_orderby+" > (select "+page_orderby+" from stats where username = "+conn.escape(socket.myPlayer.pName)+") ) / "+global.page_length+") as result";
+	}
+	else
+	{
+		desired_page = page_flag
+		if (desired_page < 0)
+		{
+			log.log(CRITICAL,"desired leaderboards page was: "+desired_page+" --> turing into 1");
+			desired_page = 1
+		}
+	}
+
+	if (page_query != "")
+	{
+
+		conn.query(page_query, function(err, rows) {
+
+			log.log(STD, "page_query: "+page_query);
+
+			if (!rows) 
+			{
+				log.log(CRITICAL,"rows does not exist for page_query in getGlobalStatsPage... using page 1 by default");
+				desired_page = 1;
+			}
+			else
+			{
+				if (globals.exists(rows[0]['result']))
+				{
+					desired_page = rows[0]['result'];
+				}
+				else
+				{
+					log.log(CRITICAL,"desired page ["+rows[0]['result']+"] does not exist... defaulting to page 1");
+					desired_page = 1;
+				}
+			}
+
+			if (desired_page < 1)
+			{
+				log.log(STD,"desired page was computed as 0.... defaulting to page 1");
+			}
+
+			//here we go
+			log.log(STD, "here we go . . . invoking callback("+arg1+", "+arg2+", "+desired_page+")");
+			callback(arg1, arg2, desired_page);
+
+		});
+	}
+	else
+	{
+		//desired a specific page
+		callback(arg1, arg2, desired_page);
+	}
+
+}
 
 var sendControlMaps = function(socket)
 {

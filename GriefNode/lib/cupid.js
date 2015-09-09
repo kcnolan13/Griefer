@@ -70,7 +70,7 @@ exports.myTimeout = myTimeout
 myTimeout.prototype.init = function() {
     this.cancel();
     this.timer = setTimeout(this.fn, this.ms, this.arg1, this.arg2, this.arg3, this.arg4);
-    log.log(CRITICAL,"initialized myTimeout for "+this.ms+" ms");
+    log.log("verbose","initialized myTimeout for "+this.ms+" ms");
     return this;
 };
 
@@ -83,7 +83,7 @@ myTimeout.prototype.change = function(ms) {
 
 myTimeout.prototype.cancel = function() {
     if ( this.timer != null ) {
-    	log.log(CRITICAL, "clearing a timeout");
+    	log.log("verbose", "clearing a timeout");
         clearTimeout(this.timer);
         this.timer = null;
     }

@@ -14,7 +14,7 @@ var conn;
 
 //WIPE DB AS DESIRED
 var users_2kill = [];
-users_2kill.push("Mr. T", "Squatting Turtle");
+users_2kill.push("0");
 //users_2kill.push(FL_WIPE);
 
 //---- LOAD MODULES ----//
@@ -174,7 +174,7 @@ io.on('connection', function(socket){
 	  	if (message.msg=="control_map")
 	  	{
 	  		//example usage
-	  		var statement = "UPDATE controls set control_code="+message.val2+" WHERE username='"+socket.myPlayer.pName+"' AND control_index="+message.val1+" AND using_gamepad="+message.val3;
+	  		var statement = "UPDATE controls set control_code="+message.val2+" WHERE username='"+conn.escape(socket.myPlayer.pName)+"' AND control_index="+message.val1+" AND using_gamepad="+message.val3;
 	  		log.log(SQL,"USER-DEFINED CONTROL MAPPING:\n"+statement+"\n\n");
 			dbman.execute(statement);
 	  	}
@@ -212,6 +212,11 @@ io.on('connection', function(socket){
       {
         log.log(STD, "received user_try_create: "+message.val1+", "+message.val2+", "+message.val3);
         dbman.userTryCreate(socket, message.val1, message.val2);
+      }
+      else if (message.msg == "page_leaderboards")
+      {
+        log.log(STD, "received page_leaderboards: "+message.val1+", "+message.val2+", "+message.val3);
+        dbman.getGlobalStats(socket, message.val1, message.val2);
       }
 
 	});
@@ -274,10 +279,6 @@ io.on('connection', function(socket){
 	{
 		log.log(STD,"adding perma challenge: "+message.val);
 		dbman.addPermaChallenge(socket,message.val);
-	}
-	else if (message.msg == "get_global_stats")
-	{
-		dbman.getGlobalStats(socket);
 	}
 	else if (message.msg == "syncPlayersConnected")
 	{

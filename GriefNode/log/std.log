@@ -5,131 +5,636 @@ pong . . .
 
 NEW CLIENT
 John Doe asked for get_top_gravatars
-NEW CLIENT
-NEW CLIENT
+received authentication request:
+{"username": "Kyle", "password": "abc123"}
+correct password
+unique login for: Kyle
+received authentication request:
+{"username": "Kyle", "password": "abc123"}
+correct password
+unique login for: Kyle
+received authentication request:
+{"username": "Kyle", "password": "abc123"}
+correct password
+unique login for: Kyle
+received authentication request:
+{"username": "Kyle", "password": "abc123"}
+correct password
+unique login for: Kyle
+Kyle: no_mode, main_menu
+sending Kyle stats to local net manager
+sending Kyle challenge stats
+received page_leaderboards: stats.true_skill, -34, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+page_query: select ceiling( (select count(*) from stats where stats.true_skill > (select stats.true_skill from stats where username = 'Kyle') ) / 50) as result
+here we go . . . invoking callback([object Object], stats.true_skill, 1)
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 0
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 0,
+  val2: 1,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, 2, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 50
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 50,
+  val2: 2,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, 3, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 100
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 100,
+  val2: 3,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, 2, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 50
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 50,
+  val2: 2,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, 1, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 0
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 0,
+  val2: 1,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, -31, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+page_query: select ceiling( (select count(*) from stats) / 50) as result
+here we go . . . invoking callback([object Object], stats.true_skill, 2)
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 50
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 50,
+  val2: 2,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, -30, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+page_query: select 1 as result
+here we go . . . invoking callback([object Object], stats.true_skill, 1)
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 0
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 0,
+  val2: 1,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, 2, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 50
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 50,
+  val2: 2,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, 1, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 0
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 0,
+  val2: 1,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, -31, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+page_query: select ceiling( (select count(*) from stats) / 50) as result
+here we go . . . invoking callback([object Object], stats.true_skill, 2)
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 50
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 50,
+  val2: 2,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, -30, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+page_query: select 1 as result
+here we go . . . invoking callback([object Object], stats.true_skill, 1)
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 0
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 0,
+  val2: 1,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, -30, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+page_query: select 1 as result
+here we go . . . invoking callback([object Object], stats.true_skill, 1)
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 0
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 0,
+  val2: 1,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, -31, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+page_query: select ceiling( (select count(*) from stats) / 50) as result
+here we go . . . invoking callback([object Object], stats.true_skill, 2)
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 50
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 50,
+  val2: 2,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, -31, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+page_query: select ceiling( (select count(*) from stats) / 50) as result
+here we go . . . invoking callback([object Object], stats.true_skill, 2)
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 50
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 50,
+  val2: 2,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, 2, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 50
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 50,
+  val2: 2,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, 1, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 0
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 0,
+  val2: 1,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, 1, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 0
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 0,
+  val2: 1,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, 1, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 0
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 0,
+  val2: 1,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, 2, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 50
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 50,
+  val2: 2,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, 3, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 100
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 100,
+  val2: 3,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, 4, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 150
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 150,
+  val2: 4,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, 2, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 50
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 50,
+  val2: 2,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, 1, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 0
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 0,
+  val2: 1,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, 1, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 0
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 0,
+  val2: 1,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, 2, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 50
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 50,
+  val2: 2,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, -30, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+page_query: select 1 as result
+here we go . . . invoking callback([object Object], stats.true_skill, 1)
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 0
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 0,
+  val2: 1,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, -30, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+page_query: select 1 as result
+here we go . . . invoking callback([object Object], stats.true_skill, 1)
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 0
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 0,
+  val2: 1,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, -31, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+page_query: select ceiling( (select count(*) from stats) / 50) as result
+here we go . . . invoking callback([object Object], stats.true_skill, 2)
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 50
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 50,
+  val2: 2,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, 2, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 50
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 50,
+  val2: 2,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, 1, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 0
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 0,
+  val2: 1,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, 3, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 100
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 100,
+  val2: 3,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, 2, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 50
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 50,
+  val2: 2,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, 1, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 0
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 0,
+  val2: 1,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, 1, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 0
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 0,
+  val2: 1,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, 1, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 0
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 0,
+  val2: 1,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, 2, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 50
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 50,
+  val2: 2,
+  val3: 0 }
+Kyle: disconnected
+deleting Kyle's socket
 PING!
 pong . . .
 
 John Doe asked for get_top_gravatars
 received authentication request:
-{"username": "Julian", "password": "abc123"}
+{"username": "Fetish Ghost", "password": "abc123"}
 sending 2 as authentication result (can create user)
-received user_try_create: Julian, abc123, lez get it on
-
-
-creating new user: 'Julian' : Julian
-
-
-sending user create success to: Julian
-Julian: no_mode, main_menu
-sending Julian stats to local net manager
-sending Julian challenge stats
-Julian moving to: ffa_lobby
-NEW CLIENT
-NEW CLIENT
-PING!
-pong . . .
-
-John Doe asked for get_top_gravatars
 received authentication request:
-{"username": "Bubbles", "password": "abc123"}
-correct password
-unique login for: Bubbles
-received authentication request:
-{"username": "Bubbles", "password": "abc123"}
-correct password
-unique login for: Bubbles
-received authentication request:
-{"username": "Bubbles", "password": "abc123"}
-correct password
-unique login for: Bubbles
-received authentication request:
-{"username": "Bubbles", "password": "abc123"}
-correct password
-unique login for: Bubbles
-received authentication request:
-{"username": "Bubbles", "password": "abc123"}
-correct password
-unique login for: Bubbles
-Bubbles: no_mode, main_menu
-sending Bubbles stats to local net manager
-sending Bubbles challenge stats
-received authentication request:
-{"username": "Marcel", "password": "abc123"}
+{"username": "Fetish Ghost", "password": "abc123"}
 sending 2 as authentication result (can create user)
-received user_try_create: Marcel, abc123, lez get it on
+received authentication request:
+{"username": "Fetish Ghost", "password": "abc123s"}
+sending 2 as authentication result (can create user)
+received authentication request:
+{"username": "Fetish Ghost", "password": "abc123"}
+sending 2 as authentication result (can create user)
+received user_try_create: Fetish Ghost, abc123, lez get it on
 
 
-creating new user: 'Marcel' : Marcel
+creating new user: 'Fetish Ghost' : Fetish Ghost
 
 
-sending user create success to: Marcel
-Marcel: no_mode, main_menu
-sending Marcel stats to local net manager
-sending Marcel challenge stats
-Bubbles moving to: ffa_lobby
-Marcel moving to: ffa_lobby
-forcing start match countdown: rescheduling room ffa1 to start match in: 10 seconds
-previous time: 50000
-new time: 10
-adding perma challenge: Literal Garbage 
-adding perma challenge: Figurative Garbage 
-adding perma challenge: Victim 
-forcing start match countdown: rescheduling room ffa1 to start match in: 10 seconds
-previous time: 110000
-new time: 10
-adding perma challenge: N00b 
-adding perma challenge: Literal Garbage 
-adding perma challenge: Plebe 
-adding perma challenge: Underwear
-adding perma challenge: Literal Garbage 
-forcing start match countdown: rescheduling room ffa1 to start match in: 10 seconds
-previous time: 110000
-new time: 10
-adding perma challenge: Figurative Garbage 
-adding perma challenge: Executioner
-adding perma challenge: Punk 
-adding perma challenge: Figurative Garbage 
-adding perma challenge: Victim 
-adding perma challenge: N00b 
-adding perma challenge: Victim 
-adding perma challenge: Contender 
-adding perma challenge: Executioner
-adding perma challenge: N00b 
-adding perma challenge: Plebe 
-Julian Leaving Matchmaking
-adding perma challenge: Plebe 
-adding perma challenge: Ninja
-adding perma challenge: Punk 
-Bubbles Leaving Matchmaking
-Marcel Leaving Matchmaking
-Bubbles: disconnected
-deleting Bubbles's socket
+sending user create success to: Fetish Ghost
+Fetish Ghost: no_mode, main_menu
+sending Fetish Ghost stats to local net manager
+sending Fetish Ghost challenge stats
+received page_leaderboards: stats.true_skill, -34, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+page_query: select ceiling( (select count(*) from stats where stats.true_skill > (select stats.true_skill from stats where username = 'Fetish Ghost') ) / 50) as result
+here we go . . . invoking callback([object Object], stats.true_skill, 1)
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 0
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 0,
+  val2: 1,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, 2, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 50
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 50,
+  val2: 2,
+  val3: 0 }
+Fetish Ghost: disconnected
+deleting Fetish Ghost's socket
 PING!
 pong . . .
 
 John Doe asked for get_top_gravatars
-Julian: disconnected
-deleting Julian's socket
-PING!
-pong . . .
-
-John Doe asked for get_top_gravatars
+received authentication request:
+{"username": "Fetish Ghost", "password": "abc123"}
+correct password
+unique login for: Fetish Ghost
+received authentication request:
+{"username": "Fetish Ghost", "password": "abc123"}
+correct password
+unique login for: Fetish Ghost
+received authentication request:
+{"username": "Fetish Ghost", "password": "abc123"}
+correct password
+unique login for: Fetish Ghost
+received authentication request:
+{"username": "Fetish Ghost", "password": "abc123"}
+correct password
+unique login for: Fetish Ghost
+received authentication request:
+{"username": "Fetish Ghost", "password": "abc123"}
+correct password
+unique login for: Fetish Ghost
+Fetish Ghost: no_mode, main_menu
+sending Fetish Ghost stats to local net manager
+sending Fetish Ghost challenge stats
+received page_leaderboards: stats.true_skill, -34, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+page_query: select ceiling( (select count(*) from stats where stats.true_skill > (select stats.true_skill from stats where username = 'Fetish Ghost') ) / 50) as result
+here we go . . . invoking callback([object Object], stats.true_skill, 1)
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 0
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 0,
+  val2: 1,
+  val3: 0 }
+received page_leaderboards: stats.wl, -34, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.wl LIMIT 50
+page_query: select ceiling( (select count(*) from stats where stats.wl > (select stats.wl from stats where username = 'Fetish Ghost') ) / 50) as result
+here we go . . . invoking callback([object Object], stats.wl, 1)
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.wl DESC LIMIT 50 OFFSET 0
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 0,
+  val2: 1,
+  val3: 0 }
+received page_leaderboards: stats.kdr, -34, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.kdr LIMIT 50
+page_query: select ceiling( (select count(*) from stats where stats.kdr > (select stats.kdr from stats where username = 'Fetish Ghost') ) / 50) as result
+here we go . . . invoking callback([object Object], stats.kdr, 1)
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.kdr DESC LIMIT 50 OFFSET 0
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 0,
+  val2: 1,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, -34, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+page_query: select ceiling( (select count(*) from stats where stats.true_skill > (select stats.true_skill from stats where username = 'Fetish Ghost') ) / 50) as result
+here we go . . . invoking callback([object Object], stats.true_skill, 1)
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 0
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 0,
+  val2: 1,
+  val3: 0 }
+received page_leaderboards: stats.xp, -34, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.xp LIMIT 50
+page_query: select ceiling( (select count(*) from stats where stats.xp > (select stats.xp from stats where username = 'Fetish Ghost') ) / 50) as result
+here we go . . . invoking callback([object Object], stats.xp, 1)
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.xp DESC LIMIT 50 OFFSET 0
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 0,
+  val2: 1,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, -34, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+page_query: select ceiling( (select count(*) from stats where stats.true_skill > (select stats.true_skill from stats where username = 'Fetish Ghost') ) / 50) as result
+here we go . . . invoking callback([object Object], stats.true_skill, 1)
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 0
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 0,
+  val2: 1,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, 2, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 50
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 50,
+  val2: 2,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, 3, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 100
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 100,
+  val2: 3,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, 4, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 150
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 150,
+  val2: 4,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, 5, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 200
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 200,
+  val2: 5,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, 6, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 250
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 250,
+  val2: 6,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, 5, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 200
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 200,
+  val2: 5,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, 5, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 200
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 200,
+  val2: 5,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, 1, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 0
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 0,
+  val2: 1,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, 2, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 50
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 50,
+  val2: 2,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, 1, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 0
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 0,
+  val2: 1,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, 5, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 200
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 200,
+  val2: 5,
+  val3: 0 }
+received page_leaderboards: stats.true_skill, -30, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill LIMIT 50
+page_query: select 1 as result
+here we go . . . invoking callback([object Object], stats.true_skill, 1)
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC LIMIT 50 OFFSET 0
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 0,
+  val2: 1,
+  val3: 0 }
+received page_leaderboards: stats.kdr, -34, 0
+initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.kdr LIMIT 50
+page_query: select ceiling( (select count(*) from stats where stats.kdr > (select stats.kdr from stats where username = 'Fetish Ghost') ) / 50) as result
+here we go . . . invoking callback([object Object], stats.kdr, 1)
+leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.kdr DESC LIMIT 50 OFFSET 0
+leaderboard_page message:
+{ name: 'bigMessage',
+  msg: 'leaderboard_page',
+  val1: 0,
+  val2: 1,
+  val3: 0 }
 John Doe: disconnected
 deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
-Marcel: disconnected
-deleting Marcel's socket
-PING!
-pong . . .
-
-John Doe asked for get_top_gravatars
-John Doe: disconnected
-deleting John Doe's socket
-John Doe: disconnected
-deleting John Doe's socket
+Fetish Ghost: disconnected
+deleting Fetish Ghost's socket
