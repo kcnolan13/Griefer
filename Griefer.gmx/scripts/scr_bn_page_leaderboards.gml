@@ -23,7 +23,8 @@ if instance_exists(modal_table)
         pg_flag = modal_table.force_page + 1
         pg_flag = constrict(pg_flag,1,modal_table.page_max)
     }
-
+    
+    printf("::: requesting leaderboards")
     printf("::: order by: "+string(pg_orderby))
     printf("::: page_flag: "+string(pg_flag))
     

@@ -601,7 +601,7 @@ for (var i=row_offset; i&lt;ds_grid_height(grid); i++)
 {
     var col = color
     
-    if string(ds_grid_get(grid,0,i+2)) = objVarRead(net_manager,"pName")
+    if string(ds_grid_get(grid,0,i)) = objVarRead(net_manager,"pName")
         col = color_highlighted
         
     draw_modal_row(left,ydraw,col,text_color,alpha,i,grid)

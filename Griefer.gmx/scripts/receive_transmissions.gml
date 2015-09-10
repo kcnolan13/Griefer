@@ -107,8 +107,8 @@ while (bigMessagesWaiting() and wait_counter < 500000)
                 s_index = 0
                 varWrite("row_offset",other.row_offset)
                 varWrite("force_page",other.force_page)
-                varWrite("force_row",max(0,other.high_row-5))
-                high_row = other.high_row
+                varWrite("force_row",max(0,other.high_row-other.row_offset-5))
+                high_row = other.high_row-other.row_offset
             }
         
         break

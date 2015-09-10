@@ -189,9 +189,14 @@ if active = false and not net_manager.lock_armory
         
         with accolade_manager
         {
-            fade_modal(bg)
-            fade_modal(chev_left)
-            fade_modal(chev_right)
+            //fade_modal(bg)
+            //fade_modal(chev_left)
+            //fade_modal(chev_right)
+            
+            with bg instance_destroy()
+            with chev_left instance_destroy()
+            with chev_right instance_destroy()
+            
             spawned_grid = false
         }
         
