@@ -1,4 +1,5 @@
 //SCORE TABLE
+global.page_length = 50
 global.table_width = 72*8.5
 global.txt_fields_start = global.table_width*2/5
 global.row_height = 72*1/2-4

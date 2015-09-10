@@ -90,39 +90,46 @@ while (bigMessagesWaiting() and wait_counter < 500000)
             var player_name = string(genVal1)
             var stat_name = string(genVal2)
             var stat_val = genVal3
-            printf("::: Received Global Stat: "+string(player_name)+" -- "+string(stat_name)+" = "+string(stat_val))
+            //printf("::: Received Global Stat: "+string(player_name)+" -- "+string(stat_name)+" = "+string(stat_val))
             insert_global_stat(player_name,stat_name,stat_val)
         break
         
         case "leaderboard_page":
             row_offset = real(genVal1)
             force_page = real(genVal2)
+            high_row = real(genVal3)
             
             printf("::: LEADERBOARD PAGE INFO RECEIVED")
-            printf("::: row_offset = "+string(row_offset)+", force_pag = "+string(force_page))
+            printf("::: row_offset = "+string(row_offset)+", force_pag = "+string(force_page)+", high_row = "+string(high_row))
             
             with (modal_table)
             {
                 s_index = 0
                 varWrite("row_offset",other.row_offset)
                 varWrite("force_page",other.force_page)
+                varWrite("force_row",max(0,other.high_row-5))
+                high_row = other.high_row
             }
         
         break
         
         
         case "leaderboard_dimensions":
-            var rows = real(genVal1)
-            var cols = real(genVal2)
-            printf("::: Received leaderboard dimensions: "+string(rows)+" X "+string(cols))
-            if instance_exists(modal_table)
+            rows = real(genVal1)
+            cols = real(genVal2)
+            page_max = real(genVal3)
+            
+            printf("::: Received leaderboard dimensions: "+string(rows)+" X "+string(cols)+", with "+string(page_max)+" total pages")
+            
+            with modal_table
             {
-                modal_table.rows = rows //to make room for the header
-                modal_table.cols = cols//+1 //because player + rank are split in grid
-                with modal_table
-                    event_perform(ev_step,ev_step_normal)
+                rows = other.rows //to make room for the header
+                cols = other.cols//+1 //because player + rank are split in grid
+                page_max = other.page_max
+                event_perform(ev_step,ev_step_normal)
             }
-            else
+            
+            if not instance_exists(modal_table)
             {
                 printf("ERROR: cannot set leaderboard dims ... modal_table does not exist")
             }

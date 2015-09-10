@@ -69,13 +69,22 @@ event_inherited()
 
 if is_page and instance_exists(modal_table)
 {
+    if page_flag &gt; modal_table.page_max //and popped_in
+    {
+        //birth_delay = 5
+        alpha = 0.25
+        scale = 0.85
+    }
+    
     if page_flag = modal_table.force_page
     {
         active = true
+        highlightable = false
     }
     else
     {
         active = false
+        highlightable = true
     }
 }   
 
@@ -135,16 +144,6 @@ if modal_highlighted(id) and submit_action != scr_none and script_exists(submit_
     script_execute(submit_action)
     if submit_fade
         fade_out = true
-        
-    if is_page
-    {
-        with modal_button
-        {
-            if is_page
-                active = false
-        }
-        active = true
-    }
 }
 </string>
           </argument>

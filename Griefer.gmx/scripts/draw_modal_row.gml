@@ -38,6 +38,9 @@ draw_set_halign(fa_left)
 draw_set_valign(fa_center)
 draw_set_font(global.table_font)
 
+if grid_y > rows_used
+    return false
+
 //draw the player's name and rank and whatnot
 var kst = 2
 

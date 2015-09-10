@@ -56,6 +56,9 @@ grid_right = room_width-64*2.5
 grid_ymid = room_height/2+64*4.5+10
 grid_xmid = average2(grid_left,grid_right)
 grid_width = abs(grid_right-grid_left)
+accolade_xmin = grid_left
+accolade_xmax = grid_right
+
 sradius = 64
 sindex = 0
 sindex_min = 0

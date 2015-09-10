@@ -28,6 +28,9 @@
             <string>event_inherited()
 
 force_page = 1
+force_row = 0
+high_row = 0
+page_max = 0
 
 netvars = ds_map_create()
 
@@ -63,7 +66,7 @@ clicked = false
 is_sens = false
 snap_2view = true
 width = global.table_width*2+32
-height = view_hview*1/2+64*2.5-46
+height = view_hview*1/2+64*2.5+2
 row_height = global.row_height+8
 row_vsep = global.row_vsep+2
 
@@ -82,6 +85,7 @@ header_text_color = global.table_font_color
 
 header_color = global.table_header_color
 color = global.you_all_color
+color_highlighted = web_hsv(228,58,80)
 
 scale = 1
 alpha = 0
@@ -232,53 +236,70 @@ if varRead("force_page")
     }
 }
 
+if varRead("force_row")
+{
+    force_row = varRead("force_row")
+    printf("::: row forced to: "+string(force_row))
+    
+    varWrite("force_row",false)
+    s_index = row_height*force_row
+    s_index = constrict(s_index,0,s_index_max)
+}
+
 if varRead("create_pages") and popped_in and rows_used &gt; 0
 {
     varWrite("create_pages",false)
-    var xadder = 64*4.25
-    var xspacer = 5
+    var pg_font = fnt_hud
+    var pg_crop_pad = 14
+    var pg_spacer = 5
+    var pgs_string = ""
+    var num_pgs = getLength(page_flags)
+    for (var i=0; i&lt;getLength(page_flags); i++)
+    {
+        pgs_string += page_flag_2str(page_flags[i])
+    }
+    draw_set_font(pg_font)
+    
+    var xadder = -1/2*(string_width(pgs_string)+(2*pg_crop_pad+pg_spacer)*(num_pgs-1))
     var bdelay = 3
     var binc = 3
+    
+    var prev_width = 0
     
     for (var i=0; i&lt;getLength(pages); i++)
     {
         if not instance_exists(pages[i]) or pages[i] = NO_HANDLE
         {
             page_width = 64
-            page_height = 36
-            ID = instance_create(x-width/2+xadder,top-page_height,bn_typical)
+            page_height = 32
+            ID = instance_create(x+xadder,top-page_height,bn_typical)
+            ID.font = pg_font
+            ID.active = true
             pages[i] = ID
+            ID.is_page = true
+            ID.height = page_height
             ID.auto_crop = true
+            ID.crop_pad = pg_crop_pad
             ID.page_offset = page_offsets[i]
             ID.page_flag = page_flags[i]
             ID.page_orderby = "stats."+"true_skill"
             ID.submit_action = scr_bn_page_leaderboards
             ID.birth_delay = bdelay
             ID.color = c_black
-            ID.active_color = c_blue
+            ID.active_color = web_hsv(228,58,80)
             bdelay += binc
             
-            //this must be done in order
-            with (ID) compute_auto_crop()
-            xadder += ID.width+xspacer
+            ID.text = page_flag_2str(page_flags[i])
             
-            switch (page_flags[i])
+            //this must be done in order
+            with (ID) 
             {
-                case FL_FIRST:
-                    ID.text = "First"
-                break
-                case FL_PREVIOUS:
-                    ID.text = "Previous"
-                break
-                case FL_LAST:
-                    ID.text = "Last"
-                break
-                case FL_NEXT:
-                    ID.text = "Next"
-                break
-                default:
-                    ID.text = string(page_flags[i])
-                break
+                other.temp_width = compute_auto_crop()
+            }
+            
+            if i &lt; getLength(pages)-1
+            {
+                xadder += ID.width/2+(string_width(page_flag_2str(page_flags[i+1]))+2*pg_crop_pad)/2+pg_spacer
             }
             
         } 
@@ -578,7 +599,12 @@ row_offset = round_nearest(s_index,row_height)/row_height
 row_draw_num = 0
 for (var i=row_offset; i&lt;ds_grid_height(grid); i++)
 {
-    draw_modal_row(left,ydraw,color,text_color,alpha,i,grid)
+    var col = color
+    
+    if string(ds_grid_get(grid,0,i+2)) = objVarRead(net_manager,"pName")
+        col = color_highlighted
+        
+    draw_modal_row(left,ydraw,col,text_color,alpha,i,grid)
     ydraw += row_height+row_vsep
     row_draw_num++
     
@@ -587,6 +613,7 @@ for (var i=row_offset; i&lt;ds_grid_height(grid); i++)
 }
 
 //SCROLL AROUND
+/*
 if modal_highlighted(id) and cursor.y &gt; top+row_height+8
 {
     if abs(cursor.y-top) &lt; s_thresh and s_index &gt; 0
@@ -594,7 +621,7 @@ if modal_highlighted(id) and cursor.y &gt; top+row_height+8
         
     if abs(ydraw-cursor.y) &lt; s_thresh and s_index &lt; s_index_max
         s_index += cursor_sens*2
-}
+}*/
 
 if cursor_depressed
 {

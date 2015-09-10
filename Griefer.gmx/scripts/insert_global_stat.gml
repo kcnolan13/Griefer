@@ -53,7 +53,7 @@ else
     return false
 }
 
-printf("::: writing to grid @("+string(row)+","+string(col))
+//printf("::: writing to grid @("+string(row)+","+string(col))
 
 //Success!! Add the stat to the table
 if string(stat) = "time"

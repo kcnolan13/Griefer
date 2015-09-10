@@ -34,7 +34,7 @@ draw_enable_swf_aa(true)
 setGppDebug(0)
 display_set_gui_size(WVIEW,HVIEW)
 
-create_random_users = true
+create_random_users = false
 
 random_seed = 210//164
 login_when_ready = false

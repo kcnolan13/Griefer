@@ -5,7 +5,7 @@ if auto_crop
     var text_width = 0
     var bail = true
     
-    if string_length(header_text) > 0
+    if string_length(header_text) > 0 and header_height > 0
     {
         draw_set_font(header_font)
         header_width = string_width(header_text)+2*crop_pad
@@ -25,6 +25,10 @@ if auto_crop
         if temp_width < width
         {
             width = temp_width
+            return temp_width
         }
+        return -1
     }
 }
+
+return -1

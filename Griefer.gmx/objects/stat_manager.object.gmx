@@ -349,7 +349,7 @@ if net_manager.menu_mode = "stats"
         case "Leaderboards":
             if not instance_exists(modal_table)
             {
-                leaderboards = instance_create(room_width*1/2,room_height*1/2+64+46,modal_table)
+                leaderboards = instance_create(room_width*1/2,room_height*1/2+62,modal_table)
                 page_orderby = "stats"+".true_skill"
                 page_flag = FL_FINDME
                 scr_bn_page_leaderboards()
@@ -358,14 +358,14 @@ if net_manager.menu_mode = "stats"
             if not instance_exists(leaderboards_title)
             {
                 //recreate title
-                tit = instance_create(room_width/2,room_height*1/5-32,bn_slabel)
+                tit = instance_create(room_width/2,room_height*1/5-32-2000,bn_slabel)
                 leaderboards_title = tit
                 tit.text = "Worldwide   Competitive   Leaderboards"
                 tit.width = 64*17
                 tit.height = 64
-                tit.font = fnt_pstats_title
+                tit.font = fnt_leaderboards
                 tit.birth_delay = 10
-                tit.text_color = c_dkgray
+                tit.text_color = web_hsv(0,0,4)
                 tit.alpha_max = 0
             }
         break
