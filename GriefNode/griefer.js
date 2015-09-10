@@ -17,6 +17,8 @@ var users_2kill = [];
 users_2kill.push("0");
 //users_2kill.push(FL_WIPE);
 
+var random_users_2create = 2;
+
 //---- LOAD MODULES ----//
 var app = require('express')();
 var http = require('http').Server(app);
@@ -32,6 +34,12 @@ var cupid = require('./lib/cupid.js');
 //establish a Connection to the griefer users database
 dbman.connect(conn, function() {
 	dbman.delete_users(users_2kill)
+  for (var i=0; i<random_users_2create; i++)
+  {
+    var name = composer.generateName();
+    console.log("Auto-Creating User: "+name)
+    dbman.userCreate(null,name,"abc123");
+  }
 });
 
 //distribute access to the io instance

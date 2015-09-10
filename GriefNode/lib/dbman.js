@@ -506,7 +506,7 @@ var appendHistoryStat = function(pName,stat,val,flag)
 	if (flag != FL_BOT)
 		table = "stats"
 
-	var select = "SELECT "+stat+" from "+table+" where username='"+username+"'";
+	var select = "SELECT "+stat+" from "+table+" where username="+username;
 
 	conn.query(select, function(err,rows) {
 
@@ -992,7 +992,7 @@ var getGlobalStats = function(socket, page_orderby, page_flag)
 	var pstats = ['stats.username','stats.rank','stats.true_skill','stats.xp','stats.time','stats.ppl','stats.kdr','stats.wl','stats.kills',/*'stats.deaths',*/'stats.assists','stats.wins',/*'stats.losses',*/'stats.kill_streak','stats.win_streak','stats.global_rank','users.helmet0','users.hat0'];
 	var table = "stats join users on stats.username = users.username";
 
-	var statement2 = "SELECT count(*) from stats ORDER BY "+page_orderby+" LIMIT "+global.page_length;
+	var statement2 = "SELECT count(*) from stats ORDER BY "+page_orderby;
 
 	//create package for this player to receive all his stats
 	var pkgDude = new composer.createPkg();
@@ -1006,18 +1006,21 @@ var getGlobalStats = function(socket, page_orderby, page_flag)
 			log.log(SQL,err);
 
 		var user_count = rows[0]["count(*)"];
+		var page_max = Math.ceil(user_count / global.page_length);
+
 		if (user_count > global.page_length) {
 			user_count = global.page_length;
 		}
-		var msg = composer.bigMessage("leaderboard_dimensions",user_count,pstats.length,0);
+
+		var msg = composer.bigMessage("leaderboard_dimensions",user_count,pstats.length,page_max);
 		log.log("verbose",msg);
 		pkgDude.messages.push(msg);
 
 		//calculate the page you need, then do everything else
-		getGlobalStatsPage(socket, page_orderby, page_flag, function(socket, page_orderby, desired_page) {
+		getGlobalStatsPage(socket, page_orderby, page_flag, function(socket, page_orderby, desired_page, your_row) {
 
 			//selecting everyone's!
-			var statement = "SELECT "+pstats+" from "+table+" ORDER BY "+page_orderby+" DESC LIMIT "+global.page_length+" OFFSET "+(desired_page-1)*global.page_length;
+			var statement = "SELECT "+pstats+" from "+table+" ORDER BY "+page_orderby+" DESC, stats.xp DESC, stats.username ASC LIMIT "+global.page_length+" OFFSET "+(desired_page-1)*global.page_length;
 
 			conn.query(statement, function(err,rows) {
 
@@ -1026,6 +1029,11 @@ var getGlobalStats = function(socket, page_orderby, page_flag)
 					//log any errors
 					if (err)
 						log.log(SQL,err);
+
+					if (!rows) {
+						log.log(CRITICAL,"callback to getGlobalStatPage failed to return rows on the query: "+statement);
+						return false;
+					}
 
 					for (var i=0; i<rows.length; i++)
 					{
@@ -1047,7 +1055,13 @@ var getGlobalStats = function(socket, page_orderby, page_flag)
 						}
 					}
 
-					var lbpage = composer.bigMessage("leaderboard_page", /*row_offset*/(desired_page-1)*global.page_length, /*force_page*/ desired_page, 0);
+					if (your_row < 0)
+					{
+						log.log(STD,"defaulting row to 0");
+						your_row = 0;
+					}
+
+					var lbpage = composer.bigMessage("leaderboard_page", /*row_offset*/(desired_page-1)*global.page_length, /*force_page*/ desired_page, /*force_row*/ your_row);
 					pkgDude.messages.push(lbpage);
 
 					log.log(STD,"leaderboard_page message:");
@@ -1067,6 +1081,7 @@ exports.getGlobalStats = getGlobalStats;
 var getGlobalStatsPage = function(socket, page_orderby, page_flag, callback, arg1, arg2)
 {
 	var desired_page = page_flag;
+	var your_row = -52;
 	var page_query = "";
 
 	if (page_flag == global.FL_FIRST)
@@ -1079,7 +1094,20 @@ var getGlobalStatsPage = function(socket, page_orderby, page_flag, callback, arg
 	}
 	else if (page_flag == global.FL_FINDME)
 	{
-		page_query = "select ceiling( (select count(*) from stats where "+page_orderby+" > (select "+page_orderby+" from stats where username = "+conn.escape(socket.myPlayer.pName)+") ) / "+global.page_length+") as result";
+		page_query = "SELECT ordered_stats.row_num AS your_row, ceiling (ordered_stats.row_num / "+global.page_length+") AS result FROM \
+						( \
+							SELECT temp.row_num from \
+							( \
+							SELECT \
+								@i:=@i+1 AS row_num,  \
+								stats.username \
+							FROM  \
+								stats, \
+								(SELECT @i:=0) AS foo \
+								ORDER BY "+page_orderby+" DESC, stats.xp DESC, stats.username ASC \
+							) AS temp \
+							WHERE temp.username = "+conn.escape(socket.myPlayer.pName)+" \
+						) AS ordered_stats";
 	}
 	else
 	{
@@ -1114,6 +1142,16 @@ var getGlobalStatsPage = function(socket, page_orderby, page_flag, callback, arg
 					log.log(CRITICAL,"desired page ["+rows[0]['result']+"] does not exist... defaulting to page 1");
 					desired_page = 1;
 				}
+
+				if (globals.exists(rows[0]['your_row']))
+				{
+					your_row = rows[0]['your_row'];
+				}
+				else
+				{
+					log.log("verbose","your_row does not exist... defaulting to page "+your_row);
+				}
+
 			}
 
 			if (desired_page < 1)
@@ -1123,14 +1161,14 @@ var getGlobalStatsPage = function(socket, page_orderby, page_flag, callback, arg
 
 			//here we go
 			log.log(STD, "here we go . . . invoking callback("+arg1+", "+arg2+", "+desired_page+")");
-			callback(arg1, arg2, desired_page);
+			callback(arg1, arg2, desired_page, your_row);
 
 		});
 	}
 	else
 	{
 		//desired a specific page
-		callback(arg1, arg2, desired_page);
+		callback(arg1, arg2, desired_page, your_row);
 	}
 
 }
