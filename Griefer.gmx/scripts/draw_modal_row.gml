@@ -8,6 +8,8 @@ var alpha = argument4
 var grid_y = argument5
 var dgrid = argument6
 
+var spaces = " "
+
 txt_fields_start = global.txt_fields_start
 
 if not ds_exists(dgrid,ds_type_grid)
@@ -107,11 +109,12 @@ else
 {
     if dgrid = grid_header
     {
+        check_sort_col = false
         //column highlighting
         var col_high = sort_col_highlighted()
         if col_high > -1
         {
-            draw_set_color(c_gray)
+            draw_set_color(highlight_color)
             if col_high > 1
             {
                 draw_rectangle(dx+x_incr*(col_high-2),rydraw,dx+x_incr*(col_high-1),rydraw+row_height,false)
@@ -123,8 +126,26 @@ else
             }
             draw_set_color(c_white)
         }
+        
+        check_sort_col = true
+        var col_high = sort_col_highlighted()
+        if col_high > -1
+        {
+            draw_set_color(highlight_color)
+            if col_high > 1
+            {
+                draw_rectangle(dx+x_incr*(col_high-2),rydraw,dx+x_incr*(col_high-1),rydraw+row_height,false)
+            }
+            else
+            {
+                //it's the player name column
+                draw_rectangle(rxdraw,rydraw,dx,rydraw+row_height,false)
+            }
+            draw_set_color(c_white)
+        }
+        
     }
-    draw_text(rxdraw+5, txt_y, "Player")
+    draw_text(rxdraw+5, txt_y, spaces+"Player")
 }
 
 for (var k=kst; k < ds_grid_width(dgrid)-extra_stats; k++)
@@ -152,7 +173,7 @@ for (var k=kst; k < ds_grid_width(dgrid)-extra_stats; k++)
         }
     }
 
-    draw_text(dx, txt_y, string(cell))
+    draw_text(dx, txt_y, spaces+string(cell))
 
     dx += x_incr
 }

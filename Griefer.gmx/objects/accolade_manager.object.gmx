@@ -406,6 +406,7 @@ if not in_match() and room != rm_login
 spawned_grid = false
 spawn_grid_delay = 0
 computed_match_end_accs = false
+match_end_accs = false
 
 if in_match()
 {

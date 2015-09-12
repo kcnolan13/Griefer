@@ -34,6 +34,7 @@ if instance_exists(modal_table)
         high_row = 0
     }
     
+    popup_loading(WVIEW/2,HVIEW/2)
     sendBigMessageStrReal("page_leaderboards", pg_orderby, pg_flag, FL_NORMAL)
     return true
 }

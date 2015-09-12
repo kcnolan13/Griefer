@@ -1170,6 +1170,7 @@
       <script>scripts\myAvatar.gml</script>
       <script>scripts\playerName.gml</script>
       <script>scripts\lobby_leader.gml</script>
+      <script>scripts\waiting_for_data.gml</script>
     </scripts>
     <scripts name="animations">
       <script>scripts\sync_poses_and_animations.gml</script>
@@ -1477,6 +1478,7 @@
       <script>scripts\popup_okay.gml</script>
       <script>scripts\popup_yesno.gml</script>
       <script>scripts\popup_exists.gml</script>
+      <script>scripts\popup_loading.gml</script>
       <script>scripts\modal_highlighted.gml</script>
       <script>scripts\scr_create_user.gml</script>
       <script>scripts\regen_control_ui.gml</script>

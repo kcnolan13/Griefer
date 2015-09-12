@@ -298,6 +298,7 @@ if ds_exists(netvars,ds_type_map)
             <string>///draw av heads and stuff
 alpha_scaler = snap_obj.alpha_scaler
 var alph = min(alph_max,alpha)*alpha_scaler*alpha_scaler
+
 if alph &gt; 0.1
 {
     draw_set_alpha(alph)
@@ -325,7 +326,7 @@ if alph &gt; 0.1
         draw_sprite_ext(weapon,-1,x+wep_xoff,y+wep_yoff-15,wepscale,wepscale,0,c_white,draw_get_alpha())
     }
     
-    if avhead1 &gt; -1 and sprite_exists(avhead1)
+    if is_real(avhead1) and avhead1 &gt; -1 and sprite_exists(avhead1)
     {
         if not instance_exists(av1)
             av1 = find_pname_avatar(avname1)
@@ -352,7 +353,7 @@ if alph &gt; 0.1
         draw_set_alpha(alph)
     }
     
-    if avhead2 &gt; -1 and sprite_exists(avhead2)
+    if is_real(avhead2) and avhead2 &gt; -1 and sprite_exists(avhead2)
     {
         if not instance_exists(av2)
             av2 = find_pname_avatar(avname2)

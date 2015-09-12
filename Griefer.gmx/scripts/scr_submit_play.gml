@@ -33,6 +33,7 @@ if valid and pword = field_pword.text_default
 if !instance_exists(processing) and valid
 {
     printf(":::MAKING AUTHENTICATION ATTEMPT: "+pname+" : "+pword)
+    popup_loading(WVIEW/2,HVIEW/2)
     authenticate(pname,pword)
     objVarWrite(net_manager,"pName",pname)
     instance_create(x,y,processing)

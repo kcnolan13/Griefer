@@ -290,6 +290,8 @@ spree_headshots = 0
 spree_gibs = 0
 spree_flashes = 0
 untouched_kills = 0
+ninja_time = 0
+untouched_kills = 0
 
 //kills
 match_points = 0

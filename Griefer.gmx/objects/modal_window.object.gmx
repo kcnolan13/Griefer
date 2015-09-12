@@ -44,6 +44,15 @@ active_color = c_gray
 color_highlighted = GARBAGE
 highlightable = true
 
+is_loading = false
+load_rot = 0
+load_rad = 38
+load_point_rad_max = 12
+load_point_rad_min = 6
+load_points = 8
+load_text_hsep = 10
+loading_counter = 0
+
 //used for modal_meter
 radius = 20
 

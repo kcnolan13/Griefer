@@ -1048,7 +1048,7 @@ if varRead("player_quit")
 
 if net_manager.local_player = id
 {
-    if varRead("hp") &lt; 100
+    if varRead("hp") &lt; 100 or match_starting() or match_ending()
     {
         with challenge_manager
         {

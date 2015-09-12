@@ -347,7 +347,7 @@ draw_set_alpha(1)
 
 if not input_active and not auto_started and alpha &gt; 0.1 and room = rm_login
 {
-    if room = rm_login and bn_login_user.field_username != id
+    if room = rm_login //and bn_login_user.field_username != id
         return false
     
     auto_started = true

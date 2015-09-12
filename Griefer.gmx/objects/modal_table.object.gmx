@@ -92,6 +92,7 @@ alpha = 0
 cols = -1
 rows = -1
 birth_delay = 5
+sort_col = -1
 
 scale_lerp_real = 0.2
 alpha_max = 1
@@ -286,7 +287,7 @@ if varRead("create_pages") and popped_in and rows_used &gt; 0
             ID.submit_action = scr_bn_page_leaderboards
             ID.birth_delay = bdelay
             ID.color = c_black
-            ID.active_color = web_hsv(228,58,80)
+            ID.active_color = highlight_color
             bdelay += binc
             
             ID.text = page_flag_2str(page_flags[i])
@@ -459,6 +460,7 @@ if clicked exit
     clicked = 2
 
 //SORT GRID BY COLUMNS
+check_sort_col = false
 col_high = sort_col_highlighted()
 if col_high &gt; -1 and ds_exists(grid,ds_type_grid)
 {
@@ -469,11 +471,13 @@ if col_high &gt; -1 and ds_exists(grid,ds_type_grid)
     switch (col_high_name)
     {
         case "username":
-            page_orderby = "stats."+"rank"
+            page_orderby = "stats."+"username"
+            sort_col = 0
         break
         
         default:
             page_orderby = "stats."+string_lower(col_high_name)
+            sort_col = col_high
         break
     }
     
@@ -565,6 +569,8 @@ if ds_exists(grid,ds_type_grid)
 
 //if ds_exists(grid,ds_type_grid) and nth_frame(30)
   //  print_ds_grid(grid)
+  
+highlight_color = web_hsv(228,58,80)
 
 if birth_delay &gt; 0 or cols &lt; 0 or rows &lt; 0 or s_index_max &lt; 1 or row_height &lt; 1
 {

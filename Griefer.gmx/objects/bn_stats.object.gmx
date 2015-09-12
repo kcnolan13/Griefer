@@ -156,6 +156,8 @@ if exit_child
 if active = false and not net_manager.lock_armory
 {
     active = true
+    
+    popup_loading(WVIEW/2,HVIEW/2)
 
     if menmode() != "stats"
     {

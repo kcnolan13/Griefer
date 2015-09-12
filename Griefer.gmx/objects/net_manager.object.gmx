@@ -34,6 +34,8 @@ draw_enable_swf_aa(true)
 setGppDebug(0)
 display_set_gui_size(WVIEW,HVIEW)
 
+load_room_start = false
+
 create_random_users = false
 
 random_seed = 210//164
@@ -1390,7 +1392,7 @@ if not bot_match and is_string(varRead("game_mode"))
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///META STUFF
+            <string>///META STUFF and avatar lerping
 if drawing_grav_popup   
     drawing_grav_popup --
     
@@ -1564,7 +1566,7 @@ if room = rm_lobby
                 if ID = stat_gravatar //or i=num_players
                 {
                     objVarWrite(ID,"dude_y",room_height*1.75/3-32)
-                    objVarWrite(ID,"dude_x",room_width*1/5)
+                    objVarWrite(ID,"dude_x",room_width*1/9)
                 }
                 else
                 {
@@ -2481,6 +2483,11 @@ if room = rm_lobby
     bpart_lotto[2] = noone
     came_from_match = false
 }
+
+if room = rm_login
+{
+    load_room_start = true
+}
 </string>
           </argument>
         </arguments>
@@ -2511,6 +2518,13 @@ alarm[7] = 2
 global.xoff = 0
 
 init_physics()
+
+if load_room_start
+{
+    load_room_start = false
+    ID = popup_loading(WVIEW/2,HVIEW/2)
+    ID.load_closable = false
+}
 
 if room = rm_menu
 {

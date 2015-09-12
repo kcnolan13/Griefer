@@ -1,6 +1,10 @@
 ///match_end_accolades()
 
-if not instance_exists(myAvatar()) exit
+if not instance_exists(myAvatar())
+{
+    printf("ERROR: cannot compute match end accolades -- no myAvatar()")
+    return false
+}
 
 var completed = false
 {

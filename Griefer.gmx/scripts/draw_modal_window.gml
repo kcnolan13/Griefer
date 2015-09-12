@@ -127,6 +127,23 @@ if not surface_exists(surface)
             var text_2draw = text
             if object_index = bn_input_field and active
                 text_2draw += string(str_cursor)
+                
+            //THE LOADING WHEEL THING (bumps text over a little to make room)
+            if is_loading
+            {
+                for (var i=0; i<load_points; i++)
+                {
+                    var ang = load_rot+(i/load_points)*360
+                    var point_rad = (load_point_rad_min+(i/load_points)*(load_point_rad_max-load_point_rad_min))*scale*master_scale
+                    var px = xpos + trigx(load_rad,ang)*scale*master_scale
+                    var py = ypos + trigy(load_rad,ang)*scale*master_scale
+                    draw_circle(px,py,point_rad,false)
+                }
+                xpos += (load_rad+load_text_hsep)*scale*master_scale
+                
+                repeat(floor(loading_counter))
+                    text_2draw += "."
+            }
             
             if text_halign = fa_center
                 draw_text_ext_transformed(xpos,ypos,text_2draw,text_linesep,(width-text_pad*2),scale*master_scale,scale*master_scale,0)

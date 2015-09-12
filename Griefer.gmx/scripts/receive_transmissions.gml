@@ -169,6 +169,20 @@ while (genMessagesWaiting() and wait_counter < 500000)
             net_manager.packets_received++
         break
         
+        case "done_loading":
+            if room != rm_login or genVal != FL_NORMAL
+            {
+                printf("::: RECEIVED done loading!")
+                with modal_dialogue
+                {
+                    if is_loading
+                    {
+                        fade_delay = 5
+                    }
+                }
+            }
+        break
+        
         case "goto_map":
             //temp = "rm_map"+string(genVal)
             room_goto(map_placeholder1+1+genVal)

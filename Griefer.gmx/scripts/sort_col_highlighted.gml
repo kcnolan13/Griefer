@@ -7,14 +7,14 @@ var ctop = top
 var cbottom = top+row_height
 
 //player column
-if rect_highlighted(left,ctop,cleft,cbottom)
+if rect_highlighted(left,ctop,cleft,cbottom) or (check_sort_col and sort_col < 2 and sort_col > -1)
 {
     return 0
 }
 
 for (var i=2; i<cols; i++)
 {
-    if rect_highlighted(cleft,ctop,cright,cbottom)
+    if (rect_highlighted(cleft,ctop,cright,cbottom) and not check_sort_col) or (check_sort_col and i = sort_col)
     {
         return i
     }
