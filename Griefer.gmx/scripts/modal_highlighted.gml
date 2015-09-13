@@ -2,7 +2,23 @@
 var m = argument0
 if not instance_exists(m) return false
 
-if instance_exists(modal_dialogue) and m.object_index != modal_dialogue and m.object_index != bn_dialogue return false
+alerts_exist = false
+
+with modal_dialogue
+{
+    if is_alert
+        other.alerts_exist = true
+}   
+
+if alerts_exist
+    return false
+
+if instance_exists(modal_dialogue) and m.object_index != modal_dialogue and m.object_index != bn_dialogue
+{
+    if not (m.object_index = bn_input_field and modal_dialogue.is_input_field)
+        return false
+}
+
 if not m.visible or not m.highlightable return false
 
 var xpos = cursor.x

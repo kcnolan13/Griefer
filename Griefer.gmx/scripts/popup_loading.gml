@@ -15,6 +15,7 @@ if not create_loading_modal
     return false
     
 printf("::: creating loading modal")
+global.load_count ++
 
 ID = instance_create(xi,yi,modal_dialogue)
 {

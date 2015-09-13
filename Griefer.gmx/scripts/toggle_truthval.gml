@@ -21,6 +21,6 @@ else if string_upper(str) = string_upper(global.optimize_fps)
     return global.optimize_graphics
 else
 {
-    printf("ERROR: toggle_truthval passed: "+string(str))
+    printf(":::WARNING unknown toggle_truthval passed: "+string(str))
     return str
 }

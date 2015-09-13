@@ -8,7 +8,7 @@ var alpha = argument4
 var grid_y = argument5
 var dgrid = argument6
 
-var spaces = " "
+var spaces = "  "
 
 txt_fields_start = global.txt_fields_start
 

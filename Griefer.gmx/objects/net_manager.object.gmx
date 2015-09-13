@@ -1152,7 +1152,14 @@ drew_armory_grid = false
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///keepalive and force sync
+            <string>///keepalive and force sync and full_screen sync
+
+var fs = truthval(global.gc[GC_FULLSCREEN,1])
+if full_screen != fs
+{
+    full_screen = fs
+    window_set_fullscreen(full_screen)
+}
 
 if force_sync_countdown
 {
@@ -2759,6 +2766,7 @@ if room = rm_login
     room_speed = 60
     
     sendMessageReal("get_top_gravatars",1)
+    popup_loading(WVIEW/2,HVIEW/2)
     
     var login_col_width = WVIEW/5
     var login_col_bdelay = 30*7
@@ -2789,6 +2797,7 @@ if room = rm_login
         login_col.text = "Log In"
         login_col.bind_global_xoff_to_translation_x = true
         login_col.alpha_max = 1
+        login_col.wait_while_loading = true
         
         //gradient?
         login_col.draw_gradient = true
@@ -2815,6 +2824,7 @@ if room = rm_login
         uname.active_color = web_hsv(235,0,85)
         uname.text_color_input = c_black
         uname.text_color_default = c_white
+        uname.wait_while_loading = true
         with uname modal_aligns()
         
         //password input
@@ -2836,6 +2846,7 @@ if room = rm_login
         pword.active_color = uname.active_color
         pword.text_color_input = uname.text_color_input
         pword.text_color_default = uname.text_color_default
+        pword.wait_while_loading = true
         with pword modal_aligns()
         
         //play button
@@ -2852,7 +2863,26 @@ if room = rm_login
         play.depth = -10
         play.color = web_hsv(220,80,5)
         play.alpha_max = 0.925
+        play.wait_while_loading = true
         with play modal_aligns()
+        
+        //randomize username button
+        rand = instance_create(-1*login_col_width/2,room_height-bn_height/2-(login_col.width-bn_width)/2,bn_typical)
+        rand.text = "Random Username"
+        rand.width = bn_width
+        rand.height = bn_height
+        rand.max_length = 20
+        rand.birth_delay = login_col_bdelay
+        rand.translation_xtarget = login_col_width
+        rand.translation_lerp = translation_lerp
+        rand.submit_action = scr_randomize_username
+        rand.can_press_enter = true
+        rand.can_press_enter_always = true
+        rand.depth = -10
+        rand.color = web_hsv(220,0,9)
+        rand.alpha_max = 0.925
+        rand.wait_while_loading = true
+        with rand modal_aligns()
     }
 }
 </string>
@@ -4339,8 +4369,8 @@ show_debug_overlay(show_debug_stats)
           <argument>
             <kind>1</kind>
             <string>///toggle full screen
-full_screen ^= 1
-window_set_fullscreen(full_screen)
+global.gc[GC_FULLSCREEN,1] = toggle_truthval(global.gc[GC_FULLSCREEN,1])
+window_set_fullscreen(truthval(global.gc[GC_FULLSCREEN,1]))
 </string>
           </argument>
         </arguments>

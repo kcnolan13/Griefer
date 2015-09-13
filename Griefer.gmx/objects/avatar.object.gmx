@@ -702,7 +702,7 @@ if rtime() &lt; 30
 
 if room = rm_lobby and net_manager.room_counter &gt; 30
 {
-    if is_my_avatar(id)
+    if myAvatar() = id
     {
         //sync uniqueID with netMan's
             //varWrite("uniqueId",objVarRead(net_manager,"uniqueId"))

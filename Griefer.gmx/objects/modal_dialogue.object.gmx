@@ -70,10 +70,14 @@ parent_dialogue = noone
 is_yesno = false
 is_alert = false
 is_loading = false
+is_input_field = false
+is_password = false
 
 bn_yes = noone
 bn_no = noone
 bn_okay = noone
+bn_input = noone
+
 scr_yes = scr_none
 scr_no = scr_none
 scr_okay = scr_none
@@ -202,7 +206,7 @@ if is_yesno
     bn_no.birth_delay = bdelay
     bdelay += binc
 }
-else if not is_alert and not is_loading
+else if not is_alert and not is_loading and not is_input_field
 {
     bn_okay = instance_create(x,y+height/2*3/4,bn_dialogue)
     bn_okay.text = "Okay"
@@ -213,11 +217,55 @@ else if not is_alert and not is_loading
     bn_okay.birth_delay = bdelay
     bdelay += binc
 }
-
-if is_alert
+else if is_alert
 {
     text_valign = fa_center
     text_yoff = 0
+}
+else if is_input_field
+{
+    bn_input = instance_create(x,y,bn_input_field)
+    bn_input.width = WVIEW/5*4/5
+    bn_input.height = 64*0.8
+    bn_input.iwidth = bn_input.width
+    bn_input.iheight = bn_input.height
+    bn_input.birth_delay = bdelay
+    bdelay += binc
+    bn_input.depth = depth-10
+    bn_input.auto_start = true
+    bn_input.sequence = 1
+    bn_input.text_color_input = c_black
+    bn_input.text_color_default = c_white
+    bn_input.color = web_hsv(220,0,55)
+    bn_input.active_color = web_hsv(235,0,85)
+    bn_input.is_gui = true
+    
+    if is_password
+    {
+        bn_input.max_length = 20
+        bn_input.is_password = true
+        bn_input.text_default = "Password"
+        bn_input.text = bn_input.text_default
+        bn_input.min_length = 6
+    }
+    
+    bn_yes = instance_create(x-width/4,y+height/2*3/4,bn_dialogue)
+    bn_yes.text = "Okay"
+    bn_yes.script = scr_okay
+    bn_yes.depth = depth -10
+    bn_yes.parent_dialogue = id
+    bn_yes.scale_lerp_real = scale_lerp_real
+    bn_yes.birth_delay = bdelay
+    bdelay += binc
+
+    bn_no = instance_create(x+width/4,y+height/2*3/4,bn_dialogue)
+    bn_no.text = "Cancel"
+    bn_no.script = scr_cancel_input
+    bn_no.depth = depth -10
+    bn_no.parent_dialogue = id
+    bn_no.scale_lerp_real = scale_lerp_real
+    bn_no.birth_delay = bdelay
+    bdelay += binc
 }
 </string>
           </argument>
@@ -242,6 +290,11 @@ if is_alert
           <argument>
             <kind>1</kind>
             <string>///all dat ish
+if instance_exists(bn_input) and fade_out
+{
+    bn_input.fade_out = true
+}
+
 event_inherited()
 label = text
 life++
@@ -249,6 +302,7 @@ life++
 bns[0] = bn_yes
 bns[1] = bn_no
 bns[2] = bn_okay
+bns[3] = bn_input
 
 //allow to exit loading
 if is_loading
@@ -260,12 +314,12 @@ if is_loading
         loading_counter = 0
     }
 
-    if not fade_out and load_closable and 
+    if not fade_out and load_closable and popped_in and
                     (input_check(mapped_control(C_CROUCH)) or keyboard_check(vk_escape) 
                     or keyboard_check(vk_space) or keyboard_check(vk_enter))
-{
-    fade_out = true
-}
+    {
+        fade_out = true
+    }
 }
 
 for (var i=0; i&lt;getLength(bns); i++)

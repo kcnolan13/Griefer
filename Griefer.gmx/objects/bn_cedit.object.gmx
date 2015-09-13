@@ -351,7 +351,7 @@ if clicked exit
 printf("clicked: "+label)
 audio_play_sound(snd_click,2,false)
 
-if not is_onoff and not is_yesno
+if not is_onoff and not is_yesno and text != "Go"
 {
     if instance_exists(myLabel) and myLabel.text != global.cactions[C_SWAP_STICKS]
     {
@@ -372,13 +372,13 @@ else
 {
     var ind = gc_ind(myLabel.text)
     
-    if ind != GC_DEFAULTS
+    if ind != GC_DEFAULTS and ind != GC_PASSWORD
         text = toggle_truthval(text)
 
     //ADJUST THE REAL SETTING VARIABLES BASED ON MYLABEL TEXT
     if ind &gt; -1
     {
-        if ind != GC_DEFAULTS
+        if ind != GC_DEFAULTS and ind != GC_PASSWORD
         {
             global.gc[ind,1] = toggle_truthval(global.gc[ind,1])
             //send to server
@@ -438,6 +438,10 @@ else
             }
             draw_set_swf_aa_level(global.gc[GC_AA_LEVEL,1])
             regen_control_ui()
+        }
+        else if ind = GC_PASSWORD
+        {
+            ID = popup_input(WVIEW/2,HVIEW/2,true,"Change Password",scr_change_password)
         }
     }
     else
