@@ -13,6 +13,7 @@ global.FL_LAST = -31;
 global.FL_NEXT = -32;
 global.FL_PREVIOUS = -33;
 global.FL_FINDME = -34;
+global.FL_EMPTY_USERS = "UsersWithNoKills";
 
 global.page_length = 50;
 

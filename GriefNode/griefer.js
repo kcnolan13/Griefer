@@ -14,7 +14,7 @@ var conn;
 
 //WIPE DB AS DESIRED
 var users_2kill = [];
-users_2kill.push("0");
+users_2kill.push("Dilwicus Prime");
 //users_2kill.push(FL_WIPE);
 
 var random_users_2create = 2;
@@ -257,6 +257,14 @@ io.on('connection', function(socket){
 		socket.emit('ping',response);
 		//log.log(STD,"\nPING\n");
 	}
+  else if (message.msg == "change_password")
+  {
+    log.log(STD,"changing password for "+socket.myPlayer.pName+" to "+message.val);
+    var statement = "UPDATE users set password=MD5('"+message.val+"') where username='"+socket.myPlayer.pName+"'";
+    log.log(SQL,statement);
+    dbman.execute(statement);
+    cupid.genMessage(socket,"done_loading",FL_NORMAL);
+  }
 	else if (message.msg == "shuffle_pnums")
 	{
 		console.log("Player 0 Has Quit. Reshuffling pNum's");
@@ -346,11 +354,13 @@ io.on('connection', function(socket){
   					log.log(STD,"unique login for: "+datMessage.username);
   					message.val = 1;
   					socket.emit('general_message',message);
+            cupid.genMessage(socket,"done_loading",2);
   				} else
   				{
   					log.log(STD,"login failure: "+datMessage.username);
   					message.val = FL_MULTIPLE;
   					socket.emit('general_message',message);
+            cupid.genMessage(socket,"done_loading",2);
   				}
   			});
 
@@ -358,12 +368,14 @@ io.on('connection', function(socket){
   		{
   			log.log(STD,"INCORRECT password");
   			socket.emit('general_message',message);
+        cupid.genMessage(socket,"done_loading",2);
   		} else if (result==2)
   		{
   			//user did not exist --> try to create?
         log.log(STD, "sending 2 as authentication result (can create user)");
         message.val = 2;
         socket.emit('general_message',message);
+        cupid.genMessage(socket,"done_loading",2);
   		}
   	});
 

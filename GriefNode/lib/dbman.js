@@ -355,14 +355,39 @@ exports.alreadyLoggedIn = alreadyLoggedIn
 
 var userDelete = function(username)
 {
-	var tables = ['users','stats','bot_stats','challenges','controls','accolades','bot_accolades','settings'];
-	for (var i=0; i<tables.length; i++)
+	if (username == global.FL_EMPTY_USERS) {
+			
+			var q = "select username from stats where kills=0";
+
+			conn.query(q,function(err,rows){
+				if (!rows)
+				{
+					log.log(CRITICAL,"userDelete could not delete empty users -- none found");
+					return false
+				}
+				else
+				{
+					for (var i=0; i<rows.length; i++)
+					{
+						var uname = rows[i]['username'];
+						userDelete(uname);
+					}
+				}
+			});
+		}
+	else
 	{
-		var where = " where username="+conn.escape(username);
-		if (username == FL_WIPE)
-			where = ""
-		var statement = "delete from "+tables[i]+where
-		execute(statement)
+		var tables = ['users','stats','bot_stats','challenges','controls','accolades','bot_accolades','settings'];
+		for (var i=0; i<tables.length; i++)
+		{
+			var where = " where username="+conn.escape(username);
+
+			if (username == FL_WIPE)
+				where = ""
+
+			var statement = "delete from "+tables[i]+where
+			execute(statement)
+		}
 	}
 }
 exports.userDelete = userDelete
@@ -381,6 +406,7 @@ var userTryCreate = function(socket, username, password)
 		  	};
 
   			socket.emit('general_message',message);
+  			cupid.genMessage(socket,"done_loading",2);
   		}
   		else if (result == 2)
   		{
@@ -394,6 +420,7 @@ var userTryCreate = function(socket, username, password)
 			message.val = 1;
 			socket.emit('general_message',message);
 			log.log(STD,'sending user create success to: '+username);	
+			cupid.genMessage(socket,"done_loading",2);
 	  	}
   	});
 
@@ -544,7 +571,7 @@ var appendHistoryStat = function(pName,stat,val,flag)
 			hist = val+","+hist
 
 			//now update back into database
-			var update = "UPDATE "+table+" set "+stat+"='"+hist+"' where username='"+username+"'";
+			var update = "UPDATE "+table+" set "+stat+"='"+hist+"' where username="+username;
 			log.log(SQL,update);
 
 			execute(update);
@@ -626,7 +653,7 @@ var saveSetting = function(socket, setting_name, val_str, val_real)
 {
 	var username = conn.escape(socket.myPlayer.pName);
 	var count = 0;
-	var statement = "SELECT COUNT(*) from settings where username='"+username+"' AND setting_name='"+setting_name+"'";
+	var statement = "SELECT COUNT(*) from settings where username="+username+" AND setting_name='"+setting_name+"'";
 	conn.query(statement, function(err,rows) {
 		if (err)
 			log.log(SQL, err);
@@ -634,11 +661,11 @@ var saveSetting = function(socket, setting_name, val_str, val_real)
 		count = rows[0]['COUNT(*)'];
 		if (count > 0)
 		{
-			statement = "UPDATE settings set val_str='"+val_str+"', val_real='"+val_real+"' WHERE username='"+username+"' AND setting_name='"+setting_name+"'";
+			statement = "UPDATE settings set val_str='"+val_str+"', val_real='"+val_real+"' WHERE username="+username+" AND setting_name='"+setting_name+"'";
 		}
 		else
 		{
-			statement = "INSERT INTO settings (username, setting_name, val_str, val_real) VALUES ('"+username+"','"+setting_name+"','"+val_str+"','"+val_real+"')";
+			statement = "INSERT INTO settings (username, setting_name, val_str, val_real) VALUES ("+username+",'"+setting_name+"','"+val_str+"','"+val_real+"')";
 		}
 		log.log(SQL,statement);
 		execute(statement);
@@ -689,7 +716,8 @@ var getGravatarAccolades = function(socket, username, flag, retransmit)
 				pkgDude.messages.push(msg);
 			}
 
-
+			var msg = composer.genMessage("done_loading",FL_NORMAL);
+			pkgDude.messages.push(msg);
 
 			socket.emit('pkg',pkgDude.messages);
 			log.log("verbose",pkgDude.messages);
@@ -741,6 +769,9 @@ var getGravatarOutfit = function(socket, username, flag)
 			log.log("verbose",message);
 			pkgDude.messages.push(message);
 		}
+
+		var msg = composer.genMessage("done_loading",FL_NORMAL);
+		pkgDude.messages.push(msg);
 		
 		//send package
 		//log.log(SQL,pkgDude);
@@ -757,7 +788,7 @@ var getTopGravatars = function(socket)
 
 	var statement = "SELECT "+vars+" \
 					FROM stats JOIN users ON stats.username=users.username \
-					ORDER BY stats.global_rank ASC LIMIT 5";
+					ORDER BY stats.true_skill DESC, stats.xp DESC, stats.kills DESC LIMIT 5";
 
 	conn.query(statement, function(err,rows) {
 
@@ -799,6 +830,9 @@ var getTopGravatars = function(socket)
 				datPkg.messages.push(msg);
 			}
 		}
+
+		var msg = composer.genMessage("done_loading",FL_NORMAL);
+		datPkg.messages.push(msg);
 
 		socket.emit('pkg',datPkg.messages);
 		log.log("verbose",datPkg.messages);
@@ -1019,8 +1053,12 @@ var getGlobalStats = function(socket, page_orderby, page_flag)
 		//calculate the page you need, then do everything else
 		getGlobalStatsPage(socket, page_orderby, page_flag, function(socket, page_orderby, desired_page, your_row) {
 
+			var asc_desc = "DESC";
+			if (page_orderby.indexOf("username") > 0)
+				asc_desc = "ASC";
+
 			//selecting everyone's!
-			var statement = "SELECT "+pstats+" from "+table+" ORDER BY "+page_orderby+" DESC, stats.xp DESC, stats.username ASC LIMIT "+global.page_length+" OFFSET "+(desired_page-1)*global.page_length;
+			var statement = "SELECT "+pstats+" from "+table+" ORDER BY "+page_orderby+" "+asc_desc+", stats.xp DESC, stats.username ASC LIMIT "+global.page_length+" OFFSET "+(desired_page-1)*global.page_length;
 
 			conn.query(statement, function(err,rows) {
 
@@ -1067,6 +1105,10 @@ var getGlobalStats = function(socket, page_orderby, page_flag)
 					log.log(STD,"leaderboard_page message:");
 					log.log(STD,lbpage);
 
+					//SEND DONE LOADING
+					var msg = composer.genMessage("done_loading",FL_NORMAL);
+					pkgDude.messages.push(msg);
+
 					socket.emit('pkg',pkgDude.messages);
 					log.log("verbose",pkgDude.messages);
 			});
@@ -1094,6 +1136,10 @@ var getGlobalStatsPage = function(socket, page_orderby, page_flag, callback, arg
 	}
 	else if (page_flag == global.FL_FINDME)
 	{
+		var asc_desc = "DESC";
+		if (page_orderby.indexOf("username") > 0)
+			asc_desc = "ASC";
+
 		page_query = "SELECT ordered_stats.row_num AS your_row, ceiling (ordered_stats.row_num / "+global.page_length+") AS result FROM \
 						( \
 							SELECT temp.row_num from \
@@ -1104,7 +1150,7 @@ var getGlobalStatsPage = function(socket, page_orderby, page_flag, callback, arg
 							FROM  \
 								stats, \
 								(SELECT @i:=0) AS foo \
-								ORDER BY "+page_orderby+" DESC, stats.xp DESC, stats.username ASC \
+								ORDER BY "+page_orderby+" "+asc_desc+", stats.xp DESC, stats.username ASC \
 							) AS temp \
 							WHERE temp.username = "+conn.escape(socket.myPlayer.pName)+" \
 						) AS ordered_stats";
@@ -1126,7 +1172,7 @@ var getGlobalStatsPage = function(socket, page_orderby, page_flag, callback, arg
 
 			log.log(STD, "page_query: "+page_query);
 
-			if (!rows) 
+			if (!rows[0]) 
 			{
 				log.log(CRITICAL,"rows does not exist for page_query in getGlobalStatsPage... using page 1 by default");
 				desired_page = 1;
@@ -1264,8 +1310,10 @@ var sendNetManPlayerStats = function(socket, objIndex, uniqueId)
 			pkgDude.messages.push(message);
 		}
 		
-		//send package
-		//log.log(SQL,pkgDude);
+		//send done loading
+		var msg = composer.genMessage("done_loading",FL_NORMAL);
+		pkgDude.messages.push(msg);
+
 		socket.emit('pkg', pkgDude.messages);
 
 	});
