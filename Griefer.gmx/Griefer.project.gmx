@@ -1464,6 +1464,7 @@
       <script>scripts\truthval.gml</script>
       <script>scripts\toggle_truthval.gml</script>
       <script>scripts\chop_string.gml</script>
+      <script>scripts\contains_profanity.gml</script>
     </scripts>
     <scripts name="kyle's lighting engine">
       <script>scripts\kyle_light_create.gml</script>

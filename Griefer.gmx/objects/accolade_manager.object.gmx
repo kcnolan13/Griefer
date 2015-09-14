@@ -128,6 +128,8 @@ init_grid_row('spr_wep1','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*we
 init_grid_row('spr_wep2','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
 init_grid_row('spr_wep3','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
 init_grid_row('spr_wep4','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+
+ds_grid_sort(grid,COL_POINTS,false)
 </string>
           </argument>
         </arguments>

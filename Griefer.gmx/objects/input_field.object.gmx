@@ -109,11 +109,11 @@ if alpha &lt; 0.1
 //detect when two input fields are active at same time
 if room = rm_login and input_active
 {
-    if bn_login_user.field_password.input_active and id != bn_login_user.field_password.id
+    /*if bn_login_user.field_password.input_active and id != bn_login_user.field_password.id
     {
         input_active = false
         str_cursor = ""
-    }
+    }*/
 }
 
 if global.using_gamepad
