@@ -16,6 +16,7 @@ var conn;
 var users_2kill = [];
 users_2kill.push("Dilwicus Prime");
 //users_2kill.push(FL_WIPE);
+users_2kill.push(global.FL_EMPTY_USERS);
 
 var random_users_2create = 2;
 
