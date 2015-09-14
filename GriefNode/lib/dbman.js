@@ -89,6 +89,7 @@ log.log(SQL,statement);
 //update bot_stats set win_history = '11,10,9,8,7,6,5,4,1,2,3,4,3,2,1,0,-1,0,-1,-2,-3,-4,-3,-2,-3,-2,-1,0,0,0,0,1,1,2,3,4,5,6,7,8' where username='kyle'
 //update bot_accolades set dub_kill=3,trip_kill=2,flash_bandicoot=1,flame_kill=5,survivor=8,3ass=1,6gibs=2,3heads=1,6heads=2,3ks=4,5ks=2,10ks=1,15ks=1 where username='kyle';
 // CREATE VIEW stats_sorted AS SELECT username, true_skill, kills, xp, time FROM stats ORDER BY true_skill, kills, xp, time
+//create table events (username VARCHAR(20), msg, str1, str2, real1);
 
 //exports
 exports.connect = function(connectMe, callback)
@@ -428,6 +429,50 @@ var userTryCreate = function(socket, username, password)
 }
 exports.userTryCreate = userTryCreate
 
+var createEvent = function(username, msg, str1, str2, real1)
+{
+	var statement = "INSERT into events (username,msg, str1, str2, real1) VALUES ("+conn.escape(username)+","+conn.escape(msg)+","+conn.escape(str1)+","+conn.escape(str2)+","+conn.escape(real1)+")";
+	log.log(SQL,statement);
+	execute(statement);
+}
+exports.createEvent = createEvent;
+
+var performEvents = function(socket, and_filter, wipe_events)
+{
+	var uname = conn.escape(socket.myPlayer.pName);
+	var q = "SELECT * from events WHERE username="+uname+" "+and_filter;
+	conn.query(q,function(err,rows){
+		if (!rows) {
+			log.log(CRITICAL,"performEvents found no rows for: "+q);
+		}
+		else if (!rows[0]) {
+			log.log(CRITICAL,"performEvents found no rows[0] for: "+q);
+		}
+		else {
+			log.log(SQL, q);
+			var pkgDude = new composer.createPkg();
+			for (var i=0; i<rows.length; i++)
+			{
+				var msg = rows[i]['msg'];
+				var str1 = rows[i]['str1'];
+				var str2 = rows[i]['str2'];
+				var real1 = rows[i]['real1'];
+				var sendMe = composer.bigMessage(msg, str1, str2, real1);
+				pkgDude.messages.push(sendMe);
+			}
+			log.log("verbose",pkgDude.messages);
+			socket.emit('pkg',pkgDude.messages);
+
+			if (wipe_events) {
+				var q2 = "DELETE from events where username = "+uname+" "+and_filter;
+				log.log(SQL,q2);
+				execute(q2);
+			}
+		}
+	});
+}
+exports.performEvents = performEvents;
+
 var userCreate = function(socket, username, password)
 {
 	//compose the query
@@ -488,6 +533,9 @@ var userCreate = function(socket, username, password)
 	statement = "INSERT INTO bot_accolades ("+"username, "+accolades+") VALUES ("+conn.escape(username)+', '+accolades_init+')';
 	log.log(SQL,"user create:\n"+statement+"\n\n");
 	execute(statement);
+
+	//new user event
+	createEvent(username,"new_user","","",FL_NORMAL);
 
 
 	//MAKE ENTRIES IN CONTROL DEFAULTS

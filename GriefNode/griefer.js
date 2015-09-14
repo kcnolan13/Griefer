@@ -96,21 +96,23 @@ io.on('connection', function(socket){
 	  	//send player stats after 35 ms delay
 	  	setTimeout(function(socket) {
 
-	  		log.log(STD,"sending "+socket.myPlayer.pName+" stats to local net manager");
-	  		dbman.sendNetManPlayerStats(socket,netManObjIndex, default_netman_uniqueId);
+    		log.log(STD,"sending "+socket.myPlayer.pName+" stats to local net manager");
+    		dbman.sendNetManPlayerStats(socket,netManObjIndex, default_netman_uniqueId);
 
-	  		//create the local avatar
-	  		cupid.objCreate(socket,avatarObjIndex,socket.myPlayer.uniqueId,Math.random()*1024,Math.random()*768);
-			cupid.objUpdate(socket,avatarObjIndex,socket.myPlayer.uniqueId,"pName",socket.myPlayer.pName,0);
-	
-			//send complete AVATAR statistics
-			dbman.sendNetManPlayerStats(socket, avatarObjIndex, socket.myPlayer.uniqueId);
+    		 //create the local avatar
+    	  cupid.objCreate(socket,avatarObjIndex,socket.myPlayer.uniqueId,Math.random()*1024,Math.random()*768);
+    	  cupid.objUpdate(socket,avatarObjIndex,socket.myPlayer.uniqueId,"pName",socket.myPlayer.pName,0);
 
-			//sync connected players for everyone... cause why not
-			cupid.manageSockets();
-			cupid.syncPlayersConnected();
+  			//send complete AVATAR statistics
+  			dbman.sendNetManPlayerStats(socket, avatarObjIndex, socket.myPlayer.uniqueId);
 
-  	}, 35, socket);
+        dbman.performEvents(socket,"",true);
+
+  			//sync connected players for everyone... cause why not
+  			cupid.manageSockets();
+  			cupid.syncPlayersConnected();
+
+  	   }, 35, socket);
 
   });
 
