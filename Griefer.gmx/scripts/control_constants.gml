@@ -43,6 +43,12 @@ global.gc[GC_FPS,2] = false //is_sens
 global.gc[GC_DEFAULTS,0] = "Restore Defaults"
 global.gc[GC_DEFAULTS,1] = global.txt_restore
 global.gc[GC_DEFAULTS,2] = false //is_sens
+global.gc[GC_FULLSCREEN,0] = "Full-Screen"
+global.gc[GC_FULLSCREEN,1] = "No"
+global.gc[GC_FULLSCREEN,2] = false //is_sens
+global.gc[GC_PASSWORD,0] = "Change Password"
+global.gc[GC_PASSWORD,1] = "Go"
+global.gc[GC_PASSWORD,2] = false
 
 for (var i=0; i<array_height_2d(global.gc); i++)
 {

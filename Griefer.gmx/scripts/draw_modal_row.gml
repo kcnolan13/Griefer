@@ -8,7 +8,7 @@ var alpha = argument4
 var grid_y = argument5
 var dgrid = argument6
 
-var spaces = " "
+var spaces = "  "
 
 txt_fields_start = global.txt_fields_start
 
@@ -40,7 +40,7 @@ draw_set_halign(fa_left)
 draw_set_valign(fa_center)
 draw_set_font(global.table_font)
 
-if grid_y > rows_used
+if grid_y > rows_used and dgrid != grid_header
     return false
 
 //draw the player's name and rank and whatnot

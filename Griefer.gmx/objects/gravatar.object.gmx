@@ -211,6 +211,12 @@ else if room = rm_lobby or room = rm_menu
 }
 else if room = rm_login
 {
+    if login_lerp_delay_base
+        login_lerp_delay_base --
+        
+    if rtime() &gt; 5*30 and varRead("lerp_delay") &gt; login_lerp_delay*varRead("pNum")
+        varWrite("lerp_delay",login_lerp_delay*varRead("pNum"))
+    
     var dude_x_new = room_width/2+global.xoff
     var pnum = varRead("pNum")
     var spacer = 64*2.75
@@ -237,7 +243,7 @@ else if room = rm_login
             varWrite("dude_y",room_height*4/5-48*(5-varRead("pNum")))
         else
         {
-            varWrite("dude_y",HVIEW+64*8)
+            varWrite("dude_y",HVIEW+64*8+400*varRead("pNum"))
         }
         
         if varRead("lerp_delay")
@@ -285,7 +291,7 @@ if not bparts_done_ready
         {
             varWrite("lerp_delay",login_lerp_delay_base+login_lerp_delay*varRead("pNum"))
             dude_instalerp_x = true
-        }    
+        }
         else
         {
             stat_manager.grav_ready = true

@@ -18,6 +18,12 @@ if valid and string_length(pname) < field_pname.min_length
     popup_alert(WVIEW/2+global.xoff,HVIEW/2,"Invalid Name","Your player name must be at least "+string(field_pname.min_length)+" characters")
 }
 
+if contains_profanity(pname)
+{
+    valid = false
+    popup_alert(WVIEW/2+global.xoff,HVIEW/2,"Profanity Filter","Tone it down a bit :)")
+}
+
 if valid and string_length(pword) < field_pword.min_length
 {
     valid = false

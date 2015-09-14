@@ -170,9 +170,13 @@ while (genMessagesWaiting() and wait_counter < 500000)
         break
         
         case "done_loading":
-            if room != rm_login or genVal != FL_NORMAL
+            if global.load_count > 0 global.load_count --
+            else global.load_count = 0
+            
+            printf("::: Done Loading! global.load_count --> "+string(global.load_count))
+            
+            if not global.load_count
             {
-                printf("::: RECEIVED done loading!")
                 with modal_dialogue
                 {
                     if is_loading
@@ -356,7 +360,7 @@ while (genMessagesWaiting() and wait_counter < 500000)
                     {
                         if translation_x != 0 or object_index = modal_splat
                         {
-                            if id = net_manager.uname or id = net_manager.pword or id = net_manager.play
+                            if id = net_manager.uname or id = net_manager.pword or id = net_manager.play or id = net_manager.rand
                                 fade_out = true
                             else
                                 translation_xtarget = 0
@@ -372,7 +376,7 @@ while (genMessagesWaiting() and wait_counter < 500000)
                 }
                 else if (genVal = 2)
                 {
-                    with popup_yesno(WVIEW/2,HVIEW/2,"Create Player", "Create new player "+string(capwords(objVarRead(net_manager,"pName")))+"?",scr_create_user,scr_none)
+                    with popup_yesno(WVIEW/2,HVIEW/2,"Create Player", "Create new player "+string(capwords(objVarRead(net_manager,"pName")))+"?#Password: "+string(net_manager.pword.text),scr_create_user,scr_none)
                     {
                         header_color = web_hsv(224,54,71)
                     }

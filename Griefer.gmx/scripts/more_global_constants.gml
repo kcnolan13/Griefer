@@ -5,6 +5,15 @@ global.tskill = "True Skill"
 global.accolade_name = "Medal"
 global.time_played = "Career Time"
 
+global.profanities[0] = "fuck"
+global.profanities[1] = "cunt"
+global.profanities[2] = "shit"
+global.profanities[3] = "nigger"
+global.profanities[4] = "nigga"
+
+//how much data are we waiting for?
+global.load_count = 0
+
 global.xoff = 0
 
 global.lowest_pnum = 0

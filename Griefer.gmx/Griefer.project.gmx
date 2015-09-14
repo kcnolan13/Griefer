@@ -1464,6 +1464,7 @@
       <script>scripts\truthval.gml</script>
       <script>scripts\toggle_truthval.gml</script>
       <script>scripts\chop_string.gml</script>
+      <script>scripts\contains_profanity.gml</script>
     </scripts>
     <scripts name="kyle's lighting engine">
       <script>scripts\kyle_light_create.gml</script>
@@ -1474,20 +1475,26 @@
       <script>scripts\new_chat_feed_message.gml</script>
     </scripts>
     <scripts name="ui">
+      <scripts name="submit actions">
+        <script>scripts\scr_randomize_username.gml</script>
+        <script>scripts\scr_submit_play.gml</script>
+        <script>scripts\scr_bn_page_leaderboards.gml</script>
+        <script>scripts\scr_create_user.gml</script>
+        <script>scripts\scr_none.gml</script>
+        <script>scripts\scr_change_password.gml</script>
+        <script>scripts\scr_cancel_input.gml</script>
+      </scripts>
       <script>scripts\popup_alert.gml</script>
       <script>scripts\popup_okay.gml</script>
+      <script>scripts\popup_input.gml</script>
       <script>scripts\popup_yesno.gml</script>
       <script>scripts\popup_exists.gml</script>
       <script>scripts\popup_loading.gml</script>
       <script>scripts\modal_highlighted.gml</script>
-      <script>scripts\scr_create_user.gml</script>
       <script>scripts\regen_control_ui.gml</script>
-      <script>scripts\scr_none.gml</script>
       <script>scripts\modal_recalculate_snap.gml</script>
-      <script>scripts\scr_submit_play.gml</script>
       <script>scripts\draw_modal_splat.gml</script>
       <script>scripts\scroll_accolades.gml</script>
-      <script>scripts\scr_bn_page_leaderboards.gml</script>
       <script>scripts\modal_aligns.gml</script>
       <script>scripts\wipe_leaderboards.gml</script>
       <script>scripts\compute_auto_crop.gml</script>
@@ -1536,6 +1543,7 @@
     <font>fonts\fnt_leaderboards</font>
     <font>fonts\fnt_feed</font>
     <font>fonts\fnt_input</font>
+    <font>fonts\fnt_alert</font>
   </fonts>
   <objects name="objects">
     <objects name="DONT MOVE ME">
@@ -1905,7 +1913,7 @@
       <room>rooms\map_placeholder2</room>
     </rooms>
   </rooms>
-  <constants number="159">
+  <constants number="161">
     <constant name="ACC_XP_SCALER">2</constant>
     <constant name="BAD_READ">-99.1234</constant>
     <constant name="BOT_XP_SCALER">0.25</constant>
@@ -1990,7 +1998,9 @@
     <constant name="GC_CHAT_FEED_ALPHA">6</constant>
     <constant name="GC_CHAT_FEED">5</constant>
     <constant name="GC_CONTROL_HINTS">2</constant>
-    <constant name="GC_DEFAULTS">12</constant>
+    <constant name="GC_DEFAULTS">14</constant>
+    <constant name="GC_PASSWORD">13</constant>
+    <constant name="GC_FULLSCREEN">12</constant>
     <constant name="GC_FPS">11</constant>
     <constant name="GC_KILL_FEED_ALPHA">4</constant>
     <constant name="GC_KILL_FEED">3</constant>

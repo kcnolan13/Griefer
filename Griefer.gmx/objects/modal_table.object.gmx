@@ -335,14 +335,9 @@ if not first_sort and ds_exists(grid,ds_type_grid)
     }
 }
 
-//CREATE THE GRID WHEN YOU HAVE THE TECHNOLOGY!!
-if grid = NO_HANDLE and varRead("create_grid")
+if grid_header = NO_HANDLE
 {
-    modal_aligns()
-    
-    grid = ds_grid_create(cols,rows) //+1 for the index to the left of columns
     grid_header = ds_grid_create(cols,1)
-    s_index_max = max(1,(rows+2)*row_height - height)
     bn_top = instance_create(left+width+32+10,top+32,bn_tbottom)
     bn_top.parent_table = id
     bn_bottom = instance_create(left+width+32+10,top+height+6,bn_tbottom)
@@ -369,6 +364,16 @@ if grid = NO_HANDLE and varRead("create_grid")
     ds_grid_add(grid_header,13,0,"global_rank")
     ds_grid_add(grid_header,14,0,"helmet0")
     ds_grid_add(grid_header,15,0,"hat0")
+}
+
+//CREATE THE GRID WHEN YOU HAVE THE TECHNOLOGY!!
+if grid = NO_HANDLE and varRead("create_grid")
+{
+    modal_aligns()
+    
+    grid = ds_grid_create(cols,rows) //+1 for the index to the left of columns
+    
+    s_index_max = max(1,(rows+2)*row_height - height)
     
     cols -= extra_stats
     

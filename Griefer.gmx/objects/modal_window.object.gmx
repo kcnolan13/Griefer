@@ -43,6 +43,8 @@ active = false
 active_color = c_gray
 color_highlighted = GARBAGE
 highlightable = true
+wait_while_loading = false
+post_loading_wait_time = 30*5
 
 is_loading = false
 load_rot = 0
@@ -389,6 +391,11 @@ if fade_delay
 if birth_delay &gt; 0
 {
     birth_delay = sub_real(birth_delay,1)
+    
+    if wait_while_loading and waiting_for_data()
+    {
+        birth_delay = post_loading_wait_time
+    }
 
     
     if fade_out
