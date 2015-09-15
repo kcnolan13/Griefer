@@ -6,7 +6,7 @@ var scale = argument3
 
 draw_set_font(fnt_hud_big)
 draw_set_halign(fa_center)
-draw_set_valign(fa_center)
+draw_set_valign(fa_middle)
 
 if rank<0
     rank = 0
@@ -21,4 +21,4 @@ draw_circle(draw_x+global.rank_radius*scale,draw_y+global.rank_radius*scale,glob
 draw_set_color(c_white)
 draw_circle(draw_x+global.rank_radius*scale,draw_y+global.rank_radius*scale,global.rank_radius*scale,true)
 
-draw_text_ext_transformed(draw_x+global.rank_radius*scale,draw_y,rank,0,300,scale,scale,0)
+draw_text_ext_transformed(draw_x+global.rank_radius*scale,draw_y+scale*string_height("blah")/8,rank,0,300,scale,scale,0)

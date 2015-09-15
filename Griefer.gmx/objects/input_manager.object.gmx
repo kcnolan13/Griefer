@@ -51,6 +51,12 @@ set_pressed[0] = 0
 set_pressed[1] = 0
 set_pressed[2] = 0
 set_pressed[3] = 0
+
+schedule_queue_script = scr_none
+schedule_queue_counter = 0
+
+schedule_script = scr_none
+schedule_counter = 0
 </string>
           </argument>
         </arguments>
@@ -272,6 +278,36 @@ for (var i=0; i&lt;4; i++)
     }
 }
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///scheduler
+if schedule_counter
+{
+    schedule_counter = sub_real(schedule_counter,1)
+    if not schedule_counter
+    {
+        script_execute(schedule_script)
+        schedule_script = scr_none
+    }
+}
 </string>
           </argument>
         </arguments>

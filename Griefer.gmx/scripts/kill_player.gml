@@ -82,6 +82,9 @@ if dead_homes != net_manager.local_player and killer = net_manager.local_player
     
     if spree > varRead("kill_streak")
         stat_update_real("kill_streak",spree,stat_manager.stat_flag)
+        
+    net_manager.draw_you_killed = net_manager.draw_you_killed_max
+    net_manager.name_you_killed = playerName(dead_homes)
     
     switch(death_type)
     {

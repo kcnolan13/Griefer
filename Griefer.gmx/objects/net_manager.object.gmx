@@ -34,6 +34,11 @@ draw_enable_swf_aa(true)
 setGppDebug(0)
 display_set_gui_size(WVIEW,HVIEW)
 
+draw_you_killed_max = room_speed
+draw_you_killed = false
+name_you_killed = ""
+new_user = false
+
 load_room_start = false
 
 create_random_users = false
@@ -1152,7 +1157,14 @@ drew_armory_grid = false
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///keepalive and force sync and full_screen sync
+            <string>///keepalive and force sync and full_screen sync and draw_you_killed
+
+if draw_you_killed
+{
+    draw_you_killed = sub_real(draw_you_killed,1)
+    if not draw_you_killed
+        name_you_killed = ""
+}
 
 var fs = truthval(global.gc[GC_FULLSCREEN,1])
 if full_screen != fs
@@ -1863,6 +1875,13 @@ if (room = rm_menu or room = rm_lobby) and (room_counter &gt; 30/2 and (not show
         stat_manager.grav_name = varRead("pName")
         objVarWrite(stat_gravatar,"pName",varRead("pName"))
         objVarWrite(stat_gravatar,"uniqueId",hash_string(varRead("pName")))
+        
+        if new_user
+        {
+            printf("::: CREATING NEWUSER_BPARTS")
+            scr_instantiate_newuser_bparts()
+            new_user = false
+        }
     }
 }
 </string>
@@ -3077,6 +3096,45 @@ if 1=0
             <string>///HUD
 master_scale = 1*match_scale//HVIEW/768*match_scale
 
+if in_match() and ((draw_killed_by and do_draw_killed_by) or (draw_you_killed and name_you_killed != ""))
+{
+    draw_set_font(fnt_splashscreen)
+    draw_flash_compensate()
+    draw_set_color(c_white)
+    draw_set_halign(fa_center)
+    draw_set_valign(fa_center)
+    var killer_name = objVarRead(local_player,"killer")
+    
+    if draw_you_killed and name_you_killed != ""
+        killer_name = name_you_killed
+    
+    if killer_name != varRead("pName")
+    {
+        var killer_av = find_pname_avatar(killer_name)
+        if instance_exists(killer_av)
+        {
+            var row_sep = 100
+            var starty = HVIEW/10
+            var row2_xoff = -76
+            var head_space = 64
+            
+            with killer_av
+                draw_avatar_head(WVIEW/2+row2_xoff,starty+row_sep,id,0,1,1,FL_NOBAR)
+                
+            var kill_txt = "You Were Killed By: "
+            
+            if draw_you_killed and name_you_killed != ""
+                kill_txt = "You Killed: "
+                
+            draw_text(WVIEW/2,starty,kill_txt)
+            draw_set_halign(fa_left)
+            draw_text(WVIEW/2+row2_xoff+head_space,starty+row_sep,string(killer_name))
+        }
+    }
+    else
+        draw_text(0+WVIEW/2,0+HVIEW/4,"You Killed Yourself...")
+}
+
 if not match_ending()
 {
     if (starting_match) and not instance_exists(modal_controls)
@@ -3101,35 +3159,6 @@ if not match_ending()
         }
     }
     
-    if draw_killed_by and do_draw_killed_by
-    {
-        draw_set_font(fnt_splashscreen)
-        draw_set_color(c_white)
-        draw_set_halign(fa_center)
-        draw_set_valign(fa_center)
-        var killer_name = objVarRead(local_player,"killer")
-        if killer_name != varRead("pName")
-        {
-            var killer_av = find_pname_avatar(killer_name)
-            if instance_exists(killer_av)
-            {
-                var row_sep = 100
-                var starty = HVIEW/10
-                var row2_xoff = -76
-                var head_space = 64
-                
-                with killer_av
-                    draw_avatar_head(WVIEW/2+row2_xoff,starty+row_sep,id,0,1,1,FL_NOBAR)
-                    
-                draw_text(WVIEW/2,starty,"You Were Killed By: ")
-                draw_set_halign(fa_left)
-                draw_text(WVIEW/2+row2_xoff+head_space,starty+row_sep,string(killer_name))
-            }
-        }
-        else
-            draw_text(0+WVIEW/2,0+HVIEW/4,"You Killed Yourself...")
-    }
-    
     if bot_override
     {
         /*if instance_exists(local_player) and in_match() and rtime() &gt; 30 
@@ -3141,6 +3170,7 @@ if not match_ending()
         draw_set_valign(fa_top)
         draw_set_color(c_white)
         draw_set_font(fnt_hud)
+        draw_flash_compensate()
         draw_set_alpha(0.8)
         draw_text(0+WVIEW-64,0+HVIEW-64,"AI Override")
     }
@@ -3172,6 +3202,7 @@ if not match_ending()
                 //printf(room_counter+" --&gt; drawing weapon_contemplating")
                 draw_weapon_slot(local_player.weapon_contemplating,0+WVIEW-sprite_get_width(spr_weapon_slot)/2*master_scale-border,0+(8+1.75*(sprite_get_height(spr_weapon_slot)+border+8))*master_scale,master_scale,1,FL_NORMAL)
                 draw_set_color(c_white)
+                draw_flash_compensate()
                 draw_set_font(fnt_hud)
                 draw_set_alpha(1)
                 draw_set_halign(fa_right)
@@ -3361,7 +3392,7 @@ if match_ending()
         
         win_popup_scale = lerp_real(win_popup_scale,win_popup_scale_max,win_popup_lerp_real)
         win_popup_alpha = lerp_real(win_popup_alpha,win_popup_alpha_max,win_popup_lerp_real)
-        draw_set_font(fnt_hud_big)
+        draw_set_font(fnt_hud)
         //NOW DRAW THE WIN POPUP
         draw_win_popup_centered(WVIEW/2,HVIEW/2,win_popup_width,win_popup_height,win_color,win_popup_scale,win_popup_alpha,av_head,titulo,subtitulo)
     }
@@ -3968,7 +3999,7 @@ if room = rm_login
         var yoff = 64*3.2-30
         var xoff = 16*string_length(string(objVarRead(ID,"pName")))/2
     
-        if ID.hover_counter &gt; ID.hover_delay
+        if ID.hover_counter &gt; ID.hover_delay and not instance_exists(modal_dialogue)
         {
             if not drawing_grav_popup
             {
@@ -4018,7 +4049,7 @@ for (var i=0; i&lt;instance_number(avatar); i++)
         if DEBUG
             draw_text(ID.x,ID.y - 64*3.35, objVarRead(ID,"uniqueId"))
     }
-    if av_popup = ID and ID.visible and abs(objVarRead(ID,"animation_scale") - av_scale_highlighted) &lt; scale_tol
+    if av_popup = ID and ID.visible and abs(objVarRead(ID,"animation_scale") - av_scale_highlighted) &lt; scale_tol and not instance_exists(modal_dialogue)
     {
         if not av_popup_drawn
         {
@@ -4381,6 +4412,7 @@ show_debug_overlay(show_debug_stats)
             <string>///toggle full screen
 global.gc[GC_FULLSCREEN,1] = toggle_truthval(global.gc[GC_FULLSCREEN,1])
 window_set_fullscreen(truthval(global.gc[GC_FULLSCREEN,1]))
+save_setting(GC_FULLSCREEN)
 </string>
           </argument>
         </arguments>

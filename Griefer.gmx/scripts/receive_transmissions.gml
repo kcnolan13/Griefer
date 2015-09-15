@@ -26,6 +26,12 @@ while (bigMessagesWaiting() and wait_counter < 500000)
         
     switch (bigMessage)
     {
+        case "new_user":
+            printf("::: tutorial time!")
+            net_manager.new_user = true
+            ui_new_user()
+        break
+        
         case "control_map":
             printf("::: Received a Control Mapping")
             

@@ -679,7 +679,7 @@ else
 draw_rectangle(s_left,s_curs_top,s_right,s_curs_bottom,false)
 
 //draw popups
-if hovrow &gt; -1 and show_hovrow
+if hovrow &gt; -1 and show_hovrow and not instance_exists(modal_dialogue)
 {
     //show popup
 

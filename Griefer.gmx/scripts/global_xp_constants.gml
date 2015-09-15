@@ -1,5 +1,7 @@
 //init xp constants
 
+global.xp_tutorial = XP_KILL*5
+
 var rank_xp_mult = 1.5
 global.rank_xp[0] = 0
 global.rank_xp[1] = 1000

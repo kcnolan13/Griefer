@@ -7,6 +7,7 @@ var padding = argument4
 var alpha = argument5
 
 popup_drawn = false
+temp_list = list
 
 if not ds_exists(list,ds_type_list)
 {
@@ -41,7 +42,7 @@ for (var i=0; i<6; i++)
                     part1 = list[| 0]
                     swap_counter = 5
                     
-                            audio_play_sound(snd_click_armory,2,false)
+                    audio_play_sound(snd_click_armory,2,false)
                     
                     if part1.disabled
                     {
@@ -61,32 +62,40 @@ for (var i=0; i<6; i++)
                     }
                 }
             }
-            else if instance_place(x,y,cursor) and not popup_exists() and rightclick_pressed() and not swap_counter
+            else if instance_place(x,y,cursor) and not popup_exists() and rightclick_pressed() and not swap_counter 
             {
-                            audio_play_sound(snd_pickup2,2,false)
-                            
-                if not contemplating_scrap
+                if ds_list_size(other.temp_list) > 2
                 {
-                    swap_counter = 5
-                    contemplating_scrap = true
+                    audio_play_sound(snd_pickup2,2,false)
+                    printf("::: other.temp_list size = "+string(ds_list_size(other.temp_list)))
+                                
+                    if not contemplating_scrap
+                    {
+                        swap_counter = 5
+                        contemplating_scrap = true
+                    }
+                    else
+                    {
+                        //SCRAP THE GEAR
+                        with other.id
+                        {
+                            ds_list_delete(temp_list, index)
+                            if DEBUG
+                            {
+                                printf("DS List of size "+ds_list_size(temp_list)+" Now Contains:")
+                                for (var q=0; q<ds_list_size(temp_list); q++)
+                                {
+                                    printf(temp_list[| q])
+                                }
+                            }
+                            sync_my_doll()
+                        }
+                        instance_destroy()  
+                    }
                 }
                 else
                 {
-                    //SCRAP THE GEAR
-                    with other.id
-                    {
-                        ds_list_delete(list, index)
-                        if DEBUG
-                        {
-                            printf("DS List of size "+ds_list_size(list)+" Now Contains:")
-                            for (var q=0; q<ds_list_size(list); q++)
-                            {
-                                printf(list[| q])
-                            }
-                        }
-                        sync_my_doll()
-                    }
-                    instance_destroy()  
+                    audio(snd_denied,1)
                 }
             }
         }

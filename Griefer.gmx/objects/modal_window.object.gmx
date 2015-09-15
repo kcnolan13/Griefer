@@ -29,6 +29,8 @@
 auto_crop = false
 crop_pad = 24
 
+force_click = false
+
 depth = -95
 counter = 0
 width = 64*4
@@ -45,6 +47,7 @@ color_highlighted = GARBAGE
 highlightable = true
 wait_while_loading = false
 post_loading_wait_time = 30*5
+blocked = false
 
 is_loading = false
 load_rot = 0

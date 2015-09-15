@@ -42,6 +42,8 @@ is_page = false
 page_flag = false
 page_orderby = "stats."+"true_skill"
 page_offset = -1
+
+force_click = false
 </string>
           </argument>
         </arguments>
@@ -136,7 +138,7 @@ if clicked
           <argument>
             <kind>1</kind>
             <string>///bail if there is a modal dialogue and this isn't part of it
-if instance_exists(modal_dialogue) and object_index != bn_dialogue
+if not force_click and instance_exists(modal_dialogue) and object_index != bn_dialogue
     exit
 
 if modal_highlighted(id) and submit_action != scr_none and script_exists(submit_action)

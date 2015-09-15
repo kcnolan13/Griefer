@@ -10,16 +10,16 @@ with modal_dialogue
         other.alerts_exist = true
 }   
 
-if alerts_exist
+if alerts_exist or m.blocked
     return false
 
-if instance_exists(modal_dialogue) and m.object_index != modal_dialogue and m.object_index != bn_dialogue
+if not force_click and instance_exists(modal_dialogue) and m.object_index != modal_dialogue and m.object_index != bn_dialogue
 {
     if not (m.object_index = bn_input_field and modal_dialogue.is_input_field)
         return false
 }
 
-if not m.visible or not m.highlightable return false
+if not m.visible or (not m.highlightable and not force_click) return false
 
 var xpos = cursor.x
 var ypos = cursor.y

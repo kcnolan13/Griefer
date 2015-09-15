@@ -5,6 +5,9 @@ global.tskill = "True Skill"
 global.accolade_name = "Medal"
 global.time_played = "Career Time"
 
+global.tut_bdelay = 60
+global.tut_wait = 18
+
 global.profanities[0] = "fuck"
 global.profanities[1] = "cunt"
 global.profanities[2] = "shit"
@@ -43,7 +46,7 @@ global.dead_limit = 3
 global.fhead_alpha = 0.65
 global.fhead_wbar = 64
 global.fhead_hbar = 24
-global.fhead_font = fnt_title_small//fnt_hud_big
+global.fhead_font = fnt_fhead//fnt_hud_big
 global.player_popup_alpha = 0.75
 
 //POPUPS
