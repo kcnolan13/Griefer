@@ -192,21 +192,21 @@ bdelay = 10
 binc = 5
 text_pad = width/12
 
-if critical
-{
-    header_color = c_red
-}
-
 if is_tutorial
 {
+    header_color = web_hsv(228,58,80)
     alpha_max = 1
     draw_fade = true
     draw_gradient = true
     font = fnt_hud
     text_yoff = 84
 }
-    
 
+if critical
+{
+    header_color = c_red
+}
+    
 if is_yesno
 {
     bn_yes = instance_create(x-width/4,y+height/2*3/4,bn_dialogue)

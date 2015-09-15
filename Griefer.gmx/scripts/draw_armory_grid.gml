@@ -72,6 +72,10 @@ for (var i=0; i<6; i++)
                     if not contemplating_scrap
                     {
                         swap_counter = 5
+                        
+                        with bpart_generic
+                            swap_counter = 5
+                            
                         contemplating_scrap = true
                     }
                     else

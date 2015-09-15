@@ -8,4 +8,4 @@ with modal_button
 }
 
 
-scheduler_queue(tut_violence,60)
+scheduler(tut_violence,60)

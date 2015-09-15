@@ -38,9 +38,11 @@ draw_you_killed_max = room_speed
 draw_you_killed = false
 name_you_killed = ""
 new_user = false
+drawing_grid_dir = 0
+
+violence_2end = false
 
 load_room_start = false
-
 create_random_users = false
 
 random_seed = 210//164
@@ -58,6 +60,8 @@ collapsed_pname = ""
 collapsed_numplayers = 0
 collapsed_pluralize = 0
 everyone_quit = false
+
+draw_prank_centered = false
 
 show_grid_counter_needed = 0
 show_grid_counter = 0
@@ -124,6 +128,12 @@ bot_focus_counter = 0
 bot_focus = noone
 bot_override = false
 drawing_cache_popup = false
+
+for (var i=0; i&lt;NUM_LIMBS; i++)
+{
+    grid_lalphs[i] = 0
+}
+grid_lalph_inc = 0.1
 
 
 printf("instance_exists(-10) = "+string(instance_exists(-10)))
@@ -2543,6 +2553,11 @@ alarm[7] = 2
 
 global.xoff = 0
 
+for (var i=0; i&lt;NUM_LIMBS; i++)
+{
+    grid_lalphs[i] = 0
+}
+
 init_physics()
 
 if load_room_start
@@ -3747,6 +3762,7 @@ if room = rm_menu or room = rm_lobby
 if (room = rm_menu or room = rm_lobby) and string(menu_mode) = "armory" and instance_exists(my_doll)
 { 
     grid_drawn = false
+    drawing_grid_dir = 0
     if abs(my_doll.x - dude_x) &lt; 5 and abs(my_doll.y - dude_y) &lt; 5 
     {
         cache_center = room_width/2-armory_sl/2
@@ -3880,10 +3896,45 @@ if (room = rm_menu or room = rm_lobby) and string(menu_mode) = "armory" and inst
                         //should fade
                         tol = 5
                         if cursor.x &lt; grid_left-tol or cursor.x &gt; grid_right+tol or cursor.y &lt; grid_top-tol or cursor.y &gt; grid_bottom+tol
-                        armory_alphas[i] = 0//lerp_real(armory_alphas[i],0,0.25)   
+                        armory_alphas[i] = 0//lerp_real(armory_alphas[i],0,0.25)
                     }
                 }
             }
+            
+            //GRID LABEL DRAWING AND STUFF
+            if grid_lalphs[i] &lt; 1 and instance_exists(myAvatar()) and abs(myAvatar().y - objVarRead(myAvatar(),"dude_y")) &lt; 0.5
+                grid_lalphs[i] += lerp(grid_lalph_inc/max(i,1),grid_lalph_inc,0.5)
+                
+            if grid_lalphs[i] &gt; 1
+                grid_lalphs[i] = 1
+            
+            var grid_lsize = ds_list_size(handle)
+            /*for (var bp=0; bp&lt;ds_list_size(handle); bp++)
+            {
+                var inst = handle[| bp]
+                if instance_exists(handle) and inst.object_index = bpart_generic and not inst.disabled
+                {
+                    grid_lsize++
+                }
+            }*/
+            if grid_lsize &lt; 2
+            {
+                grid_lalphs[i] = -2*grid_lalph_inc
+            }
+            else
+            {
+                var off = 0.75*armory_sl
+                var yoff = armory_sl/2
+                var xoff = -1*off
+                
+                if first_bpart.x &gt; my_doll.x
+                    xoff = armory_sl+off
+                    
+                draw_set_alpha(grid_lalphs[i])
+                draw_prank_centered = true
+                draw_player_rank("+"+string(grid_lsize-1),first_bpart.x+xoff,first_bpart.y+yoff,1.15*abs(lerp(grid_lalphs[i],1,0.2)))
+                draw_set_alpha(1)
+            }   
             
             if armory_alphas[i] &gt; 0.05
             {
@@ -3899,14 +3950,35 @@ if (room = rm_menu or room = rm_lobby) and string(menu_mode) = "armory" and inst
                 if first_bpart.x &gt; my_doll.x
                 {
                     xoff = armory_sl*2.5+2*armory_ysep
-                    with bn_randomize
+                    drawing_grid_dir = 1
+                    for (var g=4; g&lt;8; g++)
                     {
-                        birth_delay = 5
-                        alpha = 0
+                        grid_lalphs[g] = -2*grid_lalph_inc
                     }
                 }
-                else
+                else if i != 8
+                {
                     xoff = -1*(armory_sl*1.5+2*armory_ysep)
+                    drawing_grid_dir = -1
+                    for (var g=0; g&lt;4; g++)
+                    {
+                        grid_lalphs[g] = -2*grid_lalph_inc
+                    }
+                }
+                else if i = 8
+                {
+                    drawing_grid_dir = 2
+                    grid_lalphs[8] = -2*grid_lalph_inc
+                }
+                
+                if drawing_grid_dir = 1
+                {
+                    with bn_randomize
+                    {
+                        alpha = 0
+                        birth_delay = 5
+                    }   
+                }
                     
                 if i=8
                 {
@@ -4410,9 +4482,24 @@ show_debug_overlay(show_debug_stats)
           <argument>
             <kind>1</kind>
             <string>///toggle full screen
-global.gc[GC_FULLSCREEN,1] = toggle_truthval(global.gc[GC_FULLSCREEN,1])
-window_set_fullscreen(truthval(global.gc[GC_FULLSCREEN,1]))
-save_setting(GC_FULLSCREEN)
+do_toggle = true
+
+with modal_dialogue
+{
+    if is_tutorial  
+        other.do_toggle = false
+}
+
+if do_toggle
+{
+    global.gc[GC_FULLSCREEN,1] = toggle_truthval(global.gc[GC_FULLSCREEN,1])
+    window_set_fullscreen(truthval(global.gc[GC_FULLSCREEN,1]))
+    save_setting(GC_FULLSCREEN)
+}
+else
+{
+    audio(snd_denied,1)
+}   
 </string>
           </argument>
         </arguments>
