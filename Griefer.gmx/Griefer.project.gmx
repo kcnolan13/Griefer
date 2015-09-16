@@ -546,6 +546,8 @@
       <sprite>sprites\sprite406</sprite>
       <sprite>sprites\icon_tbottom</sprite>
       <sprite>sprites\icon_chevron_lr</sprite>
+      <sprite>sprites\icon_cursor</sprite>
+      <sprite>sprites\icon_cursor_small</sprite>
     </sprites>
     <sprites name="accolades">
       <sprite>sprites\acc_dub_kill</sprite>
@@ -1519,6 +1521,7 @@
       <script>scripts\compute_auto_crop.gml</script>
       <script>scripts\page_flag_2str.gml</script>
       <script>scripts\modal_force_click.gml</script>
+      <script>scripts\cursor_highlight.gml</script>
     </scripts>
   </scripts>
   <shaders name="shaders">

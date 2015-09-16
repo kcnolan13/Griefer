@@ -34,6 +34,9 @@ for (var i=0; i<6; i++)
         if instance_exists(bpart) and bpart.object_index = bpart_generic 
         with bpart
         {
+            if instance_place(x,y,cursor)
+                cursor_highlight()
+                
             if instance_place(x,y,cursor) and not popup_exists() and click_pressed() and not swap_counter
             {
                 swap_counter = 5

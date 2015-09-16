@@ -50,7 +50,29 @@
           <argument>
             <kind>1</kind>
             <string>///stuff
+
+cursor_width = 32
+
 cursor_lerp_real = 0.15
+
+points = 3
+
+point_size_normal = 4
+point_size_highlighted = 8
+point_size = point_size_normal
+point_size_lerp = 0.25
+
+point_rad_normal = 16
+point_rad_highlighted = 0
+point_rad = point_rad_normal
+point_rad_lerp = 0.25
+
+highlighted = 0
+
+rot_normal = 90
+rot_highlighted = 90//+360
+rot_lerp = 0.25
+rot = rot_normal
 </string>
           </argument>
         </arguments>
@@ -133,6 +155,23 @@ if not global.using_gamepad
     x = mouse_x
     y = mouse_y 
 }
+
+var rad_target = point_rad_normal
+var rot_target = rot_normal
+var size_target = point_size_normal
+
+if highlighted
+{
+    highlighted = sub_real(highlighted,1)
+    
+    rad_target = point_rad_highlighted
+    rot_target = rot_highlighted
+    size_target = point_size_highlighted
+}
+
+point_rad = lerp(point_rad,rad_target,point_rad_lerp)
+rot = lerp(rot,rot_target,rot_lerp)
+point_size = lerp(point_size,size_target,point_size_lerp)
 </string>
           </argument>
         </arguments>
@@ -156,19 +195,59 @@ if not global.using_gamepad
           <argument>
             <kind>1</kind>
             <string>///draw id and coords
-if in_match() return false
+if in_match() 
+{
+    do_draw = true
+    
+    with cursor_generic
+    {
+        if active and counter &gt; 2
+            other.do_draw = false
+    }
+    
+    if not do_draw
+        return false
+}
 
-if room = rm_login or room = rm_menu or room = rm_lobby and string(net_manager.menu_mode) != "settings"
-    image_blend = c_black
-else
-image_blend = c_white
+var spr = icon_cursor_small
+var xscale = cursor_width/sprite_get_width(spr)
+var yscale = xscale
 
-draw_sprite_ext(sprite_index,image_index,x,y,image_xscale,image_yscale,image_angle,image_blend,image_alpha)
+draw_sprite_ext(spr,image_index,x,y,xscale,yscale,image_angle,image_blend,image_alpha)
 draw_set_color(c_white)
-draw_set_font(fnt_button)
-draw_set_halign(fa_center)
 
-//draw_text(x,y-32,"("+string(x)+", "+string(y)+")")
+/*
+draw_set_alpha(0.35)
+draw_flash_compensate()
+
+var pts = points*2
+var ptsize = point_size*0.5
+for (var i=0; i&lt;pts; i++)
+{
+    var ang = (rot-90)+i/pts*360
+    var rad = point_rad*1.5*lerp(global.notification_scale,1,0.75)
+    var drawx = x+trigx(rad,ang)
+    var drawy = y+trigy(rad,ang)
+    draw_circle(drawx,drawy,ptsize,false)
+}*/
+
+/*
+draw_set_alpha(1)
+draw_flash_compensate()
+for (var i=0; i&lt;points; i++)
+{
+    var ang = rot+i/points*360
+    var rad = point_rad*lerp(global.notification_scale,1,0.75)
+    var drawx = x+trigx(rad,ang)
+    var drawy = y+trigy(rad,ang)
+    draw_circle(drawx,drawy,point_size,false)
+}
+
+draw_set_alpha(1)
+draw_circle(x,y,point_size/2,false)*/
+
+
+
 </string>
           </argument>
         </arguments>

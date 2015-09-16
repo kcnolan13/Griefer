@@ -480,6 +480,8 @@ if modal_highlighted(id)
         show_popup = true
         
     scale = lerp_real(scale,scale_highlighted,scale_lerp_real)
+    cursor_highlight()
+    
     if not fade_out
     {
         alpha = lerp_real(alpha,alpha_highlight,scale_lerp_real)

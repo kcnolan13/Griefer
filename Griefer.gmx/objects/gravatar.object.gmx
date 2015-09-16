@@ -182,6 +182,9 @@ printf("::: "+string(varRead("pName"))+" gravatr was instantiated with uniqueId 
 if mouse_wheel_delay &gt; 0
 mouse_wheel_delay --
 
+if hover_counter
+    cursor_highlight()
+
 if nth_frame(60)
 {
     if room = rm_login

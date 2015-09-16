@@ -411,6 +411,7 @@ else
 
 if hovering
 {
+    cursor_highlight()
     txt_alpha_target = txt_alpha_highlighted
     txt_scale_target = txt_scale_highlighted
     hover_counter += real_speed(1)

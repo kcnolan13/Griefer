@@ -24,6 +24,9 @@ for (var i=0; i<NUM_PROPS-1; i++)
     if instance_exists(bpart) and bpart.object_index = bpart_generic
     with bpart
     {
+        if instance_place(x,y,cursor)
+            cursor_highlight()
+            
         if instance_place(x,y,cursor) and not popup_exists() and click_pressed() and not swap_counter
         {
             audio_play_sound(snd_click_armory,2,false)

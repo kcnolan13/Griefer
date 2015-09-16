@@ -272,8 +272,8 @@ lobby_dude_y = room_height*3.25/5+32
 av_padding = room_width/6
 av_scale_lobby = 2.75
 av_scale_menu = 3
-av_scale_higlighted = 3.5
-av_scale_highlighted_normal = 3.5
+av_scale_higlighted = 3.3
+av_scale_highlighted_normal = 3.3
 av_scale_play = 2.6
 col_new = c_white
 col_stolen = make_color_rgb(255,125,125)
@@ -1455,22 +1455,22 @@ if room = rm_menu and instance_exists(my_doll) and instance_exists(stat_gravatar
     var curscale = objVarRead(datObj,"animation_scale")
         
         //avatar popups and scale lerp_realing
-        if av_popup != noone or not collision_rectangle(datObj.x-curscale*av_xbd, datObj.y-curscale*av_ybd, datObj.x+curscale*av_xbd, datObj.y+curscale*av_ybd, cursor, false, false)
+        if av_popup != noone or menmode() = "challenges" or menmode() = "armory" or menmode() = "stats" or not collision_rectangle(datObj.x-curscale*av_xbd, datObj.y-curscale*av_ybd, datObj.x+curscale*av_xbd, datObj.y+curscale*av_ybd, cursor, false, false)
         {
             if menu_mode != "armory"
-                objVarWrite(datObj,"animation_scale",lerp_real(objVarRead(datObj,"animation_scale"),av_scale_play,0.1))
+                objVarWrite(datObj,"animation_scale",lerp_real(objVarRead(datObj,"animation_scale"),av_scale_play,0.5))
             else
-                objVarWrite(datObj,"animation_scale",lerp_real(objVarRead(datObj,"animation_scale"),av_scale_menu,0.1))
+                objVarWrite(datObj,"animation_scale",lerp_real(objVarRead(datObj,"animation_scale"),av_scale_menu,0.5))
         }
         else
         {
             av_popup = datObj
             
-            if menu_mode != "armory"
+            if menmode() != "armory"
                 av_scale_highlighted = av_scale_highlighted_normal*(av_scale_play/av_scale_menu)
             else av_scale_highlighted = av_scale_highlighted_normal
             
-            objVarWrite(datObj,"animation_scale",lerp_real(objVarRead(datObj,"animation_scale"),av_scale_highlighted,0.25))
+            objVarWrite(datObj,"animation_scale",lerp_real(objVarRead(datObj,"animation_scale"),av_scale_highlighted,0.5))
         }
 }
 
@@ -1514,12 +1514,14 @@ if room = rm_lobby
         var curscale = objVarRead(ID,"animation_scale")
         
         //avatar popups and scale lerp_realing
-        if av_popup != noone or not collision_rectangle(ID.x-curscale*av_xbd, ID.y-curscale*av_ybd, ID.x+curscale*av_xbd, ID.y+curscale*av_ybd, cursor, false, false)
+        if av_popup != noone or menmode() = "challenges" or menmode() = "armory" or menmode() = "stats" or not collision_rectangle(ID.x-curscale*av_xbd, ID.y-curscale*av_ybd, ID.x+curscale*av_xbd, ID.y+curscale*av_ybd, cursor, false, false)
         {
+            cursor_highlight()
+    
             if menu_mode != "armory" or not is_my_avatar(ID)
-                objVarWrite(ID,"animation_scale",lerp_real(objVarRead(ID,"animation_scale"),av_scale_lobby,0.1))
+                objVarWrite(ID,"animation_scale",lerp_real(objVarRead(ID,"animation_scale"),av_scale_lobby,0.5))
             else
-                objVarWrite(ID,"animation_scale",lerp_real(objVarRead(ID,"animation_scale"),av_scale_menu,0.1))
+                objVarWrite(ID,"animation_scale",lerp_real(objVarRead(ID,"animation_scale"),av_scale_menu,0.5))
         }
         else
         {
@@ -1528,7 +1530,7 @@ if room = rm_lobby
             if menu_mode = "armory"
                 av_scale_highlighted = av_scale_highlighted_normal*(av_scale_menu/av_scale_lobby)
             
-            objVarWrite(ID,"animation_scale",lerp_real(objVarRead(ID,"animation_scale"),av_scale_highlighted,0.25))
+            objVarWrite(ID,"animation_scale",lerp_real(objVarRead(ID,"animation_scale"),av_scale_highlighted,0.5))
         }
         
         switch (menu_mode)
@@ -1795,10 +1797,11 @@ if room = rm_lobby
                 image = image_real
                 active = false
                 clickable = false
+                highlightable = false
                 x = room_width/2
-                y = lerp(y,room_height/2+96+64*1.6,0.05)
-                width = lerp(width,width_init*2,0.05)
-                height = lerp(height,height_init*2,0.05)
+                y = lerp(y,room_height/2+96+64*0.5,0.05)
+                width = lerp(width,width_init*1.5,0.05)
+                height = lerp(height,height_init*1.5,0.05)
                 modal_aligns()
             }
         }
@@ -3114,8 +3117,8 @@ master_scale = 1*match_scale//HVIEW/768*match_scale
 if in_match() and ((draw_killed_by and do_draw_killed_by) or (draw_you_killed and name_you_killed != ""))
 {
     draw_set_font(fnt_splashscreen)
-    draw_flash_compensate()
     draw_set_color(c_white)
+    draw_flash_compensate()
     draw_set_halign(fa_center)
     draw_set_valign(fa_center)
     var killer_name = objVarRead(local_player,"killer")
@@ -3128,10 +3131,10 @@ if in_match() and ((draw_killed_by and do_draw_killed_by) or (draw_you_killed an
         var killer_av = find_pname_avatar(killer_name)
         if instance_exists(killer_av)
         {
-            var row_sep = 100
-            var starty = HVIEW/10
-            var row2_xoff = -76
+            var row_sep = 94
+            var starty = HVIEW/12
             var head_space = 64
+            var row2_xoff = -1/2*(head_space+string_width(string(killer_name)))
             
             with killer_av
                 draw_avatar_head(WVIEW/2+row2_xoff,starty+row_sep,id,0,1,1,FL_NOBAR)
@@ -3808,6 +3811,7 @@ if (room = rm_menu or room = rm_lobby) and string(menu_mode) = "armory" and inst
                 if instance_place(x,y,cursor) and not other.id.grid_drawn
                 {
                     hovering ++
+                    cursor_highlight()
                     if hovering &gt; hover_delay
                     {
                         popup_alpha = lerp_real(popup_alpha,1,popup_lerp_real)
@@ -3902,7 +3906,9 @@ if (room = rm_menu or room = rm_lobby) and string(menu_mode) = "armory" and inst
             }
             
             //GRID LABEL DRAWING AND STUFF
-            if grid_lalphs[i] &lt; 1 and instance_exists(myAvatar()) and abs(myAvatar().y - objVarRead(myAvatar(),"dude_y")) &lt; 0.5
+            if grid_lalphs[i] &lt; 1 and instance_exists(myAvatar()) 
+                                  and abs(myAvatar().y - objVarRead(myAvatar(),"dude_y")) &lt; 0.5
+                                  and abs(myAvatar().x - objVarRead(myAvatar(),"dude_x")) &lt; 0.5
                 grid_lalphs[i] += lerp(grid_lalph_inc/max(i,1),grid_lalph_inc,0.5)
                 
             if grid_lalphs[i] &gt; 1
@@ -4020,6 +4026,13 @@ if (room = rm_menu or room = rm_lobby) and string(menu_mode) = "armory" and inst
         }
     }    
 }
+else if not in_match()
+{
+    for (var i=0; i&lt;NUM_LIMBS; i++)
+    {
+        grid_lalphs[i] = 0
+    }
+}
 </string>
           </argument>
         </arguments>
@@ -4121,7 +4134,7 @@ for (var i=0; i&lt;instance_number(avatar); i++)
         if DEBUG
             draw_text(ID.x,ID.y - 64*3.35, objVarRead(ID,"uniqueId"))
     }
-    if av_popup = ID and ID.visible and abs(objVarRead(ID,"animation_scale") - av_scale_highlighted) &lt; scale_tol and not instance_exists(modal_dialogue)
+    if av_popup = ID and menu_mode != "armory" and menu_mode != "challenges" and ID.visible and abs(objVarRead(ID,"animation_scale") - av_scale_highlighted) &lt; scale_tol and not instance_exists(modal_dialogue)
     {
         if not av_popup_drawn
         {

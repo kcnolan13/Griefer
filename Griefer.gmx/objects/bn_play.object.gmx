@@ -292,7 +292,7 @@ if room = rm_lobby and net_manager.menu_mode = "lobby"  and net_manager.came_fro
     {
         tab = bn_postmatch
         
-        left = bn_settings.x + 80
+        left = bn_settings.x + 100
             
         top = 164
         width = 72*3.25
