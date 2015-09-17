@@ -175,7 +175,7 @@ if net_manager.menu_mode != "lottery_steal" and not instance_exists(bn_tab) and 
     top = 5
     height = 72
     spacer = 15
-    width = (WVIEW-(getLength(tabs)*spacer)-spacer)/getLength(tabs)
+    width = (WVIEW-(getLength(tabs)*spacer)-spacer/2)/getLength(tabs)
     
     //room_width - (width*(array_length_1d(tabs)-1) + 3*left)
     //spacer /= array_length_1d(tabs)
@@ -184,7 +184,7 @@ if net_manager.menu_mode != "lottery_steal" and not instance_exists(bn_tab) and 
     //create the tab background modal window thing
     ID = instance_create(0,0,tab_bg_modal)
     ID.birth_delay = 1
-    ID.width = left+(width+spacer)*array_length_1d(tabs)
+    ID.width = room_width+10
     ID.height = height+top*2
     ID.highlightable = false
     ID.scale_born = 1
@@ -301,7 +301,7 @@ if room = rm_lobby and net_manager.menu_mode = "lobby"  and net_manager.came_fro
         
         hue = 90
         sat = 30
-        val = 70
+        val = 0
         
         ID = instance_create(left,top,tab)
         ID.width = width

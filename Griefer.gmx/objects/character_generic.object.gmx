@@ -38,6 +38,9 @@ dude_lerp = 0.3
 dude_instalerp_x = false
 dude_instalerp_y = false
 
+hover_counter = 0
+hover_delay = 10
+
 //dummy vars
 shoulderl_xoffset_temp = 0
 shoulderl_yoffset_temp = 0
@@ -543,6 +546,8 @@ if not in_match() and room != rm_login
     else
         shadow_scale = 0.55-0.05*(varRead("animation_index")-12)/12
         
+    shadow_scale *= varRead("animation_scale")/net_manager.av_scale_menu
+        
     if varRead("dude_y")
         shadow_y = varRead("dude_y")
     else
@@ -554,12 +559,13 @@ if not in_match() and room != rm_login
         draw_sprite_ext(spr_doll_shadow,0,x,shadow_y,shadow_scale,shadow_scale,0,c_white,0.8)
     else if surface_exists(surf_splat)
     {
+        var scale_scaler = 2.25
         surface_set_target(surf_splat)
         draw_clear_alpha(c_black,0)    
         draw_set_alpha(1)
-        draw_splats(splat_width/2,0,0.75,varRead("blood_color"),1)
+        draw_splats(splat_width/2-2,0,0.75,varRead("blood_color"),1)
         surface_reset_target()
-        draw_surface(surf_splat,x-splat_width/2-10,shadow_y)
+        draw_surface_ext(surf_splat,x-splat_width*shadow_scale*scale_scaler/2-10,shadow_y,shadow_scale*scale_scaler,shadow_scale*scale_scaler,0,c_white,1)
     }
 }
 

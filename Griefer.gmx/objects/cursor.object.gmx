@@ -201,7 +201,7 @@ if in_match()
     
     with cursor_generic
     {
-        if active and counter &gt; 2
+        if active and counter &gt; 2 and not match_starting() and not match_ending()
             other.do_draw = false
     }
     
@@ -213,7 +213,7 @@ var spr = icon_cursor_small
 var xscale = cursor_width/sprite_get_width(spr)
 var yscale = xscale
 
-draw_sprite_ext(spr,image_index,x,y,xscale,yscale,image_angle,image_blend,image_alpha)
+draw_sprite_ext(spr,image_index,(x-view_xview)*WVIEW/view_wview,(y-view_yview)*HVIEW/view_hview,xscale,yscale,image_angle,image_blend,image_alpha)
 draw_set_color(c_white)
 
 /*

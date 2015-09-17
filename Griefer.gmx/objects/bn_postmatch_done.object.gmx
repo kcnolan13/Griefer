@@ -33,6 +33,8 @@ text = "Done"
 active = false
 
 cant_fade = false
+
+draw_gradient = false
 </string>
           </argument>
         </arguments>

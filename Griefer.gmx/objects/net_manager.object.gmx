@@ -268,9 +268,9 @@ saving_armor_reboot = false
 show_avatar = false
 local_dollsync = false
 global.bg_color = c_white
-lobby_dude_y = room_height*3.25/5+32
+lobby_dude_y = room_height*3.25/5+32+42
 av_padding = room_width/6
-av_scale_lobby = 2.75
+av_scale_lobby = 2.2
 av_scale_menu = 3
 av_scale_higlighted = 3.3
 av_scale_highlighted_normal = 3.3
@@ -1457,6 +1457,7 @@ if room = rm_menu and instance_exists(my_doll) and instance_exists(stat_gravatar
         //avatar popups and scale lerp_realing
         if av_popup != noone or menmode() = "armory" or menmode() = "stats" or not collision_rectangle(datObj.x-curscale*av_xbd, datObj.y-curscale*av_ybd, datObj.x+curscale*av_xbd, datObj.y+curscale*av_ybd, cursor, false, false)
         {
+            datObj.hover_counter = 0
             if menu_mode != "armory"
                 objVarWrite(datObj,"animation_scale",lerp_real(objVarRead(datObj,"animation_scale"),av_scale_play,0.5))
             else
@@ -1464,13 +1465,15 @@ if room = rm_menu and instance_exists(my_doll) and instance_exists(stat_gravatar
         }
         else
         {
+            datObj.hover_counter++
+            
             av_popup = datObj
             
             if menmode() != "armory"
                 av_scale_highlighted = av_scale_highlighted_normal*(av_scale_play/av_scale_menu)
             else av_scale_highlighted = av_scale_highlighted_normal
             
-            objVarWrite(datObj,"animation_scale",lerp_real(objVarRead(datObj,"animation_scale"),av_scale_highlighted,0.5))
+            objVarWrite(datObj,"animation_scale",lerp_real(objVarRead(datObj,"animation_scale"),av_scale_menu*av_scale_highlighted/av_scale_menu,0.5))
         }
 }
 
@@ -1516,7 +1519,7 @@ if room = rm_lobby
         //avatar popups and scale lerp_realing
         if av_popup != noone or menmode() = "armory" or menmode() = "stats" or not collision_rectangle(ID.x-curscale*av_xbd, ID.y-curscale*av_ybd, ID.x+curscale*av_xbd, ID.y+curscale*av_ybd, cursor, false, false)
         {
-            cursor_highlight()
+            ID.hover_counter = 0
     
             if menu_mode != "armory" or not is_my_avatar(ID)
                 objVarWrite(ID,"animation_scale",lerp_real(objVarRead(ID,"animation_scale"),av_scale_lobby,0.5))
@@ -1525,12 +1528,14 @@ if room = rm_lobby
         }
         else
         {
+            ID.hover_counter++
             av_popup = ID
-            
+                
+            var targ = av_scale_lobby
             if menu_mode = "armory"
-                av_scale_highlighted = av_scale_highlighted_normal*(av_scale_menu/av_scale_lobby)
+                targ = av_scale_menu
             
-            objVarWrite(ID,"animation_scale",lerp_real(objVarRead(ID,"animation_scale"),av_scale_highlighted,0.5))
+            objVarWrite(ID,"animation_scale",lerp_real(objVarRead(ID,"animation_scale"),targ*av_scale_highlighted/av_scale_menu,0.5))
         }
         
         switch (menu_mode)
@@ -3126,7 +3131,7 @@ for (var i=0; i&lt;instance_number(avatar); i++)
         if DEBUG
             draw_text(ID.x,ID.y - 64*3.35, objVarRead(ID,"uniqueId"))
     }
-    if av_popup = ID and menu_mode != "armory" and ID.visible and abs(objVarRead(ID,"animation_scale") - av_scale_highlighted) &lt; scale_tol and not instance_exists(modal_dialogue)
+    if av_popup = ID and menu_mode != "armory" and ID.visible and ID.hover_counter &gt; ID.hover_delay and not instance_exists(modal_dialogue)
     {
         if not av_popup_drawn
         {
@@ -3545,7 +3550,7 @@ if match_ending()
 if room = rm_lobby and came_from_match and not lobby_match_countdown and  menu_mode != "lottery_steal" and menu_mode != "armory" and menu_mode != "challenges" and menu_mode != "settings" and menu_mode != "stats"
 {
     if not disable_scores
-        draw_score_table(armory_ysep, 64+armory_ysep+12)
+        draw_score_table(WVIEW/2 - global.table_width/2, 64+armory_ysep+12)
 }
 
 if in_match() and not match_ending() and instance_exists(myAvatar()) and room_counter &gt; 30*3

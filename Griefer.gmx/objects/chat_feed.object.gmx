@@ -94,9 +94,9 @@ cval = 10
 chue_mult = 1
 csat_mult = 0.75
 cval_mult = 4
-header_height = 28
+header_height = 38
 header_xoff = 0
-header_yoff = -8
+header_yoff = -4
 header_font = fnt_hud_big
 header_color = c_black//web_hsv(main_hue,csat*2,65)
 color = web_hsv(main_hue,csat,cval*0.5)
@@ -154,10 +154,10 @@ if nth_frame(30)
     match_scale = average2(global.gc[GC_CHAT_FEED_ALPHA,1],1)
 }
 
-//if in_match()
+if in_match()
 {
 
-    if keyboard_check_pressed(192)
+    if keyboard_check_pressed(192) and room != rm_login
     {
         force_show ^= 1
         
@@ -199,7 +199,7 @@ if nth_frame(30)
     if force_show
         alpha_scaler = alpha_scaler_max
 }
-/*else
+else
 {
     master_scale = 0.8
     if room = rm_lobby and menmode() = "lobby"
@@ -218,7 +218,7 @@ if nth_frame(30)
         force_show = false
         alpha_scaler = 0
     }
-}*/
+}
 
 if instance_exists(modal_controls) or rtime() &lt; 30
     alpha_scaler = 0
@@ -247,8 +247,8 @@ if alpha &lt; 0.1 return false
 
 if not in_match()
 {
-    x = width/2
-    y = height/2*master_scale+82
+    x = width/2-30
+    y = height/2*master_scale+92
 }
 else
 {

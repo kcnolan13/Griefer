@@ -102,29 +102,32 @@ else
 event_inherited()
 label = text
 
-if active
+if object_index != bn_postmatch and object_index != bn_postmatch_done
 {
-    draw_gradient = false
-    if sat &gt; 25 
+    if active
     {
-        img_blend = c_white
-        text_color = c_white
+        draw_gradient = false
+        if sat &gt; 25 
+        {
+            img_blend = c_white
+            text_color = c_white
+        }
+        else
+        {
+            img_blend = c_black
+            text_color = c_black
+        }
     }
     else
     {
-        img_blend = c_black
-        text_color = c_black
+        grad1 = c_dkgray
+        grad2 = c_dkgray
+        grad3 = c_black
+        grad4 = c_black
+        draw_gradient = true
+        img_blend = active_color
+        text_color = c_white
     }
-}
-else
-{
-    grad1 = c_dkgray
-    grad2 = c_dkgray
-    grad3 = c_black
-    grad4 = c_black
-    draw_gradient = true
-    img_blend = active_color
-    text_color = c_white
 }
 </string>
           </argument>

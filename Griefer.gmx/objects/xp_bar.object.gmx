@@ -181,7 +181,7 @@ if net_manager.menu_mode != "lottery_steal" and xp_replay and rtime() &gt; 30
 if room = rm_lobby
 {
     if net_manager.menu_mode = "lottery_steal" and xp_2earn &lt; 1
-        xp_done_counter++
+        xp_done_counter += real_speed(1)
     else
         xp_done_counter = 0
 }

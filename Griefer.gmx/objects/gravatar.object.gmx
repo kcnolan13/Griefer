@@ -599,14 +599,15 @@ if room = rm_login
     var val_min = 16
     var val_max = 90
     var val_step = (val_max-val_min)/5
+    var hue_start = 282
+    var hue_end = 212
+    var hue_step = (hue_end-hue_start)/4
     
-    for (var i=5; i&gt;1; i--)
+    for (var i=1; i&lt;=5; i++)
     {
-        platcolors[i] = web_hsv(0,0,8)
-        plattopcolors[i] = web_hsv(0,0,max(0,val_max-i*val_step))
+        platcolors[i] = c_black//web_hsv(0,0,8)
+        plattopcolors[i] = web_hsv(hue_start+(i-1)*hue_step,65,100) //,0,max(0,val_max-i*val_step))
     }
-    platcolors[1] = web_hsv(46,10,17)
-    plattopcolors[1] = web_hsv(46,85,100)
     
     var pnum = varRead("pNum")
     pnum = constrict(pnum,1,getLength(platcolors)-1)
@@ -614,7 +615,7 @@ if room = rm_login
     var plattopcolor = plattopcolors[pnum]
     
     var drawy = y+64*3.35*varRead("animation_scale")/3
-    draw_rectangle_colour(x-wplat/2,drawy,x+wplat/2,room_height+5,plattopcolor,plattopcolor,platcolor,platcolor,false)
+    draw_rectangle_colour(x-wplat/2,drawy,x+wplat/2,lerp(room_height+5,drawy+room_height/2,0.5),plattopcolor,plattopcolor,platcolor,platcolor,false)
     draw_set_font(fnt_pstats)
     draw_set_color(c_white)
     draw_set_halign(fa_center)

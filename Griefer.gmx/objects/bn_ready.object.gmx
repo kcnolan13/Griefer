@@ -45,7 +45,7 @@ not_ready_text = "Not Ready"
 text_color_ready = web_hsv(150,100,75)
 text_color_not_ready = web_hsv(0,60,75)
 
-width = 64*3.5
+width = 64*5
 height = 64
 
 if ready 
@@ -151,9 +151,9 @@ else
         //jump to a decent position below the avatar
         if instance_exists(bn_vote) and abs(bound_avatar.x - objVarRead(bound_avatar,"dude_x") &lt; 10) and abs(bound_avatar.y - objVarRead(bound_avatar,"dude_y") &lt; 10) and bound_avatar.visible and objVarRead(bound_avatar,"visible")
         {
-            var somey = 64*2.95
+            var somey = 64*2.95*net_manager.av_scale_lobby/2.7
             if instance_number(avatar) &lt; 3
-                somey = 64*3.2
+                somey = 64*3.225*net_manager.av_scale_lobby/2.7
                 
             visible = true
             x = bound_avatar.x
