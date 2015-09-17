@@ -29,7 +29,7 @@
 life = 0
 event_inherited()
 
-scale_die = 0
+scale_die = 0.5
 
 loading_counter = 0
 loading_counter_max = 4

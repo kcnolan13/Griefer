@@ -612,7 +612,9 @@ if room = rm_menu or room = rm_lobby
         {
             draw_notification(1,x-off+global.noffset*txt_scale,y-off+global.noffset*txt_scale,txt_scale,color_complete,1)
         }
-        draw_mod_notification(x+72-global.moffset,y+global.moffset,icon)
+        
+        //done in popup_drawer now
+        //draw_mod_notification(x+72-global.moffset,y+global.moffset,icon)
         
         if cursor.x &gt;= x and cursor.y &gt;= y and cursor.x &lt;= bbox_right and cursor.y &lt;= bbox_bottom
             //and not challenge_manager.challenge_showing_popup
@@ -633,69 +635,11 @@ if room = rm_menu or room = rm_lobby
             popup_alpha_target = popup_alpha
             icon = icon_complete
             
-            var desc = description
-            
-            if completed
-            {
-                for (var i=0; i&lt;getLength(rewards); i++)
-                {
-                    if not bpart_has_armor_lists(rewards[i]) and not bpart_has_cache(rewards[i])
-                    {
-                        desc = "Click To Redeem!"
-                    }
-                }
-            }
-            
-                draw_popup_challenge(cursor.x, cursor.y, name, "", desc, icon, color_complete, 1,1)
+            //done in popup_drawer now
+            //draw_popup_challenge(cursor.x, cursor.y, name, "", desc, icon, color_complete, 1,1)
             
             //determine whether to use the surface or not
-            //if completed
-            {
-                mod_ind = bpart_mod_index(icon)
-                with popup_drawer
-                {
-                    mod_ind = other.mod_ind
-                    icon_ref = other.icon
-                    
-                    if mod_ind &gt; GARBAGE and surface_exists(surf_popup)
-                    {
-                        surface_set_target(surf_popup)
-                        draw_clear_alpha(c_black,0)
-                        draw_set_color(c_white)
-                        draw_set_alpha(1)
-                        
-                        col = c_white
-                        
-                        if bpart_mod_var(icon_ref) = "blood_color"
-                        {
-                            col = bpart_mod_val(icon_ref)
-                            draw_set_color(c_white)
-                            //draw some blood to the popup surface.... also draw the fancy text
-                            draw_splats(global.popup_width-40,40,0.6,col,1)
-                        }
-                        
-                        //draw the fancy text
-                        surface_reset_target()
-                        
-                        draw_set_alpha(1)
-                        draw_surface(surf_popup,other.right-global.popup_width,other.top)
-                        
-                        var t = global.mod_descriptions[mod_ind]
-                        var tcol = c_white
-                            if do_fancy_text_black(col)
-                                tcol = c_black
-                        var tscale = 1*global.notification_scale
-                        var trot = -45
-                        var toff = 32
-                        draw_set_color(tcol)
-                        draw_set_font(fnt_mod)
-                        draw_set_halign(fa_center)
-                        draw_set_valign(fa_center)
-                        draw_text_ext_transformed(other.right-toff,other.top+toff,t,24,global.popup_width,tscale,tscale,trot)
-                        draw_set_font(fnt_hud)
-                    }
-                }
-            }
+            
             
             depth = -103
             if new

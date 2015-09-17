@@ -548,6 +548,7 @@
       <sprite>sprites\icon_chevron_lr</sprite>
       <sprite>sprites\icon_cursor</sprite>
       <sprite>sprites\icon_cursor_small</sprite>
+      <sprite>sprites\icon_animated</sprite>
     </sprites>
     <sprites name="accolades">
       <sprite>sprites\acc_dub_kill</sprite>
@@ -744,7 +745,9 @@
       <script>scripts\free_splat_surface.gml</script>
       <script>scripts\free_popup_surfaces.gml</script>
       <script>scripts\draw_splats.gml</script>
+      <script>scripts\draw_icon_animated.gml</script>
       <script>scripts\draw_splat_notification.gml</script>
+      <script>scripts\draw_icon_animated_notification.gml</script>
       <script>scripts\draw_mod_notification.gml</script>
       <script>scripts\do_fancy_text_black.gml</script>
     </scripts>
@@ -1547,6 +1550,7 @@
     <font>fonts\fnt_hud</font>
     <font>fonts\fnt_hud_medium</font>
     <font>fonts\fnt_hud_big</font>
+    <font>fonts\fnt_hud_biggest</font>
     <font>fonts\fnt_boom</font>
     <font>fonts\fnt_splashscreen</font>
     <font>fonts\fnt_promoted</font>
@@ -1581,9 +1585,9 @@
       <object>objects\character_generic</object>
       <object>objects\xp_bar</object>
       <object>objects\challenge_generic</object>
+      <object>objects\popup_drawer</object>
       <object>objects\accolade_generic</object>
       <object>objects\bpart_generic</object>
-      <object>objects\popup_drawer</object>
       <object>objects\background_drawer</object>
       <object>objects\weapon_generic</object>
       <object>objects\bullet_generic</object>
@@ -1934,7 +1938,9 @@
       <room>rooms\map_placeholder2</room>
     </rooms>
   </rooms>
-  <constants number="161">
+  <constants number="163">
+    <constant name="GMHSV">1.41176470588</constant>
+    <constant name="WEBHSV">0.70833333333</constant>
     <constant name="ACC_XP_SCALER">2</constant>
     <constant name="BAD_READ">-99.1234</constant>
     <constant name="BOT_XP_SCALER">0.25</constant>

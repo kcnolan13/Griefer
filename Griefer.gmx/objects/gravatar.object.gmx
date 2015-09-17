@@ -582,7 +582,7 @@ else
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///debug
+            <string>///draw rank on their pillar
     
 if net_manager.show_cout
 {
@@ -617,6 +617,8 @@ if room = rm_login
     draw_rectangle_colour(x-wplat/2,drawy,x+wplat/2,room_height+5,plattopcolor,plattopcolor,platcolor,platcolor,false)
     draw_set_font(fnt_pstats)
     draw_set_color(c_white)
+    draw_set_halign(fa_center)
+    draw_set_valign(fa_middle)
     draw_text(x,drawy+32,global_rank_2str(pnum))
     
 }

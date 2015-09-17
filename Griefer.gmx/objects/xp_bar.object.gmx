@@ -626,7 +626,7 @@ else if room = rm_lobby and net_manager.menu_mode = "lottery_steal"
         draw_set_alpha(alpha)
         var yoff = -64*0.8-24
         scale = 1.25
-        draw_xpbar(room_width/2-20,yoff+HVIEW-XPBAR_BOTTOM-64*2.35-12,fraction_full,fraction_full,scale,fa_center,fa_bottom,c_black,false)
+        draw_xpbar(room_width/2-20,yoff+HVIEW-XPBAR_BOTTOM-64*2.35-12,fraction_full,fraction_full,scale,fa_center,fa_bottom,c_white,false)
         draw_xp_progression(room_width/2,yoff+HVIEW-XPBAR_BOTTOM-64*2-12,1,fa_center,fa_top,c_white,alpha,rank,xp)
     }
     else

@@ -172,6 +172,7 @@ text_pad = 0
 
 image = spr_none
 image_stretch = false
+img_blend = c_white
 
 color = c_dkgray
 header_color = c_gray

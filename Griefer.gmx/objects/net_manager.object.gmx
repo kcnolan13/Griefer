@@ -1455,7 +1455,7 @@ if room = rm_menu and instance_exists(my_doll) and instance_exists(stat_gravatar
     var curscale = objVarRead(datObj,"animation_scale")
         
         //avatar popups and scale lerp_realing
-        if av_popup != noone or menmode() = "challenges" or menmode() = "armory" or menmode() = "stats" or not collision_rectangle(datObj.x-curscale*av_xbd, datObj.y-curscale*av_ybd, datObj.x+curscale*av_xbd, datObj.y+curscale*av_ybd, cursor, false, false)
+        if av_popup != noone or menmode() = "armory" or menmode() = "stats" or not collision_rectangle(datObj.x-curscale*av_xbd, datObj.y-curscale*av_ybd, datObj.x+curscale*av_xbd, datObj.y+curscale*av_ybd, cursor, false, false)
         {
             if menu_mode != "armory"
                 objVarWrite(datObj,"animation_scale",lerp_real(objVarRead(datObj,"animation_scale"),av_scale_play,0.5))
@@ -1514,7 +1514,7 @@ if room = rm_lobby
         var curscale = objVarRead(ID,"animation_scale")
         
         //avatar popups and scale lerp_realing
-        if av_popup != noone or menmode() = "challenges" or menmode() = "armory" or menmode() = "stats" or not collision_rectangle(ID.x-curscale*av_xbd, ID.y-curscale*av_ybd, ID.x+curscale*av_xbd, ID.y+curscale*av_ybd, cursor, false, false)
+        if av_popup != noone or menmode() = "armory" or menmode() = "stats" or not collision_rectangle(ID.x-curscale*av_xbd, ID.y-curscale*av_ybd, ID.x+curscale*av_xbd, ID.y+curscale*av_ybd, cursor, false, false)
         {
             cursor_highlight()
     
@@ -3045,6 +3045,126 @@ current_time_offset = current_time
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///avatar popups and promoted,demoted
+draw_set_font(fnt_hud_big)
+draw_set_halign(fa_center)
+draw_set_valign(fa_center)
+draw_set_color(c_white)
+
+var scale_tol = 0.25
+
+if av_popup = noone
+    av_popup_drawn = false
+    
+menu_mode = string(menu_mode)
+
+if room = rm_login
+{
+    with gravatar
+    {
+        var yoff = 64*3.2-30
+        var xoff = 16*string_length(string(varRead("pName")))/2
+    
+        draw_set_alpha(1)
+        draw_namerank(capwords(varRead("pName")), varRead("rank"), x - xoff,y - yoff, 1, c_black)
+    }
+
+    for (var i=0; i&lt;instance_number(gravatar); i++)
+    {
+        ID = instance_find(gravatar,i)
+        
+        var yoff = 64*3.2-30
+        var xoff = 16*string_length(string(objVarRead(ID,"pName")))/2
+    
+        if ID.hover_counter &gt; ID.hover_delay and not instance_exists(modal_dialogue)
+        {
+            if not drawing_grav_popup
+            {
+                audio_play_sound(snd_scroll3,2,false)
+            }
+            
+            drawing_grav_popup = 2
+            
+            //DRAW THE PLAYER POPUP
+            draw_player_popup_ext(cursor.x,cursor.y,capwords(objVarRead(ID,"pName")),objVarRead(ID,"rank"),objVarRead(ID,"global_rank"),objVarRead(ID,"true_skill"),
+                objVarRead(ID,"helmet0"),objVarRead(ID,"hat0"),1,is_bot(ID))
+        }
+    }
+}
+
+if menmode() = "stats"
+{
+    with gravatar
+    {
+        var yoff = 64*4.5
+        var xoff = 16*string_length(string(varRead("pName")))/2+32
+    
+        draw_set_alpha(1)
+        draw_namerank(capwords(varRead("pName")), objVarRead(stat_manager,"rank"), x - xoff,y - yoff, 1, c_white)
+    }
+}
+
+for (var i=0; i&lt;instance_number(avatar); i++)
+{
+    ID = instance_find(avatar,i)
+    if ID.visible and menu_mode != "armory" and menu_mode != "stats" and real(objVarRead(ID,"pName")) != BAD_READ
+    {
+        if room = rm_menu
+        {
+            if menu_mode = "play"
+                var yoff = 64*3.25
+            else
+                var yoff = 64*4.25
+        }
+        else var yoff = 64*3.2-30
+        
+        var xoff = 16*string_length(string(objVarRead(ID,"pName")))/2
+        draw_set_alpha(1)
+        draw_namerank(capwords(objVarRead(ID,"pName")), objVarRead(ID,"rank"), ID.x - xoff,ID.y - yoff, 1, c_white)
+        //draw_text(ID.x,ID.y - 64*3,objVarRead(ID,"pName"))
+        
+        if DEBUG
+            draw_text(ID.x,ID.y - 64*3.35, objVarRead(ID,"uniqueId"))
+    }
+    if av_popup = ID and menu_mode != "armory" and ID.visible and abs(objVarRead(ID,"animation_scale") - av_scale_highlighted) &lt; scale_tol and not instance_exists(modal_dialogue)
+    {
+        if not av_popup_drawn
+        {
+            audio_play_sound(snd_scroll3,2,false)
+            av_popup_drawn = true
+        }
+        
+        //DRAW THE PLAYER POPUP
+        draw_player_popup_ext(cursor.x,cursor.y,capwords(objVarRead(av_popup,"pName")),objVarRead(av_popup,"rank"),objVarRead(av_popup,"global_rank"),objVarRead(av_popup,"true_skill"),
+            objVarRead(av_popup,"helmet0"),objVarRead(av_popup,"hat0"),1,is_bot(av_popup))
+        
+        //GET CLICKED!
+        if not is_bot(ID) and not popup_exists() and (input_check_pressed(mapped_control(C_JUMP)) or mouse_check_button_pressed(mb_left)) and not lock_armory and menmode() != "armory"
+        {
+            show_player_stats(objVarRead(ID,"pName"))
+        }
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///real time step
 real_time_step()
 </string>
@@ -3828,7 +3948,7 @@ if (room = rm_menu or room = rm_lobby) and string(menu_mode) = "armory" and inst
                         }
                     }
                         
-                    if rightclick_pressed() and not popup_exists() 
+                    if rightclick_pressed() or click_pressed() and not popup_exists() 
                     {
                     
                         //if not audio_is_playing(snd_pickup2)
@@ -3945,11 +4065,10 @@ if (room = rm_menu or room = rm_lobby) and string(menu_mode) = "armory" and inst
             if armory_alphas[i] &gt; 0.05
             {
                 grid_drawn = true
-                draw_set_font(fnt_hud_big)
+                draw_set_font(fnt_hud_biggest)
                 draw_set_halign(fa_center)
                 draw_set_valign(fa_center)
-                draw_set_color(c_black)
-                draw_set_alpha(armory_label_alpha)
+                draw_set_color(c_white)
                 
                 yoff = -14
                 
@@ -3990,10 +4109,13 @@ if (room = rm_menu or room = rm_lobby) and string(menu_mode) = "armory" and inst
                 {
                     yoff = -32
                     xoff = armory_sl/2
+                    draw_set_color(c_black)
                 }
-                    
-                draw_text(first_bpart.x+xoff,grid_top+yoff,lookup_limb_type_name(first_bpart.limb_type))
+                  
                 draw_set_alpha(1)
+                draw_text(first_bpart.x+xoff,grid_top+yoff,lookup_limb_type_name(first_bpart.limb_type))
+                draw_set_color(c_white)
+                
                 if show_grid != armory_lists[| i]
                 {
                     show_grid_counter = 0
@@ -4031,126 +4153,6 @@ else if not in_match()
     for (var i=0; i&lt;NUM_LIMBS; i++)
     {
         grid_lalphs[i] = 0
-    }
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///avatar popups and promoted,demoted
-draw_set_font(fnt_hud_big)
-draw_set_halign(fa_center)
-draw_set_valign(fa_center)
-draw_set_color(c_black)
-
-var scale_tol = 0.25
-
-if av_popup = noone
-    av_popup_drawn = false
-    
-menu_mode = string(menu_mode)
-
-if room = rm_login
-{
-    with gravatar
-    {
-        var yoff = 64*3.2-30
-        var xoff = 16*string_length(string(varRead("pName")))/2
-    
-        draw_set_alpha(1)
-        draw_namerank(capwords(varRead("pName")), varRead("rank"), x - xoff,y - yoff, 1, c_black)
-    }
-
-    for (var i=0; i&lt;instance_number(gravatar); i++)
-    {
-        ID = instance_find(gravatar,i)
-        
-        var yoff = 64*3.2-30
-        var xoff = 16*string_length(string(objVarRead(ID,"pName")))/2
-    
-        if ID.hover_counter &gt; ID.hover_delay and not instance_exists(modal_dialogue)
-        {
-            if not drawing_grav_popup
-            {
-                audio_play_sound(snd_scroll3,2,false)
-            }
-            
-            drawing_grav_popup = 2
-            
-            //DRAW THE PLAYER POPUP
-            draw_player_popup_ext(cursor.x,cursor.y,capwords(objVarRead(ID,"pName")),objVarRead(ID,"rank"),objVarRead(ID,"global_rank"),objVarRead(ID,"true_skill"),
-                objVarRead(ID,"helmet0"),objVarRead(ID,"hat0"),1,is_bot(ID))
-        }
-    }
-}
-
-if menmode() = "stats"
-{
-    with gravatar
-    {
-        var yoff = 64*4.5
-        var xoff = 16*string_length(string(varRead("pName")))/2+32
-    
-        draw_set_alpha(1)
-        draw_namerank(capwords(varRead("pName")), objVarRead(stat_manager,"rank"), x - xoff,y - yoff, 1, c_black)
-    }
-}
-
-for (var i=0; i&lt;instance_number(avatar); i++)
-{
-    ID = instance_find(avatar,i)
-    if ID.visible and menu_mode != "armory" and menu_mode != "stats" and real(objVarRead(ID,"pName")) != BAD_READ
-    {
-        if room = rm_menu
-        {
-            if menu_mode = "play"
-                var yoff = 64*3.25
-            else
-                var yoff = 64*4.25
-        }
-        else var yoff = 64*3.2-30
-        
-        var xoff = 16*string_length(string(objVarRead(ID,"pName")))/2
-        draw_set_alpha(1)
-        draw_namerank(capwords(objVarRead(ID,"pName")), objVarRead(ID,"rank"), ID.x - xoff,ID.y - yoff, 1, c_black)
-        //draw_text(ID.x,ID.y - 64*3,objVarRead(ID,"pName"))
-        
-        if DEBUG
-            draw_text(ID.x,ID.y - 64*3.35, objVarRead(ID,"uniqueId"))
-    }
-    if av_popup = ID and menu_mode != "armory" and menu_mode != "challenges" and ID.visible and abs(objVarRead(ID,"animation_scale") - av_scale_highlighted) &lt; scale_tol and not instance_exists(modal_dialogue)
-    {
-        if not av_popup_drawn
-        {
-            audio_play_sound(snd_scroll3,2,false)
-            av_popup_drawn = true
-        }
-        
-        //DRAW THE PLAYER POPUP
-        draw_player_popup_ext(cursor.x,cursor.y,capwords(objVarRead(av_popup,"pName")),objVarRead(av_popup,"rank"),objVarRead(av_popup,"global_rank"),objVarRead(av_popup,"true_skill"),
-            objVarRead(av_popup,"helmet0"),objVarRead(av_popup,"hat0"),1,is_bot(av_popup))
-        
-        //GET CLICKED!
-        if not is_bot(ID) and not popup_exists() and (input_check_pressed(mapped_control(C_JUMP)) or mouse_check_button_pressed(mb_left)) and not lock_armory and menmode() != "armory"
-        {
-            show_player_stats(objVarRead(ID,"pName"))
-        }
     }
 }
 </string>

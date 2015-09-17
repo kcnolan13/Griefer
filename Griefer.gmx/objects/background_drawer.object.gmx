@@ -343,9 +343,7 @@ if in_match()
     draw_set_alpha(1)
 } else if room != rm_login
 {
-    background_colour = global.bg_color
-    background_showcolour = true
-    background_visible[0] = true
+    draw_background_ext(bg_menu2,0,0,1,1,0,global.bg_color,1)
 }
 else
 {

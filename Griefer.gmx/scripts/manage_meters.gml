@@ -50,6 +50,7 @@ for (var i=0; i<getLength(meters); i++)
         met.meter_col_out = meter_col_outs[i]
         met.meter_col_in = meter_col_ins[i]
         met.meter_desc = meter_descs[i]
+        met.text_color = c_white
     }
     
     met = meters[i]
@@ -125,6 +126,17 @@ var h = 36
     
     yst += ysep*1.75
     
+    hue_start = 210//218
+    with bn_stats
+    {
+        if stat_manager.stat_tab = stat_tab
+        {
+            other.hue_start = hue*GMHSV
+        }
+    }
+    hue_end = hue_start+70
+    var hue_step = (hue_end-hue_start)/getLength(pstats)
+    
     for (var i=0; i<getLength(pstats); i++)
     {
         if not instance_exists(pstat_labels[i])
@@ -146,7 +158,7 @@ var h = 36
             bdelay += birthmas
             pstat_labels[i] = lab
             pstat_vals[i] = lab
-            lab.color = web_hsv(235,50,50)
+            lab.color = web_hsv(hue_start+hue_step*i,65,65)
             
             //the stat value!
             strval = string(varRead(pstats[i]))

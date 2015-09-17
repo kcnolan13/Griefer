@@ -81,7 +81,7 @@ if not surface_exists(surface)
                 img_ysc *= height/sprite_get_height(image)
             }
             
-            draw_sprite_ext(image,img_index,left+rect_xoff*scale*master_scale,top+rect_yoff*scale*master_scale,img_xsc,img_ysc,0,c_white,1)
+            draw_sprite_ext(image,img_index,left+rect_xoff*scale*master_scale,top+rect_yoff*scale*master_scale,img_xsc,img_ysc,0,img_blend,1)
         }
         
         if string(text) != "" or string(header_text) != "" or (object_index = bn_input_field and string_length(string(str_cursor)) > 0)

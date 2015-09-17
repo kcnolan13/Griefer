@@ -5,6 +5,18 @@ global.moffset = 8
 
 var i = 0
 global.mod_limbvars[i] = "helmet0"
+global.mod_limbs[i] = spr_ahunch_helmet
+global.mod_vars[i] = "animated"
+global.mod_vals[i] = web_hsv(0,100,100)
+global.mod_descriptions[i] = "Animated"
+i++
+global.mod_limbvars[i] = "helmet0"
+global.mod_limbs[i] = spr_bhunch_helmet
+global.mod_vars[i] = "animated"
+global.mod_vals[i] = web_hsv(0,100,100)
+global.mod_descriptions[i] = "Animated"
+i++
+global.mod_limbvars[i] = "helmet0"
 global.mod_limbs[i] = spr_cursed_helmet
 global.mod_vars[i] = "blood_color"
 global.mod_vals[i] = make_colour_hsv(  268   *255/360,    100    *255/100,  100   *255/100)
