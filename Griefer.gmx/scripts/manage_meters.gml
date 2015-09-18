@@ -22,6 +22,7 @@ if not instance_exists(history_chart)
 {
     history_chart = instance_create(WVIEW/2-32,HVIEW/2+64*1.75,modal_stat_history)
     history_chart.birth_delay = 25
+    history_chart.menu_mode = "stats"
 }
 
 var bdelay = 5
@@ -51,6 +52,7 @@ for (var i=0; i<getLength(meters); i++)
         met.meter_col_in = meter_col_ins[i]
         met.meter_desc = meter_descs[i]
         met.text_color = c_white
+        met.menu_mode = "stats"
     }
     
     met = meters[i]
@@ -142,6 +144,7 @@ var h = 36
         if not instance_exists(pstat_labels[i])
         {
             lab = instance_create(xst-48,yst,bn_slabel)
+            lab.menu_mode = "stats"
             
             //the stat title!
             lab.header_text = capwords_super(pstats[i])+":"

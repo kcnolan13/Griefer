@@ -28,5 +28,5 @@ if av != noone
     
 draw_set_halign(fa_center)
 draw_set_valign(fa_center)
-draw_text_ext_transformed(xdraw, ydraw, str_title, 0, right-left, scale*1.25, scale*1.25, 0)
+draw_text_ext_transformed(xdraw, ydraw, str_title, 0, right-left, scale, scale, 0)
 draw_text_ext_transformed(xdraw, ydraw+(bottom-ydraw)/2, str_subtitle,0, right-left, scale*0.75, scale*0.75, 0)

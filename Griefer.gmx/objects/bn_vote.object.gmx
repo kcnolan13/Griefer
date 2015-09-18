@@ -41,6 +41,8 @@ halign = fa_center
 valign = fa_center
 snap_2view = false
 
+scale_highlight = 1.05
+
 map_num = rm_double
 is_random = false
 

@@ -274,6 +274,7 @@ if net_manager.menu_mode = "stats"
             if not instance_exists(modal_table)
             {
                 leaderboards = instance_create(room_width*1/2,room_height*1/2+54,modal_table)
+                leaderboards.menu_mode = "stats"
                 page_orderby = "stats"+".true_skill"
                 page_flag = FL_FINDME
                 scr_bn_page_leaderboards()
@@ -291,6 +292,7 @@ if net_manager.menu_mode = "stats"
                 tit.birth_delay = 10
                 tit.text_color = web_hsv(0,0,4)
                 tit.alpha_max = 0
+                tit.menu_mode = "stats"
             }
         break
     }

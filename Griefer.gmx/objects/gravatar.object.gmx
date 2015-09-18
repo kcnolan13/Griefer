@@ -243,14 +243,15 @@ else if room = rm_login
     else
     {
         if not net_manager.login_when_ready
-            varWrite("dude_y",room_height*4/5-48*(5-varRead("pNum")))
-        else
         {
-            varWrite("dude_y",HVIEW+64*8+400*varRead("pNum"))
+            varWrite("dude_y",room_height*4/5-48*(5-varRead("pNum")))
+            if varRead("lerp_delay")
+                y = 1200
         }
-        
-        if varRead("lerp_delay")
-            y = 1200
+        else if not varRead("lerp_delay")
+        {
+            varWrite("dude_y",HVIEW+64*8)
+        }
     }
 }
 

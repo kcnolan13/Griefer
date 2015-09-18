@@ -21,6 +21,7 @@ mw.alpha_max = 0.5
 mw.highlightable = false
 mw.color = c_black//make_colour_hsv(100,10,80)
 mw.birth_delay = birth_delay
+mw.menu_mode = "lottery_steal"
 
 aw = instance_create(lottery_x,room_height/2,modal_window)
 aw.halign = fa_center
@@ -32,5 +33,6 @@ aw.alpha_max = 0.5
 aw.highlightable = false
 aw.color = c_black//make_colour_hsv(100,10,80)
 aw.birth_delay = birth_delay+net_manager.lotto_delay
+aw.menu_mode = "lottery_steal"
 
 regen_postmatch_visuals()

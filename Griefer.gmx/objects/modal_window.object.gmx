@@ -49,6 +49,8 @@ wait_while_loading = false
 post_loading_wait_time = 30*5
 blocked = false
 
+menu_mode = "all"
+
 is_loading = false
 load_rot = 0
 load_rad = 38
@@ -406,6 +408,11 @@ if birth_delay &gt; 0
         instance_destroy()
     
     exit
+}
+
+if menu_mode != "all" and menmode() != menu_mode
+{
+    fade_out = true
 }
 
 //TRANSLATION

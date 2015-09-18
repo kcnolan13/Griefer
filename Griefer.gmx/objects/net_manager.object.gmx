@@ -34,7 +34,7 @@ draw_enable_swf_aa(true)
 setGppDebug(0)
 display_set_gui_size(WVIEW,HVIEW)
 
-draw_you_killed_max = room_speed
+draw_you_killed_max = 75
 draw_you_killed = false
 name_you_killed = ""
 new_user = false
@@ -75,8 +75,10 @@ votes3 = 0
 
 force_sync_countdown = 0
 
-keepalive_timeout = room_speed*3
+keepalive_timeout = room_speed*2
 keepalive_timer = 15
+keepalive_missed = 0
+keepalive_missable = 4
 
 master_scale = 1
 match_scale = 0.9
@@ -114,7 +116,7 @@ ffa_kill_limit = 15
 versus_kill_limit = 10
 kill_limit = 10
 
-ffa_player_limit = 4
+ffa_player_limit = 3
 tdm_player_limit = 4
 versus_player_limit = 2
 
@@ -231,10 +233,10 @@ av_ybd = 48
 
 //META GAME
 alarm[4] = 30*5
-lottery_time = 6*30
-lottery_calc_time = 3*30
-steal_time = 5*30
-steal_calc_time = 3*30
+lottery_time = 5*30
+lottery_calc_time = 1.5*30
+steal_time = 3.5*30
+steal_calc_time = 2*30
 mode_total = lottery_time+steal_time
 lotto_comein_offset = 15
 slot_scale_deciding = 1
@@ -1204,14 +1206,20 @@ if keepalive_timer
             //printf(":::IS ALIVE")
             keepalive_timer = keepalive_timeout
             server_found = true
+            keepalive_missed = 0
             keepAlive()
         }
         else
         {
+            keepalive_missed ++
             printf("::: KEEPALIVE TIMEOUT")
-            server_found = false
+            keepAlive()
+            
+            if keepalive_missed &gt; keepalive_missable
+            {
+                server_found = false
+            }
         }
-        //printf("::: checked keepalive")
     }
 }
 </string>
@@ -3067,10 +3075,11 @@ if room = rm_login
 {
     with gravatar
     {
-        var yoff = 64*3.2-30
-        var xoff = 16*string_length(string(varRead("pName")))/2
-    
         draw_set_alpha(1)
+        draw_set_halign(fa_center)
+        draw_set_font(fnt_hud_big)
+        var yoff = 64*3.2-30
+        var xoff = string_width(string(varRead("pName")))/2
         draw_namerank(capwords(varRead("pName")), varRead("rank"), x - xoff,y - yoff, 1, c_black)
     }
 
@@ -3079,7 +3088,7 @@ if room = rm_login
         ID = instance_find(gravatar,i)
         
         var yoff = 64*3.2-30
-        var xoff = 16*string_length(string(objVarRead(ID,"pName")))/2
+        var xoff = string_width(string(objVarRead(ID,"pName")))/2
     
         if ID.hover_counter &gt; ID.hover_delay and not instance_exists(modal_dialogue)
         {
@@ -3101,10 +3110,11 @@ if menmode() = "stats"
 {
     with gravatar
     {
-        var yoff = 64*4.5
-        var xoff = 16*string_length(string(varRead("pName")))/2+32
-    
         draw_set_alpha(1)
+        draw_set_halign(fa_center)
+        draw_set_font(fnt_hud_big)
+        var yoff = 64*4.5
+        var xoff = string_width(string(varRead("pName")))/2+32
         draw_namerank(capwords(varRead("pName")), objVarRead(stat_manager,"rank"), x - xoff,y - yoff, 1, c_white)
     }
 }
@@ -3114,6 +3124,10 @@ for (var i=0; i&lt;instance_number(avatar); i++)
     ID = instance_find(avatar,i)
     if ID.visible and menu_mode != "armory" and menu_mode != "stats" and real(objVarRead(ID,"pName")) != BAD_READ
     {
+        draw_set_alpha(1)
+        draw_set_halign(fa_center)
+        draw_set_font(fnt_hud_big)
+        
         if room = rm_menu
         {
             if menu_mode = "play"
@@ -3123,8 +3137,7 @@ for (var i=0; i&lt;instance_number(avatar); i++)
         }
         else var yoff = 64*3.2-30
         
-        var xoff = 16*string_length(string(objVarRead(ID,"pName")))/2
-        draw_set_alpha(1)
+        var xoff = string_width(string(objVarRead(ID,"pName")))/2
         draw_namerank(capwords(objVarRead(ID,"pName")), objVarRead(ID,"rank"), ID.x - xoff,ID.y - yoff, 1, c_white)
         //draw_text(ID.x,ID.y - 64*3,objVarRead(ID,"pName"))
         
@@ -3254,12 +3267,30 @@ if in_match() and ((draw_killed_by and do_draw_killed_by) or (draw_you_killed an
     if killer_name != varRead("pName")
     {
         var killer_av = find_pname_avatar(killer_name)
+        var dead_av = noone
+        
+        if draw_you_killed and name_you_killed != ""
+            dead_av = find_pname_avatar(name_you_killed)
+        else
+        {
+            dead_av = myAvatar()
+            //printf("::: yours is the dead avatar")
+        }
+        
         if instance_exists(killer_av)
         {
             var row_sep = 94
             var starty = HVIEW/12
             var head_space = 64
             var row2_xoff = -1/2*(head_space+string_width(string(killer_name)))
+            
+            var blood_color = c_red
+            if instance_exists(dead_av)
+            {
+                blood_color = objVarRead(dead_av,"blood_color")
+            } else printf("::: WARNING: couldn't locate dead avatar to find blood color for killed display")
+            
+            draw_splats(WVIEW/2,starty+row_sep*1,1.15,blood_color,0.15)
             
             with killer_av
                 draw_avatar_head(WVIEW/2+row2_xoff,starty+row_sep,id,0,1,1,FL_NOBAR)
@@ -3475,7 +3506,7 @@ if match_ending()
                 } else 
                 {
                     av_head = noone
-                    win_color = c_dkgray
+                    win_color = c_black
                 }
                 
                 if av_head != noone
@@ -3487,7 +3518,7 @@ if match_ending()
                 {
                     titulo = "The Match Is A Tie"
                     subtitulo = ""
-                    win_color = c_dkgray
+                    win_color = c_black
                 }
             }
         }
@@ -3507,7 +3538,7 @@ if match_ending()
                     printf("ERROR: should not be getting tied match (FFA) in draw_GUI_4 when match collapsed")
                     titulo = "The Match Is A Tie"
                     subtitulo = ""
-                    win_color = c_dkgray
+                    win_color = c_black
                 }
             }
             else
@@ -3528,7 +3559,7 @@ if match_ending()
                 {
                     titulo = "The Match Is A Tie"
                     subtitulo = ""
-                    win_color = c_dkgray
+                    win_color = c_black
                 }
             }
         }

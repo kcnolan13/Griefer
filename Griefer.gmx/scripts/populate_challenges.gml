@@ -191,19 +191,19 @@ blah.xp = 5000*chal_scaler
 update_acc_chal_needed("10ks",2)
 
 samurai = instantiate_challenge(spr_samurai_helmet, global.samurai_name, "Earn "+string(1)+' "'+acc_name("15ks")+'" '+global.accolade_name)
-samurai.progress_varname = "15ks"
-samurai.xp = 10000*chal_scaler
-update_acc_chal_needed("15ks",1)
-
-blah = instantiate_challenge(spr_gashog_helmet, global.gashog_name, "Earn "+string(2)+' "'+acc_name("9gibs")+'" '+global.accolade_name+"s")
 samurai.rewards[1] = spr_samurai_torso
 samurai.rewards[2] = spr_samurai_leg
 samurai.rewards[3] = spr_samurai_shin
 samurai.rewards[4] = spr_samurai_foot
 samurai.rewards[5] = spr_samurai_shoulder
 samurai.rewards[6] = spr_samurai_forearm
-samurai.progress_varname = "10ks"
-samurai.xp = 5000*chal_scaler
+samurai.progress_varname = "15ks"
+samurai.xp = 10000*chal_scaler
+update_acc_chal_needed("15ks",1)
+
+blah = instantiate_challenge(spr_gashog_helmet, global.gashog_name, "Earn "+string(2)+' "'+acc_name("9gibs")+'" '+global.accolade_name+"s")
+blah.progress_varname = "9gibs"
+blah.xp = 5000*chal_scaler
 update_acc_chal_needed("9gibs",2)
 
 blah = instantiate_challenge(spr_hound_helmet, "Hound Helmet", "Earn "+string(hound_kills_needed)+' "'+acc_name("dub_kill")+'" '+global.accolade_name+"s")

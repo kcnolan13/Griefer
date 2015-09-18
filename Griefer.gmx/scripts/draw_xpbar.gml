@@ -39,7 +39,7 @@ var bar_top = top
 
 draw_player_rank(xp_bar.rank,left+rank_width/2,top-rank_width*scale/4,rank_scaler*scale)
 //backing
-draw_set_color(c_dkgray)
+draw_set_color(c_black)
 draw_rectangle(bar_left,bar_top,bar_left+XPBAR_WIDTH*scale,top+XPBAR_HEIGHT*scale,false)
 //fraction really full
 draw_set_color(web_hsv(48,100,100))

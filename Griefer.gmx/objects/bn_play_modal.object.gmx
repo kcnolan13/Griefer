@@ -32,6 +32,7 @@ text = global.bmode
 alpha_max = 0.75
 halign = fa_center
 valign = fa_center
+header_color = c_black
 
 alarm[0] = 1
 </string>
@@ -140,7 +141,7 @@ for (var i=0; i&lt;2; i++)
                 ID.label_subtitle = "Versus (1 on 1)"//"1 on 1 Versus, "+string(net_manager.versus_kill_limit)+" Kill Limit"
                 break
             case 2:
-               ID.label_subtitle = "Free-For-All (4 Players)"//"4-Player Free For All, "+string(net_manager.ffa_kill_limit)+" Kill Limit" 
+               ID.label_subtitle = "Free-For-All (3 Players)"//"4-Player Free For All, "+string(net_manager.ffa_kill_limit)+" Kill Limit" 
                break
             case 3:
                 ID.label_subtitle = "Death Match (2 on 2)"//"2 on 2 Death Match, "+string(net_manager.tdm_kill_limit)+" Kill Limit"
@@ -154,7 +155,7 @@ for (var i=0; i&lt;2; i++)
         {
             ID.header_text = ID.label_subtitle
             ID.header_height = ID.height*1/4
-            ID.header_color = c_dkgray
+            ID.header_color = c_black
             ID.alpha_max = 0.85
         }
         ID.halign = halign

@@ -2325,7 +2325,8 @@ if not varRead("player_quit") and (net_manager.local_player = id or is_local_tea
 {
     draw_set_font(fnt_hud_big)
     draw_set_color(c_white)
-    draw_namerank(capwords(varRead("pName")),varRead("rank"),x-32,y-100,1,c_white)
+    var xoff = string_width(string(varRead("pName")))/2
+    draw_namerank(capwords(varRead("pName")),varRead("rank"),x-xoff,y-100,1,c_white)
     draw_set_font(fnt_hud)
     
     /*draw_text(x,y-200,"rank: "+varRead("rank"))

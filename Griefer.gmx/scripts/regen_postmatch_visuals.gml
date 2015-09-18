@@ -28,6 +28,7 @@ av_head.stick_2view = true
 av_head.scale = scale
 av_head.init_as_promoted = true
 av_head.birth_delay = birth_delay
+av_head.menu_mode = "lottery_steal"
 
 // Your Name
 av_txt = instance_create(xpos+get_head_width(scale)-twidth/2,ypos+av_head_yoff,action_word)
@@ -41,6 +42,7 @@ av_txt.scale = scale
 av_txt.init_as_promoted = true
 av_txt.halign = fa_left
 av_txt.birth_delay = birth_delay
+av_txt.menu_mode = "lottery_steal"
 
 // Rank + Rank Name
 av_namerank = instance_create(xpos,ypos+av_head_yoff+112,action_word)
@@ -54,3 +56,4 @@ av_namerank.scale = 1.5
 av_namerank.init_as_promoted = true
 av_namerank.halign = fa_center
 av_namerank.birth_delay = birth_delay
+av_namerank.menu_mode = "lottery_steal"

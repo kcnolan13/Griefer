@@ -362,6 +362,10 @@ while (genMessagesWaiting() and wait_counter < 500000)
                     printf("::: GOOD LOGIN")
                     audio_play_sound(snd_click,2,false)
                     net_manager.login_when_ready = true
+                    with gravatar
+                    {
+                        varWrite("lerp_delay",login_lerp_delay/5*(5-varRead("pNum")))
+                    }
                     with modal_window
                     {
                         if translation_x != 0 or object_index = modal_splat

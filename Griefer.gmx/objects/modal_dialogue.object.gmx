@@ -38,6 +38,7 @@ loading_counter_inc = 0.1
 load_rot = 0
 load_rot_inc = 20
 load_closable = true
+load_life_max = 0
 
 width = 64*2.25*2.5
 height = 64*1.5*2.5
@@ -205,6 +206,7 @@ if is_tutorial
 if critical
 {
     header_color = c_red
+    font = fnt_hud_small
 }
     
 if is_yesno
@@ -333,6 +335,12 @@ if is_loading
     //if loading_counter &gt; loading_counter_max
     {
         loading_counter = 0
+    }
+    
+    if load_life_max and life &gt; load_life_max
+    {
+        fade_out = true    
+        printf(":::WARNING: loading dialogue closed due to load_life_max")
     }
 
     if not fade_out and load_closable and popped_in and
