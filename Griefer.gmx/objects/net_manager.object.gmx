@@ -1557,16 +1557,25 @@ if room = rm_lobby
                 if pnum &lt; instance_number(avatar)/2
                     dat_sign = -1
                 
-                if instance_number(avatar) &lt; 3
+                if not string_count("ffa",varRead("game_mode"))
                 {
-                    xtarget = room_width/2+(64*6.25)*dat_sign
-                } else
+                    if instance_number(avatar) &lt; 3
+                    {
+                        xtarget = room_width/2+(64*5.25)*dat_sign
+                    } else
+                    {
+                        if dat_sign = 1
+                            pnum -= 2
+                            
+                        var avpad = 64*4
+                        xtarget = room_width/2+(64*2.5+(avpad-32)*(pnum+0.5))*dat_sign
+                    }
+                }
+                else
                 {
-                    if dat_sign = 1
-                        pnum -= 2
-                        
-                    var avpad = 64*4
-                    xtarget = room_width/2+(64*2.5+avpad*(pnum+0.5))*dat_sign
+                    xtarget = room_width/2
+                    if pnum != 0
+                        xtarget += 64*6.25*dat_sign
                 }
                 
                 objVarWrite(ID,"dude_x",xtarget)
@@ -1766,7 +1775,7 @@ if room = rm_menu or room = rm_lobby
             <string>///map voting
 if room = rm_lobby 
 {
-    if not lock_armory and not instance_exists(bn_vote) and rtime() &gt; 30*5 and varRead("next_map1") &gt;= 0 and varRead("next_map2") &gt;= 0 and varRead("next_map3") &gt;= 0
+    if not lock_armory and not instance_exists(bn_vote) and rtime() &gt; 30*4 and varRead("next_map1") &gt;= 0 and varRead("next_map2") &gt;= 0 and varRead("next_map3") &gt;= 0
     {
         mnums[0] = varRead("next_map1")
         mnums[1] = varRead("next_map2")
@@ -1774,10 +1783,13 @@ if room = rm_lobby
         
         var bdelay = 0
         var binc = 10
-        
+        var h = 83
+        var w = 365
+        var vspacer = 10
+            
         for (var i=0; i&lt;getLength(mnums); i++)
         {
-            ID = instance_create(room_width/2,room_height/2+96+i*64*1.6,bn_vote)
+            ID = instance_create(room_width-w/2,92+h/2+i*(h+vspacer),bn_vote)
             ID.map_num = mnums[i]
             ID.birth_delay = bdelay
             bdelay += binc
@@ -1811,8 +1823,12 @@ if room = rm_lobby
                 active = false
                 clickable = false
                 highlightable = false
+                if x &gt; room_width/2
+                {
+                    alpha = 0
+                }
                 x = room_width/2
-                y = lerp(y,room_height/2+96+64*0.5,0.05)
+                y = 210//lerp(y,room_height/2+96+64*0.5,0.05)
                 width = lerp(width,width_init*1.5,0.05)
                 height = lerp(height,height_init*1.5,0.05)
                 modal_aligns()
@@ -3438,7 +3454,7 @@ if room = rm_lobby
         if instance_exists(bn_vote) and menmode() = "lobby"
         {
             draw_set_alpha(bn_vote.alpha)
-            draw_text(room_width/2,room_height/2+28,"Vote for Next Map")
+            //draw_text(room_width/2,room_height/2+28,"Vote for Next Map")
             draw_set_alpha(1)
         }
     }

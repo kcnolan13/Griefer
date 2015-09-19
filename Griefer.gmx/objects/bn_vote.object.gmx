@@ -41,15 +41,17 @@ halign = fa_center
 valign = fa_center
 snap_2view = false
 
-scale_highlight = 1.05
+alpha = 0
+scale = 1
+scale_highlighted = 1
 
 map_num = rm_double
 is_random = false
 
 image = spr_none
 
-width = 64*2.25
-height = 64*1.5
+width = 365
+height = 83
 
 width_init = width
 height_init = height
