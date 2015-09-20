@@ -292,9 +292,10 @@ if room = rm_lobby and net_manager.menu_mode = "lobby"  and net_manager.came_fro
     {
         tab = bn_postmatch
         
-        left = bn_settings.x + 100
-            
-        top = 164
+        //left = bn_settings.x + 100
+        //top = 164
+        left = WVIEW/2+width/2//WVIEW-10-width
+        top = HVIEW/2+height/2//HVIEW-10-height
         width = 72*3.25
         height = 72
         birth_delay = 1

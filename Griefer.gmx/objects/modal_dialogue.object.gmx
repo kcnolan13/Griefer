@@ -93,7 +93,7 @@ fade_alpha = 0.65
 is_gui = true
 scale_lerp_real = 0.4
 
-color = web_hsv(0,0,18)
+color = web_hsv(0,0,5)
 
 depth = -99999999
 

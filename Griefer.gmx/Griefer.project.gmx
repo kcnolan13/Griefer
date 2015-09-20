@@ -1915,8 +1915,6 @@
     <rooms name="maps">
       <room>rooms\map_placeholder1</room>
       <room>rooms\rm_double</room>
-      <room>rooms\rm_torque</room>
-      <room>rooms\rm_orange</room>
       <room>rooms\rm_bridge</room>
       <room>rooms\rm_pillar</room>
       <room>rooms\rm_rocky</room>
@@ -1928,10 +1926,12 @@
       <room>rooms\rm_debug</room>
       <room>rooms\rm_dust</room>
       <room>rooms\rm_pillar2</room>
+      <room>rooms\rm_torque</room>
       <room>rooms\rm_trench</room>
       <room>rooms\rm_cave2</room>
       <room>rooms\rm_cave</room>
       <room>rooms\rm_snow</room>
+      <room>rooms\rm_orange</room>
       <room>rooms\rm_chronic</room>
       <room>rooms\rm_tree</room>
       <room>rooms\rm_crosscut</room>

@@ -28,9 +28,19 @@
             <string>///inherit and define properties
 life = 0
 event_inherited()
+
+width = 365
+height = 83
+width_init = width
+height_init = height
+
+header_font = fnt_hud_medium
 header_text = "Map 1"
 header_text_color = c_white
-header_yoff = 8
+header_yoff = -1
+header_color = c_black
+header_alpha = 0.9
+header_height = 32
 
 header_text_random = "Random"
 image_random = snap_random
@@ -49,10 +59,12 @@ map_num = rm_double
 is_random = false
 
 image = spr_none
-width = 365
-height = 83
-width_init = width
-height_init = height
+image_crop = true
+//image_stretch_x = true
+img_xscale = width/sprite_get_width(snap_double)
+img_yscale = img_xscale
+//image_stretch_y = true
+text_yoff = height/2-6
 
 alarm[0] = 1
 

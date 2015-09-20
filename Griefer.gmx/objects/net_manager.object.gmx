@@ -34,6 +34,10 @@ draw_enable_swf_aa(true)
 setGppDebug(0)
 display_set_gui_size(WVIEW,HVIEW)
 
+snapshot_mode = false
+snapshot_number = 1
+snapshot_auto = false
+
 draw_you_killed_max = 75
 draw_you_killed = false
 name_you_killed = ""
@@ -981,6 +985,12 @@ if match_starting() or match_ending() and not instance_exists(modal_controls) an
     if room_counter &lt; 7.5*30
     {
         view_overscaler = 1.65
+        
+        if room_counter + 1 &gt;= 7.5*30 and snapshot_mode and snapshot_auto
+        {
+            printf("::: triggering snapshot")
+            event_perform(ev_keypress,vk_f9)
+        }
     }
     else
     { 
@@ -1801,9 +1811,6 @@ if room = rm_lobby
             
             //assign images
             ID.image = mapsnap_base+ID.map_num+1
-            ID.image_crop = true
-            ID.image_stretch_x = true
-            //ID.image_stretch_y = true
             ID.header_text = string(global.map_names[map_placeholder1+1+ID.map_num])
     
             //the random one
@@ -1828,7 +1835,12 @@ if room = rm_lobby
             {
                 header_text = "Map 1"
                 header_text_color = c_white
-                header_yoff = 8
+                header_yoff = -2
+                header_font = fnt_hud_biggest
+                
+                header_color = c_black
+                header_alpha = 0.9
+                header_height = 48
                 
                 alpha = 0
 
@@ -1840,6 +1852,8 @@ if room = rm_lobby
                 alpha_max = 1
                 
                 map_num = objVarRead(net_manager,"next_map")
+                img_xscale = 0.5
+                img_yscale = 0.5
                 image = mapsnap_base+map_num+1
                 header_text = string(global.map_names[map_placeholder1+1+map_num])
                 
@@ -3360,7 +3374,7 @@ if in_match() and ((draw_killed_by and do_draw_killed_by) or (draw_you_killed an
 
 if not match_ending()
 {
-    if (starting_match) and not instance_exists(modal_controls)
+    if (starting_match) and not instance_exists(modal_controls) and not snapshot_mode
     {
         draw_set_font(fnt_splashscreen)
         draw_set_color(c_white)
@@ -3509,7 +3523,7 @@ if ((show_scores &gt; 0) and not match_ending() or (room_counter &gt; 30*2 and r
         }
     }
         
-    if not disable_scores and do_draw
+    if not disable_scores and do_draw  and not snapshot_mode
     {
         draw_set_alpha(dalph)
         draw_score_table(WVIEW/2 - global.table_width/2, sy)
@@ -3633,7 +3647,7 @@ if room = rm_lobby and came_from_match and not lobby_match_countdown and  menu_m
         draw_score_table(WVIEW/2 - global.table_width/2, 64+armory_ysep+12)
 }
 
-if in_match() and not match_ending() and instance_exists(myAvatar()) and room_counter &gt; 30*3
+if in_match() and not match_ending() and instance_exists(myAvatar()) and room_counter &gt; 30*3  and not snapshot_mode
 {
     var av_head0, av_head1
     var score0, score1
@@ -3680,7 +3694,7 @@ if in_match() and not match_ending() and instance_exists(myAvatar()) and room_co
     draw_avatar_head(xhead+head_width*1*master_scale, yhead, av_head1, score1, head_scale*master_scale, -1, FL_NORMAL)
 }
 
-if lobby_match_countdown and not waiting_for_data() and varRead("lobby_wait_time")/30 &lt; 8 and not instance_exists(ui_countdown)
+if lobby_match_countdown and not waiting_for_data() and varRead("lobby_wait_time")/30 &lt; 6 and not instance_exists(ui_countdown)
 {
     ui_countdown = popup_loading(WVIEW/2,HVIEW/2)
     ui_countdown.is_ui_countdown = true
@@ -4609,6 +4623,59 @@ else
         </arguments>
       </action>
     </event>
+    <event eventtype="9" enumb="120">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///snapshot mode
+if keyboard_check(vk_shift)
+{
+    snapshot_mode ^= 1
+    var txt = "Disabled"
+    if snapshot_mode
+        txt = "Enabled"
+        
+    if keyboard_check(vk_control)
+    {
+        txt = "Loop Engaged!"
+        snapshot_auto = true
+        room_goto(rm_double)
+    }
+    else
+        snapshot_auto = false
+        
+    popup_alert(WVIEW/2,HVIEW/2,"Snapshot Mode",txt)
+}
+else if snapshot_mode
+{
+    printf("::: TAKING SNAPSHOT!")
+    //take snapshot
+    var snap_w = sprite_get_width(snap_double)*2
+    var snap_h = sprite_get_height(snap_double)*2
+    screen_save_part("snapshots/snapshot"+string(snapshot_number)+".png",WVIEW/2-snap_w/2,HVIEW/2-snap_h/2,snap_w,snap_h)
+    snapshot_number++
+    
+    if snapshot_auto and room &lt; map_placeholder2 - 1
+        room_goto(room+1)
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="9" enumb="89">
       <action>
         <libid>1</libid>
@@ -4824,17 +4891,26 @@ splat_constants(seed)
       </action>
       <action>
         <libid>1</libid>
-        <id>222</id>
-        <kind>0</kind>
+        <id>603</id>
+        <kind>7</kind>
         <userelative>0</userelative>
         <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_next_room</functionname>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
         <codestring></codestring>
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///next room
+printf("::: next room")
+room_goto(room+1)
+</string>
+          </argument>
+        </arguments>
       </action>
     </event>
     <event eventtype="9" enumb="38">
@@ -4901,17 +4977,26 @@ if room = rm_login
       </action>
       <action>
         <libid>1</libid>
-        <id>221</id>
-        <kind>0</kind>
+        <id>603</id>
+        <kind>7</kind>
         <userelative>0</userelative>
         <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_previous_room</functionname>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
         <codestring></codestring>
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///previous room
+printf("::: previous room")
+room_goto(room-1)
+</string>
+          </argument>
+        </arguments>
       </action>
     </event>
     <event eventtype="9" enumb="35">

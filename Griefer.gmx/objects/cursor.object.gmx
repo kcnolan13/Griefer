@@ -195,6 +195,9 @@ point_size = lerp(point_size,size_target,point_size_lerp)
           <argument>
             <kind>1</kind>
             <string>///draw id and coords
+
+if net_manager.snapshot_mode exit
+
 if in_match() 
 {
     do_draw = true

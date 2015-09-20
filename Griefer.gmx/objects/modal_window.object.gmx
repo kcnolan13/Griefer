@@ -176,6 +176,8 @@ image = spr_none
 image_stretch_x = false
 image_stretch_y = false
 image_stretch = false
+img_xscale = 1
+img_yscale = 1
 image_crop = false
 img_blend = c_white
 

@@ -64,12 +64,6 @@ if not surface_exists(surface)
         drew_left = left
         drew_right = left+width*scale*master_scale
         
-        if header_height > 0
-        {
-            draw_set_color(header_color)
-            draw_rectangle(left+rect_xoff*scale*master_scale,top+header_height*scale*master_scale+rect_yoff*scale*master_scale,left+width*scale*master_scale+rect_xoff*scale*master_scale,top+rect_yoff*scale*master_scale,false)
-        }
-        
         if image != spr_none
         {
             var img_xsc = scale*master_scale
@@ -91,12 +85,21 @@ if not surface_exists(surface)
             
             if not image_crop
             {
-                draw_sprite_ext(image,img_index,left+rect_xoff*scale*master_scale,top+rect_yoff*scale*master_scale,img_xsc,img_ysc,0,img_blend,alpha*alpha_scaler)
+                draw_sprite_ext(image,img_index,left+rect_xoff*scale*master_scale,top+rect_yoff*scale*master_scale,img_xsc*img_xscale,img_ysc*img_yscale,0,img_blend,alpha*alpha_scaler)
             }
             else
             {
-                draw_sprite_part_ext(image,img_index,0,0,width*scale*master_scale/img_xsc,height*scale*master_scale/img_ysc,left+rect_xoff*scale*master_scale,top+rect_yoff*scale*master_scale,img_xsc,img_ysc,img_blend,alpha*alpha_scaler)
+                draw_sprite_part_ext(image,img_index,0,0,width*scale*master_scale/img_xsc/img_xscale,height*scale*master_scale/img_ysc/img_yscale,left+rect_xoff*scale*master_scale,top+rect_yoff*scale*master_scale,img_xsc*img_xscale,img_ysc*img_yscale,img_blend,alpha*alpha_scaler)
             }
+        }
+        
+        if header_height > 0
+        {
+            draw_set_color(header_color)
+            var alph = draw_get_alpha()
+            draw_set_alpha(alpha*alpha_scaler*header_alpha)
+            draw_rectangle(left+rect_xoff*scale*master_scale,top+header_height*scale*master_scale+rect_yoff*scale*master_scale,left+width*scale*master_scale+rect_xoff*scale*master_scale,top+rect_yoff*scale*master_scale,false)
+            draw_set_alpha(alph)
         }
         
         if string(text) != "" or string(header_text) != "" or (object_index = bn_input_field and string_length(string(str_cursor)) > 0)
