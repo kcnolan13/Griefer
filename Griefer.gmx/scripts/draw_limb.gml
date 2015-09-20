@@ -8,6 +8,11 @@ limb_2draw = varRead(limb)
 
 limb_2draw = convert_spr_none_to_drawable(limb_2draw,limb)
 
+if string(limb) != "helmet0" and real(limb_2draw) = 0
+{
+    return false
+}
+
 if limb = "forearm0" or limb = "shoulder0" or limb = "active_weapon_sprite"
 {
     if (varRead("arms_posing"))
@@ -45,3 +50,5 @@ if real(limb_2draw) = spr_bhunch_helmet or real(limb_2draw) = spr_ahunch_helmet
 if sprite_exists(real(limb_2draw))
     draw_sprite_ext(real(limb_2draw),subimg,x+xpos,y+ypos,varRead("animation_scale")*xscaler,varRead("animation_scale")*yscaler,angle,image_blend,image_alpha)
 else printf("WARNING: nonexistent draw_limb sprite: "+string(limb_2draw))
+
+return true

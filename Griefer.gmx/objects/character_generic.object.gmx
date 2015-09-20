@@ -573,21 +573,32 @@ if not in_match() and room != rm_login
 calc_limb_draws()
 
 //left arm
-draw_limb("forearm0",forearml_drawx,forearml_drawy,forearml_drawr)
-draw_limb("shoulder0",shoulderl_drawx,shoulderl_drawy,shoulderl_drawr)
+var ret = true
+
+ret = draw_limb("forearm0",forearml_drawx,forearml_drawy,forearml_drawr)
+if not ret exit
+ret = draw_limb("shoulder0",shoulderl_drawx,shoulderl_drawy,shoulderl_drawr)
+if not ret exit
 
 //left leg
-draw_limb("leg0",legl_drawx,legl_drawy,legl_drawr)
-draw_limb("shin0",shinl_drawx,shinl_drawy,shinl_drawr)
-draw_limb("foot0",footl_drawx,footl_drawy,footl_drawr)
+ret = draw_limb("leg0",legl_drawx,legl_drawy,legl_drawr)
+if not ret exit
+ret = draw_limb("shin0",shinl_drawx,shinl_drawy,shinl_drawr)
+if not ret exit
+ret = draw_limb("foot0",footl_drawx,footl_drawy,footl_drawr)
+if not ret exit
 
 //torso
-draw_limb("torso0",torso_drawx,torso_drawy,torso_drawr)
+ret = draw_limb("torso0",torso_drawx,torso_drawy,torso_drawr)
+if not ret exit
 
 //right leg
-draw_limb("leg0",legr_drawx,legr_drawy,legr_drawr)
-draw_limb("shin0",shinr_drawx,shinr_drawy,shinr_drawr)
-draw_limb("foot0",footr_drawx,footr_drawy,footr_drawr)
+ret = draw_limb("leg0",legr_drawx,legr_drawy,legr_drawr)
+if not ret exit
+ret = draw_limb("shin0",shinr_drawx,shinr_drawy,shinr_drawr)
+if not ret exit
+ret = draw_limb("foot0",footr_drawx,footr_drawy,footr_drawr)
+if not ret exit
 
 if (varRead("animation") != "die_headshot")
 {

@@ -577,6 +577,7 @@
       <sprite>sprites\snap_tree</sprite>
       <sprite>sprites\snap_crosscut</sprite>
       <sprite>sprites\snap_random</sprite>
+      <sprite>sprites\snap_random_backup</sprite>
     </sprites>
     <sprite>sprites\spr_1pixel</sprite>
     <sprite>sprites\sprite393</sprite>
@@ -1525,6 +1526,7 @@
       <script>scripts\page_flag_2str.gml</script>
       <script>scripts\modal_force_click.gml</script>
       <script>scripts\cursor_highlight.gml</script>
+      <script>scripts\manage_voting_modals.gml</script>
     </scripts>
   </scripts>
   <shaders name="shaders">

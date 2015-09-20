@@ -93,6 +93,12 @@ if not surface_exists(surface)
             }
         }
         
+        if draw_image_gradient
+        {   draw_set_alpha(draw_get_alpha()*image_gradient_alpha)
+                draw_rectangle_colour(left+rect_xoff*scale*master_scale-rect_xextra*scale*master_scale/2,top+rect_yoff*scale*master_scale-rect_yextra*scale*master_scale/2,left+width*scale*master_scale+rect_xoff*scale*master_scale+rect_xextra*scale*master_scale/2,top+(height+extra_height)*scale*master_scale+rect_yoff*scale*master_scale+rect_yextra*scale*master_scale/2,grad1,grad2,grad3,grad4,false)
+            draw_set_alpha(draw_get_alpha()/image_gradient_alpha)
+        }
+        
         if header_height > 0
         {
             draw_set_color(header_color)
@@ -100,6 +106,23 @@ if not surface_exists(surface)
             draw_set_alpha(alpha*alpha_scaler*header_alpha)
             draw_rectangle(left+rect_xoff*scale*master_scale,top+header_height*scale*master_scale+rect_yoff*scale*master_scale,left+width*scale*master_scale+rect_xoff*scale*master_scale,top+rect_yoff*scale*master_scale,false)
             draw_set_alpha(alph)
+        }
+        
+        if border_width > 0
+        {
+            draw_set_color(border_color)
+            draw_set_alpha(draw_get_alpha()*border_alpha)
+            
+            var bsign = 1
+            if border_inscribe
+                bsign = -1
+            
+            for (var i=0; i<border_width; i+=0.5)
+            {
+                draw_rectangle(left-i*bsign,top-i*bsign,left+width+i*bsign,top+height+i*bsign,true)
+            }
+            draw_set_color(c_white)
+            draw_set_alpha(draw_get_alpha()/border_alpha)
         }
         
         if string(text) != "" or string(header_text) != "" or (object_index = bn_input_field and string_length(string(str_cursor)) > 0)

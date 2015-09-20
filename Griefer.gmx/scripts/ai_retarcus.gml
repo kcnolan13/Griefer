@@ -9,7 +9,7 @@ var percent_reflexes = argument1
     
     if overheating
         overheating--
-    
+
     percent_active += 0.05
     
     if varRead("flash_hp") < 75-lerp(0,60,varRead("rank")/global.rank_max_theoretical)
@@ -24,7 +24,7 @@ var percent_reflexes = argument1
     }
     
     //TAKE OUT THE BEST WEAPON FOR THE SITUATION
-    if instance_exists(target) and dice_real(percent_active/2)
+    if instance_exists(target) and dice_real(percent_active/3)
     {
         draw_best_weapon(point_distance(x,y,target.x,target.y), percent_active)
     }
@@ -132,8 +132,15 @@ var percent_reflexes = argument1
                 
             if other.id.possible_2shoot and ( dice_real(other.id.shooting_prob) or other.id.auto_shooting )
             {
-                script_execute(weapon_press_left)
-                script_execute(weapon_hold_left)
+                if varRead("is_nade")
+                {
+                    script_execute(weapon_press_right)
+                }
+                else
+                {
+                    script_execute(weapon_press_left)
+                    script_execute(weapon_hold_left)
+                    }
                 
                 if varRead("control_type") = "left_press"
                 {

@@ -49,6 +49,14 @@ wait_while_loading = false
 post_loading_wait_time = 30*5
 blocked = false
 
+draw_image_gradient = false
+image_gradient_alpha = 0.25
+
+border_width = 0
+border_color = c_white
+border_alpha = 1
+border_inscribe = false
+
 menu_mode = "all"
 
 is_loading = false

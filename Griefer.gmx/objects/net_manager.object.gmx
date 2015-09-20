@@ -1785,94 +1785,8 @@ if room = rm_menu or room = rm_lobby
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///map voting
-if room = rm_lobby 
-{
-    if not lock_armory and not instance_exists(bn_vote) and rtime() &gt; 30*4 and varRead("next_map1") &gt;= 0 and varRead("next_map2") &gt;= 0 and varRead("next_map3") &gt;= 0
-    {
-        next_map_final = noone
-        
-        mnums[0] = varRead("next_map1")
-        mnums[1] = varRead("next_map2")
-        mnums[2] = varRead("next_map3")
-        
-        var bdelay = 0
-        var binc = 10
-        var h = 83
-        var w = 360
-        var vspacer = 10
-            
-        for (var i=0; i&lt;getLength(mnums); i++)
-        {
-            ID = instance_create(room_width-w/2,92+h/2+i*(h+vspacer),bn_vote)
-            ID.map_num = mnums[i]
-            ID.birth_delay = bdelay
-            bdelay += binc
-            
-            //assign images
-            ID.image = mapsnap_base+ID.map_num+1
-            ID.header_text = string(global.map_names[map_placeholder1+1+ID.map_num])
-    
-            //the random one
-            if i = getLength(mnums)-1
-            {
-                ID.is_random = true
-            }
-        }
-    }
-    else if lock_armory and instance_exists(bn_vote) and varRead("next_map") &gt;= 0
-    {
-        with bn_vote
-        {
-            alpha = 0.5
-            alpha_max = 0.5
-            blocked = true
-        }
-        if not instance_exists(next_map_final)
-        {
-            next_map_final = instance_create(room_width/2,210,modal_window)
-            with (next_map_final)
-            {
-                header_text = "Map 1"
-                header_text_color = c_white
-                header_yoff = -2
-                header_font = fnt_hud_biggest
-                
-                header_color = c_black
-                header_alpha = 0.9
-                header_height = 48
-                
-                alpha = 0
-
-                scale = 1
-                scale_highlighted = 1.02
-                image_stretch = true
-                active = true
-                highlightable = false
-                alpha_max = 1
-                
-                map_num = objVarRead(net_manager,"next_map")
-                img_xscale = 0.5
-                img_yscale = 0.5
-                image = mapsnap_base+map_num+1
-                header_text = string(global.map_names[map_placeholder1+1+map_num])
-                
-                is_random = false
-                width = 550//bn_vote.width*1.5
-                height = 270//bn_vote.height*3
-                
-                y = 72+20+height/2
-                
-                width_init = width
-                height_init = height
-                halign = fa_center
-                valign = fa_center
-                snap_2view = false
-                modal_aligns()
-            }
-        }
-    }
-}
+            <string>///map voting modal management
+manage_voting_modals()
 </string>
           </argument>
         </arguments>
@@ -3694,24 +3608,21 @@ if in_match() and not match_ending() and instance_exists(myAvatar()) and room_co
     draw_avatar_head(xhead+head_width*1*master_scale, yhead, av_head1, score1, head_scale*master_scale, -1, FL_NORMAL)
 }
 
-if lobby_match_countdown and not waiting_for_data() and varRead("lobby_wait_time")/30 &lt; 6 and not instance_exists(ui_countdown)
+if lobby_match_countdown and instance_exists(next_map_final)//and not waiting_for_data() and varRead("lobby_wait_time")/30 &lt; 6 and not instance_exists(ui_countdown)
 {
-    ui_countdown = popup_loading(WVIEW/2,HVIEW/2)
-    ui_countdown.is_ui_countdown = true
-    /*
+    //ui_countdown = popup_loading(WVIEW/2,HVIEW/2)
+    //ui_countdown.is_ui_countdown = true
+    
+    next_map_final.text = "Match Countdown ... "+string(ceil(varRead("lobby_wait_time")/30))
+    
     draw_set_color(c_black)
-    if varRead("lobby_wait_time")/30 &lt; 6
-        draw_set_alpha(0.8 - max(0,(varRead("lobby_wait_time")/30)/6))
+    if varRead("lobby_wait_time")/30 &lt; 8
+        draw_set_alpha(0.9 - max(0,(varRead("lobby_wait_time")/30)/8))
     else draw_set_alpha(0)
     draw_rectangle_colour(0,0,WVIEW,HVIEW,c_black,c_black,c_white,c_white,false)
+
+    //draw_text(next_map_final.x,next_map_final.y+48,"Match Countdown ... "+string(ceil(varRead("lobby_wait_time")/30)))
     
-    draw_set_color(c_white)
-    draw_set_alpha(1)
-    draw_set_font(fnt_menu)
-    draw_set_halign(fa_center)
-    draw_set_valign(fa_center)
-    draw_text(WVIEW/2,HVIEW/2,"Match Countdown ... "+string(ceil(varRead("lobby_wait_time")/30)))
-    */
 }
 </string>
           </argument>
