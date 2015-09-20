@@ -40,6 +40,9 @@ name_you_killed = ""
 new_user = false
 drawing_grid_dir = 0
 
+next_map_final = noone
+ui_countdown = noone
+
 violence_2end = false
 
 load_room_start = false
@@ -1777,6 +1780,8 @@ if room = rm_lobby
 {
     if not lock_armory and not instance_exists(bn_vote) and rtime() &gt; 30*4 and varRead("next_map1") &gt;= 0 and varRead("next_map2") &gt;= 0 and varRead("next_map3") &gt;= 0
     {
+        next_map_final = noone
+        
         mnums[0] = varRead("next_map1")
         mnums[1] = varRead("next_map2")
         mnums[2] = varRead("next_map3")
@@ -1784,7 +1789,7 @@ if room = rm_lobby
         var bdelay = 0
         var binc = 10
         var h = 83
-        var w = 365
+        var w = 360
         var vspacer = 10
             
         for (var i=0; i&lt;getLength(mnums); i++)
@@ -1796,7 +1801,9 @@ if room = rm_lobby
             
             //assign images
             ID.image = mapsnap_base+ID.map_num+1
-            ID.image_stretch = true
+            ID.image_crop = true
+            ID.image_stretch_x = true
+            //ID.image_stretch_y = true
             ID.header_text = string(global.map_names[map_placeholder1+1+ID.map_num])
     
             //the random one
@@ -1810,27 +1817,43 @@ if room = rm_lobby
     {
         with bn_vote
         {
-            if map_num != objVarRead(net_manager,"next_map")
+            alpha = 0.5
+            alpha_max = 0.5
+            blocked = true
+        }
+        if not instance_exists(next_map_final)
+        {
+            next_map_final = instance_create(room_width/2,210,modal_window)
+            with (next_map_final)
             {
-                if not fade_out
-                    fade_out = true
-            }
-            else
-            {
-                is_random = false
-                header_text = header_text_real
-                image = image_real
-                active = false
-                clickable = false
+                header_text = "Map 1"
+                header_text_color = c_white
+                header_yoff = 8
+                
+                alpha = 0
+
+                scale = 1
+                scale_highlighted = 1.02
+                image_stretch = true
+                active = true
                 highlightable = false
-                if x &gt; room_width/2
-                {
-                    alpha = 0
-                }
-                x = room_width/2
-                y = 210//lerp(y,room_height/2+96+64*0.5,0.05)
-                width = lerp(width,width_init*1.5,0.05)
-                height = lerp(height,height_init*1.5,0.05)
+                alpha_max = 1
+                
+                map_num = objVarRead(net_manager,"next_map")
+                image = mapsnap_base+map_num+1
+                header_text = string(global.map_names[map_placeholder1+1+map_num])
+                
+                is_random = false
+                width = 550//bn_vote.width*1.5
+                height = 270//bn_vote.height*3
+                
+                y = 72+20+height/2
+                
+                width_init = width
+                height_init = height
+                halign = fa_center
+                valign = fa_center
+                snap_2view = false
                 modal_aligns()
             }
         }
@@ -2527,6 +2550,14 @@ computed_winloss = false
 previous_room = room
 audio_stop_sound(snd_flashed)
 
+if ui_countdown != noone
+{
+    ui_countdown = noone
+    global.load_count -- 
+    if global.load_count &lt; 0
+        global.load_count = 0
+}
+
 show_scores = 0
 saving_armor = 0
 saving_armor_reboot = false
@@ -2620,6 +2651,8 @@ view_wview[0] = 1365
 
 if in_match()
 {
+    //zero out the global load counter -- start fresh!!
+    global.load_count = 0
     default_winner = ""
     match_collapsed = false
     collapsed_numplayers = 0
@@ -3647,8 +3680,11 @@ if in_match() and not match_ending() and instance_exists(myAvatar()) and room_co
     draw_avatar_head(xhead+head_width*1*master_scale, yhead, av_head1, score1, head_scale*master_scale, -1, FL_NORMAL)
 }
 
-if lobby_match_countdown and room = rm_lobby
+if lobby_match_countdown and not waiting_for_data() and varRead("lobby_wait_time")/30 &lt; 8 and not instance_exists(ui_countdown)
 {
+    ui_countdown = popup_loading(WVIEW/2,HVIEW/2)
+    ui_countdown.is_ui_countdown = true
+    /*
     draw_set_color(c_black)
     if varRead("lobby_wait_time")/30 &lt; 6
         draw_set_alpha(0.8 - max(0,(varRead("lobby_wait_time")/30)/6))
@@ -3660,7 +3696,8 @@ if lobby_match_countdown and room = rm_lobby
     draw_set_font(fnt_menu)
     draw_set_halign(fa_center)
     draw_set_valign(fa_center)
-    draw_text(WVIEW/2,HVIEW/4,"Match Countdown ... "+string(ceil(varRead("lobby_wait_time")/30)))
+    draw_text(WVIEW/2,HVIEW/2,"Match Countdown ... "+string(ceil(varRead("lobby_wait_time")/30)))
+    */
 }
 </string>
           </argument>

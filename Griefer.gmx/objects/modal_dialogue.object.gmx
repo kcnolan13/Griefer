@@ -74,6 +74,7 @@ is_loading = false
 is_input_field = false
 is_password = false
 is_tutorial = false
+is_ui_countdown = false
 
 bn_yes = noone
 bn_no = noone
@@ -349,6 +350,11 @@ if is_loading
     {
         fade_out = true
     }
+}
+
+if is_ui_countdown
+{
+    text = "Match Countdown ... "+string(ceil(objVarRead(net_manager,"lobby_wait_time")/30))
 }
 
 for (var i=0; i&lt;getLength(bns); i++)

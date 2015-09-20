@@ -34,7 +34,7 @@ match_scale = 0.9
 is_gui = true
 
 force_show = false
-width = 64*6
+width = 64*6+52
 height = 64*4.5
 entry_height = 48
 entry_width = width
@@ -375,6 +375,14 @@ if room = rm_menu
           <argument>
             <kind>1</kind>
             <string>///mostly inherited
+
+if room = rm_lobby and not instance_exists(bn_vote)
+{
+    alpha = 0 
+    entry.alpha = alpha
+    send.alpha = alpha
+    exit  
+}
 
 if room = rm_login
     alpha_scaler = 0

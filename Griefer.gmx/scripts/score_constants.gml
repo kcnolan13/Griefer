@@ -2,7 +2,7 @@
 global.page_length = 50
 global.table_width = 72*8.5
 global.txt_fields_start = global.table_width*2/5
-global.row_height = 72*1/2-4
+global.row_height = 72*1/2-1
 global.row_vsep = 0
 global.table_header_vsep = 16
 global.table_font = fnt_hud

@@ -43,16 +43,14 @@ snap_2view = false
 
 alpha = 0
 scale = 1
-scale_highlighted = 1
+scale_highlighted = 1.02
 
 map_num = rm_double
 is_random = false
 
 image = spr_none
-
 width = 365
 height = 83
-
 width_init = width
 height_init = height
 
@@ -211,7 +209,15 @@ if clickable
     if instance_exists(myAvatar()) and objVarRead(myAvatar(),"nextMapVote") = map_num
     {
         depth = -2
-        draw_notification("!",other.x-other.width/2,other.y-other.height/2,1.5,c_ltgray,1)
+        //draw_notification("!",other.x-other.width/2,other.y-other.height/2,1.5,c_ltgray,1)
+        var border_width = 2
+        draw_set_color(c_white)
+        draw_set_alpha(1)
+        for (var i=0; i&lt;border_width; i++)
+        {
+            draw_rectangle(left-i,top-i,left+width+i,top+height+i,true)
+        }
+        
     }
     else
     {

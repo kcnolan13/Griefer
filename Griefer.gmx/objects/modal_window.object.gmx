@@ -173,7 +173,10 @@ text_linesep = 20
 text_pad = 0
 
 image = spr_none
+image_stretch_x = false
+image_stretch_y = false
 image_stretch = false
+image_crop = false
 img_blend = c_white
 
 color = c_dkgray

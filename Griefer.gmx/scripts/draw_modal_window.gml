@@ -77,11 +77,26 @@ if not surface_exists(surface)
             
             if image_stretch
             {
-                img_xsc *= width/sprite_get_width(image)
-                img_ysc *= height/sprite_get_height(image)
+                img_xsc = ceil(img_xsc*width/sprite_get_width(image))
+                img_ysc = ceil(img_ysc*height/sprite_get_height(image))
             }
+            else
+            {
+                if image_stretch_x
+                    img_xsc = ceil(img_xsc*width/sprite_get_width(image))
+                    
+                if image_stretch_y
+                    img_ysc = ceil(img_ysc*height/sprite_get_height(image))
+            }   
             
-            draw_sprite_ext(image,img_index,left+rect_xoff*scale*master_scale,top+rect_yoff*scale*master_scale,img_xsc,img_ysc,0,img_blend,1)
+            if not image_crop
+            {
+                draw_sprite_ext(image,img_index,left+rect_xoff*scale*master_scale,top+rect_yoff*scale*master_scale,img_xsc,img_ysc,0,img_blend,alpha*alpha_scaler)
+            }
+            else
+            {
+                draw_sprite_part_ext(image,img_index,0,0,width*scale*master_scale/img_xsc,height*scale*master_scale/img_ysc,left+rect_xoff*scale*master_scale,top+rect_yoff*scale*master_scale,img_xsc,img_ysc,img_blend,alpha*alpha_scaler)
+            }
         }
         
         if string(text) != "" or string(header_text) != "" or (object_index = bn_input_field and string_length(string(str_cursor)) > 0)
