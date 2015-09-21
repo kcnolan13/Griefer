@@ -43,7 +43,7 @@ else
     {
         hspacer = w*2
         //create dat one button and trigger draw scores + table and whatnot
-        blah = instance_create(left+width*4/5+296+xoff,yoff,bn_match_quit)
+        blah = instance_create(left+width*4/5+296+xoff+128,yoff,bn_match_quit)
         blah.width = w-32
         blah.height = h
         blah.depth = depth-1

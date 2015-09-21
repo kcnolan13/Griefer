@@ -85,11 +85,27 @@ if not surface_exists(surface)
             
             if not image_crop
             {
-                draw_sprite_ext(image,img_index,left+rect_xoff*scale*master_scale,top+rect_yoff*scale*master_scale,img_xsc*img_xscale,img_ysc*img_yscale,0,img_blend,alpha*alpha_scaler)
+                draw_sprite_ext(image,img_index,left+(rect_xoff+image_xoff)*scale*master_scale,top+(rect_yoff+image_yoff)*scale*master_scale,img_xsc*img_xscale,img_ysc*img_yscale,0,img_blend,alpha*alpha_scaler)
             }
             else
             {
-                draw_sprite_part_ext(image,img_index,0,0,width*scale*master_scale/img_xsc/img_xscale,height*scale*master_scale/img_ysc/img_yscale,left+rect_xoff*scale*master_scale,top+rect_yoff*scale*master_scale,img_xsc*img_xscale,img_ysc*img_yscale,img_blend,alpha*alpha_scaler)
+                var img_yst = 0
+                var img_xst = 0
+                
+                if image_crop_align = fa_center
+                {
+                    var y_coverage = height*scale*master_scale/img_ysc/img_yscale
+                    img_yst = (sprite_get_height(image)-y_coverage)/2
+                    if img_yst < 0
+                        img_yst = 0
+                        
+                    var x_coverage = width*scale*master_scale/img_xsc/img_xscale
+                    img_xst = (sprite_get_width(image)-x_coverage)/2
+                    if img_xst < 0
+                        img_xst = 0
+                }
+                
+                draw_sprite_part_ext(image,img_index,img_xst,img_yst,width*scale*master_scale/img_xsc/img_xscale,height*scale*master_scale/img_ysc/img_yscale,left+(rect_xoff+image_xoff)*scale*master_scale,top+(rect_yoff+image_yoff)*scale*master_scale,img_xsc*img_xscale,img_ysc*img_yscale,img_blend,alpha*alpha_scaler)
             }
         }
         
@@ -187,11 +203,11 @@ if not surface_exists(surface)
             }
             
             if text_halign = fa_center
-                draw_text_ext_transformed(xpos,ypos,text_2draw,text_linesep,(width-text_pad*2),scale*master_scale,scale*master_scale,0)
+                draw_text_ext_transformed(xpos,ypos,text_2draw,text_linesep,(width-text_pad*2-text_xoff),scale*master_scale,scale*master_scale,0)
             else if text_halign = fa_left
-                draw_text_ext_transformed(xpos+text_pad,ypos,text_2draw,text_linesep,(width-text_pad*2),scale*master_scale,scale*master_scale,0)
+                draw_text_ext_transformed(xpos+text_pad,ypos,text_2draw,text_linesep,(width-text_pad*2-text_xoff),scale*master_scale,scale*master_scale,0)
             else
-                draw_text_ext_transformed(xpos-text_pad,ypos,text_2draw,text_linesep,(width-text_pad*2),scale*master_scale,scale*master_scale,0)
+                draw_text_ext_transformed(xpos-text_pad,ypos,text_2draw,text_linesep,(width-text_pad*2-text_xoff),scale*master_scale,scale*master_scale,0)
             
             if header_text != ""
             {
@@ -199,7 +215,7 @@ if not surface_exists(surface)
                 draw_set_color(header_text_color)
                 draw_set_halign(text_halign)
                 draw_set_valign(fa_center)
-                draw_text_ext_transformed(xpos+header_xoff,top+header_yoff+header_height*scale*master_scale/2,header_text,text_linesep,width,scale*master_scale,scale*master_scale,0)
+                draw_text_ext_transformed(xpos+header_xoff,top+header_yoff+header_height*scale*master_scale/2,header_text,text_linesep,width-text_pad*2-text_xoff,scale*master_scale,scale*master_scale,0)
             }
             
             draw_set_alpha(alpha*alpha_scaler)

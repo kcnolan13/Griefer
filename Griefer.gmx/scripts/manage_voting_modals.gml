@@ -77,16 +77,10 @@ if room = rm_lobby
                 border_color = c_white
                 border_inscribe = true
                 
-                map_num = objVarRead(net_manager,"next_map")
-                img_xscale = 0.5
-                img_yscale = 0.5
-                image = mapsnap_base+map_num+1
-                header_text = string(global.map_names[map_placeholder1+1+map_num])
-                
                 is_gui = true
                 depth = net_manager.depth-1
                 is_random = false
-                width = 550//bn_vote.width*1.5
+                width = 550+68//bn_vote.width*1.5
                 height = 270//bn_vote.height*3
                 
                 y = 72+20+height/2
@@ -97,6 +91,14 @@ if room = rm_lobby
                 valign = fa_center
                 snap_2view = false
                 modal_aligns()
+                
+                map_num = objVarRead(net_manager,"next_map")
+                img_xscale = width/sprite_get_width(snap_double)
+                img_yscale = img_xscale
+                image = mapsnap_base+map_num+1
+                image_crop = true
+                header_text = string(global.map_names[map_placeholder1+1+map_num])
+                
             }
         }
     }

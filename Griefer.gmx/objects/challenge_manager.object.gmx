@@ -36,7 +36,7 @@ global.challenge_grid_xstart = 72*5
 global.challenge_grid_ystart = 72*2-13
 
 comp_yoff = room_height*1/2-32-130
-chal_yoff = room_height*1/2+64*1.5-16
+chal_yoff = room_height*1/2+64*1.5-16-24
 
 
 //deprecated

@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>///initialization
 serverURL = "http://www.puddlesquid.com:8080"
-show_debug_stats = true
+show_debug_stats = false
 show_debug_overlay(show_debug_stats)
 draw_set_swf_aa_level(1)
 draw_enable_swf_aa(true)
@@ -267,7 +267,8 @@ bpart_lotto[2] = noone
 mode_counter = 0
 
 came_from_match = false
-draw_edge_padding = 8
+draw_edge_padding = 0
+draw_edge_txtpad = 8
 lobby_wait_time = 45*30
 lock_armory = false
 num_players = 1
@@ -277,9 +278,9 @@ saving_armor_reboot = false
 show_avatar = false
 local_dollsync = false
 global.bg_color = c_white
-lobby_dude_y = room_height*3.25/5+32+42
+lobby_dude_y = room_height*3.25/5+32+48
 av_padding = room_width/6
-av_scale_lobby = 2.2
+av_scale_lobby = 2
 av_scale_menu = 3
 av_scale_higlighted = 3.3
 av_scale_highlighted_normal = 3.3
@@ -3290,12 +3291,26 @@ if not match_ending()
 {
     if (starting_match) and not instance_exists(modal_controls) and not snapshot_mode
     {
-        draw_set_font(fnt_splashscreen)
         draw_set_color(c_white)
         draw_set_halign(fa_center)
         draw_set_valign(fa_center)
-        draw_text(0+WVIEW/2,0+HVIEW*1/4,"Starting Match . . . "+string(ceil(starting_match/30)))
-        draw_text(0+WVIEW/2,0+72,string(game_mode_name(varRead("game_mode")))+" on "+string(global.map_names[room]))
+        
+        var rw = WVIEW+20
+        var rh = 64*1.5
+        var rtop = 18
+        var rbottom = rtop+rh
+        draw_set_alpha(0.5)
+        draw_rectangle_colour(WVIEW/2-rw/2,rtop,WVIEW/2+rw/2,rtop+rh,c_dkgray,c_dkgray,c_black,c_black,false)
+        draw_set_alpha(1)
+        
+        draw_set_font(fnt_hud_biggest)
+        draw_set_valign(fa_top)
+        draw_text(0+WVIEW/2,rtop+12,string(game_mode_name(varRead("game_mode")))+" on "+string(global.map_names[room]))
+        
+        draw_set_font(fnt_hud_medium)
+        draw_set_valign(fa_bottom)
+        draw_text(0+WVIEW/2,rbottom-12,"Starting Match . . . "+string(ceil(starting_match/30)))
+        draw_set_valign(fa_center)
     }
     
     //don't let killed by overlap with promoted text
@@ -3747,19 +3762,27 @@ if room = rm_login
             <kind>1</kind>
             <string>///menu and lobby
 
+var barh = 22
+
 //menu-type room commonalities
 if room = rm_menu or room = rm_lobby
 {
+    
+    //draw bottom status bar
+    draw_set_alpha(1)
+    draw_rectangle_colour(0,HVIEW-barh-draw_edge_padding,WVIEW,HVIEW-draw_edge_padding,c_dkgray,c_dkgray,c_black,c_black,false)
+    draw_set_alpha(1)
+    
     if varRead("game_mode") = "no_mode"
     {
         global.bg_color = c_white
     } else if room = rm_lobby
     {
-        draw_set_font(fnt_hud_big)
-        draw_set_color(c_black)
+        draw_set_font(fnt_hud)
+        draw_set_color(c_white)
         draw_set_halign(fa_left)
-        draw_set_valign(fa_bottom)
-        draw_text(draw_edge_padding,room_height-draw_edge_padding,game_mode_name(varRead("game_mode")))
+        draw_set_valign(fa_middle)
+        draw_text(draw_edge_txtpad,room_height-draw_edge_padding-barh/2,game_mode_name(varRead("game_mode")))
         draw_set_halign(fa_center)
     }
      /*   
@@ -3768,27 +3791,27 @@ if room = rm_menu or room = rm_lobby
     draw_set_color(make_color_rgb(110,110,110))
     draw_rectangle(0,56,room_width,64,false)*/
     
-    draw_set_font(fnt_hud_big)
+    draw_set_font(fnt_hud)
     draw_set_halign(fa_center)
     draw_set_valign(fa_center)
-    draw_set_color(c_black)
+    draw_set_color(c_white)
     
     if room = rm_lobby and room_counter &gt; 30*3
     {
         draw_set_halign(fa_right)
-        draw_set_valign(fa_bottom)
-        draw_text(room_width-draw_edge_padding,room_height-draw_edge_padding,"Intermission ... "+string(ceil(varRead("lobby_wait_time")/30)))
+        draw_set_valign(fa_middle)
+        draw_text(room_width-draw_edge_txtpad,room_height-draw_edge_padding/2-barh/2,"Intermission ... "+string(ceil(varRead("lobby_wait_time")/30)))
     }
     
     if room = rm_menu and room_counter &gt; 30*2 and menmode() != "armory" and menmode() != "stats"
     {
         draw_set_halign(fa_left)
-        draw_set_valign(fa_bottom)
+        draw_set_valign(fa_middle)
         var ptxt = "Players Online"
         var pnums = varRead("players_online")
         if pnums = 1
             ptxt = "Player Online"
-        draw_text(draw_edge_padding,room_height-draw_edge_padding,string(pnums)+" "+string(ptxt))
+        draw_text(draw_edge_txtpad,room_height-draw_edge_padding-barh/2,string(pnums)+" "+string(ptxt))
     }
     
 }
@@ -3797,13 +3820,13 @@ if room = rm_menu or room = rm_lobby
 if room = rm_menu and varRead("game_mode") != "no_mode"
 {
     searching_msg = "Finding "
-    draw_set_font(fnt_hud_big)
-    draw_set_color(c_black)
+    draw_set_font(fnt_hud)
+    draw_set_color(c_white)
     draw_set_halign(fa_right)
-    draw_set_valign(fa_bottom)
+    draw_set_valign(fa_middle)
     
     searching_msg += string(game_mode_name(varRead("game_mode")))+" . . ."
-    draw_text(room_width-draw_edge_padding,room_height-draw_edge_padding,searching_msg)
+    draw_text(room_width-draw_edge_txtpad,room_height-draw_edge_padding-barh/2,searching_msg)
     
     switch (varRead("game_mode"))
     {
@@ -3869,11 +3892,11 @@ if room = rm_menu or room = rm_lobby
     }
     
     //draw armor_msg
-    draw_set_font(fnt_hud_big)
-    draw_set_color(c_black)
+    draw_set_font(fnt_hud)
+    draw_set_color(c_white)
     draw_set_halign(fa_right)
-    draw_set_valign(fa_bottom)
-    draw_text(room_width-draw_edge_padding,room_height-4.5*draw_edge_padding,armor_msg)
+    draw_set_valign(fa_middle)
+    draw_text(room_width-draw_edge_txtpad-string_width(armor_msg)-32,room_height-draw_edge_padding-barh/2,armor_msg)
 }
 </string>
           </argument>
@@ -4189,7 +4212,7 @@ else if not in_match()
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///draw lottery/seal
+            <string>///draw lottery/steal
 if lotto_counter &gt; lotto_delay and instance_exists(xp_bar.aw)
 {
     if string(menu_mode) = "lottery_steal" and room = rm_lobby and xp_bar.aw.popped_in

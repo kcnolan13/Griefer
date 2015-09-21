@@ -64,7 +64,7 @@ snap_2view = true//false
           <argument>
             <kind>1</kind>
             <string>///adjust for aligns
-if object_index != bn_postmatch and object_index != bn_postmatch_done
+if object_index != bn_postmatch_done
 {
     x += width/2
     y += height/2
@@ -102,7 +102,7 @@ else
 event_inherited()
 label = text
 
-if object_index != bn_postmatch and object_index != bn_postmatch_done
+if object_index != bn_postmatch_done
 {
     if active
     {

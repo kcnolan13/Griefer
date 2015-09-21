@@ -2300,7 +2300,7 @@ wheel_up()
             <kind>1</kind>
             <string>///draw me and my name
 if not bparts_ready or net_manager.snapshot_mode exit
-if not varRead("controllable") and in_match() and not match_ending() and not match_starting() exit
+if not varRead("controllable") and id = myPlayer() and in_match() and not match_ending() and not match_starting() exit
 
 //draw stupid
 //draw_sprite_ext(sprite_index,image_index,x,y,image_xscale,image_yscale,image_angle,c_white,image_alpha)

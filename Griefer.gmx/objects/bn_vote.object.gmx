@@ -72,6 +72,7 @@ is_random = false
 
 image = spr_none
 image_crop = true
+image_crop_align = fa_top
 //image_stretch_x = true
 img_xscale = width/sprite_get_width(snap_double)
 img_yscale = img_xscale

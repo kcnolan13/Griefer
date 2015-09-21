@@ -38,6 +38,9 @@ width = view_wview*2/3+64
 height = view_hview*2/3
 extra_height = 50
 
+if not in_match()
+    height -= 24
+
 if in_match()
 {
     draw_gradient = true

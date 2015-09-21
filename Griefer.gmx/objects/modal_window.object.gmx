@@ -187,7 +187,10 @@ image_stretch = false
 img_xscale = 1
 img_yscale = 1
 image_crop = false
+image_crop_align = fa_center
 img_blend = c_white
+image_xoff = 0
+image_yoff = 0
 
 color = c_dkgray
 header_color = c_gray

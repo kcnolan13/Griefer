@@ -10,6 +10,7 @@ limb_2draw = convert_spr_none_to_drawable(limb_2draw,limb)
 
 if string(limb) != "helmet0" and real(limb_2draw) = 0
 {
+    printf(":::WARNING: could not draw limb: "+string(limb_2draw))
     return false
 }
 
