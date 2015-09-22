@@ -75,6 +75,7 @@ is_input_field = false
 is_password = false
 is_tutorial = false
 is_ui_countdown = false
+is_downloading = false
 
 bn_yes = noone
 bn_no = noone
@@ -155,6 +156,8 @@ if is_loading
 {
     printf("::: destroying loading modal")
 }
+
+event_inherited()
 </string>
           </argument>
         </arguments>
@@ -355,6 +358,11 @@ if is_loading
 if is_ui_countdown
 {
     text = "Match Countdown ... "+string(ceil(objVarRead(net_manager,"lobby_wait_time")/30))
+}
+
+if is_downloading
+{
+    text = "Downloading Important Updates"
 }
 
 for (var i=0; i&lt;getLength(bns); i++)

@@ -52,6 +52,8 @@ blocked = false
 draw_image_gradient = false
 image_gradient_alpha = 0.25
 
+game_end_on_destroy = false
+
 border_width = 0
 border_color = c_white
 border_alpha = 1
@@ -267,6 +269,9 @@ if surface_exists(surface)
 
 if surface_exists(surf_3d)
     surface_free(surf_3d)
+    
+if game_end_on_destroy
+    game_end()
 </string>
           </argument>
         </arguments>

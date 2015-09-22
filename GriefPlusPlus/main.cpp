@@ -5,6 +5,7 @@
 #include "./src/gm_readers.h"
 #include "./src/gm_transmitters.h"
 #include "./src/helpers.h"
+//#include "./src/updater.cpp"
 
 #include <functional>
 #include <iostream>
@@ -15,6 +16,7 @@
 #include <stdlib.h>
 #include <windows.h>
 #include <deque>
+#include <boost/algorithm/string/replace.hpp>
 
 using namespace sio;
 using namespace std;
@@ -43,6 +45,12 @@ GMEXPORT const double initGrieferClient(string connURL)
 	bind_events(current_socket);
 	current_socket->emit("PING");
 	
+	return 0;
+}
+
+GMEXPORT const double downloadLatest()
+{
+	//DownloadURLImage(_T("http://www.puddlesquid.com/griefer/release/Griefer.exe"), _T("C:/"), NULL);
 	return 0;
 }
 
@@ -78,4 +86,60 @@ GMEXPORT const double isAlive() {
 
 GMEXPORT const char * getGreeting() {
 	return retString.c_str();
+}
+
+string ExePath() {
+	wchar_t buffer[MAX_PATH];
+	GetModuleFileName(NULL, buffer, MAX_PATH);
+	wstring ws(buffer);
+	string ret(ws.begin(), ws.end());
+
+	/*size_t found = ret.find("AppData");
+	ret = ret.substr(0, found + 7);*/
+
+	return ret;
+}
+
+GMEXPORT const char *getExecPath() {
+	return ExePath().c_str();
+}
+
+GMEXPORT const double updateGame(char *dir_newgame) {
+	string exepath = ExePath();
+	size_t found = exepath.find_last_of("\\");
+	exepath = exepath.substr(0, found+1) + "Griefer.exe";
+
+	boost::replace_all(exepath, "\\", "/");
+	const char *savepath = exepath.c_str();
+
+	console("::: working_dir = " + string(savepath));
+	console("::: received dir_newgame = " + string(dir_newgame));
+
+	wchar_t wsavepath[250];
+	wchar_t wdownloadpath[250];
+	mbstowcs(wdownloadpath, dir_newgame, strlen(dir_newgame) + 1);
+	mbstowcs(wsavepath, savepath, strlen(savepath) + 1);
+	bool success = true;
+
+	MessageBox(NULL, L"SavePath", wsavepath, NULL);
+
+	if (MoveFileEx(L"Griefer.exe", L"Deprecated/Griefer_old.exe", MOVEFILE_REPLACE_EXISTING)) {
+		console("::: current Griefer.exe renamed to Deprecated/Griefer_old.exe");
+	}
+
+	if (MoveFileEx(wdownloadpath, wsavepath, MOVEFILE_REPLACE_EXISTING)) {
+		console("::: new Griefer.exe copied to Griefer.exe");
+	}
+	else {
+		success = false;
+	}
+
+	if (success) {
+		console("::: FILES COPIED. GAME UPDATE COMPLETE");
+	}
+	else {
+		console("::: UPDATE FAILED.");
+	}
+
+	return 0;
 }

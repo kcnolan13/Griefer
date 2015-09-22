@@ -175,6 +175,13 @@ while (genMessagesWaiting() and wait_counter < 500000)
             net_manager.packets_received++
         break
         
+        case "validate_hash":
+            if genVal != 1
+            {
+                download_updates()
+            }
+        break   
+        
         case "done_loading":
             if global.load_count > 0 global.load_count --
             else global.load_count = 0
@@ -185,7 +192,7 @@ while (genMessagesWaiting() and wait_counter < 500000)
             {
                 with modal_dialogue
                 {
-                    if is_loading
+                    if is_loading and not is_downloading
                     {
                         fade_delay = 5
                     }

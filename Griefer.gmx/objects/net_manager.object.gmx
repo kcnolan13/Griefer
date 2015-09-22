@@ -26,13 +26,18 @@
           <argument>
             <kind>1</kind>
             <string>///initialization
+hash = "V112"
 serverURL = "http://www.puddlesquid.com:8080"
+downloadURL = string_copy(working_directory,0,string_pos("AppData",working_directory)) + "ppData\Local\Griefer\Downloads\Griefer.exe"
+downloadURL = string_replace_all(downloadURL,"\","/")
 show_debug_stats = false
 show_debug_overlay(show_debug_stats)
 draw_set_swf_aa_level(1)
 draw_enable_swf_aa(true)
 setGppDebug(0)
 display_set_gui_size(WVIEW,HVIEW)
+
+file = NO_HANDLE
 
 snapshot_mode = false
 snapshot_number = 1
@@ -43,6 +48,8 @@ draw_you_killed = false
 name_you_killed = ""
 new_user = false
 drawing_grid_dir = 0
+
+force_loading_popup = false
 
 next_map_final = noone
 ui_countdown = noone
@@ -149,6 +156,8 @@ printf("instance_exists(-10) = "+string(instance_exists(-10)))
 
 initGrieferClient(serverURL)
 printf("CONNECTION ESTABLISHED")
+
+sendMessageStr("validate_hash",hash)
 
 //login screen
 title_scale = 1
@@ -2450,6 +2459,51 @@ if in_match() and force_recompute_scores or (nth_frame(10) and sort_worthy and n
             print_ds_grid(team_all)
         }
     }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="62">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///DETECT DOWNLOAD COMPLETE
+if ds_map_find_value(async_load, "id") == file
+{
+   var status = ds_map_find_value(async_load, "status");
+   if status == 0
+   {
+        printf("::: DOWNLOAD COMPLETE to: "+string(downloadURL))
+        with modal_dialogue
+        {
+            if is_downloading
+                fade_out = true
+        }
+        
+        updateGame(downloadURL)
+        
+       /*var path = ds_map_find_value(async_load, "result");
+       var files = zip_unzip(path, "Downloads/Release");
+       if files &gt; 0
+       {
+            printf("::: UPDATES COMPLETE!")
+       }*/
+   }
 }
 </string>
           </argument>

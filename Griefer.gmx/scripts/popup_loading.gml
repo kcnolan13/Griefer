@@ -5,6 +5,7 @@ var yi = argument1
 var msg = "Contacting Griefer Services "
 
 create_loading_modal = true
+if object_index != net_manager or force_loading_popup = false
 with modal_dialogue
 {
     if is_loading

@@ -1033,6 +1033,7 @@
     </scripts>
     <scripts name="send/receive">
       <script>scripts\receive_transmissions.gml</script>
+      <script>scripts\download_updates.gml</script>
       <script>scripts\send_frame.gml</script>
       <script>scripts\send_all_bpart_stats.gml</script>
       <script>scripts\mega_stat_update.gml</script>
@@ -1508,6 +1509,7 @@
         <script>scripts\scr_change_password.gml</script>
         <script>scripts\scr_cancel_input.gml</script>
         <script>scripts\scr_instantiate_newuser_bparts.gml</script>
+        <script>scripts\download_new_game.gml</script>
       </scripts>
       <script>scripts\popup_alert.gml</script>
       <script>scripts\popup_okay.gml</script>
