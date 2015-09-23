@@ -157,6 +157,13 @@ for (var i=0; i&lt;2; i++)
             ID.header_height = ID.height*1/4
             ID.header_color = c_black
             ID.alpha_max = 0.85
+            ID.text_valign = fa_bottom
+            ID.text_yoff = 20
+        }
+        else
+        {
+            ID.text_color = c_white
+            ID.color = c_black
         }
         ID.halign = halign
         ID.valign = valign

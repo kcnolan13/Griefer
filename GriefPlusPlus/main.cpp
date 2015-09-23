@@ -18,6 +18,8 @@
 #include <deque>
 #include <boost/algorithm/string/replace.hpp>
 
+string working_directory = "";
+
 using namespace sio;
 using namespace std;
 
@@ -41,7 +43,7 @@ GMEXPORT const double initGrieferClient(string connURL)
     h.set_close_listener(std::bind(&connection_listener::on_close, &l,std::placeholders::_1));
     h.set_fail_listener(std::bind(&connection_listener::on_fail, &l));
     h.connect(serverURL);
-
+	console("::: connecting to: " + connURL);
 	bind_events(current_socket);
 	current_socket->emit("PING");
 	
@@ -104,6 +106,12 @@ GMEXPORT const char *getExecPath() {
 	return ExePath().c_str();
 }
 
+GMEXPORT const double setWorkingDir(char *wdir) {
+	working_directory = string(wdir);
+	console("::: set working directory: " + working_directory);
+	return 0;
+}
+
 GMEXPORT const double updateGame(char *dir_newgame) {
 	string exepath = ExePath();
 	size_t found = exepath.find_last_of("\\");
@@ -121,7 +129,7 @@ GMEXPORT const double updateGame(char *dir_newgame) {
 	mbstowcs(wsavepath, savepath, strlen(savepath) + 1);
 	bool success = true;
 
-	MessageBox(NULL, L"SavePath", wsavepath, NULL);
+	//MessageBox(NULL, L"SavePath", wsavepath, NULL);
 
 	if (MoveFileEx(L"Griefer.exe", L"Deprecated/Griefer_old.exe", MOVEFILE_REPLACE_EXISTING)) {
 		console("::: current Griefer.exe renamed to Deprecated/Griefer_old.exe");
@@ -139,6 +147,51 @@ GMEXPORT const double updateGame(char *dir_newgame) {
 	}
 	else {
 		console("::: UPDATE FAILED.");
+	}
+
+	return 0;
+}
+
+GMEXPORT const double launchGame(char *gUrl) {
+	wchar_t wgamePath[500];
+	mbstowcs(wgamePath, gUrl, strlen(gUrl) + 1);
+
+	// additional information
+	STARTUPINFO si;
+	PROCESS_INFORMATION pi;
+
+	// set the size of the structures
+	ZeroMemory(&si, sizeof(si));
+	si.cb = sizeof(si);
+	ZeroMemory(&pi, sizeof(pi));
+
+	// start the program up
+	CreateProcess(wgamePath,   // the path
+		NULL,			// Command line
+		NULL,           // Process handle not inheritable
+		NULL,           // Thread handle not inheritable
+		FALSE,          // Set handle inheritance to FALSE
+		0,              // No creation flags
+		NULL,           // Use parent's environment block
+		NULL,           // Use parent's starting directory 
+		&si,            // Pointer to STARTUPINFO structure
+		&pi);           // Pointer to PROCESS_INFORMATION structure
+
+	// Close process and thread handles. 
+	CloseHandle(pi.hProcess);
+	CloseHandle(pi.hThread);
+	return 0;
+}
+
+GMEXPORT const double moveFile(char *file1, char *file2) {
+	wchar_t fpath1[500];
+	wchar_t fpath2[500];
+	mbstowcs(fpath1, file1, strlen(file1) + 1);
+	mbstowcs(fpath2, file2, strlen(file2) + 1);
+
+	if (MoveFileEx(fpath1, fpath2, MOVEFILE_REPLACE_EXISTING)) {
+		console("::: FILE MOVED: "+string(file1)+" --> "+string(file2));
+		return 1;
 	}
 
 	return 0;

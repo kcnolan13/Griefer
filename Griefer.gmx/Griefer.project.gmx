@@ -549,6 +549,9 @@
       <sprite>sprites\icon_cursor</sprite>
       <sprite>sprites\icon_cursor_small</sprite>
       <sprite>sprites\icon_animated</sprite>
+      <sprite>sprites\icon_globe</sprite>
+      <sprite>sprites\icon_bot</sprite>
+      <sprite>sprites\icon_multiplayer</sprite>
     </sprites>
     <sprites name="accolades">
       <sprite>sprites\acc_dub_kill</sprite>
@@ -1137,6 +1140,7 @@
         <script>scripts\row_highlighted.gml</script>
       </scripts>
       <script>scripts\draw_limb.gml</script>
+      <script>scripts\draw_modal_window.gml</script>
       <script>scripts\convert_spr_none_to_drawable.gml</script>
       <script>scripts\draw_trajectory.gml</script>
       <script>scripts\flash_update_light.gml</script>
@@ -1159,7 +1163,6 @@
       <script>scripts\draw_lives.gml</script>
       <script>scripts\simple_popup.gml</script>
       <script>scripts\web_hsv.gml</script>
-      <script>scripts\draw_modal_window.gml</script>
     </scripts>
     <scripts name="net_utils">
       <script>scripts\find_player.gml</script>
@@ -1438,6 +1441,7 @@
       <script>scripts\leave_matchmaking.gml</script>
       <script>scripts\start_matchmaking.gml</script>
       <script>scripts\game_mode_name.gml</script>
+      <script>scripts\game_mode_name_long.gml</script>
       <script>scripts\in_match.gml</script>
       <script>scripts\get_player_limit.gml</script>
       <script>scripts\match_ending.gml</script>
@@ -1942,7 +1946,8 @@
       <room>rooms\map_placeholder2</room>
     </rooms>
   </rooms>
-  <constants number="163">
+  <constants number="164">
+    <constant name="VERSION">"V121"</constant>
     <constant name="GMHSV">1.41176470588</constant>
     <constant name="WEBHSV">0.70833333333</constant>
     <constant name="ACC_XP_SCALER">2</constant>

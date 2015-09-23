@@ -74,15 +74,17 @@ notif_pauser = 0
             <string>///create play modals
 if net_manager.menu_mode = "play" and not instance_exists(bn_play_modal) and not instance_exists(bn_start_matchmaking) and net_manager.room_counter &gt; 30*1.5
 {
-    left = net_manager.play_left
-    top = net_manager.play_top
+    hspacer = 128
+    vspacer = 48
     width = 64*5
-    height = 64*3
-    vspacer = 32
+    height = (HVIEW-72-vspacer-2*hspacer)/2
+    left = hspacer+width
+    top = 72+hspacer+height
+    
     
     ID = instance_create(left,top,bn_play_modal)
     ID.text = global.cmode
-    ID.color = make_colour_hsv(255*3/4,75,75)
+    ID.color = c_black//make_colour_hsv(255*3/4,75,75)
     ID.width = width
     ID.height = height
     ID.play_bots = false
@@ -90,15 +92,25 @@ if net_manager.menu_mode = "play" and not instance_exists(bn_play_modal) and not
     ID.text_halign = fa_right
     ID.text_valign = fa_bottom
     ID.font = fnt_play
+    ID.image = icon_globe
+    ID.img_xscale = 0.4
+    ID.img_yscale = 0.4
+    ID.image_halign = fa_center
+    ID.image_valign = fa_center
     
     ID = instance_create(left,top+height+vspacer,bn_play_modal)
-    ID.color = make_colour_hsv(255*1/3,75,75)
+    ID.color = c_black//make_colour_hsv(255*1/3,75,75)
     ID.width = width
     ID.height = height
     ID.birth_delay = 10
     ID.text_halign = fa_right
     ID.text_valign = fa_bottom
     ID.font = fnt_play
+    ID.image = icon_bot
+    ID.img_xscale = 0.4
+    ID.img_yscale = 0.4
+    ID.image_halign = fa_center
+    ID.image_valign = fa_center
 }
 
 if net_manager.menu_mode = "play"

@@ -92,7 +92,8 @@
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy C:\Users\Kyle\Games\Griefer\GriefPlusPlus\GriefPlusPlus\Release\GriefPlusPlus.dll C:\Users\Kyle\Games\Griefer\Griefer.gmx\extensions\griefer_client\GriefPlusPlus.dll /E /C /H /R /K /O /Y</Command>
+      <Command>xcopy C:\Users\Kyle\Games\Griefer\GriefPlusPlus\GriefPlusPlus\Release\GriefPlusPlus.dll C:\Users\Kyle\Games\Griefer\Griefer.gmx\extensions\griefer_client\GriefPlusPlus.dll /E /C /H /R /K /O /Y
+xcopy C:\Users\Kyle\Games\Griefer\GriefPlusPlus\GriefPlusPlus\Release\GriefPlusPlus.dll C:\Users\Kyle\Games\Griefer\GrieferLauncher.gmx\extensions\griefer_client\GriefPlusPlus.dll /E /C /H /R /K /O /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

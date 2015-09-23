@@ -193,6 +193,8 @@ image_crop_align = fa_center
 img_blend = c_white
 image_xoff = 0
 image_yoff = 0
+image_halign = fa_left
+image_valign = fa_left
 
 color = c_dkgray
 header_color = c_gray

@@ -69,6 +69,14 @@ if not surface_exists(surface)
             var img_xsc = scale*master_scale
             var img_ysc = scale*master_scale
             
+            var img_x = left+(rect_xoff+image_xoff)*scale*master_scale
+            var img_y = top+(rect_yoff+image_yoff)*scale*master_scale
+            
+            if image_halign = fa_center
+                img_x += width*scale*master_scale/2
+            if image_valign = fa_center or image_valign = fa_middle
+                img_y += height*scale*master_scale/2
+            
             if image_stretch
             {
                 img_xsc = ceil(img_xsc*width/sprite_get_width(image))
@@ -85,7 +93,7 @@ if not surface_exists(surface)
             
             if not image_crop
             {
-                draw_sprite_ext(image,img_index,left+(rect_xoff+image_xoff)*scale*master_scale,top+(rect_yoff+image_yoff)*scale*master_scale,img_xsc*img_xscale,img_ysc*img_yscale,0,img_blend,alpha*alpha_scaler)
+                draw_sprite_ext(image,img_index,img_x,img_y,img_xsc*img_xscale,img_ysc*img_yscale,0,img_blend,alpha*alpha_scaler)
             }
             else
             {
@@ -105,7 +113,7 @@ if not surface_exists(surface)
                         img_xst = 0
                 }
                 
-                draw_sprite_part_ext(image,img_index,img_xst,img_yst,width*scale*master_scale/img_xsc/img_xscale,height*scale*master_scale/img_ysc/img_yscale,left+(rect_xoff+image_xoff)*scale*master_scale,top+(rect_yoff+image_yoff)*scale*master_scale,img_xsc*img_xscale,img_ysc*img_yscale,img_blend,alpha*alpha_scaler)
+                draw_sprite_part_ext(image,img_index,img_xst,img_yst,width*scale*master_scale/img_xsc/img_xscale,height*scale*master_scale/img_ysc/img_yscale,img_x,img_y,img_xsc*img_xscale,img_ysc*img_yscale,img_blend,alpha*alpha_scaler)
             }
         }
         
