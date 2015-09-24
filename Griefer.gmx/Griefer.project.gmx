@@ -1571,6 +1571,7 @@
     <font>fonts\fnt_meter</font>
     <font>fonts\fnt_mod</font>
     <font>fonts\fnt_ready</font>
+    <font>fonts\fnt_not_ready</font>
     <font>fonts\fnt_play</font>
     <font>fonts\fnt_login</font>
     <font>fonts\fnt_cout</font>
