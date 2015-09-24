@@ -549,9 +549,15 @@
       <sprite>sprites\icon_cursor</sprite>
       <sprite>sprites\icon_cursor_small</sprite>
       <sprite>sprites\icon_animated</sprite>
+      <sprite>sprites\icon_globe2</sprite>
       <sprite>sprites\icon_globe</sprite>
+      <sprite>sprites\icon_bot2</sprite>
       <sprite>sprites\icon_bot</sprite>
+      <sprite>sprites\sprite453</sprite>
       <sprite>sprites\icon_multiplayer</sprite>
+      <sprite>sprites\icon_versus</sprite>
+      <sprite>sprites\icon_tdm</sprite>
+      <sprite>sprites\icon_ffa</sprite>
     </sprites>
     <sprites name="accolades">
       <sprite>sprites\acc_dub_kill</sprite>

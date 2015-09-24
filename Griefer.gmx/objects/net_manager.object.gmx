@@ -429,12 +429,12 @@ varWrite("bot_versus_players_online",5)
 varWrite("players_online",14)
 varWrite("everyone_quit",false)
 var cdiv = 3
-varWrite("versus_color",make_color_rgb(255/cdiv,200/cdiv,200/cdiv))
-varWrite("ffa_color",make_color_rgb(200/cdiv,200/cdiv,255/cdiv))
-varWrite("tdm_color",make_color_rgb(200/cdiv,255/cdiv,200/cdiv))
-varWrite("bot_versus_color",make_color_rgb(255/cdiv,200/cdiv,255/cdiv))
-varWrite("bot_ffa_color",make_color_rgb(200/cdiv,255/cdiv,255/cdiv))
-varWrite("bot_tdm_color",make_color_rgb(230/cdiv,255/cdiv,230/cdiv))
+varWrite("versus_color",global.versus_color)
+varWrite("ffa_color",global.ffa_color)
+varWrite("tdm_color",global.tdm_color)
+varWrite("bot_versus_color",global.versus_color)
+varWrite("bot_ffa_color",global.ffa_color)
+varWrite("bot_tdm_color",global.tdm_color)
 
 
 //bparts
@@ -3844,36 +3844,13 @@ if room = rm_menu and varRead("game_mode") != "no_mode"
     draw_set_halign(fa_right)
     draw_set_valign(fa_middle)
     
-    searching_msg += string(game_mode_name(varRead("game_mode")))+" . . ."
+    searching_msg += string(game_mode_name_long(varRead("game_mode")))+" . . ."
     draw_text(room_width-draw_edge_txtpad,room_height-draw_edge_padding-barh/2,searching_msg)
     
-    switch (varRead("game_mode"))
-    {
-        case "ffa":
-            global.bg_color = make_color_rgb(200,200,255)
-        break
-        
-        case "tdm":
-            global.bg_color = make_color_rgb(200,255,200)
-        break
-        
-        case "versus":
-            global.bg_color = make_color_rgb(255,200,200)
-        break
-        
-        case "bot_versus":
-            global.bg_color = make_color_rgb(255,200,255)
-        break
-        
-        case "bot_ffa":
-            global.bg_color = make_color_rgb(200,255,255)
-        break
-        
-        case "bot_tdm":
-            global.bg_color = make_color_rgb(255,255,200)
-        break
-    }
+    var badd = 35
+    var cadd = 20
     
+    global.bg_color = real(varRead(varRead("game_mode")+"_color"))    
 }
 
 if room = rm_menu or room = rm_lobby

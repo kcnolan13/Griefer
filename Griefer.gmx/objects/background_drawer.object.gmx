@@ -343,7 +343,10 @@ if in_match()
     draw_set_alpha(1)
 } else if room != rm_login
 {
-    draw_background_ext(bg_menu2,0,0,1,1,0,global.bg_color,1)
+    var h = colour_get_hue(global.bg_color)
+    var s = colour_get_saturation(global.bg_color)
+    var v = colour_get_value(global.bg_color)
+    draw_background_ext(bg_menu2,0,0,1,1,0,make_colour_hsv(h,s/5,255),1)
 }
 else
 {

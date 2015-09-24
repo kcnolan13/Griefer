@@ -10,6 +10,12 @@ global.table_font_color = c_white
 global.table_alpha = 0.75
 global.table_namerank_scale = 0.75
 
+var sat = 75
+var val = 90
+global.versus_color = web_hsv(0,sat,val)
+global.ffa_color = web_hsv(126,sat,val)
+global.tdm_color = web_hsv(236,sat,val)
+
 global.table_header_color = make_colour_rgb(40,40,40)
 global.table_label_color = make_colour_rgb(10,10,10)
 
