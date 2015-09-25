@@ -55,6 +55,7 @@ setInterval(dbman.rankPlayers,60000);
 setInterval(cupid.manageSockets,1000);
 setInterval(cupid.syncPlayersConnected,4*5010);
 setInterval(cupid.makeMatches,5000);
+setInterval(log.syncVersionHash,5000);
 
 //---- PRIMARY EVENT-DRIVEN SERVER LOGIC ----//
 io.on('connection', function(socket){
@@ -185,7 +186,7 @@ io.on('connection', function(socket){
 	  	if (message.msg=="control_map")
 	  	{
 	  		//example usage
-	  		var statement = "UPDATE controls set control_code="+message.val2+" WHERE username='"+conn.escape(socket.myPlayer.pName)+"' AND control_index="+message.val1+" AND using_gamepad="+message.val3;
+	  		var statement = "UPDATE controls set control_code="+message.val2+" WHERE username='"+socket.myPlayer.pName+"' AND control_index="+message.val1+" AND using_gamepad="+message.val3;
 	  		log.log(SQL,"USER-DEFINED CONTROL MAPPING:\n"+statement+"\n\n");
 			dbman.execute(statement);
 	  	}
@@ -250,6 +251,18 @@ io.on('connection', function(socket){
   		},2000,cupid.socketsInRoom(socket.myPlayer.room),socket.myPlayer.room);
 
 	}
+  else if (message.msg == "validate_hash")
+  {
+    var valid = 1;
+    log.log("verbose","comparing "+message.val+" to "+global.version_hash);
+    if (message.val != global.version_hash)
+        valid = 0;
+
+    log.log("verbose","hash valid? --> "+valid);
+
+    var response = composer.genMessage("validate_hash",valid);
+    socket.emit('general_message',response);
+  }
 	else if (message.msg =="ping")
 	{
 		var response = {
@@ -258,6 +271,7 @@ io.on('connection', function(socket){
 	  		val: message.val
 		};
 		socket.emit('ping',response);
+    console.log("ping");
 		//log.log(STD,"\nPING\n");
 	}
   else if (message.msg == "change_password")

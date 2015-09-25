@@ -1,6 +1,23 @@
-CREATE PROCEDURE `rankPlayers` ()
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `rankPlayers`()
 BEGIN
-	UPDATE stats set true_skill = FLOOR(ppl * (wl+1)/2);
+	UPDATE stats set kdr = ROUND(kills/GREATEST(1,deaths),2), ppl = ROUND(points/GREATEST(1,deaths)), wl = ROUND(wins/GREATEST(1,losses),2);
+    UPDATE bot_stats set kdr = ROUND(kills/GREATEST(1,deaths),2), ppl = ROUND(points/GREATEST(1,deaths)), wl = ROUND(wins/GREATEST(1,losses),2);
+	UPDATE stats join bot_stats ON stats.username=bot_stats.username 
+	SET stats.true_skill = ROUND(
+									GREATEST(
+												LEAST(
+														500, 
+														(LEAST(stats.wins+stats.losses,10)*1/10*(stats.ppl/8 + stats.wl*125)+LEAST(50,stats.kills/10))/2
+                                                     )
+												,
+												LEAST(
+														200, 
+														(LEAST(bot_stats.wins+bot_stats.losses,10)*1/10*(bot_stats.ppl/8 + bot_stats.wl*125)+LEAST(50,bot_stats.kills/10))/2 * 1/4
+													)
+											 )
+								);
+    
     set @true_skill := -1; 
 	set @num := 0;  
 	set @c := 1; 
@@ -17,4 +34,10 @@ BEGIN
 	) stats_sorted 
 	ON stats.username = stats_sorted.username 
 	SET stats.global_rank = stats_sorted.global_rank;
-END
+END$$
+DELIMITER ;
+
+
+#select username,true_skill,ppl, wl, wins, losses, kills from stats order by true_skill  desc
+
+#update stats set wins=50, losses = 10 where username='Total N00bcall'

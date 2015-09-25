@@ -1,3 +1,6 @@
+//game hash
+global.version_hash = "V119"
+
 //general flags
 global.FL_NORMAL = 0;
 global.FL_DECREMENT = 1;

@@ -92,11 +92,11 @@ myTimeout.prototype.cancel = function() {
 
 //define game mode constants as vars in these global objects
 var tdm = new room("tdm", "tdm", 4, 2);
-var ffa = new room("ffa", "ffa", 4, 2);
+var ffa = new room("ffa", "ffa", 3, 2);
 var versus = new room("versus", "versus", 2, 2);
 var party = new room("party", "party", 4, 1);
 var bot_tdm = new room("bot_tdm", "bot_tdm", 4, 1);
-var bot_ffa = new room("bot_ffa", "bot_ffa", 4, 1);
+var bot_ffa = new room("bot_ffa", "bot_ffa", 3, 1);
 var bot_versus = new room("bot_versus", "bot_versus", 2, 1);
 
 //acquire connection to db when ready

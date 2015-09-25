@@ -446,7 +446,7 @@ var performEvents = function(socket, and_filter, wipe_events)
 			log.log(CRITICAL,"performEvents found no rows for: "+q);
 		}
 		else if (!rows[0]) {
-			log.log(CRITICAL,"performEvents found no rows[0] for: "+q);
+			//log.log(CRITICAL,"performEvents found no rows[0] for: "+q);
 		}
 		else {
 			log.log(SQL, q);

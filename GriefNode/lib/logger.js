@@ -107,3 +107,19 @@ var sockets_cleaner = setInterval(function() {
 		log_sockets = fs.createWriteStream(__dirname + '/../log/sockets.log', {flags : 'w'});
 	}
 }, 104000);
+
+
+
+
+var syncVersionHash = function() {
+	fs.readFile('C:\\inetpub\\wwwroot\\griefer\\release\\config.txt','utf8', function(err, data) {
+		if (err) {
+			return console.log(err);
+		}
+		else {
+			exports.log(STD,"Current Griefer Version: "+data);
+			global.version_hash = data;
+		}
+	});
+}
+exports.syncVersionHash = syncVersionHash;
