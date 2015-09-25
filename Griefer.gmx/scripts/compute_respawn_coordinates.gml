@@ -16,8 +16,8 @@ for (var dat_index=0; dat_index < instance_number(spawn_point_generic); dat_inde
 {
     var candidate = instance_find(spawn_point_generic,dat_index)
 
-    if DEBUG
-        printf("    analyzing spawn point @ "+candidate.x+", "+candidate.y)
+    //if DEBUG
+        //printf(":::    analyzing spawn point @ "+candidate.x+", "+candidate.y)
     
     if net_manager.starting_match
     {
@@ -28,8 +28,8 @@ for (var dat_index=0; dat_index < instance_number(spawn_point_generic); dat_inde
               ((my_team = 1 and candidate.object_index = spawn_point0) 
             or (my_team = 0 and candidate.object_index = spawn_point1))
         {
-            if DEBUG
-                printf("        bad candidate --> wrong team")
+            //if DEBUG
+                //printf(":::        bad candidate --> wrong team")
                 
             //toss this one --> next spawn point candidate please
             continue
@@ -38,8 +38,8 @@ for (var dat_index=0; dat_index < instance_number(spawn_point_generic); dat_inde
         //also rule out neutral spawn points at the beginning of the match
         if candidate.object_index = spawn_point_neutral and objVarRead(net_manager,"game_mode") != "ffa"
         {
-            if DEBUG
-                printf("        bad candidate --> neutral spawn @ match start")
+            //if DEBUG
+                //printf(":::        bad candidate --> neutral spawn @ match start")
                 
             //toss this one --> next spawn point candidate please
             continue
@@ -49,8 +49,8 @@ for (var dat_index=0; dat_index < instance_number(spawn_point_generic); dat_inde
     //rule out spawn points that already have a guy on them
     if instance_position(candidate.x, candidate.y, player)
     {
-        if DEBUG
-            printf("        bad candidate --> spawn point occupied")
+        //if DEBUG
+            //printf(":::        bad candidate --> spawn point occupied")
             
         //toss this one --> next spawn point candidate please
         continue
@@ -95,7 +95,7 @@ for (var dat_index=0; dat_index < instance_number(spawn_point_generic); dat_inde
 
 if flag = FL_RANDOM
 {
-    printf("OVERLAPPING SPAWNS --> randomizing to avoid further confusion...")
+    printf("::: OVERLAPPING SPAWNS --> randomizing to avoid further confusion...")
     
     if (not ds_map_empty(points_with_los) or not ds_map_empty(points_with_no_los))
     {
@@ -146,8 +146,8 @@ if flag != FL_RANDOM
         var optimal_spawn_point = cand //to contain the best candidate
         var dist_from_enemies = ds_map_find_value(points_with_no_los,cand)
         
-        if DEBUG
-            printf("            optimizing ... "+truncate(dist_from_enemies/64,1)+" blocks from enemy")
+        //if DEBUG
+          //  printf("            optimizing ... "+truncate(dist_from_enemies/64,1)+" blocks from enemy")
         
         for (var cand_index = 0; cand_index < ds_map_size(points_with_no_los) - 1; cand_index++)
         {
@@ -155,8 +155,8 @@ if flag != FL_RANDOM
             //search through the whole ds map and find point with maximum min-dist from enemies
             var temp_dist = ds_map_find_value(points_with_no_los,cand)
             
-            if DEBUG
-                printf("            optimizing ... "+truncate(temp_dist/64,1)+" blocks from enemy")
+            //if DEBUG
+              //  printf("            optimizing ... "+truncate(temp_dist/64,1)+" blocks from enemy")
                 
             if temp_dist > dist_from_enemies
             {
@@ -173,8 +173,8 @@ if flag != FL_RANDOM
         
         //if DEBUG
         {
-           // printf("OPTIMAL SPAWN POINT FOUND @ ("+spawn_x+", "+spawn_y+")")
-            //printf("    No LOS to enemy and "+truncate(dist_from_enemies/64,1)+" blocks from nearest enemy")
+            printf(":::OPTIMAL SPAWN POINT FOUND @ ("+string(spawn_x)+", "+string(spawn_y)+")")
+            printf(":::    No LOS to enemy and "+string(truncate(dist_from_enemies/64,1))+" blocks from nearest enemy")
         }
         
         //DOPE BEATS, WE'RE DONE
@@ -188,8 +188,8 @@ if flag != FL_RANDOM
         var optimal_spawn_point = cand //to contain the best candidate
         var dist_from_enemies = ds_map_find_value(points_with_los,cand)
         
-        if DEBUG
-            printf("            optimizing ... "+truncate(dist_from_enemies/64,1)+" blocks from enemy")
+        //if DEBUG
+          //  printf("            optimizing ... "+truncate(dist_from_enemies/64,1)+" blocks from enemy")
         
         for (var cand_index = 0; cand_index < ds_map_size(points_with_los) - 1; cand_index++)
         {
@@ -197,8 +197,8 @@ if flag != FL_RANDOM
             //search through the whole ds map and find point with maximum min-dist from enemies
             var temp_dist = ds_map_find_value(points_with_los,cand)
             
-            if DEBUG
-                printf("            optimizing ... "+truncate(dist_from_enemies/64,1)+" blocks from enemy")
+            //if DEBUG
+              //  printf("            optimizing ... "+truncate(dist_from_enemies/64,1)+" blocks from enemy")
             
             if temp_dist > dist_from_enemies
             {
@@ -217,14 +217,14 @@ if flag != FL_RANDOM
             spawn_fail_message = ""
             
             {
-            //printf("SUB-OPTIMAL SPAWN POINT FOUND @ ("+spawn_x+", "+spawn_y+")")
-            //printf("    There is LOS to enemy, but "+truncate(dist_from_enemies/64,1)+" blocks from nearest enemy")
+            printf(":::SUB-OPTIMAL SPAWN POINT FOUND @ ("+string(spawn_x)+", "+string(spawn_y)+")")
+            printf(":::    There is LOS to enemy, but "+string(truncate(dist_from_enemies/64,1))+" blocks from nearest enemy")
             }
             
         }
         else
         {
-            printf("CAMPER ALERT! You don't want to spawn yet. Really.")
+            printf(":::CAMPER ALERT! You don't want to spawn yet. Really.")
             spawn_fail_message = "CAMPER ALERT! Waiting for them to quit it . . ."
         }
         

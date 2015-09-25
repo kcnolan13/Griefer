@@ -546,6 +546,18 @@
       <sprite>sprites\sprite406</sprite>
       <sprite>sprites\icon_tbottom</sprite>
       <sprite>sprites\icon_chevron_lr</sprite>
+      <sprite>sprites\icon_cursor</sprite>
+      <sprite>sprites\icon_cursor_small</sprite>
+      <sprite>sprites\icon_animated</sprite>
+      <sprite>sprites\icon_globe2</sprite>
+      <sprite>sprites\icon_globe</sprite>
+      <sprite>sprites\icon_bot2</sprite>
+      <sprite>sprites\icon_bot</sprite>
+      <sprite>sprites\sprite453</sprite>
+      <sprite>sprites\icon_multiplayer</sprite>
+      <sprite>sprites\icon_versus</sprite>
+      <sprite>sprites\icon_tdm</sprite>
+      <sprite>sprites\icon_ffa</sprite>
     </sprites>
     <sprites name="accolades">
       <sprite>sprites\acc_dub_kill</sprite>
@@ -574,6 +586,7 @@
       <sprite>sprites\snap_tree</sprite>
       <sprite>sprites\snap_crosscut</sprite>
       <sprite>sprites\snap_random</sprite>
+      <sprite>sprites\snap_random_backup</sprite>
     </sprites>
     <sprite>sprites\spr_1pixel</sprite>
     <sprite>sprites\sprite393</sprite>
@@ -742,7 +755,9 @@
       <script>scripts\free_splat_surface.gml</script>
       <script>scripts\free_popup_surfaces.gml</script>
       <script>scripts\draw_splats.gml</script>
+      <script>scripts\draw_icon_animated.gml</script>
       <script>scripts\draw_splat_notification.gml</script>
+      <script>scripts\draw_icon_animated_notification.gml</script>
       <script>scripts\draw_mod_notification.gml</script>
       <script>scripts\do_fancy_text_black.gml</script>
     </scripts>
@@ -944,7 +959,6 @@
     <scripts name="meta">
       <scripts name="overarching">
         <script>scripts\perform_everyones_steal_gear.gml</script>
-        <script>scripts\perform_lottery.gml</script>
         <script>scripts\roll_dice.gml</script>
         <script>scripts\step_rand.gml</script>
         <script>scripts\init_global_bparts.gml</script>
@@ -1028,6 +1042,7 @@
     </scripts>
     <scripts name="send/receive">
       <script>scripts\receive_transmissions.gml</script>
+      <script>scripts\download_updates.gml</script>
       <script>scripts\send_frame.gml</script>
       <script>scripts\send_all_bpart_stats.gml</script>
       <script>scripts\mega_stat_update.gml</script>
@@ -1131,6 +1146,7 @@
         <script>scripts\row_highlighted.gml</script>
       </scripts>
       <script>scripts\draw_limb.gml</script>
+      <script>scripts\draw_modal_window.gml</script>
       <script>scripts\convert_spr_none_to_drawable.gml</script>
       <script>scripts\draw_trajectory.gml</script>
       <script>scripts\flash_update_light.gml</script>
@@ -1153,7 +1169,6 @@
       <script>scripts\draw_lives.gml</script>
       <script>scripts\simple_popup.gml</script>
       <script>scripts\web_hsv.gml</script>
-      <script>scripts\draw_modal_window.gml</script>
     </scripts>
     <scripts name="net_utils">
       <script>scripts\find_player.gml</script>
@@ -1201,13 +1216,13 @@
       <script>scripts\random_string.gml</script>
     </scripts>
     <scripts name="player">
+      <script>scripts\compute_respawn_coordinates.gml</script>
       <script>scripts\framely_view_adjust.gml</script>
       <script>scripts\compute_cursor_offset.gml</script>
       <script>scripts\spawn_my_weapons.gml</script>
       <script>scripts\ensure_weapons_spawned.gml</script>
       <script>scripts\kill_player.gml</script>
       <script>scripts\player_death_handler.gml</script>
-      <script>scripts\compute_respawn_coordinates.gml</script>
       <script>scripts\player_nades.gml</script>
       <script>scripts\pickup_weapon.gml</script>
       <script>scripts\drop_weapon.gml</script>
@@ -1432,12 +1447,14 @@
       <script>scripts\leave_matchmaking.gml</script>
       <script>scripts\start_matchmaking.gml</script>
       <script>scripts\game_mode_name.gml</script>
+      <script>scripts\game_mode_name_long.gml</script>
       <script>scripts\in_match.gml</script>
       <script>scripts\get_player_limit.gml</script>
       <script>scripts\match_ending.gml</script>
       <script>scripts\match_starting.gml</script>
       <script>scripts\compute_lowest_pnum.gml</script>
       <script>scripts\refresh_scoregrid.gml</script>
+      <script>scripts\perform_lottery.gml</script>
     </scripts>
     <scripts name="general utilities">
       <script>scripts\printf.gml</script>
@@ -1465,6 +1482,9 @@
       <script>scripts\toggle_truthval.gml</script>
       <script>scripts\chop_string.gml</script>
       <script>scripts\contains_profanity.gml</script>
+      <script>scripts\scheduler.gml</script>
+      <script>scripts\scheduler_queue.gml</script>
+      <script>scripts\scheduler_run_queue.gml</script>
     </scripts>
     <scripts name="kyle's lighting engine">
       <script>scripts\kyle_light_create.gml</script>
@@ -1476,6 +1496,21 @@
     </scripts>
     <scripts name="ui">
       <scripts name="submit actions">
+        <scripts name="menu_tutorial">
+          <script>scripts\ui_new_user.gml</script>
+          <script>scripts\tut_begin.gml</script>
+          <script>scripts\tut_options.gml</script>
+          <script>scripts\tut_leaderboards.gml</script>
+          <script>scripts\tut_bot_stats.gml</script>
+          <script>scripts\tut_stats.gml</script>
+          <script>scripts\tut_rewards.gml</script>
+          <script>scripts\tut_armory.gml</script>
+          <script>scripts\tut_end.gml</script>
+          <script>scripts\tut_get_xp.gml</script>
+          <script>scripts\tut_violence.gml</script>
+          <script>scripts\enable_violence.gml</script>
+          <script>scripts\disable_violence.gml</script>
+        </scripts>
         <script>scripts\scr_randomize_username.gml</script>
         <script>scripts\scr_submit_play.gml</script>
         <script>scripts\scr_bn_page_leaderboards.gml</script>
@@ -1483,6 +1518,8 @@
         <script>scripts\scr_none.gml</script>
         <script>scripts\scr_change_password.gml</script>
         <script>scripts\scr_cancel_input.gml</script>
+        <script>scripts\scr_instantiate_newuser_bparts.gml</script>
+        <script>scripts\download_new_game.gml</script>
       </scripts>
       <script>scripts\popup_alert.gml</script>
       <script>scripts\popup_okay.gml</script>
@@ -1499,6 +1536,9 @@
       <script>scripts\wipe_leaderboards.gml</script>
       <script>scripts\compute_auto_crop.gml</script>
       <script>scripts\page_flag_2str.gml</script>
+      <script>scripts\modal_force_click.gml</script>
+      <script>scripts\cursor_highlight.gml</script>
+      <script>scripts\manage_voting_modals.gml</script>
     </scripts>
   </scripts>
   <shaders name="shaders">
@@ -1520,19 +1560,18 @@
     <font>fonts\fnt_button</font>
     <font>fonts\fnt_title</font>
     <font>fonts\fnt_title_small</font>
-    <font>fonts\fnt_hud</font>
     <font>fonts\fnt_hud_small</font>
-    <fonts name="Glare">
-      <font>fonts\font_glare2</font>
-      <font>fonts\font_glare</font>
-    </fonts>
+    <font>fonts\fnt_hud</font>
+    <font>fonts\fnt_hud_medium</font>
     <font>fonts\fnt_hud_big</font>
+    <font>fonts\fnt_hud_biggest</font>
     <font>fonts\fnt_boom</font>
     <font>fonts\fnt_splashscreen</font>
     <font>fonts\fnt_promoted</font>
     <font>fonts\fnt_meter</font>
     <font>fonts\fnt_mod</font>
     <font>fonts\fnt_ready</font>
+    <font>fonts\fnt_not_ready</font>
     <font>fonts\fnt_play</font>
     <font>fonts\fnt_login</font>
     <font>fonts\fnt_cout</font>
@@ -1544,6 +1583,7 @@
     <font>fonts\fnt_feed</font>
     <font>fonts\fnt_input</font>
     <font>fonts\fnt_alert</font>
+    <font>fonts\fnt_fhead</font>
   </fonts>
   <objects name="objects">
     <objects name="DONT MOVE ME">
@@ -1560,9 +1600,9 @@
       <object>objects\character_generic</object>
       <object>objects\xp_bar</object>
       <object>objects\challenge_generic</object>
+      <object>objects\popup_drawer</object>
       <object>objects\accolade_generic</object>
       <object>objects\bpart_generic</object>
-      <object>objects\popup_drawer</object>
       <object>objects\background_drawer</object>
       <object>objects\weapon_generic</object>
       <object>objects\bullet_generic</object>
@@ -1890,8 +1930,6 @@
     <rooms name="maps">
       <room>rooms\map_placeholder1</room>
       <room>rooms\rm_double</room>
-      <room>rooms\rm_torque</room>
-      <room>rooms\rm_orange</room>
       <room>rooms\rm_bridge</room>
       <room>rooms\rm_pillar</room>
       <room>rooms\rm_rocky</room>
@@ -1903,17 +1941,22 @@
       <room>rooms\rm_debug</room>
       <room>rooms\rm_dust</room>
       <room>rooms\rm_pillar2</room>
+      <room>rooms\rm_torque</room>
       <room>rooms\rm_trench</room>
       <room>rooms\rm_cave2</room>
       <room>rooms\rm_cave</room>
       <room>rooms\rm_snow</room>
+      <room>rooms\rm_orange</room>
       <room>rooms\rm_chronic</room>
       <room>rooms\rm_tree</room>
       <room>rooms\rm_crosscut</room>
       <room>rooms\map_placeholder2</room>
     </rooms>
   </rooms>
-  <constants number="161">
+  <constants number="164">
+    <constant name="VERSION">"V121"</constant>
+    <constant name="GMHSV">1.41176470588</constant>
+    <constant name="WEBHSV">0.70833333333</constant>
     <constant name="ACC_XP_SCALER">2</constant>
     <constant name="BAD_READ">-99.1234</constant>
     <constant name="BOT_XP_SCALER">0.25</constant>

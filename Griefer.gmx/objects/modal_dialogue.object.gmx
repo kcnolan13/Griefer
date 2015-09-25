@@ -29,7 +29,7 @@
 life = 0
 event_inherited()
 
-scale_die = 0
+scale_die = 0.5
 
 loading_counter = 0
 loading_counter_max = 4
@@ -38,12 +38,13 @@ loading_counter_inc = 0.1
 load_rot = 0
 load_rot_inc = 20
 load_closable = true
+load_life_max = 0
 
 width = 64*2.25*2.5
 height = 64*1.5*2.5
 
 header_text_color = c_white
-header_font = fnt_hud
+header_font = fnt_hud_medium
 font = fnt_hud
 
 active = false
@@ -72,6 +73,9 @@ is_alert = false
 is_loading = false
 is_input_field = false
 is_password = false
+is_tutorial = false
+is_ui_countdown = false
+is_downloading = false
 
 bn_yes = noone
 bn_no = noone
@@ -90,11 +94,15 @@ fade_alpha = 0.65
 is_gui = true
 scale_lerp_real = 0.4
 
-color = web_hsv(0,0,18)
+color = web_hsv(0,0,5)
 
 depth = -99999999
 
 critical = false
+
+text_yes = "Yes"
+text_no = "No"
+text_okay = "Okay"
 </string>
           </argument>
         </arguments>
@@ -148,6 +156,8 @@ if is_loading
 {
     printf("::: destroying loading modal")
 }
+
+event_inherited()
 </string>
           </argument>
         </arguments>
@@ -171,6 +181,13 @@ if is_loading
           <argument>
             <kind>1</kind>
             <string>///adjust for aligns and create buttons
+
+if birth_delay
+{
+    alarm[0] = 1
+    exit
+}
+
 modal_aligns()
 
 if not is_loading
@@ -180,16 +197,26 @@ bdelay = 10
 binc = 5
 text_pad = width/12
 
+if is_tutorial
+{
+    header_color = web_hsv(228,58,80)
+    alpha_max = 1
+    draw_fade = true
+    draw_gradient = true
+    font = fnt_hud
+    text_yoff = 84
+}
+
 if critical
 {
     header_color = c_red
+    font = fnt_hud_small
 }
     
-
 if is_yesno
 {
     bn_yes = instance_create(x-width/4,y+height/2*3/4,bn_dialogue)
-    bn_yes.text = "Yes"
+    bn_yes.text = text_yes
     bn_yes.script = scr_yes
     bn_yes.depth = depth -10
     bn_yes.parent_dialogue = id
@@ -198,7 +225,7 @@ if is_yesno
     bdelay += binc
 
     bn_no = instance_create(x+width/4,y+height/2*3/4,bn_dialogue)
-    bn_no.text = "No"
+    bn_no.text = text_no
     bn_no.script = scr_no
     bn_no.depth = depth -10
     bn_no.parent_dialogue = id
@@ -209,7 +236,7 @@ if is_yesno
 else if not is_alert and not is_loading and not is_input_field
 {
     bn_okay = instance_create(x,y+height/2*3/4,bn_dialogue)
-    bn_okay.text = "Okay"
+    bn_okay.text = text_okay
     bn_okay.script = scr_okay
     bn_okay.depth = depth -10
     bn_okay.parent_dialogue = id
@@ -250,7 +277,7 @@ else if is_input_field
     }
     
     bn_yes = instance_create(x-width/4,y+height/2*3/4,bn_dialogue)
-    bn_yes.text = "Okay"
+    bn_yes.text = text_okay
     bn_yes.script = scr_okay
     bn_yes.depth = depth -10
     bn_yes.parent_dialogue = id
@@ -313,6 +340,12 @@ if is_loading
     {
         loading_counter = 0
     }
+    
+    if load_life_max and life &gt; load_life_max
+    {
+        fade_out = true    
+        printf(":::WARNING: loading dialogue closed due to load_life_max")
+    }
 
     if not fade_out and load_closable and popped_in and
                     (input_check(mapped_control(C_CROUCH)) or keyboard_check(vk_escape) 
@@ -320,6 +353,16 @@ if is_loading
     {
         fade_out = true
     }
+}
+
+if is_ui_countdown
+{
+    text = "Match Countdown ... "+string(ceil(objVarRead(net_manager,"lobby_wait_time")/30))
+}
+
+if is_downloading
+{
+    text = "Downloading Important Updates"
 }
 
 for (var i=0; i&lt;getLength(bns); i++)

@@ -2,13 +2,19 @@
 global.page_length = 50
 global.table_width = 72*8.5
 global.txt_fields_start = global.table_width*2/5
-global.row_height = 72*1/2-4
+global.row_height = 72*1/2-1
 global.row_vsep = 0
 global.table_header_vsep = 16
 global.table_font = fnt_hud
 global.table_font_color = c_white
 global.table_alpha = 0.75
 global.table_namerank_scale = 0.75
+
+var sat = 75
+var val = 90
+global.versus_color = web_hsv(0,sat,val)
+global.ffa_color = web_hsv(152,sat,val)
+global.tdm_color = web_hsv(236,sat,val)
 
 global.table_header_color = make_colour_rgb(40,40,40)
 global.table_label_color = make_colour_rgb(10,10,10)

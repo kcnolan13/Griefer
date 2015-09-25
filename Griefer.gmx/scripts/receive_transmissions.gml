@@ -26,6 +26,12 @@ while (bigMessagesWaiting() and wait_counter < 500000)
         
     switch (bigMessage)
     {
+        case "new_user":
+            printf("::: tutorial time!")
+            net_manager.new_user = true
+            ui_new_user()
+        break
+        
         case "control_map":
             printf("::: Received a Control Mapping")
             
@@ -169,6 +175,13 @@ while (genMessagesWaiting() and wait_counter < 500000)
             net_manager.packets_received++
         break
         
+        case "validate_hash":
+            if genVal != 1
+            {
+                download_updates()
+            }
+        break   
+        
         case "done_loading":
             if global.load_count > 0 global.load_count --
             else global.load_count = 0
@@ -179,7 +192,7 @@ while (genMessagesWaiting() and wait_counter < 500000)
             {
                 with modal_dialogue
                 {
-                    if is_loading
+                    if is_loading and not is_downloading
                     {
                         fade_delay = 5
                     }
@@ -356,6 +369,10 @@ while (genMessagesWaiting() and wait_counter < 500000)
                     printf("::: GOOD LOGIN")
                     audio_play_sound(snd_click,2,false)
                     net_manager.login_when_ready = true
+                    with gravatar
+                    {
+                        varWrite("lerp_delay",login_lerp_delay/5*(5-varRead("pNum")))
+                    }
                     with modal_window
                     {
                         if translation_x != 0 or object_index = modal_splat

@@ -8,3 +8,9 @@ if bpart_mod_var(icon) = "blood_color"
     var col = bpart_mod_val(icon)
     draw_splat_notification(dx,dy,col,1)
 }
+
+else if bpart_mod_var(icon) = "animated"
+{
+    var col = bpart_mod_val(icon)
+    draw_icon_animated_notification(dx,dy,col,1)
+}

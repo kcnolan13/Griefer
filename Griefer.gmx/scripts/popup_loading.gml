@@ -5,6 +5,7 @@ var yi = argument1
 var msg = "Contacting Griefer Services "
 
 create_loading_modal = true
+if object_index != net_manager or force_loading_popup = false
 with modal_dialogue
 {
     if is_loading
@@ -44,6 +45,11 @@ ID = instance_create(xi,yi,modal_dialogue)
     ID.load_points = 3
     ID.load_text_hsep = 10
     ID.birth_delay = 20
+    
+    if in_match()
+    {
+        ID.load_life_max = 30*8
+    }
 }
 
 return ID

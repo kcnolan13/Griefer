@@ -599,7 +599,7 @@ if not is_string(varRead("my_player"))
     printf("WARNING: draw ev weapon_generic: my_player not a string val: "+string(varRead("my_player")))    
 }
     
-if match_starting() or match_ending() exit
+if /*match_starting() or */ match_ending() exit
 
 /*else if varRead("active")
     {

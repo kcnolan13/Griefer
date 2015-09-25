@@ -6,19 +6,43 @@ var scale = argument3
 
 draw_set_font(fnt_hud_big)
 draw_set_halign(fa_center)
-draw_set_valign(fa_center)
+draw_set_valign(fa_middle)
 
-if rank<0
-    rank = 0
-    
-if rank > array_length_1d(global.rank_names)-1
+var toff = scale*string_height("blah")/8
+
+var real_rank = rank
+
+if is_real(rank)
 {
-    increase_max_ranks(rank+5)
-}   
+    if rank<0
+        rank = 0
+    
+    if rank > array_length_1d(global.rank_names)-1
+    {
+        increase_max_ranks(rank+5)
+    }   
+}
+else
+{
+    draw_set_font(fnt_hud)
+    real_rank = string_copy(rank,2,string_length(rank)-1)
+    toff = -1*scale*string_height("blah")/2
+}
 
-draw_set_color(global.rank_colors[rank])
-draw_circle(draw_x+global.rank_radius*scale,draw_y+global.rank_radius*scale,global.rank_radius*scale,false)
+var xoff = global.rank_radius*scale
+var yoff = global.rank_radius*scale
+
+if object_index = net_manager and draw_prank_centered
+{
+    xoff = 0
+    yoff = 0
+    net_manager.draw_prank_centered = false
+}
+
+draw_set_color(global.rank_colors[real_rank])
+draw_circle(draw_x+xoff,draw_y+yoff,global.rank_radius*scale,false)
 draw_set_color(c_white)
-draw_circle(draw_x+global.rank_radius*scale,draw_y+global.rank_radius*scale,global.rank_radius*scale,true)
+draw_circle(draw_x+xoff,draw_y+yoff,global.rank_radius*scale,true)
 
-draw_text_ext_transformed(draw_x+global.rank_radius*scale,draw_y,rank,0,300,scale,scale,0)
+rank = string(rank)
+draw_text_ext_transformed(draw_x+xoff,draw_y+toff,rank,0,300,scale,scale,0)

@@ -120,7 +120,7 @@ draw_set_alpha(current_alpha)
 //draw the value
 draw_set_halign(fa_center)
 draw_set_valign(fa_center)
-draw_set_color(c_black)
+draw_set_color(text_color)
 draw_set_font(fnt_meter)
 draw_text_transformed(drawx,drawy+val_yoff,val,val_scale,val_scale,0)
 

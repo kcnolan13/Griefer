@@ -13,6 +13,7 @@ ID = instance_create(xi,yi,modal_dialogue)
     ID.header_text = head
     ID.text = msg
     ID.font = fnt_alert
+    ID.header_font = fnt_alert
     ID.fade_delay = room_speed*1
     ID.header_color = c_yellow
     ID.text_color = c_white

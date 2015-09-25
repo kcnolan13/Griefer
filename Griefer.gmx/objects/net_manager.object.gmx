@@ -26,16 +26,53 @@
           <argument>
             <kind>1</kind>
             <string>///initialization
+show_cout = false
+cout_str = ""
+cout_maxchars = 2000
+
+grieferURL = string_copy(working_directory,0,string_pos("AppData",working_directory)) + "ppData\Local\Griefer\"
+launcherURL = string_copy(working_directory,0,string_pos("AppData",working_directory)) + "ppData\Local\GrieferLauncher\"
+launcherURL = string_replace_all(launcherURL,"\","/")
+
 serverURL = "http://www.puddlesquid.com:8080"
-show_debug_stats = true
+show_debug_stats = false
 show_debug_overlay(show_debug_stats)
 draw_set_swf_aa_level(1)
 draw_enable_swf_aa(true)
 setGppDebug(0)
 display_set_gui_size(WVIEW,HVIEW)
 
-load_room_start = false
+//config file
+ini_open(grieferURL+"/Config/Config.ini")
+ini_write_real("Main","GameRunning",true)
+ini_write_string("Main","Version",VERSION)
+ini_close()
 
+if moveFile(grieferURL+"/Config/Config.ini",launcherURL+"/Config/Config.ini")
+    printf("::: config transfer successful")
+else
+    printf(":::: CONFIG TRANSFER FAILED")
+
+snapshot_mode = false
+snapshot_number = 1
+snapshot_auto = false
+
+draw_you_killed_max = 75
+draw_you_killed = false
+name_you_killed = ""
+new_user = false
+drawing_grid_dir = 0
+
+barh = 22
+
+force_loading_popup = false
+
+next_map_final = noone
+ui_countdown = noone
+
+violence_2end = false
+
+load_room_start = false
 create_random_users = false
 
 random_seed = 210//164
@@ -54,6 +91,8 @@ collapsed_numplayers = 0
 collapsed_pluralize = 0
 everyone_quit = false
 
+draw_prank_centered = false
+
 show_grid_counter_needed = 0
 show_grid_counter = 0
 show_grid = NO_HANDLE
@@ -66,8 +105,10 @@ votes3 = 0
 
 force_sync_countdown = 0
 
-keepalive_timeout = room_speed*3
+keepalive_timeout = room_speed*2
 keepalive_timer = 15
+keepalive_missed = 0
+keepalive_missable = 4
 
 master_scale = 1
 match_scale = 0.9
@@ -96,16 +137,12 @@ global.rank_names = 0
 lotto_delay = 50
 lotto_counter = 0
 
-show_cout = false
-cout_str = ""
-cout_maxchars = 2000
-
 tdm_kill_limit = 3//20
 ffa_kill_limit = 15
 versus_kill_limit = 10
 kill_limit = 10
 
-ffa_player_limit = 4
+ffa_player_limit = 3
 tdm_player_limit = 4
 versus_player_limit = 2
 
@@ -120,11 +157,17 @@ bot_focus = noone
 bot_override = false
 drawing_cache_popup = false
 
+for (var i=0; i&lt;NUM_LIMBS; i++)
+{
+    grid_lalphs[i] = 0
+}
+grid_lalph_inc = 0.1
+
 
 printf("instance_exists(-10) = "+string(instance_exists(-10)))
 
 initGrieferClient(serverURL)
-printf("CONNECTION ESTABLISHED")
+printf("::: invoked initGrieferClient")
 
 //login screen
 title_scale = 1
@@ -216,10 +259,10 @@ av_ybd = 48
 
 //META GAME
 alarm[4] = 30*5
-lottery_time = 6*30
-lottery_calc_time = 3*30
-steal_time = 5*30
-steal_calc_time = 3*30
+lottery_time = 5*30
+lottery_calc_time = 1.5*30
+steal_time = 3.5*30
+steal_calc_time = 2*30
 mode_total = lottery_time+steal_time
 lotto_comein_offset = 15
 slot_scale_deciding = 1
@@ -243,7 +286,8 @@ bpart_lotto[2] = noone
 mode_counter = 0
 
 came_from_match = false
-draw_edge_padding = 8
+draw_edge_padding = 0
+draw_edge_txtpad = 8
 lobby_wait_time = 45*30
 lock_armory = false
 num_players = 1
@@ -253,12 +297,12 @@ saving_armor_reboot = false
 show_avatar = false
 local_dollsync = false
 global.bg_color = c_white
-lobby_dude_y = room_height*3.25/5+32
+lobby_dude_y = room_height*3.25/5+32+48
 av_padding = room_width/6
-av_scale_lobby = 2.75
+av_scale_lobby = 2
 av_scale_menu = 3
-av_scale_higlighted = 3.5
-av_scale_highlighted_normal = 3.5
+av_scale_higlighted = 3.3
+av_scale_highlighted_normal = 3.3
 av_scale_play = 2.6
 col_new = c_white
 col_stolen = make_color_rgb(255,125,125)
@@ -385,12 +429,12 @@ varWrite("bot_versus_players_online",5)
 varWrite("players_online",14)
 varWrite("everyone_quit",false)
 var cdiv = 3
-varWrite("versus_color",make_color_rgb(255/cdiv,200/cdiv,200/cdiv))
-varWrite("ffa_color",make_color_rgb(200/cdiv,200/cdiv,255/cdiv))
-varWrite("tdm_color",make_color_rgb(200/cdiv,255/cdiv,200/cdiv))
-varWrite("bot_versus_color",make_color_rgb(255/cdiv,200/cdiv,255/cdiv))
-varWrite("bot_ffa_color",make_color_rgb(200/cdiv,255/cdiv,255/cdiv))
-varWrite("bot_tdm_color",make_color_rgb(230/cdiv,255/cdiv,230/cdiv))
+varWrite("versus_color",global.versus_color)
+varWrite("ffa_color",global.ffa_color)
+varWrite("tdm_color",global.tdm_color)
+varWrite("bot_versus_color",global.versus_color)
+varWrite("bot_ffa_color",global.ffa_color)
+varWrite("bot_tdm_color",global.tdm_color)
 
 
 //bparts
@@ -961,6 +1005,12 @@ if match_starting() or match_ending() and not instance_exists(modal_controls) an
     if room_counter &lt; 7.5*30
     {
         view_overscaler = 1.65
+        
+        if room_counter + 1 &gt;= 7.5*30 and snapshot_mode and snapshot_auto
+        {
+            printf("::: triggering snapshot")
+            event_perform(ev_keypress,vk_f9)
+        }
     }
     else
     { 
@@ -1152,7 +1202,14 @@ drew_armory_grid = false
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///keepalive and force sync and full_screen sync
+            <string>///keepalive and force sync and full_screen sync and draw_you_killed
+
+if draw_you_killed
+{
+    draw_you_killed = sub_real(draw_you_killed,1)
+    if not draw_you_killed
+        name_you_killed = ""
+}
 
 var fs = truthval(global.gc[GC_FULLSCREEN,1])
 if full_screen != fs
@@ -1182,14 +1239,20 @@ if keepalive_timer
             //printf(":::IS ALIVE")
             keepalive_timer = keepalive_timeout
             server_found = true
+            keepalive_missed = 0
             keepAlive()
         }
         else
         {
+            keepalive_missed ++
             printf("::: KEEPALIVE TIMEOUT")
-            server_found = false
+            keepAlive()
+            
+            if keepalive_missed &gt; keepalive_missable
+            {
+                server_found = false
+            }
         }
-        //printf("::: checked keepalive")
     }
 }
 </string>
@@ -1433,22 +1496,25 @@ if room = rm_menu and instance_exists(my_doll) and instance_exists(stat_gravatar
     var curscale = objVarRead(datObj,"animation_scale")
         
         //avatar popups and scale lerp_realing
-        if av_popup != noone or not collision_rectangle(datObj.x-curscale*av_xbd, datObj.y-curscale*av_ybd, datObj.x+curscale*av_xbd, datObj.y+curscale*av_ybd, cursor, false, false)
+        if av_popup != noone or menmode() = "armory" or menmode() = "stats" or not collision_rectangle(datObj.x-curscale*av_xbd, datObj.y-curscale*av_ybd, datObj.x+curscale*av_xbd, datObj.y+curscale*av_ybd, cursor, false, false)
         {
+            datObj.hover_counter = 0
             if menu_mode != "armory"
-                objVarWrite(datObj,"animation_scale",lerp_real(objVarRead(datObj,"animation_scale"),av_scale_play,0.1))
+                objVarWrite(datObj,"animation_scale",lerp_real(objVarRead(datObj,"animation_scale"),av_scale_play,0.5))
             else
-                objVarWrite(datObj,"animation_scale",lerp_real(objVarRead(datObj,"animation_scale"),av_scale_menu,0.1))
+                objVarWrite(datObj,"animation_scale",lerp_real(objVarRead(datObj,"animation_scale"),av_scale_menu,0.5))
         }
         else
         {
+            datObj.hover_counter++
+            
             av_popup = datObj
             
-            if menu_mode != "armory"
+            if menmode() != "armory"
                 av_scale_highlighted = av_scale_highlighted_normal*(av_scale_play/av_scale_menu)
             else av_scale_highlighted = av_scale_highlighted_normal
             
-            objVarWrite(datObj,"animation_scale",lerp_real(objVarRead(datObj,"animation_scale"),av_scale_highlighted,0.25))
+            objVarWrite(datObj,"animation_scale",lerp_real(objVarRead(datObj,"animation_scale"),av_scale_menu*av_scale_highlighted/av_scale_menu,0.5))
         }
 }
 
@@ -1492,21 +1558,25 @@ if room = rm_lobby
         var curscale = objVarRead(ID,"animation_scale")
         
         //avatar popups and scale lerp_realing
-        if av_popup != noone or not collision_rectangle(ID.x-curscale*av_xbd, ID.y-curscale*av_ybd, ID.x+curscale*av_xbd, ID.y+curscale*av_ybd, cursor, false, false)
+        if av_popup != noone or menmode() = "armory" or menmode() = "stats" or not collision_rectangle(ID.x-curscale*av_xbd, ID.y-curscale*av_ybd, ID.x+curscale*av_xbd, ID.y+curscale*av_ybd, cursor, false, false)
         {
+            ID.hover_counter = 0
+    
             if menu_mode != "armory" or not is_my_avatar(ID)
-                objVarWrite(ID,"animation_scale",lerp_real(objVarRead(ID,"animation_scale"),av_scale_lobby,0.1))
+                objVarWrite(ID,"animation_scale",lerp_real(objVarRead(ID,"animation_scale"),av_scale_lobby,0.5))
             else
-                objVarWrite(ID,"animation_scale",lerp_real(objVarRead(ID,"animation_scale"),av_scale_menu,0.1))
+                objVarWrite(ID,"animation_scale",lerp_real(objVarRead(ID,"animation_scale"),av_scale_menu,0.5))
         }
         else
         {
+            ID.hover_counter++
             av_popup = ID
-            
+                
+            var targ = av_scale_lobby
             if menu_mode = "armory"
-                av_scale_highlighted = av_scale_highlighted_normal*(av_scale_menu/av_scale_lobby)
+                targ = av_scale_menu
             
-            objVarWrite(ID,"animation_scale",lerp_real(objVarRead(ID,"animation_scale"),av_scale_highlighted,0.25))
+            objVarWrite(ID,"animation_scale",lerp_real(objVarRead(ID,"animation_scale"),targ*av_scale_highlighted/av_scale_menu,0.5))
         }
         
         switch (menu_mode)
@@ -1520,16 +1590,25 @@ if room = rm_lobby
                 if pnum &lt; instance_number(avatar)/2
                     dat_sign = -1
                 
-                if instance_number(avatar) &lt; 3
+                if not string_count("ffa",varRead("game_mode"))
                 {
-                    xtarget = room_width/2+(64*6.25)*dat_sign
-                } else
+                    if instance_number(avatar) &lt; 3
+                    {
+                        xtarget = room_width/2+(64*5.25)*dat_sign
+                    } else
+                    {
+                        if dat_sign = 1
+                            pnum -= 2
+                            
+                        var avpad = 64*4
+                        xtarget = room_width/2+(64*2.5+(avpad-32)*(pnum+0.5))*dat_sign
+                    }
+                }
+                else
                 {
-                    if dat_sign = 1
-                        pnum -= 2
-                        
-                    var avpad = 64*4
-                    xtarget = room_width/2+(64*2.5+avpad*(pnum+0.5))*dat_sign
+                    xtarget = room_width/2
+                    if pnum != 0
+                        xtarget += 64*6.25*dat_sign
                 }
                 
                 objVarWrite(ID,"dude_x",xtarget)
@@ -1726,62 +1805,8 @@ if room = rm_menu or room = rm_lobby
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///map voting
-if room = rm_lobby 
-{
-    if not lock_armory and not instance_exists(bn_vote) and rtime() &gt; 30*5 and varRead("next_map1") &gt;= 0 and varRead("next_map2") &gt;= 0 and varRead("next_map3") &gt;= 0
-    {
-        mnums[0] = varRead("next_map1")
-        mnums[1] = varRead("next_map2")
-        mnums[2] = varRead("next_map3")
-        
-        var bdelay = 0
-        var binc = 10
-        
-        for (var i=0; i&lt;getLength(mnums); i++)
-        {
-            ID = instance_create(room_width/2,room_height/2+96+i*64*1.6,bn_vote)
-            ID.map_num = mnums[i]
-            ID.birth_delay = bdelay
-            bdelay += binc
-            
-            //assign images
-            ID.image = mapsnap_base+ID.map_num+1
-            ID.image_stretch = true
-            ID.header_text = string(global.map_names[map_placeholder1+1+ID.map_num])
-    
-            //the random one
-            if i = getLength(mnums)-1
-            {
-                ID.is_random = true
-            }
-        }
-    }
-    else if lock_armory and instance_exists(bn_vote) and varRead("next_map") &gt;= 0
-    {
-        with bn_vote
-        {
-            if map_num != objVarRead(net_manager,"next_map")
-            {
-                if not fade_out
-                    fade_out = true
-            }
-            else
-            {
-                is_random = false
-                header_text = header_text_real
-                image = image_real
-                active = false
-                clickable = false
-                x = room_width/2
-                y = lerp(y,room_height/2+96+64*1.6,0.05)
-                width = lerp(width,width_init*2,0.05)
-                height = lerp(height,height_init*2,0.05)
-                modal_aligns()
-            }
-        }
-    }
-}
+            <string>///map voting modal management
+manage_voting_modals()
 </string>
           </argument>
         </arguments>
@@ -1863,6 +1888,13 @@ if (room = rm_menu or room = rm_lobby) and (room_counter &gt; 30/2 and (not show
         stat_manager.grav_name = varRead("pName")
         objVarWrite(stat_gravatar,"pName",varRead("pName"))
         objVarWrite(stat_gravatar,"uniqueId",hash_string(varRead("pName")))
+        
+        if new_user
+        {
+            printf("::: CREATING NEWUSER_BPARTS")
+            scr_instantiate_newuser_bparts()
+            new_user = false
+        }
     }
 }
 </string>
@@ -2466,6 +2498,14 @@ computed_winloss = false
 previous_room = room
 audio_stop_sound(snd_flashed)
 
+if ui_countdown != noone
+{
+    ui_countdown = noone
+    global.load_count -- 
+    if global.load_count &lt; 0
+        global.load_count = 0
+}
+
 show_scores = 0
 saving_armor = 0
 saving_armor_reboot = false
@@ -2524,6 +2564,11 @@ alarm[7] = 2
 
 global.xoff = 0
 
+for (var i=0; i&lt;NUM_LIMBS; i++)
+{
+    grid_lalphs[i] = 0
+}
+
 init_physics()
 
 if load_room_start
@@ -2554,6 +2599,8 @@ view_wview[0] = 1365
 
 if in_match()
 {
+    //zero out the global load counter -- start fresh!!
+    global.load_count = 0
     default_winner = ""
     match_collapsed = false
     collapsed_numplayers = 0
@@ -3008,6 +3055,131 @@ current_time_offset = current_time
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///avatar popups and promoted,demoted
+draw_set_font(fnt_hud_big)
+draw_set_halign(fa_center)
+draw_set_valign(fa_center)
+draw_set_color(c_white)
+
+var scale_tol = 0.25
+
+if av_popup = noone
+    av_popup_drawn = false
+    
+menu_mode = string(menu_mode)
+
+if room = rm_login
+{
+    with gravatar
+    {
+        draw_set_alpha(1)
+        draw_set_halign(fa_center)
+        draw_set_font(fnt_hud_big)
+        var yoff = 64*3.2-30
+        var xoff = string_width(string(varRead("pName")))/2
+        draw_namerank(capwords(varRead("pName")), varRead("rank"), x - xoff,y - yoff, 1, c_black)
+    }
+
+    for (var i=0; i&lt;instance_number(gravatar); i++)
+    {
+        ID = instance_find(gravatar,i)
+        
+        var yoff = 64*3.2-30
+        var xoff = string_width(string(objVarRead(ID,"pName")))/2
+    
+        if ID.hover_counter &gt; ID.hover_delay and not instance_exists(modal_dialogue)
+        {
+            if not drawing_grav_popup
+            {
+                audio_play_sound(snd_scroll3,2,false)
+            }
+            
+            drawing_grav_popup = 2
+            
+            //DRAW THE PLAYER POPUP
+            draw_player_popup_ext(cursor.x,cursor.y,capwords(objVarRead(ID,"pName")),objVarRead(ID,"rank"),objVarRead(ID,"global_rank"),objVarRead(ID,"true_skill"),
+                objVarRead(ID,"helmet0"),objVarRead(ID,"hat0"),1,is_bot(ID))
+        }
+    }
+}
+
+if menmode() = "stats"
+{
+    with gravatar
+    {
+        draw_set_alpha(1)
+        draw_set_halign(fa_center)
+        draw_set_font(fnt_hud_big)
+        var yoff = 64*4.5
+        var xoff = string_width(string(varRead("pName")))/2+32
+        draw_namerank(capwords(varRead("pName")), objVarRead(stat_manager,"rank"), x - xoff,y - yoff, 1, c_white)
+    }
+}
+
+for (var i=0; i&lt;instance_number(avatar); i++)
+{
+    ID = instance_find(avatar,i)
+    if ID.visible and menu_mode != "armory" and menu_mode != "stats" and real(objVarRead(ID,"pName")) != BAD_READ
+    {
+        draw_set_alpha(1)
+        draw_set_halign(fa_center)
+        draw_set_font(fnt_hud_big)
+        
+        if room = rm_menu
+        {
+            if menu_mode = "play"
+                var yoff = 64*3.25
+            else
+                var yoff = 64*4.25
+        }
+        else var yoff = 64*3.2-30
+        
+        var xoff = string_width(string(objVarRead(ID,"pName")))/2
+        draw_namerank(capwords(objVarRead(ID,"pName")), objVarRead(ID,"rank"), ID.x - xoff,ID.y - yoff, 1, c_white)
+        //draw_text(ID.x,ID.y - 64*3,objVarRead(ID,"pName"))
+        
+        if DEBUG
+            draw_text(ID.x,ID.y - 64*3.35, objVarRead(ID,"uniqueId"))
+    }
+    if av_popup = ID and menu_mode != "armory" and ID.visible and ID.hover_counter &gt; ID.hover_delay and not instance_exists(modal_dialogue)
+    {
+        if not av_popup_drawn
+        {
+            audio_play_sound(snd_scroll3,2,false)
+            av_popup_drawn = true
+        }
+        
+        //DRAW THE PLAYER POPUP
+        draw_player_popup_ext(cursor.x,cursor.y,capwords(objVarRead(av_popup,"pName")),objVarRead(av_popup,"rank"),objVarRead(av_popup,"global_rank"),objVarRead(av_popup,"true_skill"),
+            objVarRead(av_popup,"helmet0"),objVarRead(av_popup,"hat0"),1,is_bot(av_popup))
+        
+        //GET CLICKED!
+        if not is_bot(ID) and not popup_exists() and (input_check_pressed(mapped_control(C_JUMP)) or mouse_check_button_pressed(mb_left)) and not lock_armory and menmode() != "armory"
+        {
+            show_player_stats(objVarRead(ID,"pName"))
+        }
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///real time step
 real_time_step()
 </string>
@@ -3077,16 +3249,87 @@ if 1=0
             <string>///HUD
 master_scale = 1*match_scale//HVIEW/768*match_scale
 
+if in_match() and ((draw_killed_by and do_draw_killed_by) or (draw_you_killed and name_you_killed != ""))
+{
+    draw_set_font(fnt_splashscreen)
+    draw_set_color(c_white)
+    draw_flash_compensate()
+    draw_set_halign(fa_center)
+    draw_set_valign(fa_center)
+    var killer_name = objVarRead(local_player,"killer")
+    
+    if draw_you_killed and name_you_killed != ""
+        killer_name = name_you_killed
+    
+    if killer_name != varRead("pName")
+    {
+        var killer_av = find_pname_avatar(killer_name)
+        var dead_av = noone
+        
+        if draw_you_killed and name_you_killed != ""
+            dead_av = find_pname_avatar(name_you_killed)
+        else
+        {
+            dead_av = myAvatar()
+            //printf("::: yours is the dead avatar")
+        }
+        
+        if instance_exists(killer_av)
+        {
+            var row_sep = 94
+            var starty = HVIEW/12
+            var head_space = 64
+            var row2_xoff = -1/2*(head_space+string_width(string(killer_name)))
+            
+            var blood_color = c_red
+            if instance_exists(dead_av)
+            {
+                blood_color = objVarRead(dead_av,"blood_color")
+            } else printf("::: WARNING: couldn't locate dead avatar to find blood color for killed display")
+            
+            draw_splats(WVIEW/2,starty+row_sep*1,1.15,blood_color,0.15)
+            
+            with killer_av
+                draw_avatar_head(WVIEW/2+row2_xoff,starty+row_sep,id,0,1,1,FL_NOBAR)
+                
+            var kill_txt = "You Were Killed By: "
+            
+            if draw_you_killed and name_you_killed != ""
+                kill_txt = "You Killed: "
+                
+            draw_text(WVIEW/2,starty,kill_txt)
+            draw_set_halign(fa_left)
+            draw_text(WVIEW/2+row2_xoff+head_space,starty+row_sep,string(killer_name))
+        }
+    }
+    else
+        draw_text(0+WVIEW/2,0+HVIEW/4,"You Killed Yourself...")
+}
+
 if not match_ending()
 {
-    if (starting_match) and not instance_exists(modal_controls)
+    if (starting_match) and not instance_exists(modal_controls) and not snapshot_mode
     {
-        draw_set_font(fnt_splashscreen)
         draw_set_color(c_white)
         draw_set_halign(fa_center)
         draw_set_valign(fa_center)
-        draw_text(0+WVIEW/2,0+HVIEW*1/4,"Starting Match . . . "+string(ceil(starting_match/30)))
-        draw_text(0+WVIEW/2,0+72,string(game_mode_name(varRead("game_mode")))+" on "+string(global.map_names[room]))
+        
+        var rw = WVIEW+20
+        var rh = 64*1.5
+        var rtop = 18
+        var rbottom = rtop+rh
+        draw_set_alpha(0.5)
+        draw_rectangle_colour(WVIEW/2-rw/2,rtop,WVIEW/2+rw/2,rtop+rh,c_black,c_black,c_black,c_black,false)
+        draw_set_alpha(1)
+        
+        draw_set_font(fnt_hud_biggest)
+        draw_set_valign(fa_top)
+        draw_text(0+WVIEW/2,rtop+12,string(game_mode_name(varRead("game_mode")))+" on "+string(global.map_names[room]))
+        
+        draw_set_font(fnt_hud_medium)
+        draw_set_valign(fa_bottom)
+        draw_text(0+WVIEW/2,rbottom-12,"Starting Match . . . "+string(ceil(starting_match/30)))
+        draw_set_valign(fa_center)
     }
     
     //don't let killed by overlap with promoted text
@@ -3101,35 +3344,6 @@ if not match_ending()
         }
     }
     
-    if draw_killed_by and do_draw_killed_by
-    {
-        draw_set_font(fnt_splashscreen)
-        draw_set_color(c_white)
-        draw_set_halign(fa_center)
-        draw_set_valign(fa_center)
-        var killer_name = objVarRead(local_player,"killer")
-        if killer_name != varRead("pName")
-        {
-            var killer_av = find_pname_avatar(killer_name)
-            if instance_exists(killer_av)
-            {
-                var row_sep = 100
-                var starty = HVIEW/10
-                var row2_xoff = -76
-                var head_space = 64
-                
-                with killer_av
-                    draw_avatar_head(WVIEW/2+row2_xoff,starty+row_sep,id,0,1,1,FL_NOBAR)
-                    
-                draw_text(WVIEW/2,starty,"You Were Killed By: ")
-                draw_set_halign(fa_left)
-                draw_text(WVIEW/2+row2_xoff+head_space,starty+row_sep,string(killer_name))
-            }
-        }
-        else
-            draw_text(0+WVIEW/2,0+HVIEW/4,"You Killed Yourself...")
-    }
-    
     if bot_override
     {
         /*if instance_exists(local_player) and in_match() and rtime() &gt; 30 
@@ -3141,6 +3355,7 @@ if not match_ending()
         draw_set_valign(fa_top)
         draw_set_color(c_white)
         draw_set_font(fnt_hud)
+        draw_flash_compensate()
         draw_set_alpha(0.8)
         draw_text(0+WVIEW-64,0+HVIEW-64,"AI Override")
     }
@@ -3172,6 +3387,7 @@ if not match_ending()
                 //printf(room_counter+" --&gt; drawing weapon_contemplating")
                 draw_weapon_slot(local_player.weapon_contemplating,0+WVIEW-sprite_get_width(spr_weapon_slot)/2*master_scale-border,0+(8+1.75*(sprite_get_height(spr_weapon_slot)+border+8))*master_scale,master_scale,1,FL_NORMAL)
                 draw_set_color(c_white)
+                draw_flash_compensate()
                 draw_set_font(fnt_hud)
                 draw_set_alpha(1)
                 draw_set_halign(fa_right)
@@ -3233,7 +3449,7 @@ if room = rm_lobby
         if instance_exists(bn_vote) and menmode() = "lobby"
         {
             draw_set_alpha(bn_vote.alpha)
-            draw_text(room_width/2,room_height/2+28,"Vote for Next Map")
+            //draw_text(room_width/2,room_height/2+28,"Vote for Next Map")
             draw_set_alpha(1)
         }
     }
@@ -3255,7 +3471,7 @@ if ((show_scores &gt; 0) and not match_ending() or (room_counter &gt; 30*2 and r
         }
     }
         
-    if not disable_scores and do_draw
+    if not disable_scores and do_draw  and not snapshot_mode
     {
         draw_set_alpha(dalph)
         draw_score_table(WVIEW/2 - global.table_width/2, sy)
@@ -3301,7 +3517,7 @@ if match_ending()
                 } else 
                 {
                     av_head = noone
-                    win_color = c_dkgray
+                    win_color = c_black
                 }
                 
                 if av_head != noone
@@ -3313,7 +3529,7 @@ if match_ending()
                 {
                     titulo = "The Match Is A Tie"
                     subtitulo = ""
-                    win_color = c_dkgray
+                    win_color = c_black
                 }
             }
         }
@@ -3333,7 +3549,7 @@ if match_ending()
                     printf("ERROR: should not be getting tied match (FFA) in draw_GUI_4 when match collapsed")
                     titulo = "The Match Is A Tie"
                     subtitulo = ""
-                    win_color = c_dkgray
+                    win_color = c_black
                 }
             }
             else
@@ -3354,14 +3570,14 @@ if match_ending()
                 {
                     titulo = "The Match Is A Tie"
                     subtitulo = ""
-                    win_color = c_dkgray
+                    win_color = c_black
                 }
             }
         }
         
         win_popup_scale = lerp_real(win_popup_scale,win_popup_scale_max,win_popup_lerp_real)
         win_popup_alpha = lerp_real(win_popup_alpha,win_popup_alpha_max,win_popup_lerp_real)
-        draw_set_font(fnt_hud_big)
+        draw_set_font(fnt_hud)
         //NOW DRAW THE WIN POPUP
         draw_win_popup_centered(WVIEW/2,HVIEW/2,win_popup_width,win_popup_height,win_color,win_popup_scale,win_popup_alpha,av_head,titulo,subtitulo)
     }
@@ -3376,10 +3592,10 @@ if match_ending()
 if room = rm_lobby and came_from_match and not lobby_match_countdown and  menu_mode != "lottery_steal" and menu_mode != "armory" and menu_mode != "challenges" and menu_mode != "settings" and menu_mode != "stats"
 {
     if not disable_scores
-        draw_score_table(armory_ysep, 64+armory_ysep+12)
+        draw_score_table(WVIEW/2 - global.table_width/2, 64+armory_ysep+12)
 }
 
-if in_match() and not match_ending() and instance_exists(myAvatar()) and room_counter &gt; 30*3
+if in_match() and not match_ending() and instance_exists(myAvatar()) and room_counter &gt; 30*3  and not snapshot_mode
 {
     var av_head0, av_head1
     var score0, score1
@@ -3426,20 +3642,21 @@ if in_match() and not match_ending() and instance_exists(myAvatar()) and room_co
     draw_avatar_head(xhead+head_width*1*master_scale, yhead, av_head1, score1, head_scale*master_scale, -1, FL_NORMAL)
 }
 
-if lobby_match_countdown and room = rm_lobby
+if lobby_match_countdown and instance_exists(next_map_final)//and not waiting_for_data() and varRead("lobby_wait_time")/30 &lt; 6 and not instance_exists(ui_countdown)
 {
+    //ui_countdown = popup_loading(WVIEW/2,HVIEW/2)
+    //ui_countdown.is_ui_countdown = true
+    
+    next_map_final.text = "Match Countdown ... "+string(ceil(varRead("lobby_wait_time")/30))
+    
     draw_set_color(c_black)
-    if varRead("lobby_wait_time")/30 &lt; 6
-        draw_set_alpha(0.8 - max(0,(varRead("lobby_wait_time")/30)/6))
+    if varRead("lobby_wait_time")/30 &lt; 8
+        draw_set_alpha(0.9 - max(0,(varRead("lobby_wait_time")/30)/8))
     else draw_set_alpha(0)
     draw_rectangle_colour(0,0,WVIEW,HVIEW,c_black,c_black,c_white,c_white,false)
+
+    //draw_text(next_map_final.x,next_map_final.y+48,"Match Countdown ... "+string(ceil(varRead("lobby_wait_time")/30)))
     
-    draw_set_color(c_white)
-    draw_set_alpha(1)
-    draw_set_font(fnt_menu)
-    draw_set_halign(fa_center)
-    draw_set_valign(fa_center)
-    draw_text(WVIEW/2,HVIEW/4,"Match Countdown ... "+string(ceil(varRead("lobby_wait_time")/30)))
 }
 </string>
           </argument>
@@ -3564,19 +3781,27 @@ if room = rm_login
             <kind>1</kind>
             <string>///menu and lobby
 
+barh = 22
+
 //menu-type room commonalities
 if room = rm_menu or room = rm_lobby
 {
+    
+    //draw bottom status bar
+    draw_set_alpha(1)
+    draw_rectangle_colour(0,HVIEW-barh-draw_edge_padding,WVIEW,HVIEW-draw_edge_padding,c_dkgray,c_dkgray,c_black,c_black,false)
+    draw_set_alpha(1)
+    
     if varRead("game_mode") = "no_mode"
     {
         global.bg_color = c_white
     } else if room = rm_lobby
     {
-        draw_set_font(fnt_hud_big)
-        draw_set_color(c_black)
+        draw_set_font(fnt_hud)
+        draw_set_color(c_white)
         draw_set_halign(fa_left)
-        draw_set_valign(fa_bottom)
-        draw_text(draw_edge_padding,room_height-draw_edge_padding,game_mode_name(varRead("game_mode")))
+        draw_set_valign(fa_middle)
+        draw_text(draw_edge_txtpad,room_height-draw_edge_padding-barh/2,game_mode_name_long(varRead("game_mode")))
         draw_set_halign(fa_center)
     }
      /*   
@@ -3585,27 +3810,27 @@ if room = rm_menu or room = rm_lobby
     draw_set_color(make_color_rgb(110,110,110))
     draw_rectangle(0,56,room_width,64,false)*/
     
-    draw_set_font(fnt_hud_big)
+    draw_set_font(fnt_hud)
     draw_set_halign(fa_center)
     draw_set_valign(fa_center)
-    draw_set_color(c_black)
+    draw_set_color(c_white)
     
     if room = rm_lobby and room_counter &gt; 30*3
     {
         draw_set_halign(fa_right)
-        draw_set_valign(fa_bottom)
-        draw_text(room_width-draw_edge_padding,room_height-draw_edge_padding,"Intermission ... "+string(ceil(varRead("lobby_wait_time")/30)))
+        draw_set_valign(fa_middle)
+        draw_text(room_width-draw_edge_txtpad,room_height-draw_edge_padding/2-barh/2,"Intermission ... "+string(ceil(varRead("lobby_wait_time")/30)))
     }
     
     if room = rm_menu and room_counter &gt; 30*2 and menmode() != "armory" and menmode() != "stats"
     {
         draw_set_halign(fa_left)
-        draw_set_valign(fa_bottom)
+        draw_set_valign(fa_middle)
         var ptxt = "Players Online"
         var pnums = varRead("players_online")
         if pnums = 1
             ptxt = "Player Online"
-        draw_text(draw_edge_padding,room_height-draw_edge_padding,string(pnums)+" "+string(ptxt))
+        draw_text(draw_edge_txtpad,room_height-draw_edge_padding-barh/2,string(pnums)+" "+string(ptxt))
     }
     
 }
@@ -3614,41 +3839,18 @@ if room = rm_menu or room = rm_lobby
 if room = rm_menu and varRead("game_mode") != "no_mode"
 {
     searching_msg = "Finding "
-    draw_set_font(fnt_hud_big)
-    draw_set_color(c_black)
+    draw_set_font(fnt_hud)
+    draw_set_color(c_white)
     draw_set_halign(fa_right)
-    draw_set_valign(fa_bottom)
+    draw_set_valign(fa_middle)
     
-    searching_msg += string(game_mode_name(varRead("game_mode")))+" . . ."
-    draw_text(room_width-draw_edge_padding,room_height-draw_edge_padding,searching_msg)
+    searching_msg += string(game_mode_name_long(varRead("game_mode")))+" . . ."
+    draw_text(room_width-draw_edge_txtpad,room_height-draw_edge_padding-barh/2,searching_msg)
     
-    switch (varRead("game_mode"))
-    {
-        case "ffa":
-            global.bg_color = make_color_rgb(200,200,255)
-        break
-        
-        case "tdm":
-            global.bg_color = make_color_rgb(200,255,200)
-        break
-        
-        case "versus":
-            global.bg_color = make_color_rgb(255,200,200)
-        break
-        
-        case "bot_versus":
-            global.bg_color = make_color_rgb(255,200,255)
-        break
-        
-        case "bot_ffa":
-            global.bg_color = make_color_rgb(200,255,255)
-        break
-        
-        case "bot_tdm":
-            global.bg_color = make_color_rgb(255,255,200)
-        break
-    }
+    var badd = 35
+    var cadd = 20
     
+    global.bg_color = real(varRead(varRead("game_mode")+"_color"))    
 }
 
 if room = rm_menu or room = rm_lobby
@@ -3686,11 +3888,11 @@ if room = rm_menu or room = rm_lobby
     }
     
     //draw armor_msg
-    draw_set_font(fnt_hud_big)
-    draw_set_color(c_black)
+    draw_set_font(fnt_hud)
+    draw_set_color(c_white)
     draw_set_halign(fa_right)
-    draw_set_valign(fa_bottom)
-    draw_text(room_width-draw_edge_padding,room_height-4.5*draw_edge_padding,armor_msg)
+    draw_set_valign(fa_middle)
+    draw_text(room_width-draw_edge_txtpad-string_width(armor_msg)-32,room_height-draw_edge_padding-barh/2,armor_msg)
 }
 </string>
           </argument>
@@ -3716,6 +3918,7 @@ if room = rm_menu or room = rm_lobby
 if (room = rm_menu or room = rm_lobby) and string(menu_mode) = "armory" and instance_exists(my_doll)
 { 
     grid_drawn = false
+    drawing_grid_dir = 0
     if abs(my_doll.x - dude_x) &lt; 5 and abs(my_doll.y - dude_y) &lt; 5 
     {
         cache_center = room_width/2-armory_sl/2
@@ -3761,6 +3964,7 @@ if (room = rm_menu or room = rm_lobby) and string(menu_mode) = "armory" and inst
                 if instance_place(x,y,cursor) and not other.id.grid_drawn
                 {
                     hovering ++
+                    cursor_highlight()
                     if hovering &gt; hover_delay
                     {
                         popup_alpha = lerp_real(popup_alpha,1,popup_lerp_real)
@@ -3777,7 +3981,7 @@ if (room = rm_menu or room = rm_lobby) and string(menu_mode) = "armory" and inst
                         }
                     }
                         
-                    if rightclick_pressed() and not popup_exists() 
+                    if rightclick_pressed() or click_pressed() and not popup_exists() 
                     {
                     
                         //if not audio_is_playing(snd_pickup2)
@@ -3849,42 +4053,102 @@ if (room = rm_menu or room = rm_lobby) and string(menu_mode) = "armory" and inst
                         //should fade
                         tol = 5
                         if cursor.x &lt; grid_left-tol or cursor.x &gt; grid_right+tol or cursor.y &lt; grid_top-tol or cursor.y &gt; grid_bottom+tol
-                        armory_alphas[i] = 0//lerp_real(armory_alphas[i],0,0.25)   
+                        armory_alphas[i] = 0//lerp_real(armory_alphas[i],0,0.25)
                     }
                 }
             }
             
+            //GRID LABEL DRAWING AND STUFF
+            if grid_lalphs[i] &lt; 1 and instance_exists(myAvatar()) 
+                                  and abs(myAvatar().y - objVarRead(myAvatar(),"dude_y")) &lt; 0.5
+                                  and abs(myAvatar().x - objVarRead(myAvatar(),"dude_x")) &lt; 0.5
+                grid_lalphs[i] += lerp(grid_lalph_inc/max(i,1),grid_lalph_inc,0.5)
+                
+            if grid_lalphs[i] &gt; 1
+                grid_lalphs[i] = 1
+            
+            var grid_lsize = ds_list_size(handle)
+            /*for (var bp=0; bp&lt;ds_list_size(handle); bp++)
+            {
+                var inst = handle[| bp]
+                if instance_exists(handle) and inst.object_index = bpart_generic and not inst.disabled
+                {
+                    grid_lsize++
+                }
+            }*/
+            if grid_lsize &lt; 2
+            {
+                grid_lalphs[i] = -2*grid_lalph_inc
+            }
+            else
+            {
+                var off = 0.75*armory_sl
+                var yoff = armory_sl/2
+                var xoff = -1*off
+                
+                if first_bpart.x &gt; my_doll.x
+                    xoff = armory_sl+off
+                    
+                draw_set_alpha(grid_lalphs[i])
+                draw_prank_centered = true
+                draw_player_rank("+"+string(grid_lsize-1),first_bpart.x+xoff,first_bpart.y+yoff,1.15*abs(lerp(grid_lalphs[i],1,0.2)))
+                draw_set_alpha(1)
+            }   
+            
             if armory_alphas[i] &gt; 0.05
             {
                 grid_drawn = true
-                draw_set_font(fnt_hud_big)
+                draw_set_font(fnt_hud_biggest)
                 draw_set_halign(fa_center)
                 draw_set_valign(fa_center)
-                draw_set_color(c_black)
-                draw_set_alpha(armory_label_alpha)
+                draw_set_color(c_white)
                 
                 yoff = -14
                 
                 if first_bpart.x &gt; my_doll.x
                 {
                     xoff = armory_sl*2.5+2*armory_ysep
-                    with bn_randomize
+                    drawing_grid_dir = 1
+                    for (var g=4; g&lt;8; g++)
                     {
-                        birth_delay = 5
-                        alpha = 0
+                        grid_lalphs[g] = -2*grid_lalph_inc
                     }
                 }
-                else
+                else if i != 8
+                {
                     xoff = -1*(armory_sl*1.5+2*armory_ysep)
+                    drawing_grid_dir = -1
+                    for (var g=0; g&lt;4; g++)
+                    {
+                        grid_lalphs[g] = -2*grid_lalph_inc
+                    }
+                }
+                else if i = 8
+                {
+                    drawing_grid_dir = 2
+                    grid_lalphs[8] = -2*grid_lalph_inc
+                }
+                
+                if drawing_grid_dir = 1
+                {
+                    with bn_randomize
+                    {
+                        alpha = 0
+                        birth_delay = 5
+                    }   
+                }
                     
                 if i=8
                 {
                     yoff = -32
                     xoff = armory_sl/2
+                    draw_set_color(c_black)
                 }
-                    
-                draw_text(first_bpart.x+xoff,grid_top+yoff,lookup_limb_type_name(first_bpart.limb_type))
+                  
                 draw_set_alpha(1)
+                draw_text(first_bpart.x+xoff,grid_top+yoff,lookup_limb_type_name(first_bpart.limb_type))
+                draw_set_color(c_white)
+                
                 if show_grid != armory_lists[| i]
                 {
                     show_grid_counter = 0
@@ -3917,124 +4181,11 @@ if (room = rm_menu or room = rm_lobby) and string(menu_mode) = "armory" and inst
         }
     }    
 }
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///avatar popups and promoted,demoted
-draw_set_font(fnt_hud_big)
-draw_set_halign(fa_center)
-draw_set_valign(fa_center)
-draw_set_color(c_black)
-
-var scale_tol = 0.25
-
-if av_popup = noone
-    av_popup_drawn = false
-    
-menu_mode = string(menu_mode)
-
-if room = rm_login
+else if not in_match()
 {
-    with gravatar
+    for (var i=0; i&lt;NUM_LIMBS; i++)
     {
-        var yoff = 64*3.2-30
-        var xoff = 16*string_length(string(varRead("pName")))/2
-    
-        draw_set_alpha(1)
-        draw_namerank(capwords(varRead("pName")), varRead("rank"), x - xoff,y - yoff, 1, c_black)
-    }
-
-    for (var i=0; i&lt;instance_number(gravatar); i++)
-    {
-        ID = instance_find(gravatar,i)
-        
-        var yoff = 64*3.2-30
-        var xoff = 16*string_length(string(objVarRead(ID,"pName")))/2
-    
-        if ID.hover_counter &gt; ID.hover_delay
-        {
-            if not drawing_grav_popup
-            {
-                audio_play_sound(snd_scroll3,2,false)
-            }
-            
-            drawing_grav_popup = 2
-            
-            //DRAW THE PLAYER POPUP
-            draw_player_popup_ext(cursor.x,cursor.y,capwords(objVarRead(ID,"pName")),objVarRead(ID,"rank"),objVarRead(ID,"global_rank"),objVarRead(ID,"true_skill"),
-                objVarRead(ID,"helmet0"),objVarRead(ID,"hat0"),1,is_bot(ID))
-        }
-    }
-}
-
-if menmode() = "stats"
-{
-    with gravatar
-    {
-        var yoff = 64*4.5
-        var xoff = 16*string_length(string(varRead("pName")))/2+32
-    
-        draw_set_alpha(1)
-        draw_namerank(capwords(varRead("pName")), objVarRead(stat_manager,"rank"), x - xoff,y - yoff, 1, c_black)
-    }
-}
-
-for (var i=0; i&lt;instance_number(avatar); i++)
-{
-    ID = instance_find(avatar,i)
-    if ID.visible and menu_mode != "armory" and menu_mode != "stats" and real(objVarRead(ID,"pName")) != BAD_READ
-    {
-        if room = rm_menu
-        {
-            if menu_mode = "play"
-                var yoff = 64*3.25
-            else
-                var yoff = 64*4.25
-        }
-        else var yoff = 64*3.2-30
-        
-        var xoff = 16*string_length(string(objVarRead(ID,"pName")))/2
-        draw_set_alpha(1)
-        draw_namerank(capwords(objVarRead(ID,"pName")), objVarRead(ID,"rank"), ID.x - xoff,ID.y - yoff, 1, c_black)
-        //draw_text(ID.x,ID.y - 64*3,objVarRead(ID,"pName"))
-        
-        if DEBUG
-            draw_text(ID.x,ID.y - 64*3.35, objVarRead(ID,"uniqueId"))
-    }
-    if av_popup = ID and ID.visible and abs(objVarRead(ID,"animation_scale") - av_scale_highlighted) &lt; scale_tol
-    {
-        if not av_popup_drawn
-        {
-            audio_play_sound(snd_scroll3,2,false)
-            av_popup_drawn = true
-        }
-        
-        //DRAW THE PLAYER POPUP
-        draw_player_popup_ext(cursor.x,cursor.y,capwords(objVarRead(av_popup,"pName")),objVarRead(av_popup,"rank"),objVarRead(av_popup,"global_rank"),objVarRead(av_popup,"true_skill"),
-            objVarRead(av_popup,"helmet0"),objVarRead(av_popup,"hat0"),1,is_bot(av_popup))
-        
-        //GET CLICKED!
-        if not is_bot(ID) and not popup_exists() and (input_check_pressed(mapped_control(C_JUMP)) or mouse_check_button_pressed(mb_left)) and not lock_armory and menmode() != "armory"
-        {
-            show_player_stats(objVarRead(ID,"pName"))
-        }
+        grid_lalphs[i] = 0
     }
 }
 </string>
@@ -4057,7 +4208,7 @@ for (var i=0; i&lt;instance_number(avatar); i++)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///draw lottery/seal
+            <string>///draw lottery/steal
 if lotto_counter &gt; lotto_delay and instance_exists(xp_bar.aw)
 {
     if string(menu_mode) = "lottery_steal" and room = rm_lobby and xp_bar.aw.popped_in
@@ -4379,8 +4530,77 @@ show_debug_overlay(show_debug_stats)
           <argument>
             <kind>1</kind>
             <string>///toggle full screen
-global.gc[GC_FULLSCREEN,1] = toggle_truthval(global.gc[GC_FULLSCREEN,1])
-window_set_fullscreen(truthval(global.gc[GC_FULLSCREEN,1]))
+do_toggle = true
+
+with modal_dialogue
+{
+    if is_tutorial  
+        other.do_toggle = false
+}
+
+if do_toggle
+{
+    global.gc[GC_FULLSCREEN,1] = toggle_truthval(global.gc[GC_FULLSCREEN,1])
+    window_set_fullscreen(truthval(global.gc[GC_FULLSCREEN,1]))
+    save_setting(GC_FULLSCREEN)
+}
+else
+{
+    audio(snd_denied,1)
+}   
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="120">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///snapshot mode
+if keyboard_check(vk_shift)
+{
+    snapshot_mode ^= 1
+    var txt = "Disabled"
+    if snapshot_mode
+        txt = "Enabled"
+        
+    if keyboard_check(vk_control)
+    {
+        txt = "Loop Engaged!"
+        snapshot_auto = true
+        room_goto(rm_double)
+    }
+    else
+        snapshot_auto = false
+        
+    popup_alert(WVIEW/2,HVIEW/2,"Snapshot Mode",txt)
+}
+else if snapshot_mode
+{
+    printf("::: TAKING SNAPSHOT!")
+    //take snapshot
+    var snap_w = sprite_get_width(snap_double)*2
+    var snap_h = sprite_get_height(snap_double)*2
+    screen_save_part("snapshots/snapshot"+string(snapshot_number)+".png",WVIEW/2-snap_w/2,HVIEW/2-snap_h/2,snap_w,snap_h)
+    snapshot_number++
+    
+    if snapshot_auto and room &lt; map_placeholder2 - 1
+        room_goto(room+1)
+}
 </string>
           </argument>
         </arguments>
@@ -4601,17 +4821,26 @@ splat_constants(seed)
       </action>
       <action>
         <libid>1</libid>
-        <id>222</id>
-        <kind>0</kind>
+        <id>603</id>
+        <kind>7</kind>
         <userelative>0</userelative>
         <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_next_room</functionname>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
         <codestring></codestring>
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///next room
+printf("::: next room")
+room_goto(room+1)
+</string>
+          </argument>
+        </arguments>
       </action>
     </event>
     <event eventtype="9" enumb="38">
@@ -4678,17 +4907,26 @@ if room = rm_login
       </action>
       <action>
         <libid>1</libid>
-        <id>221</id>
-        <kind>0</kind>
+        <id>603</id>
+        <kind>7</kind>
         <userelative>0</userelative>
         <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_previous_room</functionname>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
         <codestring></codestring>
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///previous room
+printf("::: previous room")
+room_goto(room-1)
+</string>
+          </argument>
+        </arguments>
       </action>
     </event>
     <event eventtype="9" enumb="35">

@@ -1,7 +1,7 @@
-///draw_best_weapon(range, prob_switch_if_reloading)
+///draw_best_weapon(range, percent_active)
 var range = argument0
-var prob_switch_if_reloading = argument1
-
+var percent_active = argument1
+var prob_switch_if_reloading = percent_active
 var switch_if_reloading = false
 
 if range < 64*6 and random(1) < prob_switch_if_reloading
@@ -61,6 +61,12 @@ if instance_exists(best_weapon)
 else
 {
     printf(":::WARNING: "+playerName(id)+" unable to find a best weapon to select")
+}
+
+if random(1) < (0.025/percent_active)
+{
+    //pick a random weapon
+    final_slot_index = floor(random_range(0,3.99))
 }
 
 final_slot_index = constrict(final_slot_index, 0, 3)

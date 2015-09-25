@@ -94,6 +94,7 @@ draw_avatar_head(left+icon_pad+48, top+icon_pad+48, id, 0, 1, 1, FL_NOBAR)
 //draw_bpart_slot_complete_ext(id, left+icon_pad, top+icon_pad, ((height-height_less)-2*icon_pad)/72, alpha)
 
 //draw name rank
+draw_set_alpha(1)
 draw_set_font(fnt_hud_big)
 draw_set_halign(fa_left)
 draw_set_valign(fa_top)
@@ -132,3 +133,5 @@ if not tis_bot
     }
 }
 draw_set_alpha(1)
+draw_set_halign(fa_center)
+draw_set_valign(fa_middle)

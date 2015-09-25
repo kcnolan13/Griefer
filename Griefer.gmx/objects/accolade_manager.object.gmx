@@ -53,7 +53,7 @@ bg = NO_HANDLE
 //stat mode scrolling variables
 grid_left = room_width/2-64*3.5+38
 grid_right = room_width-64*2.5
-grid_ymid = room_height/2+64*4.5+10
+grid_ymid = room_height/2+64*4.5-6
 grid_xmid = average2(grid_left,grid_right)
 grid_width = abs(grid_right-grid_left)
 accolade_xmin = grid_left
@@ -329,6 +329,7 @@ if not in_match() and room != rm_login
                         bg.header_yoff = 8
                         bg.header_font = fnt_hud
                         bg.header_text_color = c_white
+                        bg.menu_mode = "stats"
                     }
                     
                     var chev_width = bg.height/2
@@ -344,8 +345,9 @@ if not in_match() and room != rm_login
                         chev_left.text = ""
                         chev_left.image = icon_chevron_lr
                         chev_left.img_index = 0
-                        chev_left.image_stretch = true
+                        chev_left.image_stretch = false
                         chev_left.birth_delay = chev_delay
+                        chev_left.menu_mode = "stats"
                         
                         chev_right = instance_create(grid_right+chev_width*1.5,grid_ymid+bg_yoff,bn_typical)
                         chev_right.submit_action = scroll_accolades
@@ -355,8 +357,9 @@ if not in_match() and room != rm_login
                         chev_right.text = ""
                         chev_right.image = icon_chevron_lr
                         chev_right.img_index = 1
-                        chev_right.image_stretch = true
+                        chev_right.image_stretch = false
                         chev_right.birth_delay = chev_delay+10
+                        chev_right.menu_mode = "stats"
                     }
                     
                     spawned_grid = true
@@ -366,6 +369,10 @@ if not in_match() and room != rm_login
                        
                     grid_hsep = stats_hsep
                     create_accolade_grid(grid_left+24,grid_ymid,grid_right,room_height,fa_left,fa_center,0,col)
+                    with accolade_generic
+                    {
+                        menu_mode = "stats"
+                    }
                 }
                 
                 //update that stupid scrollable grid

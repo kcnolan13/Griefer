@@ -114,7 +114,7 @@ hold = false
 respawn_counter = 30*1.5+ceil(random_range(0,30*1))
 double_spawn_counter =0
 respawn_flag = FL_NORMAL
-double_spawn_window = 5
+double_spawn_window = 20
 spawn_fail_message = ""
 spawn_x = 0
 spawn_y = 0
@@ -660,41 +660,60 @@ if respawn_counter &gt; 0 and (is_my_avatar(id) or is_bot(id))
 
 if double_spawn_counter and (is_my_avatar(id) or is_bot(id))
 {
-    double_spawn_counter--
+    double_spawn_counter = sub_real(double_spawn_counter,1)
     
-    //with (local_player)
+    if not double_spawn_counter
     {
-        if not double_spawn_counter
-        {
-            varWrite("visible",true)
-            varWrite("controllable",true)
-        }
-        
-        if is_my_avatar(id)    
-            net_manager.hide_spawn_text = false
-            
-        var overlapping_player = collision_rectangle(bbox_left,bbox_top,bbox_right,bbox_bottom,player,true,true)
-        if instance_exists(overlapping_player) and not is_local_teammate(overlapping_player) and varRead("myX") &gt; 0 and varRead("myY") &gt; 0
-        {
-            double_spawn_counter = 0
-            if is_my_avatar(id)
-                net_manager.hide_spawn_text = true
-            printf("::: Overlapping Players! Another spawn computation is in order ... ")
-            //another.id respawn coordinate computation is needed --&gt; allow a little delay time to be safe
-            respawn_counter = random_range(1,15)
-            respawn_flag = FL_RANDOM
-        }
+        varWrite("visible",true)
+        varWrite("controllable",true)
     }
+    
+    if is_my_avatar(id)    
+        net_manager.hide_spawn_text = false
+        
+    var redo_spawn = false
+        
+    var overlapping_player = collision_rectangle(bbox_left,bbox_top,bbox_right,bbox_bottom,player,true,true)
+    if instance_exists(overlapping_player) and not is_local_teammate(overlapping_player) and varRead("myX") &gt; 0 and varRead("myY") &gt; 0
+    {
+        redo_spawn = true
+        printf("::: Overlapping Players! Another spawn computation is in order ... ")
+    }
+    
+    var min_los = min_line_of_sight_to_enemy(id)
+    if  min_los &lt; 64*8 and min_los &gt; -1
+    {
+        printf("::: BAD SPAWN POINT! Min line of sight to enemy was: "+string(min_los))
+        redo_spawn = true
+    }
+    
+    if redo_spawn
+    {
+        double_spawn_counter = 0
+        
+        if is_my_avatar(id)
+            net_manager.hide_spawn_text = true
+        
+        //another.id respawn coordinate computation is needed --&gt; allow a little delay time to be safe(?)
+        respawn_counter = floor(random_range(1,15))
+        
+        //sometimes randomize the spawn selection ... just to get out of a weird loop scenario (?)
+        if random(1) &lt; 0.25
+            respawn_flag = FL_RANDOM
+        
+        printf("::: redoing spawn with FL_RANDOM in "+string(respawn_counter))
+    }
+        
 }
 
 //trigger another.id spawn if we've got overlapping guys
-if not respawn_counter and net_manager.starting_match
+if not respawn_counter and match_starting()
 {
     if collision_rectangle(bbox_left,bbox_top,bbox_right,bbox_bottom,player,true,true) and varRead("myX") &gt; 0 and varRead("myY") &gt; 0
     {
         printf("::: Overlapping Players! Another spawn computation is in order ... ")
         //another.id respawn coordinate computation is needed --&gt; allow a little delay time to be safe
-        respawn_counter = random_range(1,30)
+        respawn_counter = floor(random_range(1,30))
     }
 }
 </string>
@@ -1474,30 +1493,33 @@ if is_bot(id) and not play_dead and (not instance_exists(modal_controls) or moda
     
     if dat_rank &lt; 1
     {
-        atarget = 0.035
-        rtarget = 0.025
+        atarget = 0.025
+        rtarget = 0.02
         aamt = 0.8
     }
     else if dat_rank &lt; 5
     {
-        atarget = 0.05
-        rtarget = 0.05
-        aamt = 0.75
+        atarget = 0.035
+        rtarget = 0.03
+        aamt = 0.875
     } else if dat_rank &lt; 10
     {
-        atarget = 0.1
-        rtarget = 0.1
-        aamt = 0.5
+        atarget = 0.05
+        rtarget = 0.05
+        aamt = 0.875
     } else if dat_rank &lt; 15
     {
-        atarget = 0.6
-        rtarget = 0.45
-        aamt = 0.25
-    } else
+        atarget = 0.08
+        rtarget = 0.075
+        aamt = 0.875
+    } else if dat_rank &lt; 20
     {
-        atarget = 1
-        rtarget = 1
-        aamt = 0.6
+        atarget = 0.25
+        rtarget = 0.6
+        aamt = 0.875
+    } else {
+        atraget = 0.75
+        rtarget = 0.875
     }
     
     var per_active = lerp(dat_rank/max_rank,atarget,aamt)
@@ -2277,7 +2299,8 @@ wheel_up()
           <argument>
             <kind>1</kind>
             <string>///draw me and my name
-if not bparts_ready exit
+if not bparts_ready or net_manager.snapshot_mode exit
+if not varRead("controllable") and id = myPlayer() and in_match() and not match_ending() and not match_starting() exit
 
 //draw stupid
 //draw_sprite_ext(sprite_index,image_index,x,y,image_xscale,image_yscale,image_angle,c_white,image_alpha)
@@ -2306,7 +2329,8 @@ if not varRead("player_quit") and (net_manager.local_player = id or is_local_tea
 {
     draw_set_font(fnt_hud_big)
     draw_set_color(c_white)
-    draw_namerank(capwords(varRead("pName")),varRead("rank"),x-32,y-100,1,c_white)
+    var xoff = string_width(string(varRead("pName")))/2
+    draw_namerank(capwords(varRead("pName")),varRead("rank"),x-xoff,y-100,1,c_white)
     draw_set_font(fnt_hud)
     
     /*draw_text(x,y-200,"rank: "+varRead("rank"))

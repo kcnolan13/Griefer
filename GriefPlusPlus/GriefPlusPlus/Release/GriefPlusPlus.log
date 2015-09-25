@@ -1,10 +1,10 @@
-﻿Build started 8/26/2015 7:55:29 PM.
+﻿Build started 9/22/2015 8:56:41 PM.
      1>Project "C:\Users\Kyle\Games\Griefer\GriefPlusPlus\GriefPlusPlus\GriefPlusPlus.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\boost /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _SCL_SECURE_NO_WARNINGS /D WIN32 /D NDEBUG /D _CONSOLE /D _WINDLL /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ..\src\gm_transmitters.cpp
-         gm_transmitters.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\boost /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _SCL_SECURE_NO_WARNINGS /D _CRT_SECURE_NO_WARNINGS /D _CRT_SECURE_NO_DEPRECATE /D WIN32 /D NDEBUG /D _CONSOLE /D _WINDLL /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ..\main.cpp
+         main.cpp
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Kyle\Games\Griefer\GriefPlusPlus\GriefPlusPlus\Release\GriefPlusPlus.dll" /INCREMENTAL:NO /NOLOGO /LIBPATH:C:\boost\release\lib boost.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Kyle\Games\Griefer\GriefPlusPlus\GriefPlusPlus\Release\GriefPlusPlus.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Kyle\Games\Griefer\GriefPlusPlus\GriefPlusPlus\Release\GriefPlusPlus.lib" /MACHINE:X86 /SAFESEH /DLL Release\main.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Kyle\Games\Griefer\GriefPlusPlus\GriefPlusPlus\Release\GriefPlusPlus.dll" /INCREMENTAL:NO /NOLOGO /LIBPATH:C:\boost\release\lib boost.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='requireAdministrator' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Kyle\Games\Griefer\GriefPlusPlus\GriefPlusPlus\Release\GriefPlusPlus.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Kyle\Games\Griefer\GriefPlusPlus\GriefPlusPlus\Release\GriefPlusPlus.lib" /MACHINE:X86 /SAFESEH /DLL Release\main.obj
          Release\event_bindings.obj
          Release\gm_readers.obj
          Release\gm_transmitters.obj
@@ -21,11 +21,14 @@
          GriefPlusPlus.vcxproj -> C:\Users\Kyle\Games\Griefer\GriefPlusPlus\GriefPlusPlus\Release\GriefPlusPlus.dll
        PostBuildEvent:
          xcopy C:\Users\Kyle\Games\Griefer\GriefPlusPlus\GriefPlusPlus\Release\GriefPlusPlus.dll C:\Users\Kyle\Games\Griefer\Griefer.gmx\extensions\griefer_client\GriefPlusPlus.dll /E /C /H /R /K /O /Y
+         xcopy C:\Users\Kyle\Games\Griefer\GriefPlusPlus\GriefPlusPlus\Release\GriefPlusPlus.dll C:\Users\Kyle\Games\Griefer\GrieferLauncher.gmx\extensions\griefer_client\GriefPlusPlus.dll /E /C /H /R /K /O /Y
          :VCEnd
+         C:\Users\Kyle\Games\Griefer\GriefPlusPlus\GriefPlusPlus\Release\GriefPlusPlus.dll
+         1 File(s) copied
          C:\Users\Kyle\Games\Griefer\GriefPlusPlus\GriefPlusPlus\Release\GriefPlusPlus.dll
          1 File(s) copied
      1>Done Building Project "C:\Users\Kyle\Games\Griefer\GriefPlusPlus\GriefPlusPlus\GriefPlusPlus.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:09.14
+Time Elapsed 00:00:10.49

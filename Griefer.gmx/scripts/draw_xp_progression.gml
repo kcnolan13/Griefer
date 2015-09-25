@@ -45,7 +45,7 @@ var nu_left = left+nr_width+xsep
 //draw backings
 //printf("ERROR: top = "+string(top)+", left = "+string(left)+", alpha = "+string(alpha))
 
-draw_set_alpha(0.5*alpha)
+draw_set_alpha(0.75*alpha)
 draw_set_color(c_black)
 draw_rectangle(left,top-5,left+nr_width,top+nr_height,false)
 draw_rectangle(left+nr_width+xsep,top-5,right,top+nu_height,false)

@@ -119,7 +119,7 @@ draw_bpart_slot_complete_ext(id, left+icon_pad*scale, top+icon_pad*scale, ((heig
 draw_set_font(fnt_hud_big)
 draw_set_halign(fa_left)
 draw_set_valign(fa_top)
-draw_set_alpha(average2(alpha,1))
+draw_set_alpha(1)
 draw_set_color(c_white)
 draw_text_ext_transformed(left+(net_manager.armory_ysep*3.3+net_manager.armory_sl+txt_pad+10)*scale,top+(txt_pad+8)*scale,dat_title, 24, width/scale-145,scale,scale,0)
 draw_set_font(fnt_hud)

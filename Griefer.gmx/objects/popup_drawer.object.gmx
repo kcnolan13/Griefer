@@ -36,6 +36,7 @@ body_text_override = ""
 color = c_blue
 draw_it = false
 alpha = 1
+draw_challenge_splash_text = 0
 
 draw_sinbad = false
 
@@ -104,7 +105,7 @@ free_popup_surfaces()
         </arguments>
       </action>
     </event>
-    <event eventtype="8" enumb="0">
+    <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -190,6 +191,14 @@ if draw_it
             draw_splats(global.popup_width-40,40,0.6,col,1)
         }
         
+        if bpart_mod_var(icon_ref) = "animated"
+        {
+            col = bpart_mod_val(icon_ref)
+            draw_set_color(c_white)
+            //draw some blood to the popup surface.... also draw the fancy text
+            draw_icon_animated(global.popup_width-40,40,0.6,col,1)
+        }
+        
         //draw the fancy text
         surface_reset_target()
         
@@ -215,6 +224,135 @@ if draw_it
         draw_popup(left, top, dat_title, subtitle, source, body_text_override, color, alph)
     }
     draw_it = false
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///draw the animated thingy for challenges
+if menmode() = "challenges"
+{
+    if draw_challenge_splash_text
+        draw_challenge_splash_text --
+        
+    mod_ind = GARBAGE
+    icon_ref = 0
+    top = -10000
+    left = -10000
+    right = -9000
+    
+    with challenge_generic
+    {
+        if room = rm_menu or room = rm_lobby
+        {
+            draw_mod_notification(x+72-global.moffset,y+global.moffset,icon)
+        }
+    }
+    
+    with challenge_generic
+    {
+        if hover_counter &gt; hover_delay and instance_place(x,y,cursor)
+        {
+            var desc = description
+            
+            if completed
+            {
+                for (var i=0; i&lt;getLength(rewards); i++)
+                {
+                    if not bpart_has_armor_lists(rewards[i]) and not bpart_has_cache(rewards[i])
+                    {
+                        desc = "Click To Redeem!"
+                    }
+                }
+            }
+            
+            icon = icon_complete
+            other.titties = bpart_mod_index(icon)
+            //printf(":::set other.mod_ind = "+string(bpart_mod_index(icon)))
+            if other.draw_challenge_splash_text &lt; 8
+                other.draw_challenge_splash_text += 2
+            other.icon_ref = icon
+            other.top = top
+            other.left = left
+            other.right = right
+            other.chal_id = id
+            
+            draw_popup_challenge(cursor.x, cursor.y, name, "", desc, icon, color_complete, 1,1)
+        }   
+    }
+    
+    
+    //SPLASH TEXT
+    if draw_challenge_splash_text &gt; 4
+    {
+        //printf("::: mod_ind = "+string(titties))
+        if titties &gt; GARBAGE and surface_exists(surf_popup) and instance_exists(chal_id)
+        {
+            top = chal_id.top
+            left = chal_id.left
+            righ = chal_id.right
+            
+            surface_set_target(surf_popup)
+            draw_clear_alpha(c_black,0)
+            draw_set_color(c_white)
+            draw_set_alpha(1)
+            
+            col = c_white
+            
+            if bpart_mod_var(icon_ref) = "blood_color"
+            {
+                col = bpart_mod_val(icon_ref)
+                draw_set_color(c_white)
+                //draw some blood to the popup surface.... also draw the fancy text
+                draw_splats(global.popup_width-40,40,0.6,col,1)
+            }
+            
+            if bpart_mod_var(icon_ref) = "animated"
+            {
+                col = bpart_mod_val(icon_ref)
+                draw_set_color(c_white)
+                //draw some blood to the popup surface.... also draw the fancy text
+                draw_icon_animated(global.popup_width-40,40,0.6,col,1)
+            }
+            
+            //draw the fancy text
+            surface_reset_target()
+            
+            draw_set_alpha(1)
+            draw_surface(surf_popup,right-global.popup_width,top)
+            
+            var t = global.mod_descriptions[titties]
+            var tcol = c_white
+                if do_fancy_text_black(col)
+                    tcol = c_black
+            var tscale = 1*global.notification_scale
+            var trot = -45
+            var toff = 32
+            draw_set_color(tcol)
+            draw_set_font(fnt_mod)
+            draw_set_halign(fa_center)
+            draw_set_valign(fa_center)
+            draw_text_ext_transformed(right-toff,top+toff,t,24,global.popup_width,tscale,tscale,trot)
+            draw_set_font(fnt_hud)
+        }
+    }
+      
 }
 </string>
           </argument>

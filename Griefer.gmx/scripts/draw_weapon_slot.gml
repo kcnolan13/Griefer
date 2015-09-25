@@ -42,6 +42,7 @@ if !instance_exists(wep_obj)
     
 draw_set_font(fnt_hud)
 draw_set_color(c_white)
+draw_flash_compensate()
 
 //draw weapon name
 draw_set_halign(fa_center)
@@ -80,7 +81,6 @@ var wep_yoff = wepscale*(sprite_get_yoffset(slot_icon)-sprite_get_height(slot_ic
 
 draw_sprite_ext(slot_icon,-1,slot_x+wep_xoff,slot_y+wep_yoff-9*slot_scale,wepscale,wepscale,0,c_white,slot_alpha)
 //printf("Weapon Drawn!")
-
 
 
 

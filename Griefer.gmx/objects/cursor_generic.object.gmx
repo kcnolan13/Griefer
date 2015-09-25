@@ -28,6 +28,8 @@
             <string>///basic properties
 active = false
 
+counter = 0
+
 //dummy vars
 angle = 90
 
@@ -57,6 +59,30 @@ inaccuracy = 0
 inaccuracy_divisor = 5
 
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///some ish
+counter++
 </string>
           </argument>
         </arguments>
@@ -128,7 +154,7 @@ active = false
           <argument>
             <kind>1</kind>
             <string>///draw code
-if active and in_match()
+if active and in_match() and not match_starting() and not match_ending()
 {
     var draw_x = (cursor.x-view_xview)*WVIEW/view_wview
     var draw_y = (cursor.y-view_yview)*HVIEW/view_hview

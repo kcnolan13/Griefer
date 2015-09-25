@@ -127,8 +127,8 @@ if string_length(body_text_override) < 1
     } else if string_length(source) > 0
     {
         //must be stolen gear
-        draw_text(pleft+txt_pad,ptop+title_height+txt_pad,"Stole From:")
-        draw_text(pleft+txt_pad,ptop+title_height+24+txt_pad,source)
+        //draw_text(pleft+txt_pad,ptop+title_height+txt_pad,"Stole From:")
+        draw_text(pleft+txt_pad,ptop+title_height+txt_pad+tbody_voff,source)
     }
 }
 else

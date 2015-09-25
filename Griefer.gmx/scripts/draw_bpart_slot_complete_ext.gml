@@ -40,8 +40,8 @@ else
             draw_sprite_ext(drawspr,-1,bpart_x+square_xmid-spr_xoff,bpart_y+square_ymid-spr_yoff,proper_scale,proper_scale,0,c_white,dalph)
         }
         
-        var square_xmid = 72/2
-        var square_ymid = 72/2
+        var square_xmid = 72/2*scale
+        var square_ymid = 72/2*scale
         
         if bpart_obj.object_index = challenge_generic
         {

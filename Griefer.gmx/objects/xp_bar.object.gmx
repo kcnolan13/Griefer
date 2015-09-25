@@ -181,7 +181,7 @@ if net_manager.menu_mode != "lottery_steal" and xp_replay and rtime() &gt; 30
 if room = rm_lobby
 {
     if net_manager.menu_mode = "lottery_steal" and xp_2earn &lt; 1
-        xp_done_counter++
+        xp_done_counter += real_speed(1)
     else
         xp_done_counter = 0
 }
@@ -626,7 +626,7 @@ else if room = rm_lobby and net_manager.menu_mode = "lottery_steal"
         draw_set_alpha(alpha)
         var yoff = -64*0.8-24
         scale = 1.25
-        draw_xpbar(room_width/2-20,yoff+HVIEW-XPBAR_BOTTOM-64*2.35-12,fraction_full,fraction_full,scale,fa_center,fa_bottom,c_black,false)
+        draw_xpbar(room_width/2-20,yoff+HVIEW-XPBAR_BOTTOM-64*2.35-12,fraction_full,fraction_full,scale,fa_center,fa_bottom,c_white,false)
         draw_xp_progression(room_width/2,yoff+HVIEW-XPBAR_BOTTOM-64*2-12,1,fa_center,fa_top,c_white,alpha,rank,xp)
     }
     else
@@ -694,6 +694,20 @@ simple_popup("Mark Distance",string(round(point_distance(xmark1,ymark1,xmark2,ym
       </action>
     </event>
     <event eventtype="9" enumb="13">
+      <action>
+        <libid>1</libid>
+        <id>425</id>
+        <kind>4</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+      </action>
       <action>
         <libid>1</libid>
         <id>603</id>

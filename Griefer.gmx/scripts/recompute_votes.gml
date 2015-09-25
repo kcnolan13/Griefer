@@ -26,11 +26,18 @@ with net_manager
     with bn_vote
     {
         if map_num = objVarRead(net_manager,"next_map1")
-            text = string(net_manager.votes1)+" "+pluralize("Vote",net_manager.votes1)
-        else if map_num = objVarRead(net_manager,"next_map2")
-            text = string(net_manager.votes2)+" "+pluralize("Vote",net_manager.votes2)
-        else if map_num = objVarRead(net_manager,"next_map3")
-            text = string(net_manager.votes3)+" "+pluralize("Vote",net_manager.votes3)
+        {
+            if net_manager.votes1 = 0 text = ""
+            else text = string(net_manager.votes1)+" "+pluralize("Vote",net_manager.votes1)
+        }
+        else if map_num = objVarRead(net_manager,"next_map2") {
+            if net_manager.votes2 = 0 text = ""
+            else text = string(net_manager.votes2)+" "+pluralize("Vote",net_manager.votes2)
+        }
+        else if map_num = objVarRead(net_manager,"next_map3") {
+            if net_manager.votes3 = 0 text = ""
+            else text = string(net_manager.votes3)+" "+pluralize("Vote",net_manager.votes3)
+        }
         else
         {
             printf("ERROR: bn_vote has bad map_num: "+string(map_num))

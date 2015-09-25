@@ -29,6 +29,8 @@
 auto_crop = false
 crop_pad = 24
 
+force_click = false
+
 depth = -95
 counter = 0
 width = 64*4
@@ -45,6 +47,19 @@ color_highlighted = GARBAGE
 highlightable = true
 wait_while_loading = false
 post_loading_wait_time = 30*5
+blocked = false
+
+draw_image_gradient = false
+image_gradient_alpha = 0.25
+
+game_end_on_destroy = false
+
+border_width = 0
+border_color = c_white
+border_alpha = 1
+border_inscribe = false
+
+menu_mode = "all"
 
 is_loading = false
 load_rot = 0
@@ -168,7 +183,18 @@ text_linesep = 20
 text_pad = 0
 
 image = spr_none
+image_stretch_x = false
+image_stretch_y = false
 image_stretch = false
+img_xscale = 1
+img_yscale = 1
+image_crop = false
+image_crop_align = fa_center
+img_blend = c_white
+image_xoff = 0
+image_yoff = 0
+image_halign = fa_left
+image_valign = fa_left
 
 color = c_dkgray
 header_color = c_gray
@@ -245,6 +271,9 @@ if surface_exists(surface)
 
 if surface_exists(surf_3d)
     surface_free(surf_3d)
+    
+if game_end_on_destroy
+    game_end()
 </string>
           </argument>
         </arguments>
@@ -404,6 +433,11 @@ if birth_delay &gt; 0
     exit
 }
 
+if menu_mode != "all" and menmode() != menu_mode
+{
+    fade_out = true
+}
+
 //TRANSLATION
 if translation_x != translation_xtarget or translation_y != translation_ytarget
 {
@@ -477,6 +511,8 @@ if modal_highlighted(id)
         show_popup = true
         
     scale = lerp_real(scale,scale_highlighted,scale_lerp_real)
+    cursor_highlight()
+    
     if not fade_out
     {
         alpha = lerp_real(alpha,alpha_highlight,scale_lerp_real)
