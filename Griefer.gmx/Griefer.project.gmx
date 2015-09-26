@@ -561,6 +561,8 @@
     </sprites>
     <sprites name="accolades">
       <sprite>sprites\acc_dub_kill</sprite>
+      <sprite>sprites\acc_3ks</sprite>
+      <sprite>sprites\acc_5ks</sprite>
     </sprites>
     <sprites name="mapsnaps">
       <sprite>sprites\mapsnap_base</sprite>

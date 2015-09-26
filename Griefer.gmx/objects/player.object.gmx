@@ -1509,13 +1509,13 @@ if is_bot(id) and not play_dead and (not instance_exists(modal_controls) or moda
         aamt = 0.875
     } else if dat_rank &lt; 15
     {
-        atarget = 0.08
-        rtarget = 0.075
+        atarget = 0.07
+        rtarget = 0.06
         aamt = 0.875
     } else if dat_rank &lt; 20
     {
-        atarget = 0.25
-        rtarget = 0.6
+        atarget = 0.125
+        rtarget = 0.2
         aamt = 0.875
     } else {
         atraget = 0.75

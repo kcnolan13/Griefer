@@ -1233,11 +1233,11 @@ if keepalive_timer
     keepalive_timer --
     if not keepalive_timer
     {
+        keepalive_timer = keepalive_timeout
         //printf("::: checking keepalive")
         if isAlive() = 1
         {
             //printf(":::IS ALIVE")
-            keepalive_timer = keepalive_timeout
             server_found = true
             keepalive_missed = 0
             keepAlive()
