@@ -1982,7 +1982,9 @@
       <room>rooms\map_placeholder2</room>
     </rooms>
   </rooms>
-  <constants number="164">
+  <constants number="166">
+    <constant name="NUM_TOP_MEDALS">3</constant>
+    <constant name="FL_TOP_MEDALS">28</constant>
     <constant name="VERSION">"V121"</constant>
     <constant name="GMHSV">1.41176470588</constant>
     <constant name="WEBHSV">0.70833333333</constant>

@@ -1,4 +1,4 @@
-///create_accolade_grid(left,top,right,bottom,halign,valign,grid_pad,col_total,create_all)
+///create_accolade_grid(left,top,right,bottom,halign,valign,grid_pad,col_total,create_all,force_num_per_row)
 var l = argument0
 var t = argument1
 var r = argument2
@@ -8,6 +8,7 @@ var valign = argument5
 var pad = argument6
 var col_total = argument7
 var create_all = argument8
+var force_num_per_row = argument9
 
 var w = abs(r - l)
 var h = abs(b - t)
@@ -89,10 +90,17 @@ var dbug = true
     //figure out how many rows there need to be
     var num_rows = ceil((acc_width+hsep)*num_2create / w)
     var num_per_row = floor(w/(acc_width+hsep))
+    
+    if force_num_per_row
+        num_per_row = force_num_per_row
+    
     var row_height = acc_width/2+12
     var row1_y = t
     
-    if dbug printf("::: num_rows="+string(num_rows)+", num_per_row="+string(num_per_row))
+    printf("::: num_rows="+string(num_rows)+", num_per_row="+string(num_per_row))
+    
+    if menmode() = "lottery_steal"
+        row_height += 8
     
     //compute y for first row
     /*if valign = fa_center
@@ -112,11 +120,11 @@ var dbug = true
     
     for (var i=0; i<lenh; i++)
     {   
-        if (acc_row_data(i,col_total) > 0 or create_all) and acc_row_data(i,COL_IMAGE) != spr_none
+        if (acc_row_data(i,col_total) > 0 or (create_all /*and create_all != FL_TOP_MEDALS*/)) and acc_row_data(i,COL_IMAGE) != spr_none
         {
             if row_index = 0
             {
-                if num_created > 1
+                if num_created > 0
                 {
                     //compute offsets for new row
                     row_num++
@@ -143,9 +151,19 @@ var dbug = true
             
             num_created ++
             
+            if create_all = FL_TOP_MEDALS 
+            {
+                datAcc.scale_normal = 1.5
+                datAcc.scale_highlighted = 2
+                
+                if num_created >= NUM_TOP_MEDALS
+                    break
+            }
+            
+            
             row_index ++
             //only rollover to the next row in match --> the stat screen now scrolls and whatnot
-            if row_index >= num_per_row and in_match()
+            if row_index >= num_per_row and (in_match() or force_num_per_row)
                 row_index = 0
         }
     }

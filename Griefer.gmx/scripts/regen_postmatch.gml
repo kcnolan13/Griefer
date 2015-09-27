@@ -35,4 +35,25 @@ aw.color = c_black//make_colour_hsv(100,10,80)
 aw.birth_delay = birth_delay+net_manager.lotto_delay
 aw.menu_mode = "lottery_steal"
 
+done_spacer = 32
+accw = instance_create(room_width*1/6+64,room_height*1/4-32+64*1.75+32,modal_window)
+accw.halign = fa_center
+accw.valign = fa_center
+accw.width = 64*3
+accw.height = mw.height - 64*1.75 - done_spacer
+accw.depth = -92
+accw.alpha_max = 0.5
+accw.highlightable = false
+accw.color = c_black//make_colour_hsv(100,10,80)
+accw.birth_delay = birth_delay+50
+accw.menu_mode = "lottery_steal"
+accw.header_text = "Top "+global.accolade_name+"s"
+accw.header_height = 36
+accw.header_alpha = 0
+
+if instance_exists(mw)
+{
+    accw.y = mw.y-mw.height/2+64*1.75+done_spacer+accw.height/2
+}
+
 regen_postmatch_visuals()

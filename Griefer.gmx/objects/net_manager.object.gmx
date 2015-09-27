@@ -134,7 +134,7 @@ full_screen = false
 global.rank_colors = 0
 global.rank_names = 0
 
-lotto_delay = 50
+lotto_delay = 40
 lotto_counter = 0
 
 tdm_kill_limit = 3//20
@@ -1665,8 +1665,12 @@ if room = rm_lobby
             break
             
             case "lottery_steal":
-                if not is_my_avatar(ID)
+                if not is_my_avatar(ID) or true
+                {
+                    ID.y = -64*10
+                    objVarWrite(ID,"myY",-64*10)
                     objVarWrite(ID,"dude_y",0-64*10)
+                }
                 else
                 {
                     objVarWrite(ID,"dude_y",room_height*2/3-32)
@@ -3324,7 +3328,7 @@ if not match_ending()
         
         draw_set_font(fnt_hud_biggest)
         draw_set_valign(fa_top)
-        draw_text(0+WVIEW/2,rtop+12,string(game_mode_name(varRead("game_mode")))+" on "+string(global.map_names[room]))
+        draw_text(0+WVIEW/2,rtop+12,string(game_mode_name_long(varRead("game_mode")))+" on "+string(global.map_names[room]))
         
         draw_set_font(fnt_hud_medium)
         draw_set_valign(fa_bottom)
@@ -4223,7 +4227,7 @@ if lotto_counter &gt; lotto_delay and instance_exists(xp_bar.aw)
         draw_set_halign(fa_center)
         draw_set_valign(fa_center)
         
-        draw_text(lottery_x,lottery_y-24,"Armor Lottery:")
+        draw_text(lottery_x,lottery_y-24,"Armor Lottery")
         
         //draw the lottery when it is time
         if mode_counter &lt; mode_total-steal_time

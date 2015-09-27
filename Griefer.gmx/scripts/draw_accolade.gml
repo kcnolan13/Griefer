@@ -36,7 +36,7 @@ else
     draw_set_color(c_white)
 
 var yoff = sprite_offset+2*scale
-var ysep = 20*scale
+var ysep = 18*scale
 
 if in_match()
 {
@@ -56,7 +56,15 @@ else
 if not in_match() or match_ending()
 {
     if number > 0 and hover_counter < 1
-        draw_text_transformed(xdraw,ydraw+yoff+ysep,"X "+string(number),scale,scale,0)
+    {
+        var txtscale = scale-(accolade_manager.acc_match_scale-1)
+        if txtscale < 0
+            txtscale = 0
+            
+        if menmode() != "lottery_steal"
+            txtscale = scale
+        draw_text_transformed(xdraw,ydraw+yoff+ysep,"X "+string(number),txtscale,txtscale,0)
+    }
 }
 
 if show_popup and (accolade_manager.acc_popup_id = id or accolade_manager.acc_popup_id = noone)
