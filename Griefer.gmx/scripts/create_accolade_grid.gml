@@ -120,7 +120,7 @@ var dbug = true
     
     for (var i=0; i<lenh; i++)
     {   
-        if (acc_row_data(i,col_total) > 0 or (create_all /*and create_all != FL_TOP_MEDALS*/)) and acc_row_data(i,COL_IMAGE) != spr_none
+        if (acc_row_data(i,col_total) > 0 or (create_all and create_all != FL_TOP_MEDALS)) and acc_row_data(i,COL_IMAGE) != spr_none
         {
             if row_index = 0
             {
