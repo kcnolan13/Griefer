@@ -1,11 +1,11 @@
 ///audio(sound,falloff_scaler)
 var sound = argument0
-var falloff = argument1*global.audio_gain
+var falloff = argument1*GAIN_AUDIO
 
 var snd = audio_play_sound(sound,falloff,false)
-printf("::: gain BEFORE for "+string(sound_get_name(sound))+" = "+string(audio_sound_get_gain(snd)))
+//printf("::: gain BEFORE for "+string(sound_get_name(sound))+" = "+string(audio_sound_get_gain(snd)))
 audio_sound_gain(snd,falloff*audio_sound_get_gain(snd),0)
-printf("::: gain AFTER for "+string(sound_get_name(sound))+" = "+string(audio_sound_get_gain(snd)))
+//printf("::: gain AFTER for "+string(sound_get_name(sound))+" = "+string(audio_sound_get_gain(snd)))
 
 var ref_norm = view_wview*2/3
 var playx = x

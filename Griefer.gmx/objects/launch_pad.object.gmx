@@ -146,8 +146,11 @@ for (var i=0; i&lt;instance_number(rag_generic); i++)
         intensity = intensity_max*2
         intensity_dir = -1
         
-        if not audio_is_playing(snd_launch_pad) and not net_manager.match_countdown and not net_manager.starting_match
-            audio(snd_launch_pad,1)
+        if not audio_is_playing(snd_launch_pad) and not net_manager.match_countdown and not net_manager.starting_match and dude.launch_pad_counter &lt;= dude.launch_pad_threshold
+        {
+            dude.launch_pad_counter++
+            audio(snd_launch_pad,0.75)
+        }
     }
 }
 </string>

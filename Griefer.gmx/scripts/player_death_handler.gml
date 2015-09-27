@@ -23,7 +23,6 @@ if is_my_avatar(id)
         untouched_kills = 0
         spree_headshots = 0
         spree_gibs = 0
-        spree_flashes = 0
         spree_kills = 0
         spree_assists = 0
         life_longshot_headshots = 0

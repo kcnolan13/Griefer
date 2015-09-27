@@ -26,6 +26,13 @@ datAcc = instance_create(spawnx,spawny,accolade_generic)
         datAcc.scale_normal = accolade_manager.acc_match_scale
         datAcc.scale_highlighted = accolade_manager.acc_match_scale
     }
+    
+    if not in_match()
+    {
+        datAcc.highlight_sound = snd_scroll3
+        datAcc.highlight_gain = 1//GAIN_HIGHLIGHT*1
+    }   
+    
 }
 
 return datAcc

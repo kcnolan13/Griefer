@@ -64,6 +64,8 @@ alpha_scroll_scaler = 1
 
 depth_show_popup = depth-2
 depth_normal = depth
+
+scale_lerp_real = 0.25
 </string>
           </argument>
         </arguments>

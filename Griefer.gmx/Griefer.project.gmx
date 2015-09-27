@@ -85,6 +85,12 @@
       <sound>sound\snd_item_blah</sound>
       <sound>sound\snd_item_stolen</sound>
       <sound>sound\snd_denied</sound>
+      <sound>sound\snd_keystroke</sound>
+      <sound>sound\snd_pan1</sound>
+      <sound>sound\snd_pan2</sound>
+      <sound>sound\snd_pan3</sound>
+      <sound>sound\snd_pan4</sound>
+      <sound>sound\snd_pan5</sound>
     </sounds>
     <sounds name="accolades">
       <sound>sound\snd_dub_kill</sound>
@@ -1270,8 +1276,10 @@
       <script>scripts\getMax.gml</script>
       <script>scripts\getMin.gml</script>
       <script>scripts\time_ms_2string.gml</script>
+      <script>scripts\time_30steps_2countdown.gml</script>
       <script>scripts\pluralize.gml</script>
       <script>scripts\random_string.gml</script>
+      <script>scripts\leading_digits.gml</script>
     </scripts>
     <scripts name="player">
       <script>scripts\compute_respawn_coordinates.gml</script>
@@ -2012,7 +2020,11 @@
       <room>rooms\map_placeholder2</room>
     </rooms>
   </rooms>
-  <constants number="166">
+  <constants number="170">
+    <constant name="GAIN_HIGHLIGHT">1</constant>
+    <constant name="GAIN_KEYSTROKE">0.8</constant>
+    <constant name="GAIN_PAN">0.875</constant>
+    <constant name="GAIN_AUDIO">0.25</constant>
     <constant name="NUM_TOP_MEDALS">3</constant>
     <constant name="FL_TOP_MEDALS">28</constant>
     <constant name="VERSION">"V121"</constant>

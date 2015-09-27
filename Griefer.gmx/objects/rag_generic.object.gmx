@@ -28,6 +28,9 @@
             <string>///CREATE FIXTURE
 fix = physics_fixture_create()
 
+launch_pad_counter = 0
+launch_pad_threshold = 5
+
 joint_health = 125
 
 life = 0

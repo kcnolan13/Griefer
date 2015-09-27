@@ -154,7 +154,12 @@ extra_height = 0
 
 
 pop_sound = snd_none
+pop_gain = 1
 popped_in = false
+
+highlight_sound = snd_none
+highlight_gain = 1
+highlight_sound_played = false
 
 birth_delay = 0
 
@@ -501,7 +506,7 @@ if play_sound_when_ready
     if do_play_sound
     {
         play_sound_when_ready = false
-        audio(pop_sound,1/global.audio_gain)
+        audio(pop_sound,pop_gain/GAIN_AUDIO)
     }
 }
 
@@ -526,6 +531,12 @@ if modal_highlighted(id)
     if hover_counter &gt; hover_delay
         show_popup = true
         
+    if hover_counter &gt; hover_delay/6 and highlight_sound != snd_none and not highlight_sound_played
+    {
+        highlight_sound_played = true
+        audio(highlight_sound,highlight_gain)
+    }
+        
     scale = lerp_real(scale,scale_highlighted,scale_lerp_real)
     cursor_highlight()
     
@@ -536,6 +547,7 @@ if modal_highlighted(id)
 }
 else
 {
+    highlight_sound_played = false
     hover_counter = 0
     show_popup = false
     scale = lerp_real(scale,scale_normal,scale_lerp_real)

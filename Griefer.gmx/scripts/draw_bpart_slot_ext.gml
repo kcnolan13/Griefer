@@ -15,7 +15,13 @@ draw_set_color(c_white)
 //else
 //draw_set_color(c_black)
 
-draw_rectangle(bpart_x,bpart_y,bpart_x+net_manager.armory_sl*scale,bpart_y+net_manager.armory_sl*scale,true)
-draw_rectangle(bpart_x+1,bpart_y+1,bpart_x+1+net_manager.armory_sl*scale-2,bpart_y+1+net_manager.armory_sl*scale-2,true)
+//draw_rectangle(bpart_x,bpart_y,bpart_x+net_manager.armory_sl*scale,bpart_y+net_manager.armory_sl*scale,true)
+//draw_rectangle(bpart_x+1,bpart_y+1,bpart_x+1+net_manager.armory_sl*scale-2,bpart_y+1+net_manager.armory_sl*scale-2,true)
+
+for (var i=0; i<2; i += 0.5)
+{
+    draw_rectangle(bpart_x+i,bpart_y+i,bpart_x+net_manager.armory_sl*scale+1-i,bpart_y+net_manager.armory_sl*scale+1-i,true)
+}
+
 draw_set_alpha(1)
 draw_set_color(c_white)

@@ -1,5 +1,3 @@
-global.audio_gain = 0.25
-
 global.bmode = "Bot Mode"
 global.cmode = "Ranked"
 global.pmode = "Start a Party"

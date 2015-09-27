@@ -41,6 +41,9 @@ sat = 0
 val = 0
 notif_scale = 1.25
 snap_2view = true//false
+
+highlight_sound = snd_scroll//snd_pan3
+highlight_gain = 1//GAIN_HIGHLIGHT
 </string>
           </argument>
         </arguments>
@@ -162,7 +165,7 @@ if clicked exit
     clicked = 2
 
 printf("clicked: "+label)
-audio(snd_click,1)
+audio(snd_pan4,GAIN_PAN)
 </string>
           </argument>
         </arguments>

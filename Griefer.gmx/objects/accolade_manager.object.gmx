@@ -76,12 +76,12 @@ var row_num = 0
 init_grid_row('dub_kill','Double Kill','2 Kills Back-to-Back',acc_dub_kill,                     50,2,99,FL_NORMAL,snd_dub_kill,row_num) row_num++
 init_grid_row('trip_kill','Triple Kill','3 Kills Back-to-Back',acc_trip_kill,                   100,3,99,FL_NORMAL,snd_trip_kill,row_num) row_num++
 init_grid_row('stick_kill','Stick Kill','Sticky Kill',acc_stick_kill,                           12.5,1,99,FL_NORMAL,snd_stick_kill,row_num) row_num++
-init_grid_row('flash_bandicoot','Flash Bandicoot','3 Stuns Without Dying',acc_flash_bandicoot,  50,3,99,FL_NORMAL,snd_flash_bandicoot,row_num) row_num++
+init_grid_row('flash_bandicoot','Flash Bandicoot','5 Stuns In One Match',acc_flash_bandicoot,   68,5,99,FL_NORMAL,snd_flash_bandicoot,row_num) row_num++
 init_grid_row('flame_kill','Incinerated','Flame Grenade Kill',acc_flame_kill,                   12.5,1,99,FL_NORMAL,snd_flame_kill,row_num) row_num++
 init_grid_row('ink_kill','Poison Kill','Poison Grenade Kill',acc_ink_kill,                      12.5,1,99,FL_NORMAL,snd_ink_kill,row_num) row_num++
 init_grid_row('cant_touch_dis',"Can't Touch Dis",'4 Kills Taking No Damage',acc_cant_touch_dis, 225,4,99,FL_NORMAL,snd_cant_touch_dis,row_num) row_num++
 init_grid_row('mvp','MVP','Most Points in Match',acc_mvp,                                       85,0,99,FL_NORMAL,snd_mvp,row_num) row_num++
-init_grid_row('highest_kd','Highest KDR','Highest Kill/Death Ratio in Match',acc_highest_kd,    65,0,99,FL_NORMAL,snd_highest_kdr,row_num) row_num++
+init_grid_row('highest_kd','Highest KDR','Highest Kill/Death Ratio in Match',acc_highest_kd,    60,0,99,FL_NORMAL,snd_highest_kdr,row_num) row_num++
 init_grid_row('10kd','Smooth Operator','10+ Kills, No Deaths',acc_10kd,                         150,10,99,FL_NORMAL,snd_10kd,row_num) row_num++
 init_grid_row('ninja','Ninja','Survive for 60 Seconds Without Taking Damage',acc_ninja,         70,60,5,FL_NORMAL,snd_ninja,row_num) row_num++
 init_grid_row('survivor','Survivor','Survive a Near-Death-Experience',acc_survivor,             25,0,99,FL_NORMAL,snd_survivor,row_num) row_num++

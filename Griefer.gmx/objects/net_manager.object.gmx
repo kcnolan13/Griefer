@@ -63,6 +63,10 @@ name_you_killed = ""
 new_user = false
 drawing_grid_dir = 0
 
+sounded_lotto_slot[0] = false
+sounded_lotto_slot[1] = false
+sounded_lotto_slot[2] = false
+
 barh = 22
 
 force_loading_popup = false
@@ -2568,6 +2572,10 @@ alarm[7] = 2
 
 global.xoff = 0
 
+sounded_lotto_slot[0] = false
+sounded_lotto_slot[1] = false
+sounded_lotto_slot[2] = false
+
 for (var i=0; i&lt;NUM_LIMBS; i++)
 {
     grid_lalphs[i] = 0
@@ -3651,7 +3659,7 @@ if lobby_match_countdown and instance_exists(next_map_final)//and not waiting_fo
     //ui_countdown = popup_loading(WVIEW/2,HVIEW/2)
     //ui_countdown.is_ui_countdown = true
     
-    next_map_final.text = "Match Countdown ... "+string(ceil(varRead("lobby_wait_time")/30))
+    next_map_final.text = "Match Countdown    "+string(time_30steps_2countdown(varRead("lobby_wait_time")))
     
     draw_set_color(c_black)
     if varRead("lobby_wait_time")/30 &lt; 8
@@ -3823,7 +3831,7 @@ if room = rm_menu or room = rm_lobby
     {
         draw_set_halign(fa_right)
         draw_set_valign(fa_middle)
-        draw_text(room_width-draw_edge_txtpad,room_height-draw_edge_padding/2-barh/2,"Intermission ... "+string(ceil(varRead("lobby_wait_time")/30)))
+        draw_text(room_width-draw_edge_txtpad,room_height-draw_edge_padding/2-barh/2,"Intermission     "+string(time_30steps_2countdown(varRead("lobby_wait_time"))))
     }
     
     if room = rm_menu and room_counter &gt; 30*2 and menmode() != "armory" and menmode() != "stats"
@@ -4264,8 +4272,9 @@ if lotto_counter &gt; lotto_delay and instance_exists(xp_bar.aw)
                 }
                 else
                 {
-                    if mode_counter = lottery_time-lottery_calc_time-lotto_slot_index*lotto_comein_offset
+                    if mode_counter &lt;= lottery_time-lottery_calc_time-lotto_slot_index*lotto_comein_offset and not sounded_lotto_slot[lotto_slot_index]
                     {
+                        sounded_lotto_slot[lotto_slot_index] = true
                         if not instance_exists(bpart_lotto[lotto_slot_index])
                             audio(snd_item_blah,1)
                         else
