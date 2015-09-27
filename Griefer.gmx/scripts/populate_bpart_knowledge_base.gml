@@ -72,6 +72,9 @@ knowledge_base_add(spr_dred_helmet, global.dred_name, 4, global.default_scale, t
 global.tadpole_name = "Tadpole Helmet"
 knowledge_base_add(spr_tadpole_helmet, global.tadpole_name, 3, global.default_scale, true, global.src_challenge,"helmet")
 
+global.bandicoot_name = "Bandicoot Helmet"
+knowledge_base_add(spr_bandicoot_helmet, global.bandicoot_name, 3, global.default_scale, true, global.src_challenge,"helmet")
+
 global.emile2_name = "Support Helmet"
 knowledge_base_add(spr_emile2_helmet, global.emile2_name, 2, global.default_scale, true, global.src_lotto,"helmet")
 
@@ -114,7 +117,7 @@ knowledge_base_add(spr_smooth_shin, "Smooth", 1, global.default_scale, true, glo
 //hats
 knowledge_base_add(spr_hat2, "Flamingo Cap", 3, global.default_scale, true, global.src_lotto,"hat")
 knowledge_base_add(spr_beret_hat, "Beret", 2, global.default_scale, true, global.src_lotto,"hat")
-knowledge_base_add(spr_sombrero_hat, "Sombrero", 4, global.default_scale, true, global.src_challenge,"hat")
+knowledge_base_add(spr_sombrero_hat, "Sombrero", 4, global.default_scale, true, global.src_lotto,"hat")
 knowledge_base_add(spr_red_cap_hat, "Fez", 3, global.default_scale, true, global.src_lotto,"hat")
 knowledge_base_add(spr_party_hat, "Party Hat", 3, global.default_scale, true, global.src_lotto,"hat")
 knowledge_base_add(spr_crown_hat, "Your Highness", 4, global.default_scale, true, global.src_lotto,"hat")

@@ -187,7 +187,8 @@ if active = false and not net_manager.lock_armory
         fade_modal(modal_meter)
         fade_modal(bn_slabel)
         fade_modal(modal_stat_history)
-        fade_modal(accolade_generic)
+        
+        with accolade_generic instance_destroy()
         
         with accolade_manager
         {
@@ -209,14 +210,14 @@ if active = false and not net_manager.lock_armory
         else if stat_tab = stat_manager.tabs[0]
         {
             //request stats + accolades
-            request_personal_stats(stat_manager.grav_name,FL_NORMAL)
             request_accolades(stat_manager.grav_name,FL_NORMAL)
+            request_personal_stats(stat_manager.grav_name,FL_NORMAL)
         }
         else if stat_tab = stat_manager.tabs[1]
         {
             //request stats + accolades
-            request_personal_stats(stat_manager.grav_name,FL_BOT)
             request_accolades(stat_manager.grav_name,FL_BOT)
+            request_personal_stats(stat_manager.grav_name,FL_BOT)
         }
     }
 }

@@ -16,12 +16,16 @@ datAcc = instance_create(spawnx,spawny,accolade_generic)
     datAcc.description = acc_data(name,COL_DESCR)
     datAcc.number = acc_data(name,col_total)
     datAcc.birth_delay = 2
-    datAcc.width = sprite_get_width(acc_dub_kill)
+    datAcc.width = sprite_get_width(acc_dub_kill)/2
     datAcc.height = datAcc.width
     datAcc.text_color = c_white
     
     if not match_ending() and in_match()
+    {
         datAcc.pop_sound = acc_data(name,COL_SOUND)
+        datAcc.scale_normal = accolade_manager.acc_match_scale
+        datAcc.scale_highlighted = accolade_manager.acc_match_scale
+    }
 }
 
 return datAcc

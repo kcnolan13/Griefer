@@ -33,6 +33,9 @@ if object_index = popup_drawer
     }
 }
 
+if object_index = accolade_generic
+    alpha_scaler = 1.25
+
 if draw_normal
 {
     //if nth_frame(15)
@@ -46,16 +49,19 @@ if draw_normal
     //average with 1 --> they should generally be more opaque than they have been in the past
     alpha = average3(alpha,1,1)
     
-    if menmode() = "armory" or menmode() = "stats" //or (net_manager.av_popup != noone and y > room_height/2)
+    if object_index != accolade_generic
     {
-        draw_x = cursor.x
-        if draw_x < room_width/2
-            draw_x -= net_manager.armory_sl
-        draw_y = cursor.y
-        alpha = alpha*0.75
+        if menmode() = "armory" or menmode() = "stats" //or (net_manager.av_popup != noone and y > room_height/2)
+        {
+            draw_x = cursor.x
+            if draw_x < room_width/2
+                draw_x -= net_manager.armory_sl
+            draw_y = cursor.y
+            alpha = alpha*0.75
+        }
     }
     
-    if draw_x+net_manager.armory_sl >= room_width/2
+    if draw_x+net_manager.armory_sl >= room_width/2 and object_index != accolade_generic
     {
         pleft = draw_x - width
         pright = draw_x
@@ -66,9 +72,17 @@ if draw_normal
     {
         pleft = draw_x+net_manager.armory_sl
         pright = draw_x+width+net_manager.armory_sl
+        
+        if pright > WVIEW
+        {
+            pleft -= (pright - WVIEW)
+            pright = WVIEW
+        }
+        
         ptop = draw_y
         pbottom = draw_y+title_height+body_height
     }
+    
     
     var whiles = 0
     while (pbottom > room_height) and whiles < 1000
@@ -133,7 +147,7 @@ if string_length(body_text_override) < 1
 }
 else
 {
-    draw_text_ext(pleft+txt_pad,ptop+title_height+tbody_voff+txt_pad,body_text_override,txt_pad,(pleft-pright))
+    draw_text_ext(pleft+txt_pad,ptop+title_height+tbody_voff+txt_pad,body_text_override,14,(pright - pleft))
 }
 
 draw_set_alpha(1)

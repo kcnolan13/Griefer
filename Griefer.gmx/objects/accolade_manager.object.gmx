@@ -40,10 +40,12 @@ netvars = ds_map_create()
 computed_match_end_accs = false
 match_end_accs = false
 
+acc_popup_id = noone
+
 //in match offsets
 match_xoff = 64*1.15
 match_yoff = 64*2.75
-acc_width = sprite_get_width(acc_dub_kill)+24
+acc_width = sprite_get_width(acc_dub_kill)/2+24
 match_hsep = 24
 stats_hsep = 0
 grid_hsep = match_hsep
@@ -59,6 +61,8 @@ grid_width = abs(grid_right-grid_left)
 accolade_xmin = grid_left
 accolade_xmax = grid_right
 
+acc_match_scale = 1.5
+
 sradius = 64
 sindex = 0
 sindex_min = 0
@@ -70,64 +74,64 @@ grid = ds_grid_create(12,num_accolades+91-65+1)
 
 var row_num = 0
 init_grid_row('dub_kill','Double Kill','2 Kills Back-to-Back',acc_dub_kill,50,2,99,FL_NORMAL,snd_promoted,row_num) row_num++
-init_grid_row('trip_kill','Triple Kill','3 Kills Back-to-Back',acc_dub_kill,100,3,99,FL_NORMAL,snd_promoted,row_num) row_num++
-init_grid_row('stick_kill','Stick Kill','Sticky Kill',acc_dub_kill,12.5,1,99,FL_NORMAL,snd_promoted,row_num) row_num++
-init_grid_row('flash_bandicoot','Flash Bandicoot','3 Stuns Without Dying',acc_dub_kill,50,3,99,FL_NORMAL,snd_promoted,row_num) row_num++
-init_grid_row('flame_kill','Pyro','Flame Grenade Kill',acc_dub_kill,12.5,1,99,FL_NORMAL,snd_promoted,row_num) row_num++
-init_grid_row('ink_kill','Poison Kill','Poison Grenade Kill',acc_dub_kill,12.5,1,99,FL_NORMAL,snd_promoted,row_num) row_num++
-init_grid_row('cant_touch_dis',"Can't Touch Dis",'3 Kills Taking No Damage',acc_dub_kill,75,3,99,FL_NORMAL,snd_promoted,row_num) row_num++
-init_grid_row('mvp','MVP','Most Points in Match',acc_dub_kill,50,0,99,FL_NORMAL,snd_promoted,row_num) row_num++
-init_grid_row('highest_kd','Highest KDR','Highest Kill/Death Ratio in Match',acc_dub_kill,50,0,99,FL_NORMAL,snd_promoted,row_num) row_num++
-init_grid_row('10kd','Smooth Operator','10+ Kills, No Deaths',acc_dub_kill,150,10,99,FL_NORMAL,snd_promoted,row_num) row_num++
-init_grid_row('ninja','Ninja','Survive for 60 Seconds Without Taking Damage',acc_dub_kill,50,60,5,FL_NORMAL,snd_promoted,row_num) row_num++
-init_grid_row('survivor','Survivor','Survive a Near-Death-Experience',acc_dub_kill,25,0,99,FL_NORMAL,snd_promoted,row_num) row_num++
-init_grid_row('3ass','Assistant','3 Assists Without Dying',acc_dub_kill,50,3,99,FL_NORMAL,snd_promoted,row_num) row_num++
-init_grid_row('5ass','Team Player','5 Assists Without Dying',acc_dub_kill,100,5,99,FL_NORMAL,snd_promoted,row_num) row_num++
-init_grid_row('3gibs','Eviscerator','3 Dismemberments Without Dying',acc_dub_kill,50,3,99,FL_NORMAL,snd_promoted,row_num) row_num++
-init_grid_row('6gibs','Jack the Ripper','6 Dismemberments Without Dying',acc_dub_kill,150,6,99,FL_NORMAL,snd_promoted,row_num) row_num++
-init_grid_row('9gibs','Cruel and Unusual','9 Dismemberments Without Dying',acc_dub_kill,225,9,99,FL_NORMAL,snd_promoted,row_num) row_num++
-init_grid_row('12gibs','Isaac Clarke','12 Dismemberments Without Dying',acc_dub_kill,300,12,99,FL_NORMAL,snd_promoted,row_num) row_num++
-init_grid_row('3heads','Hat Trick','3 Headshots Without Dying',acc_dub_kill,75,3,99,FL_NORMAL,snd_promoted,row_num) row_num++
-init_grid_row('6heads','Double Hat Trick','6 Headshots Without Dying',acc_dub_kill,200,6,99,FL_NORMAL,snd_promoted,row_num) row_num++
-init_grid_row('9heads','Triple Hat Trick','9 Headshots Without Dying',acc_dub_kill,275,9,99,FL_NORMAL,snd_promoted,row_num) row_num++
-init_grid_row('12heads','Jason Bourne','12 Headshots Without Dying',acc_dub_kill,400,12,99,FL_NORMAL,snd_promoted,row_num) row_num++
-init_grid_row('3ks','3 Kill Streak','3 Kills Without Dying',acc_dub_kill,50,3,99,FL_NORMAL,snd_promoted,row_num) row_num++
-init_grid_row('5ks','5 Kill Streak','5 Kills Without Dying',acc_dub_kill,75,5,99,FL_NORMAL,snd_promoted,row_num) row_num++
-init_grid_row('10ks','10 Kill Streak','10 Kills Without Dying',acc_dub_kill,100,10,99,FL_NORMAL,snd_promoted,row_num) row_num++
-init_grid_row('15ks','15 Kill Streak','15 Kills Without Dying',acc_dub_kill,175,15,99,FL_NORMAL,snd_promoted,row_num) row_num++
-init_grid_row('20ks','20 Kill Streak','20 Kills Without Dying',acc_dub_kill,250,20,99,FL_NORMAL,snd_promoted,row_num) row_num++
-init_grid_row('25ks','25 Kill Streak','25 Kills Without Dying',acc_dub_kill,400,25,99,FL_NORMAL,snd_promoted,row_num) row_num++
+init_grid_row('trip_kill','Triple Kill','3 Kills Back-to-Back',acc_trip_kill,100,3,99,FL_NORMAL,snd_promoted,row_num) row_num++
+init_grid_row('stick_kill','Stick Kill','Sticky Kill',acc_stick_kill,12.5,1,99,FL_NORMAL,snd_promoted,row_num) row_num++
+init_grid_row('flash_bandicoot','Flash Bandicoot','3 Stuns Without Dying',acc_flash_bandicoot,50,3,99,FL_NORMAL,snd_promoted,row_num) row_num++
+init_grid_row('flame_kill','Pyro','Flame Grenade Kill',acc_flame_kill,12.5,1,99,FL_NORMAL,snd_promoted,row_num) row_num++
+init_grid_row('ink_kill','Poison Kill','Poison Grenade Kill',acc_ink_kill,12.5,1,99,FL_NORMAL,snd_promoted,row_num) row_num++
+init_grid_row('cant_touch_dis',"Can't Touch Dis",'3 Kills Taking No Damage',acc_cant_touch_dis,75,3,99,FL_NORMAL,snd_promoted,row_num) row_num++
+init_grid_row('mvp','MVP','Most Points in Match',acc_mvp,50,0,99,FL_NORMAL,snd_promoted,row_num) row_num++
+init_grid_row('highest_kd','Highest KDR','Highest Kill/Death Ratio in Match',acc_highest_kd,50,0,99,FL_NORMAL,snd_promoted,row_num) row_num++
+init_grid_row('10kd','Smooth Operator','10+ Kills, No Deaths',acc_10kd,150,10,99,FL_NORMAL,snd_promoted,row_num) row_num++
+init_grid_row('ninja','Ninja','Survive for 60 Seconds Without Taking Damage',acc_ninja,50,60,5,FL_NORMAL,snd_promoted,row_num) row_num++
+init_grid_row('survivor','Survivor','Survive a Near-Death-Experience',acc_survivor,25,0,99,FL_NORMAL,snd_promoted,row_num) row_num++
+init_grid_row('3ass','Assistant','3 Assists Without Dying',acc_3ass,50,3,99,FL_NORMAL,snd_promoted,row_num) row_num++
+init_grid_row('5ass','Team Player','5 Assists Without Dying',acc_5ass,100,5,99,FL_NORMAL,snd_promoted,row_num) row_num++
+init_grid_row('3gibs','Eviscerator','3 Dismemberments Without Dying',acc_3gibs,50,3,99,FL_NORMAL,snd_promoted,row_num) row_num++
+init_grid_row('6gibs','Jack the Ripper','6 Dismemberments Without Dying',acc_6gibs,150,6,99,FL_NORMAL,snd_promoted,row_num) row_num++
+init_grid_row('9gibs','Cruel and Unusual','9 Dismemberments Without Dying',acc_9gibs,225,9,99,FL_NORMAL,snd_promoted,row_num) row_num++
+init_grid_row('12gibs','Isaac Clarke','12 Dismemberments Without Dying',acc_12gibs,300,12,99,FL_NORMAL,snd_promoted,row_num) row_num++
+init_grid_row('3heads','Hat Trick','3 Headshots Without Dying',acc_3heads,75,3,99,FL_NORMAL,snd_promoted,row_num) row_num++
+init_grid_row('6heads','Double Hat Trick','6 Headshots Without Dying',acc_6heads,200,6,99,FL_NORMAL,snd_promoted,row_num) row_num++
+init_grid_row('9heads','Triple Hat Trick','9 Headshots Without Dying',acc_9heads,275,9,99,FL_NORMAL,snd_promoted,row_num) row_num++
+init_grid_row('12heads','Jason Bourne','12 Headshots Without Dying',acc_12heads,400,12,99,FL_NORMAL,snd_promoted,row_num) row_num++
+init_grid_row('3ks','3 Kill Streak','3 Kills Without Dying',acc_3ks,50,3,99,FL_NORMAL,snd_promoted,row_num) row_num++
+init_grid_row('5ks','5 Kill Streak','5 Kills Without Dying',acc_5ks,75,5,99,FL_NORMAL,snd_promoted,row_num) row_num++
+init_grid_row('10ks','10 Kill Streak','10 Kills Without Dying',acc_10ks,100,10,99,FL_NORMAL,snd_promoted,row_num) row_num++
+init_grid_row('15ks','15 Kill Streak','15 Kills Without Dying',acc_15ks,175,15,99,FL_NORMAL,snd_promoted,row_num) row_num++
+init_grid_row('20ks','20 Kill Streak','20 Kills Without Dying',acc_20ks,250,20,99,FL_NORMAL,snd_promoted,row_num) row_num++
+init_grid_row('25ks','25 Kill Streak','25 Kills Without Dying',acc_25ks,400,25,99,FL_NORMAL,snd_promoted,row_num) row_num++
 
 //weapon accolades --&gt; not to be awarded as accolades, but used for challenge progression tracking
 wep_kills_needed = 1
 evil_row_num = row_num
-init_grid_row('spr_flame','text','descr',acc_dub_kill,0,25*wep_kills_needed,25*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_ink','text','descr',acc_dub_kill,0,25*wep_kills_needed,25*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_snare','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_smoke','text','descr',acc_dub_kill,0,10*wep_kills_needed,10*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_flashbang','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_pistol','text','descr',acc_dub_kill,0,5*wep_kills_needed,5*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_carbine','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_rifle','text','descr',acc_dub_kill,0,10*wep_kills_needed,10*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_tickler','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_smg','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_sticky','text','descr',acc_dub_kill,0,25*wep_kills_needed,25*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_lmg','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_longshot','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_vulcan','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_torque','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_thumper','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_boltok','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_shotgun','text','descr',acc_dub_kill,0,50*wep_kills_needed,50*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_stomper','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_boom','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_frag','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_rocket','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_double','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_wep1','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_wep2','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_wep3','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
-init_grid_row('spr_wep4','text','descr',acc_dub_kill,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_flame','text','descr',spr_none,0,25*wep_kills_needed,25*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_ink','text','descr',spr_none,0,25*wep_kills_needed,25*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_snare','text','descr',spr_none,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_smoke','text','descr',spr_none,0,10*wep_kills_needed,10*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_flashbang','text','descr',spr_none,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_pistol','text','descr',spr_none,0,5*wep_kills_needed,5*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_carbine','text','descr',spr_none,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_rifle','text','descr',spr_none,0,10*wep_kills_needed,10*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_tickler','text','descr',spr_none,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_smg','text','descr',spr_none,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_sticky','text','descr',spr_none,0,25*wep_kills_needed,25*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_lmg','text','descr',spr_none,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_longshot','text','descr',spr_none,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_vulcan','text','descr',spr_none,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_torque','text','descr',spr_none,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_thumper','text','descr',spr_none,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_boltok','text','descr',spr_none,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_shotgun','text','descr',spr_none,0,50*wep_kills_needed,50*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_stomper','text','descr',spr_none,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_boom','text','descr',spr_none,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_frag','text','descr',spr_none,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_rocket','text','descr',spr_none,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_double','text','descr',spr_none,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_wep1','text','descr',spr_none,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_wep2','text','descr',spr_none,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_wep3','text','descr',spr_none,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
+init_grid_row('spr_wep4','text','descr',spr_none,0,20*wep_kills_needed,20*wep_kills_needed,FL_COMPETITIVE,snd_promoted,row_num) row_num++
 
 ds_grid_sort(grid,COL_POINTS,false)
 </string>
@@ -246,7 +250,7 @@ if in_match() and match_ending() and not spawned_grid
         with accolade_generic instance_destroy()
         
         grid_hsep = match_hsep
-        create_accolade_grid(64*1.5,64*1.5,match_xoff+acc_width*3+match_hsep*2,HVIEW,fa_left,fa_center,5,COL_MATCH_TOTAL)
+        create_accolade_grid(64*1.5,64*1.5,match_xoff+acc_width*3+match_hsep*2,HVIEW,fa_left,fa_center,5,COL_MATCH_TOTAL,false)
     }
 }
 </string>
@@ -290,10 +294,24 @@ if in_match() and match_ending() and not spawned_grid
           <argument>
             <kind>1</kind>
             <string>///manage accolade grid
+
 if not in_match() and room != rm_login
 {
     if net_manager.menu_mode = "stats"
     {
+        
+        if acc_popup_id != noone
+        {
+            going_to_switch_can_draw = true
+            with accolade_generic
+            {
+                if show_popup and id=accolade_manager.acc_popup_id
+                    other.going_to_switch_can_draw = false
+            }
+            if going_to_switch_can_draw
+                acc_popup_id = noone
+        }
+        
         if not instance_exists(accolade_generic)
         {
             spawned_grid = false
@@ -368,7 +386,7 @@ if not in_match() and room != rm_login
                        col =  COL_BOT_TOTAL
                        
                     grid_hsep = stats_hsep
-                    create_accolade_grid(grid_left+24,grid_ymid,grid_right,room_height,fa_left,fa_center,0,col)
+                    create_accolade_grid(grid_left+24,grid_ymid,grid_right,room_height,fa_left,fa_center,0,col,true)
                     with accolade_generic
                     {
                         menu_mode = "stats"

@@ -1636,7 +1636,7 @@ if room = rm_lobby
                 if is_my_avatar(ID)
                 {
                     objVarWrite(ID,"dude_y",room_height*1.75/3-64)
-                    objVarWrite(ID,"dude_x",room_width*1/9)
+                    objVarWrite(ID,"dude_x",-64*8)//room_width*1/9)
                 }
                 else
                 {
@@ -1644,7 +1644,7 @@ if room = rm_lobby
                     if ID.x &lt; room_width/2
                         objVarWrite(ID,"dude_x",-64*8)
                     else
-                        objVarWrite(ID,"dude_x",room_width+64*8)
+                        objVarWrite(ID,"dude_x",-64*8)
                 }
             break
             
@@ -1738,7 +1738,7 @@ if room = rm_menu or room = rm_lobby
         break
         
         case "challenges":
-            dude_x = room_width*1/9
+            dude_x = -64*8//room_width*1/9
             dude_y = room_height*1.75/3-64
         break
         

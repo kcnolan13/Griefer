@@ -34,6 +34,8 @@ alarm[1] = 2
 alarm[2] = room_speed
 
 //vars that needed to be transmitted framely --&gt; now only when they change!
+stationary_counter = 0
+stationary_threshold = 30*10
 xyLerp = 0.35
 xyLerp_counter = 0
 update_physics = false
@@ -449,12 +451,18 @@ if perform_step != 0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///sync position and set previous stats periodically
+            <string>///sync position and set previous stats periodically ... assess stationary
 if not varRead("trigger_update_ignore")
 {
     x = varRead("myX")
     y = varRead("myY")
 }
+
+if x = xprevious and y = yprevious
+{
+    stationary_counter += real_speed(1)
+}   
+else stationary_counter = 0
 
 //update previous grid stats every now and again
 if nth_frame(1)
@@ -1082,13 +1090,25 @@ if net_manager.local_player = id
             if ninja_time &gt; acc_data("ninja",COL_NEEDED)*30
             {
                 //printf("::: ninja acc completed -- data in col_needed was: "+string(acc_data("ninja",COL_NEEDED)))
-                complete_accolade("ninja")
-                ninja_time = 1
-                
-                /*if acc_data("ninja",COL_TOTAL) &gt;= ninjas_needed and not challenge_is_complete(global.ninja_name)
+                total_stationary_players = 0
+                with player
                 {
-                    complete_challenge(global.ninja_name)
-                }*/
+                    if stationary_counter &gt; stationary_threshold
+                        other.total_stationary_players++
+                }
+                if total_stationary_players &lt; 1
+                {
+                    complete_accolade("ninja")
+                    ninja_time = 1
+                }
+                else 
+                {
+                    with challenge_manager
+                    {
+                        ninja_time = 0
+                    }
+                    printf(":::WARNING: unable to complete ninja accolade because "+string(total_stationary_players)+" players are stationary")
+                }
             }
         }
     }

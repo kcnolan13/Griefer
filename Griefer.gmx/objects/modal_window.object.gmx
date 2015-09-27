@@ -482,7 +482,7 @@ if not is_gui
 image_xscale = width
 image_yscale = height
 
-if not popped_in and abs(scale - 1) &lt;= 0.05 
+if not popped_in and abs(scale - scale_normal) &lt;= 0.05 
 {
    popped_in = true
    if pop_sound != snd_none

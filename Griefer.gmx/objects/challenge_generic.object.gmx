@@ -166,7 +166,7 @@ if not surface_exists(surf_slot)
     }
     else
     {
-        printf(":::WARNING: had to regenerate surf_slot for challenge_generic")
+        //printf(":::WARNING: had to regenerate surf_slot for challenge_generic")
     }
 }
 
@@ -447,7 +447,7 @@ if not surface_exists(surf_slot) and not regen_delay
     //regen challenge slot surfaces
     alarm[1] = ceil(random_range(5,15))
     regen_delay = 30
-    printf("::: calling for a challenge surface regen")
+    //printf("::: calling for a challenge surface regen")
 }
 else if regen_delay
 {
