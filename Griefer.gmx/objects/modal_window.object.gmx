@@ -486,7 +486,7 @@ if not popped_in and abs(scale - scale_normal) &lt;= 0.05
 {
    popped_in = true
    if pop_sound != snd_none
-   audio(pop_sound,1)
+    audio(pop_sound,1.75)
 }
 
 if fade_out = true and popped_in and translation_x = translation_xtarget and translation_y = translation_ytarget

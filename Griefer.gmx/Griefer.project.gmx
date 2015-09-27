@@ -86,6 +86,36 @@
       <sound>sound\snd_item_stolen</sound>
       <sound>sound\snd_denied</sound>
     </sounds>
+    <sounds name="accolades">
+      <sound>sound\snd_dub_kill</sound>
+      <sound>sound\snd_trip_kill</sound>
+      <sound>sound\snd_stick_kill</sound>
+      <sound>sound\snd_flash_bandicoot</sound>
+      <sound>sound\snd_flame_kill</sound>
+      <sound>sound\snd_ink_kill</sound>
+      <sound>sound\snd_mvp</sound>
+      <sound>sound\snd_cant_touch_dis</sound>
+      <sound>sound\snd_highest_kdr</sound>
+      <sound>sound\snd_10kd</sound>
+      <sound>sound\snd_survivor</sound>
+      <sound>sound\snd_3ass</sound>
+      <sound>sound\snd_5ass</sound>
+      <sound>sound\snd_3gibs</sound>
+      <sound>sound\snd_6gibs</sound>
+      <sound>sound\snd_9gibs</sound>
+      <sound>sound\snd_12gibs</sound>
+      <sound>sound\snd_3heads</sound>
+      <sound>sound\snd_6heads</sound>
+      <sound>sound\snd_9heads</sound>
+      <sound>sound\snd_12heads</sound>
+      <sound>sound\snd_3ks</sound>
+      <sound>sound\snd_5ks</sound>
+      <sound>sound\snd_10ks</sound>
+      <sound>sound\snd_15ks</sound>
+      <sound>sound\snd_20ks</sound>
+      <sound>sound\snd_25ks</sound>
+      <sound>sound\snd_ninja</sound>
+    </sounds>
   </sounds>
   <sprites name="sprites">
     <sprites name="DONT MOVE ME">
