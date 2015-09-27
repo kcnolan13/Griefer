@@ -170,7 +170,7 @@ if sticky and is_string(varRead("stuck_pname"))
             <string>///all dah ish --&gt; most of it computed by everyone
 if varRead("play_stick_sound")
 {
-    audio_play_sound(snd_sticky_stuck,2,false)
+    audio(snd_sticky_stuck,1)
     varWrite("play_stick_sound",false)
 }
 depth = -80

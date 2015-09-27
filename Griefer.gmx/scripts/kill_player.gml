@@ -52,7 +52,7 @@ if dead_homes != net_manager.local_player and killer = net_manager.local_player
     
     refresh_scoregrid()
     
-    audio_play_sound(snd_kill,1,false)
+    audio(snd_kill,1)
     delay_spacer = 2
     boom_delay = compute_boom_delay()
     boom_group = random_range(0,1000000)

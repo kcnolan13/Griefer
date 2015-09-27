@@ -281,7 +281,7 @@ if varRead("sound_on") = false and audio_is_playing(snd_torque_charge)
     
 if varRead("sound_on") = 1 and not audio_is_playing(snd_torque_charge)
 {
-    audio_play_sound(snd_torque_charge,2,false)
+    audio(snd_torque_charge,1)
     varWrite("sound_on",-1)
 }
 

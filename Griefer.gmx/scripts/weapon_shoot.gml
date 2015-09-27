@@ -12,7 +12,7 @@ i_dir = point_direction(x,y,cursor.x,cursor.y)
 if (object_index = weapon_boom or object_index = weapon_rocket) and aiming_at_flo(64*4,x,y,i_dir,16,16)
 {
     if not is_bot(mi_jugador) and not audio_is_playing(snd_denied)
-        audio_play_sound(snd_denied, 2, false)
+        audio(snd_denied, 1)
         
     return false
 }

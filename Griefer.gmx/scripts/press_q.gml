@@ -7,5 +7,5 @@ if not varRead("controllable") return false
 
 weapon_wheel_alpha = weapon_wheel_alpha_max
 if net_manager.local_player = id
-    audio_play_sound(snd_scroll3,2,false)
+    audio(snd_scroll3,1)
 previous_weapon()

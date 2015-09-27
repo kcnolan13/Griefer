@@ -30,7 +30,7 @@ event_inherited()
 
 initialize_physics()
 
-audio(snd_snare,2)
+audio(snd_snare,1)
 counter = 0
 part_off = 64*1.5
 

@@ -33,7 +33,7 @@ roll_dir = sign(hsp)
 varWrite("animation_speed",SPD_ROLL*sign(hsp)*sign(varRead("animation_xscale")))
 
 if net_manager.local_player = id
-    audio_play_sound(snd_roll,2,false)
+    audio(snd_roll,1)
 
 roll_timer = roll_timer_max
 rolling = 1

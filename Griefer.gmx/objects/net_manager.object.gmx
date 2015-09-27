@@ -3095,7 +3095,7 @@ if room = rm_login
         {
             if not drawing_grav_popup
             {
-                audio_play_sound(snd_scroll3,2,false)
+                audio(snd_scroll3,1)
             }
             
             drawing_grav_popup = 2
@@ -3149,7 +3149,7 @@ for (var i=0; i&lt;instance_number(avatar); i++)
     {
         if not av_popup_drawn
         {
-            audio_play_sound(snd_scroll3,2,false)
+            audio(snd_scroll3,1)
             av_popup_drawn = true
         }
         
@@ -3989,7 +3989,7 @@ if (room = rm_menu or room = rm_lobby) and string(menu_mode) = "armory" and inst
                     {
                     
                         //if not audio_is_playing(snd_pickup2)
-                                audio_play_sound(snd_pickup2,2,false)
+                                audio(snd_pickup2,1)
                     
                         with other.id
                         {
@@ -4023,7 +4023,7 @@ if (room = rm_menu or room = rm_lobby) and string(menu_mode) = "armory" and inst
                     {
                         //should draw
                         if not armory_alphas[i] = 1
-                            audio_play_sound(snd_scroll,2,false)
+                            audio(snd_scroll,1)
                             
                         armory_alphas[i] = 1//lerp_real(armory_alphas[i],1,0.25)
                         //compute grid coordinates
@@ -4260,16 +4260,16 @@ if lotto_counter &gt; lotto_delay and instance_exists(xp_bar.aw)
                     lotto_slot_scale[lotto_slot_index] = lerp_real(lotto_slot_scale[lotto_slot_index],slot_scale_deciding,slot_lerp_real)
                     draw_lotsteal_slot_thinking(slot_xoff,slot_yoff,lotto_slot_scale[lotto_slot_index],1,dat_spr_do)
                     if not audio_is_playing(snd_scroll3)
-                        audio_play_sound(snd_scroll3,1,false)
+                        audio(snd_scroll3,1)
                 }
                 else
                 {
                     if mode_counter = lottery_time-lottery_calc_time-lotto_slot_index*lotto_comein_offset
                     {
                         if not instance_exists(bpart_lotto[lotto_slot_index])
-                            audio_play_sound(snd_item_blah,3,false)
+                            audio(snd_item_blah,1)
                         else
-                            audio_play_sound(snd_item_new,3,false)
+                            audio(snd_item_new,1)
                     }
                     lotto_slot_scale[lotto_slot_index] = lerp_real(lotto_slot_scale[lotto_slot_index],slot_scale_decided,slot_lerp_real)
                     //draw the finalized slot

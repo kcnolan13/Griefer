@@ -30,6 +30,7 @@ auto_crop = false
 crop_pad = 24
 
 force_click = false
+play_sound_when_ready = false
 
 depth = -95
 counter = 0
@@ -486,7 +487,22 @@ if not popped_in and abs(scale - scale_normal) &lt;= 0.05
 {
    popped_in = true
    if pop_sound != snd_none
-    audio(pop_sound,1.75)
+    play_sound_when_ready = true
+}
+
+if play_sound_when_ready
+{
+    do_play_sound = true
+    with modal_window
+    {
+        if pop_sound != snd_none and audio_is_playing(pop_sound)
+            other.do_play_sound = false
+    }
+    if do_play_sound
+    {
+        play_sound_when_ready = false
+        audio(pop_sound,1/global.audio_gain)
+    }
 }
 
 if fade_out = true and popped_in and translation_x = translation_xtarget and translation_y = translation_ytarget

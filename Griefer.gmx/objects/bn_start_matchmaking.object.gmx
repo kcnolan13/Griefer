@@ -124,7 +124,7 @@ if not modal_highlighted(id) exit
 
 if clicked or (net_manager.room_counter &lt; 30*2 and net_manager.previous_room = rm_lobby) exit
 clicked = 2
-audio_play_sound(snd_click,2,false)
+audio(snd_click,1)
 
 if label = "Back"
 {

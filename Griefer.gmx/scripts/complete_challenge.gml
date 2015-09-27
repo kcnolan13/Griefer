@@ -19,7 +19,7 @@ if instance_exists(cha)
         printf(":::CHALLENGE COMPLETE: "+string(name))
         
         if in_match()
-            audio_play_sound(snd_item_stolen,2,false)
+            audio(snd_item_stolen,1)
         else
             printf("::: muting challenge sound")
             

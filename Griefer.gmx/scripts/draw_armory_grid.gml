@@ -45,7 +45,7 @@ for (var i=0; i<6; i++)
                     part1 = list[| 0]
                     swap_counter = 5
                     
-                    audio_play_sound(snd_click_armory,2,false)
+                    audio(snd_click_armory,1)
                     
                     if part1.disabled
                     {
@@ -69,7 +69,7 @@ for (var i=0; i<6; i++)
             {
                 if ds_list_size(other.temp_list) > 2
                 {
-                    audio_play_sound(snd_pickup2,2,false)
+                    audio(snd_pickup2,1)
                     printf("::: other.temp_list size = "+string(ds_list_size(other.temp_list)))
                                 
                     if not contemplating_scrap
@@ -120,7 +120,7 @@ for (var i=0; i<6; i++)
                     hovering ++
                     
                     if hovering = hover_delay
-                    audio_play_sound(snd_scroll3,2,false)
+                    audio(snd_scroll3,1)
                     
                     if hovering > hover_delay
                     {

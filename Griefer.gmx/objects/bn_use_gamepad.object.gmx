@@ -166,7 +166,7 @@ if clicked exit
 if global.gamepad_connected
 {
     printf("clicked: "+label)
-    audio_play_sound(snd_click,2,false)
+    audio(snd_click,1)
 
     refresh_control_scheme(FL_GAMEPAD)
     global.forced_control_scheme = true

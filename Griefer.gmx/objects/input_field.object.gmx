@@ -220,7 +220,7 @@ else
         auto_started = true
     
     if not audio_is_playing(snd_click) and not input_active
-        audio_play_sound(snd_click,3,false)
+        audio(snd_click,1)
     
     input_active = true
     keyboard_string = ""
@@ -352,7 +352,7 @@ if not input_active and not auto_started and alpha &gt; 0.1 and room = rm_login
     
     auto_started = true
     if not audio_is_playing(snd_click) and not input_active
-    audio_play_sound(snd_click,3,false)
+    audio(snd_click,1)
 
     input_active = true
     str_cursor = "|"

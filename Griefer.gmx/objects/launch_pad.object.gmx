@@ -147,7 +147,7 @@ for (var i=0; i&lt;instance_number(rag_generic); i++)
         intensity_dir = -1
         
         if not audio_is_playing(snd_launch_pad) and not net_manager.match_countdown and not net_manager.starting_match
-            audio_play_sound(snd_launch_pad,2,false)
+            audio(snd_launch_pad,1)
     }
 }
 </string>
@@ -196,7 +196,7 @@ for (var i=0; i&lt;instance_number(player); i++)
         intensity_dir = -1
         
         if not audio_is_playing(snd_launch_pad) and not net_manager.match_countdown and not net_manager.starting_match
-            audio_play_sound(snd_launch_pad,2,false)
+            audio(snd_launch_pad,1)
     }
 }
 </string>
@@ -246,7 +246,7 @@ for (var i=0; i&lt;instance_number(tossable_generic); i++)
         intensity_dir = -1
         
         if not audio_is_playing(snd_launch_pad)
-            audio_play_sound(snd_launch_pad,2,false)
+            audio(snd_launch_pad,1)
     }
 }
 </string>

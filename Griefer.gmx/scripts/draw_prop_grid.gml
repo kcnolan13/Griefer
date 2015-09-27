@@ -29,7 +29,7 @@ for (var i=0; i<NUM_PROPS-1; i++)
             
         if instance_place(x,y,cursor) and not popup_exists() and click_pressed() and not swap_counter
         {
-            audio_play_sound(snd_click_armory,2,false)
+            audio(snd_click_armory,1)
             swap_counter = 5
             with other.id //other.id is actually net_manager
             {
@@ -56,7 +56,7 @@ for (var i=0; i<NUM_PROPS-1; i++)
         }
         else if instance_place(x,y,cursor) and not popup_exists() and rightclick_pressed() and not swap_counter
         {
-            audio_play_sound(snd_pickup2,2,false)
+            audio(snd_pickup2,1)
             if not contemplating_scrap
             {
                 swap_counter = 5
@@ -101,7 +101,7 @@ for (var i=0; i<NUM_PROPS-1; i++)
                 hovering ++
                 
                 if hovering = hover_delay
-                    audio_play_sound(snd_scroll3,2,false)
+                    audio(snd_scroll3,1)
                 
                 if hovering > hover_delay
                 {

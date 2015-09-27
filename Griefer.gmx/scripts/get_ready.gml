@@ -6,7 +6,7 @@ if not visible or bound_avatar != myAvatar() or clicked
 }
 
 clicked = 2
-audio_play_sound(snd_click,2,false)
+audio(snd_click,1)
 
 //toggle ready
 ready ^= 1

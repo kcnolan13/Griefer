@@ -29,7 +29,7 @@
 event_inherited()
 
 //DAMAGE
-audio(snd_flashbang,2)
+audio(snd_flashbang,1)
 radius = 64*6
 damage = 150
 varWrite("falloff_x1",radius/3)
