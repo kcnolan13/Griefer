@@ -200,7 +200,9 @@ if instance_exists(myAvatar()) and clickable
     }
     
     with bn_ready
-        get_ready()
+    {
+        get_ready(true)
+    }
     
     recompute_votes()
 }

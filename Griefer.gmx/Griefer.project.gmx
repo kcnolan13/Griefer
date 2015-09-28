@@ -2027,7 +2027,7 @@
     <constant name="GAIN_AUDIO">0.25</constant>
     <constant name="NUM_TOP_MEDALS">3</constant>
     <constant name="FL_TOP_MEDALS">28</constant>
-    <constant name="VERSION">"V121"</constant>
+    <constant name="VERSION">"V130"</constant>
     <constant name="GMHSV">1.41176470588</constant>
     <constant name="WEBHSV">0.70833333333</constant>
     <constant name="ACC_XP_SCALER">2</constant>

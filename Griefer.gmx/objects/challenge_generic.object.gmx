@@ -678,7 +678,11 @@ if in_match() and popup_show and not is_progression
         //descr = ""
         popup_xoff_extra = 0
     }
-    draw_popup_challenge(x+(popup_xoff+popup_xoff_extra+endmatch_offset)*(1+(1-scl)), y+(popup_yoff+popup_yoff_extra)*scl, name, "", descr, icon, color, popup_alpha,scl)
+    
+    var dy = y+(popup_yoff+popup_yoff_extra)*scl
+    if dy &lt; 64 dy = 64
+    if dy &gt; HVIEW-64 dy = HVIEW-64
+    draw_popup_challenge(x+(popup_xoff+popup_xoff_extra+endmatch_offset)*(1+(1-scl)), dy, name, "", descr, icon, color, popup_alpha,scl)
     //printf("::: show_number = "+string(show_number)+", id="+string(id)+", popup_xoff="+string(popup_xoff)+", popup_xoff_extra="+string(popup_xoff_extra))
 }
 </string>

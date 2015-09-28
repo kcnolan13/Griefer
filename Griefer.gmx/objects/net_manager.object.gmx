@@ -141,7 +141,7 @@ global.rank_names = 0
 lotto_delay = 40
 lotto_counter = 0
 
-tdm_kill_limit = 3//20
+tdm_kill_limit = 10//20
 ffa_kill_limit = 15
 versus_kill_limit = 10
 kill_limit = 10
@@ -1588,6 +1588,10 @@ if room = rm_lobby
             case "lobby":
                 objVarWrite(ID,"dude_y",lobby_dude_y)
                 var pnum = objVarRead(ID,"pNum")
+                
+                if not lobby_match_countdown
+                    pnum = i
+                
                 var xtarget = room_width/2
                 var dat_sign = 1
                 

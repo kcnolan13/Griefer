@@ -1510,7 +1510,7 @@ if is_bot(id) and not play_dead and (not instance_exists(modal_controls) or moda
     //AI override adjustment
     if myPlayer() = id
     {
-        dat_rank += 15
+        dat_rank += 5//15
         if dat_rank &gt; max_rank
             dat_rank = max_rank
     }
@@ -2328,6 +2328,9 @@ if not varRead("controllable") and id = myPlayer() and in_match() and not match_
 
 //draw stupid
 //draw_sprite_ext(sprite_index,image_index,x,y,image_xscale,image_yscale,image_angle,c_white,image_alpha)
+
+if double_spawn_counter
+    exit
 
 if net_manager.show_cout or false
 {

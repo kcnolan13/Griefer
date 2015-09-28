@@ -1,4 +1,5 @@
-///get_ready()
+///get_ready(forced_state)
+var forced_state = argument0
 
 if not visible or bound_avatar != myAvatar() or clicked
 {
@@ -9,7 +10,11 @@ clicked = 2
 audio(snd_click,1)
 
 //toggle ready
-ready ^= 1
+if forced_state > -1
+    ready = forced_state
+else
+    ready ^= 1
+    
 objVarWrite(bound_avatar,"ready",ready)
 obj_update_real(bound_avatar,"ready",FL_NORMAL)
 

@@ -1,6 +1,6 @@
 global.wspawn_default = 30*30
 global.vulcan = "Vulcan"
-global.pistol = "Derringer"
+global.pistol = "Sidearm"
 global.rifle = "Spitfire"
 global.shotgun = "Mincer"
 global.frag = "Frag"

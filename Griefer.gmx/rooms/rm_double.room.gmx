@@ -3,8 +3,8 @@
   <caption></caption>
   <width>2812</width>
   <height>2240</height>
-  <vsnap>4</vsnap>
-  <hsnap>4</hsnap>
+  <vsnap>64</vsnap>
+  <hsnap>64</hsnap>
   <isometric>0</isometric>
   <speed>30</speed>
   <persistent>0</persistent>
@@ -16,19 +16,19 @@
   <clearDisplayBuffer>-1</clearDisplayBuffer>
   <makerSettings>
     <isSet>-1</isSet>
-    <w>1926</w>
-    <h>1050</h>
+    <w>1936</w>
+    <h>1056</h>
     <showGrid>0</showGrid>
     <showObjects>-1</showObjects>
-    <showTiles>0</showTiles>
+    <showTiles>-1</showTiles>
     <showBackgrounds>-1</showBackgrounds>
     <showForegrounds>-1</showForegrounds>
     <showViews>0</showViews>
     <deleteUnderlyingObj>0</deleteUnderlyingObj>
     <deleteUnderlyingTiles>0</deleteUnderlyingTiles>
     <page>0</page>
-    <xoffset>-31</xoffset>
-    <yoffset>162</yoffset>
+    <xoffset>16</xoffset>
+    <yoffset>457</yoffset>
   </makerSettings>
   <backgrounds>
     <background visible="0" foreground="0" name="" x="0" y="0" htiled="-1" vtiled="-1" hspeed="0" vspeed="0" stretch="0"/>
@@ -299,7 +299,6 @@
     <instance objName="block" x="1344" y="1088" name="inst_0C131BEC" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="wedge_right_mirrored" x="128" y="832" name="inst_9DB9C1DC" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="wedge_right_mirrored" x="2688" y="1088" name="inst_0022971D" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="block" x="1344" y="1152" name="inst_53DA8D1C" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="block" x="1408" y="1152" name="inst_062559FB" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="block" x="1472" y="1152" name="inst_CCB61F4F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="block" x="1536" y="1152" name="inst_711D692E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
@@ -568,6 +567,7 @@
     <instance objName="weapon_drop_long" x="2476" y="2144" name="inst_57331455" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="spawn_point0" x="476" y="1364" name="inst_96233562" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="weapon_drop_flashbang" x="2712" y="740" name="inst_ED76AB3C" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="wedge_right_mirrored" x="1344" y="1152" name="inst_1EDFE315" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="tiles_new" x="0" y="256" w="64" h="64" xo="212" yo="282" id="10002865" name="inst_49684CD5" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
@@ -1100,7 +1100,6 @@
     <tile bgName="tiles_desert" x="2688" y="1920" w="64" h="64" xo="72" yo="72" id="10018937" name="inst_FFA70784" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="tiles_desert" x="448" y="2112" w="64" h="64" xo="2" yo="142" id="10018939" name="inst_926CF6C8" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="tiles_desert" x="512" y="2112" w="64" h="64" xo="72" yo="2" id="10018940" name="inst_607762C2" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="tiles_desert" x="1344" y="1152" w="64" h="64" xo="2" yo="562" id="10018941" name="inst_3789FC74" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="tiles_desert" x="1920" y="2112" w="64" h="64" xo="212" yo="142" id="10018945" name="inst_C71E7CE8" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="tiles_desert" x="1152" y="2112" w="64" h="64" xo="142" yo="142" id="10018946" name="inst_B225B572" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="tiles_desert" x="1856" y="2112" w="64" h="64" xo="142" yo="142" id="10018948" name="inst_09D01F08" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
@@ -1147,6 +1146,7 @@
     <tile bgName="tiles_desert" x="896" y="1728" w="64" h="64" xo="142" yo="142" id="10018998" name="inst_2797F986" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="tiles_desert" x="768" y="1856" w="64" h="64" xo="212" yo="212" id="10018999" name="inst_A0049152" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="tiles_desert" x="832" y="1792" w="64" h="64" xo="212" yo="212" id="10019000" name="inst_155EE7F4" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="tiles_desert" x="1344" y="1152" w="64" h="64" xo="2" yo="212" id="10019841" name="inst_EBCC8492" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="vines_desert" x="676" y="546" w="192" h="128" xo="128" yo="0" id="10014236" name="inst_58DE1DFD" depth="-90" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="vines_desert" x="274" y="1392" w="192" h="128" xo="128" yo="0" id="10014237" name="inst_6405B9D1" depth="-90" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="vines_desert" x="2138" y="1384" w="192" h="128" xo="128" yo="0" id="10014238" name="inst_3C97CDD1" depth="-90" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>

@@ -246,7 +246,7 @@ if not modal_highlighted(id) or net_manager.lobby_match_countdown
     exit
 }
 
-get_ready()
+get_ready(-1)
 </string>
           </argument>
         </arguments>
