@@ -34,6 +34,8 @@ angle = 0
 sprite_2draw = spr_none
 varWrite("is_bullet",false)
 splosion = splosion_rocket
+varWrite("deceleration",-1.75)
+//varWrite("max_speed",90)
 cook_time = 30*0.5
 start_cook_on_hit = true
 

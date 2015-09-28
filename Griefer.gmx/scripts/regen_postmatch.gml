@@ -23,7 +23,7 @@ mw.color = c_black//make_colour_hsv(100,10,80)
 mw.birth_delay = birth_delay
 mw.menu_mode = "lottery_steal"
 mw.pop_sound = snd_pan1
-mw.pop_gain = GAIN_PAN
+mw.pop_gain = 0//GAIN_PAN
 
 aw = instance_create(lottery_x,room_height/2,modal_window)
 aw.halign = fa_center
@@ -37,7 +37,7 @@ aw.color = c_black//make_colour_hsv(100,10,80)
 aw.birth_delay = birth_delay+net_manager.lotto_delay
 aw.menu_mode = "lottery_steal"
 aw.pop_sound = snd_pan1
-aw.pop_gain = GAIN_PAN
+aw.pop_gain = 0//GAIN_PAN
 
 done_spacer = 32
 accw = instance_create(room_width*1/6+64,room_height*1/4-32+64*1.75+32,modal_window)
@@ -55,7 +55,7 @@ accw.header_text = "Top "+global.accolade_name+"s"
 accw.header_height = 36
 accw.header_alpha = 0
 accw.pop_sound = snd_pan1
-accw.pop_gain = GAIN_PAN
+accw.pop_gain = 0//GAIN_PAN
 
 if instance_exists(mw)
 {

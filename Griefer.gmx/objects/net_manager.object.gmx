@@ -3270,6 +3270,8 @@ if in_match() and ((draw_killed_by and do_draw_killed_by) or (draw_you_killed an
     draw_set_valign(fa_center)
     var killer_name = objVarRead(local_player,"killer")
     
+    var modal_scale = 0.75
+    
     if draw_you_killed and name_you_killed != ""
         killer_name = name_you_killed
     
@@ -3282,6 +3284,7 @@ if in_match() and ((draw_killed_by and do_draw_killed_by) or (draw_you_killed an
             dead_av = find_pname_avatar(name_you_killed)
         else
         {
+            modal_scale = 1
             dead_av = myAvatar()
             //printf("::: yours is the dead avatar")
         }
@@ -3299,23 +3302,31 @@ if in_match() and ((draw_killed_by and do_draw_killed_by) or (draw_you_killed an
                 blood_color = objVarRead(dead_av,"blood_color")
             } else printf("::: WARNING: couldn't locate dead avatar to find blood color for killed display")
             
-            draw_splats(WVIEW/2,starty+row_sep*1,1.15,blood_color,0.15)
+            if modal_scale = 1
+                draw_splats(WVIEW/2,starty+row_sep*1,1.15,blood_color,0.15)
             
             with killer_av
-                draw_avatar_head(WVIEW/2+row2_xoff,starty+row_sep,id,0,1,1,FL_NOBAR)
+                draw_avatar_head(WVIEW/2+row2_xoff*modal_scale,starty+row_sep*modal_scale,id,0,1,1,FL_NOBAR)
                 
             var kill_txt = "You Were Killed By: "
             
             if draw_you_killed and name_you_killed != ""
                 kill_txt = "You Killed: "
                 
-            draw_text(WVIEW/2,starty,kill_txt)
+            draw_text_transformed(WVIEW/2,starty,kill_txt,modal_scale,modal_scale,0)
             draw_set_halign(fa_left)
-            draw_text(WVIEW/2+row2_xoff+head_space,starty+row_sep,string(killer_name))
+            draw_text_transformed(WVIEW/2+(row2_xoff+head_space)*modal_scale,starty+row_sep*modal_scale,string(killer_name),modal_scale,modal_scale,0)
         }
     }
     else
-        draw_text(0+WVIEW/2,0+HVIEW/4,"You Killed Yourself...")
+    {
+        var row_sep = 94
+        var starty = HVIEW/12
+        var head_space = 64
+        var row2_xoff = -1/2*(head_space+string_width(string(killer_name)))
+        draw_splats(WVIEW/2,starty+row_sep*1,1.15,objVarRead(myAvatar(),"blood_color"),0.15)
+        draw_text_transformed(WVIEW/2,starty+64,"You Killed Yourself...",modal_scale,modal_scale,0)
+    }
 }
 
 if not match_ending()

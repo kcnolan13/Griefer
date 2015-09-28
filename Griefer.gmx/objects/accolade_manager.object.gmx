@@ -52,6 +52,8 @@ grid_hsep = match_hsep
 grid_vsep = grid_hsep
 bg = NO_HANDLE
 
+force_accolade_sound = false
+
 //stat mode scrolling variables
 grid_left = room_width/2-64*3.5+38
 grid_right = room_width-64*2.5
@@ -77,9 +79,9 @@ init_grid_row('dub_kill','Double Kill','2 Kills Back-to-Back',acc_dub_kill,     
 init_grid_row('trip_kill','Triple Kill','3 Kills Back-to-Back',acc_trip_kill,                   100,3,99,FL_NORMAL,snd_trip_kill,row_num) row_num++
 init_grid_row('stick_kill','Stick Kill','Sticky Kill',acc_stick_kill,                           12.5,1,99,FL_NORMAL,snd_stick_kill,row_num) row_num++
 init_grid_row('flash_bandicoot','Flash Bandicoot','5 Stuns In One Match',acc_flash_bandicoot,   68,5,99,FL_NORMAL,snd_flash_bandicoot,row_num) row_num++
-init_grid_row('flame_kill','Incinerated','Flame Grenade Kill',acc_flame_kill,                   12.5,1,99,FL_NORMAL,snd_flame_kill,row_num) row_num++
+init_grid_row('flame_kill','Incinerator','Flame Grenade Kill',acc_flame_kill,                   12.5,1,99,FL_NORMAL,snd_flame_kill,row_num) row_num++
 init_grid_row('ink_kill','Poison Kill','Poison Grenade Kill',acc_ink_kill,                      12.5,1,99,FL_NORMAL,snd_ink_kill,row_num) row_num++
-init_grid_row('cant_touch_dis',"Can't Touch Dis",'4 Kills Taking No Damage',acc_cant_touch_dis, 225,4,99,FL_NORMAL,snd_cant_touch_dis,row_num) row_num++
+init_grid_row('cant_touch_dis',"Can't Touch Dis",'3 Kills Taking No Damage',acc_cant_touch_dis, 225,3,99,FL_NORMAL,snd_cant_touch_dis,row_num) row_num++
 init_grid_row('mvp','MVP','Most Points in Match',acc_mvp,                                       85,0,99,FL_NORMAL,snd_mvp,row_num) row_num++
 init_grid_row('highest_kd','Highest KDR','Highest Kill/Death Ratio in Match',acc_highest_kd,    60,0,99,FL_NORMAL,snd_highest_kdr,row_num) row_num++
 init_grid_row('10kd','Smooth Operator','10+ Kills, No Deaths',acc_10kd,                         150,10,99,FL_NORMAL,snd_10kd,row_num) row_num++
@@ -235,7 +237,9 @@ if in_match() and match_ending() and not spawned_grid
     {
         match_end_accs = true
         //note that this function actually awards the accolades as needed
+        force_accolade_sound = true
         match_end_accolades()
+        force_accolade_sound = false
         spawn_grid_delay = 1*30
     }
     

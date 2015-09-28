@@ -94,7 +94,7 @@ if respawn_counter
         } else
         {
             //can still maybe spawn a new one
-            if not wait_till_weapon_gone
+            if not wait_till_weapon_gone or true
             {
                 var wep_at_pos = instance_place(x,y,weapon)
                 if wep_at_pos != noone

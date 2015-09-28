@@ -33,6 +33,10 @@ alarm[1] = 2
 //recompute lowest pnums and whatnot
 alarm[2] = room_speed
 
+aamt = 0.875
+atarget = 0.07
+rtarget = 0.06
+
 //vars that needed to be transmitted framely --&gt; now only when they change!
 stationary_counter = 0
 stationary_threshold = 30*10
