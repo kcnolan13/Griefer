@@ -52,6 +52,8 @@ global.numBotTdm = 0;
 global.NUM_BPARTS = 25
 global.NUM_STATS = 13
 
+global.cluster = null;
+
 global.clients = [];
 global.rooms = [];
 global.conn_ready = false;

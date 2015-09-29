@@ -13,7 +13,7 @@ BEGIN
 												,
 												LEAST(
 														200, 
-														(LEAST(bot_stats.wins+bot_stats.losses,10)*1/10*(bot_stats.ppl/8 + bot_stats.wl*125)+LEAST(50,bot_stats.kills/10))/2 * 1/4
+														(LEAST(bot_stats.wins+bot_stats.losses,15)*1/15*(bot_stats.ppl/8 + bot_stats.wl*125)+LEAST(50,bot_stats.kills/10))/2 * 1/2.5
 													)
 											 )
 								);
@@ -36,8 +36,3 @@ BEGIN
 	SET stats.global_rank = stats_sorted.global_rank;
 END$$
 DELIMITER ;
-
-
-#select username,true_skill,ppl, wl, wins, losses, kills from stats order by true_skill  desc
-
-#update stats set wins=50, losses = 10 where username='Total N00bcall'

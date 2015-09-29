@@ -21,90 +21,145 @@ var CRITICAL = "err"
 var SOCKETS = "sock"
 var VERBOSE = "verbose"
 
-var log_std = fs.createWriteStream(__dirname + '/../log/std.log', {flags : 'w'});
-var log_cupid = fs.createWriteStream(__dirname + '/../log/cupid.log', {flags : 'w'});
-var log_critical = fs.createWriteStream(__dirname + '/../log/critical.log', {flags : 'w'});
-var log_sockets = fs.createWriteStream(__dirname+ '/../log/sockets.log', {flags : 'w'});
-var log_sql = fs.createWriteStream(__dirname + '/../log/sql.log', {flags : 'w'});
-var log_verbose = fs.createWriteStream(__dirname + '/../log/verbose.log', {flags : 'w'});
-var log_stdout = process.stdout;
+var log_std;// = fs.createWriteStream(__dirname + '/../log/std.log', {flags : 'w'});
+var log_cupid;// = fs.createWriteStream(__dirname + '/../log/cupid.log', {flags : 'w'});
+var log_critical;// = fs.createWriteStream(__dirname + '/../log/critical.log', {flags : 'w'});
+var log_sockets;// = fs.createWriteStream(__dirname+ '/../log/sockets.log', {flags : 'w'});
+var log_sql;// = fs.createWriteStream(__dirname + '/../log/sql.log', {flags : 'w'});
+var log_verbose;// = fs.createWriteStream(__dirname + '/../log/verbose.log', {flags : 'w'});
+var log_stdout;// = process.stdout;
+var initialized = false;
+
+exports.init = function() {
+	if (!global.cluster.isMaster)
+		var wid = global.cluster.worker.id;
+	else
+		var wid = ""
+	log_std = fs.createWriteStream(__dirname + '/../log/std.log'+wid, {flags : 'w'});
+	log_cupid = fs.createWriteStream(__dirname + '/../log/cupid.log'+wid, {flags : 'w'});
+	log_critical = fs.createWriteStream(__dirname + '/../log/critical.log'+wid, {flags : 'w'});
+	log_sockets = fs.createWriteStream(__dirname+ '/../log/sockets.log'+wid, {flags : 'w'});
+	log_sql = fs.createWriteStream(__dirname + '/../log/sql.log'+wid, {flags : 'w'});
+	log_verbose = fs.createWriteStream(__dirname + '/../log/verbose.log'+wid, {flags : 'w'});
+	log_stdout = process.stdout;
+	initialized = true;
+};
+
+
 
 exports.log = function(flag,text) { 
-	if (flag == SQL)
-		log_sql.write(util.format(text) + '\n');
-	else if (flag == CUPID)
-		log_cupid.write(util.format(text) + '\n');
-	else if (flag == CRITICAL) {
-		log_critical.write(util.format(text) + '\n');
-		console.log("ERROR: "+text);
+	if (initialized)
+	{
+		if (flag == SQL)
+			log_sql.write(util.format(text) + '\n');
+		else if (flag == CUPID)
+			log_cupid.write(util.format(text) + '\n');
+		else if (flag == CRITICAL) {
+			log_critical.write(util.format(text) + '\n');
+			console.log("ERROR: "+text);
+		}
+		else if (flag == STD)
+			log_std.write(util.format(text) + '\n');
+		else if (flag == SOCKETS)
+			log_sockets.write(util.format(text) + '\n');
+		else if (flag == VERBOSE)
+			log_verbose.write(util.format(text) + '\n');
+		else
+			log_stdout.write(util.format(text) + '\n');
 	}
-	else if (flag == STD)
-		log_std.write(util.format(text) + '\n');
-	else if (flag == SOCKETS)
-		log_sockets.write(util.format(text) + '\n');
-	else if (flag == VERBOSE)
-		log_verbose.write(util.format(text) + '\n');
 	else
-		log_stdout.write(util.format(text) + '\n');
+	{
+		//console.log(text);
+	}
 };
 
 var std_cleaner = setInterval(function() {
-	var stats = fs.statSync(__dirname + '/../log/std.log');
+	if (!global.cluster.isMaster)
+		var wid = global.cluster.worker.id;
+	else
+		var wid = ""
+
+	var stats = fs.statSync(__dirname + '/../log/std.log'+wid);
 	var fsize_mb = stats["size"]/1000000.0;
 	//console.log("\n\nLog File Size: "+fsize_mb+" MegaBytes\n\n");
 	if (fsize_mb > 5)
 	{
-		log_std = fs.createWriteStream(__dirname + '/../log/std.log', {flags : 'w'});
+		log_std = fs.createWriteStream(__dirname + '/../log/std.log'+wid, {flags : 'w'});
 	}
 }, 100000);
 
 var verbose_cleaner = setInterval(function() {
-	var stats = fs.statSync(__dirname + '/../log/verbose.log');
+	if (!global.cluster.isMaster)
+		var wid = global.cluster.worker.id;
+	else
+		var wid = ""
+
+	var stats = fs.statSync(__dirname + '/../log/verbose.log'+wid);
 	var fsize_mb = stats["size"]/1000000.0;
 	//console.log("\n\nLog File Size: "+fsize_mb+" MegaBytes\n\n");
 	if (fsize_mb > 5)
 	{
-		log_std = fs.createWriteStream(__dirname + '/../log/verbose.log', {flags : 'w'});
+		log_std = fs.createWriteStream(__dirname + '/../log/verbose.log'+wid, {flags : 'w'});
 	}
 }, 100000);
 
 var cupid_cleaner = setInterval(function() {
-	var stats = fs.statSync(__dirname + '/../log/cupid.log');
+	if (!global.cluster.isMaster)
+		var wid = global.cluster.worker.id;
+	else
+		var wid = ""
+
+	var stats = fs.statSync(__dirname + '/../log/cupid.log'+wid);
 	var fsize_mb = stats["size"]/1000000.0;
 	//console.log("\n\nLog File Size: "+fsize_mb+" MegaBytes\n\n");
 	if (fsize_mb > 5)
 	{
-		log_cupid = fs.createWriteStream(__dirname + '/../log/cupid.log', {flags : 'w'});
+		log_cupid = fs.createWriteStream(__dirname + '/../log/cupid.log'+wid, {flags : 'w'});
 	}
 }, 101000);
 
 var critical_cleaner = setInterval(function() {
-	var stats = fs.statSync(__dirname + '/../log/critical.log');
+	if (!global.cluster.isMaster)
+		var wid = global.cluster.worker.id;
+	else
+		var wid = ""
+
+	var stats = fs.statSync(__dirname + '/../log/critical.log'+wid);
 	var fsize_mb = stats["size"]/1000000.0;
 	//console.log("\n\nLog File Size: "+fsize_mb+" MegaBytes\n\n");
 	if (fsize_mb > 5)
 	{
-		log_critical = fs.createWriteStream(__dirname + '/../log/critical.log', {flags : 'w'});
+		log_critical = fs.createWriteStream(__dirname + '/../log/critical.log'+wid, {flags : 'w'});
 	}
 }, 102000);
 
 var sql_cleaner = setInterval(function() {
-	var stats = fs.statSync(__dirname + '/../log/sql.log');
+	if (!global.cluster.isMaster)
+		var wid = global.cluster.worker.id;
+	else
+		var wid = ""
+
+	var stats = fs.statSync(__dirname + '/../log/sql.log'+wid);
 	var fsize_mb = stats["size"]/1000000.0;
 	//console.log("\n\nLog File Size: "+fsize_mb+" MegaBytes\n\n");
 	if (fsize_mb > 10)
 	{
-		log_sql = fs.createWriteStream(__dirname + '/../log/sql.log', {flags : 'w'});
+		log_sql = fs.createWriteStream(__dirname + '/../log/sql.log'+wid, {flags : 'w'});
 	}
 }, 103000);
 
 var sockets_cleaner = setInterval(function() {
-	var stats = fs.statSync(__dirname + '/../log/sockets.log');
+	if (!global.cluster.isMaster)
+		var wid = global.cluster.worker.id;
+	else
+		var wid = ""
+
+	var stats = fs.statSync(__dirname + '/../log/sockets.log'+wid);
 	var fsize_mb = stats["size"]/1000000.0;
 	//console.log("\n\nLog File Size: "+fsize_mb+" MegaBytes\n\n");
 	if (fsize_mb > 5)
 	{
-		log_sockets = fs.createWriteStream(__dirname + '/../log/sockets.log', {flags : 'w'});
+		log_sockets = fs.createWriteStream(__dirname + '/../log/sockets.log'+wid, {flags : 'w'});
 	}
 }, 104000);
 
