@@ -145,6 +145,11 @@ var generateName = function() {
 }
 exports.generateName = generateName;
 
+var fsocket = function(socket) {
+	return {id: socket.id, name: socket.myPlayer.pName, myPlayer: socket.myPlayer};
+}
+exports.fsocket = fsocket;
+
 var nouns = ["aardvark",
 "abyssinian",
 "accelerator",

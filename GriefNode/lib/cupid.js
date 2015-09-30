@@ -20,12 +20,14 @@ var dbman = require('./dbman.js');
 var composer = require('./composer.js');
 
 //default 'main_menu' group ----> all room objects in the rooms array should have these properties
-rooms.push( {
+var main_menu = {
 	groupName: "main_menu",
 	modeName: "no mode",
 	maxPlayers: "-1",
 	minPlayers: "-1"
-});
+};
+main_menu.fsockets = [];
+rooms.push(main_menu);
 
 //this basically makes player objects
 var player = function(){
@@ -52,6 +54,7 @@ var room = function(groupName, modeName, maxPlayers, minPlayers) {
 	this.party = false;
 	this.match_countdown_timeout = null;
 	this.match_start_timeout = null;
+	this.fsockets = [];
 };
 exports.room = room
 
@@ -139,33 +142,183 @@ exports.bigMessage = bigMessage
 
 //returns an array of the sockets grouped in a certain room
 var socketsInRoom = function(roomName) {
-	namespace = "/";
-	var theSockets = [];
-	var roomsweep = [];
-	if (roomName=="all")
-	{
-		for (var i=0; i<rooms.length; i++)
+
+	if (!global.MULTITHREAD) {
+		namespace = "/";
+		var theSockets = [];
+		var roomsweep = [];
+		if (roomName=="all")
 		{
-			roomsweep.push(rooms[i].groupName);
+			for (var i=0; i<rooms.length; i++)
+			{
+				roomsweep.push(rooms[i].groupName);
+			}
+		}
+		else
+		{
+			roomsweep.push(roomName);
+		}
+		for (var i=0; i<roomsweep.length; i++)
+		{
+			var datRoom = roomsweep[i];
+			for (var socketId in io.nsps[namespace].adapter.rooms[datRoom]) {
+				if (io.sockets.connected[socketId]!=undefined) //was myPlayer.pName
+			    	theSockets.push(io.sockets.connected[socketId]);
+			}
+		}
+		return theSockets;
+
+	}
+	else {
+		if (roomName == "all") {
+			var theSockets = [];
+			for (var i=0; i<global.rooms.length; i++) {
+				for (var j=0; j<global.rooms[i].fsockets.length; j++) {
+					theSockets.push(global.rooms[i].fsockets[j]);
+				}
+			}
+			return theSockets;
+		} 
+		else 
+		{
+			var room = ds_find_room(roomName);
+			if (room) {
+				return room.fsockets;
+			} else {
+				log.log(CRITICAL,"socketsInRoom has no handle to "+roomName);
+			}
 		}
 	}
-	else
-	{
-		roomsweep.push(roomName);
-	}
-
-	for (var i=0; i<roomsweep.length; i++)
-	{
-		var datRoom = roomsweep[i];
-		for (var socketId in io.nsps[namespace].adapter.rooms[datRoom]) {
-			if (io.sockets.connected[socketId]!=undefined) //was myPlayer.pName
-		    	theSockets.push(io.sockets.connected[socketId]);
-		}
-	}
-
-return theSockets;
 }
 exports.socketsInRoom = socketsInRoom;
+
+//WORKER ONLY
+var worker_join_room = function(socket, groupNameTo) {
+	var groupNameFrom = socket.myPlayer.room;
+
+	if (socket.myPlayer.room != "") {
+		socket.leave(socket.myPlayer.room);
+	}
+	socket.myPlayer.room = groupNameTo;
+	socket.join(groupNameTo);
+
+	if (global.MULTITHREAD) {
+  		process.send({id:'player_join_room',fsocket:composer.fsocket(socket),groupNameFrom:groupNameFrom,groupNameTo:groupNameTo});
+  	}
+};
+exports.worker_join_room = worker_join_room;
+
+//MASTER ONLY
+var master_join_room = function(socket, groupName) {
+	if (global.MULTITHREAD) {
+		io.to(player.room).emit('player_join_room',socket.myPlayer.pName,groupName);
+		ds_migrate_player(socket.myPlayer.pName, socket.myPlayer.room, groupName)
+	}
+	else {
+		socket.myPlayer.room = groupName;
+		socket.leave(groupName);
+		socket.join(groupName);
+	}
+};
+exports.master_join_room = master_join_room;
+
+var ds_migrate_player = function(pName, groupNameFrom, groupNameTo) {
+	var roomFrom = ds_find_room(groupNameFrom);
+	var roomTo = ds_find_room(groupNameTo);
+	var fsocket_index = ds_find_fsocket_index(pName, roomFrom)
+	if (roomFrom && roomTo && fsocket_index >= 0) {
+		var fsocket = roomFrom.fsockets.splice(fsocket_index,1);
+		fsocket.myPlayer.room = groupNameTo;
+		roomTo.fsockets.push(fsocket);
+		log.log(CUPID,pName+" ds_migrated from "+roomFrom.groupName+" to "+roomTo.groupName);
+	}
+	else {
+		log.log(CRITICAL, "Unable to ds_migrate player "+pName+" from "+groupNameFrom+" to "+groupNameTo);
+		return false;
+	}
+} 
+exports.ds_migrate_player = ds_migrate_player;
+
+var ds_find_room = function(groupName) {
+	for (var i=0; i<global.rooms.length; i++) {
+		if (global.rooms[i].groupName == groupName) {
+			return global.rooms[i];
+		}
+	}
+	log.log(CRITICAL,"Unable to locate ds_room with groupName "+groupName);
+	return null;
+} 
+exports.ds_find_room = ds_find_room;
+
+var ds_find_fsocket_index = function(pName, room) {
+	for (var i=0; i<room.fsockets.length; i++) {
+		if (room.fsockets[i].myPlayer.pName == pName) {
+			return i;
+		}
+	}
+	log.log(CRITICAL,"Unable to find "+pName+" fsocket in room "+room.groupName);
+	return -1;
+} 
+exports.ds_find_fsocket_index = ds_find_fsocket_index;
+
+var ds_find_fsocket = function(pName, room) {
+	if (room) {
+		for (var i=0; i<room.fsockets.length; i++) {
+			if (room.fsockets[i].myPlayer.pName = pName) {
+				return room.fsockets[i];
+			}
+		}
+		log.log(CRITICAL,"Unable to find "+pName+" fsocket in room "+room.groupName);
+		return null;
+	} else {
+		var rcount = 0;
+		var fcount = 0;
+		for (var i=0; i<global.rooms.length; i++) {
+			rcount++;
+			var r = global.rooms[i];
+			for (var j=0; j<r.fsockets.length; j++) {
+				fcount++;
+				if (r.fsockets[j].myPlayer.pName == pName) {
+					return r.fsockets[j];
+				}
+			}
+		}
+		log.log(CRITICAL,"Unable to find "+pName+" in any room (searched "+rcount+" rooms, "+fcount+" fsockets)");
+		return null;
+	}
+}
+
+var ds_destroy_fsocket = function(pName, room) {
+	if (room) {
+		console.log("looking to destroy "+pName+"'s fsocket in room "+room.groupName);
+		for (var i=0; i<room.fsockets.length; i++) {
+			if (room.fsockets[i].myPlayer.pName = pName) {
+				room.fsockets.splice(i,1);
+				return true;
+			}
+		}
+		log.log(CRITICAL,"Unable to destroy "+pName+" fsocket in room "+room.groupName);
+	} 
+
+	//looks everywhere if not narrowed to a particular room or not found there
+	var rcount = 0;
+	var fcount = 0;
+	for (var i=0; i<global.rooms.length; i++) {
+		rcount++;
+		var r = global.rooms[i];
+		for (var j=0; j<r.fsockets.length; j++) {
+			fcount++;
+			if (r.fsockets[j].myPlayer.pName == pName) {
+				r.fsockets.splice(j,1);
+				console.log("destroyed "+pName+"'s fsocket in room "+r.groupName);
+				return true;
+			}
+		}
+	}
+	log.log(CRITICAL,"Unable to destroy "+pName+" fsocket in any room (searched "+rcount+" rooms, "+fcount+" fsockets)");
+	return false;
+}
+exports.ds_destroy_fsocket = ds_destroy_fsocket;
 
 var roomOfMode = function(mode_name) {
 	if (mode_name == "tdm")
@@ -260,7 +413,7 @@ var switchPartyMode = function(socket,room,new_mode) {
 }
 
 //prints players in each room / socket group and shows general net stats
-exports.manageSockets = function(){
+exports.manageSockets = function() {
 
 	numSockets = 0;
 	numTdm = 0;
@@ -271,28 +424,29 @@ exports.manageSockets = function(){
 	numBotFfa = 0;
 	numBotTdm = 0;
 
-	log.log(SOCKETS,"\n\nSocket Groups:\n");
-	for (var i=0; i<rooms.length; i++)
+	var socket_str = "\n\nNew Socket Report:\n";
+
+	for (var i=0; i<global.rooms.length; i++)
 	{
 		var sockets = [];
-		sockets = socketsInRoom(rooms[i].groupName);
+		sockets = socketsInRoom(global.rooms[i].groupName);
 
 		//collect network stats
 		numSockets += sockets.length;
 
-		if ((rooms[i].groupName.indexOf("bot") < 0)&&(rooms[i].groupName.indexOf("ffa") > -1))
+		if ((global.rooms[i].groupName.indexOf("bot") < 0)&&(global.rooms[i].groupName.indexOf("ffa") > -1))
 			numFfa += sockets.length;
-		else if ((rooms[i].groupName.indexOf("bot") < 0)&&(rooms[i].groupName.indexOf("tdm") > -1))
+		else if ((global.rooms[i].groupName.indexOf("bot") < 0)&&(global.rooms[i].groupName.indexOf("tdm") > -1))
 			numTdm += sockets.length;
-		else if ((rooms[i].groupName.indexOf("bot") < 0)&&(rooms[i].groupName.indexOf("versus") > -1))
+		else if ((global.rooms[i].groupName.indexOf("bot") < 0)&&(global.rooms[i].groupName.indexOf("versus") > -1))
 			numVersus += sockets.length;
-		else if (rooms[i].groupName.indexOf("bot_versus") > -1)
+		else if (global.rooms[i].groupName.indexOf("bot_versus") > -1)
 			numBot += sockets.length;
-		else if (rooms[i].groupName.indexOf("bot_ffa") > -1)
+		else if (global.rooms[i].groupName.indexOf("bot_ffa") > -1)
 			numBotFfa += sockets.length;
-		else if (rooms[i].groupName.indexOf("bot_tdm") > -1)
+		else if (global.rooms[i].groupName.indexOf("bot_tdm") > -1)
 			numBotTdm += sockets.length;
-		else if (rooms[i].groupName.indexOf("menu") > -1)
+		else if (global.rooms[i].groupName.indexOf("menu") > -1)
 			numMenu += sockets.length;
 
 		//end network stats
@@ -303,30 +457,28 @@ exports.manageSockets = function(){
 			if (j<sockets.length-1)
 				playerNames += ", ";
 		}
-		log.log(SOCKETS,"\t"+rooms[i].groupName+": "+playerNames);
+		socket_str += "\n\t"+rooms[i].groupName+": "+playerNames;
 	}
-	log.log(SOCKETS,"\n\nPlayers Online: "+numSockets+"\nPlaying TDM: "+numTdm+"\nPlaying FFA: "+numFfa+"\nPlaying Verus: "+numVersus+"\nPlaying Bot_Verus: "+numBot+"\nPlaying Bot_Ffa: "+numBotFfa+"\nPlaying Bot_Tdm: "+numBotTdm+"\n\n");
-	log.log(SOCKETS,"\n");
+
+	socket_str += "\n"+"\n\nPlayers Online: "+numSockets+"\nPlaying TDM: "+numTdm+"\nPlaying FFA: "+numFfa+"\nPlaying Verus: "+numVersus+"\nPlaying Bot_Verus: "+numBot+"\nPlaying Bot_Ffa: "+numBotFfa+"\nPlaying Bot_Tdm: "+numBotTdm+"\n\n\n"
+	if (global.socket_str != socket_str) {
+		log.log(SOCKETS,socket_str);
+		global.socket_str = socket_str;
+	} else {
+		log.log("verbose","no new data ... skipping socket report");
+	}
 }
 
 exports.syncPlayersConnected = function(){
 	log.log(CUPID,"SYNCHRONIZING PLAYERS CONNECTED");
-	for (var i=0; i<rooms.length; i++)
-	{
-		var sockets = [];
-		sockets = socketsInRoom(rooms[i].groupName);
-		for (var j=0; j<sockets.length; j++)
-		{
-			var socket = sockets[j];
-			objUpdate(socket, netManObjIndex, -1, "ffa_players_online", numFfa, FL_NORMAL);
-			objUpdate(socket, netManObjIndex, -1, "versus_players_online", numVersus, FL_NORMAL);
-			objUpdate(socket, netManObjIndex, -1, "tdm_players_online", numTdm, FL_NORMAL);
-			objUpdate(socket, netManObjIndex, -1, "bot_versus_players_online", numBot, FL_NORMAL);
-			objUpdate(socket, netManObjIndex, -1, "bot_ffa_players_online", numBotFfa, FL_NORMAL);
-			objUpdate(socket, netManObjIndex, -1, "bot_tdm_players_online", numBotTdm, FL_NORMAL);
-			objUpdate(socket, netManObjIndex, -1, "players_online", numSockets, FL_NORMAL);
-		}
-	}
+	io.emit('obj_update',composer.objUpdate(netManObjIndex, -1, "ffa_players_online", numFfa, FL_NORMAL));
+	io.emit('obj_update',composer.objUpdate(netManObjIndex, -1, "ffa_players_online", numFfa, FL_NORMAL));
+	io.emit('obj_update',composer.objUpdate(netManObjIndex, -1, "versus_players_online", numVersus, FL_NORMAL));
+	io.emit('obj_update',composer.objUpdate(netManObjIndex, -1, "tdm_players_online", numTdm, FL_NORMAL));
+	io.emit('obj_update',composer.objUpdate(netManObjIndex, -1, "bot_versus_players_online", numBot, FL_NORMAL));
+	io.emit('obj_update',composer.objUpdate(netManObjIndex, -1, "bot_ffa_players_online", numBotFfa, FL_NORMAL));
+	io.emit('obj_update',composer.objUpdate(netManObjIndex, -1, "bot_tdm_players_online", numBotTdm, FL_NORMAL));
+	io.emit('obj_update',composer.objUpdate(netManObjIndex, -1, "players_online", numSockets, FL_NORMAL));
 }
 
 var partyExpired = function(groupName) {

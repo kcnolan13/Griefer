@@ -20,12 +20,18 @@ global.FL_EMPTY_USERS = "UsersWithNoKills";
 
 global.page_length = 50;
 
+//stuff needed for multithreading
+global.MULTITHREAD = true;
+global.workers = [];
+global.rooms = [];
+
 //log flags
 global.SQL = "sql"
 global.CUPID = "cupid"
 global.STD = "std"
 global.CRITICAL = "err"
 global.SOCKETS = "sock"
+global.socket_string = ""
 
 //globals
 global.gamePort = 8080;
@@ -55,7 +61,6 @@ global.NUM_STATS = 13
 global.cluster = null;
 
 global.clients = [];
-global.rooms = [];
 global.conn_ready = false;
 
 global.calcColumns = ["kdr", "wl", "ppl"];

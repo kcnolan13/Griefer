@@ -962,67 +962,50 @@ var rankPlayers = function() {
 	execute(statement);
 
 	//update all connected clients
-	global.clients = cupid.socketsInRoom("all");
-	for (var j=0; j<global.clients.length; j++)
-	{
-		var sock = global.clients[j];
-		if (globals.exists(sock.myPlayer))
+	io.emit('reread_tskill');
+}
+exports.rankPlayers = rankPlayers;
+
+//ONLY CALLED BY WORKERS
+var reread_tskill = function(sock) {
+	var q = "SELECT true_skill,global_rank from stats where username="+conn.escape(sock.myPlayer.pName);
+	
+	conn.query(q,function(err,rows){
+
+		log.log(STD,"forcibly updating "+sock.myPlayer.pName+"'s global_rank and true_skill, which were just recomputed");
+		if (!rows)
 		{
-			if (globals.exists(sock.myPlayer.room) == true)
-			{
-				var q = "SELECT true_skill,global_rank from stats where username="+conn.escape(sock.myPlayer.pName);
-
-				conn.query(q,function(err,rows){
-
-					log.log(STD,"forcibly updating "+sock.myPlayer.pName+"'s global_rank and true_skill, which were just recomputed");
-					if (!rows)
-					{
-						log.log(CRITICAL,"rows does not exist for "+q);
-					}
-					else if (!rows[0])
-					{
-						log.log(CRITICAL,"rows[0] does not exist for "+q);
-					}
-					else
-					{
-						var manual_uid = composer.hash_string(sock.myPlayer.pName);
-						var tskill = rows[0]['true_skill'];
-						var grank = rows[0]['global_rank'];
-
-						if (sock.myPlayer.room != "")
-						{
-							log.log(SQL,"updating "+sock.myPlayer.pName+"'s local avatar: true_skill="+tskill+", global_rank = "+grank);
-							//update the local avatar with his new trueskill / global_rank
-							var upd = composer.objUpdate(avatarObjIndex,manual_uid,"true_skill",tskill,FL_NORMAL);
-							log.log(SQL,upd);
-							sock.emit('obj_update',upd);
-							
-							upd = composer.objUpdate(avatarObjIndex,manual_uid,"global_rank",grank,FL_NORMAL);
-							log.log(SQL,upd);
-							sock.emit('obj_update',upd);
-						}
-						else
-						{
-							log.log(CRITICAL,"WARNING: "+sock.myPlayer.pName+" is still at room=''");
-						}
-					}
-
-				});
-			}
-			else
-			{
-				log.log(CRITICAL,"WARNING: rankPlayers -- sock.myPlayer.room does not exist: \n"+sock)
-			}
+			log.log(CRITICAL,"rows does not exist for "+q);
+		}
+		else if (!rows[0])
+		{
+			log.log(CRITICAL,"rows[0] does not exist for "+q);
 		}
 		else
 		{
-			log.log(CRITICAL,"WARNING: rankPlayers -- sock.myPlayer does not exist: \n"+sock)
+			var manual_uid = composer.hash_string(sock.myPlayer.pName);
+			var tskill = rows[0]['true_skill'];
+			var grank = rows[0]['global_rank'];
+
+			if (sock.myPlayer.room != "")
+			{
+				log.log(SQL,"updating "+sock.myPlayer.pName+"'s local avatar: true_skill="+tskill+", global_rank = "+grank);
+				//update the local avatar with his new trueskill / global_rank
+				var upd = composer.objUpdate(avatarObjIndex,manual_uid,"true_skill",tskill,FL_NORMAL);
+				log.log(SQL,upd);
+				sock.emit('obj_update',upd);
+				
+				upd = composer.objUpdate(avatarObjIndex,manual_uid,"global_rank",grank,FL_NORMAL);
+				log.log(SQL,upd);
+				sock.emit('obj_update',upd);
+			}
+			else
+			{
+				log.log(CRITICAL,"WARNING: "+sock.myPlayer.pName+" is still at room=''");
+			}
 		}
-	}
-
-
+	});
 }
-exports.rankPlayers = rankPlayers;
 
 var getGlobalStats = function(socket, page_orderby, page_flag)
 {
