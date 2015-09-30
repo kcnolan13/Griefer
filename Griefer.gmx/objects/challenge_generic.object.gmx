@@ -106,8 +106,10 @@ popup_alpha = popup_alpha_idle
 popupa_alpha_target = popup_alpha
 
 hover_counter = 0
-hover_delay = 10
+hover_delay = 5
 hovering = false
+
+played_highlight_sound = false
 </string>
           </argument>
         </arguments>
@@ -158,7 +160,7 @@ if surface_exists(surf_slot)
             <string>///draw slot to surface at the highest scale expected (2?)
 if not surface_exists(surf_slot)
 {
-    surf_slot = surface_create(72*2,72*2)
+    surf_slot = surface_create(net_manager.armory_sl*2,net_manager.armory_sl*2)
     if not surface_exists(surf_slot)
     {
         printf("ERROR: challenge_generic cannot find surf_slot in alarm[1] ... trying to regenerate")
@@ -166,7 +168,7 @@ if not surface_exists(surf_slot)
     }
     else
     {
-        printf(":::WARNING: had to regenerate surf_slot for challenge_generic")
+        //printf(":::WARNING: had to regenerate surf_slot for challenge_generic")
     }
 }
 
@@ -447,7 +449,7 @@ if not surface_exists(surf_slot) and not regen_delay
     //regen challenge slot surfaces
     alarm[1] = ceil(random_range(5,15))
     regen_delay = 30
-    printf("::: calling for a challenge surface regen")
+    //printf("::: calling for a challenge surface regen")
 }
 else if regen_delay
 {
@@ -486,7 +488,7 @@ if not in_match() and net_manager.menu_mode = "challenges" and completed
     {
         if not bpart_has_armor_lists(rewards[i]) and not bpart_has_cache(rewards[i])
         {
-            
+            audio(snd_pan4,GAIN_PAN)
             destList = global.cache
             
             /* screw this for now
@@ -624,7 +626,14 @@ if room = rm_menu or room = rm_lobby
         else
         {
             hovering = false
+            played_highlight_sound = false
             //hover_counter = 0
+        }
+        
+        if hovering and not played_highlight_sound
+        {
+            played_highlight_sound = true
+            audio(snd_scroll,GAIN_HIGHLIGHT)
         }
         
         if hover_counter &gt; hover_delay and instance_place(x,y,cursor)
@@ -669,7 +678,11 @@ if in_match() and popup_show and not is_progression
         //descr = ""
         popup_xoff_extra = 0
     }
-    draw_popup_challenge(x+(popup_xoff+popup_xoff_extra+endmatch_offset)*(1+(1-scl)), y+(popup_yoff+popup_yoff_extra)*scl, name, "", descr, icon, color, popup_alpha,scl)
+    
+    var dy = y+(popup_yoff+popup_yoff_extra)*scl
+    if dy &lt; 64 dy = 64
+    if dy &gt; HVIEW-64 dy = HVIEW-64
+    draw_popup_challenge(x+(popup_xoff+popup_xoff_extra+endmatch_offset)*(1+(1-scl)), dy, name, "", descr, icon, color, popup_alpha,scl)
     //printf("::: show_number = "+string(show_number)+", id="+string(id)+", popup_xoff="+string(popup_xoff)+", popup_xoff_extra="+string(popup_xoff_extra))
 }
 </string>

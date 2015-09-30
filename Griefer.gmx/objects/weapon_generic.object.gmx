@@ -126,7 +126,7 @@ varWrite("my_player",MY_PLAYER_NULL)                //uniqueId of bonded player
 varWrite("control_type","left_press")   //fire button left_press, left_hold, or left_charge
 varWrite("can_disappear",true)          //disappear from the battlefield after a while
 varWrite("disappear_counter",-1)         
-varWrite("disappear_delay",30*10)
+varWrite("disappear_delay",60*10)
 varWrite("reload_counter",-1)
 varWrite("reload_incremental",false)
 varWrite("reload_empty_delay",30/2)

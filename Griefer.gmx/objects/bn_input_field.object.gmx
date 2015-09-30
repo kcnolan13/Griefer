@@ -143,15 +143,16 @@ if active
         {
             if string_length(text) &gt; 0
             {
+                audio(snd_keystroke,GAIN_KEYSTROKE)
                 text = string_copy(text,1,string_length(text)-1)
                 keyboard_string = text
             }
         }
-        backspace_counter += real_speed(1)
+        backspace_counter ++
         if backspace_counter &gt; backspace_delay
             backspace_counter = 0
     }
-    else backspace_counter = sub_real(backspace_counter,1)
+    else backspace_counter --//sub_real(backspace_counter,1)
     
     //PRESS TAB
     if keyboard_check_pressed(vk_tab)
@@ -283,7 +284,7 @@ if not modal_highlighted(id)
 if clicked exit
     clicked = 2
 
-audio_play_sound(snd_click,2,false)
+audio(snd_click,1)
 active = true
 auto_start = false
 
@@ -343,6 +344,7 @@ if not active and auto_start
     if string_length(keyboard_string) &lt; max_length
     {
         text = keyboard_string
+        audio(snd_keystroke,1)
     } else {
         keyboard_string = text
     }   
@@ -360,6 +362,7 @@ if active
 
     if string_length(keyboard_string) &lt; max_length
     {
+        audio(snd_keystroke,1)
         text = keyboard_string
     } else {
         keyboard_string = text

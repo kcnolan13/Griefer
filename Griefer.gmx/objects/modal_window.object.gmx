@@ -30,6 +30,7 @@ auto_crop = false
 crop_pad = 24
 
 force_click = false
+play_sound_when_ready = false
 
 depth = -95
 counter = 0
@@ -153,7 +154,12 @@ extra_height = 0
 
 
 pop_sound = snd_none
+pop_gain = 1
 popped_in = false
+
+highlight_sound = snd_none
+highlight_gain = 1
+highlight_sound_played = false
 
 birth_delay = 0
 
@@ -482,11 +488,26 @@ if not is_gui
 image_xscale = width
 image_yscale = height
 
-if not popped_in and abs(scale - 1) &lt;= 0.05 
+if not popped_in and abs(scale - scale_normal) &lt;= 0.05 
 {
    popped_in = true
    if pop_sound != snd_none
-   audio(pop_sound,1)
+    play_sound_when_ready = true
+}
+
+if play_sound_when_ready
+{
+    do_play_sound = true
+    with modal_window
+    {
+        if pop_sound != snd_none and audio_is_playing(pop_sound)
+            other.do_play_sound = false
+    }
+    if do_play_sound
+    {
+        play_sound_when_ready = false
+        audio(pop_sound,pop_gain/GAIN_AUDIO)
+    }
 }
 
 if fade_out = true and popped_in and translation_x = translation_xtarget and translation_y = translation_ytarget
@@ -510,6 +531,12 @@ if modal_highlighted(id)
     if hover_counter &gt; hover_delay
         show_popup = true
         
+    if hover_counter &gt; hover_delay/6 and highlight_sound != snd_none and not highlight_sound_played
+    {
+        highlight_sound_played = true
+        audio(highlight_sound,highlight_gain)
+    }
+        
     scale = lerp_real(scale,scale_highlighted,scale_lerp_real)
     cursor_highlight()
     
@@ -520,6 +547,7 @@ if modal_highlighted(id)
 }
 else
 {
+    highlight_sound_played = false
     hover_counter = 0
     show_popup = false
     scale = lerp_real(scale,scale_normal,scale_lerp_real)

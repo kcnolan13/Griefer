@@ -29,8 +29,8 @@
 event_inherited()
 
 //DAMAGE
-audio(snd_rocket_splosion,2)
-radius = 64*7
+audio(snd_rocket_splosion,1)
+radius = 64*6
 damage = 158
 varWrite("falloff_x1",radius/4)
 varWrite("falloff_y1",1)

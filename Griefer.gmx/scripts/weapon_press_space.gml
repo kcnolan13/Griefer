@@ -8,7 +8,7 @@ if varRead("my_player") = MY_PLAYER_NULL
             if contemplator.weapon_contemplating = id
             {
                 if net_manager.local_player = contemplator
-                    audio_play_sound(snd_pickup,2,false)
+                    audio(snd_pickup,1)
                 //printf("::: telling "+objVarRead(contemplator,"pName")+" to pick me up: "+string(varRead("name")))
                 with (contemplator) pickup_weapon(weapon_contemplating)
                 //printf("::: "+objVarRead(contemplator,"pName")+" picked me up: "+string(varRead("name")))

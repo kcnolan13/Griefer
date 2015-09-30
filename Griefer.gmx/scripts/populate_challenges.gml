@@ -136,10 +136,10 @@ blah.progress_varname = "5ass"
 blah.xp = 5000*chal_scaler
 update_acc_chal_needed("5ass",1)
 
-blah = instantiate_challenge(spr_sombrero_hat, "Sombrero", "Earn "+string(3)+' "'+acc_name("flash_bandicoot")+'" '+global.accolade_name+"s")
+blah = instantiate_challenge(spr_bandicoot_helmet, global.bandicoot_name, "Earn "+string(10)+' "'+acc_name("flash_bandicoot")+'" '+global.accolade_name+"s")
 blah.progress_varname = "flash_bandicoot"
 blah.xp = 5000*chal_scaler
-update_acc_chal_needed("flash_bandicoot",3)
+update_acc_chal_needed("flash_bandicoot",10)
 
 ass = instantiate_challenge(spr_assassin_helmet, global.ass_name, "Earn "+string(assassin_spree_needed)+' "'+acc_name("3ks")+'" '+global.accolade_name+"s")
 ass.rewards[1] = spr_assassin_torso

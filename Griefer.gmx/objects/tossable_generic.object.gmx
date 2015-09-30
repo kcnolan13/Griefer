@@ -60,6 +60,8 @@ varWrite("been_picked_up",false)
 varWrite("rigidity",3)
 varWrite("can_rotate",true)
 varWrite("stationary",false)
+varWrite("deceleration",0)
+varWrite("max_speed",99999999)
 stationary_counter = 0
 
 varWrite("stuck_pname",-52)
@@ -170,7 +172,7 @@ if sticky and is_string(varRead("stuck_pname"))
             <string>///all dah ish --&gt; most of it computed by everyone
 if varRead("play_stick_sound")
 {
-    audio_play_sound(snd_sticky_stuck,2,false)
+    audio(snd_sticky_stuck,1)
     varWrite("play_stick_sound",false)
 }
 depth = -80
@@ -277,6 +279,11 @@ if not stuck //and (not sticky or varRead("local"))
     {
         vsp += real_speed(grav)
         recalc_tossable_vector()
+        if point_distance(x,y,x+hsp,y+vsp) &lt; varRead("max_speed")
+        {
+            hsp -= trigx(varRead("deceleration"),dir)
+            vsp -= trigy(varRead("deceleration"),dir)
+        }
     }
     else
     {

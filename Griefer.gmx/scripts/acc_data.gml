@@ -10,14 +10,15 @@ if not ds_exists(grid,ds_type_grid)
     return false
 }
 
-if ds_grid_value_exists(grid,0,0,0,ds_grid_height(grid)-1,name)
+if ds_grid_value_exists(grid,0,0,ds_grid_width(grid),ds_grid_height(grid)-1,name)
 {
     var row_num = ds_grid_value_y(grid,0,0,0,ds_grid_height(grid)-1,name)
     return ds_grid_get(grid,col_num,row_num)
 }
 else
 {
-    printf("ERROR: acc_data cannot find the row number for name: "+string(name))
+    if string_length(name) > 0
+        printf("ERROR: acc_data cannot find the row number for name: "+string(name))
     //print_ds_grid(grid)
     return false
 }

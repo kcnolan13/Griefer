@@ -32,6 +32,10 @@ halign = fa_center
 valign = fa_center
 snap_by_percent = false
 
+intended_fade_delay = 30*3
+
+scale_highlighted = 2
+
 width = 64*7
 height = 64*5
 
@@ -53,13 +57,15 @@ else
 
 if in_match() and not match_ending()
 {
-    fade_delay = 30*2
+    fade_delay = intended_fade_delay
 }
 
 alpha_scroll_scaler = 1
 
 depth_show_popup = depth-2
 depth_normal = depth
+
+scale_lerp_real = 0.25
 </string>
           </argument>
         </arguments>
@@ -116,6 +122,19 @@ event_inherited()
 if not in_match() and menmode() = "stats"
 {
     x = lerp(x,xtarget,0.25)
+}
+
+if in_match() and not match_ending() and counter &gt; intended_fade_delay
+{
+    if not fade_out
+    {
+        printf("ERROR: accolade_generic has counter &gt; intended_fade_delay")
+        fade_out = true
+    }
+    else if counter &gt; intended_fade_delay*2
+    {
+        printf("ERROR: accolade_generic has been around for "+string(counter)+" steps and is trying to fade_out but scale is still "+string(scale))
+    }
 }
 </string>
           </argument>

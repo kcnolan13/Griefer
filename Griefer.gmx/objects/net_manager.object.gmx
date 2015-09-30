@@ -63,6 +63,10 @@ name_you_killed = ""
 new_user = false
 drawing_grid_dir = 0
 
+sounded_lotto_slot[0] = false
+sounded_lotto_slot[1] = false
+sounded_lotto_slot[2] = false
+
 barh = 22
 
 force_loading_popup = false
@@ -134,10 +138,10 @@ full_screen = false
 global.rank_colors = 0
 global.rank_names = 0
 
-lotto_delay = 50
+lotto_delay = 40
 lotto_counter = 0
 
-tdm_kill_limit = 3//20
+tdm_kill_limit = 10//20
 ffa_kill_limit = 15
 versus_kill_limit = 10
 kill_limit = 10
@@ -1233,11 +1237,11 @@ if keepalive_timer
     keepalive_timer --
     if not keepalive_timer
     {
+        keepalive_timer = keepalive_timeout
         //printf("::: checking keepalive")
         if isAlive() = 1
         {
             //printf(":::IS ALIVE")
-            keepalive_timer = keepalive_timeout
             server_found = true
             keepalive_missed = 0
             keepAlive()
@@ -1584,6 +1588,10 @@ if room = rm_lobby
             case "lobby":
                 objVarWrite(ID,"dude_y",lobby_dude_y)
                 var pnum = objVarRead(ID,"pNum")
+                
+                if not lobby_match_countdown
+                    pnum = i
+                
                 var xtarget = room_width/2
                 var dat_sign = 1
                 
@@ -1636,7 +1644,7 @@ if room = rm_lobby
                 if is_my_avatar(ID)
                 {
                     objVarWrite(ID,"dude_y",room_height*1.75/3-64)
-                    objVarWrite(ID,"dude_x",room_width*1/9)
+                    objVarWrite(ID,"dude_x",-64*8)//room_width*1/9)
                 }
                 else
                 {
@@ -1644,7 +1652,7 @@ if room = rm_lobby
                     if ID.x &lt; room_width/2
                         objVarWrite(ID,"dude_x",-64*8)
                     else
-                        objVarWrite(ID,"dude_x",room_width+64*8)
+                        objVarWrite(ID,"dude_x",-64*8)
                 }
             break
             
@@ -1665,8 +1673,12 @@ if room = rm_lobby
             break
             
             case "lottery_steal":
-                if not is_my_avatar(ID)
+                if not is_my_avatar(ID) or true
+                {
+                    ID.y = -64*10
+                    objVarWrite(ID,"myY",-64*10)
                     objVarWrite(ID,"dude_y",0-64*10)
+                }
                 else
                 {
                     objVarWrite(ID,"dude_y",room_height*2/3-32)
@@ -1738,7 +1750,7 @@ if room = rm_menu or room = rm_lobby
         break
         
         case "challenges":
-            dude_x = room_width*1/9
+            dude_x = -64*8//room_width*1/9
             dude_y = room_height*1.75/3-64
         break
         
@@ -2564,6 +2576,10 @@ alarm[7] = 2
 
 global.xoff = 0
 
+sounded_lotto_slot[0] = false
+sounded_lotto_slot[1] = false
+sounded_lotto_slot[2] = false
+
 for (var i=0; i&lt;NUM_LIMBS; i++)
 {
     grid_lalphs[i] = 0
@@ -3091,7 +3107,7 @@ if room = rm_login
         {
             if not drawing_grav_popup
             {
-                audio_play_sound(snd_scroll3,2,false)
+                audio(snd_scroll3,1)
             }
             
             drawing_grav_popup = 2
@@ -3145,7 +3161,7 @@ for (var i=0; i&lt;instance_number(avatar); i++)
     {
         if not av_popup_drawn
         {
-            audio_play_sound(snd_scroll3,2,false)
+            audio(snd_scroll3,1)
             av_popup_drawn = true
         }
         
@@ -3258,6 +3274,8 @@ if in_match() and ((draw_killed_by and do_draw_killed_by) or (draw_you_killed an
     draw_set_valign(fa_center)
     var killer_name = objVarRead(local_player,"killer")
     
+    var modal_scale = 0.75
+    
     if draw_you_killed and name_you_killed != ""
         killer_name = name_you_killed
     
@@ -3270,6 +3288,7 @@ if in_match() and ((draw_killed_by and do_draw_killed_by) or (draw_you_killed an
             dead_av = find_pname_avatar(name_you_killed)
         else
         {
+            modal_scale = 1
             dead_av = myAvatar()
             //printf("::: yours is the dead avatar")
         }
@@ -3287,23 +3306,31 @@ if in_match() and ((draw_killed_by and do_draw_killed_by) or (draw_you_killed an
                 blood_color = objVarRead(dead_av,"blood_color")
             } else printf("::: WARNING: couldn't locate dead avatar to find blood color for killed display")
             
-            draw_splats(WVIEW/2,starty+row_sep*1,1.15,blood_color,0.15)
+            if modal_scale = 1
+                draw_splats(WVIEW/2,starty+row_sep*1,1.15,blood_color,0.15)
             
             with killer_av
-                draw_avatar_head(WVIEW/2+row2_xoff,starty+row_sep,id,0,1,1,FL_NOBAR)
+                draw_avatar_head(WVIEW/2+row2_xoff*modal_scale,starty+row_sep*modal_scale,id,0,1,1,FL_NOBAR)
                 
             var kill_txt = "You Were Killed By: "
             
             if draw_you_killed and name_you_killed != ""
                 kill_txt = "You Killed: "
                 
-            draw_text(WVIEW/2,starty,kill_txt)
+            draw_text_transformed(WVIEW/2,starty,kill_txt,modal_scale,modal_scale,0)
             draw_set_halign(fa_left)
-            draw_text(WVIEW/2+row2_xoff+head_space,starty+row_sep,string(killer_name))
+            draw_text_transformed(WVIEW/2+(row2_xoff+head_space)*modal_scale,starty+row_sep*modal_scale,string(killer_name),modal_scale,modal_scale,0)
         }
     }
     else
-        draw_text(0+WVIEW/2,0+HVIEW/4,"You Killed Yourself...")
+    {
+        var row_sep = 94
+        var starty = HVIEW/12
+        var head_space = 64
+        var row2_xoff = -1/2*(head_space+string_width(string(killer_name)))
+        draw_splats(WVIEW/2,starty+row_sep*1,1.15,objVarRead(myAvatar(),"blood_color"),0.15)
+        draw_text_transformed(WVIEW/2,starty+64,"You Killed Yourself...",modal_scale,modal_scale,0)
+    }
 }
 
 if not match_ending()
@@ -3324,7 +3351,7 @@ if not match_ending()
         
         draw_set_font(fnt_hud_biggest)
         draw_set_valign(fa_top)
-        draw_text(0+WVIEW/2,rtop+12,string(game_mode_name(varRead("game_mode")))+" on "+string(global.map_names[room]))
+        draw_text(0+WVIEW/2,rtop+12,string(game_mode_name_long(varRead("game_mode")))+" on "+string(global.map_names[room]))
         
         draw_set_font(fnt_hud_medium)
         draw_set_valign(fa_bottom)
@@ -3647,7 +3674,7 @@ if lobby_match_countdown and instance_exists(next_map_final)//and not waiting_fo
     //ui_countdown = popup_loading(WVIEW/2,HVIEW/2)
     //ui_countdown.is_ui_countdown = true
     
-    next_map_final.text = "Match Countdown ... "+string(ceil(varRead("lobby_wait_time")/30))
+    next_map_final.text = "Match Countdown    "+string(time_30steps_2countdown(varRead("lobby_wait_time")))
     
     draw_set_color(c_black)
     if varRead("lobby_wait_time")/30 &lt; 8
@@ -3819,7 +3846,7 @@ if room = rm_menu or room = rm_lobby
     {
         draw_set_halign(fa_right)
         draw_set_valign(fa_middle)
-        draw_text(room_width-draw_edge_txtpad,room_height-draw_edge_padding/2-barh/2,"Intermission ... "+string(ceil(varRead("lobby_wait_time")/30)))
+        draw_text(room_width-draw_edge_txtpad,room_height-draw_edge_padding/2-barh/2,"Intermission     "+string(time_30steps_2countdown(varRead("lobby_wait_time"))))
     }
     
     if room = rm_menu and room_counter &gt; 30*2 and menmode() != "armory" and menmode() != "stats"
@@ -3985,7 +4012,7 @@ if (room = rm_menu or room = rm_lobby) and string(menu_mode) = "armory" and inst
                     {
                     
                         //if not audio_is_playing(snd_pickup2)
-                                audio_play_sound(snd_pickup2,2,false)
+                                audio(snd_pickup2,1)
                     
                         with other.id
                         {
@@ -4019,7 +4046,7 @@ if (room = rm_menu or room = rm_lobby) and string(menu_mode) = "armory" and inst
                     {
                         //should draw
                         if not armory_alphas[i] = 1
-                            audio_play_sound(snd_scroll,2,false)
+                            audio(snd_scroll,1)
                             
                         armory_alphas[i] = 1//lerp_real(armory_alphas[i],1,0.25)
                         //compute grid coordinates
@@ -4223,7 +4250,7 @@ if lotto_counter &gt; lotto_delay and instance_exists(xp_bar.aw)
         draw_set_halign(fa_center)
         draw_set_valign(fa_center)
         
-        draw_text(lottery_x,lottery_y-24,"Armor Lottery:")
+        draw_text(lottery_x,lottery_y-24,"Armor Lottery")
         
         //draw the lottery when it is time
         if mode_counter &lt; mode_total-steal_time
@@ -4256,16 +4283,17 @@ if lotto_counter &gt; lotto_delay and instance_exists(xp_bar.aw)
                     lotto_slot_scale[lotto_slot_index] = lerp_real(lotto_slot_scale[lotto_slot_index],slot_scale_deciding,slot_lerp_real)
                     draw_lotsteal_slot_thinking(slot_xoff,slot_yoff,lotto_slot_scale[lotto_slot_index],1,dat_spr_do)
                     if not audio_is_playing(snd_scroll3)
-                        audio_play_sound(snd_scroll3,1,false)
+                        audio(snd_scroll3,1)
                 }
                 else
                 {
-                    if mode_counter = lottery_time-lottery_calc_time-lotto_slot_index*lotto_comein_offset
+                    if mode_counter &lt;= lottery_time-lottery_calc_time-lotto_slot_index*lotto_comein_offset and not sounded_lotto_slot[lotto_slot_index]
                     {
+                        sounded_lotto_slot[lotto_slot_index] = true
                         if not instance_exists(bpart_lotto[lotto_slot_index])
-                            audio_play_sound(snd_item_blah,3,false)
+                            audio(snd_item_blah,1)
                         else
-                            audio_play_sound(snd_item_new,3,false)
+                            audio(snd_item_new,1)
                     }
                     lotto_slot_scale[lotto_slot_index] = lerp_real(lotto_slot_scale[lotto_slot_index],slot_scale_decided,slot_lerp_real)
                     //draw the finalized slot

@@ -39,7 +39,7 @@ bleed_lerp_real = 0.1
 
 initialize_physics()
 
-audio(snd_ink,2)
+audio(snd_ink,1)
 counter = 0
 part_off = 64*2
 

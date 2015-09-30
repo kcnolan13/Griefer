@@ -53,7 +53,7 @@ if not in_match()
     draw_y = cursor.y
 }
 
-alpha = alpha*0.75
+alpha = alpha
 
 if not in_match()
 {
@@ -105,10 +105,10 @@ draw_rectangle(left,top,right,top+height/2,false)
 
 //draw body rectangle
 draw_set_color(c_black)
-draw_set_alpha(0.95*alpha)//alpha*0.8)
+draw_set_alpha(0.98*alpha)//alpha*0.8)
 draw_rectangle(left,top+height/2,right,bottom,false)
 draw_set_color(c_white)
-draw_set_alpha(0.6*alpha)
+draw_set_alpha(0.85*alpha)
 draw_rectangle(left+icon_pad,top+icon_pad,left+(bottom-top)-icon_pad,bottom-icon_pad,false)
 draw_set_alpha(alpha)
 

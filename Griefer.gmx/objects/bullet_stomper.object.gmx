@@ -55,7 +55,7 @@ varWrite("hitscan",true)
 varWrite("gravity",0)
 
 //damage
-varWrite("damage_body",35)
+varWrite("damage_body",48)
 varWrite("damage_head",1000)
 
 //damage falloff

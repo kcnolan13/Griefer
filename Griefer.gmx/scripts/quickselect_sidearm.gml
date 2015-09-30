@@ -24,7 +24,7 @@ while (varRead("weapon_index") != desired_index) and whiles < 1000
 {
     whiles++
     if net_manager.local_player = id
-        audio_play_sound(snd_scroll3,2,false)
+        audio(snd_scroll3,1)
     
     if desired_index > varRead("weapon_index")
         next_weapon()

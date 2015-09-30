@@ -493,7 +493,7 @@ global.notification_scale = notif_scale
 if clicked exit
 clicked = 2
 
-audio_play_sound(snd_click,2,false)
+audio(snd_click,1)
 
 printf("clicked: "+string(label))
 

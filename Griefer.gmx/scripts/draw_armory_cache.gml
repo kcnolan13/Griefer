@@ -129,7 +129,7 @@ for (var i=0; i<num_slots; i++)
             swap_counter = 5
             with other.id //other.id is actually net_manager
             {
-                            audio_play_sound(snd_click_armory,2,false)
+                            audio(snd_click_armory,1)
                 swap_counter = 5
                 //add to the list this belongs in if you can
                 handle2 = get_bpart_list(bpart.limb_type)
@@ -172,7 +172,7 @@ for (var i=0; i<num_slots; i++)
         }
         else if instance_place(x,y,cursor) and not popup_exists()  and rightclick_pressed() and not swap_counter and dis_slot_alpha > 0.2 
         {
-            audio_play_sound(snd_pickup2,2,false)
+            audio(snd_pickup2,1)
                             
             if not contemplating_scrap
             {
@@ -222,7 +222,7 @@ for (var i=0; i<num_slots; i++)
                 hovering ++
                 
                 if hovering = hover_delay and dis_slot_alpha > 0.2
-                    audio_play_sound(snd_scroll3,2,false)
+                    audio(snd_scroll3,1)
                 
                 if hovering > hover_delay and dis_slot_alpha > 0.2 
                 {

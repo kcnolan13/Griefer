@@ -7,7 +7,7 @@ var master_scale = kill_feed.master_scale
 //printf("drawing score table @ "+xdraw+", "+ydraw)
 //draw the match header
 draw_set_font(global.table_font)
-draw_table_row(xdraw, ydraw, c_black/*global.table_header_color*/, global.table_font_color, 1, "CARNAGE REPORT               "+string(game_mode_name(objVarRead(net_manager,"game_mode")))+" on "+string(net_manager.map_previous), -99, "","", "", "", "")
+draw_table_row(xdraw, ydraw, c_black/*global.table_header_color*/, global.table_font_color, 1, "CARNAGE REPORT               "+string(game_mode_name_long(objVarRead(net_manager,"game_mode")))+" on "+string(net_manager.map_previous), -99, "","", "", "", "")
 
 //draw how many kills you need and the little symbol
 var scl = 0.325

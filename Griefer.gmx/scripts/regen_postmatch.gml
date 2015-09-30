@@ -22,6 +22,8 @@ mw.highlightable = false
 mw.color = c_black//make_colour_hsv(100,10,80)
 mw.birth_delay = birth_delay
 mw.menu_mode = "lottery_steal"
+mw.pop_sound = snd_pan1
+mw.pop_gain = 0//GAIN_PAN
 
 aw = instance_create(lottery_x,room_height/2,modal_window)
 aw.halign = fa_center
@@ -34,5 +36,30 @@ aw.highlightable = false
 aw.color = c_black//make_colour_hsv(100,10,80)
 aw.birth_delay = birth_delay+net_manager.lotto_delay
 aw.menu_mode = "lottery_steal"
+aw.pop_sound = snd_pan1
+aw.pop_gain = 0//GAIN_PAN
+
+done_spacer = 32
+accw = instance_create(room_width*1/6+64,room_height*1/4-32+64*1.75+32,modal_window)
+accw.halign = fa_center
+accw.valign = fa_center
+accw.width = 64*3
+accw.height = mw.height - 64*1.75 - done_spacer
+accw.depth = -92
+accw.alpha_max = 0.5
+accw.highlightable = false
+accw.color = c_black//make_colour_hsv(100,10,80)
+accw.birth_delay = birth_delay+30
+accw.menu_mode = "lottery_steal"
+accw.header_text = "Top "+global.accolade_name+"s"
+accw.header_height = 36
+accw.header_alpha = 0
+accw.pop_sound = snd_pan1
+accw.pop_gain = 0//GAIN_PAN
+
+if instance_exists(mw)
+{
+    accw.y = mw.y-mw.height/2+64*1.75+done_spacer+accw.height/2
+}
 
 regen_postmatch_visuals()

@@ -150,7 +150,7 @@ if clicked exit
     clicked = 2
 
 printf("clicked: "+label)
-audio_play_sound(snd_click,2,false)
+audio(snd_click,1)
 
 refresh_control_scheme(FL_KEYBOARD)
 global.forced_control_scheme = true

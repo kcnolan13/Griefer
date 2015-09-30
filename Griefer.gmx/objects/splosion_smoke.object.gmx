@@ -29,7 +29,7 @@
 netvars = ds_map_create()
 initialize_physics()
 
-audio(snd_smoke,2)
+audio(snd_smoke,1)
 counter = 0
 part_off = 64*2
 

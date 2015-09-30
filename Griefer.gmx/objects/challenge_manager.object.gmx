@@ -32,7 +32,7 @@ global.challenge_popup_width = 72*5.5
 global.challenge_popup_height = 1.5*72+ 2*net_manager.armory_ysep
 global.challenge_color_incomplete = make_color_rgb(10,10,10)
 global.challenge_slot_width = 72
-global.challenge_grid_xstart = 72*5
+global.challenge_grid_xstart = 72-24
 global.challenge_grid_ystart = 72*2-13
 
 comp_yoff = room_height*1/2-32-130
@@ -43,7 +43,7 @@ chal_yoff = room_height*1/2+64*1.5-16-24
 bot_yoff = room_height*1/2-64*2
 
 global.challenge_grid_sep = net_manager.armory_ysep
-global.challenge_grid_width = 10
+global.challenge_grid_width = 14
 
 //ASSOCIATIVE DATA STRUCTURE --&gt; CHALLENGE NAME AND OBJECT ID
 global.ds_challenges = ds_map_create()

@@ -139,7 +139,7 @@ if clicked exit
     clicked = 5
 
 printf("clicked: "+label)
-audio_play_sound(snd_click,2,false)
+audio(snd_click,1)
 
 //unhighlight the others
 with bn_stat_tab

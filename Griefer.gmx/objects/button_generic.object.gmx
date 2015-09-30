@@ -63,7 +63,7 @@ image_speed = 0
 if cursor.x &gt; bbox_left and cursor.x &lt; bbox_right and cursor.y &gt; bbox_top and cursor.y &lt; bbox_bottom
 {
     if image_index = 0
-        audio_play_sound(snd_scroll2,1,false)
+        audio(snd_scroll2,1)
     image_index = 1
     txt_alpha = 1
     txt_scale = 1.1

@@ -37,7 +37,7 @@ if not part_system_exists(particle_controller.sys_flame)
 initialize_physics()
 
 //audio(snd_ink,2)
-audio(snd_flame,2)
+audio(snd_flame,1)
 counter = 0
 part_off = 64*2
 

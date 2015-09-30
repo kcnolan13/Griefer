@@ -34,6 +34,12 @@ halign = fa_center
 valign = fa_center
 header_color = c_black
 
+highlight_sound = snd_pan5
+highlight_gain = GAIN_HIGHLIGHT
+
+//pop_sound = snd_pan3
+//pop_gain = GAIN_PAN
+
 alarm[0] = 1
 </string>
           </argument>
@@ -95,6 +101,8 @@ if text = global.pmode
     net_manager.party_leader = true
     net_manager.in_party = true
 }
+
+audio(snd_click,1)
 
 net_manager.menu_mode = "play"
 known_modes[0] = "versus"

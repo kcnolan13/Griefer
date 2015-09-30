@@ -499,7 +499,7 @@ if col_high &gt; -1 and ds_exists(grid,ds_type_grid)
     //ascending[col_high] ^= 1
     //print_ds_grid(grid)
     s_index = 0
-    audio_play_sound(snd_click,2,false)
+    audio(snd_click,1)
     
     //page the leaderboards!
     scr_bn_page_leaderboards()
@@ -507,13 +507,13 @@ if col_high &gt; -1 and ds_exists(grid,ds_type_grid)
 
 if not cursor_depressed and rect_highlighted(s_left,s_curs_top,s_right,s_curs_bottom)
 {
-    audio_play_sound(snd_click,2,false)
+    audio(snd_click,1)
     cursor_depressed = true
     mouse_lasty = cursor.y
 }
 else if not cursor_depressed and rect_highlighted(s_left,s_top,s_right,s_bottom)
 {
-    audio_play_sound(snd_click,2,false)
+    audio(snd_click,1)
     
     //clicks in the general scroll region
     if cursor.y &gt; s_curs_bottom

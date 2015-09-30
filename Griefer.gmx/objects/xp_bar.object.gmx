@@ -61,6 +61,7 @@ xp_before_match = 0
 modal_prom = NO_HANDLE
 mw = NO_HANDLE  //modal window
 aw = NO_HANDLE //armory window
+accw = NO_HANDLE //accolade window
 earn_pauser = 0
 
 //xp vars to be periodically computed
@@ -398,10 +399,14 @@ if (instance_exists(mw) or instance_exists(aw) or instance_exists(av_txt) or ins
     if instance_exists(aw)
         with aw fade_out = true
         
+    if instance_exists(accw)
+        with accw fade_out = true
+        
     clear_postmatch_visuals()
         
     mw = NO_HANDLE
     aw = NO_HANDLE
+    accw = NO_HANDLE
 
 }
 
@@ -427,6 +432,11 @@ if instance_exists(av_txt)
     }
 }
 
+if instance_exists(accw) and instance_exists(bn_postmatch_done)
+{
+    accw.x = bn_postmatch_done.x
+}
+
 if net_manager.menu_mode = "lottery_steal" and not instance_exists(bn_postmatch_done) and room = rm_lobby
 {
     bn = instance_create(room_width*1/6+64,room_height*1/4-32,bn_postmatch_done)
@@ -437,7 +447,7 @@ if net_manager.menu_mode = "lottery_steal" and not instance_exists(bn_postmatch_
     bn.height = 64*1.75
     bn.alpha_max = 0.7
     bn.color = make_colour_hsv(300,0,0)
-    bn.birth_delay = 30*3
+    bn.birth_delay = 30*1.5
     bn.font = fnt_hud_big
     bn.text_valign = fa_center
     

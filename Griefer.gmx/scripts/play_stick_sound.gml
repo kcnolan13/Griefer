@@ -1,5 +1,5 @@
 ///play_stick_sound()
-audio_play_sound(snd_sticky_stuck,2,FL_NORMAL)
+audio(snd_sticky_stuck,1)
 
 if varRead("local")
 {

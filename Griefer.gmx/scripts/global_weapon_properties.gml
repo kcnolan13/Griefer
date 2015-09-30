@@ -1,6 +1,6 @@
 global.wspawn_default = 30*30
 global.vulcan = "Vulcan"
-global.pistol = "Derringer"
+global.pistol = "Sidearm"
 global.rifle = "Spitfire"
 global.shotgun = "Mincer"
 global.frag = "Frag"
@@ -47,7 +47,7 @@ global.rifle_scale = 1.1
 global.nade_scale = 1.5
 global.shotgun_scale = 1.125
 global.longshot_scale = 0.85
-global.smg_scale = 1
+global.smg_scale = 1.1
 global.lmg_scale = 1.1
 global.boom_scale = 1.25
 global.boltok_scale = 1

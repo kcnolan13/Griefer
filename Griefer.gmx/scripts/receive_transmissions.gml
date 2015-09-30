@@ -367,7 +367,7 @@ while (genMessagesWaiting() and wait_counter < 500000)
                 if (genVal = 1)
                 {
                     printf("::: GOOD LOGIN")
-                    audio_play_sound(snd_click,2,false)
+                    audio(snd_click,1)
                     net_manager.login_when_ready = true
                     with gravatar
                     {
@@ -399,7 +399,7 @@ while (genMessagesWaiting() and wait_counter < 500000)
                     }
                 } 
                 else {
-                    audio_play_sound(snd_denied,2,false)
+                    audio(snd_denied,1)
                     with popup_alert(WVIEW/2+global.xoff,HVIEW/2,"User Exists / Wrong Password","That is not the correct password for "+string(capwords(objVarRead(net_manager,"pName")))+".")
                     {
                         header_color = web_hsv(0,100,85)
@@ -409,7 +409,7 @@ while (genMessagesWaiting() and wait_counter < 500000)
             }
             else
             {
-                audio_play_sound(snd_denied,2,false)
+                audio(snd_denied,1)
                 with popup_alert(WVIEW/2+global.xoff,HVIEW/2,"Already Logged In",string(capwords(objVarRead(net_manager,"pName")))+" is logged in somewhere else.")
                 {
                     header_color = web_hsv(0,100,85)

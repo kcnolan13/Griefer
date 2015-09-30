@@ -1,7 +1,7 @@
 global.bmode = "Bot Mode"
 global.cmode = "Ranked"
 global.pmode = "Start a Party"
-global.tskill = "True Skill"
+global.tskill = "Skill Rating"
 global.accolade_name = "Medal"
 global.time_played = "Career Time"
 

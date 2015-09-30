@@ -39,7 +39,11 @@ if object_index = net_manager and draw_prank_centered
     net_manager.draw_prank_centered = false
 }
 
-draw_set_color(global.rank_colors[real_rank])
+var real_real_rank = real(real_rank)
+if real_real_rank < 0 or real_real_rank > getLength(global.rank_colors)-1
+    real_real_rank = getLength(global.rank_colors)-1
+
+draw_set_color(global.rank_colors[real_real_rank])
 draw_circle(draw_x+xoff,draw_y+yoff,global.rank_radius*scale,false)
 draw_set_color(c_white)
 draw_circle(draw_x+xoff,draw_y+yoff,global.rank_radius*scale,true)

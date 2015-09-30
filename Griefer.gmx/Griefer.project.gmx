@@ -85,6 +85,42 @@
       <sound>sound\snd_item_blah</sound>
       <sound>sound\snd_item_stolen</sound>
       <sound>sound\snd_denied</sound>
+      <sound>sound\snd_keystroke</sound>
+      <sound>sound\snd_pan1</sound>
+      <sound>sound\snd_pan2</sound>
+      <sound>sound\snd_pan3</sound>
+      <sound>sound\snd_pan4</sound>
+      <sound>sound\snd_pan5</sound>
+    </sounds>
+    <sounds name="accolades">
+      <sound>sound\snd_dub_kill</sound>
+      <sound>sound\snd_trip_kill</sound>
+      <sound>sound\snd_stick_kill</sound>
+      <sound>sound\snd_flash_bandicoot</sound>
+      <sound>sound\snd_flame_kill</sound>
+      <sound>sound\snd_ink_kill</sound>
+      <sound>sound\snd_mvp</sound>
+      <sound>sound\snd_cant_touch_dis</sound>
+      <sound>sound\snd_highest_kdr</sound>
+      <sound>sound\snd_10kd</sound>
+      <sound>sound\snd_survivor</sound>
+      <sound>sound\snd_3ass</sound>
+      <sound>sound\snd_5ass</sound>
+      <sound>sound\snd_3gibs</sound>
+      <sound>sound\snd_6gibs</sound>
+      <sound>sound\snd_9gibs</sound>
+      <sound>sound\snd_12gibs</sound>
+      <sound>sound\snd_3heads</sound>
+      <sound>sound\snd_6heads</sound>
+      <sound>sound\snd_9heads</sound>
+      <sound>sound\snd_12heads</sound>
+      <sound>sound\snd_3ks</sound>
+      <sound>sound\snd_5ks</sound>
+      <sound>sound\snd_10ks</sound>
+      <sound>sound\snd_15ks</sound>
+      <sound>sound\snd_20ks</sound>
+      <sound>sound\snd_25ks</sound>
+      <sound>sound\snd_ninja</sound>
     </sounds>
   </sounds>
   <sprites name="sprites">
@@ -138,6 +174,7 @@
         <sprite>sprites\spr_pvisor_helmet</sprite>
         <sprite>sprites\spr_gashog_helmet</sprite>
         <sprite>sprites\spr_tadpole_helmet</sprite>
+        <sprite>sprites\spr_bandicoot_helmet</sprite>
       </sprites>
       <sprites name="shins">
         <sprite>sprites\spr_smooth_shin</sprite>
@@ -561,6 +598,33 @@
     </sprites>
     <sprites name="accolades">
       <sprite>sprites\acc_dub_kill</sprite>
+      <sprite>sprites\acc_trip_kill</sprite>
+      <sprite>sprites\acc_3ks</sprite>
+      <sprite>sprites\acc_5ks</sprite>
+      <sprite>sprites\acc_10ks</sprite>
+      <sprite>sprites\acc_15ks</sprite>
+      <sprite>sprites\acc_20ks</sprite>
+      <sprite>sprites\acc_25ks</sprite>
+      <sprite>sprites\acc_stick_kill</sprite>
+      <sprite>sprites\acc_ink_kill</sprite>
+      <sprite>sprites\acc_flame_kill</sprite>
+      <sprite>sprites\acc_flash_bandicoot</sprite>
+      <sprite>sprites\acc_cant_touch_dis</sprite>
+      <sprite>sprites\acc_mvp</sprite>
+      <sprite>sprites\acc_ninja</sprite>
+      <sprite>sprites\acc_survivor</sprite>
+      <sprite>sprites\acc_3gibs</sprite>
+      <sprite>sprites\acc_6gibs</sprite>
+      <sprite>sprites\acc_9gibs</sprite>
+      <sprite>sprites\acc_12gibs</sprite>
+      <sprite>sprites\acc_3heads</sprite>
+      <sprite>sprites\acc_6heads</sprite>
+      <sprite>sprites\acc_9heads</sprite>
+      <sprite>sprites\acc_12heads</sprite>
+      <sprite>sprites\acc_highest_kd</sprite>
+      <sprite>sprites\acc_10kd</sprite>
+      <sprite>sprites\acc_3ass</sprite>
+      <sprite>sprites\acc_5ass</sprite>
     </sprites>
     <sprites name="mapsnaps">
       <sprite>sprites\mapsnap_base</sprite>
@@ -1212,8 +1276,10 @@
       <script>scripts\getMax.gml</script>
       <script>scripts\getMin.gml</script>
       <script>scripts\time_ms_2string.gml</script>
+      <script>scripts\time_30steps_2countdown.gml</script>
       <script>scripts\pluralize.gml</script>
       <script>scripts\random_string.gml</script>
+      <script>scripts\leading_digits.gml</script>
     </scripts>
     <scripts name="player">
       <script>scripts\compute_respawn_coordinates.gml</script>
@@ -1485,6 +1551,7 @@
       <script>scripts\scheduler.gml</script>
       <script>scripts\scheduler_queue.gml</script>
       <script>scripts\scheduler_run_queue.gml</script>
+      <script>scripts\ds_grid_sort_ext.gml</script>
     </scripts>
     <scripts name="kyle's lighting engine">
       <script>scripts\kyle_light_create.gml</script>
@@ -1953,8 +2020,14 @@
       <room>rooms\map_placeholder2</room>
     </rooms>
   </rooms>
-  <constants number="164">
-    <constant name="VERSION">"V121"</constant>
+  <constants number="170">
+    <constant name="GAIN_HIGHLIGHT">1</constant>
+    <constant name="GAIN_KEYSTROKE">0.8</constant>
+    <constant name="GAIN_PAN">0.875</constant>
+    <constant name="GAIN_AUDIO">0.25</constant>
+    <constant name="NUM_TOP_MEDALS">3</constant>
+    <constant name="FL_TOP_MEDALS">28</constant>
+    <constant name="VERSION">"V130"</constant>
     <constant name="GMHSV">1.41176470588</constant>
     <constant name="WEBHSV">0.70833333333</constant>
     <constant name="ACC_XP_SCALER">2</constant>

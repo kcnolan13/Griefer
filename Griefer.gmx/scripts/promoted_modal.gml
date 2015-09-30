@@ -47,7 +47,7 @@ else
     if in_match()
         ID.col = c_white
     else
-        ID.col = c_black
+        ID.col = c_white
     ID.txt = "Promoted"
     ID.scale = 1
     ID.init_as_promoted = true

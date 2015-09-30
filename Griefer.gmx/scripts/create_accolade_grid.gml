@@ -1,4 +1,4 @@
-///create_accolade_grid(left,top,right,bottom,halign,valign,grid_pad,col_total)
+///create_accolade_grid(left,top,right,bottom,halign,valign,grid_pad,col_total,create_all,force_num_per_row)
 var l = argument0
 var t = argument1
 var r = argument2
@@ -7,6 +7,8 @@ var halign = argument4
 var valign = argument5
 var pad = argument6
 var col_total = argument7
+var create_all = argument8
+var force_num_per_row = argument9
 
 var w = abs(r - l)
 var h = abs(b - t)
@@ -16,7 +18,7 @@ var ymid = t+h/2
 var dbug = true
 
 {
-    if dbug printf("::: creating accolade grid")
+    printf("::: CREATING ACCOLADE GRID")
     
     l += pad
     r -= pad
@@ -52,20 +54,22 @@ var dbug = true
         return false
     }
     
+    ds_grid_sort_ext(grid,col_total,COL_POINTS, false)
+    
     var len = accolade_manager.num_accolades
     var lenh = ds_grid_height(grid)
-    if len != lenh
+    /*if len != lenh
     {
         printf(":::WARNING: create_accolade_grid dimension disagreement len = "+string(len)+", lenh = "+string(lenh))
         //return false
-    }
+    }*/
     
     var num_2create = 0
     
     //figure out how many accolades will be created
-    for (var i=0; i<min(len,accolade_manager.evil_row_num); i++)
+    for (var i=0; i<lenh; i++)
     {
-        if acc_row_data(i,col_total) > 0
+        if (acc_row_data(i,col_total) > 0 or create_all) and acc_row_data(i,COL_IMAGE) != spr_none
             num_2create ++
     }
     
@@ -86,10 +90,17 @@ var dbug = true
     //figure out how many rows there need to be
     var num_rows = ceil((acc_width+hsep)*num_2create / w)
     var num_per_row = floor(w/(acc_width+hsep))
+    
+    if force_num_per_row
+        num_per_row = force_num_per_row
+    
     var row_height = acc_width/2+12
     var row1_y = t
     
-    if dbug printf("::: num_rows="+string(num_rows)+", num_per_row="+string(num_per_row))
+    printf("::: num_rows="+string(num_rows)+", num_per_row="+string(num_per_row))
+    
+    if menmode() = "lottery_steal"
+        row_height += 8
     
     //compute y for first row
     /*if valign = fa_center
@@ -107,13 +118,13 @@ var dbug = true
     var bdelay = 15
     var birthmas = 2
     
-    for (var i=0; i<min(len,accolade_manager.evil_row_num); i++)
+    for (var i=0; i<lenh; i++)
     {   
-        if acc_row_data(i,col_total) > 0
+        if (acc_row_data(i,col_total) > 0 or (create_all and create_all != FL_TOP_MEDALS)) and acc_row_data(i,COL_IMAGE) != spr_none
         {
             if row_index = 0
             {
-                if num_created > 1
+                if num_created > 0
                 {
                     //compute offsets for new row
                     row_num++
@@ -140,9 +151,19 @@ var dbug = true
             
             num_created ++
             
+            if create_all = FL_TOP_MEDALS 
+            {
+                datAcc.scale_normal = 1.5
+                datAcc.scale_highlighted = 2
+                
+                if num_created >= NUM_TOP_MEDALS
+                    break
+            }
+            
+            
             row_index ++
             //only rollover to the next row in match --> the stat screen now scrolls and whatnot
-            if row_index >= num_per_row and in_match()
+            if row_index >= num_per_row and (in_match() or force_num_per_row)
                 row_index = 0
         }
     }

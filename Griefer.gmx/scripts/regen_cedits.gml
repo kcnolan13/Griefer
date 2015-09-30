@@ -146,6 +146,38 @@ else
             break
             
         bdelay += binc
+        
+        var ohue = 0
+        var osat = 85
+        var oval = 100
+        
+        if fl = FL_GEN_SETTINGS
+        {
+            if i=GC_VIOLENT_CONTENT {
+                ohue = 0
+            } else if i=GC_KILL_FEED or i=GC_KILL_FEED_ALPHA or i=GC_CHAT_FEED or i=GC_CHAT_FEED_ALPHA or i=GC_SHOW_XP or i=GC_CONTROL_HINTS{
+                ohue = 218
+            } else if i=GC_PARTICLES or i=GC_SURFACES or i=GC_RAGDOLLS or i=GC_FPS or i=GC_AA_LEVEL {
+                ohue = 150
+            } else if i=GC_FULLSCREEN or i=GC_PASSWORD or i=GC_DEFAULTS {
+                ohue = 283
+            }
+            else {
+                osat = 0
+                ohue = 0
+                oval = 100
+            }
+        }
+        else 
+        {
+            osat = 0
+            ohue = 0
+            oval = 100
+        }
+        
+        var txt_override = web_hsv(ohue,osat,oval)
+        
+        
     
         //create the label
         ID = instance_create(xst,yst-6,bn_clabel)
@@ -157,7 +189,7 @@ else
         ID.depth = depth-1
         ID.text_halign = fa_right
         ID.text_valign = fa_center
-        ID.text_color = text_color
+        ID.text_color = txt_override
         
         //create the edit field
         ID2 = instance_create(xst+lwidth/2+hspacer,yst,bn_cedit)
@@ -177,7 +209,7 @@ else
         ID2.myLabel = ID
         ID.myCedit = ID2
         ID2.color = web_hsv(chue,csat,cval)
-        ID2.text_color = text_color
+        ID2.text_color = txt_override
         
         if is_senses[i] = true
         {

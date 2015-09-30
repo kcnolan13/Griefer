@@ -34,7 +34,7 @@ if objVarRead(my_wep,"ammo") > objVarRead(my_wep,"max_ammo")
 printf("::: absorbed weapon: "+string(wep_2absorb)+" : "+objVarRead(wep_2absorb,"name"))
 
 if net_manager.local_player = id
-    audio_play_sound(snd_pickup2,2,false)
+    audio(snd_pickup2,1)
 
 instance_destroy_for_everyone(wep_2absorb)
 with (wep_2absorb) {exit}
