@@ -59,11 +59,6 @@ if (cluster.isMaster)
   io = sio.listen(server);
   io.adapter(redis({ host: 'localhost', port: 6379 }));
 
-  setInterval(function(){
-    //console.log("emitting global heartbeat");
-    io.to('/').emit('global_heartbeat');
-  },3000);
-
   //initialize logging
   log.init();
 
@@ -89,6 +84,16 @@ if (cluster.isMaster)
         }
 
         else if (m.id == "player_join_room") {
+
+          if (m.groupNameTo == "main_menu" && m.groupNameFrom != "") {
+            var fsocket = cupid.ds_find_fsocket(m.fsocket.name,m.groupNameFrom);
+            if (fsocket) {
+              fsocket.myPlayer.uniqueMatchId = -51;
+            } else {
+              log.log(CRITICAL,"unable to set fsocket.myPlayer.uniqueMatchId to -51: couldn't find fsocket");
+            }
+          }
+
           if (m.groupNameFrom == "" && m.groupNameTo == "main_menu") {
             console.log("NEW FSOCKET: "+m.fsocket.name);
             //initialize to main menu
@@ -111,6 +116,51 @@ if (cluster.isMaster)
           cupid.ds_destroy_fsocket(m.fsocket.name);
         }
 
+        else if (m.id == "rank_players") {
+          dbman.rankPlayers();
+        }
+
+        else if (m.id == "configure_match") {
+          var playerSubGroup = cupid.socketsInRoom(m.gameRoom);
+          cupid.configure_match(playerSubGroup, m.gameRoom, lobby_wait_time);
+        }
+
+        else if (m.id == "shuffle_pnums") {
+          var pname = m.fsocket.name;
+          var fsocket = cupid.ds_find_fsocket(pname);
+          if (fsocket) {
+            cupid.shuffle_pnums(fsocket);
+          } else {
+            log.log(CRITICAL,"Cannot shuffle_pnums ... unable to locate fsocket for "+pname);
+          }
+        }
+
+        else if (m.id == "sync_players_connected") {
+          cupid.manageSockets();
+          cupid.syncPlayersConnected();
+        }
+
+        else if (m.id == "everyone_ready") {
+          var fsocket = cupid.ds_find_fsocket(m.fsocket.name);
+          if (fsocket) {
+            cupid.get_everyone_ready(fsocket);
+          } else {
+            log.log(CRITICAL,"Cannot get everyone ready ... unable to locate fsocket for "+m.fsocket.name);
+          }
+        }
+
+        else if (m.id == "next_map_vote") {
+          var fsocket = cupid.ds_find_fsocket(m.fsocket.name, m.fsocket.myPlayer.room);
+          if (fsocket) {
+            fsocket.myPlayer.nextMapVote = m.fsocket.myPlayer.nextMapVote;
+          }
+        }
+
+
+        else {
+          log.log(CRITICAL,"Unknown message from worker to master: "+m.id);
+        }
+
       });
 
     }
@@ -127,7 +177,7 @@ if (cluster.isMaster)
   }
 
   cluster.on('exit', function(worker, code, signal) {
-    console.log('worker ' + worker.process.pid + ' died');
+    console.log('worker ' + worker.id+ ' died [pid '+worker.process.pid + ']');
   });
 
   //initialize all of the socket rooms
@@ -185,16 +235,58 @@ if (cluster.isWorker)
   //
   // HANDLE MESSAGES FROM MASTER
   //
+  process.on('message', function(m) {
+
+    log.log("verbose",m.id+" : "+cluster.worker.id);
+
+    if (m.id == "fsocket_emit") {
+      io.sockets.sockets.forEach(function(socket,i,sockets,m){
+        if (socket.myPlayer.pName == m.toPlayer) {
+          console.log("fsocket_emit: "+m.str_header+" resolved to worker "+cluster.worker.id+"'s socket for "+socket.myPlayer.pName);
+          socket.emit(m.str_header,m.obj_body);
+        }
+      },m);
+    }
+
+    else if (m.id == "player_join_room") {
+      io.sockets.sockets.forEach(function(socket,i,sockets,m){
+        if (socket.myPlayer.pName == m.pName) {
+          if (m.groupNameFrom != "") {
+            socket.leave(m.groupNameFrom);
+          }
+          socket.join(m.groupNameTo);
+        }
+      },m);
+    }
+
+    else if (m.id == "reread_tskill") {
+      io.sockets.sockets.forEach(function(socket,i,sockets,m){
+          console.log(socket.myPlayer.pName+" rereading_tskill");
+          dbman.reread_tskill(socket);
+      },m);
+    }
+
+    else {
+      log.log(CRITICAL,"Unknown message from Master to Worker "+cluster.worker.id+": "+m.id);
+    }
+
+  });
 
 }
 
 if (cluster.isWorker || !MULTITHREAD)
 {
 
+  var special_ping = false;
+  if (special_ping) {
+    setInterval(function(){
+          console.log("worker "+cluster.worker.id+" sending special_ping to everyone");
+          io.emit('general_message',composer.genMessage("special_ping",""+cluster.worker.id+" says HI"));
+    },5000);
+  }
+
   //---- PRIMARY SERVER LOGIC ----//
   io.on('connection', function(socket){
-
-    socket.broadcast.emit('global_heartbeat');
 
     //initialize a web-socket Connection to the client
     if (cluster.isWorker) {
@@ -262,33 +354,25 @@ if (cluster.isWorker || !MULTITHREAD)
 
       socket.broadcast.to(socket.myPlayer.room).emit('player_left_room', socket.myPlayer);
       //move to the lobby for your game type
-      socket.leave(socket.myPlayer.room);
-      socket.myPlayer.room = (socket.myPlayer.gameMode+"_lobby");
-      socket.join(socket.myPlayer.room);
-
+      cupid.worker_join_room(socket,socket.myPlayer.gameMode+"_lobby");
     });
 
     socket.on('player_join_room',function(pName,groupName) {
+      log.log(CRITICAL,"Why on Earth is the deprecated player_join_room message being sent around?");
+      /*
       if (socket.myPlayer.pName == pName) {
         socket.myPlayer.room = groupName;
         socket.join(groupName);
-      }
+      }*/
     });
 
     //---- CANCEL MATCHMAKING ----//
     socket.on('cancel_matchmaking',function(arg1) {
-      if (socket.myPlayer.room != "main_menu")
-      {
         socket.broadcast.to(socket.myPlayer.room).emit('player_left_matchmaking', socket.myPlayer);
         log.log(STD,socket.myPlayer.pName+" Leaving Matchmaking")
         socket.myPlayer.uniqueMatchId = -51;
 
-        socket.leave(socket.myPlayer.room);
-        socket.myPlayer.room = "main_menu";
-        socket.join('main_menu');
-
-        //if this is a party, promote some other player to party leader
-      }
+        cupid.worker_join_room(socket,"main_menu");
     });
 
     //---- A PLAYER DISCONNECTS FROM THE SERVER ----//
@@ -309,8 +393,7 @@ if (cluster.isWorker || !MULTITHREAD)
         socket.join('main_menu');
         socket.myPlayer.pName = "John Doe";
         //socket.disconnect('unauthorized');
-
-        delete socket; 
+        delete socket;
 
         //sync connected players for everyone... cause why not
         cupid.manageSockets();
@@ -323,20 +406,11 @@ if (cluster.isWorker || !MULTITHREAD)
         socket.emit('keepalive');
     });
 
-    socket.on('reread_tskill',function() {
-      console.log(socket.myPlayer.pName+" invoking reread_tskill");
-      dbman.reread_tskill(socket);
-    })
-
     socket.on('PING', function () {
           log.log(STD,'PING!');
           log.log(STD,'pong . . .\n');
           socket.emit('PONG');
         });
-
-    socket.on('global_heartbeat', function() {
-      console.log('Ping! '+socket.myPlayer.pName);
-    })
 
     //---- BIG MESSAGES ----//
     socket.on('big_message', function(message) {
@@ -395,6 +469,7 @@ if (cluster.isWorker || !MULTITHREAD)
     //---- GENERAL MESSAGES ----//
     socket.on('general_message', function(message) {
       message = composer.ensureJSON(message);
+
       if (message.msg=="end_match")
       {
         //forward the message
@@ -402,109 +477,105 @@ if (cluster.isWorker || !MULTITHREAD)
 
         //trigger a player re-ranking
         if (message.val != FL_BOT)
-          setTimeout(function() {dbman.rankPlayers()},5000);
+          setTimeout(function() {
+            if (cluster.isWorker) {
+              cupid.message_master({id:"rank_players"});
+            }
+            else {
+              dbman.rankPlayers()
+            }
+          },5000);
 
         //configure the next match after a short delay
         setTimeout(function(playerSubGroup, gameRoom) {
-          cupid.configure_match(playerSubGroup, gameRoom, lobby_wait_time);
+          if (cluster.isWorker) {
+            cupid.message_master({id:"configure_match",gameRoom:gameRoom});
+          } else {
+            cupid.configure_match(playerSubGroup, gameRoom, lobby_wait_time);
+          }
         },2000,cupid.socketsInRoom(socket.myPlayer.room),socket.myPlayer.room);
 
-    }
-    else if (message.msg == "validate_hash")
-    {
-      var valid = 1;
-      log.log("verbose","comparing "+message.val+" to "+global.version_hash);
-      if (message.val != global.version_hash)
-          valid = 0;
-
-      log.log("verbose","hash valid? --> "+valid);
-
-      var response = composer.genMessage("validate_hash",valid);
-      socket.emit('general_message',response);
-    }
-    else if (message.msg =="ping")
-    {
-      var response = {
-          name: "generalMessage",
-          msg: "ack",
-          val: message.val
-      };
-      socket.emit('ping',response);
-      console.log("ping");
-      //log.log(STD,"\nPING\n");
-    }
-    else if (message.msg == "change_password")
-    {
-      log.log(STD,"changing password for "+socket.myPlayer.pName+" to "+message.val);
-      var statement = "UPDATE users set password=MD5('"+message.val+"') where username='"+socket.myPlayer.pName+"'";
-      log.log(SQL,statement);
-      dbman.execute(statement);
-      cupid.genMessage(socket,"done_loading",FL_NORMAL);
-    }
-    else if (message.msg == "shuffle_pnums")
-    {
-      console.log("Player 0 Has Quit. Reshuffling pNum's");
-
-      //shuffle around people's uniqueIds based on who is still in the match
-      var possible_nums = []
-      var playerSubGroup = cupid.socketsInRoom(socket.myPlayer.room)
-      for (var i=0; i<playerSubGroup.length; i++)
-      {
-        possible_nums.push(i);
       }
 
-      for (var i=0; i<playerSubGroup.length; i++)
+      else if (message.msg == "validate_hash")
       {
-        var ind = Math.floor(Math.random()*(possible_nums.length-0.0000001));
+        var valid = 1;
+        log.log("verbose","comparing "+message.val+" to "+global.version_hash);
+        if (message.val != global.version_hash)
+            valid = 0;
 
-        var dirty_num = possible_nums.splice(ind,1);
-        var num = dirty_num[0];
+        log.log("verbose","hash valid? --> "+valid);
 
-        log.log(CUPID,"Reassigning pNum for "+playerSubGroup[i].myPlayer.pName+" : "+playerSubGroup[i].myPlayer.pNum+" ---> "+num);
-        playerSubGroup[i].myPlayer.pNum = num;
-        var message = composer.objUpdate(avatarObjIndex,playerSubGroup[i].myPlayer.uniqueId,"pNum",playerSubGroup[i].myPlayer.pNum,FL_NORMAL);
-        log.log("verbose",message);
-        io.to(socket.myPlayer.room).emit('obj_update',message);
+        var response = composer.genMessage("validate_hash",valid);
+        socket.emit('general_message',response);
       }
-    } 
-    else if (message.msg == "perma_challenge")
-    {
-      log.log(STD,"adding perma challenge: "+message.val);
-      dbman.addPermaChallenge(socket,message.val);
-    }
-    else if (message.msg == "syncPlayersConnected")
-    {
-      cupid.manageSockets();
-      cupid.syncPlayersConnected();
-    }
-    else if (message.msg == "everyone_ready") {
-      //initiate match start countdown
-      var obj_room = cupid.room_with_name(socket.myPlayer.room);
-      if (globals.exists(obj_room.match_countdown_timeout) == true)
-      {
-        if (obj_room.match_countdown_timeout != null)
-        {
-          if (globals.exists(obj_room.match_countdown_timeout.change) == true)
-          {
-            log.log(STD,"forcing start match countdown: rescheduling room "+obj_room.groupName+" to start match in: "+Math.round(global.starting_match_time/1000)+" seconds");
-            log.log(STD,"previous time: "+obj_room.match_countdown_timeout.ms);
-                  obj_room.match_countdown_timeout.change(10);
-            obj_room.match_start_timeout.change(global.starting_match_time);
-            log.log(STD,"new time: "+obj_room.match_countdown_timeout.ms);
 
-          } else log.log(CRITICAL,"obj_room.match_countdown_timeout.change does not exist!");
-        } else log.log(CRITICAL,"everyone_ready room has invalid match_countdown_timeout handle");
-      } else log.log(CRITICAL,"everyone_ready has nonexistent match_countdown_timeout var");
-    }
-     else if (message.msg == "get_top_gravatars")
-     {
+      else if (message.msg == "ping")
+      {
+        var response = {
+            name: "generalMessage",
+            msg: "ack",
+            val: message.val
+        };
+        socket.emit('ping',response);
+        console.log("ping");
+        //log.log(STD,"\nPING\n");
+      }
+
+      else if (message.msg == "change_password")
+      {
+        log.log(STD,"changing password for "+socket.myPlayer.pName+" to "+message.val);
+        var statement = "UPDATE users set password=MD5('"+message.val+"') where username='"+socket.myPlayer.pName+"'";
+        log.log(SQL,statement);
+        dbman.execute(statement);
+        cupid.genMessage(socket,"done_loading",FL_NORMAL);
+      }
+
+      else if (message.msg == "shuffle_pnums")
+      {
+        if (cluster.isWorker) {
+          cupid.message_master({id: "shuffle_pnums", fsocket: composer.fsocket(socket)});
+        } else {
+          cupid.shuffle_pnums(socket);
+        }
+      } 
+
+      else if (message.msg == "perma_challenge")
+      {
+        log.log(STD,"adding perma challenge: "+message.val);
+        dbman.addPermaChallenge(socket,message.val);
+      }
+
+      else if (message.msg == "syncPlayersConnected")
+      {
+        if (cluster.isWorker) {
+          cupid.message_master({id: "sync_players_connected"});
+        } else {
+          cupid.manageSockets();
+          cupid.syncPlayersConnected();
+        }
+      }
+
+      else if (message.msg == "everyone_ready") {
+        //initiate match start countdown
+        if (cluster.isWorker) {
+          cupid.message_master({id: "everyone_ready"});
+        } else {
+          cupid.get_everyone_ready(socket);
+        }
+      }
+
+      else if (message.msg == "get_top_gravatars")
+      {
         log.log(STD, socket.myPlayer.pName+" asked for get_top_gravatars");
         dbman.getTopGravatars(socket);
-     }
-    else {
+      }
+
+     else 
+     {
       //OTHERWISE, FORWARD THE MESSAGE TO OTHER PLAYERS
       socket.broadcast.to(socket.myPlayer.room).emit('general_message',message);
-    }
+     }
 
     });
 
@@ -576,8 +647,7 @@ if (cluster.isWorker || !MULTITHREAD)
         {
           //console.log(term+" not in: ");
           //console.log(global.calcColumns);
-
-        if (datMessage.flag == FL_SQL)
+          if (datMessage.flag == FL_SQL)
           {
             dbman.updateStat(socket.myPlayer.pName, term, datMessage.val, FL_SQL);
           }
@@ -618,17 +688,30 @@ if (cluster.isWorker || !MULTITHREAD)
       var term = datMessage.netvar;
 
       //deprecated messages
-      if (term=="hats_Fd" || term=="compute_global_rank")
+      if (term=="hats_Fd" || term=="compute_global_rank") {
+        log.log(CRITICAL,"Why on Earth is the "+term+" message being passed around?! Ever?!");
         return true;
+      }
 
       //keep track of which map you voted for
       if (term == "nextMapVote")
       {
         socket.myPlayer.nextMapVote = datMessage.val;
+
+        if (cluster.isWorker) {
+          if (socket.rooms[0]) {
+            socket.myPlayer.room = socket.rooms[0];
+          } else {
+            log.log(CRITICAL,socket.myPlayer.pName+"'s socket does not seem to be in a room... what gives?");
+            console.log(socket.rooms);
+          }
+          cupid.message_master({id:"next_map_vote",fsocket:composer.fsocket(socket)})
+        }
       }
 
       //---- FORWARD ON TO OTHER CLIENTS ----//
       socket.broadcast.to(socket.myPlayer.room).emit('obj_update', datMessage);
+
     });
 
     socket.on('obj_create', function(datMessage) {

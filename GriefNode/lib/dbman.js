@@ -420,7 +420,7 @@ var userTryCreate = function(socket, username, password)
 			userCreate(socket, username, password);
 			var message = composer.genMessage("user_create_result",0);
 			message.val = 1;
-			socket.emit('general_message',message);
+			cupid.fsocket_emit(socket,'general_message',message);
 			log.log(STD,'sending user create success to: '+username);	
 			cupid.genMessage(socket,"done_loading",2);
 	  	}
@@ -461,7 +461,7 @@ var performEvents = function(socket, and_filter, wipe_events)
 				pkgDude.messages.push(sendMe);
 			}
 			log.log("verbose",pkgDude.messages);
-			socket.emit('pkg',pkgDude.messages);
+			cupid.fsocket_emit(socket,'pkg',pkgDude.messages);
 
 			if (wipe_events) {
 				var q2 = "DELETE from events where username = "+uname+" "+and_filter;
@@ -657,7 +657,7 @@ var sendPermaChallenges = function(socket)
 				pkgDude.messages.push(msg);
 			}
 
-			socket.emit('pkg',pkgDude.messages);
+			cupid.fsocket_emit(socket,'pkg',pkgDude.messages);
 			log.log("verbose",pkgDude.messages);
 	});
 }
@@ -692,7 +692,7 @@ var loadSettings = function(socket)
 				pkgDude.messages.push(msg);
 			}
 
-			socket.emit('pkg',pkgDude.messages);
+		cupid.fsocket_emit(socket,'pkg',pkgDude.messages);
 			log.log("verbose",pkgDude.messages);
 	});
 }
@@ -768,7 +768,7 @@ var getGravatarAccolades = function(socket, username, flag, retransmit)
 			var msg = composer.genMessage("done_loading",FL_NORMAL);
 			pkgDude.messages.push(msg);
 
-			socket.emit('pkg',pkgDude.messages);
+		cupid.fsocket_emit(socket,'pkg',pkgDude.messages);
 			log.log("verbose",pkgDude.messages);
 	});
 }
@@ -824,7 +824,7 @@ var getGravatarOutfit = function(socket, username, flag)
 		
 		//send package
 		//log.log(SQL,pkgDude);
-		socket.emit('pkg', pkgDude.messages);
+	cupid.fsocket_emit(socket,'pkg', pkgDude.messages);
 	});
 }
 exports.getGravatarOutfit = getGravatarOutfit
@@ -883,7 +883,7 @@ var getTopGravatars = function(socket)
 		var msg = composer.genMessage("done_loading",FL_NORMAL);
 		datPkg.messages.push(msg);
 
-		socket.emit('pkg',datPkg.messages);
+	cupid.fsocket_emit(socket,'pkg',datPkg.messages);
 		log.log("verbose",datPkg.messages);
 
 	});
@@ -933,7 +933,7 @@ var getGravatarStats = function(socket, username, flag)
 				}
 			}
 
-		socket.emit('pkg',pkgDude.messages);
+	cupid.fsocket_emit(socket,'pkg',pkgDude.messages);
 		log.log("verbose",pkgDude.messages);
 
 		//now get the outfit
@@ -962,7 +962,15 @@ var rankPlayers = function() {
 	execute(statement);
 
 	//update all connected clients
-	io.emit('reread_tskill');
+	if (global.MULTITHREAD) {
+		var msg = {id:"reread_tskill"};
+		cupid.message_workers(msg);
+	} else {
+		io.sockets.sockets.forEach(function(socket,i,sockets){
+          console.log(socket.myPlayer.pName+" invoking reread_tskill");
+          reread_tskill(socket);
+      });
+	}
 }
 exports.rankPlayers = rankPlayers;
 
@@ -1006,6 +1014,7 @@ var reread_tskill = function(sock) {
 		}
 	});
 }
+exports.reread_tskill = reread_tskill;
 
 var getGlobalStats = function(socket, page_orderby, page_flag)
 {
@@ -1097,7 +1106,7 @@ var getGlobalStats = function(socket, page_orderby, page_flag)
 					var msg = composer.genMessage("done_loading",FL_NORMAL);
 					pkgDude.messages.push(msg);
 
-					socket.emit('pkg',pkgDude.messages);
+				cupid.fsocket_emit(socket,'pkg',pkgDude.messages);
 					log.log("verbose",pkgDude.messages);
 			});
 
@@ -1229,7 +1238,7 @@ var sendControlMaps = function(socket)
 
 				var msg = composer.bigMessage("control_map",control_index,control_code,using_gamepad);
 				log.log("verbose",msg);
-				socket.emit("big_message",msg);
+			cupid.fsocket_emit(socket,"big_message",msg);
 			}
 	});
 }
@@ -1302,7 +1311,7 @@ var sendNetManPlayerStats = function(socket, objIndex, uniqueId)
 		var msg = composer.genMessage("done_loading",FL_NORMAL);
 		pkgDude.messages.push(msg);
 
-		socket.emit('pkg', pkgDude.messages);
+	cupid.fsocket_emit(socket,'pkg', pkgDude.messages);
 
 	});
 }
@@ -1368,9 +1377,11 @@ var sendCompletePlayerStats = function(socket, gameRoom, objIndex, broadcast_onl
 		}
 
 		//SEND THE PACKAGE 
-		if (broadcast_only)
+		/*if (broadcast_only)
 			socket.broadcast.to(gameRoom).emit('pkg',pkgDude.messages);
-		else
+		else*/
+
+			//always broadcasting ever since multithread... improves server performance(?)
 			io.to(gameRoom).emit('pkg',pkgDude.messages);
 	});	
 

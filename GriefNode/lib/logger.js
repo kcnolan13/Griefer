@@ -50,6 +50,14 @@ exports.init = function() {
 exports.log = function(flag,text) { 
 	if (initialized)
 	{
+		if (global.MULTITHREAD) {
+			if (global.cluster.isWorker) {
+				text = "Worker "+cluster.worker.id+": "+text;
+			} else {
+				text = "Master: "+text;
+			}
+		}
+		
 		if (flag == SQL)
 			log_sql.write(util.format(text) + '\n');
 		else if (flag == CUPID)
@@ -57,6 +65,7 @@ exports.log = function(flag,text) {
 		else if (flag == CRITICAL) {
 			log_critical.write(util.format(text) + '\n');
 			console.log("ERROR: "+text);
+			console.trace();
 		}
 		else if (flag == STD)
 			log_std.write(util.format(text) + '\n');

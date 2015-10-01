@@ -42,6 +42,7 @@ if (cluster.isWorker) {
   io.on('connection', function(socket){
       console.log('socket connected to worker '+cluster.worker.id);
       socket.emit('ping','fecal urgency');
+      console.log(socket);
   });
   
   io.adapter(redis({ host: 'localhost', port: 6379 }));
