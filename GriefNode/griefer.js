@@ -17,7 +17,7 @@ var MULTITHREAD = global.MULTITHREAD;
 var users_2kill = [];
 //users_2kill.push("Kyle");
 //users_2kill.push(FL_WIPE);
-//users_2kill.push(global.FL_EMPTY_USERS);
+users_2kill.push(global.FL_EMPTY_USERS);
 
 var random_users_2create = 2;
 
