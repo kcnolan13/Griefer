@@ -17,6 +17,7 @@ global.FL_NEXT = -32;
 global.FL_PREVIOUS = -33;
 global.FL_FINDME = -34;
 global.FL_EMPTY_USERS = "UsersWithNoKills";
+global.anon_user = "John Doe";
 
 global.page_length = 50;
 
@@ -31,6 +32,7 @@ global.CUPID = "cupid"
 global.STD = "std"
 global.CRITICAL = "err"
 global.SOCKETS = "sock"
+global.WARN = "warn"
 global.socket_string = ""
 
 //globals

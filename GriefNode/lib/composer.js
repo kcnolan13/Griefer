@@ -9,6 +9,7 @@ var default_netman_uniqueId = global.default_netman_uniqueId; var numTdm = globa
 var	numMenu = global.numMenu; var numBot = global.numBot; var numSockets = global.numSockets; var numBotFfa = global.numBotFfa; var numBotTdm = global.numBotTdm;
 var NUM_BPARTS = global.NUM_BPARTS; var NUM_STATS = global.NUM_STATS; var clients = global.clients; var rooms = global.rooms;
 var gravatarObjIndex = global.gravatarObjIndex;
+var WARN = global.WARN;
 
 var SOCKETS = "sock"
 

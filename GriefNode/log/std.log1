@@ -1,0 +1,61 @@
+Worker 1: NEW CLIENT
+Worker 1: PING!
+Worker 1: pong . . .
+
+Worker 1: NEW CLIENT
+Worker 1: John Doe asked for get_top_gravatars
+Worker 1: received authentication request:
+Worker 1: {"username": "Kyle", "password": "asdfjkl;"}
+Worker 1: correct password
+Worker 1: unique login for: Kyle
+Worker 1: Kyle: no_mode, main_menu
+Worker 1: sending Kyle stats to local net manager
+Worker 1: sending Kyle challenge stats
+Worker 1: received page_leaderboards: stats.true_skill, -34, 0
+Worker 1: initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill
+Worker 1: page_query: SELECT ordered_stats.row_num AS your_row, ceiling (ordered_stats.row_num / 50) AS result FROM 						( 							SELECT temp.row_num from 							( 							SELECT 								@i:=@i+1 AS row_num,  								stats.username 							FROM  								stats, 								(SELECT @i:=0) AS foo 								ORDER BY stats.true_skill DESC, stats.xp DESC, stats.username ASC 							) AS temp 							WHERE temp.username = 'Kyle' 						) AS ordered_stats
+Worker 1: here we go . . . invoking callback([object Object], stats.true_skill, 1)
+Worker 1: leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC, stats.xp DESC, stats.username ASC LIMIT 50 OFFSET 0
+Worker 1: leaderboard_page message:
+Worker 1: [object Object]
+Worker 1: received page_leaderboards: stats.win_streak, -34, 0
+Worker 1: initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.win_streak
+Worker 1: page_query: SELECT ordered_stats.row_num AS your_row, ceiling (ordered_stats.row_num / 50) AS result FROM 						( 							SELECT temp.row_num from 							( 							SELECT 								@i:=@i+1 AS row_num,  								stats.username 							FROM  								stats, 								(SELECT @i:=0) AS foo 								ORDER BY stats.win_streak DESC, stats.xp DESC, stats.username ASC 							) AS temp 							WHERE temp.username = 'Kyle' 						) AS ordered_stats
+Worker 1: here we go . . . invoking callback([object Object], stats.win_streak, 1)
+Worker 1: leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.win_streak DESC, stats.xp DESC, stats.username ASC LIMIT 50 OFFSET 0
+Worker 1: leaderboard_page message:
+Worker 1: [object Object]
+Worker 1: received page_leaderboards: stats.true_skill, -34, 0
+Worker 1: initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill
+Worker 1: page_query: SELECT ordered_stats.row_num AS your_row, ceiling (ordered_stats.row_num / 50) AS result FROM 						( 							SELECT temp.row_num from 							( 							SELECT 								@i:=@i+1 AS row_num,  								stats.username 							FROM  								stats, 								(SELECT @i:=0) AS foo 								ORDER BY stats.true_skill DESC, stats.xp DESC, stats.username ASC 							) AS temp 							WHERE temp.username = 'Kyle' 						) AS ordered_stats
+Worker 1: here we go . . . invoking callback([object Object], stats.true_skill, 1)
+Worker 1: leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC, stats.xp DESC, stats.username ASC LIMIT 50 OFFSET 0
+Worker 1: leaderboard_page message:
+Worker 1: [object Object]
+Worker 1: received page_leaderboards: stats.true_skill, -34, 0
+Worker 1: initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill
+Worker 1: page_query: SELECT ordered_stats.row_num AS your_row, ceiling (ordered_stats.row_num / 50) AS result FROM 						( 							SELECT temp.row_num from 							( 							SELECT 								@i:=@i+1 AS row_num,  								stats.username 							FROM  								stats, 								(SELECT @i:=0) AS foo 								ORDER BY stats.true_skill DESC, stats.xp DESC, stats.username ASC 							) AS temp 							WHERE temp.username = 'Kyle' 						) AS ordered_stats
+Worker 1: here we go . . . invoking callback([object Object], stats.true_skill, 1)
+Worker 1: leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC, stats.xp DESC, stats.username ASC LIMIT 50 OFFSET 0
+Worker 1: leaderboard_page message:
+Worker 1: [object Object]
+Worker 1: received page_leaderboards: stats.xp, -34, 0
+Worker 1: initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.xp
+Worker 1: page_query: SELECT ordered_stats.row_num AS your_row, ceiling (ordered_stats.row_num / 50) AS result FROM 						( 							SELECT temp.row_num from 							( 							SELECT 								@i:=@i+1 AS row_num,  								stats.username 							FROM  								stats, 								(SELECT @i:=0) AS foo 								ORDER BY stats.xp DESC, stats.xp DESC, stats.username ASC 							) AS temp 							WHERE temp.username = 'Kyle' 						) AS ordered_stats
+Worker 1: here we go . . . invoking callback([object Object], stats.xp, 1)
+Worker 1: leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.xp DESC, stats.xp DESC, stats.username ASC LIMIT 50 OFFSET 0
+Worker 1: leaderboard_page message:
+Worker 1: [object Object]
+Worker 1: forcibly updating Kyle's global_rank and true_skill, which were just recomputed
+Worker 1: received page_leaderboards: stats.true_skill, -34, 0
+Worker 1: initial leaderboard count query: SELECT count(*) from stats ORDER BY stats.true_skill
+Worker 1: page_query: SELECT ordered_stats.row_num AS your_row, ceiling (ordered_stats.row_num / 50) AS result FROM 						( 							SELECT temp.row_num from 							( 							SELECT 								@i:=@i+1 AS row_num,  								stats.username 							FROM  								stats, 								(SELECT @i:=0) AS foo 								ORDER BY stats.true_skill DESC, stats.xp DESC, stats.username ASC 							) AS temp 							WHERE temp.username = 'Kyle' 						) AS ordered_stats
+Worker 1: here we go . . . invoking callback([object Object], stats.true_skill, 1)
+Worker 1: leaderboard page query: SELECT stats.username,stats.rank,stats.true_skill,stats.xp,stats.time,stats.ppl,stats.kdr,stats.wl,stats.kills,stats.assists,stats.wins,stats.kill_streak,stats.win_streak,stats.global_rank,users.helmet0,users.hat0 from stats join users on stats.username = users.username ORDER BY stats.true_skill DESC, stats.xp DESC, stats.username ASC LIMIT 50 OFFSET 0
+Worker 1: leaderboard_page message:
+Worker 1: [object Object]
+Worker 1: Kyle moving to: bot_versus_lobby
+Worker 1: forcibly updating Kyle's global_rank and true_skill, which were just recomputed
+Worker 1: forcibly updating Kyle's global_rank and true_skill, which were just recomputed
+Worker 1: Kyle: disconnected
+Worker 1: deleting Kyle's socket

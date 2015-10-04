@@ -8,7 +8,7 @@ var netManObjIndex = global.netManObjIndex; var lobby_wait_time = global.lobby_w
 var default_netman_uniqueId = global.default_netman_uniqueId; var numTdm = global.numTdm; var numFfa = global.numFfa; var numVersus = global.numVersus;
 var	numMenu = global.numMenu; var numBot = global.numBot; var numSockets = global.numSockets; var numBotFfa = global.numBotFfa; var numBotTdm = global.numBotTdm;
 var NUM_BPARTS = global.NUM_BPARTS; var NUM_STATS = global.NUM_STATS; var clients = global.clients; var rooms = global.rooms;
-var SOCKETS = "sock"; var gravatarObjIndex = global.gravatarObjIndex;
+var SOCKETS = "sock"; var gravatarObjIndex = global.gravatarObjIndex; var WARN = global.WARN;
 
 var conn;
 var io;
@@ -966,10 +966,14 @@ var rankPlayers = function() {
 		var msg = {id:"reread_tskill"};
 		cupid.message_workers(msg);
 	} else {
-		io.sockets.sockets.forEach(function(socket,i,sockets){
-          console.log(socket.myPlayer.pName+" invoking reread_tskill");
-          reread_tskill(socket);
-      });
+		for (var i=0; i<io.sockets.sockets.length; i++) {
+        	var socket = io.sockets.sockets[i];
+        	if (socket.myPlayer.pName == global.anon_user)
+            	continue;
+
+        	console.log(socket.myPlayer.pName+" invoking reread_tskill");
+          	reread_tskill(socket);
+        }
 	}
 }
 exports.rankPlayers = rankPlayers;
@@ -977,6 +981,9 @@ exports.rankPlayers = rankPlayers;
 //ONLY CALLED BY WORKERS
 var reread_tskill = function(sock) {
 	var q = "SELECT true_skill,global_rank from stats where username="+conn.escape(sock.myPlayer.pName);
+
+	if (sock.myPlayer.pName == global.anon_user)
+            return false;
 	
 	conn.query(q,function(err,rows){
 
@@ -1171,7 +1178,7 @@ var getGlobalStatsPage = function(socket, page_orderby, page_flag, callback, arg
 
 			if (!rows[0]) 
 			{
-				log.log(CRITICAL,"rows does not exist for page_query in getGlobalStatsPage... using page 1 by default");
+				log.log(WARN,"rows does not exist for page_query in getGlobalStatsPage... using page 1 by default");
 				desired_page = 1;
 			}
 			else

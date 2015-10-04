@@ -1,0 +1,124 @@
+Worker 1: CONNECTED to griefer database, as id: 83
+Worker 1: SELECT * from users WHERE username='Kyle' AND password=MD5('asdfjkl;')
+Worker 1: done with password query
+Worker 1: good password for user: Kyle
+Worker 1: UPDATE stats SET xp = 142840 WHERE username='Kyle'
+Worker 1: UPDATE stats SET rank = 20 WHERE username='Kyle'
+Worker 1: SELECT users.hat0, users.helmet0, users.torso0, users.shoulder0, users.forearm0, users.leg0, users.shin0, users.foot0, users.prop0 FROM users join stats on users.username=stats.username where users.username='Kyle'
+Worker 1: 
+Recalculating TRUE SKILL + GLOBAL RANKINGS
+Worker 1: SELECT users.hat0, users.helmet0, users.torso0, users.shoulder0, users.forearm0, users.leg0, users.shin0, users.foot0, users.prop0 FROM users join stats on users.username=stats.username where users.username='Kyle'
+Worker 1: sending the other half of the accolades as well
+Worker 1: UPDATE stats SET kdr = 1.53 WHERE username='Kyle'
+Worker 1: UPDATE stats SET wl = 1.4 WHERE username='Kyle'
+Worker 1: UPDATE stats SET ppl = 175.940002 WHERE username='Kyle'
+Worker 1: updating calculated columns
+Worker 1: updating Kyle's local avatar: true_skill=118, global_rank = 4
+Worker 1: [object Object]
+Worker 1: [object Object]
+Worker 1: SELECT users.hat0, users.helmet0, users.torso0, users.shoulder0, users.forearm0, users.leg0, users.shin0, users.foot0, users.prop0 FROM users join stats on users.username=stats.username where users.username='Total N00bcall'
+Worker 1: sending the other half of the accolades as well
+Worker 1: sending the other half of the accolades as well
+Worker 1: SELECT users.hat0, users.helmet0, users.torso0, users.shoulder0, users.forearm0, users.leg0, users.shin0, users.foot0, users.prop0 FROM users join stats on users.username=stats.username where users.username='Total N00bcall'
+Worker 1: sending the other half of the accolades as well
+Worker 1: SELECT users.hat0, users.helmet0, users.torso0, users.shoulder0, users.forearm0, users.leg0, users.shin0, users.foot0, users.prop0 FROM users join stats on users.username=stats.username where users.username='Total N00bcall'
+Worker 1: UPDATE users SET helmet0='0038_Armor Lottery', helmet1='0023_Armor Lottery', helmet2='0215_Challenge', helmet3='0078_Armor Lottery', helmet4='0208_Armor Lottery', helmet5='0085_Armor Lottery', helmet6='0042_Armor Lottery', helmet7='0021_Armor Lottery', helmet8='0039_Armor Lottery', helmet9='0031_Armor Lottery', helmet10='0044_Armor Lottery', helmet11='0243_Armor Lottery', helmet12='0019_Armor Lottery', helmet13='0167_Armor Lottery', helmet14='0029_Challenge', helmet15='0181_Challenge', helmet16='0146_Challenge', helmet17='0026_Armor Lottery', helmet18='0057_Armor Lottery', helmet19='0040_Armor Lottery', helmet20='0046_Armor Lottery', helmet21='0194_Challenge', helmet22='0032_Armor Lottery', helmet23='0153_Armor Lottery', helmet24='0027_Armor Lottery', torso0='0158_Challenge', torso1='0069_Armor Lottery', torso2='0225_Armor Lottery', torso3='0103_Armor Lottery', torso4='0246_Armor Lottery', torso5='0190_Armor Lottery', torso6='0098_Armor Lottery', torso7='0161_Armor Lottery', torso8='0204_Armor Lottery', torso9='0260_Armor Lottery', torso10='0126_Armor Lottery', torso11='0150_Armor Lottery', torso12='0260_Armor Lottery', torso13='0232_Armor Lottery', torso14='0253_Armor Lottery', torso15='0069_Armor Lottery', torso16='0239_Armor Lottery', torso17='0197_Armor Lottery', torso18='0117_Armor Lottery', torso19='0218_Challenge', torso20='0081_Armor Lottery', torso21='9999_empty', torso22='9999_empty', torso23='9999_empty', torso24='9999_empty', leg0='0219_Armor Lottery', leg1='0240_Armor Lottery', leg2='0066_Armor Lottery', leg3='0205_Armor Lottery', leg4='0082_Armor Lottery', leg5='0072_Armor Lottery', leg6='0191_Armor Lottery', leg7='0114_Armor Lottery', leg8='0151_Armor Lottery', leg9='0088_Armor Lottery', leg10='0094_Armor Lottery', leg11='0247_Armor Lottery', leg12='0061_Armor Lottery', leg13='0178_Armor Lottery', leg14='0151_Armor Lottery', leg15='0198_Armor Lottery', leg16='0154_Armor Lottery', leg17='0233_Armor Lottery', leg18='0205_Armor Lottery', leg19='0094_Armor Lottery', leg20='0154_Armor Lottery', leg21='0240_Armor Lottery', leg22='0121_Armor Lottery', leg23='9999_empty', leg24='9999_empty', shin0='0152_Armor Lottery', shin1='0102_Armor Lottery', shin2='0199_Armor Lottery', shin3='0248_Armor Lottery', shin4='0220_Armor Lottery', shin5='0089_Armor Lottery', shin6='0227_Armor Lottery', shin7='0192_Armor Lottery', shin8='0122_Armor Lottery', shin9='0179_Armor Lottery', shin10='0234_Armor Lottery', shin11='0068_Armor Lottery', shin12='0206_Armor Lottery', shin13='0163_Armor Lottery', shin14='0115_Armor Lottery', shin15='0155_Armor Lottery', shin16='0241_Armor Lottery', shin17='0062_Challenge', shin18='9999_empty', shin19='9999_empty', shin20='9999_empty', shin21='9999_empty', shin22='9999_empty', shin23='9999_empty', shin24='9999_empty', hat0='0135_Armor Lottery', hat1='0144_Armor Lottery', hat2='0139_Armor Lottery', hat3='0127_Armor Lottery', hat4='0143_Armor Lottery', hat5='0134_Armor Lottery', hat6='0136_Armor Lottery', hat7='0135_Armor Lottery', hat8='0127_Armor Lottery', hat9='0129_Armor Lottery', hat10='0127_Armor Lottery', hat11='0133_Armor Lottery', hat12='0140_Armor Lottery', hat13='0142_Armor Lottery', hat14='0131_Armor Lottery', hat15='0138_Armor Lottery', hat16='9999_empty', hat17='9999_empty', hat18='9999_empty', hat19='9999_empty', hat20='9999_empty', hat21='9999_empty', hat22='9999_empty', hat23='9999_empty', hat24='9999_empty', shoulder0='0159_Armor Lottery', shoulder1='0223_Armor Lottery', shoulder2='0175_Armor Lottery', shoulder3='0244_Armor Lottery', shoulder4='0182_Armor Lottery', shoulder5='0216_Armor Lottery', shoulder6='0159_Armor Lottery', shoulder7='0195_Armor Lottery', shoulder8='0258_Armor Lottery', shoulder9='0168_Armor Lottery', shoulder10='0230_Challenge', shoulder11='0087_Armor Lottery', shoulder12='0059_Armor Lottery', shoulder13='0048_Armor Lottery', shoulder14='0097_Armor Lottery', shoulder15='0147_Armor Lottery', shoulder16='0118_Armor Lottery', shoulder17='9999_empty', shoulder18='9999_empty', shoulder19='9999_empty', shoulder20='9999_empty', shoulder21='9999_empty', shoulder22='9999_empty', shoulder23='9999_empty', shoulder24='9999_empty', forearm0='0196_Armor Lottery', forearm1='0217_Armor Lottery', forearm2='0051_Armor Lottery', forearm3='0123_Armor Lottery', forearm4='0052_Armor Lottery', forearm5='0245_Armor Lottery', forearm6='0217_Armor Lottery', forearm7='0148_Armor Lottery', forearm8='0050_Armor Lottery', forearm9='0053_Armor Lottery', forearm10='0231_Armor Lottery', forearm11='0052_Armor Lottery', forearm12='0104_Armor Lottery', forearm13='0049_Armor Lottery', forearm14='0052_Armor Lottery', forearm15='0217_Armor Lottery', forearm16='0104_Armor Lottery', forearm17='0157_Armor Lottery', forearm18='0196_Armor Lottery', forearm19='0070_Armor Lottery', forearm20='0123_Armor Lottery', forearm21='0169_Armor Lottery', forearm22='0217_Armor Lottery', forearm23='0189_Armor Lottery', forearm24='0238_Armor Lottery', foot0='0090_Armor Lottery', foot1='0054_Armor Lottery', foot2='0060_Armor Lottery', foot3='0119_Armor Lottery', foot4='0156_Armor Lottery', foot5='0171_Armor Lottery', foot6='0256_Armor Lottery', foot7='0060_Armor Lottery', foot8='0149_Armor Lottery', foot9='0156_Armor Lottery', foot10='0119_Armor Lottery', foot11='0067_Armor Lottery', foot12='0186_Armor Lottery', foot13='0090_Armor Lottery', foot14='0207_Armor Lottery', foot15='0263_Armor Lottery', foot16='0067_Armor Lottery', foot17='0180_Armor Lottery', foot18='0055_Armor Lottery', foot19='0164_Armor Lottery', foot20='0249_Armor Lottery', foot21='0235_Armor Lottery', foot22='0200_Challenge', foot23='9999_empty', foot24='9999_empty', prop0='0267_Armor Lottery', prop1='0273_Challenge', prop2='0281_Challenge', prop3='0274_Armor Lottery', prop4='0280_Armor Lottery', prop5='0286_Challenge', prop6='0289_Armor Lottery', prop7='0287_Armor Lottery', prop8='0291_Challenge', prop9='0279_Armor Lottery', prop10='0285_Armor Lottery', prop11='9999_empty', prop12='9999_empty', prop13='9999_empty', prop14='9999_empty', prop15='9999_empty', prop16='9999_empty', prop17='9999_empty', prop18='9999_empty', prop19='9999_empty', prop20='9999_empty', prop21='9999_empty', prop22='9999_empty', prop23='9999_empty', prop24='9999_empty' WHERE username='Kyle';
+Worker 1: UPDATE users SET helmet0='0038_Armor Lottery', helmet1='0023_Armor Lottery', helmet2='0215_Challenge', helmet3='0078_Armor Lottery', helmet4='0208_Armor Lottery', helmet5='0085_Armor Lottery', helmet6='0042_Armor Lottery', helmet7='0021_Armor Lottery', helmet8='0039_Armor Lottery', helmet9='0031_Armor Lottery', helmet10='0044_Armor Lottery', helmet11='0243_Armor Lottery', helmet12='0019_Armor Lottery', helmet13='0167_Armor Lottery', helmet14='0029_Challenge', helmet15='0181_Challenge', helmet16='0146_Challenge', helmet17='0026_Armor Lottery', helmet18='0057_Armor Lottery', helmet19='0040_Armor Lottery', helmet20='0046_Armor Lottery', helmet21='0194_Challenge', helmet22='0032_Armor Lottery', helmet23='0153_Armor Lottery', helmet24='0027_Armor Lottery', torso0='0158_Challenge', torso1='0069_Armor Lottery', torso2='0225_Armor Lottery', torso3='0103_Armor Lottery', torso4='0246_Armor Lottery', torso5='0190_Armor Lottery', torso6='0098_Armor Lottery', torso7='0161_Armor Lottery', torso8='0204_Armor Lottery', torso9='0260_Armor Lottery', torso10='0126_Armor Lottery', torso11='0150_Armor Lottery', torso12='0260_Armor Lottery', torso13='0232_Armor Lottery', torso14='0253_Armor Lottery', torso15='0069_Armor Lottery', torso16='0239_Armor Lottery', torso17='0197_Armor Lottery', torso18='0117_Armor Lottery', torso19='0218_Challenge', torso20='0081_Armor Lottery', torso21='9999_empty', torso22='9999_empty', torso23='9999_empty', torso24='9999_empty', leg0='0219_Armor Lottery', leg1='0240_Armor Lottery', leg2='0066_Armor Lottery', leg3='0205_Armor Lottery', leg4='0082_Armor Lottery', leg5='0072_Armor Lottery', leg6='0191_Armor Lottery', leg7='0114_Armor Lottery', leg8='0151_Armor Lottery', leg9='0088_Armor Lottery', leg10='0094_Armor Lottery', leg11='0247_Armor Lottery', leg12='0061_Armor Lottery', leg13='0178_Armor Lottery', leg14='0151_Armor Lottery', leg15='0198_Armor Lottery', leg16='0154_Armor Lottery', leg17='0233_Armor Lottery', leg18='0205_Armor Lottery', leg19='0094_Armor Lottery', leg20='0154_Armor Lottery', leg21='0240_Armor Lottery', leg22='0121_Armor Lottery', leg23='9999_empty', leg24='9999_empty', shin0='0152_Armor Lottery', shin1='0102_Armor Lottery', shin2='0199_Armor Lottery', shin3='0248_Armor Lottery', shin4='0220_Armor Lottery', shin5='0089_Armor Lottery', shin6='0227_Armor Lottery', shin7='0192_Armor Lottery', shin8='0122_Armor Lottery', shin9='0179_Armor Lottery', shin10='0234_Armor Lottery', shin11='0068_Armor Lottery', shin12='0206_Armor Lottery', shin13='0163_Armor Lottery', shin14='0115_Armor Lottery', shin15='0155_Armor Lottery', shin16='0241_Armor Lottery', shin17='0062_Challenge', shin18='9999_empty', shin19='9999_empty', shin20='9999_empty', shin21='9999_empty', shin22='9999_empty', shin23='9999_empty', shin24='9999_empty', hat0='0135_Armor Lottery', hat1='0144_Armor Lottery', hat2='0139_Armor Lottery', hat3='0127_Armor Lottery', hat4='0143_Armor Lottery', hat5='0134_Armor Lottery', hat6='0136_Armor Lottery', hat7='0135_Armor Lottery', hat8='0127_Armor Lottery', hat9='0129_Armor Lottery', hat10='0127_Armor Lottery', hat11='0133_Armor Lottery', hat12='0140_Armor Lottery', hat13='0142_Armor Lottery', hat14='0131_Armor Lottery', hat15='0138_Armor Lottery', hat16='9999_empty', hat17='9999_empty', hat18='9999_empty', hat19='9999_empty', hat20='9999_empty', hat21='9999_empty', hat22='9999_empty', hat23='9999_empty', hat24='9999_empty', shoulder0='0159_Armor Lottery', shoulder1='0223_Armor Lottery', shoulder2='0175_Armor Lottery', shoulder3='0244_Armor Lottery', shoulder4='0182_Armor Lottery', shoulder5='0216_Armor Lottery', shoulder6='0159_Armor Lottery', shoulder7='0195_Armor Lottery', shoulder8='0258_Armor Lottery', shoulder9='0168_Armor Lottery', shoulder10='0230_Challenge', shoulder11='0087_Armor Lottery', shoulder12='0059_Armor Lottery', shoulder13='0048_Armor Lottery', shoulder14='0097_Armor Lottery', shoulder15='0147_Armor Lottery', shoulder16='0118_Armor Lottery', shoulder17='9999_empty', shoulder18='9999_empty', shoulder19='9999_empty', shoulder20='9999_empty', shoulder21='9999_empty', shoulder22='9999_empty', shoulder23='9999_empty', shoulder24='9999_empty', forearm0='0196_Armor Lottery', forearm1='0217_Armor Lottery', forearm2='0051_Armor Lottery', forearm3='0123_Armor Lottery', forearm4='0052_Armor Lottery', forearm5='0245_Armor Lottery', forearm6='0217_Armor Lottery', forearm7='0148_Armor Lottery', forearm8='0050_Armor Lottery', forearm9='0053_Armor Lottery', forearm10='0231_Armor Lottery', forearm11='0052_Armor Lottery', forearm12='0104_Armor Lottery', forearm13='0049_Armor Lottery', forearm14='0052_Armor Lottery', forearm15='0217_Armor Lottery', forearm16='0104_Armor Lottery', forearm17='0157_Armor Lottery', forearm18='0196_Armor Lottery', forearm19='0070_Armor Lottery', forearm20='0123_Armor Lottery', forearm21='0169_Armor Lottery', forearm22='0217_Armor Lottery', forearm23='0189_Armor Lottery', forearm24='0238_Armor Lottery', foot0='0090_Armor Lottery', foot1='0054_Armor Lottery', foot2='0060_Armor Lottery', foot3='0119_Armor Lottery', foot4='0156_Armor Lottery', foot5='0171_Armor Lottery', foot6='0256_Armor Lottery', foot7='0060_Armor Lottery', foot8='0149_Armor Lottery', foot9='0156_Armor Lottery', foot10='0119_Armor Lottery', foot11='0067_Armor Lottery', foot12='0186_Armor Lottery', foot13='0090_Armor Lottery', foot14='0207_Armor Lottery', foot15='0263_Armor Lottery', foot16='0067_Armor Lottery', foot17='0180_Armor Lottery', foot18='0055_Armor Lottery', foot19='0164_Armor Lottery', foot20='0249_Armor Lottery', foot21='0235_Armor Lottery', foot22='0200_Challenge', foot23='9999_empty', foot24='9999_empty', prop0='0267_Armor Lottery', prop1='0273_Challenge', prop2='0281_Challenge', prop3='0274_Armor Lottery', prop4='0280_Armor Lottery', prop5='0286_Challenge', prop6='0289_Armor Lottery', prop7='0287_Armor Lottery', prop8='0291_Challenge', prop9='0279_Armor Lottery', prop10='0285_Armor Lottery', prop11='9999_empty', prop12='9999_empty', prop13='9999_empty', prop14='9999_empty', prop15='9999_empty', prop16='9999_empty', prop17='9999_empty', prop18='9999_empty', prop19='9999_empty', prop20='9999_empty', prop21='9999_empty', prop22='9999_empty', prop23='9999_empty', prop24='9999_empty' WHERE username='Kyle';
+Worker 1: SELECT users.hat0, users.helmet0, users.torso0, users.shoulder0, users.forearm0, users.leg0, users.shin0, users.foot0, users.prop0 FROM users join stats on users.username=stats.username where users.username='Kyle'
+Worker 1: SELECT users.hat0, users.helmet0, users.torso0, users.shoulder0, users.forearm0, users.leg0, users.shin0, users.foot0, users.prop0 FROM users join stats on users.username=stats.username where users.username='Kyle'
+Worker 1: sending the other half of the accolades as well
+Worker 1: updating Kyle's local avatar: true_skill=118, global_rank = 4
+Worker 1: [object Object]
+Worker 1: [object Object]
+Worker 1: USER-DEFINED CONTROL MAPPING:
+UPDATE controls set control_code=65 WHERE username='Kyle' AND control_index=0 AND using_gamepad=0
+
+
+Worker 1: USER-DEFINED CONTROL MAPPING:
+UPDATE controls set control_code=68 WHERE username='Kyle' AND control_index=1 AND using_gamepad=0
+
+
+Worker 1: USER-DEFINED CONTROL MAPPING:
+UPDATE controls set control_code=87 WHERE username='Kyle' AND control_index=2 AND using_gamepad=0
+
+
+Worker 1: USER-DEFINED CONTROL MAPPING:
+UPDATE controls set control_code=83 WHERE username='Kyle' AND control_index=3 AND using_gamepad=0
+
+
+Worker 1: USER-DEFINED CONTROL MAPPING:
+UPDATE controls set control_code=16 WHERE username='Kyle' AND control_index=4 AND using_gamepad=0
+
+
+Worker 1: USER-DEFINED CONTROL MAPPING:
+UPDATE controls set control_code=81 WHERE username='Kyle' AND control_index=5 AND using_gamepad=0
+
+
+Worker 1: USER-DEFINED CONTROL MAPPING:
+UPDATE controls set control_code=69 WHERE username='Kyle' AND control_index=6 AND using_gamepad=0
+
+
+Worker 1: USER-DEFINED CONTROL MAPPING:
+UPDATE controls set control_code=80 WHERE username='Kyle' AND control_index=7 AND using_gamepad=0
+
+
+Worker 1: USER-DEFINED CONTROL MAPPING:
+UPDATE controls set control_code=32 WHERE username='Kyle' AND control_index=8 AND using_gamepad=0
+
+
+Worker 1: USER-DEFINED CONTROL MAPPING:
+UPDATE controls set control_code=82 WHERE username='Kyle' AND control_index=9 AND using_gamepad=0
+
+
+Worker 1: USER-DEFINED CONTROL MAPPING:
+UPDATE controls set control_code=1 WHERE username='Kyle' AND control_index=10 AND using_gamepad=0
+
+
+Worker 1: USER-DEFINED CONTROL MAPPING:
+UPDATE controls set control_code=2 WHERE username='Kyle' AND control_index=11 AND using_gamepad=0
+
+
+Worker 1: USER-DEFINED CONTROL MAPPING:
+UPDATE controls set control_code=49 WHERE username='Kyle' AND control_index=12 AND using_gamepad=0
+
+
+Worker 1: USER-DEFINED CONTROL MAPPING:
+UPDATE controls set control_code=50 WHERE username='Kyle' AND control_index=13 AND using_gamepad=0
+
+
+Worker 1: USER-DEFINED CONTROL MAPPING:
+UPDATE controls set control_code=51 WHERE username='Kyle' AND control_index=14 AND using_gamepad=0
+
+
+Worker 1: USER-DEFINED CONTROL MAPPING:
+UPDATE controls set control_code=52 WHERE username='Kyle' AND control_index=15 AND using_gamepad=0
+
+
+Worker 1: USER-DEFINED CONTROL MAPPING:
+UPDATE controls set control_code=88 WHERE username='Kyle' AND control_index=16 AND using_gamepad=0
+
+
+Worker 1: USER-DEFINED CONTROL MAPPING:
+UPDATE controls set control_code=1 WHERE username='Kyle' AND control_index=17 AND using_gamepad=0
+
+
+Worker 1: USER-DEFINED CONTROL MAPPING:
+UPDATE controls set control_code=1 WHERE username='Kyle' AND control_index=18 AND using_gamepad=0
+
+
+Worker 1: USER-DEFINED CONTROL MAPPING:
+UPDATE controls set control_code=0 WHERE username='Kyle' AND control_index=19 AND using_gamepad=0
+
+
+Worker 1: UPDATE bot_stats SET deaths = 447 WHERE username='Kyle'
+Worker 1: updating Kyle's local avatar: true_skill=118, global_rank = 4
+Worker 1: [object Object]
+Worker 1: [object Object]
+Worker 1: UPDATE bot_stats SET kills = 691 WHERE username='Kyle'
+Worker 1: UPDATE bot_accolades SET spr_flame = '48' WHERE username='Kyle'
+Worker 1: UPDATE bot_accolades SET flame_kill = '48' WHERE username='Kyle'
+Worker 1: UPDATE bot_stats SET points = 78895 WHERE username='Kyle'
+Worker 1: UPDATE bot_stats SET kill_streak = 0 WHERE username='Kyle'
+Worker 1: UPDATE stats SET xp = 142872 WHERE username='Kyle'
+Worker 1: UPDATE stats SET rank = 20 WHERE username='Kyle'
+Worker 1: UPDATE settings set val_str='No', val_real='-69' WHERE username='Kyle' AND setting_name='Full-Screen'

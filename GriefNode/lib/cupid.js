@@ -8,7 +8,7 @@ var netManObjIndex = global.netManObjIndex; var lobby_wait_time = global.lobby_w
 var default_netman_uniqueId = global.default_netman_uniqueId; var numTdm = global.numTdm; var numFfa = global.numFfa; var numVersus = global.numVersus;
 var	numMenu = global.numMenu; var numBot = global.numBot; var numSockets = global.numSockets; var numBotFfa = global.numBotFfa; var numBotTdm = global.numBotTdm;
 var NUM_BPARTS = global.NUM_BPARTS; var NUM_STATS = global.NUM_STATS; var clients = global.clients; var rooms = global.rooms;
-var gravatarObjIndex = global.gravatarObjIndex; var SOCKETS = "sock"
+var gravatarObjIndex = global.gravatarObjIndex; var SOCKETS = "sock"; var WARN = global.WARN;
 
 var io;
 var conn;
@@ -18,6 +18,9 @@ var util = require('util');
 var log = require('./logger.js');
 var dbman = require('./dbman.js');
 var composer = require('./composer.js');
+
+var fs = require('fs');
+var crypto = require('crypto');
 
 //default 'main_menu' group ----> all room objects in the rooms array should have these properties
 var main_menu = {
@@ -31,7 +34,7 @@ rooms.push(main_menu);
 
 //this basically makes player objects
 var player = function(){
-	this.pName = "John Doe";
+	this.pName = global.anon_user;
 	this.gameMode = "no_mode"; //can be ffa, tdm, or versus
 	this.room = "no_room";
 	this.uniqueId = "-1";
@@ -177,10 +180,30 @@ var bigMessage = function(socket, message, value1, value2, value3) {
 }
 exports.bigMessage = bigMessage
 
+var syncVersionHash = function() {
+	var md5hash = crypto.createHash('md5');
+	var stream = fs.createReadStream('C:\\inetpub\\wwwroot\\griefer\\release\\Griefer.exe');
+	stream.on('data',function(data) {
+		md5hash.update(data,'utf8');
+	});
+	stream.on('end',function() {
+		global.version_hash = md5hash.digest('hex');
+		log.log(STD,"Version Hash: "+global.version_hash);
+		if (global.MULTITHREAD && cluster.isMaster) {
+			message_workers({id: "sync_version_hash", version_hash: global.version_hash});
+		}
+	});
+	stream.on('error',function(err) {
+		log.log(WARN,"read stream error while syncing version hash");
+		return false;
+	});
+}
+exports.syncVersionHash = syncVersionHash;
+
 //returns an array of the sockets grouped in a certain room
 var socketsInRoom = function(roomName) {
 
-	if (!global.MULTITHREAD) {
+	if (!global.MULTITHREAD || cluster.isWorker) {
 		namespace = "/";
 		var theSockets = [];
 		var roomsweep = [];
@@ -258,7 +281,7 @@ var shuffle_pnums = function(socket) {
 exports.shuffle_pnums = shuffle_pnums;
 
 var get_everyone_ready = function(socket) {
-	var obj_room = cupid.room_with_name(socket.myPlayer.room);
+	var obj_room = room_with_name(socket.myPlayer.room);
     if (globals.exists(obj_room.match_countdown_timeout) == true)
     {
       if (obj_room.match_countdown_timeout != null)
@@ -314,37 +337,40 @@ exports.master_join_room = master_join_room;
 var ds_migrate_player = function(pName, groupNameFrom, groupNameTo) {
 	var fsocket, fsocket_index;
 
-	var roomFrom = ds_find_room(groupNameFrom); 
-	if (roomFrom) {
-		fsocket_index = ds_find_fsocket_index(pName, roomFrom)
-		fsocket;
-	} else {
-		log.log(CRITICAL,"Unable to find roomFrom ... searched for: "+groupNameFrom);
-		return false;
-	}
+	if (groupNameFrom != "") {
 
-	if (fsocket_index >= 0) {
-		fsocket = roomFrom.fsockets.splice(fsocket_index,1)[0];
-		if (fsocket) {
-			if (!fsocket.myPlayer) {
-				log.log(CRITICAL,pName+"'s fsocket exists, but its myPlayer object evaluates to "+fsocket.myPlayer+"");
-				console.log(fsocket);
-				return false;
-			} else {
-				fsocket.myPlayer.room = groupNameTo;
-			}
+		var roomFrom = ds_find_room(groupNameFrom); 
+
+		if (roomFrom) {
+			fsocket_index = ds_find_fsocket_index(pName, roomFrom);
 		} else {
-			log.log(CRITICAL,"Unable to find fsocket for "+pName+" in "+groupNameFrom+" at index "+fsocket_index);
+			log.log(CRITICAL,"Unable to find roomFrom ... searched for: "+groupNameFrom);
 			return false;
 		}
-	} else {
-		log.log(CRITICAL,"Unable to find fsocket_index for "+pName+" in "+groupNameFrom);
-		return false;
+
+		if (fsocket_index >= 0) {
+			fsocket = roomFrom.fsockets.splice(fsocket_index,1)[0];
+			if (fsocket) {
+				if (!fsocket.myPlayer) {
+					log.log(CRITICAL,pName+"'s fsocket exists, but its myPlayer object evaluates to "+fsocket.myPlayer+"");
+					return false;
+				} else {
+					fsocket.myPlayer.room = groupNameTo;
+				}
+			} else {
+				log.log(CRITICAL,"Unable to find fsocket for "+pName+" in "+groupNameFrom+" at index "+fsocket_index);
+				return false;
+			}
+		} else {
+			log.log(CRITICAL,"Unable to find fsocket_index for "+pName+" in "+groupNameFrom);
+			return false;
+		}
+
 	}
 
+	//perform the migration
 	var roomTo = ds_find_room(groupNameTo);
 	if (roomFrom && roomTo && fsocket_index >= 0) {
-		
 		roomTo.fsockets.push(fsocket);
 		log.log(CUPID,pName+" ds_migrated from "+roomFrom.groupName+" to "+roomTo.groupName);
 	}
@@ -376,7 +402,7 @@ var ds_find_fsocket_index = function(pName, room) {
 			return i;
 		}
 	}
-	log.log(CRITICAL,"Unable to find "+pName+" fsocket in room "+room.groupName);
+	log.log(CRITICAL,"Unable to find "+pName+" fsocket during index lookup in room "+room.groupName);
 	return -1;
 } 
 exports.ds_find_fsocket_index = ds_find_fsocket_index;
@@ -388,7 +414,7 @@ var ds_find_fsocket = function(pName, room) {
 
 	if (room) {
 		for (var i=0; i<room.fsockets.length; i++) {
-			if (room.fsockets[i].myPlayer.pName = pName) {
+			if (room.fsockets[i].myPlayer.pName == pName) {
 				return room.fsockets[i];
 			}
 		}
@@ -415,9 +441,8 @@ exports.ds_find_fsocket = ds_find_fsocket;
 
 var ds_destroy_fsocket = function(pName, room) {
 	if (room) {
-		console.log("looking to destroy "+pName+"'s fsocket in room "+room.groupName);
 		for (var i=0; i<room.fsockets.length; i++) {
-			if (room.fsockets[i].myPlayer.pName = pName) {
+			if (room.fsockets[i].myPlayer.pName == pName) {
 				room.fsockets.splice(i,1)[0];
 				return true;
 			}
@@ -538,6 +563,20 @@ exports.manageSockets = function() {
 
 	var socket_str = "\n\nNew Socket Report:\n";
 
+	var pnames = "";
+	for (var i=0; i<io.sockets.sockets.length; i++) {
+		var socket = io.sockets.sockets[i];
+		if (socket.myPlayer) {
+			if (socket.myPlayer.pName == global.anon_user) {
+				pnames += socket.myPlayer.pName+", "
+			}
+		}
+	}
+
+	if (pnames != "") {
+		socket_str += "\n\tANONYMOUS SOCKETS: "+pnames+"\n";
+	}
+
 	for (var i=0; i<global.rooms.length; i++)
 	{
 		var sockets = [];
@@ -577,7 +616,7 @@ exports.manageSockets = function() {
 		log.log(SOCKETS,socket_str);
 		global.socket_str = socket_str;
 	} else {
-		log.log("verbose","no new data ... skipping socket report");
+		//log.log("verbose","no new data ... skipping socket report");
 	}
 }
 
@@ -1092,13 +1131,20 @@ var makeMatches = function(){
 				log.log(CUPID,"\nenough players in "+rooms[i].groupName+" to start a match");
 
 				//divide lobby players into groups of acceptable size for this match type
-				while (lobbyMembers.length >= rooms[i].minPlayers)
+				var remainingLobbyMembers = lobbyMembers.length;
+				while (remainingLobbyMembers >= rooms[i].minPlayers)
 				{
 					log.log(CUPID,"grouping "+rooms[i].groupName+" sockets");
 					var playerSubGroup = [];
+
 					//make the biggest group of players you can based on how many left in lobby
-					while ((playerSubGroup.length<rooms[i].maxPlayers)&&(lobbyMembers.length>0))
-						playerSubGroup.push(lobbyMembers.pop());
+					for (var k=0; k<lobbyMembers.length; k++) {
+						playerSubGroup.push(lobbyMembers[k]);
+						remainingLobbyMembers --;
+
+						if (playerSubGroup.length >= rooms[i].maxPlayers)
+							break;
+					}
 
 					//find a game lobby for this player group
 					var roomOffset = 1;
@@ -1124,7 +1170,6 @@ var makeMatches = function(){
 						whileLoop:
 						while (gameRoom.indexOf(rooms[i].modeName) > -1)
 						{
-
 							//EMPTY PROSPECTIVE MATCHES ONLY -- NO PLAYER WAITING IN A 'LOBBY' OR ANYTHING
 							if (socketsInRoom(gameRoom).length == 0)
 							{

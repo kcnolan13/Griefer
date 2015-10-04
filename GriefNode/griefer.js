@@ -8,7 +8,7 @@ var netManObjIndex = global.netManObjIndex; var lobby_wait_time = global.lobby_w
 var default_netman_uniqueId = global.default_netman_uniqueId; var numTdm = global.numTdm; var numFfa = global.numFfa; var numVersus = global.numVersus;
 var	numMenu = global.numMenu; var numBot = global.numBot; var numSockets = global.numSockets; var numBotFfa = global.numBotFfa; var numBotTdm = global.numBotTdm;
 var NUM_BPARTS = global.NUM_BPARTS; var NUM_STATS = global.NUM_STATS; var clients = global.clients; var rooms = global.rooms;
-var SOCKETS = "sock"; var gravatarObjIndex = global.gravatarObjIndex;
+var SOCKETS = "sock"; var gravatarObjIndex = global.gravatarObjIndex; var WARN = global.WARN;
 
 var conn;
 var MULTITHREAD = global.MULTITHREAD;
@@ -23,6 +23,8 @@ var random_users_2create = 2;
 
 //---- LOAD MODULES ----//
 global.cluster = require('cluster');
+global.cluster.schedulingPolicy = global.cluster.SCHED_RR;
+
 var cluster = global.cluster;
 var os = require('os');
 var http = require('http');
@@ -43,6 +45,8 @@ var io;
 
 if (cluster.isMaster) 
 {
+
+  cupid.syncVersionHash();
 
   //establish a Connection to the griefer users database
   dbman.connect(conn, function() {
@@ -105,12 +109,14 @@ if (cluster.isMaster)
             }
           }
           else {
-            log.log(CUPID,"ds_migrating player "+m.fsocket.name);
+            log.log(CUPID,"ds_migrating player "+m.fsocket.name+" from "+m.groupNameFrom+" to "+m.groupNameTo);
             cupid.ds_migrate_player(m.fsocket.name, m.groupNameFrom, m.groupNameTo);
           }
         }
 
         else if (m.id == "player_destroy") {
+          if (m.fsocket.name == global.anon_user)
+            return false;
           var destroyed = false;
           log.log(CUPID, "received player_destroy for: "+m.fsocket.name);
           cupid.ds_destroy_fsocket(m.fsocket.name);
@@ -185,10 +191,10 @@ if (cluster.isMaster)
 
   //perform intervalic tasks
   setInterval(dbman.rankPlayers,60000);
-  setInterval(cupid.manageSockets,1000);
+  setInterval(cupid.manageSockets,5000);
   setInterval(cupid.syncPlayersConnected,4*5010);
   setInterval(cupid.makeMatches,5000);
-  setInterval(log.syncVersionHash,5000);
+  setInterval(cupid.syncVersionHash,30000);
 
 }
 
@@ -224,6 +230,9 @@ if (cluster.isWorker)
   dbman.setIo(io);
   cupid.setIo(io);
 
+  //initialize all of the socket rooms
+  cupid.initGameRooms();
+
   server.listen(global.gamePort, function(err) {
     if (err) {
       console.log(err);
@@ -240,30 +249,43 @@ if (cluster.isWorker)
     log.log("verbose",m.id+" : "+cluster.worker.id);
 
     if (m.id == "fsocket_emit") {
-      io.sockets.sockets.forEach(function(socket,i,sockets,m){
+      for (var i=0; i<io.sockets.sockets.length; i++) {
+        var socket = io.sockets.sockets[i];
         if (socket.myPlayer.pName == m.toPlayer) {
           console.log("fsocket_emit: "+m.str_header+" resolved to worker "+cluster.worker.id+"'s socket for "+socket.myPlayer.pName);
           socket.emit(m.str_header,m.obj_body);
         }
-      },m);
+      }
     }
 
     else if (m.id == "player_join_room") {
-      io.sockets.sockets.forEach(function(socket,i,sockets,m){
+      for (var i=0; i<io.sockets.sockets.length; i++) {
+        var socket = io.sockets.sockets[i];
         if (socket.myPlayer.pName == m.pName) {
           if (m.groupNameFrom != "") {
             socket.leave(m.groupNameFrom);
           }
           socket.join(m.groupNameTo);
+          socket.myPlayer.room = m.groupNameTo;
         }
-      },m);
+      }
+    }
+
+    else if (m.id == "sync_version_hash") {
+      log.log("verbose"," synced version hash: "+m.version_hash);
+      global.version_hash = m.version_hash;
     }
 
     else if (m.id == "reread_tskill") {
-      io.sockets.sockets.forEach(function(socket,i,sockets,m){
-          console.log(socket.myPlayer.pName+" rereading_tskill");
-          dbman.reread_tskill(socket);
-      },m);
+      for (var i=0; i<io.sockets.sockets.length; i++) {
+        var socket = io.sockets.sockets[i];
+
+        if (socket.myPlayer.pName == global.anon_user)
+            continue;
+
+        log.log(socket.myPlayer.pName+" rereading_tskill");
+        dbman.reread_tskill(socket);
+      }
     }
 
     else {
@@ -368,10 +390,12 @@ if (cluster.isWorker || !MULTITHREAD)
 
     //---- CANCEL MATCHMAKING ----//
     socket.on('cancel_matchmaking',function(arg1) {
+        if (socket.myPlayer.pName == global.anon_user)
+          return false;
+
         socket.broadcast.to(socket.myPlayer.room).emit('player_left_matchmaking', socket.myPlayer);
         log.log(STD,socket.myPlayer.pName+" Leaving Matchmaking")
         socket.myPlayer.uniqueMatchId = -51;
-
         cupid.worker_join_room(socket,"main_menu");
     });
 
@@ -379,8 +403,11 @@ if (cluster.isWorker || !MULTITHREAD)
     socket.on('disconnect', function() {
         global.clients.splice(global.clients.indexOf(socket),1);
 
+        if (socket.myPlayer.pName == global.anon_user)
+            return false;
+
         if (cluster.isWorker) {
-          console.log("WORKER "+cluster.worker.id+": Player Disconnected");
+          console.log("WORKER "+cluster.worker.id+": "+socket.myPlayer.pName+" Disconnected");
           process.send({id:"player_destroy",fsocket:composer.fsocket(socket)});
         }
 
@@ -391,9 +418,9 @@ if (cluster.isWorker || !MULTITHREAD)
         log.log(STD,"deleting "+socket.myPlayer.pName+"'s socket");
         socket.myPlayer.room = "main_menu";
         socket.join('main_menu');
-        socket.myPlayer.pName = "John Doe";
+        socket.myPlayer.pName = global.anon_user;
         //socket.disconnect('unauthorized');
-        delete socket;
+        //delete socket;
 
         //sync connected players for everyone... cause why not
         cupid.manageSockets();
@@ -501,12 +528,13 @@ if (cluster.isWorker || !MULTITHREAD)
       {
         var valid = 1;
         log.log("verbose","comparing "+message.val+" to "+global.version_hash);
+        
         if (message.val != global.version_hash)
             valid = 0;
 
         log.log("verbose","hash valid? --> "+valid);
 
-        var response = composer.genMessage("validate_hash",valid);
+        var response = composer.genMessage("validate_hash",global.version_hash);
         socket.emit('general_message',response);
       }
 
@@ -559,7 +587,7 @@ if (cluster.isWorker || !MULTITHREAD)
       else if (message.msg == "everyone_ready") {
         //initiate match start countdown
         if (cluster.isWorker) {
-          cupid.message_master({id: "everyone_ready"});
+          cupid.message_master({id: "everyone_ready",fsocket: composer.fsocket(socket)});
         } else {
           cupid.get_everyone_ready(socket);
         }
@@ -699,8 +727,20 @@ if (cluster.isWorker || !MULTITHREAD)
         socket.myPlayer.nextMapVote = datMessage.val;
 
         if (cluster.isWorker) {
-          if (socket.rooms[0]) {
-            socket.myPlayer.room = socket.rooms[0];
+          var rname = "";
+          for (var i=0; i<socket.rooms.length; i++) {
+            for (var j=0; j<global.rooms.length; j++) {
+              if (socket.rooms[i] == global.rooms[j].groupName)
+              {
+                rname = socket.rooms[i];
+                break;
+              }
+              if (rname != "")
+                break
+            }
+          }
+          if (rname != "") {
+            socket.myPlayer.room = rname;
           } else {
             log.log(CRITICAL,socket.myPlayer.pName+"'s socket does not seem to be in a room... what gives?");
             console.log(socket.rooms);

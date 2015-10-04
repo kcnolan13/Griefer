@@ -1,1505 +1,399 @@
-create table users (username VARCHAR(20), password VARCHAR(32), hat0 TEXT, helmet0 TEXT, torso0 TEXT, shoulder0 TEXT, forearm0 TEXT, leg0 TEXT, shin0 TEXT, foot0 TEXT, prop0 TEXT, hat1 TEXT, helmet1 TEXT, torso1 TEXT, shoulder1 TEXT, forearm1 TEXT, leg1 TEXT, shin1 TEXT, foot1 TEXT, prop1 TEXT, hat2 TEXT, helmet2 TEXT, torso2 TEXT, shoulder2 TEXT, forearm2 TEXT, leg2 TEXT, shin2 TEXT, foot2 TEXT, prop2 TEXT, hat3 TEXT, helmet3 TEXT, torso3 TEXT, shoulder3 TEXT, forearm3 TEXT, leg3 TEXT, shin3 TEXT, foot3 TEXT, prop3 TEXT, hat4 TEXT, helmet4 TEXT, torso4 TEXT, shoulder4 TEXT, forearm4 TEXT, leg4 TEXT, shin4 TEXT, foot4 TEXT, prop4 TEXT, hat5 TEXT, helmet5 TEXT, torso5 TEXT, shoulder5 TEXT, forearm5 TEXT, leg5 TEXT, shin5 TEXT, foot5 TEXT, prop5 TEXT, hat6 TEXT, helmet6 TEXT, torso6 TEXT, shoulder6 TEXT, forearm6 TEXT, leg6 TEXT, shin6 TEXT, foot6 TEXT, prop6 TEXT, hat7 TEXT, helmet7 TEXT, torso7 TEXT, shoulder7 TEXT, forearm7 TEXT, leg7 TEXT, shin7 TEXT, foot7 TEXT, prop7 TEXT, hat8 TEXT, helmet8 TEXT, torso8 TEXT, shoulder8 TEXT, forearm8 TEXT, leg8 TEXT, shin8 TEXT, foot8 TEXT, prop8 TEXT, hat9 TEXT, helmet9 TEXT, torso9 TEXT, shoulder9 TEXT, forearm9 TEXT, leg9 TEXT, shin9 TEXT, foot9 TEXT, prop9 TEXT, hat10 TEXT, helmet10 TEXT, torso10 TEXT, shoulder10 TEXT, forearm10 TEXT, leg10 TEXT, shin10 TEXT, foot10 TEXT, prop10 TEXT, hat11 TEXT, helmet11 TEXT, torso11 TEXT, shoulder11 TEXT, forearm11 TEXT, leg11 TEXT, shin11 TEXT, foot11 TEXT, prop11 TEXT, hat12 TEXT, helmet12 TEXT, torso12 TEXT, shoulder12 TEXT, forearm12 TEXT, leg12 TEXT, shin12 TEXT, foot12 TEXT, prop12 TEXT, hat13 TEXT, helmet13 TEXT, torso13 TEXT, shoulder13 TEXT, forearm13 TEXT, leg13 TEXT, shin13 TEXT, foot13 TEXT, prop13 TEXT, hat14 TEXT, helmet14 TEXT, torso14 TEXT, shoulder14 TEXT, forearm14 TEXT, leg14 TEXT, shin14 TEXT, foot14 TEXT, prop14 TEXT, hat15 TEXT, helmet15 TEXT, torso15 TEXT, shoulder15 TEXT, forearm15 TEXT, leg15 TEXT, shin15 TEXT, foot15 TEXT, prop15 TEXT, hat16 TEXT, helmet16 TEXT, torso16 TEXT, shoulder16 TEXT, forearm16 TEXT, leg16 TEXT, shin16 TEXT, foot16 TEXT, prop16 TEXT, hat17 TEXT, helmet17 TEXT, torso17 TEXT, shoulder17 TEXT, forearm17 TEXT, leg17 TEXT, shin17 TEXT, foot17 TEXT, prop17 TEXT, hat18 TEXT, helmet18 TEXT, torso18 TEXT, shoulder18 TEXT, forearm18 TEXT, leg18 TEXT, shin18 TEXT, foot18 TEXT, prop18 TEXT, hat19 TEXT, helmet19 TEXT, torso19 TEXT, shoulder19 TEXT, forearm19 TEXT, leg19 TEXT, shin19 TEXT, foot19 TEXT, prop19 TEXT, hat20 TEXT, helmet20 TEXT, torso20 TEXT, shoulder20 TEXT, forearm20 TEXT, leg20 TEXT, shin20 TEXT, foot20 TEXT, prop20 TEXT, hat21 TEXT, helmet21 TEXT, torso21 TEXT, shoulder21 TEXT, forearm21 TEXT, leg21 TEXT, shin21 TEXT, foot21 TEXT, prop21 TEXT, hat22 TEXT, helmet22 TEXT, torso22 TEXT, shoulder22 TEXT, forearm22 TEXT, leg22 TEXT, shin22 TEXT, foot22 TEXT, prop22 TEXT, hat23 TEXT, helmet23 TEXT, torso23 TEXT, shoulder23 TEXT, forearm23 TEXT, leg23 TEXT, shin23 TEXT, foot23 TEXT, prop23 TEXT, hat24 TEXT, helmet24 TEXT, torso24 TEXT, shoulder24 TEXT, forearm24 TEXT, leg24 TEXT, shin24 TEXT, foot24 TEXT, prop24 TEXT);
-CONNECTED to griefer database, as id: 12
-user create:
-INSERT INTO users (username,password,hat0,helmet0,torso0,shoulder0,forearm0,leg0,shin0,foot0,prop0,hat1,helmet1,torso1,shoulder1,forearm1,leg1,shin1,foot1,prop1,hat2,helmet2,torso2,shoulder2,forearm2,leg2,shin2,foot2,prop2,hat3,helmet3,torso3,shoulder3,forearm3,leg3,shin3,foot3,prop3,hat4,helmet4,torso4,shoulder4,forearm4,leg4,shin4,foot4,prop4,hat5,helmet5,torso5,shoulder5,forearm5,leg5,shin5,foot5,prop5,hat6,helmet6,torso6,shoulder6,forearm6,leg6,shin6,foot6,prop6,hat7,helmet7,torso7,shoulder7,forearm7,leg7,shin7,foot7,prop7,hat8,helmet8,torso8,shoulder8,forearm8,leg8,shin8,foot8,prop8,hat9,helmet9,torso9,shoulder9,forearm9,leg9,shin9,foot9,prop9,hat10,helmet10,torso10,shoulder10,forearm10,leg10,shin10,foot10,prop10,hat11,helmet11,torso11,shoulder11,forearm11,leg11,shin11,foot11,prop11,hat12,helmet12,torso12,shoulder12,forearm12,leg12,shin12,foot12,prop12,hat13,helmet13,torso13,shoulder13,forearm13,leg13,shin13,foot13,prop13,hat14,helmet14,torso14,shoulder14,forearm14,leg14,shin14,foot14,prop14,hat15,helmet15,torso15,shoulder15,forearm15,leg15,shin15,foot15,prop15,hat16,helmet16,torso16,shoulder16,forearm16,leg16,shin16,foot16,prop16,hat17,helmet17,torso17,shoulder17,forearm17,leg17,shin17,foot17,prop17,hat18,helmet18,torso18,shoulder18,forearm18,leg18,shin18,foot18,prop18,hat19,helmet19,torso19,shoulder19,forearm19,leg19,shin19,foot19,prop19,hat20,helmet20,torso20,shoulder20,forearm20,leg20,shin20,foot20,prop20,hat21,helmet21,torso21,shoulder21,forearm21,leg21,shin21,foot21,prop21,hat22,helmet22,torso22,shoulder22,forearm22,leg22,shin22,foot22,prop22,hat23,helmet23,torso23,shoulder23,forearm23,leg23,shin23,foot23,prop23,hat24,helmet24,torso24,shoulder24,forearm24,leg24,shin24,foot24,prop24) VALUES ('blotty zoo', MD5('abc123'), '0013_new-user','0009_new-user','0010_new-user','0014_new-user','0015_new-user','0011_new-user','0012_new-user','0016_new-user','0017_new-user','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty')
+Master: CONNECTED to griefer database, as id: 80
+Master: user create:
+INSERT INTO users (username,password,hat0,helmet0,torso0,shoulder0,forearm0,leg0,shin0,foot0,prop0,hat1,helmet1,torso1,shoulder1,forearm1,leg1,shin1,foot1,prop1,hat2,helmet2,torso2,shoulder2,forearm2,leg2,shin2,foot2,prop2,hat3,helmet3,torso3,shoulder3,forearm3,leg3,shin3,foot3,prop3,hat4,helmet4,torso4,shoulder4,forearm4,leg4,shin4,foot4,prop4,hat5,helmet5,torso5,shoulder5,forearm5,leg5,shin5,foot5,prop5,hat6,helmet6,torso6,shoulder6,forearm6,leg6,shin6,foot6,prop6,hat7,helmet7,torso7,shoulder7,forearm7,leg7,shin7,foot7,prop7,hat8,helmet8,torso8,shoulder8,forearm8,leg8,shin8,foot8,prop8,hat9,helmet9,torso9,shoulder9,forearm9,leg9,shin9,foot9,prop9,hat10,helmet10,torso10,shoulder10,forearm10,leg10,shin10,foot10,prop10,hat11,helmet11,torso11,shoulder11,forearm11,leg11,shin11,foot11,prop11,hat12,helmet12,torso12,shoulder12,forearm12,leg12,shin12,foot12,prop12,hat13,helmet13,torso13,shoulder13,forearm13,leg13,shin13,foot13,prop13,hat14,helmet14,torso14,shoulder14,forearm14,leg14,shin14,foot14,prop14,hat15,helmet15,torso15,shoulder15,forearm15,leg15,shin15,foot15,prop15,hat16,helmet16,torso16,shoulder16,forearm16,leg16,shin16,foot16,prop16,hat17,helmet17,torso17,shoulder17,forearm17,leg17,shin17,foot17,prop17,hat18,helmet18,torso18,shoulder18,forearm18,leg18,shin18,foot18,prop18,hat19,helmet19,torso19,shoulder19,forearm19,leg19,shin19,foot19,prop19,hat20,helmet20,torso20,shoulder20,forearm20,leg20,shin20,foot20,prop20,hat21,helmet21,torso21,shoulder21,forearm21,leg21,shin21,foot21,prop21,hat22,helmet22,torso22,shoulder22,forearm22,leg22,shin22,foot22,prop22,hat23,helmet23,torso23,shoulder23,forearm23,leg23,shin23,foot23,prop23,hat24,helmet24,torso24,shoulder24,forearm24,leg24,shin24,foot24,prop24) VALUES ('ducal windscreen', MD5('abc123'), '0013_new-user','0009_new-user','0010_new-user','0014_new-user','0015_new-user','0011_new-user','0012_new-user','0016_new-user','0017_new-user','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty')
 
 
-user create:
-INSERT INTO stats (username, rank,true_skill,xp,ppl,kdr,wl,time,points,kills,deaths,assists,wins,losses,kill_streak,win_streak,rollover_kstreak,rollover_wstreak,global_rank,kdr_history,ppl_history,win_history) VALUES ('blotty zoo', 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+Master: user create:
+INSERT INTO stats (username, rank,true_skill,xp,ppl,kdr,wl,time,points,kills,deaths,assists,wins,losses,kill_streak,win_streak,rollover_kstreak,rollover_wstreak,global_rank,kdr_history,ppl_history,win_history) VALUES ('ducal windscreen', 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
 
 
-user create:
-INSERT INTO bot_stats (username, bot_rank,ppl,kdr,wl,points,kills,deaths,assists,wins,losses,kill_streak,win_streak,rollover_kstreak,rollover_wstreak,kdr_history,ppl_history,win_history) VALUES ('blotty zoo', 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+Master: user create:
+INSERT INTO bot_stats (username, bot_rank,ppl,kdr,wl,points,kills,deaths,assists,wins,losses,kill_streak,win_streak,rollover_kstreak,rollover_wstreak,kdr_history,ppl_history,win_history) VALUES ('ducal windscreen', 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
 
 
-user create:
-INSERT INTO accolades (username, dub_kill,trip_kill,stick_kill,flash_bandicoot,flame_kill,ink_kill,cant_touch_dis,mvp,highest_kd,10kd,ninja,survivor,3ass,5ass,3gibs,6gibs,9gibs,12gibs,3heads,6heads,9heads,12heads,3ks,5ks,10ks,15ks,20ks,25ks,spr_flame,spr_ink,spr_snare,spr_smoke,spr_flashbang,spr_pistol,spr_carbine,spr_rifle,spr_tickler,spr_smg,spr_sticky,spr_lmg,spr_longshot,spr_vulcan,spr_torque,spr_thumper,spr_boltok,spr_shotgun,spr_stomper,spr_boom,spr_frag,spr_rocket,spr_double,spr_wep1,spr_wep2,spr_wep3,spr_wep4) VALUES ('blotty zoo', 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+Master: user create:
+INSERT INTO accolades (username, dub_kill,trip_kill,stick_kill,flash_bandicoot,flame_kill,ink_kill,cant_touch_dis,mvp,highest_kd,10kd,ninja,survivor,3ass,5ass,3gibs,6gibs,9gibs,12gibs,3heads,6heads,9heads,12heads,3ks,5ks,10ks,15ks,20ks,25ks,spr_flame,spr_ink,spr_snare,spr_smoke,spr_flashbang,spr_pistol,spr_carbine,spr_rifle,spr_tickler,spr_smg,spr_sticky,spr_lmg,spr_longshot,spr_vulcan,spr_torque,spr_thumper,spr_boltok,spr_shotgun,spr_stomper,spr_boom,spr_frag,spr_rocket,spr_double,spr_wep1,spr_wep2,spr_wep3,spr_wep4) VALUES ('ducal windscreen', 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
 
 
-user create:
-INSERT INTO bot_accolades (username, dub_kill,trip_kill,stick_kill,flash_bandicoot,flame_kill,ink_kill,cant_touch_dis,mvp,highest_kd,10kd,ninja,survivor,3ass,5ass,3gibs,6gibs,9gibs,12gibs,3heads,6heads,9heads,12heads,3ks,5ks,10ks,15ks,20ks,25ks,spr_flame,spr_ink,spr_snare,spr_smoke,spr_flashbang,spr_pistol,spr_carbine,spr_rifle,spr_tickler,spr_smg,spr_sticky,spr_lmg,spr_longshot,spr_vulcan,spr_torque,spr_thumper,spr_boltok,spr_shotgun,spr_stomper,spr_boom,spr_frag,spr_rocket,spr_double,spr_wep1,spr_wep2,spr_wep3,spr_wep4) VALUES ('blotty zoo', 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+Master: user create:
+INSERT INTO bot_accolades (username, dub_kill,trip_kill,stick_kill,flash_bandicoot,flame_kill,ink_kill,cant_touch_dis,mvp,highest_kd,10kd,ninja,survivor,3ass,5ass,3gibs,6gibs,9gibs,12gibs,3heads,6heads,9heads,12heads,3ks,5ks,10ks,15ks,20ks,25ks,spr_flame,spr_ink,spr_snare,spr_smoke,spr_flashbang,spr_pistol,spr_carbine,spr_rifle,spr_tickler,spr_smg,spr_sticky,spr_lmg,spr_longshot,spr_vulcan,spr_torque,spr_thumper,spr_boltok,spr_shotgun,spr_stomper,spr_boom,spr_frag,spr_rocket,spr_double,spr_wep1,spr_wep2,spr_wep3,spr_wep4) VALUES ('ducal windscreen', 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
 
 
-INSERT into events (username,msg, str1, str2, real1) VALUES ('blotty zoo','new_user','','',0)
-keyboard control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('blotty zoo', 'Move Left', 0, 65, 0)
+Master: INSERT into events (username,msg, str1, str2, real1) VALUES ('ducal windscreen','new_user','','',0)
+Master: keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('ducal windscreen', 'Move Left', 0, 65, 0)
 
 
-keyboard control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('blotty zoo', 'Move Right', 1, 68, 0)
+Master: keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('ducal windscreen', 'Move Right', 1, 68, 0)
 
 
-keyboard control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('blotty zoo', 'Jump', 2, 87, 0)
+Master: keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('ducal windscreen', 'Jump', 2, 87, 0)
 
 
-keyboard control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('blotty zoo', 'Crouch', 3, 83, 0)
+Master: keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('ducal windscreen', 'Crouch', 3, 83, 0)
 
 
-keyboard control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('blotty zoo', 'Evade', 4, 16, 0)
+Master: keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('ducal windscreen', 'Evade', 4, 16, 0)
 
 
-keyboard control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('blotty zoo', 'Previous Weapon', 5, 81, 0)
+Master: keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('ducal windscreen', 'Previous Weapon', 5, 81, 0)
 
 
-keyboard control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('blotty zoo', 'Next Weapon', 6, 69, 0)
+Master: keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('ducal windscreen', 'Next Weapon', 6, 69, 0)
 
 
-keyboard control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('blotty zoo', 'Quickselect Sidearm', 7, 32, 0)
+Master: keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('ducal windscreen', 'Quickselect Sidearm', 7, 32, 0)
 
 
-keyboard control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('blotty zoo', 'Pick Up Weapon', 8, 32, 0)
+Master: keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('ducal windscreen', 'Pick Up Weapon', 8, 32, 0)
 
 
-keyboard control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('blotty zoo', 'Reload', 9, 82, 0)
+Master: keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('ducal windscreen', 'Reload', 9, 82, 0)
 
 
-keyboard control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('blotty zoo', 'Shoot', 10, 1, 0)
+Master: keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('ducal windscreen', 'Shoot', 10, 1, 0)
 
 
-keyboard control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('blotty zoo', 'Quicktoss Grenade', 11, 2, 0)
+Master: keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('ducal windscreen', 'Quicktoss Grenade', 11, 2, 0)
 
 
-keyboard control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('blotty zoo', 'Select Primary', 12, 49, 0)
+Master: keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('ducal windscreen', 'Select Primary', 12, 49, 0)
 
 
-keyboard control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('blotty zoo', 'Select Secondary', 13, 50, 0)
+Master: keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('ducal windscreen', 'Select Secondary', 13, 50, 0)
 
 
-keyboard control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('blotty zoo', 'Select Sidearm', 14, 51, 0)
+Master: keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('ducal windscreen', 'Select Sidearm', 14, 51, 0)
 
 
-keyboard control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('blotty zoo', 'Select Grenades', 15, 52, 0)
+Master: keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('ducal windscreen', 'Select Grenades', 15, 52, 0)
 
 
-keyboard control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('blotty zoo', 'Drop Weapon', 16, 88, 0)
+Master: keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('ducal windscreen', 'Drop Weapon', 16, 88, 0)
 
 
-keyboard control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('blotty zoo', 'Mouse Sensitivity', 17, 1, 0)
+Master: keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('ducal windscreen', 'Mouse Sensitivity', 17, 1, 0)
 
 
-keyboard control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('blotty zoo', 'Look Sensitivity', 18, 1, 0)
+Master: keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('ducal windscreen', 'Look Sensitivity', 18, 1, 0)
 
 
-keyboard control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('blotty zoo', 'Swap Sticks', 19, 0, 0)
+Master: keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('ducal windscreen', 'Swap Sticks', 19, 0, 0)
 
 
-gamepad control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('blotty zoo', 'Move Left', 0, 32785, 1)
+Master: gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('ducal windscreen', 'Move Left', 0, 32785, 1)
 
 
-gamepad control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('blotty zoo', 'Move Right', 1, 32785, 1)
+Master: gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('ducal windscreen', 'Move Right', 1, 32785, 1)
 
 
-gamepad control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('blotty zoo', 'Jump', 2, 32769, 1)
+Master: gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('ducal windscreen', 'Jump', 2, 32769, 1)
 
 
-gamepad control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('blotty zoo', 'Crouch', 3, 32770, 1)
+Master: gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('ducal windscreen', 'Crouch', 3, 32770, 1)
 
 
-gamepad control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('blotty zoo', 'Evade', 4, 32775, 1)
+Master: gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('ducal windscreen', 'Evade', 4, 32775, 1)
 
 
-gamepad control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('blotty zoo', 'Previous Weapon', 5, 32779, 1)
+Master: gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('ducal windscreen', 'Previous Weapon', 5, 32779, 1)
 
 
-gamepad control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('blotty zoo', 'Next Weapon', 6, 32780, 1)
+Master: gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('ducal windscreen', 'Next Weapon', 6, 32780, 1)
 
 
-gamepad control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('blotty zoo', 'Quickselect Sidearm', 7, 32772, 1)
+Master: gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('ducal windscreen', 'Quickselect Sidearm', 7, 32772, 1)
 
 
-gamepad control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('blotty zoo', 'Pick Up Weapon', 8, 32771, 1)
+Master: gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('ducal windscreen', 'Pick Up Weapon', 8, 32771, 1)
 
 
-gamepad control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('blotty zoo', 'Reload', 9, 32773, 1)
+Master: gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('ducal windscreen', 'Reload', 9, 32773, 1)
 
 
-gamepad control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('blotty zoo', 'Shoot', 10, 32776, 1)
+Master: gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('ducal windscreen', 'Shoot', 10, 32776, 1)
 
 
-gamepad control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('blotty zoo', 'Quicktoss Grenade', 11, 32774, 1)
+Master: gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('ducal windscreen', 'Quicktoss Grenade', 11, 32774, 1)
 
 
-gamepad control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('blotty zoo', 'Select Primary', 12, 32784, 1)
+Master: gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('ducal windscreen', 'Select Primary', 12, 32784, 1)
 
 
-gamepad control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('blotty zoo', 'Select Secondary', 13, 32783, 1)
+Master: gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('ducal windscreen', 'Select Secondary', 13, 32783, 1)
 
 
-gamepad control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('blotty zoo', 'Select Sidearm', 14, 32782, 1)
+Master: gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('ducal windscreen', 'Select Sidearm', 14, 32782, 1)
 
 
-gamepad control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('blotty zoo', 'Select Grenades', 15, 32781, 1)
+Master: gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('ducal windscreen', 'Select Grenades', 15, 32781, 1)
 
 
-gamepad control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('blotty zoo', 'Drop Weapon', 16, 32777, 1)
+Master: gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('ducal windscreen', 'Drop Weapon', 16, 32777, 1)
 
 
-gamepad control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('blotty zoo', 'Mouse Sensitivity', 17, 55, 1)
+Master: gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('ducal windscreen', 'Mouse Sensitivity', 17, 55, 1)
 
 
-gamepad control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('blotty zoo', 'Look Sensitivity', 18, 95, 1)
+Master: gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('ducal windscreen', 'Look Sensitivity', 18, 95, 1)
 
 
-gamepad control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('blotty zoo', 'Swap Sticks', 19, 0, 1)
+Master: gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('ducal windscreen', 'Swap Sticks', 19, 0, 1)
 
 
-user create:
-INSERT INTO users (username,password,hat0,helmet0,torso0,shoulder0,forearm0,leg0,shin0,foot0,prop0,hat1,helmet1,torso1,shoulder1,forearm1,leg1,shin1,foot1,prop1,hat2,helmet2,torso2,shoulder2,forearm2,leg2,shin2,foot2,prop2,hat3,helmet3,torso3,shoulder3,forearm3,leg3,shin3,foot3,prop3,hat4,helmet4,torso4,shoulder4,forearm4,leg4,shin4,foot4,prop4,hat5,helmet5,torso5,shoulder5,forearm5,leg5,shin5,foot5,prop5,hat6,helmet6,torso6,shoulder6,forearm6,leg6,shin6,foot6,prop6,hat7,helmet7,torso7,shoulder7,forearm7,leg7,shin7,foot7,prop7,hat8,helmet8,torso8,shoulder8,forearm8,leg8,shin8,foot8,prop8,hat9,helmet9,torso9,shoulder9,forearm9,leg9,shin9,foot9,prop9,hat10,helmet10,torso10,shoulder10,forearm10,leg10,shin10,foot10,prop10,hat11,helmet11,torso11,shoulder11,forearm11,leg11,shin11,foot11,prop11,hat12,helmet12,torso12,shoulder12,forearm12,leg12,shin12,foot12,prop12,hat13,helmet13,torso13,shoulder13,forearm13,leg13,shin13,foot13,prop13,hat14,helmet14,torso14,shoulder14,forearm14,leg14,shin14,foot14,prop14,hat15,helmet15,torso15,shoulder15,forearm15,leg15,shin15,foot15,prop15,hat16,helmet16,torso16,shoulder16,forearm16,leg16,shin16,foot16,prop16,hat17,helmet17,torso17,shoulder17,forearm17,leg17,shin17,foot17,prop17,hat18,helmet18,torso18,shoulder18,forearm18,leg18,shin18,foot18,prop18,hat19,helmet19,torso19,shoulder19,forearm19,leg19,shin19,foot19,prop19,hat20,helmet20,torso20,shoulder20,forearm20,leg20,shin20,foot20,prop20,hat21,helmet21,torso21,shoulder21,forearm21,leg21,shin21,foot21,prop21,hat22,helmet22,torso22,shoulder22,forearm22,leg22,shin22,foot22,prop22,hat23,helmet23,torso23,shoulder23,forearm23,leg23,shin23,foot23,prop23,hat24,helmet24,torso24,shoulder24,forearm24,leg24,shin24,foot24,prop24) VALUES ('unspared throne', MD5('abc123'), '0013_new-user','0009_new-user','0010_new-user','0014_new-user','0015_new-user','0011_new-user','0012_new-user','0016_new-user','0017_new-user','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty')
+Master: user create:
+INSERT INTO users (username,password,hat0,helmet0,torso0,shoulder0,forearm0,leg0,shin0,foot0,prop0,hat1,helmet1,torso1,shoulder1,forearm1,leg1,shin1,foot1,prop1,hat2,helmet2,torso2,shoulder2,forearm2,leg2,shin2,foot2,prop2,hat3,helmet3,torso3,shoulder3,forearm3,leg3,shin3,foot3,prop3,hat4,helmet4,torso4,shoulder4,forearm4,leg4,shin4,foot4,prop4,hat5,helmet5,torso5,shoulder5,forearm5,leg5,shin5,foot5,prop5,hat6,helmet6,torso6,shoulder6,forearm6,leg6,shin6,foot6,prop6,hat7,helmet7,torso7,shoulder7,forearm7,leg7,shin7,foot7,prop7,hat8,helmet8,torso8,shoulder8,forearm8,leg8,shin8,foot8,prop8,hat9,helmet9,torso9,shoulder9,forearm9,leg9,shin9,foot9,prop9,hat10,helmet10,torso10,shoulder10,forearm10,leg10,shin10,foot10,prop10,hat11,helmet11,torso11,shoulder11,forearm11,leg11,shin11,foot11,prop11,hat12,helmet12,torso12,shoulder12,forearm12,leg12,shin12,foot12,prop12,hat13,helmet13,torso13,shoulder13,forearm13,leg13,shin13,foot13,prop13,hat14,helmet14,torso14,shoulder14,forearm14,leg14,shin14,foot14,prop14,hat15,helmet15,torso15,shoulder15,forearm15,leg15,shin15,foot15,prop15,hat16,helmet16,torso16,shoulder16,forearm16,leg16,shin16,foot16,prop16,hat17,helmet17,torso17,shoulder17,forearm17,leg17,shin17,foot17,prop17,hat18,helmet18,torso18,shoulder18,forearm18,leg18,shin18,foot18,prop18,hat19,helmet19,torso19,shoulder19,forearm19,leg19,shin19,foot19,prop19,hat20,helmet20,torso20,shoulder20,forearm20,leg20,shin20,foot20,prop20,hat21,helmet21,torso21,shoulder21,forearm21,leg21,shin21,foot21,prop21,hat22,helmet22,torso22,shoulder22,forearm22,leg22,shin22,foot22,prop22,hat23,helmet23,torso23,shoulder23,forearm23,leg23,shin23,foot23,prop23,hat24,helmet24,torso24,shoulder24,forearm24,leg24,shin24,foot24,prop24) VALUES ('noxious pantry', MD5('abc123'), '0013_new-user','0009_new-user','0010_new-user','0014_new-user','0015_new-user','0011_new-user','0012_new-user','0016_new-user','0017_new-user','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty','9999_empty')
 
 
-user create:
-INSERT INTO stats (username, rank,true_skill,xp,ppl,kdr,wl,time,points,kills,deaths,assists,wins,losses,kill_streak,win_streak,rollover_kstreak,rollover_wstreak,global_rank,kdr_history,ppl_history,win_history) VALUES ('unspared throne', 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+Master: user create:
+INSERT INTO stats (username, rank,true_skill,xp,ppl,kdr,wl,time,points,kills,deaths,assists,wins,losses,kill_streak,win_streak,rollover_kstreak,rollover_wstreak,global_rank,kdr_history,ppl_history,win_history) VALUES ('noxious pantry', 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
 
 
-user create:
-INSERT INTO bot_stats (username, bot_rank,ppl,kdr,wl,points,kills,deaths,assists,wins,losses,kill_streak,win_streak,rollover_kstreak,rollover_wstreak,kdr_history,ppl_history,win_history) VALUES ('unspared throne', 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+Master: user create:
+INSERT INTO bot_stats (username, bot_rank,ppl,kdr,wl,points,kills,deaths,assists,wins,losses,kill_streak,win_streak,rollover_kstreak,rollover_wstreak,kdr_history,ppl_history,win_history) VALUES ('noxious pantry', 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
 
 
-user create:
-INSERT INTO accolades (username, dub_kill,trip_kill,stick_kill,flash_bandicoot,flame_kill,ink_kill,cant_touch_dis,mvp,highest_kd,10kd,ninja,survivor,3ass,5ass,3gibs,6gibs,9gibs,12gibs,3heads,6heads,9heads,12heads,3ks,5ks,10ks,15ks,20ks,25ks,spr_flame,spr_ink,spr_snare,spr_smoke,spr_flashbang,spr_pistol,spr_carbine,spr_rifle,spr_tickler,spr_smg,spr_sticky,spr_lmg,spr_longshot,spr_vulcan,spr_torque,spr_thumper,spr_boltok,spr_shotgun,spr_stomper,spr_boom,spr_frag,spr_rocket,spr_double,spr_wep1,spr_wep2,spr_wep3,spr_wep4) VALUES ('unspared throne', 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+Master: user create:
+INSERT INTO accolades (username, dub_kill,trip_kill,stick_kill,flash_bandicoot,flame_kill,ink_kill,cant_touch_dis,mvp,highest_kd,10kd,ninja,survivor,3ass,5ass,3gibs,6gibs,9gibs,12gibs,3heads,6heads,9heads,12heads,3ks,5ks,10ks,15ks,20ks,25ks,spr_flame,spr_ink,spr_snare,spr_smoke,spr_flashbang,spr_pistol,spr_carbine,spr_rifle,spr_tickler,spr_smg,spr_sticky,spr_lmg,spr_longshot,spr_vulcan,spr_torque,spr_thumper,spr_boltok,spr_shotgun,spr_stomper,spr_boom,spr_frag,spr_rocket,spr_double,spr_wep1,spr_wep2,spr_wep3,spr_wep4) VALUES ('noxious pantry', 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
 
 
-user create:
-INSERT INTO bot_accolades (username, dub_kill,trip_kill,stick_kill,flash_bandicoot,flame_kill,ink_kill,cant_touch_dis,mvp,highest_kd,10kd,ninja,survivor,3ass,5ass,3gibs,6gibs,9gibs,12gibs,3heads,6heads,9heads,12heads,3ks,5ks,10ks,15ks,20ks,25ks,spr_flame,spr_ink,spr_snare,spr_smoke,spr_flashbang,spr_pistol,spr_carbine,spr_rifle,spr_tickler,spr_smg,spr_sticky,spr_lmg,spr_longshot,spr_vulcan,spr_torque,spr_thumper,spr_boltok,spr_shotgun,spr_stomper,spr_boom,spr_frag,spr_rocket,spr_double,spr_wep1,spr_wep2,spr_wep3,spr_wep4) VALUES ('unspared throne', 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+Master: user create:
+INSERT INTO bot_accolades (username, dub_kill,trip_kill,stick_kill,flash_bandicoot,flame_kill,ink_kill,cant_touch_dis,mvp,highest_kd,10kd,ninja,survivor,3ass,5ass,3gibs,6gibs,9gibs,12gibs,3heads,6heads,9heads,12heads,3ks,5ks,10ks,15ks,20ks,25ks,spr_flame,spr_ink,spr_snare,spr_smoke,spr_flashbang,spr_pistol,spr_carbine,spr_rifle,spr_tickler,spr_smg,spr_sticky,spr_lmg,spr_longshot,spr_vulcan,spr_torque,spr_thumper,spr_boltok,spr_shotgun,spr_stomper,spr_boom,spr_frag,spr_rocket,spr_double,spr_wep1,spr_wep2,spr_wep3,spr_wep4) VALUES ('noxious pantry', 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
 
 
-INSERT into events (username,msg, str1, str2, real1) VALUES ('unspared throne','new_user','','',0)
-keyboard control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('unspared throne', 'Move Left', 0, 65, 0)
+Master: INSERT into events (username,msg, str1, str2, real1) VALUES ('noxious pantry','new_user','','',0)
+Master: keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('noxious pantry', 'Move Left', 0, 65, 0)
 
 
-keyboard control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('unspared throne', 'Move Right', 1, 68, 0)
+Master: keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('noxious pantry', 'Move Right', 1, 68, 0)
 
 
-keyboard control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('unspared throne', 'Jump', 2, 87, 0)
+Master: keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('noxious pantry', 'Jump', 2, 87, 0)
 
 
-keyboard control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('unspared throne', 'Crouch', 3, 83, 0)
+Master: keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('noxious pantry', 'Crouch', 3, 83, 0)
 
 
-keyboard control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('unspared throne', 'Evade', 4, 16, 0)
+Master: keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('noxious pantry', 'Evade', 4, 16, 0)
 
 
-keyboard control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('unspared throne', 'Previous Weapon', 5, 81, 0)
+Master: keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('noxious pantry', 'Previous Weapon', 5, 81, 0)
 
 
-keyboard control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('unspared throne', 'Next Weapon', 6, 69, 0)
+Master: keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('noxious pantry', 'Next Weapon', 6, 69, 0)
 
 
-keyboard control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('unspared throne', 'Quickselect Sidearm', 7, 32, 0)
+Master: keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('noxious pantry', 'Quickselect Sidearm', 7, 32, 0)
 
 
-keyboard control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('unspared throne', 'Pick Up Weapon', 8, 32, 0)
+Master: keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('noxious pantry', 'Pick Up Weapon', 8, 32, 0)
 
 
-keyboard control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('unspared throne', 'Reload', 9, 82, 0)
+Master: keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('noxious pantry', 'Reload', 9, 82, 0)
 
 
-keyboard control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('unspared throne', 'Shoot', 10, 1, 0)
+Master: keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('noxious pantry', 'Shoot', 10, 1, 0)
 
 
-keyboard control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('unspared throne', 'Quicktoss Grenade', 11, 2, 0)
+Master: keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('noxious pantry', 'Quicktoss Grenade', 11, 2, 0)
 
 
-keyboard control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('unspared throne', 'Select Primary', 12, 49, 0)
+Master: keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('noxious pantry', 'Select Primary', 12, 49, 0)
 
 
-keyboard control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('unspared throne', 'Select Secondary', 13, 50, 0)
+Master: keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('noxious pantry', 'Select Secondary', 13, 50, 0)
 
 
-keyboard control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('unspared throne', 'Select Sidearm', 14, 51, 0)
+Master: keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('noxious pantry', 'Select Sidearm', 14, 51, 0)
 
 
-keyboard control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('unspared throne', 'Select Grenades', 15, 52, 0)
+Master: keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('noxious pantry', 'Select Grenades', 15, 52, 0)
 
 
-keyboard control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('unspared throne', 'Drop Weapon', 16, 88, 0)
+Master: keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('noxious pantry', 'Drop Weapon', 16, 88, 0)
 
 
-keyboard control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('unspared throne', 'Mouse Sensitivity', 17, 1, 0)
+Master: keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('noxious pantry', 'Mouse Sensitivity', 17, 1, 0)
 
 
-keyboard control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('unspared throne', 'Look Sensitivity', 18, 1, 0)
+Master: keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('noxious pantry', 'Look Sensitivity', 18, 1, 0)
 
 
-keyboard control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('unspared throne', 'Swap Sticks', 19, 0, 0)
+Master: keyboard control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('noxious pantry', 'Swap Sticks', 19, 0, 0)
 
 
-gamepad control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('unspared throne', 'Move Left', 0, 32785, 1)
+Master: gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('noxious pantry', 'Move Left', 0, 32785, 1)
 
 
-gamepad control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('unspared throne', 'Move Right', 1, 32785, 1)
+Master: gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('noxious pantry', 'Move Right', 1, 32785, 1)
 
 
-gamepad control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('unspared throne', 'Jump', 2, 32769, 1)
+Master: gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('noxious pantry', 'Jump', 2, 32769, 1)
 
 
-gamepad control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('unspared throne', 'Crouch', 3, 32770, 1)
+Master: gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('noxious pantry', 'Crouch', 3, 32770, 1)
 
 
-gamepad control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('unspared throne', 'Evade', 4, 32775, 1)
+Master: gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('noxious pantry', 'Evade', 4, 32775, 1)
 
 
-gamepad control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('unspared throne', 'Previous Weapon', 5, 32779, 1)
+Master: gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('noxious pantry', 'Previous Weapon', 5, 32779, 1)
 
 
-gamepad control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('unspared throne', 'Next Weapon', 6, 32780, 1)
+Master: gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('noxious pantry', 'Next Weapon', 6, 32780, 1)
 
 
-gamepad control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('unspared throne', 'Quickselect Sidearm', 7, 32772, 1)
+Master: gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('noxious pantry', 'Quickselect Sidearm', 7, 32772, 1)
 
 
-gamepad control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('unspared throne', 'Pick Up Weapon', 8, 32771, 1)
+Master: gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('noxious pantry', 'Pick Up Weapon', 8, 32771, 1)
 
 
-gamepad control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('unspared throne', 'Reload', 9, 32773, 1)
+Master: gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('noxious pantry', 'Reload', 9, 32773, 1)
 
 
-gamepad control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('unspared throne', 'Shoot', 10, 32776, 1)
+Master: gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('noxious pantry', 'Shoot', 10, 32776, 1)
 
 
-gamepad control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('unspared throne', 'Quicktoss Grenade', 11, 32774, 1)
+Master: gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('noxious pantry', 'Quicktoss Grenade', 11, 32774, 1)
 
 
-gamepad control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('unspared throne', 'Select Primary', 12, 32784, 1)
+Master: gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('noxious pantry', 'Select Primary', 12, 32784, 1)
 
 
-gamepad control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('unspared throne', 'Select Secondary', 13, 32783, 1)
+Master: gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('noxious pantry', 'Select Secondary', 13, 32783, 1)
 
 
-gamepad control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('unspared throne', 'Select Sidearm', 14, 32782, 1)
+Master: gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('noxious pantry', 'Select Sidearm', 14, 32782, 1)
 
 
-gamepad control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('unspared throne', 'Select Grenades', 15, 32781, 1)
+Master: gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('noxious pantry', 'Select Grenades', 15, 32781, 1)
 
 
-gamepad control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('unspared throne', 'Drop Weapon', 16, 32777, 1)
+Master: gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('noxious pantry', 'Drop Weapon', 16, 32777, 1)
 
 
-gamepad control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('unspared throne', 'Mouse Sensitivity', 17, 55, 1)
+Master: gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('noxious pantry', 'Mouse Sensitivity', 17, 55, 1)
 
 
-gamepad control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('unspared throne', 'Look Sensitivity', 18, 95, 1)
+Master: gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('noxious pantry', 'Look Sensitivity', 18, 95, 1)
 
 
-gamepad control defaults:
-INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('unspared throne', 'Swap Sticks', 19, 0, 1)
+Master: gamepad control defaults:
+INSERT INTO controls (username,control_name,control_index,control_code,using_gamepad) VALUES ('noxious pantry', 'Swap Sticks', 19, 0, 1)
 
 
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-SELECT * from users WHERE username='Kyle' AND password=MD5('abc123')
-done with password query
-good password for user: Kyle
-UPDATE stats SET xp = 40088 WHERE username='Kyle'
-UPDATE stats SET rank = 12 WHERE username='Kyle'
-SELECT users.hat0, users.helmet0, users.torso0, users.shoulder0, users.forearm0, users.leg0, users.shin0, users.foot0, users.prop0 FROM users join stats on users.username=stats.username where users.username='Kyle'
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=127, global_rank = 6
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 127,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 6,
-  flag: 0 }
-updating calculated columns
-SELECT users.hat0, users.helmet0, users.torso0, users.shoulder0, users.forearm0, users.leg0, users.shin0, users.foot0, users.prop0 FROM users join stats on users.username=stats.username where users.username='Kyle'
-sending the other half of the accolades as well
-UPDATE stats SET kdr = 0.84 WHERE username='Kyle'
-UPDATE stats SET wl = 0.67 WHERE username='Kyle'
-UPDATE stats SET ppl = 94.339996 WHERE username='Kyle'
-sending the other half of the accolades as well
-SELECT users.hat0, users.helmet0, users.torso0, users.shoulder0, users.forearm0, users.leg0, users.shin0, users.foot0, users.prop0 FROM users join stats on users.username=stats.username where users.username='Kyle'
-SELECT users.hat0, users.helmet0, users.torso0, users.shoulder0, users.forearm0, users.leg0, users.shin0, users.foot0, users.prop0 FROM users join stats on users.username=stats.username where users.username='Titties'
-sending the other half of the accolades as well
-sending the other half of the accolades as well
-sending the other half of the accolades as well
-SELECT users.hat0, users.helmet0, users.torso0, users.shoulder0, users.forearm0, users.leg0, users.shin0, users.foot0, users.prop0 FROM users join stats on users.username=stats.username where users.username='Kyle'
-UPDATE stats SET kdr = 6 WHERE username='Kyle'
-UPDATE stats SET wl = 0.67 WHERE username='Kyle'
-UPDATE stats SET ppl = 5850 WHERE username='Kyle'
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=1496, global_rank = 1
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 1496,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 1,
-  flag: 0 }
-SELECT * from users WHERE username='Bubbles' AND password=MD5('abc123')
-done with password query
-good password for user: Bubbles
-UPDATE stats SET xp = 7428 WHERE username='Bubbles'
-UPDATE stats SET rank = 6 WHERE username='Bubbles'
-SELECT users.hat0, users.helmet0, users.torso0, users.shoulder0, users.forearm0, users.leg0, users.shin0, users.foot0, users.prop0 FROM users join stats on users.username=stats.username where users.username='Bubbles'
-UPDATE stats SET kdr = 23 WHERE username='Bubbles'
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Bubbles's local avatar: true_skill=1052, global_rank = 2
-{ name: 'objUpdate',
-  oid_string: '2:Bubbles',
-  object_index: 2,
-  uniqueId: 'Bubbles',
-  netvar: 'true_skill',
-  val: 1052,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Bubbles',
-  object_index: 2,
-  uniqueId: 'Bubbles',
-  netvar: 'global_rank',
-  val: 2,
-  flag: 0 }
-sending the other half of the accolades as well
-SELECT users.hat0, users.helmet0, users.torso0, users.shoulder0, users.forearm0, users.leg0, users.shin0, users.foot0, users.prop0 FROM users join stats on users.username=stats.username where users.username='Bubbles'
-UPDATE stats SET kdr = 23 WHERE username='Bubbles'
-UPDATE stats SET wl = 0.25 WHERE username='Bubbles'
-UPDATE stats SET ppl = 6655 WHERE username='Bubbles'
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Bubbles's local avatar: true_skill=1052, global_rank = 2
-{ name: 'objUpdate',
-  oid_string: '2:Bubbles',
-  object_index: 2,
-  uniqueId: 'Bubbles',
-  netvar: 'true_skill',
-  val: 1052,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Bubbles',
-  object_index: 2,
-  uniqueId: 'Bubbles',
-  netvar: 'global_rank',
-  val: 2,
-  flag: 0 }
-SELECT users.hat0, users.helmet0, users.torso0, users.shoulder0, users.forearm0, users.leg0, users.shin0, users.foot0, users.prop0 FROM users join stats on users.username=stats.username where users.username='Bubbles'
-sending the other half of the accolades as well
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Bubbles's local avatar: true_skill=1052, global_rank = 2
-{ name: 'objUpdate',
-  oid_string: '2:Bubbles',
-  object_index: 2,
-  uniqueId: 'Bubbles',
-  netvar: 'true_skill',
-  val: 1052,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Bubbles',
-  object_index: 2,
-  uniqueId: 'Bubbles',
-  netvar: 'global_rank',
-  val: 2,
-  flag: 0 }
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Bubbles's local avatar: true_skill=1052, global_rank = 2
-{ name: 'objUpdate',
-  oid_string: '2:Bubbles',
-  object_index: 2,
-  uniqueId: 'Bubbles',
-  netvar: 'true_skill',
-  val: 1052,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Bubbles',
-  object_index: 2,
-  uniqueId: 'Bubbles',
-  netvar: 'global_rank',
-  val: 2,
-  flag: 0 }
-sending the other half of the accolades as well
-SELECT users.hat0, users.helmet0, users.torso0, users.shoulder0, users.forearm0, users.leg0, users.shin0, users.foot0, users.prop0 FROM users join stats on users.username=stats.username where users.username='Bubbles'
-SELECT users.hat0, users.helmet0, users.torso0, users.shoulder0, users.forearm0, users.leg0, users.shin0, users.foot0, users.prop0 FROM users join stats on users.username=stats.username where users.username='Bubbles'
-sending the other half of the accolades as well
-sending the other half of the accolades as well
-sending the other half of the accolades as well
-SELECT users.hat0, users.helmet0, users.torso0, users.shoulder0, users.forearm0, users.leg0, users.shin0, users.foot0, users.prop0 FROM users join stats on users.username=stats.username where users.username='Bubbles'
-UPDATE stats SET kdr = 0 WHERE username='Bubbles'
-UPDATE stats SET wl = 0 WHERE username='Bubbles'
-UPDATE stats SET ppl = 0 WHERE username='Bubbles'
-SELECT * from users WHERE username='Kyle' AND password=MD5('abc123')
-done with password query
-good password for user: Kyle
-UPDATE stats SET xp = 40088 WHERE username='Kyle'
-UPDATE stats SET rank = 12 WHERE username='Kyle'
-SELECT users.hat0, users.helmet0, users.torso0, users.shoulder0, users.forearm0, users.leg0, users.shin0, users.foot0, users.prop0 FROM users join stats on users.username=stats.username where users.username='Kyle'
-UPDATE stats SET kdr = 0.84 WHERE username='Kyle'
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=62, global_rank = 3
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 62,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 3,
-  flag: 0 }
-SELECT users.hat0, users.helmet0, users.torso0, users.shoulder0, users.forearm0, users.leg0, users.shin0, users.foot0, users.prop0 FROM users join stats on users.username=stats.username where users.username='Kyle'
-sending the other half of the accolades as well
-UPDATE stats SET kdr = 0.84 WHERE username='Kyle'
-UPDATE stats SET wl = 0.67 WHERE username='Kyle'
-UPDATE stats SET ppl = 94.339996 WHERE username='Kyle'
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=33, global_rank = 6
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 33,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 6,
-  flag: 0 }
-SELECT users.hat0, users.helmet0, users.torso0, users.shoulder0, users.forearm0, users.leg0, users.shin0, users.foot0, users.prop0 FROM users join stats on users.username=stats.username where users.username='Kyle'
-sending the other half of the accolades as well
-UPDATE stats SET kdr = 0.84 WHERE username='Kyle'
-UPDATE stats SET wl = 0.67 WHERE username='Kyle'
-UPDATE stats SET ppl = 94.339996 WHERE username='Kyle'
-SELECT users.hat0, users.helmet0, users.torso0, users.shoulder0, users.forearm0, users.leg0, users.shin0, users.foot0, users.prop0 FROM users join stats on users.username=stats.username where users.username='Kyle'
-sending the other half of the accolades as well
-UPDATE stats SET kdr = 0.84 WHERE username='Kyle'
-UPDATE stats SET wl = 0.67 WHERE username='Kyle'
-UPDATE stats SET ppl = 94.339996 WHERE username='Kyle'
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=33, global_rank = 6
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 33,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 6,
-  flag: 0 }
-SELECT users.hat0, users.helmet0, users.torso0, users.shoulder0, users.forearm0, users.leg0, users.shin0, users.foot0, users.prop0 FROM users join stats on users.username=stats.username where users.username='Kyle'
-sending the other half of the accolades as well
-sending the other half of the accolades as well
-SELECT users.hat0, users.helmet0, users.torso0, users.shoulder0, users.forearm0, users.leg0, users.shin0, users.foot0, users.prop0 FROM users join stats on users.username=stats.username where users.username='Kyle'
-sending the other half of the accolades as well
-sending the other half of the accolades as well
-SELECT users.hat0, users.helmet0, users.torso0, users.shoulder0, users.forearm0, users.leg0, users.shin0, users.foot0, users.prop0 FROM users join stats on users.username=stats.username where users.username='Kyle'
-UPDATE stats SET kdr = 0.84 WHERE username='Kyle'
-UPDATE stats SET wl = 0.67 WHERE username='Kyle'
-UPDATE stats SET ppl = 94.339996 WHERE username='Kyle'
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=33, global_rank = 6
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 33,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 6,
-  flag: 0 }
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=33, global_rank = 6
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 33,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 6,
-  flag: 0 }
-sending the other half of the accolades as well
-SELECT users.hat0, users.helmet0, users.torso0, users.shoulder0, users.forearm0, users.leg0, users.shin0, users.foot0, users.prop0 FROM users join stats on users.username=stats.username where users.username='Kyle'
-sending the other half of the accolades as well
-SELECT users.hat0, users.helmet0, users.torso0, users.shoulder0, users.forearm0, users.leg0, users.shin0, users.foot0, users.prop0 FROM users join stats on users.username=stats.username where users.username='Kyle'
-SELECT users.hat0, users.helmet0, users.torso0, users.shoulder0, users.forearm0, users.leg0, users.shin0, users.foot0, users.prop0 FROM users join stats on users.username=stats.username where users.username='Kyle'
-sending the other half of the accolades as well
-SELECT * from users WHERE username='Kyle' AND password=MD5('ABC123')
-done with password query
-bad password for user: Kyle
-SELECT * from users WHERE username='Kyle'
-authUname Exists
-SELECT * from users WHERE username='Kyle' AND password=MD5('abc123')
-done with password query
-good password for user: Kyle
-UPDATE stats SET xp = 40088 WHERE username='Kyle'
-UPDATE stats SET rank = 12 WHERE username='Kyle'
-SELECT users.hat0, users.helmet0, users.torso0, users.shoulder0, users.forearm0, users.leg0, users.shin0, users.foot0, users.prop0 FROM users join stats on users.username=stats.username where users.username='Kyle'
-UPDATE stats SET kdr = 0.84 WHERE username='Kyle'
-sending the other half of the accolades as well
-SELECT users.hat0, users.helmet0, users.torso0, users.shoulder0, users.forearm0, users.leg0, users.shin0, users.foot0, users.prop0 FROM users join stats on users.username=stats.username where users.username='Kyle'
-UPDATE stats SET kdr = 0.84 WHERE username='Kyle'
-UPDATE stats SET wl = 0.67 WHERE username='Kyle'
-UPDATE stats SET ppl = 94.339996 WHERE username='Kyle'
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=34, global_rank = 6
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 34,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 6,
-  flag: 0 }
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=34, global_rank = 6
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 34,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 6,
-  flag: 0 }
-SELECT users.hat0, users.helmet0, users.torso0, users.shoulder0, users.forearm0, users.leg0, users.shin0, users.foot0, users.prop0 FROM users join stats on users.username=stats.username where users.username='Total N00bcall'
-sending the other half of the accolades as well
-sending the other half of the accolades as well
-SELECT users.hat0, users.helmet0, users.torso0, users.shoulder0, users.forearm0, users.leg0, users.shin0, users.foot0, users.prop0 FROM users join stats on users.username=stats.username where users.username='Kyle'
-sending the other half of the accolades as well
-UPDATE bot_stats SET kdr = 11 WHERE username='Kyle'
-UPDATE bot_stats SET wl = 4 WHERE username='Kyle'
-UPDATE bot_stats SET ppl = 2425 WHERE username='Kyle'
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=34, global_rank = 6
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 34,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 6,
-  flag: 0 }
-sending the other half of the accolades as well
-UPDATE users SET helmet0='0031_Challenge', helmet1='0221_Challenge', helmet2='0025_Armor Lottery', helmet3='0040_Armor Lottery', helmet4='0200_Armor Lottery', helmet5='0063_Armor Lottery', helmet6='0242_Armor Lottery', helmet7='0020_Armor Lottery', helmet8='0035_Challenge', helmet9='0207_Armor Lottery', helmet10='0098_Armor Lottery', helmet11='0026_Armor Lottery', helmet12='0186_Challenge', helmet13='0034_Armor Lottery', helmet14='0105_Armor Lottery', helmet15='0033_Armor Lottery', helmet16='0056_Challenge', helmet17='0256_Challenge', helmet18='0166_Challenge', helmet19='0045_Armor Lottery', helmet20='0159_Armor Lottery', helmet21='0249_Challenge', helmet22='0027_Armor Lottery', helmet23='0024_Armor Lottery', helmet24='0070_Challenge', torso0='0252_Challenge', torso1='0224_Challenge', torso2='0062_Challenge', torso3='0111_Armor Lottery', torso4='0210_Armor Lottery', torso5='0259_Challenge', torso6='0189_Challenge', torso7='0160_Armor Lottery', torso8='0097_Armor Lottery', torso9='0075_Challenge', torso10='0231_Challenge', torso11='0068_Armor Lottery', torso12='0116_Armor Lottery', torso13='0245_Armor Lottery', torso14='0102_Armor Lottery', torso15='0125_Armor Lottery', torso16='0169_Challenge', torso17='0203_Armor Lottery', torso18='0102_Armor Lottery', torso19='9999_empty', torso20='9999_empty', torso21='9999_empty', torso22='9999_empty', torso23='9999_empty', torso24='9999_empty', leg0='0190_Challenge', leg1='0225_Challenge', leg2='0253_Challenge', leg3='0260_Challenge', leg4='0065_Armor Lottery', leg5='0106_Armor Lottery', leg6='0120_Armor Lottery', leg7='0104_Armor Lottery', leg8='0060_Challenge', leg9='0071_Challenge', leg10='0246_Armor Lottery', leg11='0211_Armor Lottery', leg12='0204_Armor Lottery', leg13='0161_Armor Lottery', leg14='0204_Armor Lottery', leg15='0113_Armor Lottery', leg16='0093_Armor Lottery', leg17='0232_Challenge', leg18='0171_Challenge', leg19='9999_empty', leg20='9999_empty', leg21='9999_empty', leg22='9999_empty', leg23='9999_empty', leg24='9999_empty', shin0='0191_Challenge', shin1='0172_Challenge', shin2='0061_Challenge', shin3='0162_Armor Lottery', shin4='0109_Armor Lottery', shin5='0233_Challenge', shin6='0226_Challenge', shin7='0121_Armor Lottery', shin8='0114_Armor Lottery', shin9='0212_Armor Lottery', shin10='0247_Armor Lottery', shin11='0254_Challenge', shin12='0101_Armor Lottery', shin13='0046_Armor Lottery', shin14='0067_Armor Lottery', shin15='0205_Armor Lottery', shin16='0261_Challenge', shin17='0072_Challenge', shin18='0094_Armor Lottery', shin19='9999_empty', shin20='9999_empty', shin21='9999_empty', shin22='9999_empty', shin23='9999_empty', shin24='9999_empty', hat0='0139_Armor Lottery', hat1='0132_Armor Lottery', hat2='0140_Armor Lottery', hat3='0132_Armor Lottery', hat4='0143_Armor Lottery', hat5='0131_Armor Lottery', hat6='0138_Armor Lottery', hat7='0137_Armor Lottery', hat8='0133_Armor Lottery', hat9='0130_Armor Lottery', hat10='0127_Armor Lottery', hat11='0126_Armor Lottery', hat12='0130_Armor Lottery', hat13='0135_Armor Lottery', hat14='0129_Armor Lottery', hat15='0142_Armor Lottery', hat16='9999_empty', hat17='9999_empty', hat18='9999_empty', hat19='9999_empty', hat20='9999_empty', hat21='9999_empty', hat22='9999_empty', hat23='9999_empty', hat24='9999_empty', shoulder0='0187_Challenge', shoulder1='0096_Armor Lottery', shoulder2='0099_Armor Lottery', shoulder3='0201_Armor Lottery', shoulder4='0167_Challenge', shoulder5='0123_Armor Lottery', shoulder6='0117_Armor Lottery', shoulder7='0208_Armor Lottery', shoulder8='0164_Armor Lottery', shoulder9='0058_Challenge', shoulder10='0257_Challenge', shoulder11='0222_Challenge', shoulder12='0229_Challenge', shoulder13='0047_Armor Lottery', shoulder14='0250_Challenge', shoulder15='0074_Challenge', shoulder16='0108_Armor Lottery', shoulder17='0064_Armor Lottery', shoulder18='0243_Armor Lottery', shoulder19='9999_empty', shoulder20='9999_empty', shoulder21='9999_empty', shoulder22='9999_empty', shoulder23='9999_empty', shoulder24='9999_empty', forearm0='0230_Challenge', forearm1='0223_Challenge', forearm2='0202_Armor Lottery', forearm3='0073_Challenge', forearm4='0165_Armor Lottery', forearm5='0258_Challenge', forearm6='0122_Armor Lottery', forearm7='0107_Armor Lottery', forearm8='0051_Armor Lottery', forearm9='0048_Armor Lottery', forearm10='0052_Armor Lottery', forearm11='0209_Armor Lottery', forearm12='0069_Armor Lottery', forearm13='0049_Armor Lottery', forearm14='0209_Armor Lottery', forearm15='0057_Challenge', forearm16='0115_Armor Lottery', forearm17='0050_Armor Lottery', forearm18='0103_Armor Lottery', forearm19='0168_Challenge', forearm20='0251_Challenge', forearm21='0244_Armor Lottery', forearm22='0092_Armor Lottery', forearm23='0188_Challenge', forearm24='9999_empty', foot0='0192_Challenge', foot1='0227_Challenge', foot2='0054_Armor Lottery', foot3='0234_Challenge', foot4='0255_Challenge', foot5='0262_Challenge', foot6='0163_Armor Lottery', foot7='0124_Armor Lottery', foot8='0100_Armor Lottery', foot9='0248_Armor Lottery', foot10='0053_Armor Lottery', foot11='0206_Armor Lottery', foot12='0170_Challenge', foot13='0059_Challenge', foot14='0076_Challenge', foot15='0118_Armor Lottery', foot16='0066_Armor Lottery', foot17='0095_Armor Lottery', foot18='0110_Armor Lottery', foot19='0118_Armor Lottery', foot20='0213_Armor Lottery', foot21='9999_empty', foot22='9999_empty', foot23='9999_empty', foot24='9999_empty', prop0='0285_Challenge', prop1='0274_Challenge', prop2='9999_empty', prop3='9999_empty', prop4='9999_empty', prop5='9999_empty', prop6='9999_empty', prop7='9999_empty', prop8='9999_empty', prop9='9999_empty', prop10='9999_empty', prop11='9999_empty', prop12='9999_empty', prop13='9999_empty', prop14='9999_empty', prop15='9999_empty', prop16='9999_empty', prop17='9999_empty', prop18='9999_empty', prop19='9999_empty', prop20='9999_empty', prop21='9999_empty', prop22='9999_empty', prop23='9999_empty', prop24='9999_empty' WHERE username='Kyle';
-sending the other half of the accolades as well
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=34, global_rank = 6
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 34,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 6,
-  flag: 0 }
-sending the other half of the accolades as well
-SELECT users.hat0, users.helmet0, users.torso0, users.shoulder0, users.forearm0, users.leg0, users.shin0, users.foot0, users.prop0 FROM users join stats on users.username=stats.username where users.username='Kyle'
-UPDATE stats SET kdr = 1.21 WHERE username='Kyle'
-UPDATE stats SET wl = 1.94 WHERE username='Kyle'
-UPDATE stats SET ppl = 136.389999 WHERE username='Kyle'
-SELECT users.hat0, users.helmet0, users.torso0, users.shoulder0, users.forearm0, users.leg0, users.shin0, users.foot0, users.prop0 FROM users join stats on users.username=stats.username where users.username='Kyle'
-sending the other half of the accolades as well
-sending the other half of the accolades as well
-SELECT users.hat0, users.helmet0, users.torso0, users.shoulder0, users.forearm0, users.leg0, users.shin0, users.foot0, users.prop0 FROM users join stats on users.username=stats.username where users.username='Kyle'
-sending the other half of the accolades as well
-sending the other half of the accolades as well
-SELECT users.hat0, users.helmet0, users.torso0, users.shoulder0, users.forearm0, users.leg0, users.shin0, users.foot0, users.prop0 FROM users join stats on users.username=stats.username where users.username='Kyle'
-UPDATE stats SET kdr = 0.84 WHERE username='Kyle'
-UPDATE stats SET wl = 0.67 WHERE username='Kyle'
-UPDATE stats SET ppl = 94.339996 WHERE username='Kyle'
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-SELECT * from users WHERE username='Kyle' AND password=MD5('abc123')
-done with password query
-good password for user: Kyle
-UPDATE stats SET xp = 40088 WHERE username='Kyle'
-UPDATE stats SET rank = 12 WHERE username='Kyle'
-UPDATE settings set val_str='Yes', val_real='-69' WHERE username='Kyle' AND setting_name='Full-Screen'
-SELECT users.hat0, users.helmet0, users.torso0, users.shoulder0, users.forearm0, users.leg0, users.shin0, users.foot0, users.prop0 FROM users join stats on users.username=stats.username where users.username='Kyle'
-UPDATE stats SET kdr = 0.84 WHERE username='Kyle'
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=53.25, global_rank = 3
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 53.25,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 3,
-  flag: 0 }
-sending the other half of the accolades as well
-SELECT users.hat0, users.helmet0, users.torso0, users.shoulder0, users.forearm0, users.leg0, users.shin0, users.foot0, users.prop0 FROM users join stats on users.username=stats.username where users.username='Kyle'
-UPDATE stats SET kdr = 0.84 WHERE username='Kyle'
-UPDATE stats SET wl = 0.67 WHERE username='Kyle'
-UPDATE stats SET ppl = 94.339996 WHERE username='Kyle'
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=53.25, global_rank = 3
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 53.25,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 3,
-  flag: 0 }
-sending the other half of the accolades as well
-SELECT users.hat0, users.helmet0, users.torso0, users.shoulder0, users.forearm0, users.leg0, users.shin0, users.foot0, users.prop0 FROM users join stats on users.username=stats.username where users.username='Kyle'
-sending the other half of the accolades as well
-SELECT users.hat0, users.helmet0, users.torso0, users.shoulder0, users.forearm0, users.leg0, users.shin0, users.foot0, users.prop0 FROM users join stats on users.username=stats.username where users.username='Kyle'
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=53.25, global_rank = 3
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 53.25,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 3,
-  flag: 0 }
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=53.25, global_rank = 3
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 53.25,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 3,
-  flag: 0 }
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=53.25, global_rank = 3
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 53.25,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 3,
-  flag: 0 }
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=53.25, global_rank = 3
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 53.25,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 3,
-  flag: 0 }
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=53.25, global_rank = 3
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 53.25,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 3,
-  flag: 0 }
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=53.25, global_rank = 3
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 53.25,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 3,
-  flag: 0 }
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=53.25, global_rank = 3
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 53.25,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 3,
-  flag: 0 }
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=53.25, global_rank = 3
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 53.25,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 3,
-  flag: 0 }
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=51, global_rank = 5
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 51,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 5,
-  flag: 0 }
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=34, global_rank = 6
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 34,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 6,
-  flag: 0 }
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=34, global_rank = 6
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 34,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 6,
-  flag: 0 }
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=34, global_rank = 6
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 34,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 6,
-  flag: 0 }
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=34, global_rank = 6
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 34,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 6,
-  flag: 0 }
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=34, global_rank = 6
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 34,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 6,
-  flag: 0 }
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=34, global_rank = 6
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 34,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 6,
-  flag: 0 }
-
+Master: 
 Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=34, global_rank = 6
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 34,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 6,
-  flag: 0 }
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=34, global_rank = 6
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 34,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 6,
-  flag: 0 }
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=34, global_rank = 6
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 34,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 6,
-  flag: 0 }
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=34, global_rank = 6
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 34,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 6,
-  flag: 0 }
-
-Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=34, global_rank = 6
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 34,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 6,
-  flag: 0 }
-
+Master: complete query: SELECT stats.rank, stats.time, stats.true_skill, stats.xp, stats.global_rank, bot_stats.points, bot_stats.wins, bot_stats.losses, bot_stats.kills, bot_stats.deaths, bot_stats.assists, bot_stats.kill_streak, bot_stats.win_streak, bot_stats.rollover_kstreak, bot_stats.rollover_wstreak, users.hat0, users.helmet0, users.torso0, users.shoulder0, users.forearm0, users.leg0, users.shin0, users.foot0, users.prop0, users.hat1, users.helmet1, users.torso1, users.shoulder1, users.forearm1, users.leg1, users.shin1, users.foot1, users.prop1, users.hat2, users.helmet2, users.torso2, users.shoulder2, users.forearm2, users.leg2, users.shin2, users.foot2, users.prop2, users.hat3, users.helmet3, users.torso3, users.shoulder3, users.forearm3, users.leg3, users.shin3, users.foot3, users.prop3, users.hat4, users.helmet4, users.torso4, users.shoulder4, users.forearm4, users.leg4, users.shin4, users.foot4, users.prop4, users.hat5, users.helmet5, users.torso5, users.shoulder5, users.forearm5, users.leg5, users.shin5, users.foot5, users.prop5, users.hat6, users.helmet6, users.torso6, users.shoulder6, users.forearm6, users.leg6, users.shin6, users.foot6, users.prop6, users.hat7, users.helmet7, users.torso7, users.shoulder7, users.forearm7, users.leg7, users.shin7, users.foot7, users.prop7, users.hat8, users.helmet8, users.torso8, users.shoulder8, users.forearm8, users.leg8, users.shin8, users.foot8, users.prop8, users.hat9, users.helmet9, users.torso9, users.shoulder9, users.forearm9, users.leg9, users.shin9, users.foot9, users.prop9, users.hat10, users.helmet10, users.torso10, users.shoulder10, users.forearm10, users.leg10, users.shin10, users.foot10, users.prop10, users.hat11, users.helmet11, users.torso11, users.shoulder11, users.forearm11, users.leg11, users.shin11, users.foot11, users.prop11, users.hat12, users.helmet12, users.torso12, users.shoulder12, users.forearm12, users.leg12, users.shin12, users.foot12, users.prop12, users.hat13, users.helmet13, users.torso13, users.shoulder13, users.forearm13, users.leg13, users.shin13, users.foot13, users.prop13, users.hat14, users.helmet14, users.torso14, users.shoulder14, users.forearm14, users.leg14, users.shin14, users.foot14, users.prop14, users.hat15, users.helmet15, users.torso15, users.shoulder15, users.forearm15, users.leg15, users.shin15, users.foot15, users.prop15, users.hat16, users.helmet16, users.torso16, users.shoulder16, users.forearm16, users.leg16, users.shin16, users.foot16, users.prop16, users.hat17, users.helmet17, users.torso17, users.shoulder17, users.forearm17, users.leg17, users.shin17, users.foot17, users.prop17, users.hat18, users.helmet18, users.torso18, users.shoulder18, users.forearm18, users.leg18, users.shin18, users.foot18, users.prop18, users.hat19, users.helmet19, users.torso19, users.shoulder19, users.forearm19, users.leg19, users.shin19, users.foot19, users.prop19, users.hat20, users.helmet20, users.torso20, users.shoulder20, users.forearm20, users.leg20, users.shin20, users.foot20, users.prop20, users.hat21, users.helmet21, users.torso21, users.shoulder21, users.forearm21, users.leg21, users.shin21, users.foot21, users.prop21, users.hat22, users.helmet22, users.torso22, users.shoulder22, users.forearm22, users.leg22, users.shin22, users.foot22, users.prop22, users.hat23, users.helmet23, users.torso23, users.shoulder23, users.forearm23, users.leg23, users.shin23, users.foot23, users.prop23, users.hat24, users.helmet24, users.torso24, users.shoulder24, users.forearm24, users.leg24, users.shin24, users.foot24, users.prop24 FROM users join stats on users.username=stats.username join bot_stats on users.username=bot_stats.username where users.username='Kyle'
+Master: complete query: SELECT stats.rank, stats.time, stats.true_skill, stats.xp, stats.global_rank, bot_stats.points, bot_stats.wins, bot_stats.losses, bot_stats.kills, bot_stats.deaths, bot_stats.assists, bot_stats.kill_streak, bot_stats.win_streak, bot_stats.rollover_kstreak, bot_stats.rollover_wstreak, users.hat0, users.helmet0, users.torso0, users.shoulder0, users.forearm0, users.leg0, users.shin0, users.foot0, users.prop0, users.hat1, users.helmet1, users.torso1, users.shoulder1, users.forearm1, users.leg1, users.shin1, users.foot1, users.prop1, users.hat2, users.helmet2, users.torso2, users.shoulder2, users.forearm2, users.leg2, users.shin2, users.foot2, users.prop2, users.hat3, users.helmet3, users.torso3, users.shoulder3, users.forearm3, users.leg3, users.shin3, users.foot3, users.prop3, users.hat4, users.helmet4, users.torso4, users.shoulder4, users.forearm4, users.leg4, users.shin4, users.foot4, users.prop4, users.hat5, users.helmet5, users.torso5, users.shoulder5, users.forearm5, users.leg5, users.shin5, users.foot5, users.prop5, users.hat6, users.helmet6, users.torso6, users.shoulder6, users.forearm6, users.leg6, users.shin6, users.foot6, users.prop6, users.hat7, users.helmet7, users.torso7, users.shoulder7, users.forearm7, users.leg7, users.shin7, users.foot7, users.prop7, users.hat8, users.helmet8, users.torso8, users.shoulder8, users.forearm8, users.leg8, users.shin8, users.foot8, users.prop8, users.hat9, users.helmet9, users.torso9, users.shoulder9, users.forearm9, users.leg9, users.shin9, users.foot9, users.prop9, users.hat10, users.helmet10, users.torso10, users.shoulder10, users.forearm10, users.leg10, users.shin10, users.foot10, users.prop10, users.hat11, users.helmet11, users.torso11, users.shoulder11, users.forearm11, users.leg11, users.shin11, users.foot11, users.prop11, users.hat12, users.helmet12, users.torso12, users.shoulder12, users.forearm12, users.leg12, users.shin12, users.foot12, users.prop12, users.hat13, users.helmet13, users.torso13, users.shoulder13, users.forearm13, users.leg13, users.shin13, users.foot13, users.prop13, users.hat14, users.helmet14, users.torso14, users.shoulder14, users.forearm14, users.leg14, users.shin14, users.foot14, users.prop14, users.hat15, users.helmet15, users.torso15, users.shoulder15, users.forearm15, users.leg15, users.shin15, users.foot15, users.prop15, users.hat16, users.helmet16, users.torso16, users.shoulder16, users.forearm16, users.leg16, users.shin16, users.foot16, users.prop16, users.hat17, users.helmet17, users.torso17, users.shoulder17, users.forearm17, users.leg17, users.shin17, users.foot17, users.prop17, users.hat18, users.helmet18, users.torso18, users.shoulder18, users.forearm18, users.leg18, users.shin18, users.foot18, users.prop18, users.hat19, users.helmet19, users.torso19, users.shoulder19, users.forearm19, users.leg19, users.shin19, users.foot19, users.prop19, users.hat20, users.helmet20, users.torso20, users.shoulder20, users.forearm20, users.leg20, users.shin20, users.foot20, users.prop20, users.hat21, users.helmet21, users.torso21, users.shoulder21, users.forearm21, users.leg21, users.shin21, users.foot21, users.prop21, users.hat22, users.helmet22, users.torso22, users.shoulder22, users.forearm22, users.leg22, users.shin22, users.foot22, users.prop22, users.hat23, users.helmet23, users.torso23, users.shoulder23, users.forearm23, users.leg23, users.shin23, users.foot23, users.prop23, users.hat24, users.helmet24, users.torso24, users.shoulder24, users.forearm24, users.leg24, users.shin24, users.foot24, users.prop24 FROM users join stats on users.username=stats.username join bot_stats on users.username=bot_stats.username where users.username='Kyle'
+Master: 
 Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=34, global_rank = 6
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 34,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 6,
-  flag: 0 }
-
+Master: 
 Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=34, global_rank = 6
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 34,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 6,
-  flag: 0 }
-
+Master: 
 Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=34, global_rank = 6
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 34,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 6,
-  flag: 0 }
-
+Master: 
 Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=34, global_rank = 6
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 34,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 6,
-  flag: 0 }
-
+Master: 
 Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=34, global_rank = 6
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 34,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 6,
-  flag: 0 }
-
+Master: 
 Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=34, global_rank = 6
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 34,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 6,
-  flag: 0 }
-
+Master: 
 Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=34, global_rank = 6
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 34,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 6,
-  flag: 0 }
-
+Master: 
 Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=34, global_rank = 6
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 34,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 6,
-  flag: 0 }
-
+Master: 
 Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=34, global_rank = 6
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 34,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 6,
-  flag: 0 }
-
+Master: 
 Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=34, global_rank = 6
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 34,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 6,
-  flag: 0 }
-
+Master: 
 Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=34, global_rank = 6
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 34,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 6,
-  flag: 0 }
-
+Master: 
 Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=34, global_rank = 6
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 34,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 6,
-  flag: 0 }
-
+Master: 
 Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=34, global_rank = 6
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 34,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 6,
-  flag: 0 }
-
+Master: 
 Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=34, global_rank = 6
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 34,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 6,
-  flag: 0 }
-
+Master: 
 Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=34, global_rank = 6
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 34,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 6,
-  flag: 0 }
-
+Master: 
 Recalculating TRUE SKILL + GLOBAL RANKINGS
-updating Kyle's local avatar: true_skill=52, global_rank = 7
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'true_skill',
-  val: 52,
-  flag: 0 }
-{ name: 'objUpdate',
-  oid_string: '2:Kyle',
-  object_index: 2,
-  uniqueId: 'Kyle',
-  netvar: 'global_rank',
-  val: 7,
-  flag: 0 }

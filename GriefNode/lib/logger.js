@@ -12,6 +12,7 @@ var gravatarObjIndex = global.gravatarObjIndex;
 
 var fs = require('fs');
 var util = require('util');
+var crypto = require('crypto');
 
 //log flags
 var SQL = "sql"
@@ -20,6 +21,8 @@ var STD = "std"
 var CRITICAL = "err"
 var SOCKETS = "sock"
 var VERBOSE = "verbose"
+var CONSOLE = "console"
+var WARN = "warn"
 
 var log_std;// = fs.createWriteStream(__dirname + '/../log/std.log', {flags : 'w'});
 var log_cupid;// = fs.createWriteStream(__dirname + '/../log/cupid.log', {flags : 'w'});
@@ -29,6 +32,8 @@ var log_sql;// = fs.createWriteStream(__dirname + '/../log/sql.log', {flags : 'w
 var log_verbose;// = fs.createWriteStream(__dirname + '/../log/verbose.log', {flags : 'w'});
 var log_stdout;// = process.stdout;
 var initialized = false;
+
+var debug = false;
 
 exports.init = function() {
 	if (!global.cluster.isMaster)
@@ -48,8 +53,16 @@ exports.init = function() {
 
 
 exports.log = function(flag,text) { 
+
+	if (debug && flag != CRITICAL)
+		flag = CONSOLE;
+
 	if (initialized)
 	{
+		if (!text) {
+			text = flag;
+			flag = CONSOLE;
+		}
 		if (global.MULTITHREAD) {
 			if (global.cluster.isWorker) {
 				text = "Worker "+cluster.worker.id+": "+text;
@@ -57,7 +70,7 @@ exports.log = function(flag,text) {
 				text = "Master: "+text;
 			}
 		}
-		
+
 		if (flag == SQL)
 			log_sql.write(util.format(text) + '\n');
 		else if (flag == CUPID)
@@ -66,6 +79,13 @@ exports.log = function(flag,text) {
 			log_critical.write(util.format(text) + '\n');
 			console.log("ERROR: "+text);
 			console.trace();
+		}
+		else if (flag == WARN) {
+			log_critical.write(util.format(text) + '\n');
+			console.log("WARNING: "+text);
+		}
+		else if (flag == CONSOLE) {
+			console.log(text);
 		}
 		else if (flag == STD)
 			log_std.write(util.format(text) + '\n');
@@ -171,19 +191,3 @@ var sockets_cleaner = setInterval(function() {
 		log_sockets = fs.createWriteStream(__dirname + '/../log/sockets.log'+wid, {flags : 'w'});
 	}
 }, 104000);
-
-
-
-
-var syncVersionHash = function() {
-	fs.readFile('C:\\inetpub\\wwwroot\\griefer\\release\\config.txt','utf8', function(err, data) {
-		if (err) {
-			return console.log(err);
-		}
-		else {
-			exports.log(STD,"Current Griefer Version: "+data);
-			global.version_hash = data;
-		}
-	});
-}
-exports.syncVersionHash = syncVersionHash;
