@@ -1,7 +1,0 @@
-Worker 2: CONNECTED to griefer database, as id: 81
-Worker 2: UPDATE settings set val_str='No', val_real='-69' WHERE username='John Doe' AND setting_name='Full-Screen'
-Worker 2: SELECT users.hat0, users.helmet0, users.torso0, users.shoulder0, users.forearm0, users.leg0, users.shin0, users.foot0, users.prop0 FROM users join stats on users.username=stats.username where users.username='Kyle'
-Worker 2: sending the other half of the accolades as well
-Worker 2: UPDATE stats SET wl = 1.4 WHERE username='John Doe'
-Worker 2: UPDATE stats SET ppl = 175.940002 WHERE username='John Doe'
-Worker 2: updating calculated columns

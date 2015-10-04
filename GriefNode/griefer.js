@@ -99,7 +99,7 @@ if (cluster.isMaster)
           }
 
           if (m.groupNameFrom == "" && m.groupNameTo == "main_menu") {
-            console.log("NEW FSOCKET: "+m.fsocket.name);
+            log.log("created "+m.fsocket.name+"'s fsocket");
             //initialize to main menu
             var main_menu = cupid.ds_find_room("main_menu");
             if (main_menu) {
@@ -177,7 +177,7 @@ if (cluster.isMaster)
       if (err) {
         console.log(err);
       } else {
-        console.log('MASTER is listening on: *'+global.gamePort);
+        console.log('MASTER listening on: *'+global.gamePort);
       }
     });
   }
@@ -237,7 +237,7 @@ if (cluster.isWorker)
     if (err) {
       console.log(err);
     } else {
-      console.log('worker '+cluster.worker.id+' is listening on: *'+global.gamePort);
+      console.log('worker '+cluster.worker.id+' listening on: *'+global.gamePort);
     }
   });
 
@@ -283,7 +283,7 @@ if (cluster.isWorker)
         if (socket.myPlayer.pName == global.anon_user)
             continue;
 
-        log.log(socket.myPlayer.pName+" rereading_tskill");
+        log.log(CUPID,socket.myPlayer.pName+" rereading_tskill");
         dbman.reread_tskill(socket);
       }
     }
@@ -311,11 +311,8 @@ if (cluster.isWorker || !MULTITHREAD)
   io.on('connection', function(socket){
 
     //initialize a web-socket Connection to the client
-    if (cluster.isWorker) {
-      console.log("WORKER "+cluster.worker.id+": Player Connected");
-    }
+    log.log("New Connection");
 
-    log.log(STD,'NEW CLIENT');
     socket.myPlayer = new cupid.player();
     global.clients.push(socket);
 

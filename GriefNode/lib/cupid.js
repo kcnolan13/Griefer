@@ -460,7 +460,7 @@ var ds_destroy_fsocket = function(pName, room) {
 			fcount++;
 			if (r.fsockets[j].myPlayer.pName == pName) {
 				r.fsockets.splice(j,1)[0];
-				console.log("destroyed "+pName+"'s fsocket in room "+r.groupName);
+				log.log("destroyed "+pName+"'s fsocket in room "+r.groupName);
 				return true;
 			}
 		}
