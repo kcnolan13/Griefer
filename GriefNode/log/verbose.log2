@@ -215,3 +215,8 @@ Worker 2:  synced version hash: f1053ae3954e55e9d72911e1fcd45efe
 Worker 2: reread_tskill : 2
 Worker 2: sync_version_hash : 2
 Worker 2:  synced version hash: f1053ae3954e55e9d72911e1fcd45efe
+Worker 2: sync_version_hash : 2
+Worker 2:  synced version hash: f1053ae3954e55e9d72911e1fcd45efe
+Worker 2: reread_tskill : 2
+Worker 2: sync_version_hash : 2
+Worker 2:  synced version hash: f1053ae3954e55e9d72911e1fcd45efe
