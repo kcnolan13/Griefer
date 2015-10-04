@@ -90,7 +90,7 @@ main_hue = 238
 
 chue = main_hue
 csat = 0
-cval = 10
+cval = 0
 chue_mult = 1
 csat_mult = 0.75
 cval_mult = 4
@@ -203,7 +203,7 @@ if behave_match
     blah.birth_delay = bdelay
     blah.hue = 20
     blah.sat = 0
-    blah.val = 30
+    blah.val = 0
     blah.color = web_hsv(chue,csat,cval)
     blah.active_color = web_hsv(chue*chue_mult,csat*csat_mult,cval*cval_mult)
     blah.text_halign = fa_left
@@ -220,7 +220,7 @@ if behave_match
     blah.birth_delay = bdelay
     blah.hue = 20
     blah.sat = 0
-    blah.val = 30
+    blah.val = 0
     blah.color = web_hsv(chue,csat,cval)
     blah.active_color = web_hsv(chue*chue_mult,csat*csat_mult,cval*cval_mult)
     blah.text_halign = fa_left
@@ -237,7 +237,7 @@ if behave_match
     blah.birth_delay = bdelay
     blah.hue = 20
     blah.sat = 0
-    blah.val = 30
+    blah.val = 0
     blah.color = web_hsv(chue,csat,cval)
     blah.active_color = web_hsv(chue*chue_mult,csat*csat_mult,cval*cval_mult)
     blah.text_halign = fa_left
@@ -256,7 +256,7 @@ else
     blah.birth_delay = bdelay
     blah.hue = 20
     blah.sat = 0
-    blah.val = 30
+    blah.val = 0
     blah.color = web_hsv(chue,csat,cval)
     blah.active_color = web_hsv(chue*chue_mult,csat*csat_mult,cval*cval_mult)
     blah.text_halign = fa_left
@@ -273,7 +273,7 @@ else
     blah.birth_delay = bdelay
     blah.hue = 20
     blah.sat = 0
-    blah.val = 30
+    blah.val = 0
     blah.color = web_hsv(chue,csat,cval)
     blah.active_color = web_hsv(chue*chue_mult,csat*csat_mult,cval*cval_mult)
     blah.text_halign = fa_left
@@ -290,7 +290,7 @@ else
     blah.birth_delay = bdelay
     blah.hue = 20
     blah.sat = 0
-    blah.val = 30
+    blah.val = 0
     blah.color = web_hsv(chue,csat,cval)
     blah.active_color = web_hsv(chue*chue_mult,csat*csat_mult,cval*cval_mult)
     blah.text_halign = fa_left

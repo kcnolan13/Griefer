@@ -25,11 +25,12 @@ using namespace std;
 
 //----- GLOBALS -----//
 
-void closeConnection()
+GMEXPORT const double closeConnection()
 {
 	console("::: CLOSING DOWN SOCKET");
 	h.clear_con_listeners();
 	h.close();
+	return 0;
 }
 
 //DLL INIT

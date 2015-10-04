@@ -1,6 +1,6 @@
 ///download_updates()
-printf("::: downloading updates to working_directory: "+string(downloadURL))
-printf("::: "+string(getExecPath()))
+printf("::: downloading updates to: "+string(downloadURL))
+//printf("::: "+string(getExecPath()))
 
 /*aID = popup_okay(WVIEW/2,HVIEW/2,"New Version Available","New features and fixes are waiting for you.",download_new_game)
 aID.text_okay = "Download"

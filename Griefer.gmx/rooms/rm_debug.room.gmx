@@ -27,8 +27,8 @@
     <deleteUnderlyingObj>-1</deleteUnderlyingObj>
     <deleteUnderlyingTiles>0</deleteUnderlyingTiles>
     <page>0</page>
-    <xoffset>-76</xoffset>
-    <yoffset>103</yoffset>
+    <xoffset>1639</xoffset>
+    <yoffset>901</yoffset>
   </makerSettings>
   <backgrounds>
     <background visible="0" foreground="0" name="" x="0" y="0" htiled="-1" vtiled="-1" hspeed="0" vspeed="0" stretch="0"/>
@@ -312,7 +312,7 @@
     <instance objName="wedge_right_mirrored" x="704" y="640" name="inst_7AA0AD25" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="wedge_left" x="192" y="1408" name="inst_8A73C804" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="wedge_left" x="768" y="1088" name="inst_EA2175F8" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="weapon_drop_frag" x="1596" y="852" name="inst_D7E21CDF" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="weapon_drop_frag" x="1598" y="862" name="inst_D7E21CDF" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="wedge_right2" x="448" y="192" name="inst_B93C7AC3" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="wedge_left2" x="1600" y="896" name="inst_5A564832" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="wedge_left" x="320" y="512" name="inst_2978EF7D" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>

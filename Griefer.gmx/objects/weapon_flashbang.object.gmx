@@ -72,7 +72,7 @@ varWrite("is_secondary",false)
 //specs
 varWrite("clip_cap",1)
 varWrite("clip",varRead("clip_cap"))
-varWrite("starting_ammo",1*varRead("clip_cap"))
+varWrite("starting_ammo",0*varRead("clip_cap"))
 varWrite("max_ammo",5*varRead("clip_cap"))
 varWrite("ammo",varRead("starting_ammo"))
 varWrite("reload_time",2)

@@ -43,12 +43,11 @@ setGppDebug(0)
 display_set_gui_size(WVIEW,HVIEW)
 
 //config file
-ini_open(grieferURL+"/Config/Config.ini")
+ini_open(grieferURL+"/Config/GameState.ini")
 ini_write_real("Main","GameRunning",true)
-ini_write_string("Main","Version",VERSION)
-ini_close()
+//ini_write_string("Main","Version",VERSION)
 
-if moveFile(grieferURL+"/Config/Config.ini",launcherURL+"/Config/Config.ini")
+if moveFile(grieferURL+"/Config/GameState.ini",launcherURL+"/Config/GameState.ini")
     printf("::: config transfer successful")
 else
     printf(":::: CONFIG TRANSFER FAILED")
@@ -141,7 +140,7 @@ global.rank_names = 0
 lotto_delay = 40
 lotto_counter = 0
 
-tdm_kill_limit = 10//20
+tdm_kill_limit = 20//20
 ffa_kill_limit = 15
 versus_kill_limit = 10
 kill_limit = 10
@@ -496,6 +495,16 @@ num_players = 1
 team = -1
 bot_match = false
 win_countdown = 0
+
+var restart_counter = ini_read_real("Main","RestartsRemaining",0)
+if restart_counter &gt; 0
+{
+    ini_write_real("Main","RestartsRemaining",restart_counter-1)
+    ini_close()
+    game_restart()
+}
+
+ini_close()
 </string>
           </argument>
         </arguments>
@@ -581,6 +590,30 @@ instance_create(x,y,xp_bar)
             <string>///free net vars
 if ds_exists(netvars,ds_type_map)
     ds_map_destroy(netvars)
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="10">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///game restart triggered by griefer_restart()
+game_restart()
 </string>
           </argument>
         </arguments>
@@ -4510,6 +4543,30 @@ if show_cout
     draw_text_ext(20,10,cout_str,14,room_width/2-35)
     draw_set_alpha(1)
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="123">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///restart game
+game_restart()
 </string>
           </argument>
         </arguments>

@@ -549,17 +549,20 @@ if is_bot(id)
     {
         //new_chat_feed_message(varRead("pName"),"","Are you sucking my cock or is it just me?")
     }
-    
+}
+
+if is_bot(id) or ( id = myAvatar() and net_manager.bot_override )
+{
     if not in_match() and not varRead("ready") and not shuffling
-    {
-        varWrite("ready",true)
-        if instance_exists(bound_bn_ready)
         {
-            bound_bn_ready.ready = true
-        } else {
-            printf("ERROR: bound_bn_ready doesn't exist (avatar step event)")
+            varWrite("ready",true)
+            if instance_exists(bound_bn_ready)
+            {
+                bound_bn_ready.ready = true
+            } else {
+                printf("ERROR: bound_bn_ready doesn't exist (avatar step event)")
+            }
         }
-    }
 }
 
 if in_match()

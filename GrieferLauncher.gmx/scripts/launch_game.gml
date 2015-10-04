@@ -7,4 +7,6 @@ with modal_dialogue
         is_launching = true
     }
 }
+
+printf("::: launching game: "+downloadURL)
 launchGame(downloadURL)

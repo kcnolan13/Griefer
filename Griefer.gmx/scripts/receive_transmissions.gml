@@ -182,6 +182,11 @@ while (genMessagesWaiting() and wait_counter < 500000)
             }
         break   
         
+        case "special_ping":
+            popup_alert(WVIEW/2,HVIEW/2,"Special Ping",string(genVal))
+            
+        break
+        
         case "done_loading":
             if global.load_count > 0 global.load_count --
             else global.load_count = 0
@@ -452,6 +457,22 @@ while (objCreatesWaiting() and wait_counter < 50)
     printf("::: objCreate: "+string(unique_id)+": "+string(object_get_name(obj_index)))
     my_x = readObjCreateMyX()
     my_y = readObjCreateMyY()
+    
+    if obj_index = avatar
+    {
+        do_create = true
+        create_unique_id = unique_id
+        with avatar
+        {
+            if varRead("uniqueId") = other.create_unique_id
+                other.do_create = false
+        }
+        if not do_create
+        {
+            printf(":::WARNING: bailing out of objCreate message --> avatar "+string(unique_id)+" already exists")
+            continue
+        }
+    }
     
     //ID = instance_create(room_width/2,room_height/2,input_field)
     //if DEBUG

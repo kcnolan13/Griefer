@@ -32,10 +32,11 @@ alpha_max = 0.75
 halign = fa_center
 valign = fa_center
 
-label = "Log Out"
-txt_logout = "Log Out"
+label = "Quit Griefer"
+txt_logout = label
 txt_leave_match = "Leave"
-text = "Log Out"
+
+text = txt_logout
 
 alarm[0] = 1
 
@@ -165,7 +166,8 @@ if label = txt_logout or room = rm_menu
             sendMessageReal("syncPlayersConnected",FL_NORMAL)
         }
         logOut()
-        griefer_restart()
+        game_end()
+        //griefer_restart()
     } else {
         if not net_manager.saving_armor
             net_manager.saving_armor = net_manager.saving_armor_max

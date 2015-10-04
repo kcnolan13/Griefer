@@ -2,6 +2,7 @@
 <assets>
   <Configs name="configs">
     <Config>Configs\Default</Config>
+    <Config>Configs\Release</Config>
   </Configs>
   <NewExtensions>
     <extension index="0">extensions\griefer_client</extension>
@@ -2020,14 +2021,13 @@
       <room>rooms\map_placeholder2</room>
     </rooms>
   </rooms>
-  <constants number="170">
+  <constants number="169">
     <constant name="GAIN_HIGHLIGHT">1</constant>
     <constant name="GAIN_KEYSTROKE">0.8</constant>
     <constant name="GAIN_PAN">0.875</constant>
     <constant name="GAIN_AUDIO">0.25</constant>
     <constant name="NUM_TOP_MEDALS">3</constant>
     <constant name="FL_TOP_MEDALS">28</constant>
-    <constant name="VERSION">"V130"</constant>
     <constant name="GMHSV">1.41176470588</constant>
     <constant name="WEBHSV">0.70833333333</constant>
     <constant name="ACC_XP_SCALER">2</constant>

@@ -319,9 +319,6 @@ if xp_needed &lt;= 0 and not earn_pauser and is_my_avatar(net_manager.my_doll)
             if varRead("rank") &lt; array_length_1d(global.rank_names)-1
                 varAdd("rank",1)  
                 mega_stat_update("rank",varRead("rank"))
-                
-            //ask for a new global rank
-            obj_sendval_real(id,"compute_global_rank",true,varRead("rank"))
         }
         
         with net_manager.my_doll

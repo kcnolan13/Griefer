@@ -2,7 +2,7 @@
 var str = argument0
 str = str+" :: "+string(object_get_name(object_index))
 
-if (true)
+if COUT
 {
     //ONLY PRINT ERRORS RIGHT NOW
     //if string_count("ERROR",str) > 0

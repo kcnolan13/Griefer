@@ -1538,12 +1538,13 @@ if is_bot(id) and not play_dead and (not instance_exists(modal_controls) or moda
         aamt = 0.875
     } else if dat_rank &lt; 20
     {
-        atarget = 0.125
-        rtarget = 0.2
+        atarget = 0.09
+        rtarget = 0.08
         aamt = 0.875
     } else {
-        atraget = 0.75
-        rtarget = 0.875
+        atraget = 0.15
+        rtarget = 0.1
+        aamt = 0.875
     }
     
     var per_active = lerp(dat_rank/max_rank,atarget,aamt)
@@ -2559,6 +2560,20 @@ press_e()
       </action>
     </event>
     <event eventtype="9" enumb="80">
+      <action>
+        <libid>1</libid>
+        <id>425</id>
+        <kind>4</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+      </action>
       <action>
         <libid>1</libid>
         <id>603</id>

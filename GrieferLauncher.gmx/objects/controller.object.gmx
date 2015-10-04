@@ -29,6 +29,7 @@
 init_constants()
 room_speed = 60
 hash = "V0"
+official_server_hash = "V0"
 
 life = 0
 
@@ -39,12 +40,15 @@ if not ini_section_exists("Main")
     ini_write_string("Main","Version",hash)
     printf("::: defaulting Version to "+string(hash))
 }
+hash = ini_read_string("Main","Version","V0")
+ini_close()
+
+ini_open("Config/GameState.ini")
 if ini_key_exists("Main","GameRunning")
 {
     ini_key_delete("Main","GameRunning")
     printf("::: game had been left running(?) deleting the GameRunning ini key")
 }
-hash = ini_read_string("Main","Version","V0")
 ini_close()
 
 //networking data
@@ -96,11 +100,8 @@ initGrieferClient("http://www.puddlesquid.com:8080")
             <string>///close window after game launched
 
 
-ini_open("Config/Config.ini")
+ini_open("Config/GameState.ini")
 
-if not ini_section_exists("Main")
-    ini_write_string("Main","Version",hash)
-    
 if ini_key_exists("Main","GameRunning")
 {
     printf("::: GameRunning Found!")
@@ -230,7 +231,9 @@ while (genMessagesWaiting() and wait_counter &lt; 500000)
         
         case "validate_hash":
         
-            if genVal != 1
+            official_server_hash = string(genVal)
+            
+            if string(hash) != official_server_hash
             {
                 printf("::: updates are needed!")
                 download_updates()
@@ -297,6 +300,13 @@ if ds_map_find_value(async_load, "id") == file
    if status == 0
    {
         printf("::: DOWNLOAD COMPLETE to: "+string(downloadURL))
+        
+        //this patch is known to be downloaded now :)
+        ini_open("Config/Config.ini")
+        ini_write_string("Main","Version",official_server_hash)
+        ini_close()
+        
+        printf("::: writing version hash to Config.ini: "+official_server_hash)
         
         launch_game()
    }
