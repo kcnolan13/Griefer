@@ -31,10 +31,10 @@ with accolade_generic
     if x < other.grid_left+width/2-5
     {
         var xdif = abs( (other.grid_left+width/2) - x )
-        alpha_scroll_scaler = lerp_real(1,0,xdif/(width/2))
+        alpha_scroll_scaler = lerp(1,0,xdif/(width))
     } else if x > other.grid_right-width/2
     {
         var xdif = abs( x - (other.grid_right-width/2) )
-        alpha_scroll_scaler = lerp_real(1,0,xdif/(width/2))
+        alpha_scroll_scaler = lerp(1,0,xdif/(width))
     } else alpha_scroll_scaler = 1
 }

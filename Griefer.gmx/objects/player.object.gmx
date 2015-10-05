@@ -591,9 +591,11 @@ if respawn_counter &gt; 0 and (is_my_avatar(id) or is_bot(id))
         
         //FIGURE OUT WHERE TO RESPAWN
         compute_respawn_coordinates(id, respawn_flag)   //computes spawn_x, spawn_y
+        
+        double_spawn_counter = double_spawn_window
+        
         objVarWrite(id,"alive",true)
         respawn_flag = FL_NORMAL    //set afterwards on purpose
-        double_spawn_counter = double_spawn_window
         
         if net_manager.local_player = id
             net_manager.rag_target = NO_HANDLE
@@ -602,7 +604,6 @@ if respawn_counter &gt; 0 and (is_my_avatar(id) or is_bot(id))
         objVarWrite(id,"myY",spawn_y)
         objVarWrite(id,"hp",100)
         objVarWrite(id,"alive",true)
-        obj_update_real(id,"alive",FL_NORMAL)
         varWrite("speed_multiplier",1)
         varWrite("assister","")
         varWrite("killer","")
@@ -678,6 +679,7 @@ if double_spawn_counter and (is_my_avatar(id) or is_bot(id))
     {
         varWrite("visible",true)
         varWrite("controllable",true)
+        obj_update_real(id,"alive",FL_NORMAL)
     }
     
     if is_my_avatar(id)    
@@ -1465,7 +1467,10 @@ if blahd and point_distance(x,y,blahd.x,blahd.y) &lt;= point_distance(x+hsp,y,bl
 }
 
 if varRead("controllable") or (net_manager.starting_match and varRead("myX") &gt; 0 and varRead("myY") &gt; 0) or (objVarRead(net_manager,"end_match_coming") and not position_meeting(x,bbox_bottom+3,solid_generic) and standing_2way = false)
-    scr_basic_physics()
+{
+    if id = myPlayer() or (not match_starting() and not match_ending())
+        scr_basic_physics()
+}
 
 if varRead("controllable")
 {
@@ -2326,6 +2331,7 @@ wheel_up()
             <string>///draw me and my name
 if not bparts_ready or net_manager.snapshot_mode exit
 if not varRead("controllable") and id = myPlayer() and in_match() and not match_ending() and not match_starting() exit
+if not varRead("alive") exit
 
 //draw stupid
 //draw_sprite_ext(sprite_index,image_index,x,y,image_xscale,image_yscale,image_angle,c_white,image_alpha)

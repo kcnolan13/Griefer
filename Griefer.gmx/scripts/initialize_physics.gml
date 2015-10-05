@@ -10,6 +10,7 @@ varWrite("animation_speed",0)
 mass_original = 1
 mass = 1
 standing_2way = false
+floating_2way = false
 jumping = false
 use_jumping_spr = false
 standing = 0

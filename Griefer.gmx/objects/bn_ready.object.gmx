@@ -121,6 +121,9 @@ if not instance_exists(bound_avatar)
 
 event_inherited()
 
+if nth_frame(30) and instance_exists(bound_avatar)
+    obj_update_real(bound_avatar,"ready",FL_NORMAL)
+
 if ready
 { 
     text = ready_text

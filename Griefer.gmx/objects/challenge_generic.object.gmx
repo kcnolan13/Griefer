@@ -33,6 +33,8 @@ is_competitive = false
 is_bot_mode = false
 dat_blend_mode = bm_normal
 
+completed_quietly = false
+
 regen_delay= 0
 
 surf_slot = surface_create(72*2,72*2)
@@ -263,6 +265,8 @@ if in_match() and progress_varname != "" and nth_frame(auto_frame_offset) and no
         if progress &gt;= progress_max and not challenge_is_complete(name) and progress_max &gt; 0
         {
             printf("::: auto completing challenge: "+string(name))
+            if abs(rtime() - net_manager.starting_match_delay) &lt; auto_frame_offset*3
+                completed_quietly = true
             complete_challenge(name)
         }
     }
@@ -329,7 +333,7 @@ else
     color = color_complete
 }
 
-if in_match() and completed and (not shown_completed or (not tripped_end_match and objVarRead(net_manager,"end_match_coming")))
+if in_match() and completed and not completed_quietly and (not shown_completed or (not tripped_end_match and objVarRead(net_manager,"end_match_coming")))
 {
     printf(":::SHOW POPUP TRIGGERED FOR: "+name)
     if objVarRead(net_manager,"end_match_coming")
@@ -355,7 +359,7 @@ if in_match() and popup_show
     for (var i=0; i&lt;instance_number(challenge_generic); i++)
     {
         CHA = instance_find(challenge_generic,i)
-        if CHA.popup_show
+        if CHA.popup_show and not CHA.completed_quietly
         {
             if CHA.id != id
                 show_number ++
@@ -668,7 +672,7 @@ if room = rm_menu or room = rm_lobby
 }
 
 //BEHAVIOR FOR IN MATCH
-if in_match() and popup_show and not is_progression
+if in_match() and popup_show and not is_progression and not completed_quietly
 {
     var endmatch_offset = 0
     var descr = description

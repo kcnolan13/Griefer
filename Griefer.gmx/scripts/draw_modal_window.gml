@@ -13,8 +13,12 @@ if valign = fa_bottom
     
 if object_index = accolade_generic
 {
-    draw_set_alpha(alpha*alpha_scroll_scaler*alpha_scaler)
-    draw_accolade()
+    var alph = alpha*alpha_scroll_scaler*alpha_scaler
+    if alph > 0.075
+    {
+        draw_set_alpha(alph)
+        draw_accolade()
+    }
     exit
 }
 

@@ -75,7 +75,7 @@ global.map_texs[rm_tunnel] = bg_stone
 global.col_alphas[rm_tunnel] = global.col_alpha_default
 
 global.map_colors[rm_snow2,0] = make_color_rgb(255,255,255)
-global.map_colors[rm_snow2,1] = make_color_rgb(30,30,175)
+global.map_colors[rm_snow2,1] = web_hsv(258,99,58)
 global.map_texs[rm_snow2] = bg_dark
 global.col_alphas[rm_snow2] = 0.8
 

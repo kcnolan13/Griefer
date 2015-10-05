@@ -50,7 +50,7 @@ global.ds_challenges = ds_map_create()
 
 //CHALLENGE VARIABLES
 string_counter = 0
-string_counter_max = 30
+string_counter_max = 45
 
 //hound
 hound_kills = 2
@@ -255,7 +255,7 @@ if challenge_showing_popup
     
 if string_counter &gt; 0
 {
-    string_counter --
+    string_counter = sub_real(string_counter,1)
     if string_counter = 0
     {
         string_kills = 0

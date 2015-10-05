@@ -53,7 +53,7 @@ else
             if not bpart_obj.completed
             {
                 //draw_set_alpha(0.75)
-                draw_sprite_ext(spr_bpart_generic,-1,bpart_x,bpart_y,scale,scale,0,c_black,3/5*dalph)
+                draw_sprite_ext(spr_bpart_generic,-1,bpart_x,bpart_y,scale,scale,0,c_black,4/5*dalph)
                 //redraw the border
                 draw_set_alpha(dalph)
                 draw_set_color(c_white)

@@ -51,6 +51,8 @@ em = part_emitter_create(sys_smoke)
 part_emitter_region(sys_smoke,em,x-random(part_off),x+random(part_off),y-random(part_off),y+random(part_off),ps_shape_ellipse,ps_distr_gaussian)
 
 part_emitter_burst(sys_smoke,em,ps,4)
+
+computed_challenge = false
 </string>
           </argument>
         </arguments>
@@ -108,8 +110,9 @@ ds_map_destroy(netvars)
 counter += real_speed(1)
 
 printf("smoke splosion!")
-if counter = 2 and find_player(varRead("senderId")) = net_manager.local_player
+if counter &gt; 2 and not computed_challenge and find_player(varRead("senderId")) = net_manager.local_player 
 {
+    computed_challenge = true
     //update smoke totals
     increment_weapon_accolade("spr_smoke")
     challenge_manager.smokes ++

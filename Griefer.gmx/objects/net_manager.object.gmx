@@ -48,7 +48,7 @@ reconnect_timer = 0
 //config file
 ini_open(grieferURL+"/Config/GameState.ini")
 ini_write_real("Main","GameRunning",true)
-//ini_write_string("Main","Version",VERSION)
+ini_close()
 
 if moveFile(grieferURL+"/Config/GameState.ini",launcherURL+"/Config/GameState.ini")
     printf("::: config transfer successful")
@@ -498,6 +498,8 @@ num_players = 1
 team = -1
 bot_match = false
 win_countdown = 0
+
+ini_open(grieferURL+"/Config/GameState.ini")
 
 var restart_counter = ini_read_real("Main","RestartsRemaining",0)
 if restart_counter &gt; 0

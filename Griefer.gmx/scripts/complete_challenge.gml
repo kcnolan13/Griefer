@@ -13,28 +13,38 @@ if instance_exists(cha)
 {
     if not cha.completed
     {
-        global.challenges_this_match ++
-        cha.completed_num = global.challenges_this_match
-        
-        printf(":::CHALLENGE COMPLETE: "+string(name))
-        
-        if in_match()
-            audio(snd_item_stolen,1)
-        else
-            printf("::: muting challenge sound")
-            
-        sendMessageStr("perma_challenge",name)
-        cha.completed = true
-        cha.new = true
-        add_xp(cha.xp,true,true,false)
-        /*printf("disbursing reward")
-        for (var i=0; i<array_length_1d(cha.rewards); i++)
+        if not cha.completed_quietly
         {
-            blah = instantiate_bpart(cha.rewards[i],global.src_challenge, global.cache)
-            blah.txt_new = net_manager.txt_new
-            blah.col_new = net_manager.col_challenge
-            blah.new = true
-        }*/
+            global.challenges_this_match ++
+            cha.completed_num = global.challenges_this_match
+            
+            printf(":::CHALLENGE COMPLETE: "+string(name))
+            
+            if in_match()
+                audio(snd_item_stolen,1)
+            else
+                printf("::: muting challenge sound")
+                
+            sendMessageStr("perma_challenge",name)
+            cha.completed = true
+            cha.new = true
+            add_xp(cha.xp,true,true,false)
+            /*printf("disbursing reward")
+            for (var i=0; i<array_length_1d(cha.rewards); i++)
+            {
+                blah = instantiate_bpart(cha.rewards[i],global.src_challenge, global.cache)
+                blah.txt_new = net_manager.txt_new
+                blah.col_new = net_manager.col_challenge
+                blah.new = true
+            }*/
+        }
+        else
+        {
+            printf(":::CHALLENGE COMPLETED QUIETLY: "+string(name))
+            sendMessageStr("perma_challenge",name)
+            cha.completed = true
+            cha.new = false
+        }
         return true
     }
     else

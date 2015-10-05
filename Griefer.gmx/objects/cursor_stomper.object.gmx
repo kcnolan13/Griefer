@@ -29,22 +29,22 @@
 event_inherited()
 
 core = "circle"//spr_cursor ///should be either a sprite or "square" or "circle"
-core_active = false
-core_scale = 8
-core_grow = false
+core_active = true
+core_scale = 4
+core_grow = true
 core_linewidth = 3
 core_color = c_white
 core_alpha = 1
 
-accent = accent_stomper
-accent_scale = 2
-accent_num = 4
-accent_rot = 0
-accent_radius_min = 0
+accent = icon_bullet_long
+accent_scale = 1
+accent_num = 0
+accent_rot = 45
+accent_radius_min = 32
 accent_color = c_white
 accent_alpha = 1
 
-sensitivity = 42
+sensitivity = 8
 
 </string>
           </argument>

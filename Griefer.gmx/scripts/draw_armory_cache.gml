@@ -116,7 +116,7 @@ for (var i=0; i<num_slots; i++)
     if blah > cache_length/2
         dis_slot_alpha = 0
     else
-        dis_slot_alpha = lerp_real(1,0,abs(dis_slot_x-cache_center)/(cache_length/2))
+        dis_slot_alpha = lerp(1,0,abs(dis_slot_x-cache_center)/(cache_length/2))
     
     bpart = list[| index]
     
@@ -227,7 +227,7 @@ for (var i=0; i<num_slots; i++)
                 if hovering > hover_delay and dis_slot_alpha > 0.2 
                 {
                     new = false
-                    popup_alpha = lerp_real(popup_alpha*dis_slot_alpha,1,popup_lerp_real)
+                    popup_alpha = lerp(popup_alpha*dis_slot_alpha,1,popup_lerp_real)
                     if not contemplating_scrap
                     {   
                         drawing_cache_popup = true

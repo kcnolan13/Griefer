@@ -2,8 +2,8 @@
 
 with net_manager
 {
-    ini_open(grieferURL+"/Config/Config.ini")
-    ini_write_real("Main","RestartsRemaining",2)
+    ini_open(grieferURL+"/Config/GameState.ini")
+    ini_write_real("Main","RestartsRemaining",0)
     ini_close()
     
     //maybe don't do this?
