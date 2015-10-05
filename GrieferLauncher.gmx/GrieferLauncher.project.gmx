@@ -58,6 +58,7 @@
     <script>scripts\compute_auto_crop.gml</script>
     <script>scripts\modal_recalculate_snap.gml</script>
     <script>scripts\scr_none.gml</script>
+    <script>scripts\try_server_reconnect.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_hud</font>

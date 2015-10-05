@@ -42,6 +42,9 @@ draw_enable_swf_aa(true)
 setGppDebug(0)
 display_set_gui_size(WVIEW,HVIEW)
 
+disconnect_on_game_end = true
+reconnect_timer = 0
+
 //config file
 ini_open(grieferURL+"/Config/GameState.ini")
 ini_write_real("Main","GameRunning",true)
@@ -1240,6 +1243,15 @@ drew_armory_grid = false
           <argument>
             <kind>1</kind>
             <string>///keepalive and force sync and full_screen sync and draw_you_killed
+
+if reconnect_timer
+{
+    reconnect_timer = sub_real(reconnect_timer,1)
+    if not reconnect_timer
+    {
+        try_server_reconnect()
+    }
+}
 
 if draw_you_killed
 {
@@ -3048,7 +3060,11 @@ else
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///free ds lists
+            <string>///end the game
+
+if disconnect_on_game_end
+    sendMessageReal("game_end",true)
+
 free_all_bparts_ds()
 ds_list_destroy(armory_lists)
 
@@ -3717,6 +3733,46 @@ if lobby_match_countdown and instance_exists(next_map_final)//and not waiting_fo
 
     //draw_text(next_map_final.x,next_map_final.y+48,"Match Countdown ... "+string(ceil(varRead("lobby_wait_time")/30)))
     
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///draw server disconnected
+if not server_found
+{
+    if not reconnect_timer
+    {
+        reconnect_timer = 30*10
+    }
+    
+    var dialogue = waiting_for_data()
+    if not dialogue
+    {
+        draw_alert(cursor.x,cursor.y,"Connection Lost","","Press [SPACE] to Retry ... "+string(round(reconnect_timer/30)),c_red)
+    }
+    else
+    { 
+        dialogue.load_closable = false
+        dialogue.color = web_hsv(0,100,30)
+        dialogue.text = "Connection Failed ... "+string(ceil(reconnect_timer/30))
+    }
 }
 </string>
           </argument>
@@ -4504,31 +4560,6 @@ if show_trans_rate
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///draw server disconnected
-if not server_found
-{
-    draw_alert(cursor.x,cursor.y,"Connection Failed","","Press [ANY KEY] to Retry",c_red)
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
             <string>///show cout if desired
 if show_cout
 {
@@ -5090,6 +5121,30 @@ ID.behave_match = true
         </arguments>
       </action>
     </event>
+    <event eventtype="9" enumb="32">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///retry server connection
+try_server_reconnect()
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="9" enumb="27">
       <action>
         <libid>1</libid>
@@ -5176,33 +5231,6 @@ else
 full_screen = false
 window_set_fullscreen(full_screen)
 */
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="9" enumb="1">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///retry server connection
-if not server_found
-{
-    griefer_restart()
-}
 </string>
           </argument>
         </arguments>

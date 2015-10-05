@@ -31,6 +31,13 @@ room_speed = 60
 hash = "V0"
 official_server_hash = "V0"
 
+keepalive_timeout = room_speed*2
+keepalive_timer = 15
+keepalive_missed = 0
+keepalive_missable = 3
+disconnect_on_game_end = true
+reconnect_timer = 0
+
 life = 0
 
 //config file
@@ -275,6 +282,66 @@ while (genMessagesWaiting() and wait_counter &lt; 500000)
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///keepalive
+
+///keepalive and force sync and full_screen sync and draw_you_killed
+
+if reconnect_timer &gt; 0
+{
+    reconnect_timer -= 0.5//= sub_real(reconnect_timer,1)
+    if not reconnect_timer
+    {
+        try_server_reconnect()
+    }
+}
+
+if keepalive_timer
+{
+    keepalive_timer --
+    if not keepalive_timer
+    {
+        keepalive_timer = keepalive_timeout
+        //printf("::: checking keepalive")
+        if isAlive() = 1
+        {
+            //printf(":::IS ALIVE")
+            server_found = true
+            keepalive_missed = 0
+            keepAlive()
+        }
+        else
+        {
+            keepalive_missed ++
+            printf("::: KEEPALIVE TIMEOUT")
+            keepAlive()
+            
+            if keepalive_missed &gt; keepalive_missable
+            {
+                server_found = false
+            }
+        }
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="7" enumb="62">
       <action>
@@ -311,6 +378,32 @@ if ds_map_find_value(async_load, "id") == file
         launch_game()
    }
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="3">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///trigger game end
+
+if disconnect_on_game_end
+    sendMessageReal("game_end",true)
 </string>
           </argument>
         </arguments>
@@ -407,6 +500,42 @@ if not instance_exists(modal_splat)
     //RANDOMIZE THE GAME!
     randomize()
     random_set_seed(random(1000000))
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///alert when disconnected
+if not server_found
+{
+    if not reconnect_timer
+    {
+        reconnect_timer = 30*10
+    }
+    
+    var dialogue = waiting_for_data()
+    if dialogue
+    { 
+        dialogue.load_closable = false
+        dialogue.text_color = c_red//web_hsv(0,100,75)
+        dialogue.text = "Connection Failed ... "+string(ceil(reconnect_timer/30))
+    }
 }
 </string>
           </argument>

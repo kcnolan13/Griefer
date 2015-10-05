@@ -51,8 +51,8 @@ else
         blah.hue = 218
         blah.sat = 100
         blah.val = 100
-        blah.color = web_hsv(chue,csat,cval)
-        blah.active_color = web_hsv(chue*chue_mult,csat*csat_mult,cval*cval_mult)
+        blah.color = web_hsv(chue,csat,colval)
+        blah.active_color = web_hsv(chue*chue_mult,csat*csat_mult,someval*cval_mult)
         blah.text_halign = fa_left
         blah.text_xoff = 72+5
         blah.text_color = text_color
@@ -82,8 +82,8 @@ else
         blah.hue = 20
         blah.sat = 0
         blah.val = 30
-        blah.color = web_hsv(chue,csat,cval)
-        blah.active_color = web_hsv(chue*chue_mult,csat*csat_mult,cval*cval_mult)
+        blah.color = web_hsv(chue,csat,colval)
+        blah.active_color = web_hsv(chue*chue_mult,csat*csat_mult,someval*cval_mult)
         blah.text_halign = fa_left
         blah.text_xoff = 72+5
         blah.text_color = text_color
@@ -99,8 +99,8 @@ else
         blah.hue = 20
         blah.sat = 0
         blah.val = 30
-        blah.color = web_hsv(chue,csat,cval)
-        blah.active_color = web_hsv(chue*chue_mult,csat*csat_mult,cval*cval_mult)
+        blah.color = web_hsv(chue,csat,colval)
+        blah.active_color = web_hsv(chue*chue_mult,csat*csat_mult,someval*cval_mult)
         blah.text_halign = fa_left
         blah.text_xoff = 72+5
         blah.text_color = text_color
@@ -116,8 +116,8 @@ else
         blah.hue = 20
         blah.sat = 0
         blah.val = 30
-        blah.color = web_hsv(chue,csat,cval)
-        blah.active_color = web_hsv(chue*chue_mult,csat*csat_mult,cval*cval_mult)
+        blah.color = web_hsv(chue,csat,colval)
+        blah.active_color = web_hsv(chue*chue_mult,csat*csat_mult,someval*cval_mult)
         blah.text_halign = fa_left
         blah.text_xoff = 72+5
         blah.text_color = text_color
@@ -136,14 +136,15 @@ else
     var yst_original = top+header_height+64*3+lheight+y_adder
     var yst = yst_original
     var hspacer = 64
-    var vspacer = 16
+    var vspacer = 10
     var len = getLength(labels)
+    
+    //don't show swap sticks unless gamepad is plugged in
+    if not global.using_gamepad and fl = FL_CEDITS
+        len -= 2
     
     for (var i=0; i<len; i++)
     {
-        //don't show swap sticks unless gamepad is plugged in
-        if not global.using_gamepad and i=len-1 and fl != FL_GEN_SETTINGS and fl != FL_MATCH_SETTINGS
-            break
             
         bdelay += binc
         

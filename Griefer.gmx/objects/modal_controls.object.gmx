@@ -38,9 +38,6 @@ width = view_wview*2/3+64
 height = view_hview*2/3
 extra_height = 50
 
-if not in_match()
-    height -= 24
-
 if in_match()
 {
     draw_gradient = true
@@ -58,6 +55,12 @@ else
 
 x = view_xview+view_wview/2
 y = view_yview+view_hview/2+36
+
+if not in_match()
+{
+    height -= 24
+    y -= 13
+}
 
 behave_match = in_match()
 
@@ -192,6 +195,9 @@ xoff = -150
 h = 72
 yoff = top-(h+12)+72
 
+someval = 12
+colval = 0
+
 //POSSIBLY GEN SETTINGS IN MIDDLE
 if behave_match
 {
@@ -203,9 +209,9 @@ if behave_match
     blah.birth_delay = bdelay
     blah.hue = 20
     blah.sat = 0
-    blah.val = 0
-    blah.color = web_hsv(chue,csat,cval)
-    blah.active_color = web_hsv(chue*chue_mult,csat*csat_mult,cval*cval_mult)
+    blah.val = colval
+    blah.color = web_hsv(chue,csat,colval)
+    blah.active_color = web_hsv(chue*chue_mult,csat*csat_mult,someval*cval_mult)
     blah.text_halign = fa_left
     blah.text_xoff = 72+5
     blah.text_color = text_color
@@ -220,9 +226,9 @@ if behave_match
     blah.birth_delay = bdelay
     blah.hue = 20
     blah.sat = 0
-    blah.val = 0
-    blah.color = web_hsv(chue,csat,cval)
-    blah.active_color = web_hsv(chue*chue_mult,csat*csat_mult,cval*cval_mult)
+    blah.val = colval
+    blah.color = web_hsv(chue,csat,colval)
+    blah.active_color = web_hsv(chue*chue_mult,csat*csat_mult,someval*cval_mult)
     blah.text_halign = fa_left
     blah.text_xoff = 72+5
     blah.text_color = text_color
@@ -237,9 +243,9 @@ if behave_match
     blah.birth_delay = bdelay
     blah.hue = 20
     blah.sat = 0
-    blah.val = 0
-    blah.color = web_hsv(chue,csat,cval)
-    blah.active_color = web_hsv(chue*chue_mult,csat*csat_mult,cval*cval_mult)
+    blah.val = colval
+    blah.color = web_hsv(chue,csat,colval)
+    blah.active_color = web_hsv(chue*chue_mult,csat*csat_mult,someval*cval_mult)
     blah.text_halign = fa_left
     blah.text_xoff = 72+5
     blah.text_color = text_color
@@ -256,9 +262,9 @@ else
     blah.birth_delay = bdelay
     blah.hue = 20
     blah.sat = 0
-    blah.val = 0
-    blah.color = web_hsv(chue,csat,cval)
-    blah.active_color = web_hsv(chue*chue_mult,csat*csat_mult,cval*cval_mult)
+    blah.val = colval
+    blah.color = web_hsv(chue,csat,colval)
+    blah.active_color = web_hsv(chue*chue_mult,csat*csat_mult,someval*cval_mult)
     blah.text_halign = fa_left
     blah.text_xoff = 72+5
     blah.text_color = text_color
@@ -273,9 +279,9 @@ else
     blah.birth_delay = bdelay
     blah.hue = 20
     blah.sat = 0
-    blah.val = 0
-    blah.color = web_hsv(chue,csat,cval)
-    blah.active_color = web_hsv(chue*chue_mult,csat*csat_mult,cval*cval_mult)
+    blah.val = colval
+    blah.color = web_hsv(chue,csat,colval)
+    blah.active_color = web_hsv(chue*chue_mult,csat*csat_mult,someval*cval_mult)
     blah.text_halign = fa_left
     blah.text_xoff = 72+5
     blah.text_color = text_color
@@ -290,9 +296,9 @@ else
     blah.birth_delay = bdelay
     blah.hue = 20
     blah.sat = 0
-    blah.val = 0
-    blah.color = web_hsv(chue,csat,cval)
-    blah.active_color = web_hsv(chue*chue_mult,csat*csat_mult,cval*cval_mult)
+    blah.val = colval
+    blah.color = web_hsv(chue,csat,colval)
+    blah.active_color = web_hsv(chue*chue_mult,csat*csat_mult,someval*cval_mult)
     blah.text_halign = fa_left
     blah.text_xoff = 72+5
     blah.text_color = text_color

@@ -72,7 +72,7 @@ knowledge_base_add(spr_dred_helmet, global.dred_name, 4, global.default_scale, t
 global.tadpole_name = "Tadpole Helmet"
 knowledge_base_add(spr_tadpole_helmet, global.tadpole_name, 3, global.default_scale, true, global.src_challenge,"helmet")
 
-global.bandicoot_name = "Bandicoot Helmet"
+global.bandicoot_name = "Flash Bandicoot"
 knowledge_base_add(spr_bandicoot_helmet, global.bandicoot_name, 3, global.default_scale, true, global.src_challenge,"helmet")
 
 global.emile2_name = "Support Helmet"
