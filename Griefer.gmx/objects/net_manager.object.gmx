@@ -3316,6 +3316,8 @@ if 1=0
             <string>///HUD
 master_scale = 1*match_scale//HVIEW/768*match_scale
 
+if global.map_editor return false
+
 if in_match() and ((draw_killed_by and do_draw_killed_by) or (draw_you_killed and name_you_killed != ""))
 {
     draw_set_font(fnt_splashscreen)
@@ -3508,6 +3510,9 @@ if not match_ending()
           <argument>
             <kind>1</kind>
             <string>///scores and win popups and starting match countdown
+
+if global.map_editor return false
+
 if win_countdown
     win_countdown --
     
@@ -4580,6 +4585,64 @@ if show_cout
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///draw color picker
+
+if global.map_editor and in_match()
+{
+    var wscaler = 3
+    var w = sprite_get_width(spr_color_picker)*wscaler
+    var l = view_xview+view_wview-w/2-10
+    var r = l+w
+    var t = view_yview+10
+    var h = sprite_get_height(spr_color_picker)
+    var b = t+h
+    
+    var xoff = 32
+    
+    var mousex = (cursor.x-view_xview)/view_wview*WVIEW             //mouse_x-view_xview//display_mouse_get_x()
+    var mousey = (cursor.y-view_yview)/view_hview*HVIEW             //mouse_y-view_yview//display_mouse_get_y()
+    
+    //printf("::: color picker mouse coords:    "+string(mousex)+" ,  "+string(mousey))
+    
+    //primary color picker
+    draw_sprite_ext(spr_color_picker,-1,l,t,wscaler,1,0,c_white,1)
+    //shade of primary color
+    draw_rectangle_colour(l-h-xoff,t,l-xoff,b,c_white,global.color_primary,c_black,c_black,false)
+    //selected picked color
+    draw_rectangle_colour(l-h-xoff,b+16,l-xoff,b+52,global.color_picker,global.color_picker,global.color_picker,global.color_picker,false)
+    
+    if mouse_check_button(mb_left)
+    { 
+        if cursor.x &gt;= l and cursor.x &lt;= r and cursor.y &gt;= t and cursor.y &lt;= b
+        {
+            global.color_primary = draw_getpixel(mousex,mousey)
+        }
+        
+        if cursor.x &gt;= l-h-xoff and cursor.x &lt;= l-xoff and cursor.y &gt;= t and cursor.y &lt;= b
+            global.color_picker = draw_getpixel(mousex,mousey)
+    }
+    
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="9" enumb="123">
       <action>
@@ -4719,6 +4782,30 @@ else if snapshot_mode
     if snapshot_auto and room &lt; map_placeholder2 - 1
         room_goto(room+1)
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="119">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///map editor mode
+global.map_editor ^= 1
 </string>
           </argument>
         </arguments>

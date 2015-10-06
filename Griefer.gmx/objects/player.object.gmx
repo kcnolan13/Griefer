@@ -1507,7 +1507,7 @@ if varRead("controllable")
           <argument>
             <kind>1</kind>
             <string>///ARTIFICIAL INTELLIGENCE
-if is_bot(id) and not play_dead and (not instance_exists(modal_controls) or modal_controls.fade_out) and varRead("controllable") and not net_manager.starting_match and varRead("alive")
+if is_bot(id) and not play_dead and not global.map_editor and (not instance_exists(modal_controls) or modal_controls.fade_out) and varRead("controllable") and not net_manager.starting_match and varRead("alive")
 {
     var dat_rank = varRead("rank")+1
     var max_rank = global.rank_max_theoretical

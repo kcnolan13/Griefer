@@ -154,7 +154,7 @@ active = false
           <argument>
             <kind>1</kind>
             <string>///draw code
-if active and in_match() and not match_starting() and not match_ending()
+if active and in_match() and not match_starting() and not match_ending() and not global.map_editor
 {
     var draw_x = (cursor.x-view_xview)*WVIEW/view_wview
     var draw_y = (cursor.y-view_yview)*HVIEW/view_hview

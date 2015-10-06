@@ -544,6 +544,7 @@
       <sprite>sprites\spr_splat</sprite>
       <sprite>sprites\spr_splat_modal</sprite>
       <sprite>sprites\spr_doll_shadow</sprite>
+      <sprite>sprites\spr_color_picker</sprite>
     </sprites>
     <sprites name="lighting">
       <sprite>sprites\spr_light_mask_spot</sprite>
@@ -710,6 +711,23 @@
   </sprites>
   <backgrounds name="background">
     <backgrounds name="overlays">
+      <background>background\bg_none</background>
+      <background>background\bg_tex_start</background>
+      <background>background\bg_stone2</background>
+      <background>background\bg_stone</background>
+      <background>background\bg_red</background>
+      <background>background\bg_swamp</background>
+      <background>background\bg_light</background>
+      <background>background\bg_jungle</background>
+      <background>background\bg_jungle_brown</background>
+      <background>background\bg_light2</background>
+      <background>background\bg_lagoon</background>
+      <background>background\bg_ground_sat</background>
+      <background>background\bg_ground</background>
+      <background>background\bg_fin2</background>
+      <background>background\bg_dark</background>
+      <background>background\bg_dark_green</background>
+      <background>background\bg_dark2</background>
       <background>background\bg_orange_overlay</background>
       <background>background\bg_incline_overlay</background>
       <background>background\bg_tree_overlay</background>
@@ -741,6 +759,7 @@
       <background>background\bg_tower_overlay2</background>
       <background>background\bg_animal_overlay</background>
       <background>background\bg_tower_overlay3</background>
+      <background>background\bg_tex_end</background>
     </backgrounds>
     <background>background\tiles_shapes</background>
     <backgrounds name="platforms">
@@ -778,23 +797,7 @@
           <background>background\back_overlay_grass</background>
         </backgrounds>
       </backgrounds>
-      <background>background\bg_none</background>
-      <background>background\bg_stone2</background>
-      <background>background\bg_stone</background>
-      <background>background\bg_red</background>
-      <background>background\bg_swamp</background>
-      <background>background\bg_light</background>
-      <background>background\bg_jungle</background>
-      <background>background\bg_jungle_brown</background>
-      <background>background\bg_light2</background>
       <background>background\tiles_not_fresh</background>
-      <background>background\bg_lagoon</background>
-      <background>background\bg_ground_sat</background>
-      <background>background\bg_ground</background>
-      <background>background\bg_fin2</background>
-      <background>background\bg_dark</background>
-      <background>background\bg_dark_green</background>
-      <background>background\bg_dark2</background>
       <background>background\old_rock</background>
       <background>background\old_jungle</background>
       <background>background\tiles_main</background>
@@ -1496,6 +1499,7 @@
       <script>scripts\being_held.gml</script>
     </scripts>
     <scripts name="fx">
+      <script>scripts\recompute_level_colors.gml</script>
       <script>scripts\build_solid_profile.gml</script>
       <script>scripts\spray_blood.gml</script>
       <script>scripts\bloodspray_player.gml</script>
@@ -1589,6 +1593,9 @@
         <script>scripts\scr_cancel_input.gml</script>
         <script>scripts\scr_instantiate_newuser_bparts.gml</script>
         <script>scripts\download_new_game.gml</script>
+      </scripts>
+      <scripts name="map_editor">
+        <script>scripts\export_level_colors.gml</script>
       </scripts>
       <script>scripts\popup_alert.gml</script>
       <script>scripts\popup_okay.gml</script>
@@ -1699,6 +1706,7 @@
       <object>objects\bn_typical</object>
       <object>objects\modal_splat</object>
       <object>objects\bn_input_field</object>
+      <object>objects\bn_meditor</object>
       <objects name="feeds">
         <object>objects\kill_feed</object>
         <object>objects\chat_feed</object>

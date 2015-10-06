@@ -83,21 +83,43 @@ if not surface_exists(surface)
             
             if image_stretch
             {
-                img_xsc = ceil(img_xsc*width/sprite_get_width(image))
-                img_ysc = ceil(img_ysc*height/sprite_get_height(image))
+                if not image_is_bg
+                {
+                    img_xsc = ceil(img_xsc*width/sprite_get_width(image))
+                    img_ysc = ceil(img_ysc*height/sprite_get_height(image))
+                }
+                else
+                {
+                    img_xsc = ceil(img_xsc*width/max(0.1,background_get_width(image)))
+                    img_ysc = ceil(img_ysc*height/max(0.1,background_get_width(image)))
+                }
             }
             else
             {
                 if image_stretch_x
-                    img_xsc = ceil(img_xsc*width/sprite_get_width(image))
+                {
+                    if not image_is_bg
+                        img_xsc = ceil(img_xsc*width/sprite_get_width(image))
+                    else
+                        img_xsc = ceil(img_xsc*width/max(0.1,background_get_width(image)))
+                }
                     
                 if image_stretch_y
-                    img_ysc = ceil(img_ysc*height/sprite_get_height(image))
+                {
+                    if not image_is_bg
+                        img_ysc = ceil(img_ysc*height/sprite_get_height(image))
+                    else
+                        img_ysc = ceil(img_ysc*height/max(0.1,background_get_height(image)))
+                    
+                }
             }   
             
             if not image_crop
             {
-                draw_sprite_ext(image,img_index,img_x,img_y,img_xsc*img_xscale,img_ysc*img_yscale,0,img_blend,alpha*alpha_scaler)
+                if not image_is_bg
+                    draw_sprite_ext(image,img_index,img_x,img_y,img_xsc*img_xscale,img_ysc*img_yscale,0,img_blend,alpha*alpha_scaler)
+                else
+                    draw_background_ext(image,img_x,img_y,img_xsc*img_xscale,img_ysc*img_yscale,0,img_blend,alpha*alpha_scaler)
             }
             else
             {
@@ -117,7 +139,11 @@ if not surface_exists(surface)
                         img_xst = 0
                 }
                 
-                draw_sprite_part_ext(image,img_index,img_xst,img_yst,width*scale*master_scale/img_xsc/img_xscale,height*scale*master_scale/img_ysc/img_yscale,img_x,img_y,img_xsc*img_xscale,img_ysc*img_yscale,img_blend,alpha*alpha_scaler)
+                if not image_is_bg
+                    draw_sprite_part_ext(image,img_index,img_xst,img_yst,width*scale*master_scale/img_xsc/img_xscale,height*scale*master_scale/img_ysc/img_yscale,img_x,img_y,img_xsc*img_xscale,img_ysc*img_yscale,img_blend,alpha*alpha_scaler)
+                else
+                    draw_background_part_ext(image,img_xst,img_yst,width*scale*master_scale/img_xsc/img_xscale,height*scale*master_scale/img_ysc/img_yscale,img_x,img_y,img_xsc*img_xscale,img_ysc*img_yscale,img_blend,alpha*alpha_scaler)
+            
             }
         }
         

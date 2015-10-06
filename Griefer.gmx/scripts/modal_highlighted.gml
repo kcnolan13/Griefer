@@ -24,6 +24,12 @@ if not m.visible or (not m.highlightable and not force_click) return false
 var xpos = cursor.x
 var ypos = cursor.y
 
+if m.is_gui
+{
+    xpos = (cursor.x-view_xview)/view_wview*WVIEW
+    ypos = (cursor.y - view_yview)/view_hview*HVIEW
+}
+
 if m.object_index = modal_meter
 {
     if point_distance(m.x,m.y,xpos,ypos) < m.radius

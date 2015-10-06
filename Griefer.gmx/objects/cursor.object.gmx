@@ -204,7 +204,7 @@ if in_match()
     
     with cursor_generic
     {
-        if active and counter &gt; 2 and not match_starting() and not match_ending()
+        if active and counter &gt; 2 and not match_starting() and not match_ending() and not global.map_editor
             other.do_draw = false
     }
     

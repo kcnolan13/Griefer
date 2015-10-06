@@ -297,7 +297,8 @@ if being_held()
           <argument>
             <kind>1</kind>
             <string>///framely weapon controls
-framely_weapon_controls()
+if not global.map_editor
+    framely_weapon_controls()
 </string>
           </argument>
         </arguments>

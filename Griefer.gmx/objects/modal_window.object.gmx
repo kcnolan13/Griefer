@@ -188,6 +188,7 @@ text_yoff = 0
 text_linesep = 20
 text_pad = 0
 
+image_is_bg = false
 image = spr_none
 image_stretch_x = false
 image_stretch_y = false
