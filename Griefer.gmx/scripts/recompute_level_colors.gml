@@ -150,20 +150,21 @@ switch (room)
         global.col_alphas[room] = global.col_alpha_default
     break
 
-    case rm_snow2:
-        lvl_alpha_grad = 0.8
-        lvl_grad1 = c_white
-        lvl_grad2 = c_white
-        lvl_grad3 = c_black
-        lvl_grad4 = c_black
-        lvl_alpha_tex = 0.5
-        lvl_tex_above = true
-        lvl_tex = bg_floral_overlay
-        global.map_colors[room,0] = make_color_rgb(255,255,255)
-        global.map_colors[room,1] = web_hsv(258,99,58)
-        global.map_texs[room] = bg_dark
-        global.col_alphas[room] = 0.8
-    break
+     case rm_snow2:
+          lvl_alpha_grad = make_colour_hsv(0,0,0)
+          lvl_grad1 = make_colour_hsv(0,0,255)
+          lvl_grad2 = make_colour_hsv(0,0,255)
+          lvl_grad3 = make_colour_hsv(0,0,0)
+          lvl_grad4 = make_colour_hsv(0,0,0)
+          lvl_alpha_tex = 0.50
+          lvl_tex_above = 1
+          lvl_tex = bg_floral_overlay
+          global.map_colors[room,0] = make_colour_hsv(0,0,75)
+          global.map_colors[room,1] = make_colour_hsv(0,0,13)
+          global.map_texs[room] = bg_stone
+          global.col_alphas[room] = 0.81
+     break
+
     
     case rm_cave2:
         lvl_alpha_grad = 0.75
@@ -270,20 +271,21 @@ switch (room)
         global.col_alphas[room] = global.col_alpha_default
     break
     
-    case rm_tree:
-        lvl_alpha_grad = 0
-        lvl_grad1 = c_white
-        lvl_grad2 = c_white
-        lvl_grad3 = c_black
-        lvl_grad4 = c_black
-        lvl_alpha_tex = 0.5
-        lvl_tex_above = true
-        lvl_tex = bg_rocky_overlay
-        global.map_colors[room,0] = make_color_rgb(150,250,150)
-        global.map_colors[room,1] = make_color_rgb(0,0,0)
-        global.map_texs[room] = bg_stone
-        global.col_alphas[room] = global.col_alpha_default
-    break
+     case rm_tree:
+          lvl_alpha_grad = make_colour_hsv(0,0,0)
+          lvl_grad1 = make_colour_hsv(0,0,255)
+          lvl_grad2 = make_colour_hsv(0,0,255)
+          lvl_grad3 = make_colour_hsv(0,0,0)
+          lvl_grad4 = make_colour_hsv(0,0,0)
+          lvl_alpha_tex = 0.60
+          lvl_tex_above = 0
+          lvl_tex = bg_tunnel_overlay
+          global.map_colors[room,0] = make_colour_hsv(0,0,244)
+          global.map_colors[room,1] = make_colour_hsv(0,0,0)
+          global.map_texs[room] = bg_fin2
+          global.col_alphas[room] = 0.60
+     break
+
     
      case rm_cave:
         lvl_alpha_grad = 0

@@ -4621,7 +4621,7 @@ if global.map_editor and in_match()
     //printf("::: color picker mouse coords:    "+string(mousex)+" ,  "+string(mousey))
     
     //primary color picker
-    draw_sprite_ext(spr_color_picker,-1,l,t,wscaler,1,0,c_white,1)
+    draw_sprite_ext(spr_color_picker,-1,l+10+w/2,t,wscaler,1,0,c_white,1)
     //shade of primary color
     draw_rectangle_colour(l-h-xoff,t,l-xoff,b,c_white,global.color_primary,c_black,c_black,false)
     //selected picked color
@@ -4632,6 +4632,14 @@ if global.map_editor and in_match()
         if cursor.x &gt;= l and cursor.x &lt;= r and cursor.y &gt;= t and cursor.y &lt;= b
         {
             global.color_primary = draw_getpixel(mousex,mousey)
+            
+            var hue_new = colour_get_hue(global.color_primary)
+            
+            var hue, sat, val 
+            hue = colour_get_hue(global.color_picker)
+            sat = colour_get_saturation(global.color_picker)
+            val = colour_get_value(global.color_picker)
+            global.color_picker = make_colour_hsv(hue_new,sat,val)
         }
         
         if cursor.x &gt;= l-h-xoff and cursor.x &lt;= l-xoff and cursor.y &gt;= t and cursor.y &lt;= b

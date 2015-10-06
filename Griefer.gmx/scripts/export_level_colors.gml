@@ -19,27 +19,47 @@ with fx
     file_text_writeln(f)
     
     //          lvl_alpha_grad = 0.825
-    data = tab+tab+"lvl_alpha_grad = "+string(lvl_alpha_grad)
+    var col = lvl_alpha_grad
+    var h = colour_get_hue(col)
+    var s = colour_get_saturation(col)
+    var v = colour_get_value(col)
+    data = tab+tab+"lvl_alpha_grad = make_colour_hsv("+string(h)+","+string(s)+","+string(v)+")"
     file_text_write_string(f,data)
     file_text_writeln(f)
     
     //          lvl_grad1 = c_green
-    data = tab+tab+"lvl_grad1 = "+string(lvl_grad1)
+    var col = lvl_grad1
+    var h = colour_get_hue(col)
+    var s = colour_get_saturation(col)
+    var v = colour_get_value(col)
+    data = tab+tab+"lvl_grad1 = make_colour_hsv("+string(h)+","+string(s)+","+string(v)+")"
     file_text_write_string(f,data)
     file_text_writeln(f)
     
     //          lvl_grad2 = c_purple
-    data = tab+tab+"lvl_grad2 = "+string(lvl_grad2)
+    var col = lvl_grad2
+    var h = colour_get_hue(col)
+    var s = colour_get_saturation(col)
+    var v = colour_get_value(col)
+    data = tab+tab+"lvl_grad2 = make_colour_hsv("+string(h)+","+string(s)+","+string(v)+")"
     file_text_write_string(f,data)
     file_text_writeln(f)
     
     //          lvl_grad3 = c_green
-    data = tab+tab+"lvl_grad3 = "+string(lvl_grad3)
+    var col = lvl_grad3
+    var h = colour_get_hue(col)
+    var s = colour_get_saturation(col)
+    var v = colour_get_value(col)
+    data = tab+tab+"lvl_grad3 = make_colour_hsv("+string(h)+","+string(s)+","+string(v)+")"
     file_text_write_string(f,data)
     file_text_writeln(f)
     
     //          lvl_grad4 = c_green
-    data = tab+tab+"lvl_grad4 = "+string(lvl_grad4)
+    var col = lvl_grad4
+    var h = colour_get_hue(col)
+    var s = colour_get_saturation(col)
+    var v = colour_get_value(col)
+    data = tab+tab+"lvl_grad4 = make_colour_hsv("+string(h)+","+string(s)+","+string(v)+")"
     file_text_write_string(f,data)
     file_text_writeln(f)
     
@@ -59,12 +79,21 @@ with fx
     file_text_writeln(f)
     
     //          global.map_colors[room,0] = c_white
-    data = tab+tab+"global.map_colors[room,0] = "+string(global.map_colors[room,0])
+    var col = global.map_colors[room,0]
+    var h = colour_get_hue(col)
+    var s = colour_get_saturation(col)
+    var v = colour_get_value(col)
+    data = tab+tab+"global.map_colors[room,0] = make_colour_hsv("+string(h)+","+string(s)+","+string(v)+")"
     file_text_write_string(f,data)
     file_text_writeln(f)
     
     //          global.map_colors[room,1] = c_black
-    data = tab+tab+"global.map_colors[room,1] = "+string(global.map_colors[room,1])
+    var col = global.map_colors[room,1]
+    var h = colour_get_hue(col)
+    var s = colour_get_saturation(col)
+    var v = colour_get_value(col)
+    data = tab+tab+"global.map_colors[room,1] = make_colour_hsv("+string(h)+","+string(s)+","+string(v)+")"
+    
     file_text_write_string(f,data)
     file_text_writeln(f)
     

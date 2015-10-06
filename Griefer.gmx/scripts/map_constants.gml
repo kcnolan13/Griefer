@@ -1,4 +1,4 @@
-global.map_editor = true
+global.map_editor = false
 
 global.map_names[rm_debug] = "Lush"
 global.map_names[rm_map2] = "Incline"
