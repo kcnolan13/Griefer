@@ -304,43 +304,6 @@ if part_system_exists(sys_fog)
     
 if part_system_exists(sys_snow)
     part_system_destroy(sys_snow)
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="7" enumb="3">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///free memory
-if part_system_exists(sys_missile)
-    part_system_destroy(sys_missile)
-
-if part_system_exists(sys_rocket)
-    part_system_destroy(sys_rocket)
-
-if part_system_exists(sys_flame)
-    part_system_destroy(sys_flame)
-    
-if part_system_exists(sys_fog)
-    part_system_destroy(sys_fog)
-    
-if part_system_exists(sys_snow)
-    part_system_destroy(sys_snow)
     
 if part_type_exists(part_flame)
     part_type_destroy(part_flame)
@@ -356,13 +319,13 @@ if part_type_exists(part_snare_trail)
     
 if part_type_exists(part_frag_trail)
     part_type_destroy(part_frag_trail)
-
+    
 if part_type_exists(part_sticky_trail)
     part_type_destroy(part_sticky_trail)
     
 if part_type_exists(part_smoke_trail)
     part_type_destroy(part_smoke_trail)
-
+    
 if part_type_exists(part_flame_trail)
     part_type_destroy(part_flame_trail)
     

@@ -33,7 +33,7 @@ intensity = intensity_min
 intensity_dir = 1
 intensity_lerp_real = 0.15
 
-light = glr_lightsimple_create(spr_light_mask_point,-1, x, y-sprite_get_height(sprite_index)/3, color, 1,  intensity)
+light = glr_lightsimple_create(spr_light_mask_point,-1, x, y-sprite_get_height(sprite_index)/3, color, 1)
 light.yscale = 0.0375
 light.xscale = 0.27*image_xscale
 

@@ -62,7 +62,7 @@ prev_angle = -1
 prev_intensity = -1
 
 //spawn the light
-light = glr_lightsimple_create(sprite, 0, x, y, color, 1, 1)
+light = glr_lightsimple_create(sprite, 0, x, y, color, 1)
 
 //if SUPER_DEBUG
     //printf("glare light count: "+glr_light_get_count())
@@ -126,11 +126,10 @@ light.loc = loc
 glr_lightsimple_set_rotation(light,varRead("angle"))
 prev_angle = varRead("angle")
 
-
 if not enabled and not delay
 {
     glr_lightsimple_set_intensity(light,intensity)
-    glr_lightsimple_set_active(light,true)
+    glr_lightsimple_set_active(light)
     enabled = true
     current_xscale = xscale
     current_yscale = yscale
@@ -180,9 +179,9 @@ if enabled
     current_intensity_flicker = random_range(-intensity_flicker,intensity_flicker)
     
     if current_intensity+current_intensity_flicker &lt; 0
-        glr_lightsimple_set_active(light,false)
+        glr_lightsimple_set_active(light)
     else
-        glr_lightsimple_set_active(light,true)
+        glr_lightsimple_set_active(light)
         
     current_xscale /= scale_divisor
     current_yscale /= scale_divisor
@@ -201,8 +200,6 @@ if enabled
         prev_intensity = current_intensity+current_intensity_flicker
     }
     
-    //if SUPER_DEBUG
-        //printf("light --&gt; "+"x="+x+",y="+y+",intensity="+real_current_intensity+",scale="+(current_xscale+current_scale_flicker)+",active="+glr_light_get_active(light))
 }
 </string>
           </argument>

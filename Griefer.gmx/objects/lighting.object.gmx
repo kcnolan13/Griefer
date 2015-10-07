@@ -51,7 +51,6 @@ surf = surface_create(room_width,room_height)
             <kind>1</kind>
             <string>///render lights onto lighting surface
 
-
 if not surface_exists(surf)
 {
     if in_match()
@@ -65,31 +64,6 @@ if not surface_exists(surf)
 surface_set_target(surf)
 draw_clear_alpha(c_black,0)
 surface_reset_target()
-
-/*draw_set_color(c_white)
-draw_set_alpha(0.8)
-draw_rectangle(0,0,room_width,room_height,false)
-draw_set_alpha(1)*/
-/*
-//render all lights
-for (var i=0; i&lt;instance_number(kLight); i++)
-{
-    ID = instance_find(kLight,i)
-    if not ID.loc
-        printf("NOT A LOCAL LIGHT")
-    if in_view(ID,64*4) and ID.active //and (ID.counter = 2 or ID.loc)
-    {
-        c = 0
-        repeat (ID.intensity)
-            draw_sprite_ext(ID.sprite, -1, ID.x, ID.y, ID.xscale, ID.yscale, ID.rot, ID.color, 1)
-
-        draw_sprite_ext(ID.sprite, -1, ID.x, ID.y, ID.xscale, ID.yscale, ID.rot, ID.color, ID.intensity%1)
-    }
-}
-
-draw_set_blend_mode(bm_normal)
-surface_reset_target()*/
-
 </string>
           </argument>
         </arguments>
@@ -200,7 +174,7 @@ draw_set_blend_mode(bm_add);   //--addative for more hardcore looking light
 tol = 64
 
 if surface_exists(surf)
-draw_surface_part_ext(surf,min(0,view_xview-tol),min(0,view_yview-tol),max(room_width,view_wview+2*tol),max(room_height,view_hview+2*tol),min(0,view_xview-tol),min(0,view_yview-tol),1,1,c_white,1);
+    draw_surface_part_ext(surf,min(0,view_xview-tol),min(0,view_yview-tol),max(room_width,view_wview+2*tol),max(room_height,view_hview+2*tol),min(0,view_xview-tol),min(0,view_yview-tol),1,1,c_white,1);
 
 draw_set_blend_mode(bm_normal)
 </string>

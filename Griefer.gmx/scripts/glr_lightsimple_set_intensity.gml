@@ -6,11 +6,3 @@ if instance_exists(da_light)
     da_light.intensity = intens
 } else printf("ERROR: light intensity cannot be set -- doesn't exist!")
 return true
-
-//
-//
-//OLD SHIT
-//
-//
-
-argument0[| 8] = argument1;

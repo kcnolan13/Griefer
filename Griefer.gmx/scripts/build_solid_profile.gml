@@ -1,5 +1,5 @@
 ///build_solid_profile(surface)
-surface_name = argument0
+var surface_name = argument0
 if !surface_exists(surface_name)
 {
     printf("failed to build solid profile")

@@ -6,11 +6,3 @@ if instance_exists(da_light)
     da_light.color = col
 } else printf("ERROR: light color cannot be set -- doesn't exist!")
 return true
-
-//
-//
-//OLD SHIT
-//
-//
-
-argument0[| 6] = argument1;

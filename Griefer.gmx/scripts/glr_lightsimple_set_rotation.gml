@@ -6,11 +6,3 @@ if instance_exists(da_light)
     da_light.rot = rot
 } else printf("ERROR: light rot cannot be set -- doesn't exist!")
 return true
-
-//
-//
-//OLD SHIT
-//
-//
-
-argument0[| 3] = argument1;

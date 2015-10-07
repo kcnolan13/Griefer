@@ -70,7 +70,7 @@ counter++
 
 if counter = 30
 {
-    myLight = glr_lightsimple_create(sprite, 0, x+trigx(muzzle_length,rot), y+trigy(muzzle_length,rot),color, 1, intensity);
+    myLight = glr_lightsimple_create(sprite, 0, x+trigx(muzzle_length,rot), y+trigy(muzzle_length,rot),color, 1);
     glr_lightsimple_set_rotation(myLight,rot)
     glr_lightsimple_set_scaling(myLight,scale,scale)
 }

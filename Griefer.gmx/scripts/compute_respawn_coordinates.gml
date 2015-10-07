@@ -241,6 +241,10 @@ if flag != FL_RANDOM
 }
 
 //free dynamically allocated memory and return
-ds_map_destroy(points_with_los)
-ds_map_destroy(points_with_no_los)
+if ds_exists(ds_type_map,points_with_los)
+    ds_map_destroy(points_with_los)
+    
+if ds_exists(ds_type_map,points_with_no_los)
+    ds_map_destroy(points_with_no_los)
+    
 return true

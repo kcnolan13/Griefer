@@ -155,7 +155,7 @@ for (var i=0; i&lt;getLength(surfs); i++)
 if recompute_parallax
     recompute_parallax = false
     
-if recompute_parallax
+if recompute_parallax and false
 {
     for (var i=0; i&lt;getLength(surfs); i++)
     {
@@ -315,9 +315,16 @@ if in_match()
     //draw bg colors and stuff
     draw_set_color(c_white)
     draw_set_alpha(1)
-    draw_background_tiled(global.map_texs[room],0,0)
-    draw_set_alpha(global.col_alphas[room])
-    draw_rectangle_colour(0,0,room_width,room_height,global.map_colors[room,0],global.map_colors[room,0],global.map_colors[room,1],global.map_colors[room,1],false)
+    
+
+    {
+        draw_background_tiled(global.map_texs[room],0,0)
+    }
+
+    {
+        draw_set_alpha(global.col_alphas[room])
+        draw_rectangle_colour(0,0,room_width,room_height,global.map_colors[room,0],global.map_colors[room,0],global.map_colors[room,1],global.map_colors[room,1],false)
+    }
     //draw_background_tiled_ext(bg_stone,view_xview-view_xview/3,view_yview-view_yview/2.2,1,1,c_white,0.75)
     
     //DRAW PARALLAX

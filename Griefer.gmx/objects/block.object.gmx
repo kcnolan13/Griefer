@@ -28,26 +28,6 @@
             <string>///shadows
 
 alarm[3] = 2
-
-//add ambient occlusion
-//glr_occlusion_add_instance(id);
-
-//glr_shadowsprite_create_from_instance(true)
-/*//create a dynamic mesh (false)
-mesh_id = glr_mesh_create(x, y, false);
-
-//half sprite width
-w=sprite_width/2;
-
-//add vertices to make a box
-glr_mesh_vertex_add(mesh_id, -w, -w);
-glr_mesh_vertex_add(mesh_id, -w, +w);
-glr_mesh_vertex_add(mesh_id, +w, +w);
-glr_mesh_vertex_add(mesh_id, +w, -w);
-glr_mesh_vertex_add(mesh_id, -w, -w);
-
-//finalize the mesh to make it renderable
-glr_mesh_update(mesh_id);*/
 </string>
           </argument>
         </arguments>

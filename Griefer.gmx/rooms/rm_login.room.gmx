@@ -26,9 +26,9 @@
     <showViews>0</showViews>
     <deleteUnderlyingObj>0</deleteUnderlyingObj>
     <deleteUnderlyingTiles>-1</deleteUnderlyingTiles>
-    <page>1</page>
-    <xoffset>-168</xoffset>
-    <yoffset>-152</yoffset>
+    <page>0</page>
+    <xoffset>-66</xoffset>
+    <yoffset>-74</yoffset>
   </makerSettings>
   <backgrounds>
     <background visible="-1" foreground="0" name="" x="0" y="0" htiled="-1" vtiled="-1" hspeed="0" vspeed="0" stretch="0"/>
@@ -53,9 +53,9 @@
   <instances>
     <instance objName="background_drawer" x="144" y="192" name="inst_CA2D1CB0" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="net_manager" x="64" y="112" name="inst_92743962" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="glare_controller" x="144" y="432" name="inst_7580E662" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="title" x="276" y="-16" name="inst_7E6EFA11" locked="0" code="" scaleX="1.79999995231628" scaleY="2.20289850234985" colour="4294967295" rotation="0"/>
     <instance objName="input_manager" x="176" y="112" name="inst_A996F329" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="glare_controller" x="388" y="544" name="inst_2871D178" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

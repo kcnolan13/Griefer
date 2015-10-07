@@ -2552,6 +2552,7 @@ if in_match() and force_recompute_scores or (nth_frame(10) and sort_worthy and n
           <argument>
             <kind>1</kind>
             <string>///synch up stats with player's in-game performance
+draw_texture_flush()
 varWrite("end_match_coming",0)
 computed_winloss = false
 previous_room = room
@@ -2771,9 +2772,15 @@ if in_match()
 {
 
     //create sortable player grids. to be used like ---&gt;  kills, avatar_obj
-    ds_grid_destroy(team_all)
-    ds_grid_destroy(team0)
-    ds_grid_destroy(team1)
+    if ds_exists(ds_type_grid,team_all)
+        ds_grid_destroy(team_all)
+    
+    if ds_exists(ds_type_grid,team0)
+        ds_grid_destroy(team0)
+    
+    if ds_exists(ds_type_grid,team1)
+        ds_grid_destroy(team1)
+        
     team_all = ds_grid_create(3,instance_number(avatar))
     team1 = ds_grid_create(3,floor(instance_number(avatar)/2))
     team0 = ds_grid_create(3,ceil(instance_number(avatar)/2))
@@ -2793,6 +2800,7 @@ if in_match()
     
     if ds_exists(avatar_winners,ds_type_list)
         ds_list_destroy(avatar_winners)
+        
     if ds_exists(avatar_losers,ds_type_list)
         ds_list_destroy(avatar_losers)
         
@@ -2809,13 +2817,6 @@ if in_match()
     win_countdown = -99
     gear_lost = false
     varWrite("end_match_coming",false)
-    
-    p1Stats = ds_map_create()
-    p2Stats = ds_map_create()
-    p3Stats = ds_map_create()
-    p4Stats = ds_map_create()
-    p5Stats = ds_map_create()
-    p6Stats = ds_map_create()
     
     num_players = 1
     team = -1
@@ -4814,6 +4815,30 @@ else if snapshot_mode
             <kind>1</kind>
             <string>///map editor mode
 global.map_editor ^= 1
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="118">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///restart room
+room_restart()
 </string>
           </argument>
         </arguments>

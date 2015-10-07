@@ -415,7 +415,8 @@ if varRead("kick") &gt; 0
         varWrite("kick",0)
 }
 
-framely_limb_computations()
+if not in_match() or object_index = player
+    framely_limb_computations()
 </string>
           </argument>
         </arguments>
