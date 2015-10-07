@@ -5,6 +5,7 @@ with modal_dialogue
         is_downloading = false
         is_checking = false
         is_launching = true
+        show_percent = false
     }
 }
 

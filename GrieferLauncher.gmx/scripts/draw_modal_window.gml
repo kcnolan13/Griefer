@@ -179,14 +179,31 @@ if not surface_exists(surface)
             //THE LOADING WHEEL THING (bumps text over a little to make room)
             if is_loading
             {
+                var rad_scaler = 1
+                if show_percent
+                    rad_scaler = 1.25//.75
+                    
                 for (var i=0; i<load_points; i++)
                 {
                     var ang = load_rot+(i/load_points)*360
                     var point_rad = (load_point_rad_min+(i/load_points)*(load_point_rad_max-load_point_rad_min))*scale*master_scale
-                    var px = xpos + trigx(load_rad,ang)*scale*master_scale
-                    var py = ypos + trigy(load_rad,ang)*scale*master_scale
+                    var px = xpos + trigx(load_rad,ang)*scale*master_scale*rad_scaler
+                    var py = ypos + trigy(load_rad,ang)*scale*master_scale*rad_scaler
                     draw_circle(px,py,point_rad,false)
                 }
+                
+                if show_percent
+                {
+                    draw_set_font(fnt_hud_small)
+                    draw_set_color(c_white)
+                    draw_set_alpha(1)
+                    draw_set_halign(fa_center)
+                    draw_set_valign(fa_middle)
+                    draw_text(xpos,ypos,string(round(controller.download_percent*100))+"%")
+                    draw_set_halign(fa_left)
+                    draw_set_font(font)
+                }
+                
                 xpos += (load_rad+load_text_hsep)*scale*master_scale
                 
                 repeat(floor(loading_counter))

@@ -13,6 +13,7 @@ with modal_dialogue
     {
         is_downloading = true
         is_checking = false
+        show_percent = true
     }
 }
 

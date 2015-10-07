@@ -105,7 +105,7 @@ critical = false
 text_yes = "Yes"
 text_no = "No"
 text_okay = "Okay"
-text_downloading = "Downloading Important Updates"
+text_downloading = "Downloading Updates"
 text_launching = "Launching the Game"
 text_checking = "Checking for Updates"
 </string>
@@ -343,6 +343,8 @@ if is_ui_countdown
 if is_downloading
 {
     text = text_downloading
+    //if show_percent and controller.download_percent &gt; 0
+      //  text += ": "+string(round(controller.download_percent*100))+"%"
 }
 else if is_launching
 {
