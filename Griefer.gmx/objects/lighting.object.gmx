@@ -32,6 +32,30 @@ surf = surface_create(room_width,room_height)
         </arguments>
       </action>
     </event>
+    <event eventtype="1" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///free lighting surface
+free_lighting_surfaces()
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="3" enumb="1">
       <action>
         <libid>1</libid>
@@ -51,19 +75,17 @@ surf = surface_create(room_width,room_height)
             <kind>1</kind>
             <string>///render lights onto lighting surface
 
-if not surface_exists(surf)
+if in_match() and truthval(global.gc[GC_PARTICLES,1])
 {
-    if in_match()
+    if not surface_exists(surf)
     {
         free_lighting_surfaces()
         regen_lighting_surfaces()
     }
-    else return false
+    surface_set_target(surf)
+    draw_clear_alpha(c_black,0)
+    surface_reset_target()
 }
-
-surface_set_target(surf)
-draw_clear_alpha(c_black,0)
-surface_reset_target()
 </string>
           </argument>
         </arguments>
@@ -163,7 +185,7 @@ free_lighting_surfaces()
             <kind>1</kind>
             <string>///draw lighting
 if not in_match() return false
-if not net_manager.tg_effects.active return false
+if not truthval(global.gc[GC_PARTICLES,1]) return false
 
 index1 = 9
 index2 = 3

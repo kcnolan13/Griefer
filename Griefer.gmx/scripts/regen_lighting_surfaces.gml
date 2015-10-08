@@ -1,5 +1,5 @@
 ///regen_lighting_surfaces
-if not net_manager.tg_effects.active return false
+if not truthval(global.gc[GC_PARTICLES,1]) return false
 
 if surface_exists(surf)
     surface_free(surf)

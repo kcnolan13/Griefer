@@ -92,7 +92,9 @@ if object_index = flash_generic
           <argument>
             <kind>1</kind>
             <string>///free net vars
-ds_map_destroy(netvars)
+if ds_exists(netvars,ds_type_map)
+    ds_map_destroy(netvars)
+    
 glr_lightsimple_destroy(light)
 </string>
           </argument>

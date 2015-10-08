@@ -101,8 +101,7 @@ modal_aligns()
           <argument>
             <kind>1</kind>
             <string>///free ds map
-if ds_exists(netvars,ds_type_map)
-    ds_map_destroy(netvars)
+free_netvars()
 </string>
           </argument>
         </arguments>

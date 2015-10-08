@@ -2558,6 +2558,12 @@ computed_winloss = false
 previous_room = room
 audio_stop_sound(snd_flashed)
 
+with all
+{
+    if not persistent and instance_exists(id)
+        instance_destroy()
+}
+
 if ui_countdown != noone
 {
     ui_countdown = noone

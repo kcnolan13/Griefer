@@ -75,7 +75,8 @@ image_blend = varRead("image_blend")
           <argument>
             <kind>1</kind>
             <string>///free net vars
-ds_map_destroy(netvars)
+if ds_exists(netvars,ds_type_map)
+    ds_map_destroy(netvars)
 </string>
           </argument>
         </arguments>

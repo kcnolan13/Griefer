@@ -139,7 +139,8 @@ if traj_draw
     ID.xscale_divisor = traj_xscale_divisor
 }
 
-ds_map_destroy(netvars)
+if ds_exists(netvars,ds_type_map)
+    ds_map_destroy(netvars)
 </string>
           </argument>
         </arguments>

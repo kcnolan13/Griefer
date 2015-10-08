@@ -23,7 +23,7 @@ while (bigMessagesWaiting() and wait_counter < 500000)
         genVal3 = readBigValStr(3)
     else
         genVal3 = readBigValReal(3)
-        
+      
     switch (bigMessage)
     {
         case "new_user":
@@ -151,7 +151,7 @@ while (bigMessagesWaiting() and wait_counter < 500000)
             new_chat_feed_message(genVal1,genVal2,genVal3)
         break
     }
-        
+       
 }
 
 wait_counter = 0
@@ -500,10 +500,6 @@ while (objUpdatesWaiting() and wait_counter < 1000)
 {
     net_manager.receptions++
     wait_counter++
-    //obj_index = readObjUpdateIndex()
-    //unique_id = readObjUpdateUniqueId()
-    //printf("obj update! reading oid_str")
-    //printf("{O}: reading objUpdate oid string")
     oid_str = readObjUpdateOidStr()
     obj_index = extract_object_index(oid_str)
     unique_id = extract_uid(oid_str)
@@ -540,16 +536,10 @@ while (objUpdatesWaiting() and wait_counter < 1000)
     //push back objects that don't exist yet
     if ID  = NO_HANDLE
     {
-        if /*room != rm_match_end and */push_count < 10
+        if push_count < 10
         {
             push_count++
-            
-            /*if push_count = 100
-            {
-                printf("BAD CONNECTION DETECTED")
-                printf("MISSION ABORT! MISSION ABORT!")
-                griefer_restart()
-            }*/
+
             
             if DEBUG
                 printf("::: PUSH BACK: update: "+string(obj_index)+", id="+string(unique_id)+", "+string(netvar)+", "+string(val))
@@ -630,7 +620,7 @@ while (objUpdatesWaiting() and wait_counter < 1000)
                     objVarWrite(ID,netvar,val)
                 }
                 
-                if netvar = "pNum" /*or netvar = "true_skill" or netvar = "global_rank" and room != rm_lobby *///or netvar = "lobby_wait_time"
+                if netvar = "pNum"
                 {
                     var bound_av = find_pname_avatar(objVarRead(ID,"pName"))
                     if bound_av != noone
