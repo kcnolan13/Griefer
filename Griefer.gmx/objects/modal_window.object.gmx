@@ -50,6 +50,8 @@ wait_while_loading = false
 post_loading_wait_time = 30*5
 blocked = false
 
+snap_ref = noone
+
 draw_image_gradient = false
 image_gradient_alpha = 0.25
 

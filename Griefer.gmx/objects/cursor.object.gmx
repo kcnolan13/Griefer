@@ -204,7 +204,7 @@ if in_match()
     
     with cursor_generic
     {
-        if active and counter &gt; 2 and not match_starting() and not match_ending() and not global.map_editor
+        if active and counter &gt; 2 and not match_starting() and not match_ending() and not global.map_editor and not instance_exists(modal_controls)
             other.do_draw = false
     }
     

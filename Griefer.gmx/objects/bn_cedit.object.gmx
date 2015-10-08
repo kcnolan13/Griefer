@@ -385,15 +385,40 @@ else
             save_setting(ind)
         }
         
+        if ind = GC_VSYNC
+        {
+            var aa = display_aa
+            if aa &lt; 2       aa = 0
+            else if aa &lt; 4  aa = 2
+            else if aa &lt; 8  aa = 4
+            else            aa = 8
+                global.vsync = truthval(global.gc[GC_VSYNC,1])
+                if not truthval(global.gc[GC_VSYNC,1])
+                    display_reset(0,false)
+                else
+                    display_reset(aa,true)
+        }
+        
         //perform actions as needed
         if ind = GC_FPS
         {  
+            var aa = display_aa
+            if aa &lt; 2       aa = 0
+            else if aa &lt; 4  aa = 2
+            else if aa &lt; 8  aa = 4
+            else            aa = 8
+
             if global.gc[GC_FPS,1] = global.optimize_graphics
             {
                 //optimize graphics
                 global.gc[GC_AA_LEVEL,1] = 1
                 save_setting(GC_AA_LEVEL)
                 draw_set_swf_aa_level(global.gc[GC_AA_LEVEL,1])
+                
+                global.gc[GC_VSYNC,1] = "On"
+                save_setting(GC_VSYNC)
+                display_reset(aa,true)
+                global.vsync = true
                 
                 global.gc[GC_PARTICLES,1] = "On"
                 save_setting(GC_PARTICLES)
@@ -415,6 +440,11 @@ else
                 
                 global.gc[GC_PARTICLES,1] = "Off"
                 save_setting(GC_PARTICLES)
+                
+                global.gc[GC_VSYNC,1] = "Off"
+                save_setting(GC_VSYNC)
+                display_reset(0,false)
+                global.vsync = false
                 
                 global.gc[GC_RAGDOLLS,1] = "Off"
                 save_setting(GC_RAGDOLLS)

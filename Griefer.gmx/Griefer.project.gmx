@@ -1256,6 +1256,7 @@
       <script>scripts\waiting_for_data.gml</script>
       <script>scripts\try_server_reconnect.gml</script>
       <script>scripts\free_netvars.gml</script>
+      <script>scripts\is_avatar_leader.gml</script>
     </scripts>
     <scripts name="animations">
       <script>scripts\sync_poses_and_animations.gml</script>
@@ -2031,7 +2032,7 @@
       <room>rooms\map_placeholder2</room>
     </rooms>
   </rooms>
-  <constants number="169">
+  <constants number="170">
     <constant name="GAIN_HIGHLIGHT">1</constant>
     <constant name="GAIN_KEYSTROKE">0.8</constant>
     <constant name="GAIN_PAN">0.875</constant>
@@ -2120,20 +2121,21 @@
     <constant name="FORCE_REDONK">22</constant>
     <constant name="FORCE_SPLOSION">30</constant>
     <constant name="GARBAGE">-69.69</constant>
+    <constant name="GC_DEFAULTS">15</constant>
+    <constant name="GC_PASSWORD">14</constant>
+    <constant name="GC_FULLSCREEN">13</constant>
+    <constant name="GC_FPS">12</constant>
+    <constant name="GC_RAGDOLLS">11</constant>
+    <constant name="GC_SURFACES">10</constant>
+    <constant name="GC_PARTICLES">9</constant>
+    <constant name="GC_VSYNC">8</constant>
     <constant name="GC_AA_LEVEL">7</constant>
     <constant name="GC_CHAT_FEED_ALPHA">6</constant>
     <constant name="GC_CHAT_FEED">5</constant>
-    <constant name="GC_CONTROL_HINTS">2</constant>
-    <constant name="GC_DEFAULTS">14</constant>
-    <constant name="GC_PASSWORD">13</constant>
-    <constant name="GC_FULLSCREEN">12</constant>
-    <constant name="GC_FPS">11</constant>
     <constant name="GC_KILL_FEED_ALPHA">4</constant>
     <constant name="GC_KILL_FEED">3</constant>
-    <constant name="GC_PARTICLES">8</constant>
-    <constant name="GC_RAGDOLLS">10</constant>
+    <constant name="GC_CONTROL_HINTS">2</constant>
     <constant name="GC_SHOW_XP">1</constant>
-    <constant name="GC_SURFACES">9</constant>
     <constant name="GC_VIOLENT_CONTENT">0</constant>
     <constant name="GEAR_CLONE">0</constant>
     <constant name="GEAR_STEAL">1</constant>

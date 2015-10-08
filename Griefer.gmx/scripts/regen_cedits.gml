@@ -51,12 +51,17 @@ else
         blah.hue = 218
         blah.sat = 100
         blah.val = 100
-        blah.color = web_hsv(chue,csat,colval)
-        blah.active_color = web_hsv(chue*chue_mult,csat*csat_mult,someval*cval_mult)
+        blah.color = web_hsv(chue,csat,0)
+        blah.active_color = web_hsv(chue*chue_mult,csat*csat_mult,someval*0)
         blah.text_halign = fa_left
         blah.text_xoff = 72+5
         blah.text_color = text_color
         blah.image = icon_settings
+        with blah
+        {
+            modal_aligns()
+            modal_recalculate_snap()
+        }
         return true
     }
     else
@@ -88,6 +93,11 @@ else
         blah.text_xoff = 72+5
         blah.text_color = text_color
         blah.image = icon_settings
+        with blah
+        {
+            modal_aligns()
+            modal_recalculate_snap()
+        }
         bdelay += binc
         
         //USE KEYBOARD BUTTON
@@ -105,6 +115,11 @@ else
         blah.text_xoff = 72+5
         blah.text_color = text_color
         blah.image = icon_settings
+        with blah
+        {
+            modal_aligns()
+            modal_recalculate_snap()
+        }
         bdelay += binc
         
         //USE GAMEPAD BUTTON
@@ -122,6 +137,11 @@ else
         blah.text_xoff = 72+5
         blah.text_color = text_color
         blah.image = icon_settings
+        with blah
+        {
+            modal_aligns()
+            modal_recalculate_snap()
+        }
         
         bdelay += binc
     }    
@@ -158,7 +178,7 @@ else
                 ohue = 0
             } else if i=GC_KILL_FEED or i=GC_KILL_FEED_ALPHA or i=GC_CHAT_FEED or i=GC_CHAT_FEED_ALPHA or i=GC_SHOW_XP or i=GC_CONTROL_HINTS{
                 ohue = 218
-            } else if i=GC_PARTICLES or i=GC_SURFACES or i=GC_RAGDOLLS or i=GC_FPS or i=GC_AA_LEVEL {
+            } else if i=GC_PARTICLES or i=GC_SURFACES or i=GC_RAGDOLLS or i=GC_FPS or i=GC_AA_LEVEL or i=GC_VSYNC{
                 ohue = 150
             } else if i=GC_FULLSCREEN or i=GC_PASSWORD or i=GC_DEFAULTS {
                 ohue = 283

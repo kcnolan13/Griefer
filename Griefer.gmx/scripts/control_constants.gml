@@ -1,5 +1,7 @@
 //general control constants
 
+global.vsync = false
+
 global.optimize_graphics = "Graphics"
 global.optimize_fps = "Frame Rate"
 global.txt_restore = "[Click to Restore]"
@@ -16,6 +18,9 @@ global.gc[GC_CONTROL_HINTS,2] = false //is_sens
 global.gc[GC_AA_LEVEL,0] = "SWF Anti-Aliasing"
 global.gc[GC_AA_LEVEL,1] = 1
 global.gc[GC_AA_LEVEL,2] = true //is_sens
+global.gc[GC_VSYNC,0] = "V-Sync"
+global.gc[GC_VSYNC,1] = "Off"
+global.gc[GC_VSYNC,2] = false //is_sens
 global.gc[GC_KILL_FEED,0] = "Show Kill Feed"
 global.gc[GC_KILL_FEED,1] = "On Action"
 global.gc[GC_KILL_FEED,2] = false

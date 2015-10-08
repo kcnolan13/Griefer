@@ -76,6 +76,10 @@ if abs(intensity-intensity_target) &lt; 0.005
     
 light.intensity = intensity
 light.rot = image_angle
+
+if not truthval(global.gc[GC_PARTICLES,1])
+    visible = true
+else visible = false
 </string>
           </argument>
         </arguments>

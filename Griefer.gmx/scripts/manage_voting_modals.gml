@@ -1,6 +1,30 @@
 ///manage_voting_modals
 if room = rm_lobby 
 {
+    
+    if not match_countdown and is_avatar_leader(myAvatar())
+    {
+        if time_after_readies >= 0
+            time_after_readies++
+            
+        if time_after_readies > 30*5
+        {
+            all_avs_ready = true
+            with avatar
+            {
+                if not varRead("ready")
+                    other.all_avs_ready = false
+            }
+            if all_avs_ready
+            {
+                with bn_ready sent_ready = true
+                printf("::: WHY ARE WE NOT READY YET? LOBBY LEADER SENDING EVERYONE_READY")
+                sendMessageReal("everyone_ready",FL_NORMAL)
+                time_after_readies = 0
+            }
+        }
+    }
+
     if not lock_armory and not instance_exists(bn_vote) and rtime() > 30*4 and varRead("next_map1") >= 0 and varRead("next_map2") >= 0 and varRead("next_map3") >= 0
     {
         next_map_final = noone
@@ -21,6 +45,8 @@ if room = rm_lobby
             ID.map_num = mnums[i]
             ID.birth_delay = bdelay
             bdelay += binc
+            
+            time_after_readies = 0
             
             //assign images
             ID.image = mapsnap_base+ID.map_num+1

@@ -216,6 +216,11 @@ if behave_match
     blah.text_xoff = 72+5
     blah.text_color = text_color
     blah.image = icon_settings
+    with blah
+    {
+        modal_aligns()
+        modal_recalculate_snap()
+    }
     bdelay += binc
     
     //GEN SETTINGS
@@ -233,6 +238,11 @@ if behave_match
     blah.text_xoff = 72+5
     blah.text_color = text_color
     blah.image = icon_settings
+    with blah
+    {
+        modal_aligns()
+        modal_recalculate_snap()
+    }
     bdelay += binc
     
     //CONTROL SETTINGS
@@ -250,6 +260,11 @@ if behave_match
     blah.text_xoff = 72+5
     blah.text_color = text_color
     blah.image = icon_settings
+    with blah
+    {
+        modal_aligns()
+        modal_recalculate_snap()
+    }
     bdelay += binc
 }
 else
@@ -269,6 +284,11 @@ else
     blah.text_xoff = 72+5
     blah.text_color = text_color
     blah.image = icon_settings
+    with blah
+    {
+        modal_aligns()
+        modal_recalculate_snap()
+    }
     bdelay += binc
 
     //CONTROL SETTINGS
@@ -286,6 +306,11 @@ else
     blah.text_xoff = 72+5
     blah.text_color = text_color
     blah.image = icon_settings
+    with blah
+    {
+        modal_aligns()
+        modal_recalculate_snap()
+    }
     bdelay += binc
     
     //LOG OUT
@@ -303,6 +328,11 @@ else
     blah.text_xoff = 72+5
     blah.text_color = text_color
     blah.image = icon_quit
+    with blah
+    {
+        modal_aligns()
+        modal_recalculate_snap()
+    }
     bdelay += binc
 }
 

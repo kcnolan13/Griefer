@@ -45,6 +45,8 @@ display_set_gui_size(WVIEW,HVIEW)
 disconnect_on_game_end = true
 reconnect_timer = 0
 
+cross_referenced_options = false
+
 //config file
 ini_open(grieferURL+"/Config/GameState.ini")
 ini_write_real("Main","GameRunning",true)
@@ -58,6 +60,8 @@ else
 snapshot_mode = false
 snapshot_number = 1
 snapshot_auto = false
+
+time_after_readies = -1
 
 draw_you_killed_max = 75
 draw_you_killed = false
@@ -1244,7 +1248,7 @@ drew_armory_grid = false
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///keepalive and force sync and full_screen sync and draw_you_killed
+            <string>///keepalive and force sync + full_screen + vsync + draw_you_killed
 
 if reconnect_timer
 {
@@ -1267,6 +1271,33 @@ if full_screen != fs
 {
     full_screen = fs
     window_set_fullscreen(full_screen)
+}
+
+if not cross_referenced_options and rtime() &gt; 30*2.5
+{
+    cross_referenced_options = true
+    
+    var swf_aa = global.gc[GC_AA_LEVEL,1]
+    if draw_get_swf_aa_level() != swf_aa
+    {
+        draw_set_swf_aa_level(swf_aa)
+        
+    }
+    
+    var aa = display_aa
+    if aa &lt; 2       aa = 0
+    else if aa &lt; 4  aa = 2
+    else if aa &lt; 8  aa = 4
+    else            aa = 8
+    if truthval(global.gc[GC_VSYNC,1]) != global.vsync
+    {
+        global.vsync = truthval(global.gc[GC_VSYNC,1])
+        if not truthval(global.gc[GC_VSYNC,1])
+            display_reset(0,false)
+        else
+            display_reset(aa,true)
+    }
+    
 }
 
 if force_sync_countdown
@@ -2132,7 +2163,7 @@ if in_match()
             <kind>1</kind>
             <string>///END MATCH CONDITION -- gear stealing and lottery and whatnot
 
-if instance_number(player) &gt; 0 and room_counter &gt; 10*30
+if instance_number(player) &gt; 0 and rtime() &gt; 10*30
 {
     if (match_countdown &gt; 0)
     {
@@ -2172,7 +2203,7 @@ if instance_number(player) &gt; 0 and room_counter &gt; 10*30
             sendMessageReal("end_match",stat_manager.stat_flag)
             room_goto(rm_lobby)
         }
-    } else if not varRead("end_match_coming") and (varRead("game_mode") != "tdm" or instance_exists(local_player) and (is_team_leader(local_player) or bot_match)) {
+    } else if not varRead("end_match_coming") and instance_exists(local_player) {//(varRead("game_mode") != "tdm" or instance_exists(local_player) and (is_team_leader(local_player) or bot_match)) {
     
         //possibly trigger a match end based on local player's kills
         team_kills = objVarRead(local_player,"match_kills")//get_netstat_pname(varRead("pName"),"kills")
@@ -2627,6 +2658,7 @@ if room = rm_login
 
 //30 = 60 --&gt; now do this after objects that have init based on room speed have a chance to go
 alarm[7] = 2
+cross_referenced_options = false
 
 global.xoff = 0
 
@@ -2700,6 +2732,7 @@ varWrite("gearsteal_computed",false)
 
 if room = rm_lobby
 {
+    time_after_readies = -1
     varWrite("next_map", -54)
     varWrite("next_map1",-54)
     varWrite("next_map2",-54)

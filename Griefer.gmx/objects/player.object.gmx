@@ -1681,13 +1681,18 @@ if (varRead("controllable")) or objVarRead(net_manager,"end_match_coming")
           <argument>
             <kind>1</kind>
             <string>///wall sliding
+
+/*if slide_left and id = myPlayer()
+{
+    printf("::: rolling = "+string(rolling)+", crawling = "+string(crawling)+", wall_delay = "+string(wall_delay)+", roll_timer = "+string(roll_timer)+", sprite_index = "+string(sprite_index))
+}*/
+
 if (varRead("controllable")) or match_ending()
 {
     ///walljumping
     if wall_delay &gt; 0 
     {
         wall_delay = sub_real(wall_delay,1)
-        return false
     }
     
     if bail_slide_timer
@@ -1706,48 +1711,52 @@ if (varRead("controllable")) or match_ending()
             //don't get stuck on top corners
             if collision_rectangle(bbox_left+4,bbox_top+42,bbox_right+4,bbox_bottom-42,block,true,true) &amp;&amp; (collision_rectangle(bbox_left+4,y-10,bbox_right+4,y-9,block,true,true)&amp;&amp;collision_rectangle(bbox_left+4,y+20,bbox_right+4,y+25,block,true,true))
             {
-     
-                if (slide_left = 0)
+                if not wall_delay
                 {
-                    bail_slide_timer = 0
-                    slide_left = 1
-                    ID = collision_rectangle(bbox_left+4,bbox_top+42,bbox_right+4,bbox_bottom-42,block,true,true)
-                    varWrite("myX",ID.bbox_left-3-sprite_get_width(sprite_index)/2)
-                }
+                    if (slide_left = 0)
+                    {
+                        bail_slide_timer = 0
+                        slide_left = 1
+                        ID = collision_rectangle(bbox_left+4,bbox_top+42,bbox_right+4,bbox_bottom-42,block,true,true)
+                        varWrite("myX",ID.bbox_left-3-sprite_get_width(sprite_index)/2)
+                    }
+                        
+                    hsp = 0
                     
-                hsp = 0
-                
-                if gfric_max != 2
-                {grav = 0.5 if vsp&gt;12 vsp=12}
-                else
-                {if vsp&lt;0 grav=grav_slide else grav=grav_slide if vsp&gt;slide_speed*mass vsp=slide_speed*mass}
-                
-                animation_wall()
-                varWrite("animation_xscale",-1)
+                    if gfric_max != 2
+                    {grav = 0.5 if vsp&gt;12 vsp=12}
+                    else
+                    {if vsp&lt;0 grav=grav_slide else grav=grav_slide if vsp&gt;slide_speed*mass vsp=slide_speed*mass}
+                    
+                    animation_wall()
+                    varWrite("animation_xscale",-1)
+                }
             }
             else slide_left = 0
             
             if !collision_rectangle(bbox_left+2,bbox_top,bbox_right-2,bbox_bottom+10,block,true,true)
             if collision_rectangle(bbox_left-4,bbox_top+42,bbox_right-4,bbox_bottom-42,block,true,true) &amp;&amp; (collision_rectangle(bbox_left-4,y-10,bbox_right-4,y-9,block,true,true)&amp;&amp;collision_rectangle(bbox_left-4,y+20,bbox_right-4,y+25,block,true,true))
             {
-                
-                if slide_right = 0
-                {
-                    bail_slide_timer =0
-                    slide_right = 1
-                    ID = collision_rectangle(bbox_left-4,bbox_top+42,bbox_right-4,bbox_bottom-42,block,true,true)
-                    varWrite("myX",ID.bbox_right+1+sprite_get_width(sprite_index)/2)
+                if not wall_delay
+                {   
+                    if slide_right = 0
+                    {
+                        bail_slide_timer =0
+                        slide_right = 1
+                        ID = collision_rectangle(bbox_left-4,bbox_top+42,bbox_right-4,bbox_bottom-42,block,true,true)
+                        varWrite("myX",ID.bbox_right+1+sprite_get_width(sprite_index)/2)
+                    }
+                    
+                    hsp = 0
+                    
+                    if gfric_max != 2
+                    {grav = 0.5 if vsp&gt;12 vsp=12}
+                    else
+                    {if vsp&lt;0 grav=grav_slide else grav=grav_slide if vsp&gt;slide_speed*mass vsp=slide_speed*mass}
+                    
+                    animation_wall()
+                    varWrite("animation_xscale",1)
                 }
-                
-                hsp = 0
-                
-                if gfric_max != 2
-                {grav = 0.5 if vsp&gt;12 vsp=12}
-                else
-                {if vsp&lt;0 grav=grav_slide else grav=grav_slide if vsp&gt;slide_speed*mass vsp=slide_speed*mass}
-                
-                animation_wall()
-                varWrite("animation_xscale",1)
             }
             else slide_right = 0
         }
@@ -1778,7 +1787,13 @@ if roll_timer
     roll_timer = sub_real(roll_timer,1)
     
     if slide_left or slide_right
+    {
         roll_timer = 0
+        rolling = 0
+        crawling = 0
+        varWrite("animation_speed",0)
+        redirect_counter = 0
+    }
 }
 if (varRead("controllable")) or objVarRead(net_manager,"end_match_coming")
 {
