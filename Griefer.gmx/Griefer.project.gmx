@@ -1091,6 +1091,10 @@
         <script>scripts\bpart_has_cache.gml</script>
         <script>scripts\bpart_has_armor_lists.gml</script>
         <script>scripts\num_new_bparts.gml</script>
+        <script>scripts\manage_cache.gml</script>
+        <script>scripts\remove_duplicate_bparts.gml</script>
+        <script>scripts\sort_bpart_list.gml</script>
+        <script>scripts\save_cache.gml</script>
       </scripts>
     </scripts>
     <scripts name="netvars">

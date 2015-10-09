@@ -21,7 +21,10 @@ var dest_list = argument2
         
     if ds_exists(dest_list,ds_type_list)
     {
+        //manage_cache after a short delay
+        net_manager.alarm[11] = 35
         ds_list_add(dest_list,ID)
+        
         if SUPER_DEBUG
         {
             var ind = ds_list_size(dest_list)-1

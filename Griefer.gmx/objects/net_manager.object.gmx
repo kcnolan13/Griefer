@@ -477,6 +477,7 @@ varWrite("uniqueId","-1")
 varWrite("end_match_coming",false)
 varWrite("using_teams",false)
 varWrite("lobby_wait_time",45)
+varWrite("cache","")
 
 griefer_url = 'http://www.puddlesquid.com/games/griefer/';
 
@@ -599,6 +600,30 @@ instance_create(x,y,xp_bar)
             <string>///free net vars
 if ds_exists(netvars,ds_type_map)
     ds_map_destroy(netvars)
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="11">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///manage_cache()
+manage_cache()
 </string>
           </argument>
         </arguments>
@@ -1201,6 +1226,7 @@ if keyboard_check(vk_control) and keyboard_check(vk_alt) and keyboard_check(vk_e
 {
    delete_invisible_gear()
 }
+
 </string>
           </argument>
         </arguments>
@@ -1917,7 +1943,7 @@ manage_voting_modals()
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///bparts_ready
+            <string>///bpart management + cache management
 for (var i=0; i&lt;NUM_BPARTS; i++)
 {
     if not bparts_ready[i] and room != rm_login
@@ -1931,6 +1957,65 @@ for (var i=0; i&lt;NUM_BPARTS; i++)
             instantiate_all_bparts()
         }
     }
+}
+
+if not in_match() and room != rm_login
+{
+    if menmode() = "armory" and nth_frame(30*6)
+    {
+        manage_cache()
+    }
+}
+
+if varRead("cache") != ""
+{
+    //instantiate items that persisted from last time's cache
+    printf("::: Importing Persistent Bparts Cache Data")
+    var str = varRead("cache")
+    printf("::: cache_str = "+string(str))
+    while string_length(str) &gt; 0
+    {
+        //printf("::: cache_str = "+string(str))
+        
+        var item
+        var first_comma = string_pos(",",str)
+        if first_comma &gt; 0
+        {
+            item = string_copy(str,1,first_comma-1)
+            str = string_copy(str,first_comma+1,string_length(str)-first_comma)
+            source = bpart_extract_source(item)
+            item = bpart_extract_sprite(item)
+            if sprite_exists(item)
+                printf("::: parsed next item: "+string(sprite_get_name(item)))
+            else
+                printf("ERROR: item sprite does not exist 1")
+        }
+        else
+        {
+            item = str
+            str = ""
+            source = bpart_extract_source(item)
+            item = bpart_extract_sprite(item)
+            if sprite_exists(item)
+                printf("::: parsed last item: "+string(sprite_get_name(item)))
+            else
+                printf("ERROR: item sprite does not exist 2")
+        }
+        
+        if item &gt; 0 and sprite_exists(item)
+        {
+            printf("::: instantiating "+string(sprite_get_name(item)))
+            instantiate_bpart(item,source,global.cache)
+            //call for cache management
+            alarm[11] = 15
+        }
+        else
+        {
+            printf("ERROR: invalid item in cache import: "+string(item))
+        }
+        
+    }
+    varWrite("cache","")
 }
 </string>
           </argument>
@@ -3103,6 +3188,8 @@ else
           <argument>
             <kind>1</kind>
             <string>///end the game
+
+save_cache()
 
 if disconnect_on_game_end
     sendMessageReal("game_end",true)
