@@ -187,7 +187,11 @@ var syncVersionHash = function() {
 		md5hash.update(data,'utf8');
 	});
 	stream.on('end',function() {
-		global.version_hash = md5hash.digest('hex');
+		var new_hash = md5hash.digest('hex');
+		if (global.version_hash != new_hash && global.version_hash != "V0.0") {
+			log.log("New Version Hash: "+new_hash);
+		}
+		global.version_hash = new_hash;
 		log.log(STD,"Version Hash: "+global.version_hash);
 		if (global.MULTITHREAD && cluster.isMaster) {
 			message_workers({id: "sync_version_hash", version_hash: global.version_hash});
@@ -802,6 +806,22 @@ var configure_match = function(playerSubGroup, gameRoom, wait_time) {
 	{
 		mapNum3 = Math.floor((Math.random() * num_maps));
 		loops ++;
+	}
+
+	if (global.maps.length > 0)
+	{
+		mapNum1 = global.maps[Math.floor((Math.random()*global.maps.length-0.0001))];
+		mapNum2 = global.maps[Math.floor((Math.random()*global.maps.length-0.0001))];
+		loops = 0;
+		while (mapNum2 == mapNum1 && loops < 100) {
+			mapNum2 = global.maps[Math.floor((Math.random()*global.maps.length-0.0001))];
+			loops++
+		}
+		mapNum3 = global.maps[Math.floor((Math.random()*global.maps.length-0.0001))];
+		while ((mapNum3 == mapNum1 || mapNum3 == mapNum2) && loops < 100) {
+			mapNum3 = global.maps[Math.floor((Math.random()*global.maps.length-0.0001))];
+			loops++
+		}
 	}
 
 	var dat_wait_time = wait_time;

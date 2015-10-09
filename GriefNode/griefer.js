@@ -404,7 +404,7 @@ if (cluster.isWorker || !MULTITHREAD)
             return false;
 
         if (cluster.isWorker) {
-          console.log("WORKER "+cluster.worker.id+": "+socket.myPlayer.pName+" Disconnected");
+          log.log("caught disconnect from "+socket.myPlayer.pName+"'s socket");
           process.send({id:"player_destroy",fsocket:composer.fsocket(socket)});
         }
 
@@ -545,6 +545,15 @@ if (cluster.isWorker || !MULTITHREAD)
         socket.emit('ping',response);
         console.log("ping");
         //log.log(STD,"\nPING\n");
+      }
+
+      else if (message.msg == "game_end")
+      {
+        var str = "Disconnected Anonymous Socket";
+        if (socket.myPlayer)
+          str = "Disconnected "+socket.myPlayer.pName+"'s Socket";
+        log.log(str);
+        socket.disconnect('unauthorized');
       }
 
       else if (message.msg == "change_password")

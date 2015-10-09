@@ -1267,7 +1267,7 @@ var sendNetManPlayerStats = function(socket, objIndex, uniqueId)
 {
 	var theDude = socket.myPlayer;
 	var username = socket.myPlayer.pName;
-	var columns = ['stats.rank','stats.true_skill','stats.time','stats.xp','stats.global_rank','stats.wins','stats.losses','stats.kills','stats.deaths','stats.assists'];
+	var columns = ['users.cache','stats.rank','stats.true_skill','stats.time','stats.xp','stats.global_rank','stats.wins','stats.losses','stats.kills','stats.deaths','stats.assists'];
 	var parts = ['users.hat','users.helmet','users.torso','users.shoulder','users.forearm','users.leg','users.shin','users.foot','users.prop'];
 	for (var i=0; i<NUM_BPARTS; i++)
 	{
@@ -1309,8 +1309,13 @@ var sendNetManPlayerStats = function(socket, objIndex, uniqueId)
 			var param = columns[j].substring(columns[j].indexOf('.')+1,columns[j].length);
 			var result = rows[0][param];
 
+			if (result == null)
+			{
+				result = "";
+			}
+
 			var message = composer.objUpdate(objIndex, uniqueId, param, result, FL_NORMAL);
-			log.log("verbose",message);
+			log.log("verbose",param+": "+result);
 			pkgDude.messages.push(message);
 		}
 		

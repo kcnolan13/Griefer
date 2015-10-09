@@ -1,5 +1,5 @@
 //game hash
-global.version_hash = "V119"
+global.version_hash = "V0.0"
 
 //general flags
 global.FL_NORMAL = 0;
@@ -35,11 +35,13 @@ global.SOCKETS = "sock"
 global.WARN = "warn"
 global.socket_string = ""
 
-//globals
+
+global.maps = //[0,1,2]//[4,5,8,3,19];
+global.num_maps = 21; //21
+
 global.gamePort = 8080;
 global.fps = 30
 global.num_game_rooms = 8;
-global.num_maps = 21; //21
 global.gravatarObjIndex = 3;
 global.avatarObjIndex = 2;
 global.playerObjIndex = 1;
