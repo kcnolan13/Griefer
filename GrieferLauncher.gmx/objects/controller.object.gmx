@@ -73,7 +73,7 @@ title_text_timer = 0
 
 baseURL = "http://griefer.cloudapp.net"
 serverURL = baseURL+":8080"
-remoteDownloadURL = baseURL+"/Griefer/Applications/Griefer.exe"
+remoteDownloadURL = baseURL+"/Shared/Griefer.exe"
 downloadURL = string_copy(working_directory,0,string_pos("AppData",working_directory)) + "ppData\Local\GrieferLauncher\Downloads\Griefer.exe"
 downloadURL = string_replace_all(downloadURL,"\","/")
 file = NO_HANDLE
