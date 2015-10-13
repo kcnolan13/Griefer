@@ -96,8 +96,8 @@ exports.connect = function(connectMe, callback)
 {
 	connectMe = mysql.createConnection({
 		host	: 	'localhost',
-		user	: 	'Kyle',
-		password : 	'm@ntadiabl0',
+		user	: 	'kyle',
+		password : 	'boomer92',
 		database : 	'griefer'
 	});
 
@@ -1398,4 +1398,4 @@ var sendCompletePlayerStats = function(socket, gameRoom, objIndex, broadcast_onl
 	});	
 
 }
-exports.sendCompletePlayerStats = sendCompletePlayerStats
+exports.sendCompletePlayerStats = sendCompletePlayerStats;
