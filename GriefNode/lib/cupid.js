@@ -182,7 +182,7 @@ exports.bigMessage = bigMessage
 
 var syncVersionHash = function() {
 	var md5hash = crypto.createHash('md5');
-	var stream = fs.createReadStream('C:\\inetpub\\wwwroot\\griefer\\release\\Griefer.exe');
+	var stream = fs.createReadStream('../Applications/Griefer.exe');
 	stream.on('data',function(data) {
 		md5hash.update(data,'utf8');
 	});
@@ -1203,12 +1203,12 @@ var makeMatches = function(){
 									master_join_room(eachSocket,gameRoom);
 									fsocket_emit(eachSocket, 'you_joined_match', eachSocket.myPlayer);
 									io.to(eachSocket.myPlayer.room).emit('new_player_in_group', eachSocket.myPlayer);
-								}
 
-								//make everyone go to the lobby -- where stuff is going to get real
-								var firstMsg = composer.genMessage("goto_lobby",FL_NORMAL);
-								log.log(CUPID,firstMsg.name+" : "+firstMsg.msg+" : "+firstMsg.val);
-								io.to(gameRoom).emit('general_message',firstMsg);
+									//make everyone go to the lobby -- where stuff is going to get real
+									var firstMsg = composer.genMessage("goto_lobby",FL_NORMAL);
+									log.log(CUPID,firstMsg.name+" : "+firstMsg.msg+" : "+firstMsg.val);
+									fsocket_emit(eachSocket, 'general_message', firstMsg);
+								}
 
 								//CREATE ALL PLAYER AVATARS
 								setTimeout(function(playerSubGroup, gameRoom) {
