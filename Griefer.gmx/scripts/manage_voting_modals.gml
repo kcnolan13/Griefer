@@ -13,14 +13,21 @@ if room = rm_lobby
             with avatar
             {
                 if not varRead("ready")
+                {
                     other.all_avs_ready = false
+                }
             }
             if all_avs_ready
             {
+                with avatar
+                {
+                    varWrite("ready",true)
+                    obj_update_real(id,"ready",FL_NORMAL)
+                }
                 with bn_ready sent_ready = true
                 printf("::: WHY ARE WE NOT READY YET? LOBBY LEADER SENDING EVERYONE_READY")
                 sendMessageReal("everyone_ready",FL_NORMAL)
-                time_after_readies = 0
+                time_after_readies = -1
             }
         }
     }

@@ -334,7 +334,7 @@ if not in_match() and room != rm_login
                 break
                 
                 default:
-                    if accolades_received() and not spawned_grid
+                    if accolades_received() and not spawned_grid and not waiting_for_data()
                     {
                         var bg_yoff = 10
                         

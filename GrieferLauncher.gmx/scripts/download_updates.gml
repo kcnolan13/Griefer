@@ -17,4 +17,4 @@ with modal_dialogue
     }
 }
 
-file = http_get_file("http://www.puddlesquid.com/griefer/release/Griefer.exe","Downloads/Griefer.exe")
+file = http_get_file(remoteDownloadURL,"Downloads/Griefer.exe")
