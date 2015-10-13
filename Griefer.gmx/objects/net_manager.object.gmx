@@ -34,7 +34,7 @@ grieferURL = string_copy(working_directory,0,string_pos("AppData",working_direct
 launcherURL = string_copy(working_directory,0,string_pos("AppData",working_directory)) + "ppData\Local\GrieferLauncher\"
 launcherURL = string_replace_all(launcherURL,"\","/")
 
-serverURL = "http://www.puddlesquid.com:8080"
+serverURL = "http://griefer.cloudapp.net:8080"
 show_debug_stats = false
 show_debug_overlay(show_debug_stats)
 draw_set_swf_aa_level(1)
@@ -479,7 +479,7 @@ varWrite("using_teams",false)
 varWrite("lobby_wait_time",45)
 varWrite("cache","")
 
-griefer_url = 'http://www.puddlesquid.com/games/griefer/';
+griefer_url = 'http://www.puddlesquid.com/';
 
 local_player = NO_HANDLE
 room_counter = 0
