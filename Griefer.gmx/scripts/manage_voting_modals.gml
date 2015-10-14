@@ -26,7 +26,7 @@ if room = rm_lobby
                 }
                 with bn_ready sent_ready = true
                 printf("::: WHY ARE WE NOT READY YET? LOBBY LEADER SENDING EVERYONE_READY")
-                sendMessageReal("everyone_ready",FL_NORMAL)
+                //sendMessageReal("everyone_ready",FL_NORMAL)
                 time_after_readies = -1
             }
         }

@@ -36,10 +36,10 @@ splat_xscale = random_range(0.3,2)
 splat_yscale = splat_xscale
 
 hue_adder = 0
-if net_manager.serverURL = net_manager.homeURL
+if net_manager.serverURL != net_manager.homeURL
 {
     //popup_alert(WVIEW/2,HVIEW/2,"blah","")
-    hue_adder = -12.5
+    hue_adder = -20
 }
 splat_color = web_hsv(random_range(242,360)+hue_adder,100,100) //random(10)
 splat_alpha = random_range(0.4,1)

@@ -36,7 +36,7 @@ launcherURL = string_replace_all(launcherURL,"\","/")
 
 azureURL = "http://griefer.cloudapp.net:8080"
 homeURL = "http://www.puddlesquid.com:8080"
-serverURL = azureURL
+serverURL = homeURL
 
 show_debug_stats = false
 show_debug_overlay(show_debug_stats)

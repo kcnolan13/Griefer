@@ -67,7 +67,7 @@ if not in_match() or match_ending()
     }
 }
 
-if show_popup and (accolade_manager.acc_popup_id = id or accolade_manager.acc_popup_id = noone)
+if show_popup and (accolade_manager.acc_popup_id = id or accolade_manager.acc_popup_id = noone) and not in_match()
 {
     accolade_manager.acc_popup_id = id
     depth = depth_show_popup

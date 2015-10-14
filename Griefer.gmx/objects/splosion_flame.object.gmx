@@ -118,9 +118,11 @@ for (i=0; i&lt;instance_number(player); i++)
     }
 }
 
-
-if part_emitter_exists(particle_controller.sys_flame,em)
-    part_emitter_destroy(particle_controller.sys_flame,em)
+if instance_exists(particle_controller)
+{
+    if part_emitter_exists(particle_controller.sys_flame,em)
+        part_emitter_destroy(particle_controller.sys_flame,em)
+}
 
 event_inherited()
 </string>

@@ -11,7 +11,7 @@ av_who_might_be_leader = av
 av_is_leader = true
 with avatar
 {
-    if varRead("pNum") > objVarRead(other.av_who_might_be_leader,"pNum") and id != other.av_who_might_be_leader.id
+    if varRead("pNum") > objVarRead(other.av_who_might_be_leader,"pNum") and id != other.av_who_might_be_leader
         other.av_is_leader = false
 }
 

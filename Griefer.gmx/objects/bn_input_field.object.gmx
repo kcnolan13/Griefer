@@ -136,8 +136,9 @@ if auto_capitalize or is_username
 
 if active
 {
+    text = string_replace_all(text,"#","")
     //PRESS BACKSPACE
-    if keyboard_check(vk_backspace)
+    if keyboard_check_pressed(vk_backspace)
     {
         if not backspace_counter    
         {
@@ -343,10 +344,10 @@ if not active and auto_start
 
     if string_length(keyboard_string) &lt; max_length
     {
-        text = keyboard_string
+        text = string_replace_all(keyboard_string,"#","")
         audio(snd_keystroke,1)
     } else {
-        keyboard_string = text
+        keyboard_string = string_replace_all(text,"#","")
     }   
     
     event_perform(ev_mouse,ev_global_left_press)
