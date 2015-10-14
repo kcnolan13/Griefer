@@ -182,7 +182,7 @@ exports.bigMessage = bigMessage
 
 var syncVersionHash = function() {
 	var md5hash = crypto.createHash('md5');
-	var stream = fs.createReadStream('../Applications/Griefer.exe');
+	var stream = fs.createReadStream('../../Shared/Griefer.exe');
 	stream.on('data',function(data) {
 		md5hash.update(data,'utf8');
 	});
