@@ -44,7 +44,7 @@ ID = instance_create(xi,yi,modal_dialogue)
     ID.load_point_rad_min = 5
     ID.load_points = 3
     ID.load_text_hsep = 10
-    ID.birth_delay = 20
+    ID.birth_delay = 40
     
     if in_match()
     {

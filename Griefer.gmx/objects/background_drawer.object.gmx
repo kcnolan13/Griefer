@@ -362,6 +362,9 @@ else
     
     draw_rectangle_colour(0,HVIEW/6,WVIEW,HVIEW,color1,color1,color2,color2,false)
 }
+
+//var col = c_black
+//draw_rectangle_colour(0,0,room_width,room_height,col,col,col,col,false)
 </string>
           </argument>
         </arguments>

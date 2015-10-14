@@ -644,6 +644,17 @@
           <argCount>0</argCount>
           <args/>
         </function>
+        <function>
+          <name>launchGame</name>
+          <externalName>launchGame</externalName>
+          <kind>12</kind>
+          <help>launchGame(game_path)</help>
+          <returnType>2</returnType>
+          <argCount>1</argCount>
+          <args>
+            <arg>1</arg>
+          </args>
+        </function>
       </functions>
       <constants/>
     </file>

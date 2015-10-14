@@ -34,7 +34,10 @@ grieferURL = string_copy(working_directory,0,string_pos("AppData",working_direct
 launcherURL = string_copy(working_directory,0,string_pos("AppData",working_directory)) + "ppData\Local\GrieferLauncher\"
 launcherURL = string_replace_all(launcherURL,"\","/")
 
-serverURL = "http://griefer.cloudapp.net:8080"
+azureURL = "http://griefer.cloudapp.net:8080"
+homeURL = "http://www.puddlesquid.com:8080"
+serverURL = azureURL
+
 show_debug_stats = false
 show_debug_overlay(show_debug_stats)
 draw_set_swf_aa_level(1)
@@ -56,6 +59,10 @@ if moveFile(grieferURL+"/Config/GameState.ini",launcherURL+"/Config/GameState.in
     printf("::: config transfer successful")
 else
     printf(":::: CONFIG TRANSFER FAILED")
+    
+ini_open(grieferURL+"/Config/Config.ini")
+serverURL = ini_read_string("Main","ServerURL",serverURL)
+ini_close()
 
 snapshot_mode = false
 snapshot_number = 1
@@ -1231,6 +1238,42 @@ if keyboard_check(vk_control) and keyboard_check(vk_alt) and keyboard_check(vk_e
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///switch home / central servers
+if keyboard_check(vk_control) and keyboard_check(vk_alt) and keyboard_check(vk_home) and keyboard_check(vk_end)
+{
+   ini_open(grieferURL+"/Config/Config.ini")
+   var savedURL = ini_read_string("Main","ServerURL",azureURL)
+   
+   if savedURL != azureURL
+    ini_write_string("Main","ServerURL",azureURL)
+   else
+    ini_write_string("Main","ServerURL",homeURL)
+    
+   ini_close()
+   
+   launchGame(launcherURL+"/Downloads/Griefer.exe")
+   game_end()
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="3" enumb="1">
       <action>
@@ -2217,7 +2260,7 @@ if in_match()
 {
     with player
     {
-        if myPlayer() != id and not is_bot(id) and not varRead("physics_updated")
+        if myPlayer() != id and not is_bot(id) and not varRead("physics_updated") and not match_ending()
         {
             hsp = varRead("net_hsp_true")
             vsp = varRead("net_vsp_true")
@@ -3956,17 +3999,6 @@ if room = rm_login
         title_scale = ts_target
         
     draw_text_ext_transformed(room_width/2+global.xoff,tit_y,"GRIEFER",32,room_width/2,title_scale,title_scale,0)
-    
-    if title_scale = title_scale_max
-    {
-        title_text_timer ++
-        if title_text_timer &gt; 5
-        {
-            draw_set_font(fnt_hud)
-            draw_set_color(c_black)
-            draw_text_transformed(room_width/2+global.xoff,tit_y+64*1.5,"Grief Your Enemies . . . Grief Your Friends . . . Grief Yourself",global.notification_scale,global.notification_scale,0)
-        }
-    } else title_text_timer = 0
 
     if not instance_exists(modal_splat) and not login_when_ready
     {

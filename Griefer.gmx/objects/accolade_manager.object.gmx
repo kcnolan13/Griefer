@@ -84,7 +84,7 @@ init_grid_row('ink_kill','Poison Kill','Poison Grenade Kill',acc_ink_kill,      
 init_grid_row('cant_touch_dis',"Can't Touch Dis",'3 Kills Taking No Damage',acc_cant_touch_dis, 225,3,99,FL_NORMAL,snd_cant_touch_dis,row_num) row_num++
 init_grid_row('mvp','MVP','Most Points in Match',acc_mvp,                                       85,0,99,FL_NORMAL,snd_mvp,row_num) row_num++
 init_grid_row('highest_kd','Highest KDR','Highest Kill/Death Ratio in Match',acc_highest_kd,    60,0,99,FL_NORMAL,snd_highest_kdr,row_num) row_num++
-init_grid_row('10kd','Smooth Operator','10+ Kills, No Deaths',acc_10kd,                         249,10,99,FL_NORMAL,snd_10kd,row_num) row_num++
+init_grid_row('10kd','Achilles','10+ Kills, No Deaths',acc_10kd,                                249,10,99,FL_NORMAL,snd_10kd,row_num) row_num++
 init_grid_row('ninja','Ninja','Survive for 60 Seconds Without Taking Damage',acc_ninja,         70,60,5,FL_NORMAL,snd_ninja,row_num) row_num++
 init_grid_row('survivor','Survivor','Survive a Near-Death-Experience',acc_survivor,             25,0,99,FL_NORMAL,snd_survivor,row_num) row_num++
 init_grid_row('3ass','Combat Support','3 Assists Without Dying',acc_3ass,                       50,3,99,FL_NORMAL,snd_3ass,row_num) row_num++
