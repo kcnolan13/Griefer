@@ -1,0 +1,2 @@
+Start-Process '.\nssm.exe' -ArgumentList ("start Redis")
+Start-Process '.\nssm.exe' -ArgumentList ("start Griefer")

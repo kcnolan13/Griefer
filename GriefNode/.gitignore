@@ -2,3 +2,5 @@ log\
 node_modules\
 *.log*
 *node_modules*
+nssm-2.24\
+*nssm*
