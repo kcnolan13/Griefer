@@ -61,6 +61,7 @@ if (cluster.isMaster)
 
   var server = http.createServer();
   io = sio.listen(server);
+  io.set('transports', ['websocket']);
   io.adapter(redis({ host: 'localhost', port: 6379 }));
 
   //initialize logging
@@ -208,19 +209,12 @@ if (cluster.isWorker)
   dbman.connect(conn, function() {
   });
 
-  var ping_master = false;
-  if (ping_master) {
-    setInterval(function(){
-      var msg = {id: "ping_master", msg: "s my d bitch"};
-      process.send(msg);
-    },1000);
-  }
-
   setInterval(cupid.manageSockets,1000);
 
   var app = require("express")();
   var server = http.createServer(app);
   io = sio.listen(server);
+  io.set('transports',['websocket']);
   io.adapter(redis({ host: 'localhost', port: 6379 }));
 
   //initialize logging
@@ -299,19 +293,11 @@ if (cluster.isWorker)
 if (cluster.isWorker || !MULTITHREAD)
 {
 
-  var special_ping = false;
-  if (special_ping) {
-    setInterval(function(){
-          console.log("worker "+cluster.worker.id+" sending special_ping to everyone");
-          io.emit('general_message',composer.genMessage("special_ping",""+cluster.worker.id+" says HI"));
-    },5000);
-  }
-
   //---- PRIMARY SERVER LOGIC ----//
   io.on('connection', function(socket){
 
     //initialize a web-socket Connection to the client
-    log.log("New Connection");
+    log.log("Socket Connected");
 
     socket.myPlayer = new cupid.player();
     global.clients.push(socket);
@@ -398,6 +384,8 @@ if (cluster.isWorker || !MULTITHREAD)
 
     //---- A PLAYER DISCONNECTS FROM THE SERVER ----//
     socket.on('disconnect', function() {
+        log.log("Socket Disconnected");
+
         global.clients.splice(global.clients.indexOf(socket),1);
 
         if (socket.myPlayer.pName == global.anon_user)
