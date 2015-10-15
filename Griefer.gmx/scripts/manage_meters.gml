@@ -154,6 +154,11 @@ var h = 36
                 lab.header_text = global.time_played
             }
             
+            if pstats[i] = "true_skill"
+            {
+                lab.header_text = global.tskill
+            }
+            
             printf("::: lab text: "+string(lab.header_text))
             lab.text_color = c_white
             lab.label = lab.header_text

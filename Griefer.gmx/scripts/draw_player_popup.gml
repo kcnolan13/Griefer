@@ -39,7 +39,7 @@ else
 var body_text_override = ""
 
 if not is_bot(av)
-    body_text_override = "True Skill: "+string(tskill)+"#####Ranked  "+string(globrank)+"  In The World#####"
+    body_text_override = global.tskill+" "+string(tskill)+"#####Ranked  "+string(globrank)+"  In The World#####"
 
 body_text_override += "Click for Stats!"
 

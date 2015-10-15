@@ -43,7 +43,12 @@ GMEXPORT const double initGrieferClient(string connURL)
     h.set_open_listener(std::bind(&connection_listener::on_connected, &l));
     h.set_close_listener(std::bind(&connection_listener::on_close, &l,std::placeholders::_1));
     h.set_fail_listener(std::bind(&connection_listener::on_fail, &l));
-    h.connect(serverURL);
+
+	std::map<string, string> m;
+	m.insert(map<string, string>::value_type("transports", "['websocket']"));
+
+    h.connect(serverURL,m);
+	
 	console("::: connecting to: " + connURL);
 	bind_events(current_socket);
 	current_socket->emit("PING");
