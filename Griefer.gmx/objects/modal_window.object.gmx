@@ -31,6 +31,8 @@ crop_pad = 24
 
 force_click = false
 play_sound_when_ready = false
+die_click_outside = false
+die_click_anywhere = false
 
 depth = -95
 counter = 0
@@ -228,6 +230,32 @@ view_yoff = 0
 
 left = x
 top = y
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///tips
+is_tips = false
+tip_timeout = 30*8
+tip_counter = tip_timeout*3/4
+tip_index = -1
+text = ""
 </string>
           </argument>
         </arguments>
@@ -491,6 +519,17 @@ if not is_gui
 image_xscale = width
 image_yscale = height
 
+if popped_in
+{
+    if input_check(mapped_control(C_SHOOT))
+    {
+        if (not modal_highlighted(id) and die_click_outside) or (die_click_anywhere)
+        {
+            fade_out = true
+        }
+    }
+}
+
 if not popped_in and abs(scale - scale_normal) &lt;= 0.05 
 {
    popped_in = true
@@ -561,6 +600,47 @@ else
         else
             alpha = lerp_real(alpha,alpha_highlight,scale_lerp_real)
     }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///tips
+if is_tips
+{
+    tip_counter += real_speed(1)
+    if tip_counter &gt; tip_timeout
+    {
+        tip_counter = 0
+        tip_index++
+        
+        if tip_index &gt;= getLength(net_manager.pre)
+            tip_index = 0
+        if tip_index &lt; 0
+            tip_index = 0
+            
+        text = tip_text(tip_index)
+    }
+    /*if nth_frame(5)
+    {
+        printf("::: text = "+string(text)+", text_yoff = "+string(text_yoff))
+    }*/
 }
 </string>
           </argument>

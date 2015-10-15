@@ -76,6 +76,11 @@ is_password = false
 is_tutorial = false
 is_ui_countdown = false
 is_downloading = false
+is_tips = false
+tip_timeout = 30*8
+tip_counter = tip_timeout/4
+tip_index = -1
+text = ""
 
 bn_yes = noone
 bn_no = noone
@@ -233,7 +238,7 @@ if is_yesno
     bn_no.birth_delay = bdelay
     bdelay += binc
 }
-else if not is_alert and not is_loading and not is_input_field
+else if not is_alert and not is_loading and not is_input_field and not is_tips
 {
     bn_okay = instance_create(x,y+height/2*3/4,bn_dialogue)
     bn_okay.text = text_okay
@@ -243,6 +248,29 @@ else if not is_alert and not is_loading and not is_input_field
     bn_okay.scale_lerp_real = scale_lerp_real
     bn_okay.birth_delay = bdelay
     bdelay += binc
+}
+else if is_tips
+{
+    var w = 64
+    {
+        bn_okay = noone
+        /*
+        bn_okay = instance_create(x+width/2+w/2+10,y,bn_dialogue)
+        bn_okay.text = text_okay
+        bn_okay.script = scr_okay
+        bn_okay.depth = depth -10
+        bn_okay.parent_dialogue = id
+        bn_okay.scale_lerp_real = scale_lerp_real
+        bn_okay.birth_delay = bdelay
+        bn_okay.is_gui = true
+        bn_okay.height = height/2
+        bn_okay.width = w
+        bn_okay.y = y+(height/4)
+        bn_okay.alpha_max = alpha_max
+        bn_okay.header_height = 0
+        bdelay += binc
+        */
+    }
 }
 else if is_alert
 {
@@ -330,6 +358,27 @@ bns[0] = bn_yes
 bns[1] = bn_no
 bns[2] = bn_okay
 bns[3] = bn_input
+
+if is_tips
+{
+    tip_counter += real_speed(1)
+    if tip_counter &gt; tip_timeout
+    {
+        tip_counter = 0
+        tip_index++
+        
+        if tip_index &gt; getLength(net_manager.pre)
+            tip_index = 0
+        if tip_index &lt; 0
+            tip_index = 0
+            
+        text = tip_text(tip_index)
+    }
+    /*if nth_frame(5)
+    {
+        printf("::: text = "+string(text)+", text_yoff = "+string(text_yoff))
+    }*/
+}
 
 //allow to exit loading
 if is_loading

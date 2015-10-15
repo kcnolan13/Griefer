@@ -1587,8 +1587,11 @@
           <script>scripts\tut_end.gml</script>
           <script>scripts\tut_get_xp.gml</script>
           <script>scripts\tut_violence.gml</script>
+          <script>scripts\tut_tips.gml</script>
           <script>scripts\enable_violence.gml</script>
+          <script>scripts\enable_tips.gml</script>
           <script>scripts\disable_violence.gml</script>
+          <script>scripts\disable_tips.gml</script>
         </scripts>
         <script>scripts\scr_randomize_username.gml</script>
         <script>scripts\scr_submit_play.gml</script>
@@ -1603,6 +1606,10 @@
       <scripts name="map_editor">
         <script>scripts\export_level_colors.gml</script>
       </scripts>
+      <script>scripts\create_control_tips.gml</script>
+      <script>scripts\show_all_tips.gml</script>
+      <script>scripts\tip_text.gml</script>
+      <script>scripts\hide_control_tips.gml</script>
       <script>scripts\popup_alert.gml</script>
       <script>scripts\popup_okay.gml</script>
       <script>scripts\popup_input.gml</script>

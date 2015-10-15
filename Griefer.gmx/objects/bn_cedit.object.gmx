@@ -399,6 +399,15 @@ else
                     display_reset(aa,true)
         }
         
+        if ind = GC_CONTROL_HINTS
+        {
+            var val = truthval(global.gc[GC_CONTROL_HINTS,1])
+            if val 
+                create_control_tips()
+            else
+                hide_control_tips()
+        }
+        
         //perform actions as needed
         if ind = GC_FPS
         {  
