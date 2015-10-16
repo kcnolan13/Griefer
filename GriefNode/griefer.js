@@ -163,6 +163,10 @@ if (cluster.isMaster)
           }
         }
 
+        else if (m.id == "worker_died") {
+          process.exit();
+        }
+
 
         else {
           log.log(CRITICAL,"Unknown message from worker to master: "+m.id);
@@ -171,6 +175,7 @@ if (cluster.isMaster)
       });
 
     }
+
   }
   else
   {
@@ -184,7 +189,9 @@ if (cluster.isMaster)
   }
 
   cluster.on('exit', function(worker, code, signal) {
+
     console.log('worker ' + worker.id+ ' died [pid '+worker.process.pid + ']');
+    process.send({id:"worker_died"});
   });
 
   //initialize all of the socket rooms
@@ -419,7 +426,6 @@ if (cluster.isWorker || !MULTITHREAD)
     });
 
     socket.on('PING', function () {
-          log.log(STD,'PING!');
           log.log(STD,'pong . . .\n');
           socket.emit('PONG');
         });

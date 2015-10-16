@@ -8,15 +8,17 @@ socket.on("connect",function(){
 	setInterval(function(){
 		//console.log(".");
 		socket.emit("PING");
-	}, 30000);
+	}, 15000);
 });
 
 socket.on("disconnect",function(err){
 	console.log("disconnected");
 	if (err)
 		console.log(err);
+
+	process.exit()
 });
 
 socket.on("PONG", function() {
-	//console.log("p");
+	console.log(".");
 });

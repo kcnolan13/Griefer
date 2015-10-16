@@ -36,7 +36,7 @@ global.WARN = "warn"
 global.socket_string = ""
 
 
-global.maps = //[0,1,2]//[4,5,8,3,19];
+global.maps = [0,9,14]//[4,5,8,3,19];
 global.num_maps = 21; //21
 
 global.gamePort = 8080;
