@@ -109,6 +109,18 @@ exports.connect = function(connectMe, callback)
 		log.log(SQL,'CONNECTED to griefer database, as id: '+connectMe.threadId);
 		conn = connectMe;
 		global.conn_ready = true;
+
+		setInterval(function() {
+			var query = "SELECT * from users where username='kyle'";
+			conn.query(query, function(err,rows) {
+				if (err)
+					log.log(CRITICAL,err);
+
+				if (rows)
+					log.log(SQL,"db keepalive");
+			});
+		},30000);
+
 		callback();
 	});
 
@@ -844,6 +856,12 @@ var getTopGravatars = function(socket)
 		if (err)
 			log.log(SQL,err);
 
+		if (!rows) 
+		{
+			log.log(CRITICAL,"no rows retrieved for getTopGravatars");
+			return false;
+		}
+
 		if (!globals.exists(rows.length))
 		{
 			log.log(CRITICAL,"no rows retrieved for getTopGravatars");
@@ -1038,6 +1056,12 @@ var getGlobalStats = function(socket, page_orderby, page_flag)
 	conn.query(statement2, function(err,rows) {
 
 		log.log(STD, "initial leaderboard count query: "+statement2);
+
+		if (!rows)
+		{
+			log.log(CRITICAL,"no rows retrieved for getGlobalStats");
+			return false;
+		}
 
 		//log any errors
 		if (err)

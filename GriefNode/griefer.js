@@ -378,6 +378,10 @@ if (cluster.isWorker || !MULTITHREAD)
       }*/
     });
 
+    socket.on('error', function (err) { 
+      log.log(CRITICAL,err.stack); 
+    });
+
     //---- CANCEL MATCHMAKING ----//
     socket.on('cancel_matchmaking',function(arg1) {
         if (socket.myPlayer.pName == global.anon_user)
