@@ -26,7 +26,7 @@ global.MULTITHREAD = true;
 global.workers = [];
 global.rooms = [];
 
-//log flags
+//log flagsl
 global.SQL = "sql"
 global.CUPID = "cupid"
 global.STD = "std"
@@ -36,7 +36,7 @@ global.WARN = "warn"
 global.socket_string = ""
 
 
-global.maps = [0,9,14]//[4,5,8,3,19];
+global.maps = []//[14,9,11,15]//[4,5,8,3,19];
 global.num_maps = 21; //21
 
 global.gamePort = 8080;
