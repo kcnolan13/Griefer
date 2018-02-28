@@ -1,0 +1,1 @@
+///gamepad_cursor_adjustment(haxis, vaxis)

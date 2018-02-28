@@ -1,0 +1,31 @@
+{
+    "id": "e5ca0018-05bb-43ed-bf5a-2dcd81957cc6",
+    "modelName": "GMFolder",
+    "mvc": "1.1",
+    "name": "e5ca0018-05bb-43ed-bf5a-2dcd81957cc6",
+    "children": [
+        "e9577c91-64ff-47df-9f6a-a3e40b71662f",
+        "56ef220d-0599-485f-839d-023dd4266229",
+        "7f792a5b-29d0-4e07-92a5-0bb696e1c665",
+        "e389a94a-84e7-459e-abe4-f764a9225d4a",
+        "d81c0c0b-4e29-478b-8d91-8e994fe2aa49",
+        "a89e170e-b029-409f-9372-8d8ee18dd75d",
+        "fa4d551a-6f57-4159-8de5-b681965e41e6",
+        "73639269-4a8b-4399-8999-9252523481dc",
+        "f420ab43-baae-4a95-83a7-91b0a83b4c3d",
+        "3ead683f-536f-4086-a377-b43ad6b4437d",
+        "f51fa03b-993b-4d6a-9f82-5552d2b284a7",
+        "e8a306f7-0450-4a3f-bb13-a08e69a5a0c8",
+        "265da395-830a-4baa-9158-f3ced03628bc",
+        "2ed1de0e-cb45-4246-9a1e-a32256bba899",
+        "8ef110b1-94b3-494f-9325-a0918859d91c",
+        "38210545-565e-4f4e-8efc-b13f4d360ac1",
+        "65d73645-8fc1-414a-97ef-2e69ad415988",
+        "1b8f5f41-d968-45b9-9f6e-cad87beeadd8",
+        "53f162eb-83a7-43f8-b8e6-69abb55c7294"
+    ],
+    "filterType": "GMSprite",
+    "folderName": "physics",
+    "isDefaultView": false,
+    "localisedFolderName": ""
+}
