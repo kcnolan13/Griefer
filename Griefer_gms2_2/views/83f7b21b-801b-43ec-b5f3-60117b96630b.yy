@@ -1,0 +1,31 @@
+{
+    "id": "83f7b21b-801b-43ec-b5f3-60117b96630b",
+    "modelName": "GMFolder",
+    "mvc": "1.1",
+    "name": "83f7b21b-801b-43ec-b5f3-60117b96630b",
+    "children": [
+        "27ac7508-01fa-41f0-bb68-12a725ccdeae",
+        "9b4d9920-90cf-46e0-83f8-ceced168f597",
+        "2d229b98-51fd-4d68-b713-20077f147afb",
+        "b70d3187-2e16-4cae-adc8-49f45eaf4dc5",
+        "4ca5ba6a-568f-41dc-9dd1-6e16caa56a78",
+        "1883f2fa-bdda-4fee-8076-97c524c98736",
+        "0680698b-2592-4707-b6b0-3f37bc975540",
+        "ac5e063a-aa2e-474a-a1f5-77985c454109",
+        "05eb4ed6-a68b-4499-aa90-fab851f17f38",
+        "680e6722-8684-45b4-b3ba-2810a2291b3e",
+        "336a07e7-6083-4cdc-85b8-7825e577ac81",
+        "10c80351-5d8b-453d-a21d-a69091ba7965",
+        "6a0f9865-a761-42d2-b6d8-588e3960fe9d",
+        "a0e27745-ef74-4f60-a028-f5f4de250e91",
+        "13d86f1c-29ec-4cba-bc15-4d95986dfe0c",
+        "f6b36fcd-28e0-4b43-9446-d130089029a4",
+        "de4a0dfa-8ac4-458b-a156-f8d6cbfd72f2",
+        "a067db62-5170-4e10-90a9-630151ba02da",
+        "975feda8-cbff-48cc-9da4-e8a7728ea208"
+    ],
+    "filterType": "GMSprite",
+    "folderName": "hats",
+    "isDefaultView": false,
+    "localisedFolderName": ""
+}
