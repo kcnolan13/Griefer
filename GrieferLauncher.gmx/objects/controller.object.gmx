@@ -42,22 +42,20 @@ download_percent = 0
 
 life = 0
 
-//config file
-ini_open("Config/Config.ini")
-if not ini_section_exists("Main")
-{
-    ini_write_string("Main","Version",hash)
-    printf("::: defaulting Version to "+string(hash))
-}
-hash = ini_read_string("Main","Version","V0")
-ini_close()
+griefer_appdata_dir = "Griefer_2_0"
+grieferlauncher_appdata_dir = "GrieferLauncher"
+game_state_ini_name = "GameState.ini"
+gameStateIni = game_state_ini_name
+thisExe = string_copy(working_directory,0,string_pos("AppData",working_directory)) + "ppData\Local\"+grieferlauncher_appdata_dir+"\"+grieferlauncher_appdata_dir+".exe"
+launcherStateIni = "LauncherState.ini"
 
-ini_open("Config/GameState.ini")
-if ini_key_exists("Main","GameRunning")
-{
-    ini_key_delete("Main","GameRunning")
-    printf("::: game had been left running(?) deleting the GameRunning ini key")
-}
+//config file
+ini_open(launcherStateIni)
+    if not ini_section_exists("Main") {
+        ini_write_string("Main","Version",hash)
+        printf("::: defaulting Version to "+string(hash))
+    }
+    hash = ini_read_string("Main","Version","V0")
 ini_close()
 
 //networking data
@@ -71,11 +69,38 @@ title_scale_max = 1.25
 title_scale_min = 1
 title_text_timer = 0
 
-baseURL = "http://griefer.cloudapp.net"
-serverURL = baseURL+":8080"
-remoteDownloadURL = baseURL+"/Shared/Griefer.exe"
-downloadURL = string_copy(working_directory,0,string_pos("AppData",working_directory)) + "ppData\Local\GrieferLauncher\Downloads\Griefer.exe"
-downloadURL = string_replace_all(downloadURL,"\","/")
+primaryServerURL = "http://www.kylenolan.net"
+alternateServerURL = "http://10.0.0.8"
+port= ":8080"
+serverURL = primaryServerURL
+
+ini_open(launcherStateIni)
+    cachedURL = ini_read_string("Main","ServerURL","null")
+    printf("::: read cached SeverURL as "+cachedURL)
+    if cachedURL != "null" {
+    serverURL = cachedURL
+    printf("::: using cached ServerURL: "+serverURL)
+    }
+    hash = ini_read_string("Main","Version","V0")
+ini_close()
+
+connectionString = serverURL+port
+remoteDownloadBaseURL = serverURL+"/downloads/Griefer 2.0/"
+files[0] = "Griefer 2.0.exe"
+files[1] = "GriefPlusPlus.dll"
+files[2] = "msvcp120.dll"
+files[3] = "msvcr120.dll"
+files[4] = "nsfs.dll"
+file_num = 0
+for (i=0; i&lt;array_length_1d(files); i++) {
+    remoteDownloadURL[i] = remoteDownloadBaseURL+files[i]
+}
+
+downloadBaseURL = string_copy(working_directory,0,string_pos("AppData",working_directory)) + "ppData\Local\GrieferLauncher\Downloads\"
+downloadBaseURL = string_replace_all(downloadBaseURL,"\","/")
+for (i=0; i&lt;array_length_1d(files); i++) {
+    downloadURL[i] = downloadBaseURL+files[i]
+}
 file = NO_HANDLE
 
 display_set_gui_size(room_width,room_height)
@@ -84,8 +109,10 @@ random_seed = 210
 instance_create(x,y,cursor)
 
 alarm[0] = 1
-alarm[1] = 60
-initGrieferClient(serverURL)
+//alarm[1] = 60
+initGrieferClient(connectionString)
+printf("::: invoked initGrieferClient")
+
 </string>
           </argument>
         </arguments>
@@ -110,21 +137,21 @@ initGrieferClient(serverURL)
             <kind>1</kind>
             <string>///close window after game launched
 
+game_end()
 
-ini_open("Config/GameState.ini")
-
-if ini_key_exists("Main","GameRunning")
-{
-    printf("::: GameRunning Found!")
-    ini_key_delete("Main","GameRunning")
+/*
+if file_exists(gameStateIni) {
+    ini_open(gameStateIni)
+        if ini_key_exists("Main","GameRunning") {
+            printf("::: GameRunning Found!")
+            ini_key_delete("Main","GameRunning")
+            ini_close()
+            game_end()
+        }
     ini_close()
-    game_end()
-}
-else
-{
-    //printf("::: GameRunning not found")
-    ini_close()
-}
+} else {
+    printf("::: STRONG WARNING: "+gameStateIni+" does not exist")
+}*/
 </string>
           </argument>
         </arguments>
@@ -187,6 +214,9 @@ force_loading_popup = false
 aID.is_downloading = false
 aID.is_checking = true
 aID.text = aID.text_checking
+if serverURL == alternateServerURL {
+    aID.text = "Connecting to Alternate Server"
+}
 aID.load_closable = false
 aID.draw_fade = false
 aID.fade_alpha = 0
@@ -243,11 +273,13 @@ while (genMessagesWaiting() and wait_counter &lt; 500000)
         case "validate_hash":
         
             official_server_hash = string(genVal)
+            printf("::: local hash = "+string(hash)+", server hash = "+official_server_hash)
             
             if string(hash) != official_server_hash
             {
                 printf("::: updates are needed!")
-                download_updates()
+                file_num = 0
+                download_updates(file_num)
             }
             else 
             {
@@ -370,22 +402,31 @@ if ds_map_find_value(async_load, "id") == file
    var status = ds_map_find_value(async_load, "status");
    if status = 0
    {
-        printf("::: DOWNLOAD COMPLETE to: "+string(downloadURL))
-        
-        //this patch is known to be downloaded now :)
-        ini_open("Config/Config.ini")
-        ini_write_string("Main","Version",official_server_hash)
-        ini_close()
-        
-        printf("::: writing version hash to Config.ini: "+official_server_hash)
-        
-        launch_game()
+        if file_num == array_length_1d(files)-1 {
+            printf("::: DOWNLOAD COMPLETE")
+            
+            //this patch is known to be downloaded now :)
+            ini_open(launcherStateIni)
+            ini_write_string("Main","Version",official_server_hash)
+            ini_close()
+            
+            printf("::: writing version hash to "+launcherStateIni+": "+official_server_hash)
+            
+            launch_game()
+        } else {
+            printf("::: Downloaded "+string(downloadURL[file_num]))
+            file_num ++
+            download_updates(file_num)
+        }
    }
    else if status = 1
    {
         var percent = ds_map_find_value(async_load, "sizeDownloaded") / ds_map_find_value(async_load, "contentLength")
         //printf("::: PERCENT = "+string(percent))
         download_percent = percent
+   }
+   else {
+        printf("::: unexpected http status: "+string(status))
    }
 }
 </string>
@@ -536,7 +577,7 @@ if not server_found
 {
     if not reconnect_timer
     {
-        reconnect_timer = 30*10
+        reconnect_timer = 30*3
     }
     
     var dialogue = waiting_for_data()
@@ -544,7 +585,15 @@ if not server_found
     { 
         dialogue.load_closable = false
         dialogue.text_color = c_red//web_hsv(0,100,75)
-        dialogue.text = "Connection Failed ... "+string(ceil(reconnect_timer/30))
+        dialogue.text = "Connection Failed"
+        next_server = "Alternate"
+        if serverURL == alternateServerURL
+            next_server = "Primary"
+        dialogue.header_text = "Reconnecting to "+next_server+" in "+string(ceil(reconnect_timer/30))+"..."
+        dialogue.header_font = fnt_hud_small
+        dialogue.header_yoff = 64*1.5
+        dialogue.header_xoff = 30
+        dialogue.header_text_color = c_red
         show_percent = false
     }
 }

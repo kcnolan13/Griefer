@@ -37,8 +37,13 @@ printf("::: config transfer retcode: "+string(retcode))
     
 ini_open(gameStateIni)
 	game_is_running = ini_read_real("Main","GameRunning",0)
-	serverURL = ini_read_string("Main","ServerURL",serverURL)
 	printf("::: read GameRunning from ini as "+string(game_is_running))
+    cachedURL = ini_read_string("Main","ServerURL","null")
+    printf("::: read cached SeverURL as "+cachedURL)
+    if cachedURL != "null" {
+	    serverURL = cachedURL
+	    printf("::: using cached ServerURL: "+serverURL)
+    }
 ini_close()
 
 snapshot_mode = false
@@ -496,18 +501,6 @@ num_players = 1
 team = -1
 bot_match = false
 win_countdown = 0
-
-ini_open(gameStateIni)
-
-var restart_counter = ini_read_real("Main","RestartsRemaining",0)
-if restart_counter > 0
-{
-    ini_write_real("Main","RestartsRemaining",restart_counter-1)
-    ini_close()
-    game_restart()
-}
-
-ini_close()
 
 /* */
 ///create the xp bar

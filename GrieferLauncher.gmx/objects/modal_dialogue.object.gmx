@@ -107,7 +107,7 @@ text_no = "No"
 text_okay = "Okay"
 text_downloading = "Downloading Updates"
 text_launching = "Launching the Game"
-text_checking = "Checking for Updates"
+text_checking = "Connecting to Primary Server"
 </string>
           </argument>
         </arguments>

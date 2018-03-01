@@ -8,8 +8,6 @@
   <license>Free to use, also for commercial games.</license>
   <description></description>
   <helpfile></helpfile>
-  <androidProps>-1</androidProps>
-  <iosProps>-1</iosProps>
   <installdir></installdir>
   <classname></classname>
   <androidclassname></androidclassname>
@@ -17,9 +15,19 @@
   <androidsourcedir></androidsourcedir>
   <macsourcedir></macsourcedir>
   <maclinkerflags></maclinkerflags>
+  <maccompilerflags></maccompilerflags>
   <androidinject></androidinject>
+  <androidmanifestinject></androidmanifestinject>
+  <iosplistinject></iosplistinject>
+  <androidactivityinject></androidactivityinject>
+  <gradleinject></gradleinject>
   <iosSystemFrameworks/>
   <iosThirdPartyFrameworks/>
+  <ConfigOptions>
+    <Config name="Default">
+      <CopyToMask>9223372036854775807</CopyToMask>
+    </Config>
+  </ConfigOptions>
   <androidPermissions/>
   <IncludedResources/>
   <files>
@@ -639,6 +647,27 @@
           <returnType>2</returnType>
           <argCount>1</argCount>
           <args>
+            <arg>1</arg>
+          </args>
+        </function>
+        <function>
+          <name>closeConnection</name>
+          <externalName>closeConnection</externalName>
+          <kind>12</kind>
+          <help>closes all sockets</help>
+          <returnType>2</returnType>
+          <argCount>-1</argCount>
+          <args/>
+        </function>
+        <function>
+          <name>moveFile</name>
+          <externalName>moveFile</externalName>
+          <kind>12</kind>
+          <help>moveFile(fpath1, fpath2)</help>
+          <returnType>2</returnType>
+          <argCount>2</argCount>
+          <args>
+            <arg>1</arg>
             <arg>1</arg>
           </args>
         </function>

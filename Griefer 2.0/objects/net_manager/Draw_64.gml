@@ -555,7 +555,7 @@ if not server_found
 {
     if not reconnect_timer
     {
-        reconnect_timer = 30*10
+        reconnect_timer = 30*5
     }
     
     var dialogue = waiting_for_data()
@@ -567,7 +567,15 @@ if not server_found
     { 
         dialogue.load_closable = false
         dialogue.color = web_hsv(0,100,30)
-        dialogue.text = "Connection Failed ... "+string(ceil(reconnect_timer/30))
+		dialogue.text = "Connection Failed"
+        next_server = "Alternate"
+        if serverURL == alternateServerURL
+            next_server = "Primary"
+        dialogue.header_text = "Reconnecting to "+next_server+" in "+string(ceil(reconnect_timer/30))+"..."
+        dialogue.header_font = fnt_hud_small
+        dialogue.header_yoff = 64*1.5
+        dialogue.header_xoff = 30
+        //dialogue.header_text_color = c_red
     }
 }
 

@@ -1,0 +1,304 @@
+Converting GML script: ${project_dir}\scripts\download_updates\download_updates.gml
+Converted description /// @description download_updates()/// @function download_updates
+
+Converting GML script: ${project_dir}\scripts\draw_modal_splat\draw_modal_splat.gml
+Converted description /// @description draw_modal_splat()/// @function draw_modal_splat
+
+Converting GML script: ${project_dir}\scripts\draw_modal_window\draw_modal_window.gml
+Converted description /// @description draw_modal_window()/// @function draw_modal_window
+
+Converting GML script: ${project_dir}\scripts\draw_splat_notification\draw_splat_notification.gml
+Converted description /// @description draw_splat_notification(x,y,color,alpha)/// @function draw_splat_notification
+/// @param x
+/// @param y
+/// @param color
+/// @param alpha
+
+Converting GML script: ${project_dir}\scripts\draw_splats\draw_splats.gml
+Converted description /// @description draw_splats(x,y,scale,color,alpha)/// @function draw_splats
+/// @param x
+/// @param y
+/// @param scale
+/// @param color
+/// @param alpha
+
+Converting GML script: ${project_dir}\scripts\modal_aligns\modal_aligns.gml
+Converted description /// @description modal_aligns()/// @function modal_aligns
+
+Converting GML script: ${project_dir}\scripts\objVarAdd\objVarAdd.gml
+Converted description /// @description objVarAdd(obj,varName,amount)/// @function objVarAdd
+/// @param obj
+/// @param varName
+/// @param amount
+
+Converting GML script: ${project_dir}\scripts\objVarRead\objVarRead.gml
+Converted description /// @description objVarRead(obj,varName)/// @function objVarRead
+/// @param obj
+/// @param varName
+
+Converting GML script: ${project_dir}\scripts\objVarWrite\objVarWrite.gml
+Converted description /// @description objVarWrite(obj,varName,value)/// @function objVarWrite
+/// @param obj
+/// @param varName
+/// @param value
+
+Converting GML script: ${project_dir}\scripts\pluralize\pluralize.gml
+Converted description /// @description pluralize(string,num)/// @function pluralize
+/// @param string
+/// @param num
+
+Converting GML script: ${project_dir}\scripts\popup_alert\popup_alert.gml
+Converted description /// @description popup_alert(x, y, header, message)/// @function popup_alert
+/// @param x
+/// @param  y
+/// @param  header
+/// @param  message
+
+Converting GML script: ${project_dir}\scripts\popup_exists\popup_exists.gml
+Converted description /// @description showing_popup()/// @function showing_popup
+
+Converting GML script: ${project_dir}\scripts\popup_loading\popup_loading.gml
+Converted description /// @description popup_loading(x, y)/// @function popup_loading
+/// @param x
+/// @param  y
+
+Converting GML script: ${project_dir}\scripts\popup_okay\popup_okay.gml
+Converted description /// @description popup_okay(x, y, header, message, scr_okay)/// @function popup_okay
+/// @param x
+/// @param  y
+/// @param  header
+/// @param  message
+/// @param  scr_okay
+
+Converting GML script: ${project_dir}\scripts\popup_yesno\popup_yesno.gml
+Converted description /// @description popup_yesno(x, y, header, message, scr_yes, scr_no)/// @function popup_yesno
+/// @param x
+/// @param  y
+/// @param  header
+/// @param  message
+/// @param  scr_yes
+/// @param  scr_no
+
+Converting GML script: ${project_dir}\scripts\printf\printf.gml
+Converted description /// @description printf(string)/// @function printf
+/// @param string
+
+Converting GML script: ${project_dir}\scripts\scr_cancel_input\scr_cancel_input.gml
+Converted description /// @description scr_cancel_input()/// @function scr_cancel_input
+
+Converting GML script: ${project_dir}\scripts\trigx\trigx.gml
+Converted description /// @description trigx(mag, angle)/// @function trigx
+/// @param mag
+/// @param  angle
+
+Converting GML script: ${project_dir}\scripts\trigy\trigy.gml
+Converted description /// @description trigy(mag, angle)/// @function trigy
+/// @param mag
+/// @param  angle
+
+Converting GML script: ${project_dir}\scripts\truncate\truncate.gml
+Converted description /// @description truncate(number,decimal_places)/// @function truncate
+/// @param number
+/// @param decimal_places
+
+Converting GML script: ${project_dir}\scripts\truthval\truthval.gml
+Converted description /// @description truthval(str)/// @function truthval
+/// @param str
+
+Converting GML script: ${project_dir}\scripts\varRead\varRead.gml
+Converted description /// @description varRead(varName)/// @function varRead
+/// @param varName
+
+Converting GML script: ${project_dir}\scripts\varWrite\varWrite.gml
+Converted description /// @description varWrite(varName,value)/// @function varWrite
+/// @param varName
+/// @param value
+
+Converting GML script: ${project_dir}\scripts\waiting_for_data\waiting_for_data.gml
+Converted description /// @description waiting_for_data()/// @function waiting_for_data
+
+Converting GML script: ${project_dir}\scripts\web_hsv\web_hsv.gml
+Converted description /// @description web_hsv(hue,sat,val)/// @function web_hsv
+/// @param hue
+/// @param sat
+/// @param val
+
+Converting GML script: ${project_dir}\scripts\getLength\getLength.gml
+Converted description /// @description getLength(array)/// @function getLength
+/// @param array
+
+Converting GML script: ${project_dir}\scripts\typeconscious_sub\typeconscious_sub.gml
+Converted description /// @description typeconscious_add(original var, what to add)/// @function typeconscious_add
+/// @param original var
+/// @param  what to add
+
+Converting GML script: ${project_dir}\scripts\typeconscious_add\typeconscious_add.gml
+Converted description /// @description typeconscious_add(original var, what to add)/// @function typeconscious_add
+/// @param original var
+/// @param  what to add
+
+Converting GML script: ${project_dir}\scripts\modal_highlighted\modal_highlighted.gml
+Converted description /// @description modal_pressed(modal_id)/// @function modal_pressed
+/// @param modal_id
+
+Converting GML script: ${project_dir}\scripts\compute_auto_crop\compute_auto_crop.gml
+Converted description /// @description compute_auto_crop
+
+Converting GML script: ${project_dir}\scripts\modal_recalculate_snap\modal_recalculate_snap.gml
+Converted builtin - line 5: view_xview -> __view_get( e__VW.XView, 0 )
+Converted builtin - line 6: view_yview -> __view_get( e__VW.YView, 0 )
+Converted builtin - line 7: view_wview -> __view_get( e__VW.WView, 0 )
+Converted builtin - line 8: view_hview -> __view_get( e__VW.HView, 0 )
+Converted description /// @description modal_recalculate_snap()/// @function modal_recalculate_snap
+
+Converting GML script: ${project_dir}\scripts\try_server_reconnect\try_server_reconnect.gml
+Converted description /// @description try_server_reconnect()/// @function try_server_reconnect
+
+Font fnt_hud has been converted to font family Calibri (Bold) - Font has been regenerated, small inconsistencies may occur
+Font fnt_hud_big has been converted to font family Calibri (Bold) - Font has been regenerated, small inconsistencies may occur
+Font fnt_hud_biggest has been converted to font family Calibri (Bold) - Font has been regenerated, small inconsistencies may occur
+Font fnt_hud_medium has been converted to font family Calibri (Bold) - Font has been regenerated, small inconsistencies may occur
+Font fnt_hud_small has been converted to font family Calibri (Bold) - Font has been regenerated, small inconsistencies may occur
+Font fnt_title has been converted to font family Techno Hideo (Bold) - Font has been regenerated, small inconsistencies may occur
+Converting GML script: ${project_dir}\objects\controller\Create_0.gml
+Converted description /// @description initialize
+Converted string - line 50: "ppData\Local\GrieferLauncher\Downloads\Griefer.exe" -> "ppData\\Local\\GrieferLauncher\\Downloads\\Griefer.exe"
+Converted string - line 51: "\" -> "\\"
+
+Converting GML script: ${project_dir}\objects\controller\Alarm_1.gml
+Converted description /// @description close window after game launched
+
+Converting GML script: ${project_dir}\objects\controller\Alarm_0.gml
+Converted description /// @description validate version with server
+Converted string - line 7: "\" -> "\\"
+
+Converting GML script: ${project_dir}\objects\controller\Step_0.gml
+Converted description /// @description receive transmissions
+
+Converting GML script: ${project_dir}\objects\controller\Other_62.gml
+Converted description /// @description DETECT DOWNLOAD COMPLETE
+
+Converting GML script: ${project_dir}\objects\controller\Other_3.gml
+Converted description /// @description trigger game end
+
+Converting GML script: ${project_dir}\objects\controller\Draw_0.gml
+Converted description /// @description draw title and blood 
+
+Converting GML script: ${project_dir}\objects\modal_button\Step_0.gml
+Converted description /// @description inherit stuff
+
+Converting GML script: ${project_dir}\objects\modal_button\Mouse_53.gml
+Converted description /// @description bail if there is a modal dialogue and this isn't part of it
+
+Converting GML script: ${project_dir}\objects\modal_dialogue\Create_0.gml
+Converted description /// @description inherit and define properties
+
+Converting GML script: ${project_dir}\objects\modal_dialogue\Destroy_0.gml
+Converted description /// @description loading destroy msg
+
+Converting GML script: ${project_dir}\objects\modal_dialogue\Alarm_0.gml
+Converted description /// @description adjust for aligns and create buttons
+
+Converting GML script: ${project_dir}\objects\modal_dialogue\Step_0.gml
+Converted description /// @description all dat ish
+
+Converting GML script: ${project_dir}\objects\modal_window\Create_0.gml
+Converted description /// @description initialize
+
+Converting GML script: ${project_dir}\objects\modal_window\Destroy_0.gml
+Converted description /// @description free surface
+
+Converting GML script: ${project_dir}\objects\modal_window\Alarm_11.gml
+Converted description /// @description auto_crop
+
+Converting GML script: ${project_dir}\objects\modal_window\Step_2.gml
+Converted builtin - line 6: view_xview -> __view_get( e__VW.XView, 0 )
+Converted builtin - line 13: view_xview -> __view_get( e__VW.XView, 0 )
+Converted builtin - line 7: view_yview -> __view_get( e__VW.YView, 0 )
+Converted builtin - line 14: view_yview -> __view_get( e__VW.YView, 0 )
+Converted builtin - line 6: view_wview -> __view_get( e__VW.WView, 0 )
+Converted builtin - line 7: view_hview -> __view_get( e__VW.HView, 0 )
+Converted description /// @description snap
+
+Converting GML script: ${project_dir}\objects\modal_window\Step_1.gml
+Converted builtin - line 6: view_xview -> __view_get( e__VW.XView, 0 )
+Converted builtin - line 13: view_xview -> __view_get( e__VW.XView, 0 )
+Converted builtin - line 7: view_yview -> __view_get( e__VW.YView, 0 )
+Converted builtin - line 14: view_yview -> __view_get( e__VW.YView, 0 )
+Converted builtin - line 6: view_wview -> __view_get( e__VW.WView, 0 )
+Converted builtin - line 7: view_hview -> __view_get( e__VW.HView, 0 )
+Converted description /// @description snap
+
+Converting GML script: ${project_dir}\objects\modal_window\Step_0.gml
+Converted builtin - line 61: view_xview -> __view_get( e__VW.XView, 0 )
+Converted builtin - line 68: view_xview -> __view_get( e__VW.XView, 0 )
+Converted builtin - line 62: view_yview -> __view_get( e__VW.YView, 0 )
+Converted builtin - line 69: view_yview -> __view_get( e__VW.YView, 0 )
+Converted builtin - line 61: view_wview -> __view_get( e__VW.WView, 0 )
+Converted builtin - line 62: view_hview -> __view_get( e__VW.HView, 0 )
+Converted description /// @description all dat ish
+
+Converting GML script: ${project_dir}\objects\modal_window\Other_3.gml
+Converted description /// @description free surface
+
+Converting GML script: ${project_dir}\objects\modal_window\Draw_64.gml
+Converted description /// @description draw in the GUI layer
+
+Converting GML script: ${project_dir}\objects\modal_window\Draw_0.gml
+Converted description /// @description draw the stuff
+
+macOS icon ${options_dir}\mac\icons\icon512.png written out as 32-bit
+Windows NSIS Installer Script has been set to default due to changes in GameMaker Studio 2
+Converting GML script: ${project_dir}\objects\modal_splat\Create_0.gml
+Converted description /// @description inherit and define properties
+
+Converting GML script: ${project_dir}\objects\modal_splat\Alarm_0.gml
+Converted description /// @description adjust for aligns
+
+Converting GML script: ${project_dir}\objects\modal_splat\Step_0.gml
+Converted description /// @description all dat ish
+
+Converting GML script: ${project_dir}\objects\background_drawer\Draw_0.gml
+Converted description /// @description draw the background
+
+Converting GML script: ${project_dir}\objects\cursor\Alarm_0.gml
+Converted description /// @description start in middle of screen
+
+Converting GML script: ${project_dir}\objects\cursor\Step_0.gml
+Converted description /// @description no gamepad: control with mouse
+
+Converting GML script: ${project_dir}\objects\cursor\Draw_64.gml
+Converted description /// @description draw id and coords
+
+Converting GML script: ${project_dir}\objects\bn_dialogue\Create_0.gml
+Converted description /// @description inherit and define properties
+
+Converting GML script: ${project_dir}\objects\bn_dialogue\Alarm_1.gml
+Converted description /// @description create user possibly?
+
+Converting GML script: ${project_dir}\objects\bn_dialogue\Alarm_0.gml
+Converted description /// @description adjust for aligns
+
+Converting GML script: ${project_dir}\objects\bn_dialogue\Step_0.gml
+Converted description /// @description all dat ish
+
+Converting GML script: ${project_dir}\objects\bn_dialogue\Mouse_53.gml
+Converted description /// @description vote for maps or random
+
+Converting GML script: ${project_dir}\objects\bn_dialogue\KeyPress_27.gml
+Converted description /// @description perform left press
+
+Converting GML script: ${project_dir}\objects\bn_dialogue\KeyPress_13.gml
+Converted description /// @description perform left press
+
+Missing audiogroup for sound: 'snd_none' - setting to default audio group
+Game speed set to 30
+Added compatibility script 'action/action_set_alarm.gml'
+Added compatibility script 'action/action_set_cursor.gml'
+Added compatibility script 'instance/instance_create.gml'
+Added compatibility script 'object/object_get_depth.gml'
+Added compatibility script 'view/__view_get.gml'
+Added compatibility script 'action/__init_action.gml'
+Added compatibility script 'view/__init_view.gml'
+Added compatibility script '__init_global.gml'
+Added compatibility script '__global_object_depths.gml'

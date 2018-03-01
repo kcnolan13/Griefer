@@ -1,5 +1,6 @@
-#macro DEBUG 1
+#macro DEBUG 0
 #macro SUPER_DEBUG 0
+#macro COUT 0
 #macro GAIN_HIGHLIGHT 1
 #macro GAIN_KEYSTROKE 0.8
 #macro GAIN_PAN 0.875
@@ -168,4 +169,3 @@
 #macro XPBAR_HEIGHT 16
 #macro XPBAR_RIGHT 16
 #macro XPBAR_WIDTH 64*5
-#macro COUT 1

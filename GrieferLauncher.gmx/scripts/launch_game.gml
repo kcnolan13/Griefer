@@ -8,6 +8,7 @@ with modal_dialogue
         show_percent = false
     }
 }
-
-printf("::: launching game: "+downloadURL)
-launchGame(downloadURL)
+game_exe = downloadURL[0]
+printf("::: launching game: "+game_exe)
+launchGame(game_exe)
+controller.alarm[1] = 60*2
