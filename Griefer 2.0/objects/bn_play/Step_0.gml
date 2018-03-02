@@ -237,8 +237,9 @@ if net_manager.menu_mode = "armory" and not instance_exists(bn_import_all)
 	ID.img_yscale = ID.img_xscale
 	ID.tooltip = "Import All"
 	ID.tooltip_halign = fa_left
-	ID.tooltip_xoff = 32
+	ID.tooltip_xoff = -36
 	ID.tooltip_yoff = ID.height/2
+	ID.tooltip_width = 96
 }
 
 if net_manager.menu_mode = "armory" and ds_list_size(global.cache) < 1 and instance_exists(bn_import_all)

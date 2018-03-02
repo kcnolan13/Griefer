@@ -174,6 +174,7 @@ tooltip_xoff = 0
 tooltip_yoff = 0
 tooltip_linesep = 20
 tooltip_pad = 0
+tooltip_width = 64
 
 image_is_bg = false
 image = spr_none

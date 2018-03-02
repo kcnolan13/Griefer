@@ -180,7 +180,7 @@ if not surface_exists(surface)
             draw_set_alpha(draw_get_alpha()/border_alpha)
         }
         
-        if string(text) != "" or string(header_text) != "" or (object_index = bn_input_field and string_length(string(str_cursor)) > 0)
+        if string(text) != "" or string(header_text) != "" or (object_index = bn_input_field and string_length(string(str_cursor)) > 0) or string(tooltip) != ""
         {
             if text_alpha_override
             draw_set_alpha(1*alpha_scaler)
@@ -274,7 +274,7 @@ if not surface_exists(surface)
                 draw_set_color(tooltip_color)
                 draw_set_halign(tooltip_halign)
                 draw_set_valign(tooltip_valign)
-                draw_text_ext_transformed(xpos+tooltip_xoff,top+tooltip_yoff,string_hash_to_newline(tooltip),tooltip_linesep,width-tooltip_pad*2-tooltip_xoff,scale*master_scale,scale*master_scale,0)
+                draw_text_ext_transformed(xpos+tooltip_xoff,top+tooltip_yoff,string_hash_to_newline(tooltip),tooltip_linesep,tooltip_width-tooltip_pad*2,scale*master_scale,scale*master_scale,0)
             }
             
             draw_set_alpha(alpha*alpha_scaler)
