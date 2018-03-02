@@ -19,7 +19,8 @@
         "d1696dec-dec8-40b6-ab05-f8f682e05d1e",
         "b14755e6-4a84-4ca7-b90d-4c87a5c3b8f0",
         "111d1107-dfd8-485c-aa05-7d759576946e",
-        "dca6b990-11fb-4ed5-9f7b-769e3088c58d"
+        "dca6b990-11fb-4ed5-9f7b-769e3088c58d",
+        "57c996b1-53b3-426c-8d63-eb66b890b788"
     ],
     "filterType": "GMObject",
     "folderName": "main_menu",

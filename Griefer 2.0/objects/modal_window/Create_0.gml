@@ -165,6 +165,16 @@ text_yoff = 0
 text_linesep = 20
 text_pad = 0
 
+tooltip = ""
+tooltip_font = font
+tooltip_color = c_white
+tooltip_halign = fa_center
+tooltip_valign = fa_middle
+tooltip_xoff = 0
+tooltip_yoff = 0
+tooltip_linesep = 20
+tooltip_pad = 0
+
 image_is_bg = false
 image = spr_none
 image_stretch_x = false

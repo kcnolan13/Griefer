@@ -16,4 +16,5 @@ text_linesep = 16
 alpha = 1
 font = fnt_button
 master_scale = 1
+is_password = false
 

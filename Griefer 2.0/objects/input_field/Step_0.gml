@@ -53,9 +53,9 @@ if input_active
     {
         if backspace_counter > backspace_delay
         {
-            if string_length(keyboard_string) > 0
+            if string_length(input_string) > 0
             {
-                keyboard_string = string_copy(keyboard_string,1,string_length(keyboard_string)-1)
+                keyboard_string = string_copy(input_string,1,string_length(keyboard_string)-1)
                 input_string = keyboard_string
             }
             backspace_delay = 10

@@ -1,6 +1,6 @@
-#macro DEBUG 0
+#macro DEBUG 1
 #macro SUPER_DEBUG 0
-#macro COUT 0
+#macro COUT 1
 #macro GAIN_HIGHLIGHT 1
 #macro GAIN_KEYSTROKE 0.8
 #macro GAIN_PAN 0.875

@@ -406,7 +406,7 @@ if (room = rm_menu or room = rm_lobby) and string(menu_mode) = "armory" and inst
                     {
                         alpha = 0
                         birth_delay = 5
-                    }   
+                    }
                 }
                     
                 if i=8

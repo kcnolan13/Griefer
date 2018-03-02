@@ -221,8 +221,19 @@ if not surface_exists(surface)
             ypos += text_yoff*scale*master_scale
             
             var text_2draw = text
-            if object_index = bn_input_field and active
-                text_2draw += string(str_cursor)
+			
+            if object_index = bn_input_field {
+				if is_password and text != "Password" {
+					text_2draw = ""
+					for (i=1; i<string_length(text); i++) {
+						text_2draw += "*"
+					}
+					text_2draw += string_char_at(text,string_length(text))
+				}
+				if active {
+					text_2draw += string(str_cursor)
+				}
+			}
                 
             //THE LOADING WHEEL THING (bumps text over a little to make room)
             if is_loading
@@ -255,6 +266,15 @@ if not surface_exists(surface)
                 draw_set_halign(text_halign)
                 draw_set_valign(fa_center)
                 draw_text_ext_transformed(xpos+header_xoff,top+header_yoff+header_height*scale*master_scale/2,string_hash_to_newline(header_text),text_linesep,width-text_pad*2-text_xoff,scale*master_scale,scale*master_scale,0)
+            }
+			
+			if tooltip != "" and show_popup
+			{
+                draw_set_font(tooltip_font)
+                draw_set_color(tooltip_color)
+                draw_set_halign(tooltip_halign)
+                draw_set_valign(tooltip_valign)
+                draw_text_ext_transformed(xpos+tooltip_xoff,top+tooltip_yoff,string_hash_to_newline(tooltip),tooltip_linesep,width-tooltip_pad*2-tooltip_xoff,scale*master_scale,scale*master_scale,0)
             }
             
             draw_set_alpha(alpha*alpha_scaler)

@@ -2,7 +2,7 @@
 event_inherited()
 label = text
 
-if object_index != bn_postmatch_done
+if object_index != bn_postmatch_done and object_index != bn_import_all
 {
     if active
     {

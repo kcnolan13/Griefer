@@ -10,7 +10,7 @@ if active
 {
     text = string_replace_all(text,"#","")
     //PRESS BACKSPACE
-    if keyboard_check_pressed(vk_backspace)
+    if keyboard_check(vk_backspace)
     {
         if not backspace_counter    
         {
@@ -25,7 +25,9 @@ if active
         if backspace_counter > backspace_delay
             backspace_counter = 0
     }
-    else backspace_counter --//sub_real(backspace_counter,1)
+    else if backspace_counter > 0 {
+		backspace_counter --
+	}
     
     //PRESS TAB
     if keyboard_check_pressed(vk_tab)

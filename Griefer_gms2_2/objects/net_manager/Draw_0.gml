@@ -166,10 +166,20 @@ if room = rm_menu or room = rm_lobby
             birth_delay = 5
             alpha = 0
         }
+        with bn_import_all
+        {
+            birth_delay = 5
+            alpha = 0
+        }
     } else if no_armor and menu_mode = "armory"
     {
         armor_msg = "You Have No Armor"
         with bn_randomize
+        {
+            birth_delay = 5
+            alpha = 0
+        }
+        with bn_import_all 
         {
             birth_delay = 5
             alpha = 0

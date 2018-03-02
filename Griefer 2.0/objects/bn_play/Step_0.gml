@@ -206,9 +206,57 @@ if net_manager.menu_mode = "armory" and not instance_exists(bn_randomize)
     ID.image = icon_dice
 }
 
+///create import all
+if net_manager.menu_mode = "armory" and not instance_exists(bn_import_all)
+{
+    tab = bn_import_all
+    
+    width = 24
+    height = 24
+    birth_delay = 1
+    
+    left = WVIEW/2-10+width+32
+    top = net_manager.cache_y-40
+    
+    hue = 255
+    sat = 0
+    val = 0
+    
+    ID = instance_create(left,top,tab)
+    ID.width = width
+    ID.height = height
+    ID.birth_delay = birth_delay
+    
+    ID.color = make_colour_hsv(hue,sat,val)
+    ID.active_color = make_colour_hsv(hue,sat*4,125)
+    
+    ID.text_halign = fa_left
+    ID.text_xoff = 72+5
+    ID.image = icon_download
+	ID.img_xscale = 24/72
+	ID.img_yscale = ID.img_xscale
+	ID.tooltip = "Import All"
+	ID.tooltip_halign = fa_left
+	ID.tooltip_xoff = 32
+	ID.tooltip_yoff = ID.height/2
+}
+
+if net_manager.menu_mode = "armory" and ds_list_size(global.cache) < 1 and instance_exists(bn_import_all)
+{
+	with bn_import_all {
+		alpha = 0
+		birth_delay = 5
+	}
+}
+
 if net_manager.menu_mode != "armory" and instance_exists(bn_randomize)
 {
     with bn_randomize fade_out = true
+}
+
+if net_manager.menu_mode != "armory" and instance_exists(bn_import_all)
+{
+    with bn_import_all fade_out = true
 }
 
 /*
