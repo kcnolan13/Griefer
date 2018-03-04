@@ -1,11 +1,11 @@
-/// @description mostly inherited
+/// @description inherited + sometimes draw selected bot level
 
-if room = rm_lobby and not instance_exists(bn_vote)
+if room = rm_lobby and (not instance_exists(bn_vote) or net_manager.bot_match)
 {
     alpha = 0 
     entry.alpha = alpha
     send.alpha = alpha
-    exit  
+    exit
 }
 
 if room = rm_login

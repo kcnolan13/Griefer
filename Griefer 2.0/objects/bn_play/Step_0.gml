@@ -1,13 +1,43 @@
-/// @description create play modals
-if net_manager.menu_mode = "play" and not instance_exists(bn_play_modal) and not instance_exists(bn_start_matchmaking) and net_manager.room_counter > 30*1.5
+/// @description create all sorts of modals
+
+if net_manager.menu_mode == "lobby" and not instance_exists(modal_bot_diff)
 {
+	var left = chat_feed.left
+	var top = chat_feed.top+48
+	var width = chat_feed.width
+	var height = 96
+	ID = instance_create(left,top,modal_bot_diff)
+	ID.width = width
+	ID.height = height
+	ID.birth_delay = 5
+	ID.text_halign = fa_center
+	ID.text_valign = fa_middle
+	ID.header_font = fnt_hud_big
+	ID.font = fnt_title
+	ID.text_yoff = -32
+	ID.highlightable = false
+	ID.draw_gradient = false
+	ID.draw_rect = false
+	ID.image_halign = fa_center
+	ID.image_valign = fa_middle
+	ID.img_xscale = 0.3
+	ID.img_yscale = 0.3
+	
+	var bot_lvl = net_manager.bot_diff_ind
+	ID.text = global.bot_diff_names[bot_lvl]
+	ID.image = global.bot_diff_icons[bot_lvl]
+	//ID.header_text = global.bot_diff_subtitles[bot_lvl]
+}
+
+if net_manager.menu_mode = "play" and not instance_exists(bn_play_modal) and not instance_exists(bn_choose_difficulty) and not instance_exists(bn_start_matchmaking) and net_manager.room_counter > 30*1.5
+{
+	//printf("::: creating bn_play_modals .... instance_exists(bn_choose_difficulty) = "+string(instance_exists(bn_choose_difficulty)))
     hspacer = 128
     vspacer = 48
     width = 64*5
     height = (HVIEW-72-vspacer-2*hspacer)/2
     left = hspacer+width
     top = 72+hspacer+height
-    
     
     ID = instance_create(left,top,bn_play_modal)
     ID.text = "Online "+global.cmode
@@ -48,7 +78,7 @@ if net_manager.menu_mode = "play" and not instance_exists(bn_play_modal) and not
 if net_manager.menu_mode = "play"
     play_counter ++
 
-if net_manager.menu_mode != "play" and (instance_exists(bn_play_modal) or instance_exists(bn_start_matchmaking))
+if net_manager.menu_mode != "play" and (instance_exists(bn_play_modal) or instance_exists(bn_start_matchmaking) or instance_exists(bn_choose_difficulty))
 {
     play_counter = 0
     with bn_play_modal
@@ -59,6 +89,11 @@ if net_manager.menu_mode != "play" and (instance_exists(bn_play_modal) or instan
     
     with bn_start_matchmaking
     {
+        if not popped_in visible = false
+        fade_out = true
+    }
+
+    with bn_choose_difficulty {
         if not popped_in visible = false
         fade_out = true
     }
@@ -321,6 +356,7 @@ if label = txt_menu
     else
     {
         with (bn_start_matchmaking) instance_destroy()
+        with (bn_choose_difficulty) instance_destroy()
         active = false
     }
 }

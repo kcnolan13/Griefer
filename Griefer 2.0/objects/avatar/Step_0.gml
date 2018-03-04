@@ -62,7 +62,7 @@ if shuffling //and x > 0 and x < room_width
             return false
         }
     
-        var rank = objVarRead(myAvatar(),"rank")
+        var rank = net_manager.bot_diff_level //objVarRead(myAvatar(),"rank")
         
         if num_bots != 1
         {

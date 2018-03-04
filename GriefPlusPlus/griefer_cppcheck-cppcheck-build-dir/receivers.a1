@@ -1,0 +1,166 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="870810337">
+        <error id="unsignedLessThanZero" severity="style" msg="Checking if unsigned variable &apos;minsize&apos; is less than zero." verbose="The unsigned variable &apos;minsize&apos; will never be negative so it is either pointless or an error to check if it is." cwe="570">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\receivers.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\receivers.cpp" line="110"/>
+        </error>
+        <error id="operatorEqVarError" severity="warning" msg="Member variable &apos;socket::m_impl&apos; is not assigned a value in &apos;socket::operator=&apos;." verbose="Member variable &apos;socket::m_impl&apos; is not assigned a value in &apos;socket::operator=&apos;." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\receivers.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_socket.h" line="95"/>
+        </error>
+        <error id="operatorEqVarError" severity="warning" msg="Member variable &apos;client::m_impl&apos; is not assigned a value in &apos;client::operator=&apos;." verbose="Member variable &apos;client::m_impl&apos; is not assigned a value in &apos;client::operator=&apos;." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\receivers.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.h" line="81"/>
+        </error>
+        <error id="useInitializationList" severity="performance" msg="Variable &apos;json&apos; is assigned in constructor body. Consider performing initialization in initialization list." verbose="When an object of a class is created, the constructors of all member variables are called consecutively in the order the variables are declared, even if you don&apos;t explicitly write them to the initialization list. You could avoid assigning &apos;json&apos; a value by passing the value to the constructor in the initialization list." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\receivers.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\receivers.cpp" line="28"/>
+        </error>
+        <error id="noCopyConstructor" severity="style" msg="class &apos;object_update_container&apos; does not have a copy constructor which is recommended since the class contains a pointer to allocated memory." verbose="class &apos;object_update_container&apos; does not have a copy constructor which is recommended since the class contains a pointer to allocated memory." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\receivers.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\receivers.h" line="28"/>
+        </error>
+        <error id="noCopyConstructor" severity="style" msg="class &apos;object_create_container&apos; does not have a copy constructor which is recommended since the class contains a pointer to allocated memory." verbose="class &apos;object_create_container&apos; does not have a copy constructor which is recommended since the class contains a pointer to allocated memory." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\receivers.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\receivers.h" line="40"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;message&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;message&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\receivers.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_message.h" line="103"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;int_message&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;int_message&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\receivers.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_message.h" line="110"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;double_message&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;double_message&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\receivers.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_message.h" line="130"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;string_message&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;string_message&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\receivers.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_message.h" line="150"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;binary_message&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;binary_message&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\receivers.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_message.h" line="169"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;list&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;list&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\receivers.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_message.h" line="239"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;list&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;list&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\receivers.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_message.h" line="243"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;list&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;list&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\receivers.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_message.h" line="249"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;list&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;list&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\receivers.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_message.h" line="255"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;list&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;list&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\receivers.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_message.h" line="261"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;list&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;list&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\receivers.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_message.h" line="266"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;list&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;list&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\receivers.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_message.h" line="272"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;genVal&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;genVal&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\receivers.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\helpers.h" line="49"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;genVal&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;genVal&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\receivers.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\helpers.h" line="50"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;connection_listener&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;connection_listener&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\receivers.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\receivers.h" line="75"/>
+        </error>
+        <error id="passedByValue" severity="performance" msg="Function parameter &apos;json_str&apos; should be passed by reference." verbose="Parameter &apos;json_str&apos; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\receivers.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\receivers.cpp" line="32"/>
+        </error>
+        <error id="passedByValue" severity="performance" msg="Function parameter &apos;json_str&apos; should be passed by reference." verbose="Parameter &apos;json_str&apos; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\receivers.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\receivers.cpp" line="37"/>
+        </error>
+        <error id="passedByValue" severity="performance" msg="Function parameter &apos;json_str&apos; should be passed by reference." verbose="Parameter &apos;json_str&apos; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\receivers.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\receivers.cpp" line="41"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="firstEntry" lineNumber="32"/>
+    <functiondecl functionName="nextEntry" lineNumber="37"/>
+    <functiondecl functionName="newEntry" lineNumber="41"/>
+    <functiondecl functionName="closePkg" lineNumber="49"/>
+    <functiondecl functionName="maintainDeckIntegrity" lineNumber="74"/>
+    <functiondecl functionName="processObjUpdate" lineNumber="125"/>
+    <functiondecl functionName="processObjCreate" lineNumber="156"/>
+    <functiondecl functionName="processGeneralMessage" lineNumber="168"/>
+    <functiondecl functionName="processBigMessage" lineNumber="178"/>
+    <functiondecl functionName="objPushBackStr" lineNumber="190"/>
+    <functiondecl functionName="objPushBackReal" lineNumber="203"/>
+    <functioncall functionName="NULL"/>
+    <functioncall functionName="_flag"/>
+    <functioncall functionName="_v"/>
+    <functioncall functionName="array_message"/>
+    <functioncall functionName="assert"/>
+    <functioncall functionName="begin"/>
+    <functioncall functionName="binary"/>
+    <functioncall functionName="binary_message"/>
+    <functioncall functionName="clear"/>
+    <functioncall functionName="client"/>
+    <functioncall functionName="close_reason_drop"/>
+    <functioncall functionName="close_reason_normal"/>
+    <functioncall functionName="console"/>
+    <functioncall functionName="const"/>
+    <functioncall functionName="corrupted"/>
+    <functioncall functionName="create"/>
+    <functioncall functionName="deque"/>
+    <functioncall functionName="double_message"/>
+    <functioncall functionName="end"/>
+    <functioncall functionName="event"/>
+    <functioncall functionName="event_name"/>
+    <functioncall functionName="exit"/>
+    <functioncall functionName="f"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="firstEntry"/>
+    <functioncall functionName="flag"/>
+    <functioncall functionName="flag_array"/>
+    <functioncall functionName="flag_binary"/>
+    <functioncall functionName="flag_double"/>
+    <functioncall functionName="flag_integer"/>
+    <functioncall functionName="flag_object"/>
+    <functioncall functionName="flag_string"/>
+    <functioncall functionName="genVal"/>
+    <functioncall functionName="getMapGenVal"/>
+    <functioncall functionName="getMapReal"/>
+    <functioncall functionName="getMapString"/>
+    <functioncall functionName="get_flag"/>
+    <functioncall functionName="get_map"/>
+    <functioncall functionName="get_vector"/>
+    <functioncall functionName="h"/>
+    <functioncall functionName="handler"/>
+    <functioncall functionName="i"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="insert"/>
+    <functioncall functionName="int"/>
+    <functioncall functionName="int_message"/>
+    <functioncall functionName="integrityCheck"/>
+    <functioncall functionName="is_empty"/>
+    <functioncall functionName="json_str"/>
+    <functioncall functionName="list"/>
+    <functioncall functionName="lock"/>
+    <functioncall functionName="m_vector"/>
+    <functioncall functionName="maintainDeckIntegrity"/>
+    <functioncall functionName="message"/>
+    <functioncall functionName="move"/>
+    <functioncall functionName="netVar"/>
+    <functioncall functionName="nextEntry"/>
+    <functioncall functionName="notify_all"/>
+    <functioncall functionName="nullptr"/>
+    <functioncall functionName="nullptr_t"/>
+    <functioncall functionName="nv"/>
+    <functioncall functionName="object_create_container"/>
+    <functioncall functionName="object_message"/>
+    <functioncall functionName="object_update_container"/>
+    <functioncall functionName="oid_string"/>
+    <functioncall functionName="pkg"/>
+    <functioncall functionName="pos"/>
+    <functioncall functionName="ptr"/>
+    <functioncall functionName="push_back"/>
+    <functioncall functionName="return"/>
+    <functioncall functionName="s"/>
+    <functioncall functionName="size"/>
+    <functioncall functionName="string_message"/>
+    <functioncall functionName="text"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="unlock"/>
+    <functioncall functionName="v"/>
+    <functioncall functionName="value"/>
+  </FileInfo>
+</analyzerinfo>

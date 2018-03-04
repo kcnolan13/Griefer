@@ -444,6 +444,9 @@ varWrite("bot_versus_color",global.versus_color)
 varWrite("bot_ffa_color",global.ffa_color)
 varWrite("bot_tdm_color",global.tdm_color)
 
+bot_diff_name = "NULL"
+bot_diff_level = 0
+
 
 //bparts
 bparts_all_init()

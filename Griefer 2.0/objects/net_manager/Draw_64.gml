@@ -111,7 +111,7 @@ for (var i=0; i<instance_number(avatar); i++)
 real_time_step()
 
 ///debug
-if 1=0
+/*if DEBUG
 {
     draw_set_color(c_white)
     draw_flash_compensate()
@@ -132,7 +132,7 @@ if 1=0
         draw_text(WVIEW*1/4,HVIEW*1/4+32*other.pinc,string_hash_to_newline("Avatar "+playerName(id)+" pNum = "+string(varRead("pNum"))+", override = "+string(varRead("pNum_override"))))
         other.pinc ++
     }
-}
+}*/
 
 
 ///HUD

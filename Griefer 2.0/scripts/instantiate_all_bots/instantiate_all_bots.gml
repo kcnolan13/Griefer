@@ -61,7 +61,7 @@ for (var i=0; i<num_bots; i++)
         }
     }
 
-    var rank = objVarRead(myAvatar(),"rank")
+    var rank = net_manager.bot_diff_level //objVarRead(myAvatar(),"rank")
         
     if num_bots != 1
     {

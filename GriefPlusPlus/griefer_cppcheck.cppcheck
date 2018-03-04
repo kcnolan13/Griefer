@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="1">
+    <builddir>griefer_cppcheck-cppcheck-build-dir</builddir>
+    <importproject>GriefPlusPlus/GriefPlusPlus.sln</importproject>
+    <analyze-all-vs-configs>true</analyze-all-vs-configs>
+</project>

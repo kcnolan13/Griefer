@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results version="2">
+    <cppcheck version="1.82"/>
+    <errors>
+        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;s&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;s&amp;#039; is assigned a value that is never used." sinceDate="3/2/2018">
+            <location file="main.cpp" line="74"/>
+        </error>
+        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;connURL&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;connURL&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="3/2/2018">
+            <location file="main.cpp" line="37"/>
+        </error>
+        <error id="stlcstrParam" severity="performance" msg="Passing the result of c_str() to a function that takes std::string as argument no. 1 is slow and redundant." verbose="The conversion from const char* as returned by c_str() to std::string creates an unnecessary string copy. Solve that by directly passing the string." sinceDate="3/2/2018">
+            <location file="main.cpp" line="69"/>
+        </error>
+        <error id="stlcstr" severity="error" msg="Dangerous usage of c_str(). The value returned by c_str() is invalid after this call." verbose="Dangerous usage of c_str(). The c_str() return value is only valid until its string is deleted." sinceDate="3/2/2018">
+            <location file="main.cpp" line="112"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;closeConnection&amp;#039; is never used." verbose="The function &amp;#039;closeConnection&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="main.cpp" line="28"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;downloadLatest&amp;#039; is never used." verbose="The function &amp;#039;downloadLatest&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="main.cpp" line="59"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;getExecPath&amp;#039; is never used." verbose="The function &amp;#039;getExecPath&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="main.cpp" line="111"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;getGreeting&amp;#039; is never used." verbose="The function &amp;#039;getGreeting&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="main.cpp" line="95"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;initGrieferClient&amp;#039; is never used." verbose="The function &amp;#039;initGrieferClient&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="main.cpp" line="37"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;isAlive&amp;#039; is never used." verbose="The function &amp;#039;isAlive&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="main.cpp" line="86"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;keepAlive&amp;#039; is never used." verbose="The function &amp;#039;keepAlive&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="main.cpp" line="80"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;launchGame&amp;#039; is never used." verbose="The function &amp;#039;launchGame&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="main.cpp" line="161"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;moveFile&amp;#039; is never used." verbose="The function &amp;#039;moveFile&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="main.cpp" line="192"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;sendCmd&amp;#039; is never used." verbose="The function &amp;#039;sendCmd&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="main.cpp" line="73"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;setGreeting&amp;#039; is never used." verbose="The function &amp;#039;setGreeting&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="main.cpp" line="66"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;setWorkingDir&amp;#039; is never used." verbose="The function &amp;#039;setWorkingDir&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="main.cpp" line="115"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;updateGame&amp;#039; is never used." verbose="The function &amp;#039;updateGame&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="main.cpp" line="121"/>
+        </error>
+        <error id="operatorEqVarError" severity="warning" msg="Member variable &amp;#039;socket::m_impl&amp;#039; is not assigned a value in &amp;#039;socket::operator=&amp;#039;." verbose="Member variable &amp;#039;socket::m_impl&amp;#039; is not assigned a value in &amp;#039;socket::operator=&amp;#039;." sinceDate="3/2/2018">
+            <location file="src\sio_socket.h" line="95"/>
+        </error>
+        <error id="operatorEqVarError" severity="warning" msg="Member variable &amp;#039;client::m_impl&amp;#039; is not assigned a value in &amp;#039;client::operator=&amp;#039;." verbose="Member variable &amp;#039;client::m_impl&amp;#039; is not assigned a value in &amp;#039;client::operator=&amp;#039;." sinceDate="3/2/2018">
+            <location file="src\sio_client.h" line="81"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;message&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;message&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="3/2/2018">
+            <location file="src\sio_message.h" line="103"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;int_message&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;int_message&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="3/2/2018">
+            <location file="src\sio_message.h" line="110"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;double_message&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;double_message&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="3/2/2018">
+            <location file="src\sio_message.h" line="130"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;string_message&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;string_message&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="3/2/2018">
+            <location file="src\sio_message.h" line="150"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;binary_message&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;binary_message&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="3/2/2018">
+            <location file="src\sio_message.h" line="169"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;list&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;list&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="3/2/2018">
+            <location file="src\sio_message.h" line="239"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;list&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;list&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="3/2/2018">
+            <location file="src\sio_message.h" line="243"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;list&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;list&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="3/2/2018">
+            <location file="src\sio_message.h" line="249"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;list&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;list&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="3/2/2018">
+            <location file="src\sio_message.h" line="255"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;list&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;list&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="3/2/2018">
+            <location file="src\sio_message.h" line="261"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;list&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;list&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="3/2/2018">
+            <location file="src\sio_message.h" line="266"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;list&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;list&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="3/2/2018">
+            <location file="src\sio_message.h" line="272"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;genVal&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;genVal&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="3/2/2018">
+            <location file="src\helpers.h" line="49"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;genVal&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;genVal&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="3/2/2018">
+            <location file="src\helpers.h" line="50"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;connection_listener&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;connection_listener&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="3/2/2018">
+            <location file="src\receivers.h" line="75"/>
+        </error>
+        <error id="noCopyConstructor" severity="style" msg="class &amp;#039;object_update_container&amp;#039; does not have a copy constructor which is recommended since the class contains a pointer to allocated memory." verbose="class &amp;#039;object_update_container&amp;#039; does not have a copy constructor which is recommended since the class contains a pointer to allocated memory." sinceDate="3/2/2018">
+            <location file="src\receivers.h" line="28"/>
+        </error>
+        <error id="noCopyConstructor" severity="style" msg="class &amp;#039;object_create_container&amp;#039; does not have a copy constructor which is recommended since the class contains a pointer to allocated memory." verbose="class &amp;#039;object_create_container&amp;#039; does not have a copy constructor which is recommended since the class contains a pointer to allocated memory." sinceDate="3/2/2018">
+            <location file="src\receivers.h" line="40"/>
+        </error>
+        <error id="unsignedLessThanZero" severity="style" msg="Checking if unsigned variable &amp;#039;deck-&amp;gt;size()&amp;#039; is less than zero." verbose="The unsigned variable &amp;#039;deck-&amp;gt;size()&amp;#039; will never be negative so it is either pointless or an error to check if it is." sinceDate="3/2/2018">
+            <location file="src\helpers.cpp" line="97"/>
+        </error>
+        <error id="unsignedLessThanZero" severity="style" msg="Checking if unsigned variable &amp;#039;deck-&amp;gt;size()&amp;#039; is less than zero." verbose="The unsigned variable &amp;#039;deck-&amp;gt;size()&amp;#039; will never be negative so it is either pointless or an error to check if it is." sinceDate="3/2/2018">
+            <location file="src\helpers.cpp" line="107"/>
+        </error>
+        <error id="unsignedLessThanZero" severity="style" msg="Checking if unsigned variable &amp;#039;deck-&amp;gt;size()&amp;#039; is less than zero." verbose="The unsigned variable &amp;#039;deck-&amp;gt;size()&amp;#039; will never be negative so it is either pointless or an error to check if it is." sinceDate="3/2/2018">
+            <location file="src\helpers.cpp" line="117"/>
+        </error>
+        <error id="unsignedLessThanZero" severity="style" msg="Checking if unsigned variable &amp;#039;deck-&amp;gt;size()&amp;#039; is less than zero." verbose="The unsigned variable &amp;#039;deck-&amp;gt;size()&amp;#039; will never be negative so it is either pointless or an error to check if it is." sinceDate="3/2/2018">
+            <location file="src\helpers.cpp" line="127"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;nv&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;nv&amp;#039; is assigned a value that is never used." sinceDate="3/2/2018">
+            <location file="src\helpers.cpp" line="196"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;val&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;val&amp;#039; is assigned a value that is never used." sinceDate="3/2/2018">
+            <location file="src\helpers.cpp" line="197"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;msgStr&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;msgStr&amp;#039; is assigned a value that is never used." sinceDate="3/2/2018">
+            <location file="src\helpers.cpp" line="220"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &amp;#039;val&amp;#039; is assigned a value that is never used." verbose="Variable &amp;#039;val&amp;#039; is assigned a value that is never used." sinceDate="3/2/2018">
+            <location file="src\helpers.cpp" line="221"/>
+        </error>
+        <error id="useInitializationList" severity="performance" msg="Variable &amp;#039;sVal&amp;#039; is assigned in constructor body. Consider performing initialization in initialization list." verbose="When an object of a class is created, the constructors of all member variables are called consecutively in the order the variables are declared, even if you don&amp;#039;t explicitly write them to the initialization list. You could avoid assigning &amp;#039;sVal&amp;#039; a value by passing the value to the constructor in the initialization list." sinceDate="3/2/2018">
+            <location file="src\helpers.cpp" line="16"/>
+        </error>
+        <error id="useInitializationList" severity="performance" msg="Variable &amp;#039;sVal&amp;#039; is assigned in constructor body. Consider performing initialization in initialization list." verbose="When an object of a class is created, the constructors of all member variables are called consecutively in the order the variables are declared, even if you don&amp;#039;t explicitly write them to the initialization list. You could avoid assigning &amp;#039;sVal&amp;#039; a value by passing the value to the constructor in the initialization list." sinceDate="3/2/2018">
+            <location file="src\helpers.cpp" line="23"/>
+        </error>
+        <error id="useInitializationList" severity="performance" msg="Variable &amp;#039;sVal&amp;#039; is assigned in constructor body. Consider performing initialization in initialization list." verbose="When an object of a class is created, the constructors of all member variables are called consecutively in the order the variables are declared, even if you don&amp;#039;t explicitly write them to the initialization list. You could avoid assigning &amp;#039;sVal&amp;#039; a value by passing the value to the constructor in the initialization list." sinceDate="3/2/2018">
+            <location file="src\helpers.cpp" line="30"/>
+        </error>
+        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;strVal&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;strVal&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="3/2/2018">
+            <location file="src\helpers.cpp" line="21"/>
+        </error>
+        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;name&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;name&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="3/2/2018">
+            <location file="src\helpers.cpp" line="169"/>
+        </error>
+        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;name&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;name&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="3/2/2018">
+            <location file="src\helpers.cpp" line="175"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;chopDeck&amp;#039; is never used." verbose="The function &amp;#039;chopDeck&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\helpers.cpp" line="275"/>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &amp;#039;j&amp;#039; can be reduced." verbose="The scope of the variable &amp;#039;j&amp;#039; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &amp;#039;i&amp;#039; can be reduced:&#10;void f(int x)&#10;{&#10;    int i = 0;&#10;    if (x) {&#10;        // it&amp;#039;s safe to move &amp;#039;int i = 0;&amp;#039; here&#10;        for (int n = 0; n &amp;lt; 10; ++n) {&#10;            // it is possible but not safe to move &amp;#039;int i = 0;&amp;#039; here&#10;            do_something(&amp;amp;i);&#10;        }&#10;    }&#10;}&#10;When you see this message it is always safe to reduce the variable scope 1 level." sinceDate="3/2/2018">
+            <location file="lib\websocketpp\websocketpp\base64\base64.hpp" line="69"/>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &amp;#039;j&amp;#039; can be reduced." verbose="The scope of the variable &amp;#039;j&amp;#039; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &amp;#039;i&amp;#039; can be reduced:&#10;void f(int x)&#10;{&#10;    int i = 0;&#10;    if (x) {&#10;        // it&amp;#039;s safe to move &amp;#039;int i = 0;&amp;#039; here&#10;        for (int n = 0; n &amp;lt; 10; ++n) {&#10;            // it is possible but not safe to move &amp;#039;int i = 0;&amp;#039; here&#10;            do_something(&amp;amp;i);&#10;        }&#10;    }&#10;}&#10;When you see this message it is always safe to reduce the variable scope 1 level." sinceDate="3/2/2018">
+            <location file="lib\websocketpp\websocketpp\base64\base64.hpp" line="134"/>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &amp;#039;bytes_read&amp;#039; can be reduced." verbose="The scope of the variable &amp;#039;bytes_read&amp;#039; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &amp;#039;i&amp;#039; can be reduced:&#10;void f(int x)&#10;{&#10;    int i = 0;&#10;    if (x) {&#10;        // it&amp;#039;s safe to move &amp;#039;int i = 0;&amp;#039; here&#10;        for (int n = 0; n &amp;lt; 10; ++n) {&#10;            // it is possible but not safe to move &amp;#039;int i = 0;&amp;#039; here&#10;            do_something(&amp;amp;i);&#10;        }&#10;    }&#10;}&#10;When you see this message it is always safe to reduce the variable scope 1 level." sinceDate="3/2/2018">
+            <location file="lib\websocketpp\websocketpp\http\impl\response.hpp" line="141"/>
+        </error>
+        <error id="uninitMemberVar" severity="warning" msg="Member variable &amp;#039;connection::m_buf&amp;#039; is not initialized in the constructor." verbose="Member variable &amp;#039;connection::m_buf&amp;#039; is not initialized in the constructor." sinceDate="3/2/2018">
+            <location file="lib\websocketpp\websocketpp\connection.hpp" line="283"/>
+        </error>
+        <error id="uninitMemberVar" severity="warning" msg="Member variable &amp;#039;connection::m_buf_cursor&amp;#039; is not initialized in the constructor." verbose="Member variable &amp;#039;connection::m_buf_cursor&amp;#039; is not initialized in the constructor." sinceDate="3/2/2018">
+            <location file="lib\websocketpp\websocketpp\connection.hpp" line="283"/>
+        </error>
+        <error id="uninitMemberVar" severity="warning" msg="Member variable &amp;#039;connection::m_closed_by_me&amp;#039; is not initialized in the constructor." verbose="Member variable &amp;#039;connection::m_closed_by_me&amp;#039; is not initialized in the constructor." sinceDate="3/2/2018">
+            <location file="lib\websocketpp\websocketpp\connection.hpp" line="283"/>
+        </error>
+        <error id="uninitMemberVar" severity="warning" msg="Member variable &amp;#039;connection::m_failed_by_me&amp;#039; is not initialized in the constructor." verbose="Member variable &amp;#039;connection::m_failed_by_me&amp;#039; is not initialized in the constructor." sinceDate="3/2/2018">
+            <location file="lib\websocketpp\websocketpp\connection.hpp" line="283"/>
+        </error>
+        <error id="uninitMemberVar" severity="warning" msg="Member variable &amp;#039;connection::m_dropped_by_me&amp;#039; is not initialized in the constructor." verbose="Member variable &amp;#039;connection::m_dropped_by_me&amp;#039; is not initialized in the constructor." sinceDate="3/2/2018">
+            <location file="lib\websocketpp\websocketpp\connection.hpp" line="283"/>
+        </error>
+        <error id="uninitMemberVar" severity="warning" msg="Member variable &amp;#039;hybi13::m_cursor&amp;#039; is not initialized in the constructor." verbose="Member variable &amp;#039;hybi13::m_cursor&amp;#039; is not initialized in the constructor." sinceDate="3/2/2018">
+            <location file="lib\websocketpp\websocketpp\processors\hybi13.hpp" line="72"/>
+        </error>
+        <error id="uninitMemberVar" severity="warning" msg="Member variable &amp;#039;hybi13::m_current_msg&amp;#039; is not initialized in the constructor." verbose="Member variable &amp;#039;hybi13::m_current_msg&amp;#039; is not initialized in the constructor." sinceDate="3/2/2018">
+            <location file="lib\websocketpp\websocketpp\processors\hybi13.hpp" line="72"/>
+        </error>
+        <error id="uninitMemberVar" severity="warning" msg="Member variable &amp;#039;endpoint::m_elog&amp;#039; is not initialized in the constructor." verbose="Member variable &amp;#039;endpoint::m_elog&amp;#039; is not initialized in the constructor." sinceDate="3/2/2018">
+            <location file="lib\websocketpp\websocketpp\transport\iostream\endpoint.hpp" line="68"/>
+        </error>
+        <error id="uninitMemberVar" severity="warning" msg="Member variable &amp;#039;endpoint::m_alog&amp;#039; is not initialized in the constructor." verbose="Member variable &amp;#039;endpoint::m_alog&amp;#039; is not initialized in the constructor." sinceDate="3/2/2018">
+            <location file="lib\websocketpp\websocketpp\transport\iostream\endpoint.hpp" line="68"/>
+        </error>
+        <error id="uninitMemberVar" severity="warning" msg="Member variable &amp;#039;message::m_opcode&amp;#039; is not initialized in the constructor." verbose="Member variable &amp;#039;message::m_opcode&amp;#039; is not initialized in the constructor." sinceDate="3/2/2018">
+            <location file="lib\websocketpp\websocketpp\message_buffer\message.hpp" line="96"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;message&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;message&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="3/2/2018">
+            <location file="lib\websocketpp\websocketpp\message_buffer\message.hpp" line="96"/>
+        </error>
+        <error id="uninitMemberVar" severity="warning" msg="Member variable &amp;#039;connection::m_io_service&amp;#039; is not initialized in the constructor." verbose="Member variable &amp;#039;connection::m_io_service&amp;#039; is not initialized in the constructor." sinceDate="3/2/2018">
+            <location file="lib\websocketpp\websocketpp\transport\asio\connection.hpp" line="101"/>
+        </error>
+        <error id="uninitMemberVar" severity="warning" msg="Member variable &amp;#039;endpoint::m_elog&amp;#039; is not initialized in the constructor." verbose="Member variable &amp;#039;endpoint::m_elog&amp;#039; is not initialized in the constructor." sinceDate="3/2/2018">
+            <location file="lib\websocketpp\websocketpp\transport\asio\endpoint.hpp" line="95"/>
+        </error>
+        <error id="uninitMemberVar" severity="warning" msg="Member variable &amp;#039;endpoint::m_alog&amp;#039; is not initialized in the constructor." verbose="Member variable &amp;#039;endpoint::m_alog&amp;#039; is not initialized in the constructor." sinceDate="3/2/2018">
+            <location file="lib\websocketpp\websocketpp\transport\asio\endpoint.hpp" line="95"/>
+        </error>
+        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;tcon&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;tcon&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="3/2/2018">
+            <location file="lib\websocketpp\websocketpp\transport\asio\endpoint.hpp" line="731"/>
+        </error>
+        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;tcon&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;tcon&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="3/2/2018">
+            <location file="lib\websocketpp\websocketpp\transport\asio\endpoint.hpp" line="999"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Struct &amp;#039;my_equal&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Struct &amp;#039;my_equal&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="3/2/2018">
+            <location file="lib\websocketpp\websocketpp\utilities.hpp" line="54"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Struct &amp;#039;extended_header&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Struct &amp;#039;extended_header&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="3/2/2018">
+            <location file="lib\websocketpp\websocketpp\frame.hpp" line="240"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;basic&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;basic&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="3/2/2018">
+            <location file="lib\websocketpp\websocketpp\logger\basic.hpp" line="61"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;basic&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;basic&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="3/2/2018">
+            <location file="lib\websocketpp\websocketpp\logger\basic.hpp" line="67"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &amp;#039;packet&amp;#039; has a constructor with 1 argument that is not explicit." verbose="Class &amp;#039;packet&amp;#039; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." sinceDate="3/2/2018">
+            <location file="src\internal\sio_packet.h" line="55"/>
+        </error>
+        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;scheme&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;scheme&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="3/2/2018">
+            <location file="lib\websocketpp\websocketpp\uri.hpp" line="206"/>
+        </error>
+        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;value&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;value&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="3/2/2018">
+            <location file="lib\websocketpp\websocketpp\transport\iostream\connection.hpp" line="274"/>
+        </error>
+        <error id="postfixOperator" severity="performance" msg="Prefer prefix ++/-- operators for non-primitive types." verbose="Prefix ++/-- operators should be preferred for non-primitive types. Pre-increment/decrement can be more efficient than post-increment/decrement. Post-increment/decrement usually involves keeping a copy of the previous value around and adds a little extra code." sinceDate="3/2/2018">
+            <location file="lib\websocketpp\websocketpp\transport\iostream\connection.hpp" line="487"/>
+        </error>
+        <error id="postfixOperator" severity="performance" msg="Prefer prefix ++/-- operators for non-primitive types." verbose="Prefix ++/-- operators should be preferred for non-primitive types. Pre-increment/decrement can be more efficient than post-increment/decrement. Post-increment/decrement usually involves keeping a copy of the previous value around and adds a little extra code." sinceDate="3/2/2018">
+            <location file="lib\websocketpp\websocketpp\transport\iostream\connection.hpp" line="497"/>
+        </error>
+        <error id="postfixOperator" severity="performance" msg="Prefer prefix ++/-- operators for non-primitive types." verbose="Prefix ++/-- operators should be preferred for non-primitive types. Pre-increment/decrement can be more efficient than post-increment/decrement. Post-increment/decrement usually involves keeping a copy of the previous value around and adds a little extra code." sinceDate="3/2/2018">
+            <location file="lib\websocketpp\websocketpp\impl\connection_impl.hpp" line="1083"/>
+        </error>
+        <error id="postfixOperator" severity="performance" msg="Prefer prefix ++/-- operators for non-primitive types." verbose="Prefix ++/-- operators should be preferred for non-primitive types. Pre-increment/decrement can be more efficient than post-increment/decrement. Post-increment/decrement usually involves keeping a copy of the previous value around and adds a little extra code." sinceDate="3/2/2018">
+            <location file="lib\websocketpp\websocketpp\http\impl\parser.hpp" line="183"/>
+        </error>
+        <error id="preprocessorErrorDirective" severity="error" msg="#error Unknown machine endianess detected. User needs to define RAPIDJSON_ENDIAN." verbose="#error Unknown machine endianess detected. User needs to define RAPIDJSON_ENDIAN." sinceDate="3/2/2018">
+            <location file="lib\rapidjson\include\rapidjson\rapidjson.h" line="192"/>
+        </error>
+        <error id="unsignedLessThanZero" severity="style" msg="Checking if unsigned variable &amp;#039;minsize&amp;#039; is less than zero." verbose="The unsigned variable &amp;#039;minsize&amp;#039; will never be negative so it is either pointless or an error to check if it is." sinceDate="3/2/2018">
+            <location file="src\receivers.cpp" line="110"/>
+        </error>
+        <error id="useInitializationList" severity="performance" msg="Variable &amp;#039;json&amp;#039; is assigned in constructor body. Consider performing initialization in initialization list." verbose="When an object of a class is created, the constructors of all member variables are called consecutively in the order the variables are declared, even if you don&amp;#039;t explicitly write them to the initialization list. You could avoid assigning &amp;#039;json&amp;#039; a value by passing the value to the constructor in the initialization list." sinceDate="3/2/2018">
+            <location file="src\receivers.cpp" line="28"/>
+        </error>
+        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;json_str&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;json_str&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="3/2/2018">
+            <location file="src\receivers.cpp" line="32"/>
+        </error>
+        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;json_str&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;json_str&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="3/2/2018">
+            <location file="src\receivers.cpp" line="37"/>
+        </error>
+        <error id="passedByValue" severity="performance" msg="Function parameter &amp;#039;json_str&amp;#039; should be passed by reference." verbose="Parameter &amp;#039;json_str&amp;#039; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." sinceDate="3/2/2018">
+            <location file="src\receivers.cpp" line="41"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;objPushBackReal&amp;#039; is never used." verbose="The function &amp;#039;objPushBackReal&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\receivers.cpp" line="203"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;objPushBackStr&amp;#039; is never used." verbose="The function &amp;#039;objPushBackStr&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\receivers.cpp" line="190"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;authenticate&amp;#039; is never used." verbose="The function &amp;#039;authenticate&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_transmitters.cpp" line="189"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;createUser&amp;#039; is never used." verbose="The function &amp;#039;createUser&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_transmitters.cpp" line="198"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;logIn&amp;#039; is never used." verbose="The function &amp;#039;logIn&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_transmitters.cpp" line="206"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;logOut&amp;#039; is never used." verbose="The function &amp;#039;logOut&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_transmitters.cpp" line="214"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;myPrintf&amp;#039; is never used." verbose="The function &amp;#039;myPrintf&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_transmitters.cpp" line="22"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;objCreate&amp;#039; is never used." verbose="The function &amp;#039;objCreate&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_transmitters.cpp" line="48"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;objUpdateReal&amp;#039; is never used." verbose="The function &amp;#039;objUpdateReal&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_transmitters.cpp" line="39"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;objUpdateStr&amp;#039; is never used." verbose="The function &amp;#039;objUpdateStr&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_transmitters.cpp" line="31"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;otherPlayerStatUpdateReal&amp;#039; is never used." verbose="The function &amp;#039;otherPlayerStatUpdateReal&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_transmitters.cpp" line="107"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;otherPlayerStatUpdateStr&amp;#039; is never used." verbose="The function &amp;#039;otherPlayerStatUpdateStr&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_transmitters.cpp" line="115"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;pkgCreate&amp;#039; is never used." verbose="The function &amp;#039;pkgCreate&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_transmitters.cpp" line="56"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;pkgSend&amp;#039; is never used." verbose="The function &amp;#039;pkgSend&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_transmitters.cpp" line="70"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;sendBigMessageReal&amp;#039; is never used." verbose="The function &amp;#039;sendBigMessageReal&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_transmitters.cpp" line="147"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;sendBigMessageStr&amp;#039; is never used." verbose="The function &amp;#039;sendBigMessageStr&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_transmitters.cpp" line="139"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;sendBigMessageStrReal&amp;#039; is never used." verbose="The function &amp;#039;sendBigMessageStrReal&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_transmitters.cpp" line="155"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;sendBigMessageStrReal2&amp;#039; is never used." verbose="The function &amp;#039;sendBigMessageStrReal2&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_transmitters.cpp" line="163"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;sendGenMessageReal&amp;#039; is never used." verbose="The function &amp;#039;sendGenMessageReal&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_transmitters.cpp" line="131"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;sendGenMessageStr&amp;#039; is never used." verbose="The function &amp;#039;sendGenMessageStr&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_transmitters.cpp" line="123"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;setGppDebug&amp;#039; is never used." verbose="The function &amp;#039;setGppDebug&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_transmitters.cpp" line="224"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;startMatchMaking&amp;#039; is never used." verbose="The function &amp;#039;startMatchMaking&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_transmitters.cpp" line="172"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;statUpdateReal&amp;#039; is never used." verbose="The function &amp;#039;statUpdateReal&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_transmitters.cpp" line="90"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;statUpdateStr&amp;#039; is never used." verbose="The function &amp;#039;statUpdateStr&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_transmitters.cpp" line="98"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;bigMessagesWaiting&amp;#039; is never used." verbose="The function &amp;#039;bigMessagesWaiting&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_readers.cpp" line="99"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;cleanse_double&amp;#039; is never used." verbose="The function &amp;#039;cleanse_double&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_readers.cpp" line="241"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;genMessagesWaiting&amp;#039; is never used." verbose="The function &amp;#039;genMessagesWaiting&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_readers.cpp" line="58"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;hash_string&amp;#039; is never used." verbose="The function &amp;#039;hash_string&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_readers.cpp" line="8"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;objCreatesWaiting&amp;#039; is never used." verbose="The function &amp;#039;objCreatesWaiting&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_readers.cpp" line="209"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;objUpdatesWaiting&amp;#039; is never used." verbose="The function &amp;#039;objUpdatesWaiting&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_readers.cpp" line="146"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;readBigMessage&amp;#039; is never used." verbose="The function &amp;#039;readBigMessage&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_readers.cpp" line="105"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;readBigValReal&amp;#039; is never used." verbose="The function &amp;#039;readBigValReal&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_readers.cpp" line="126"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;readBigValStr&amp;#039; is never used." verbose="The function &amp;#039;readBigValStr&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_readers.cpp" line="119"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;readBigValType&amp;#039; is never used." verbose="The function &amp;#039;readBigValType&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_readers.cpp" line="112"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;readGenMessage&amp;#039; is never used." verbose="The function &amp;#039;readGenMessage&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_readers.cpp" line="64"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;readGenValReal&amp;#039; is never used." verbose="The function &amp;#039;readGenValReal&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_readers.cpp" line="88"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;readGenValStr&amp;#039; is never used." verbose="The function &amp;#039;readGenValStr&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_readers.cpp" line="80"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;readObjCreateIndex&amp;#039; is never used." verbose="The function &amp;#039;readObjCreateIndex&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_readers.cpp" line="215"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;readObjCreateMyX&amp;#039; is never used." verbose="The function &amp;#039;readObjCreateMyX&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_readers.cpp" line="228"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;readObjCreateMyY&amp;#039; is never used." verbose="The function &amp;#039;readObjCreateMyY&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_readers.cpp" line="234"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;readObjCreateUniqueId&amp;#039; is never used." verbose="The function &amp;#039;readObjCreateUniqueId&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_readers.cpp" line="221"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;readObjUpdateFlag&amp;#039; is never used." verbose="The function &amp;#039;readObjUpdateFlag&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_readers.cpp" line="199"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;readObjUpdateIndex&amp;#039; is never used." verbose="The function &amp;#039;readObjUpdateIndex&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_readers.cpp" line="152"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;readObjUpdateNetvar&amp;#039; is never used." verbose="The function &amp;#039;readObjUpdateNetvar&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_readers.cpp" line="165"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;readObjUpdateOidStr&amp;#039; is never used." verbose="The function &amp;#039;readObjUpdateOidStr&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_readers.cpp" line="172"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;readObjUpdateUniqueId&amp;#039; is never used." verbose="The function &amp;#039;readObjUpdateUniqueId&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_readers.cpp" line="158"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;readObjUpdateValReal&amp;#039; is never used." verbose="The function &amp;#039;readObjUpdateValReal&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_readers.cpp" line="193"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;readObjUpdateValStr&amp;#039; is never used." verbose="The function &amp;#039;readObjUpdateValStr&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_readers.cpp" line="186"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;readObjUpdateValType&amp;#039; is never used." verbose="The function &amp;#039;readObjUpdateValType&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_readers.cpp" line="179"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;toString&amp;#039; is never used." verbose="The function &amp;#039;toString&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\gm_readers.cpp" line="27"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;get_messages&amp;#039; is never used." verbose="The function &amp;#039;get_messages&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\sio_socket.cpp" line="60"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;put_ack_message&amp;#039; is never used." verbose="The function &amp;#039;put_ack_message&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\sio_socket.cpp" line="70"/>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &amp;#039;set_error_listener&amp;#039; is never used." verbose="The function &amp;#039;set_error_listener&amp;#039; is never used." sinceDate="3/2/2018">
+            <location file="src\sio_socket.cpp" line="124"/>
+        </error>
+    </errors>
+</results>

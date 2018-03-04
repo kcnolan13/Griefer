@@ -8,7 +8,8 @@ if COUT
 {
     //ONLY PRINT ERRORS RIGHT NOW
     //if string_count("ERROR",str) > 0
-        printf_external(str)
+    printf_external(str)
+	
     if net_manager.show_cout
     {
         if string_length(net_manager.cout_str) > net_manager.cout_maxchars

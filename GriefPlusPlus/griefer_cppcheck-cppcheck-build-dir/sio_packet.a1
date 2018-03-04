@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="761027764">
+        <error id="preprocessorErrorDirective" severity="error" msg="#error Unknown machine endianess detected. User needs to define RAPIDJSON_ENDIAN." verbose="#error Unknown machine endianess detected. User needs to define RAPIDJSON_ENDIAN.">
+            <location file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\lib\rapidjson\include\rapidjson\rapidjson.h" line="192"/>
+        </error>
+</analyzerinfo>

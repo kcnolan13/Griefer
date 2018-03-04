@@ -32,7 +32,8 @@
         "532a818f-eb78-477e-8b4e-4cc00627bf3d",
         "9f6d7c60-a8ea-4f62-ae11-8415878f8efa",
         "4bbd2d4e-ac37-470b-8b24-2a1c729aa734",
-        "6e06901d-f2fc-4ad6-a7f7-65e2ccc6e95c"
+        "6e06901d-f2fc-4ad6-a7f7-65e2ccc6e95c",
+        "e3077ca3-7218-42cf-8d2e-0a42defbc54e"
     ],
     "filterType": "GMScript",
     "folderName": "general utilities",

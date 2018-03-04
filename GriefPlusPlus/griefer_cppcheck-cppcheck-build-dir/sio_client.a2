@@ -1,0 +1,1101 @@
+<?xml version="1.0"?>
+<analyzerinfo checksum="2481675860">
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;j&apos; can be reduced." verbose="The scope of the variable &apos;j&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\lib\websocketpp\websocketpp\base64\base64.hpp" line="69"/>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;j&apos; can be reduced." verbose="The scope of the variable &apos;j&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\lib\websocketpp\websocketpp\base64\base64.hpp" line="134"/>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;bytes_read&apos; can be reduced." verbose="The scope of the variable &apos;bytes_read&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\lib\websocketpp\websocketpp\http\impl\response.hpp" line="141"/>
+        </error>
+        <error id="operatorEqVarError" severity="warning" msg="Member variable &apos;socket::m_impl&apos; is not assigned a value in &apos;socket::operator=&apos;." verbose="Member variable &apos;socket::m_impl&apos; is not assigned a value in &apos;socket::operator=&apos;." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_socket.h" line="95"/>
+        </error>
+        <error id="operatorEqVarError" severity="warning" msg="Member variable &apos;client::m_impl&apos; is not assigned a value in &apos;client::operator=&apos;." verbose="Member variable &apos;client::m_impl&apos; is not assigned a value in &apos;client::operator=&apos;." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.h" line="81"/>
+        </error>
+        <error id="uninitMemberVar" severity="warning" msg="Member variable &apos;connection::m_buf&apos; is not initialized in the constructor." verbose="Member variable &apos;connection::m_buf&apos; is not initialized in the constructor." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\lib\websocketpp\websocketpp\connection.hpp" line="283"/>
+        </error>
+        <error id="uninitMemberVar" severity="warning" msg="Member variable &apos;connection::m_buf_cursor&apos; is not initialized in the constructor." verbose="Member variable &apos;connection::m_buf_cursor&apos; is not initialized in the constructor." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\lib\websocketpp\websocketpp\connection.hpp" line="283"/>
+        </error>
+        <error id="uninitMemberVar" severity="warning" msg="Member variable &apos;connection::m_closed_by_me&apos; is not initialized in the constructor." verbose="Member variable &apos;connection::m_closed_by_me&apos; is not initialized in the constructor." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\lib\websocketpp\websocketpp\connection.hpp" line="283"/>
+        </error>
+        <error id="uninitMemberVar" severity="warning" msg="Member variable &apos;connection::m_failed_by_me&apos; is not initialized in the constructor." verbose="Member variable &apos;connection::m_failed_by_me&apos; is not initialized in the constructor." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\lib\websocketpp\websocketpp\connection.hpp" line="283"/>
+        </error>
+        <error id="uninitMemberVar" severity="warning" msg="Member variable &apos;connection::m_dropped_by_me&apos; is not initialized in the constructor." verbose="Member variable &apos;connection::m_dropped_by_me&apos; is not initialized in the constructor." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\lib\websocketpp\websocketpp\connection.hpp" line="283"/>
+        </error>
+        <error id="uninitMemberVar" severity="warning" msg="Member variable &apos;hybi13::m_cursor&apos; is not initialized in the constructor." verbose="Member variable &apos;hybi13::m_cursor&apos; is not initialized in the constructor." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\lib\websocketpp\websocketpp\processors\hybi13.hpp" line="72"/>
+        </error>
+        <error id="uninitMemberVar" severity="warning" msg="Member variable &apos;hybi13::m_current_msg&apos; is not initialized in the constructor." verbose="Member variable &apos;hybi13::m_current_msg&apos; is not initialized in the constructor." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\lib\websocketpp\websocketpp\processors\hybi13.hpp" line="72"/>
+        </error>
+        <error id="uninitMemberVar" severity="warning" msg="Member variable &apos;endpoint::m_elog&apos; is not initialized in the constructor." verbose="Member variable &apos;endpoint::m_elog&apos; is not initialized in the constructor." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\lib\websocketpp\websocketpp\transport\iostream\endpoint.hpp" line="68"/>
+        </error>
+        <error id="uninitMemberVar" severity="warning" msg="Member variable &apos;endpoint::m_alog&apos; is not initialized in the constructor." verbose="Member variable &apos;endpoint::m_alog&apos; is not initialized in the constructor." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\lib\websocketpp\websocketpp\transport\iostream\endpoint.hpp" line="68"/>
+        </error>
+        <error id="uninitMemberVar" severity="warning" msg="Member variable &apos;message::m_opcode&apos; is not initialized in the constructor." verbose="Member variable &apos;message::m_opcode&apos; is not initialized in the constructor." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\lib\websocketpp\websocketpp\message_buffer\message.hpp" line="96"/>
+        </error>
+        <error id="uninitMemberVar" severity="warning" msg="Member variable &apos;connection::m_io_service&apos; is not initialized in the constructor." verbose="Member variable &apos;connection::m_io_service&apos; is not initialized in the constructor." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\lib\websocketpp\websocketpp\transport\asio\connection.hpp" line="101"/>
+        </error>
+        <error id="uninitMemberVar" severity="warning" msg="Member variable &apos;endpoint::m_elog&apos; is not initialized in the constructor." verbose="Member variable &apos;endpoint::m_elog&apos; is not initialized in the constructor." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\lib\websocketpp\websocketpp\transport\asio\endpoint.hpp" line="95"/>
+        </error>
+        <error id="uninitMemberVar" severity="warning" msg="Member variable &apos;endpoint::m_alog&apos; is not initialized in the constructor." verbose="Member variable &apos;endpoint::m_alog&apos; is not initialized in the constructor." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\lib\websocketpp\websocketpp\transport\asio\endpoint.hpp" line="95"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;message&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;message&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_message.h" line="103"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;int_message&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;int_message&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_message.h" line="110"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;double_message&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;double_message&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_message.h" line="130"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;string_message&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;string_message&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_message.h" line="150"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;binary_message&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;binary_message&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_message.h" line="169"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;list&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;list&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_message.h" line="239"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;list&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;list&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_message.h" line="243"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;list&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;list&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_message.h" line="249"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;list&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;list&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_message.h" line="255"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;list&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;list&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_message.h" line="261"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;list&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;list&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_message.h" line="266"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;list&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;list&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_message.h" line="272"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Struct &apos;my_equal&apos; has a constructor with 1 argument that is not explicit." verbose="Struct &apos;my_equal&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\lib\websocketpp\websocketpp\utilities.hpp" line="54"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Struct &apos;extended_header&apos; has a constructor with 1 argument that is not explicit." verbose="Struct &apos;extended_header&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\lib\websocketpp\websocketpp\frame.hpp" line="240"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;message&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;message&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\lib\websocketpp\websocketpp\message_buffer\message.hpp" line="96"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;basic&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;basic&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\lib\websocketpp\websocketpp\logger\basic.hpp" line="61"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;basic&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;basic&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\lib\websocketpp\websocketpp\logger\basic.hpp" line="67"/>
+        </error>
+        <error id="noExplicitConstructor" severity="style" msg="Class &apos;packet&apos; has a constructor with 1 argument that is not explicit." verbose="Class &apos;packet&apos; has a constructor with 1 argument that is not explicit. Such constructors should in general be explicit for type safety reasons. Using the explicit keyword in the constructor means some mistakes when using the class can be avoided." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\internal\sio_packet.h" line="55"/>
+        </error>
+        <error id="passedByValue" severity="performance" msg="Function parameter &apos;scheme&apos; should be passed by reference." verbose="Parameter &apos;scheme&apos; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\lib\websocketpp\websocketpp\uri.hpp" line="206"/>
+        </error>
+        <error id="passedByValue" severity="performance" msg="Function parameter &apos;value&apos; should be passed by reference." verbose="Parameter &apos;value&apos; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\lib\websocketpp\websocketpp\transport\iostream\connection.hpp" line="274"/>
+        </error>
+        <error id="passedByValue" severity="performance" msg="Function parameter &apos;tcon&apos; should be passed by reference." verbose="Parameter &apos;tcon&apos; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\lib\websocketpp\websocketpp\transport\asio\endpoint.hpp" line="731"/>
+        </error>
+        <error id="passedByValue" severity="performance" msg="Function parameter &apos;tcon&apos; should be passed by reference." verbose="Parameter &apos;tcon&apos; is passed by value. It could be passed as a (const) reference which is usually faster and recommended in C++." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\lib\websocketpp\websocketpp\transport\asio\endpoint.hpp" line="999"/>
+        </error>
+        <error id="postfixOperator" severity="performance" msg="Prefer prefix ++/-- operators for non-primitive types." verbose="Prefix ++/-- operators should be preferred for non-primitive types. Pre-increment/decrement can be more efficient than post-increment/decrement. Post-increment/decrement usually involves keeping a copy of the previous value around and adds a little extra code." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\lib\websocketpp\websocketpp\impl\connection_impl.hpp" line="1083"/>
+        </error>
+        <error id="postfixOperator" severity="performance" msg="Prefer prefix ++/-- operators for non-primitive types." verbose="Prefix ++/-- operators should be preferred for non-primitive types. Pre-increment/decrement can be more efficient than post-increment/decrement. Post-increment/decrement usually involves keeping a copy of the previous value around and adds a little extra code." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\lib\websocketpp\websocketpp\transport\iostream\connection.hpp" line="487"/>
+        </error>
+        <error id="postfixOperator" severity="performance" msg="Prefer prefix ++/-- operators for non-primitive types." verbose="Prefix ++/-- operators should be preferred for non-primitive types. Pre-increment/decrement can be more efficient than post-increment/decrement. Post-increment/decrement usually involves keeping a copy of the previous value around and adds a little extra code." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\lib\websocketpp\websocketpp\transport\iostream\connection.hpp" line="497"/>
+        </error>
+        <error id="postfixOperator" severity="performance" msg="Prefer prefix ++/-- operators for non-primitive types." verbose="Prefix ++/-- operators should be preferred for non-primitive types. Pre-increment/decrement can be more efficient than post-increment/decrement. Post-increment/decrement usually involves keeping a copy of the previous value around and adds a little extra code." cwe="398">
+            <location file0="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\src\sio_client.cpp" file="C:\Users\Kyle\Games\Griefer\GriefPlusPlus\lib\websocketpp\websocketpp\http\impl\parser.hpp" line="183"/>
+        </error>
+  <FileInfo check="CheckUnusedFunctions">
+    <functiondecl functionName="clear_con_listeners" lineNumber="61"/>
+    <functiondecl functionName="clear_socket_listeners" lineNumber="66"/>
+    <functiondecl functionName="connect" lineNumber="71"/>
+    <functiondecl functionName="connect" lineNumber="77"/>
+    <functiondecl functionName="socket" lineNumber="82"/>
+    <functiondecl functionName="close" lineNumber="88"/>
+    <functiondecl functionName="sync_close" lineNumber="93"/>
+    <functiondecl functionName="opened" lineNumber="98"/>
+    <functiondecl functionName="get_sessionid" lineNumber="103"/>
+    <functiondecl functionName="set_reconnect_attempts" lineNumber="108"/>
+    <functiondecl functionName="set_reconnect_delay" lineNumber="113"/>
+    <functiondecl functionName="set_reconnect_delay_max" lineNumber="118"/>
+    <functioncall functionName="APPLICATION"/>
+    <functioncall functionName="BASIC_HEADER_LENGTH"/>
+    <functioncall functionName="BHB0_FIN"/>
+    <functioncall functionName="BHB0_RSV1"/>
+    <functioncall functionName="BHB0_RSV2"/>
+    <functioncall functionName="BHB0_RSV3"/>
+    <functioncall functionName="BHB1_MASK"/>
+    <functioncall functionName="BODY"/>
+    <functioncall functionName="CLOSE"/>
+    <functioncall functionName="DONE"/>
+    <functioncall functionName="FATAL_ERROR"/>
+    <functioncall functionName="HEADER"/>
+    <functioncall functionName="HEADERS"/>
+    <functioncall functionName="HEADER_BASIC"/>
+    <functioncall functionName="HEADER_EXTENDED"/>
+    <functioncall functionName="LISTENING"/>
+    <functioncall functionName="MAX_EXTENDED_HEADER_LENGTH"/>
+    <functioncall functionName="NULL"/>
+    <functioncall functionName="PAYLOAD"/>
+    <functioncall functionName="PING"/>
+    <functioncall functionName="PONG"/>
+    <functioncall functionName="PROCESS_CONNECTION"/>
+    <functioncall functionName="PROCESS_HTTP_REQUEST"/>
+    <functioncall functionName="READING"/>
+    <functioncall functionName="READY"/>
+    <functioncall functionName="READ_HTTP_REQUEST"/>
+    <functioncall functionName="READ_HTTP_RESPONSE"/>
+    <functioncall functionName="RESPONSE_LINE"/>
+    <functioncall functionName="TRANSPORT_INIT"/>
+    <functioncall functionName="UNINITIALIZED"/>
+    <functioncall functionName="USER_INIT"/>
+    <functioncall functionName="WRITE_HTTP_REQUEST"/>
+    <functioncall functionName="_1"/>
+    <functioncall functionName="_2"/>
+    <functioncall functionName="_3"/>
+    <functioncall functionName="_flag"/>
+    <functioncall functionName="_htonll"/>
+    <functioncall functionName="_ntohll"/>
+    <functioncall functionName="_v"/>
+    <functioncall functionName="a"/>
+    <functioncall functionName="abnormal_close"/>
+    <functioncall functionName="access"/>
+    <functioncall functionName="ack"/>
+    <functioncall functionName="action_after_shutdown"/>
+    <functioncall functionName="acursor"/>
+    <functioncall functionName="add_subprotocol"/>
+    <functioncall functionName="address"/>
+    <functioncall functionName="all"/>
+    <functioncall functionName="allocate"/>
+    <functioncall functionName="allocator_"/>
+    <functioncall functionName="alog"/>
+    <functioncall functionName="alog_level"/>
+    <functioncall functionName="append"/>
+    <functioncall functionName="append_header"/>
+    <functioncall functionName="append_payload"/>
+    <functioncall functionName="arg1"/>
+    <functioncall functionName="arg2"/>
+    <functioncall functionName="array_message"/>
+    <functioncall functionName="assert"/>
+    <functioncall functionName="assign"/>
+    <functioncall functionName="async_accept"/>
+    <functioncall functionName="async_accept_not_listening"/>
+    <functioncall functionName="async_connect"/>
+    <functioncall functionName="async_read"/>
+    <functioncall functionName="async_read_at_least"/>
+    <functioncall functionName="async_read_until"/>
+    <functioncall functionName="async_resolve"/>
+    <functioncall functionName="async_shutdown"/>
+    <functioncall functionName="async_wait"/>
+    <functioncall functionName="async_write"/>
+    <functioncall functionName="atoi"/>
+    <functioncall functionName="attempts"/>
+    <functioncall functionName="attributes"/>
+    <functioncall functionName="authority"/>
+    <functioncall functionName="b"/>
+    <functioncall functionName="b0"/>
+    <functioncall functionName="b1"/>
+    <functioncall functionName="back"/>
+    <functioncall functionName="backlog"/>
+    <functioncall functionName="bad"/>
+    <functioncall functionName="bad_close_code"/>
+    <functioncall functionName="bad_connection"/>
+    <functioncall functionName="bad_request"/>
+    <functioncall functionName="bad_stream"/>
+    <functioncall functionName="base"/>
+    <functioncall functionName="base64_encode"/>
+    <functioncall functionName="basic_header"/>
+    <functioncall functionName="bec"/>
+    <functioncall functionName="begin"/>
+    <functioncall functionName="binary"/>
+    <functioncall functionName="binary_message"/>
+    <functioncall functionName="bind"/>
+    <functioncall functionName="blank"/>
+    <functioncall functionName="body"/>
+    <functioncall functionName="body_ready"/>
+    <functioncall functionName="bool"/>
+    <functioncall functionName="boost_ec"/>
+    <functioncall functionName="break"/>
+    <functioncall functionName="buf"/>
+    <functioncall functionName="buffer"/>
+    <functioncall functionName="byte"/>
+    <functioncall functionName="byte_mask"/>
+    <functioncall functionName="byte_mask_circ"/>
+    <functioncall functionName="bytes"/>
+    <functioncall functionName="bytes_processed"/>
+    <functioncall functionName="bytes_read"/>
+    <functioncall functionName="bytes_to_copy"/>
+    <functioncall functionName="bytes_to_process"/>
+    <functioncall functionName="bytes_to_read"/>
+    <functioncall functionName="bytes_transferred"/>
+    <functioncall functionName="c"/>
+    <functioncall functionName="c1"/>
+    <functioncall functionName="c2"/>
+    <functioncall functionName="c_str"/>
+    <functioncall functionName="calc"/>
+    <functioncall functionName="callback"/>
+    <functioncall functionName="cancel"/>
+    <functioncall functionName="cancel_socket"/>
+    <functioncall functionName="catch"/>
+    <functioncall functionName="category"/>
+    <functioncall functionName="cb"/>
+    <functioncall functionName="cerr"/>
+    <functioncall functionName="ch1"/>
+    <functioncall functionName="ch2"/>
+    <functioncall functionName="channel"/>
+    <functioncall functionName="channel_name"/>
+    <functioncall functionName="channels"/>
+    <functioncall functionName="char"/>
+    <functioncall functionName="chunked"/>
+    <functioncall functionName="ci_find_substr"/>
+    <functioncall functionName="circshift_prepared_key"/>
+    <functioncall functionName="clear"/>
+    <functioncall functionName="clearWBuffert"/>
+    <functioncall functionName="clear_channels"/>
+    <functioncall functionName="clear_con_listeners"/>
+    <functioncall functionName="clear_function"/>
+    <functioncall functionName="clear_socket_listeners"/>
+    <functioncall functionName="client"/>
+    <functioncall functionName="client_handshake_request"/>
+    <functioncall functionName="client_impl"/>
+    <functioncall functionName="client_only"/>
+    <functioncall functionName="client_version"/>
+    <functioncall functionName="close"/>
+    <functioncall functionName="close_ec"/>
+    <functioncall functionName="close_handshake_timeout"/>
+    <functioncall functionName="close_reason_drop"/>
+    <functioncall functionName="close_reason_normal"/>
+    <functioncall functionName="close_reason_size"/>
+    <functioncall functionName="closed"/>
+    <functioncall functionName="closing"/>
+    <functioncall functionName="code"/>
+    <functioncall functionName="complete"/>
+    <functioncall functionName="complete_read"/>
+    <functioncall functionName="compress"/>
+    <functioncall functionName="compressed"/>
+    <functioncall functionName="con"/>
+    <functioncall functionName="con_closed"/>
+    <functioncall functionName="con_closing"/>
+    <functioncall functionName="con_creation_failed"/>
+    <functioncall functionName="con_header"/>
+    <functioncall functionName="con_opened"/>
+    <functioncall functionName="con_opening"/>
+    <functioncall functionName="con_timer"/>
+    <functioncall functionName="connect"/>
+    <functioncall functionName="connecting"/>
+    <functioncall functionName="connection_ptr"/>
+    <functioncall functionName="connection_read_buffer_size"/>
+    <functioncall functionName="connection_token"/>
+    <functioncall functionName="const"/>
+    <functioncall functionName="const_cast"/>
+    <functioncall functionName="consume"/>
+    <functioncall functionName="consume_ec"/>
+    <functioncall functionName="continue"/>
+    <functioncall functionName="control"/>
+    <functioncall functionName="control_too_big"/>
+    <functioncall functionName="copy"/>
+    <functioncall functionName="copy_basic_header_bytes"/>
+    <functioncall functionName="copy_extended_header_bytes"/>
+    <functioncall functionName="copy_payload"/>
+    <functioncall functionName="cout"/>
+    <functioncall functionName="create"/>
+    <functioncall functionName="create_connection"/>
+    <functioncall functionName="currentBlock"/>
+    <functioncall functionName="cursor"/>
+    <functioncall functionName="cursor_end"/>
+    <functioncall functionName="cursor_start"/>
+    <functioncall functionName="custom_alloc_handler"/>
+    <functioncall functionName="d"/>
+    <functioncall functionName="data"/>
+    <functioncall functionName="deallocate"/>
+    <functioncall functionName="decode"/>
+    <functioncall functionName="decode_client_key"/>
+    <functioncall functionName="decompress"/>
+    <functioncall functionName="default"/>
+    <functioncall functionName="devel"/>
+    <functioncall functionName="digest"/>
+    <functioncall functionName="disabled"/>
+    <functioncall functionName="disconnect"/>
+    <functioncall functionName="dispatch"/>
+    <functioncall functionName="dns_timer"/>
+    <functioncall functionName="double_message"/>
+    <functioncall functionName="double_read"/>
+    <functioncall functionName="drop_on_protocol_error"/>
+    <functioncall functionName="dur"/>
+    <functioncall functionName="duration"/>
+    <functioncall functionName="dynamic_test"/>
+    <functioncall functionName="e"/>
+    <functioncall functionName="ec"/>
+    <functioncall functionName="echannel"/>
+    <functioncall functionName="ecm"/>
+    <functioncall functionName="elog"/>
+    <functioncall functionName="elog_level"/>
+    <functioncall functionName="empty"/>
+    <functioncall functionName="enable_extensions"/>
+    <functioncall functionName="enable_multithreading"/>
+    <functioncall functionName="end"/>
+    <functioncall functionName="endpoint"/>
+    <functioncall functionName="endpoint_not_secure"/>
+    <functioncall functionName="endpoint_unavailable"/>
+    <functioncall functionName="eof"/>
+    <functioncall functionName="ep"/>
+    <functioncall functionName="equal"/>
+    <functioncall functionName="erase"/>
+    <functioncall functionName="error"/>
+    <functioncall functionName="error_code"/>
+    <functioncall functionName="error_msg"/>
+    <functioncall functionName="event"/>
+    <functioncall functionName="event_name"/>
+    <functioncall functionName="exception"/>
+    <functioncall functionName="expires_from_now"/>
+    <functioncall functionName="extended_header"/>
+    <functioncall functionName="extension_parse_error"/>
+    <functioncall functionName="extensions_disabled"/>
+    <functioncall functionName="extract_all_lws"/>
+    <functioncall functionName="extract_attributes"/>
+    <functioncall functionName="extract_code"/>
+    <functioncall functionName="extract_lws"/>
+    <functioncall functionName="extract_parameters"/>
+    <functioncall functionName="extract_quoted_string"/>
+    <functioncall functionName="extract_reason"/>
+    <functioncall functionName="extract_subprotocols"/>
+    <functioncall functionName="extract_token"/>
+    <functioncall functionName="f"/>
+    <functioncall functionName="fail"/>
+    <functioncall functionName="failed"/>
+    <functioncall functionName="false"/>
+    <functioncall functionName="fatal"/>
+    <functioncall functionName="fill"/>
+    <functioncall functionName="fill_n"/>
+    <functioncall functionName="fin"/>
+    <functioncall functionName="find"/>
+    <functioncall functionName="find_if"/>
+    <functioncall functionName="first"/>
+    <functioncall functionName="flag_array"/>
+    <functioncall functionName="flag_binary"/>
+    <functioncall functionName="flag_double"/>
+    <functioncall functionName="flag_integer"/>
+    <functioncall functionName="flag_object"/>
+    <functioncall functionName="flag_string"/>
+    <functioncall functionName="flush"/>
+    <functioncall functionName="for"/>
+    <functioncall functionName="fragmented_control"/>
+    <functioncall functionName="frame_header"/>
+    <functioncall functionName="frame_payload"/>
+    <functioncall functionName="front"/>
+    <functioncall functionName="function"/>
+    <functioncall functionName="gcount"/>
+    <functioncall functionName="general"/>
+    <functioncall functionName="get_authority"/>
+    <functioncall functionName="get_basic_size"/>
+    <functioncall functionName="get_body"/>
+    <functioncall functionName="get_buffered_amount"/>
+    <functioncall functionName="get_category"/>
+    <functioncall functionName="get_compressed"/>
+    <functioncall functionName="get_con_from_hdl"/>
+    <functioncall functionName="get_connection"/>
+    <functioncall functionName="get_ec"/>
+    <functioncall functionName="get_extended_size"/>
+    <functioncall functionName="get_fin"/>
+    <functioncall functionName="get_header"/>
+    <functioncall functionName="get_header_as_plist"/>
+    <functioncall functionName="get_header_len"/>
+    <functioncall functionName="get_host"/>
+    <functioncall functionName="get_host_port"/>
+    <functioncall functionName="get_jumbo_size"/>
+    <functioncall functionName="get_masked"/>
+    <functioncall functionName="get_masking_key"/>
+    <functioncall functionName="get_masking_key_offset"/>
+    <functioncall functionName="get_max_body_size"/>
+    <functioncall functionName="get_message"/>
+    <functioncall functionName="get_method"/>
+    <functioncall functionName="get_next_layer"/>
+    <functioncall functionName="get_opcode"/>
+    <functioncall functionName="get_origin"/>
+    <functioncall functionName="get_payload"/>
+    <functioncall functionName="get_payload_size"/>
+    <functioncall functionName="get_port"/>
+    <functioncall functionName="get_port_from_string"/>
+    <functioncall functionName="get_port_str"/>
+    <functioncall functionName="get_prepared"/>
+    <functioncall functionName="get_processor"/>
+    <functioncall functionName="get_processor_category"/>
+    <functioncall functionName="get_proxy"/>
+    <functioncall functionName="get_raw"/>
+    <functioncall functionName="get_raw_payload"/>
+    <functioncall functionName="get_raw_socket"/>
+    <functioncall functionName="get_remote_endpoint"/>
+    <functioncall functionName="get_resource"/>
+    <functioncall functionName="get_rsv1"/>
+    <functioncall functionName="get_rsv2"/>
+    <functioncall functionName="get_rsv3"/>
+    <functioncall functionName="get_secure"/>
+    <functioncall functionName="get_sessionid"/>
+    <functioncall functionName="get_shared"/>
+    <functioncall functionName="get_socket"/>
+    <functioncall functionName="get_socket_category"/>
+    <functioncall functionName="get_status_code"/>
+    <functioncall functionName="get_status_msg"/>
+    <functioncall functionName="get_strand"/>
+    <functioncall functionName="get_string"/>
+    <functioncall functionName="get_terminal"/>
+    <functioncall functionName="get_uri"/>
+    <functioncall functionName="get_uri_from_host"/>
+    <functioncall functionName="get_valid"/>
+    <functioncall functionName="get_vector"/>
+    <functioncall functionName="get_version"/>
+    <functioncall functionName="get_websocket_version"/>
+    <functioncall functionName="getline"/>
+    <functioncall functionName="good"/>
+    <functioncall functionName="guard"/>
+    <functioncall functionName="h"/>
+    <functioncall functionName="handle_close_handshake_timeout"/>
+    <functioncall functionName="handle_interrupt"/>
+    <functioncall functionName="handle_open_handshake_timeout"/>
+    <functioncall functionName="handle_pause_reading"/>
+    <functioncall functionName="handle_pong_timeout"/>
+    <functioncall functionName="handle_read_frame"/>
+    <functioncall functionName="handle_read_handshake"/>
+    <functioncall functionName="handle_read_http_response"/>
+    <functioncall functionName="handle_resume_reading"/>
+    <functioncall functionName="handle_send_http_request"/>
+    <functioncall functionName="handle_send_http_response"/>
+    <functioncall functionName="handle_terminate"/>
+    <functioncall functionName="handle_transport_init"/>
+    <functioncall functionName="handler"/>
+    <functioncall functionName="handler_"/>
+    <functioncall functionName="handshake_ec"/>
+    <functioncall functionName="handshake_guid"/>
+    <functioncall functionName="hashByte"/>
+    <functioncall functionName="hdl"/>
+    <functioncall functionName="header"/>
+    <functioncall functionName="header_delimiter"/>
+    <functioncall functionName="header_separator"/>
+    <functioncall functionName="headers"/>
+    <functioncall functionName="headers_ready"/>
+    <functioncall functionName="helper"/>
+    <functioncall functionName="host"/>
+    <functioncall functionName="htonl"/>
+    <functioncall functionName="htons"/>
+    <functioncall functionName="http"/>
+    <functioncall functionName="http_connection_ended"/>
+    <functioncall functionName="http_parse_error"/>
+    <functioncall functionName="i"/>
+    <functioncall functionName="if"/>
+    <functioncall functionName="in"/>
+    <functioncall functionName="in_"/>
+    <functioncall functionName="in_use_"/>
+    <functioncall functionName="info"/>
+    <functioncall functionName="init"/>
+    <functioncall functionName="init_asio"/>
+    <functioncall functionName="init_logging"/>
+    <functioncall functionName="initialize_processor"/>
+    <functioncall functionName="innerHash"/>
+    <functioncall functionName="input"/>
+    <functioncall functionName="insert"/>
+    <functioncall functionName="int"/>
+    <functioncall functionName="int_message"/>
+    <functioncall functionName="internal_server_error"/>
+    <functioncall functionName="internal_state"/>
+    <functioncall functionName="internet_protocol"/>
+    <functioncall functionName="interrupt"/>
+    <functioncall functionName="invalid"/>
+    <functioncall functionName="invalid_arguments"/>
+    <functioncall functionName="invalid_close_code"/>
+    <functioncall functionName="invalid_continuation"/>
+    <functioncall functionName="invalid_host_service"/>
+    <functioncall functionName="invalid_http_method"/>
+    <functioncall functionName="invalid_http_status"/>
+    <functioncall functionName="invalid_http_version"/>
+    <functioncall functionName="invalid_num_bytes"/>
+    <functioncall functionName="invalid_opcode"/>
+    <functioncall functionName="invalid_payload"/>
+    <functioncall functionName="invalid_port"/>
+    <functioncall functionName="invalid_rsv_bit"/>
+    <functioncall functionName="invalid_state"/>
+    <functioncall functionName="invalid_subprotocol"/>
+    <functioncall functionName="invalid_tls_context"/>
+    <functioncall functionName="invalid_uri"/>
+    <functioncall functionName="invalid_utf8"/>
+    <functioncall functionName="invalid_version"/>
+    <functioncall functionName="io_service"/>
+    <functioncall functionName="is_base64"/>
+    <functioncall functionName="is_control"/>
+    <functioncall functionName="is_enabled"/>
+    <functioncall functionName="is_implemented"/>
+    <functioncall functionName="is_little_endian"/>
+    <functioncall functionName="is_negative"/>
+    <functioncall functionName="is_not_token_char"/>
+    <functioncall functionName="is_not_whitespace_char"/>
+    <functioncall functionName="is_open"/>
+    <functioncall functionName="is_secure"/>
+    <functioncall functionName="is_server"/>
+    <functioncall functionName="is_websocket_handshake"/>
+    <functioncall functionName="is_whitespace_char"/>
+    <functioncall functionName="istream_buffer"/>
+    <functioncall functionName="it"/>
+    <functioncall functionName="iterator"/>
+    <functioncall functionName="j"/>
+    <functioncall functionName="key"/>
+    <functioncall functionName="key_final"/>
+    <functioncall functionName="key_offset"/>
+    <functioncall functionName="l"/>
+    <functioncall functionName="last_colon"/>
+    <functioncall functionName="left"/>
+    <functioncall functionName="len"/>
+    <functioncall functionName="length"/>
+    <functioncall functionName="lexicographical_compare"/>
+    <functioncall functionName="library"/>
+    <functioncall functionName="list"/>
+    <functioncall functionName="listen"/>
+    <functioncall functionName="loc"/>
+    <functioncall functionName="locale"/>
+    <functioncall functionName="localtime"/>
+    <functioncall functionName="localtime_s"/>
+    <functioncall functionName="location"/>
+    <functioncall functionName="lock"/>
+    <functioncall functionName="log_close_result"/>
+    <functioncall functionName="log_err"/>
+    <functioncall functionName="log_fail_result"/>
+    <functioncall functionName="log_http_result"/>
+    <functioncall functionName="log_msg"/>
+    <functioncall functionName="log_open_result"/>
+    <functioncall functionName="long"/>
+    <functioncall functionName="low_bits"/>
+    <functioncall functionName="lt"/>
+    <functioncall functionName="m"/>
+    <functioncall functionName="m_alog"/>
+    <functioncall functionName="m_async_read_handler"/>
+    <functioncall functionName="m_async_write_handler"/>
+    <functioncall functionName="m_basic_header"/>
+    <functioncall functionName="m_body"/>
+    <functioncall functionName="m_body_bytes_max"/>
+    <functioncall functionName="m_body_bytes_needed"/>
+    <functioncall functionName="m_body_encoding"/>
+    <functioncall functionName="m_buf"/>
+    <functioncall functionName="m_buf_cursor"/>
+    <functioncall functionName="m_bufs"/>
+    <functioncall functionName="m_bytes_needed"/>
+    <functioncall functionName="m_close_handler"/>
+    <functioncall functionName="m_close_handshake_timeout_dur"/>
+    <functioncall functionName="m_code"/>
+    <functioncall functionName="m_codepoint"/>
+    <functioncall functionName="m_compressed"/>
+    <functioncall functionName="m_connection_hdl"/>
+    <functioncall functionName="m_connection_state_lock"/>
+    <functioncall functionName="m_control_msg"/>
+    <functioncall functionName="m_cursor"/>
+    <functioncall functionName="m_data_msg"/>
+    <functioncall functionName="m_dis"/>
+    <functioncall functionName="m_dynamic_channels"/>
+    <functioncall functionName="m_ec"/>
+    <functioncall functionName="m_elog"/>
+    <functioncall functionName="m_error_code"/>
+    <functioncall functionName="m_error_msg"/>
+    <functioncall functionName="m_extended_header"/>
+    <functioncall functionName="m_external_io_service"/>
+    <functioncall functionName="m_fail_handler"/>
+    <functioncall functionName="m_fin"/>
+    <functioncall functionName="m_handle_read_frame"/>
+    <functioncall functionName="m_handshake_buffer"/>
+    <functioncall functionName="m_handshake_timer"/>
+    <functioncall functionName="m_hdl"/>
+    <functioncall functionName="m_header_bytes"/>
+    <functioncall functionName="m_host"/>
+    <functioncall functionName="m_http_handler"/>
+    <functioncall functionName="m_impl"/>
+    <functioncall functionName="m_init_handler"/>
+    <functioncall functionName="m_internal_state"/>
+    <functioncall functionName="m_interrupt_handler"/>
+    <functioncall functionName="m_io_service"/>
+    <functioncall functionName="m_is_http"/>
+    <functioncall functionName="m_is_secure"/>
+    <functioncall functionName="m_is_server"/>
+    <functioncall functionName="m_listen_backlog"/>
+    <functioncall functionName="m_loc"/>
+    <functioncall functionName="m_local_close_code"/>
+    <functioncall functionName="m_local_close_reason"/>
+    <functioncall functionName="m_lock"/>
+    <functioncall functionName="m_manager"/>
+    <functioncall functionName="m_max_http_body_size"/>
+    <functioncall functionName="m_max_message_size"/>
+    <functioncall functionName="m_message_handler"/>
+    <functioncall functionName="m_msg"/>
+    <functioncall functionName="m_msg_manager"/>
+    <functioncall functionName="m_msg_ptr"/>
+    <functioncall functionName="m_mutex"/>
+    <functioncall functionName="m_opcode"/>
+    <functioncall functionName="m_open_handler"/>
+    <functioncall functionName="m_open_handshake_timeout_dur"/>
+    <functioncall functionName="m_out"/>
+    <functioncall functionName="m_output_stream"/>
+    <functioncall functionName="m_ping_handler"/>
+    <functioncall functionName="m_ping_timer"/>
+    <functioncall functionName="m_pong_handler"/>
+    <functioncall functionName="m_pong_timeout_dur"/>
+    <functioncall functionName="m_pong_timeout_handler"/>
+    <functioncall functionName="m_port"/>
+    <functioncall functionName="m_prepared"/>
+    <functioncall functionName="m_processor"/>
+    <functioncall functionName="m_proxy_data"/>
+    <functioncall functionName="m_read"/>
+    <functioncall functionName="m_read_flag"/>
+    <functioncall functionName="m_read_handler"/>
+    <functioncall functionName="m_read_handler_allocator"/>
+    <functioncall functionName="m_read_mutex"/>
+    <functioncall functionName="m_reading"/>
+    <functioncall functionName="m_ready"/>
+    <functioncall functionName="m_remote_close_code"/>
+    <functioncall functionName="m_remote_close_reason"/>
+    <functioncall functionName="m_remote_endpoint"/>
+    <functioncall functionName="m_request"/>
+    <functioncall functionName="m_requested_subprotocols"/>
+    <functioncall functionName="m_resolver"/>
+    <functioncall functionName="m_resource"/>
+    <functioncall functionName="m_response"/>
+    <functioncall functionName="m_reuse_addr"/>
+    <functioncall functionName="m_rng"/>
+    <functioncall functionName="m_scheme"/>
+    <functioncall functionName="m_secure"/>
+    <functioncall functionName="m_send_buffer"/>
+    <functioncall functionName="m_send_buffer_size"/>
+    <functioncall functionName="m_server"/>
+    <functioncall functionName="m_shutdown_handler"/>
+    <functioncall functionName="m_socket_init_handler"/>
+    <functioncall functionName="m_state"/>
+    <functioncall functionName="m_static_channels"/>
+    <functioncall functionName="m_status_code"/>
+    <functioncall functionName="m_strand"/>
+    <functioncall functionName="m_subprotocol"/>
+    <functioncall functionName="m_tcp_post_init_handler"/>
+    <functioncall functionName="m_tcp_pre_init_handler"/>
+    <functioncall functionName="m_terminal"/>
+    <functioncall functionName="m_termination_handler"/>
+    <functioncall functionName="m_uri"/>
+    <functioncall functionName="m_user_agent"/>
+    <functioncall functionName="m_valid"/>
+    <functioncall functionName="m_validate_handler"/>
+    <functioncall functionName="m_vector"/>
+    <functioncall functionName="m_was_clean"/>
+    <functioncall functionName="m_write_flag"/>
+    <functioncall functionName="m_write_frame_handler"/>
+    <functioncall functionName="m_write_handler"/>
+    <functioncall functionName="m_write_handler_allocator"/>
+    <functioncall functionName="m_write_lock"/>
+    <functioncall functionName="make_custom_alloc_handler"/>
+    <functioncall functionName="make_error_code"/>
+    <functioncall functionName="make_pair"/>
+    <functioncall functionName="make_shared"/>
+    <functioncall functionName="manager"/>
+    <functioncall functionName="marker"/>
+    <functioncall functionName="mask"/>
+    <functioncall functionName="masked"/>
+    <functioncall functionName="masked_copy"/>
+    <functioncall functionName="masking_forbidden"/>
+    <functioncall functionName="masking_key"/>
+    <functioncall functionName="masking_required"/>
+    <functioncall functionName="max_body_size"/>
+    <functioncall functionName="max_http_body_size"/>
+    <functioncall functionName="max_message_size"/>
+    <functioncall functionName="md5_append"/>
+    <functioncall functionName="md5_finish"/>
+    <functioncall functionName="md5_hash_string"/>
+    <functioncall functionName="md5_init"/>
+    <functioncall functionName="md5_process"/>
+    <functioncall functionName="memcpy"/>
+    <functioncall functionName="message"/>
+    <functioncall functionName="message_digest"/>
+    <functioncall functionName="message_ptr"/>
+    <functioncall functionName="message_too_big"/>
+    <functioncall functionName="method"/>
+    <functioncall functionName="millis"/>
+    <functioncall functionName="milliseconds"/>
+    <functioncall functionName="min"/>
+    <functioncall functionName="missing_required_header"/>
+    <functioncall functionName="missing_tls_init_handler"/>
+    <functioncall functionName="move"/>
+    <functioncall functionName="msg"/>
+    <functioncall functionName="msg_ftr"/>
+    <functioncall functionName="msg_hdr"/>
+    <functioncall functionName="msg_metadata"/>
+    <functioncall functionName="msg_ptr"/>
+    <functioncall functionName="my_equal"/>
+    <functioncall functionName="name"/>
+    <functioncall functionName="nbytes"/>
+    <functioncall functionName="needle"/>
+    <functioncall functionName="needs_writing"/>
+    <functioncall functionName="negotiate"/>
+    <functioncall functionName="negotiate_extensions"/>
+    <functioncall functionName="new_handler"/>
+    <functioncall functionName="new_it"/>
+    <functioncall functionName="new_timer"/>
+    <functioncall functionName="new_value"/>
+    <functioncall functionName="next_message"/>
+    <functioncall functionName="no_incoming_buffers"/>
+    <functioncall functionName="no_outgoing_buffers"/>
+    <functioncall functionName="no_protocol_support"/>
+    <functioncall functionName="no_status"/>
+    <functioncall functionName="nocase_compare"/>
+    <functioncall functionName="non_minimal_encoding"/>
+    <functioncall functionName="normal"/>
+    <functioncall functionName="not_implemented"/>
+    <functioncall functionName="nsp"/>
+    <functioncall functionName="ntohs"/>
+    <functioncall functionName="nullptr"/>
+    <functioncall functionName="nullptr_t"/>
+    <functioncall functionName="num"/>
+    <functioncall functionName="num_bytes"/>
+    <functioncall functionName="o"/>
+    <functioncall functionName="object_message"/>
+    <functioncall functionName="offset"/>
+    <functioncall functionName="old_it"/>
+    <functioncall functionName="op"/>
+    <functioncall functionName="open"/>
+    <functioncall functionName="open_handshake_timeout"/>
+    <functioncall functionName="opened"/>
+    <functioncall functionName="operation_aborted"/>
+    <functioncall functionName="operation_canceled"/>
+    <functioncall functionName="operation_not_supported"/>
+    <functioncall functionName="operatordelete"/>
+    <functioncall functionName="operatornew"/>
+    <functioncall functionName="out"/>
+    <functioncall functionName="outgoing_msg"/>
+    <functioncall functionName="output"/>
+    <functioncall functionName="output_stream_required"/>
+    <functioncall functionName="p"/>
+    <functioncall functionName="p0"/>
+    <functioncall functionName="p1"/>
+    <functioncall functionName="p_is_server"/>
+    <functioncall functionName="packet"/>
+    <functioncall functionName="pad"/>
+    <functioncall functionName="pair"/>
+    <functioncall functionName="parameter_name"/>
+    <functioncall functionName="parse_parameter_list"/>
+    <functioncall functionName="pass_through"/>
+    <functioncall functionName="password"/>
+    <functioncall functionName="pause_reading"/>
+    <functioncall functionName="payload"/>
+    <functioncall functionName="payload_offset"/>
+    <functioncall functionName="payload_size"/>
+    <functioncall functionName="payload_size_code_16bit"/>
+    <functioncall functionName="payload_size_code_64bit"/>
+    <functioncall functionName="payload_violation"/>
+    <functioncall functionName="ping"/>
+    <functioncall functionName="pl"/>
+    <functioncall functionName="plain"/>
+    <functioncall functionName="pms"/>
+    <functioncall functionName="pointer"/>
+    <functioncall functionName="poll"/>
+    <functioncall functionName="poll_one"/>
+    <functioncall functionName="pong"/>
+    <functioncall functionName="pop"/>
+    <functioncall functionName="port"/>
+    <functioncall functionName="pos"/>
+    <functioncall functionName="post"/>
+    <functioncall functionName="post_init"/>
+    <functioncall functionName="post_timer"/>
+    <functioncall functionName="pre_init"/>
+    <functioncall functionName="prepare_body"/>
+    <functioncall functionName="prepare_close"/>
+    <functioncall functionName="prepare_control"/>
+    <functioncall functionName="prepare_data_frame"/>
+    <functioncall functionName="prepare_header"/>
+    <functioncall functionName="prepare_masking_key"/>
+    <functioncall functionName="prepare_ping"/>
+    <functioncall functionName="prepare_pong"/>
+    <functioncall functionName="prepared_key"/>
+    <functioncall functionName="private:"/>
+    <functioncall functionName="process"/>
+    <functioncall functionName="process_body"/>
+    <functioncall functionName="process_control_frame"/>
+    <functioncall functionName="process_handshake"/>
+    <functioncall functionName="process_handshake_key"/>
+    <functioncall functionName="process_handshake_request"/>
+    <functioncall functionName="process_header"/>
+    <functioncall functionName="process_payload_bytes"/>
+    <functioncall functionName="processed"/>
+    <functioncall functionName="processor_ec"/>
+    <functioncall functionName="protocol"/>
+    <functioncall functionName="protocol_error"/>
+    <functioncall functionName="protocol_violation"/>
+    <functioncall functionName="proxy"/>
+    <functioncall functionName="proxy_data"/>
+    <functioncall functionName="proxy_failed"/>
+    <functioncall functionName="proxy_init"/>
+    <functioncall functionName="proxy_invalid"/>
+    <functioncall functionName="proxy_read"/>
+    <functioncall functionName="proxy_write"/>
+    <functioncall functionName="ptr"/>
+    <functioncall functionName="public:"/>
+    <functioncall functionName="push"/>
+    <functioncall functionName="push_back"/>
+    <functioncall functionName="query"/>
+    <functioncall functionName="r"/>
+    <functioncall functionName="raw"/>
+    <functioncall functionName="raw_headers"/>
+    <functioncall functionName="raw_key"/>
+    <functioncall functionName="rbegin"/>
+    <functioncall functionName="read"/>
+    <functioncall functionName="read_buf"/>
+    <functioncall functionName="read_frame"/>
+    <functioncall functionName="read_handshake"/>
+    <functioncall functionName="read_some"/>
+    <functioncall functionName="read_some_impl"/>
+    <functioncall functionName="ready"/>
+    <functioncall functionName="reason"/>
+    <functioncall functionName="reason_requires_code"/>
+    <functioncall functionName="recycle"/>
+    <functioncall functionName="ref"/>
+    <functioncall functionName="register_ostream"/>
+    <functioncall functionName="reinterpret_cast"/>
+    <functioncall functionName="rejected"/>
+    <functioncall functionName="remote_endpoint"/>
+    <functioncall functionName="remove_header"/>
+    <functioncall functionName="rend"/>
+    <functioncall functionName="replace"/>
+    <functioncall functionName="replace_header"/>
+    <functioncall functionName="req"/>
+    <functioncall functionName="request"/>
+    <functioncall functionName="request_entity_too_large"/>
+    <functioncall functionName="request_header_fields_too_large"/>
+    <functioncall functionName="requires_64bit"/>
+    <functioncall functionName="rerror"/>
+    <functioncall functionName="res"/>
+    <functioncall functionName="reserve"/>
+    <functioncall functionName="reserved"/>
+    <functioncall functionName="reserved_close_code"/>
+    <functioncall functionName="reset"/>
+    <functioncall functionName="reset_headers"/>
+    <functioncall functionName="resize"/>
+    <functioncall functionName="resolve"/>
+    <functioncall functionName="resource"/>
+    <functioncall functionName="result"/>
+    <functioncall functionName="resume_reading"/>
+    <functioncall functionName="ret"/>
+    <functioncall functionName="ret_ec"/>
+    <functioncall functionName="return"/>
+    <functioncall functionName="reuse_address"/>
+    <functioncall functionName="rfind"/>
+    <functioncall functionName="rng"/>
+    <functioncall functionName="rol"/>
+    <functioncall functionName="round"/>
+    <functioncall functionName="rsv1"/>
+    <functioncall functionName="rsv2"/>
+    <functioncall functionName="rsv3"/>
+    <functioncall functionName="run"/>
+    <functioncall functionName="run_one"/>
+    <functioncall functionName="s"/>
+    <functioncall functionName="scheme"/>
+    <functioncall functionName="search"/>
+    <functioncall functionName="second"/>
+    <functioncall functionName="secure"/>
+    <functioncall functionName="select_subprotocol"/>
+    <functioncall functionName="send"/>
+    <functioncall functionName="send_close_ack"/>
+    <functioncall functionName="send_close_frame"/>
+    <functioncall functionName="send_http_request"/>
+    <functioncall functionName="send_http_response"/>
+    <functioncall functionName="send_http_response_error"/>
+    <functioncall functionName="send_queue_full"/>
+    <functioncall functionName="server_key"/>
+    <functioncall functionName="server_only"/>
+    <functioncall functionName="service"/>
+    <functioncall functionName="set_body"/>
+    <functioncall functionName="set_channels"/>
+    <functioncall functionName="set_close_handler"/>
+    <functioncall functionName="set_close_handshake_timeout"/>
+    <functioncall functionName="set_close_listener"/>
+    <functioncall functionName="set_fail_handler"/>
+    <functioncall functionName="set_fail_listener"/>
+    <functioncall functionName="set_handle"/>
+    <functioncall functionName="set_header"/>
+    <functioncall functionName="set_http_handler"/>
+    <functioncall functionName="set_interrupt_handler"/>
+    <functioncall functionName="set_max_body_size"/>
+    <functioncall functionName="set_max_http_body_size"/>
+    <functioncall functionName="set_max_message_size"/>
+    <functioncall functionName="set_message_handler"/>
+    <functioncall functionName="set_method"/>
+    <functioncall functionName="set_opcode"/>
+    <functioncall functionName="set_open_handler"/>
+    <functioncall functionName="set_open_handshake_timeout"/>
+    <functioncall functionName="set_open_listener"/>
+    <functioncall functionName="set_option"/>
+    <functioncall functionName="set_payload"/>
+    <functioncall functionName="set_ping_handler"/>
+    <functioncall functionName="set_pong_handler"/>
+    <functioncall functionName="set_pong_timeout"/>
+    <functioncall functionName="set_pong_timeout_handler"/>
+    <functioncall functionName="set_prepared"/>
+    <functioncall functionName="set_proxy"/>
+    <functioncall functionName="set_proxy_basic_auth"/>
+    <functioncall functionName="set_proxy_timeout"/>
+    <functioncall functionName="set_reconnect_attempts"/>
+    <functioncall functionName="set_reconnect_delay"/>
+    <functioncall functionName="set_reconnect_delay_max"/>
+    <functioncall functionName="set_reconnect_listener"/>
+    <functioncall functionName="set_reconnecting_listener"/>
+    <functioncall functionName="set_shutdown_handler"/>
+    <functioncall functionName="set_socket_close_listener"/>
+    <functioncall functionName="set_socket_init_handler"/>
+    <functioncall functionName="set_socket_open_listener"/>
+    <functioncall functionName="set_status"/>
+    <functioncall functionName="set_tcp_post_init_handler"/>
+    <functioncall functionName="set_tcp_pre_init_handler"/>
+    <functioncall functionName="set_terminal"/>
+    <functioncall functionName="set_timer"/>
+    <functioncall functionName="set_uri"/>
+    <functioncall functionName="set_validate_handler"/>
+    <functioncall functionName="set_version"/>
+    <functioncall functionName="set_write_handler"/>
+    <functioncall functionName="sha1_library"/>
+    <functioncall functionName="shared"/>
+    <functioncall functionName="shared_from_this"/>
+    <functioncall functionName="shared_ptr"/>
+    <functioncall functionName="short_key3"/>
+    <functioncall functionName="should_reply"/>
+    <functioncall functionName="shutdown"/>
+    <functioncall functionName="shutdown_both"/>
+    <functioncall functionName="shutdown_timer"/>
+    <functioncall functionName="silent_close"/>
+    <functioncall functionName="size"/>
+    <functioncall functionName="sizeof"/>
+    <functioncall functionName="socket"/>
+    <functioncall functionName="spaces"/>
+    <functioncall functionName="src"/>
+    <functioncall functionName="ss"/>
+    <functioncall functionName="start"/>
+    <functioncall functionName="state"/>
+    <functioncall functionName="static_cast"/>
+    <functioncall functionName="static_pointer_cast"/>
+    <functioncall functionName="static_test"/>
+    <functioncall functionName="steps"/>
+    <functioncall functionName="stop"/>
+    <functioncall functionName="stop_listening"/>
+    <functioncall functionName="stopped"/>
+    <functioncall functionName="str"/>
+    <functioncall functionName="strftime"/>
+    <functioncall functionName="string"/>
+    <functioncall functionName="string_message"/>
+    <functioncall functionName="string_replace_all"/>
+    <functioncall functionName="strip_lws"/>
+    <functioncall functionName="strtoul"/>
+    <functioncall functionName="subp_ec"/>
+    <functioncall functionName="subprotocol"/>
+    <functioncall functionName="subprotocol_parse_error"/>
+    <functioncall functionName="substr"/>
+    <functioncall functionName="switch"/>
+    <functioncall functionName="switching_protocols"/>
+    <functioncall functionName="sync_close"/>
+    <functioncall functionName="t"/>
+    <functioncall functionName="t_port"/>
+    <functioncall functionName="tcon"/>
+    <functioncall functionName="tec"/>
+    <functioncall functionName="temp"/>
+    <functioncall functionName="terminal"/>
+    <functioncall functionName="terminate"/>
+    <functioncall functionName="test"/>
+    <functioncall functionName="text"/>
+    <functioncall functionName="this"/>
+    <functioncall functionName="throw"/>
+    <functioncall functionName="time"/>
+    <functioncall functionName="timeout"/>
+    <functioncall functionName="timeout_close_handshake"/>
+    <functioncall functionName="timeout_connect"/>
+    <functioncall functionName="timeout_dns_resolve"/>
+    <functioncall functionName="timeout_open_handshake"/>
+    <functioncall functionName="timeout_pong"/>
+    <functioncall functionName="timeout_proxy"/>
+    <functioncall functionName="timeout_socket_post_init"/>
+    <functioncall functionName="timeout_socket_shutdown"/>
+    <functioncall functionName="timer_handler"/>
+    <functioncall functionName="tls_error"/>
+    <functioncall functionName="tls_handshake_failed"/>
+    <functioncall functionName="tls_handshake_timeout"/>
+    <functioncall functionName="tls_short_read"/>
+    <functioncall functionName="tm_snapshot"/>
+    <functioncall functionName="to_hex"/>
+    <functioncall functionName="to_read"/>
+    <functioncall functionName="to_ws"/>
+    <functioncall functionName="tolower"/>
+    <functioncall functionName="total_read"/>
+    <functioncall functionName="toupper"/>
+    <functioncall functionName="tr"/>
+    <functioncall functionName="transfer_at_least"/>
+    <functioncall functionName="transform"/>
+    <functioncall functionName="translate_ec"/>
+    <functioncall functionName="transport_con_type"/>
+    <functioncall functionName="true"/>
+    <functioncall functionName="tstat"/>
+    <functioncall functionName="type"/>
+    <functioncall functionName="u"/>
+    <functioncall functionName="ua"/>
+    <functioncall functionName="uint16_t"/>
+    <functioncall functionName="ull"/>
+    <functioncall functionName="uninitialized"/>
+    <functioncall functionName="unknown"/>
+    <functioncall functionName="unrequested_subprotocol"/>
+    <functioncall functionName="unsupported_version"/>
+    <functioncall functionName="upgrade_header"/>
+    <functioncall functionName="upgrade_required"/>
+    <functioncall functionName="upgrade_token"/>
+    <functioncall functionName="uri"/>
+    <functioncall functionName="uri_default_port"/>
+    <functioncall functionName="uri_default_secure_port"/>
+    <functioncall functionName="user_agent"/>
+    <functioncall functionName="username"/>
+    <functioncall functionName="utf8_accept"/>
+    <functioncall functionName="v"/>
+    <functioncall functionName="v6"/>
+    <functioncall functionName="val"/>
+    <functioncall functionName="validate"/>
+    <functioncall functionName="validate_ec"/>
+    <functioncall functionName="validate_handshake"/>
+    <functioncall functionName="validate_incoming_basic_header"/>
+    <functioncall functionName="validate_incoming_extended_header"/>
+    <functioncall functionName="validate_server_handshake_response"/>
+    <functioncall functionName="value"/>
+    <functioncall functionName="version"/>
+    <functioncall functionName="void"/>
+    <functioncall functionName="w"/>
+    <functioncall functionName="warn"/>
+    <functioncall functionName="what"/>
+    <functioncall functionName="while"/>
+    <functioncall functionName="word_mask_circ"/>
+    <functioncall functionName="word_mask_exact"/>
+    <functioncall functionName="wrap"/>
+    <functioncall functionName="write"/>
+    <functioncall functionName="write_buf"/>
+    <functioncall functionName="write_frame"/>
+    <functioncall functionName="write_pop"/>
+    <functioncall functionName="write_push"/>
+    <functioncall functionName="xbuf"/>
+  </FileInfo>
+</analyzerinfo>

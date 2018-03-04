@@ -63,6 +63,7 @@ score_constants()
 //RANK + XP SYSTEM
 rank_constants()
 global_xp_constants() 
+bot_constants()
 
 //double array length with stupid duplicates to prevent access errors
 increase_max_ranks(array_length_1d(global.rank_names)*2)
