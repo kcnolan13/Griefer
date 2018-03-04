@@ -66,7 +66,7 @@ if shuffling //and x > 0 and x < room_width
         
         if num_bots != 1
         {
-            rank += floor(random_range(-2,2))
+            rank += floor(random_range(-1,2))
         }
         
         rank = constrict(rank,0,getLength(global.rank_names)-1)

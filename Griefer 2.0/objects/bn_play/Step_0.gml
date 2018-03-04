@@ -2,9 +2,9 @@
 
 if net_manager.menu_mode == "lobby" and not instance_exists(modal_bot_diff)
 {
-	var left = chat_feed.left
-	var top = chat_feed.top+48
-	var width = chat_feed.width
+	var left = 32
+	var top = 120
+	var width = 96
 	var height = 96
 	ID = instance_create(left,top,modal_bot_diff)
 	ID.width = width
@@ -12,16 +12,25 @@ if net_manager.menu_mode == "lobby" and not instance_exists(modal_bot_diff)
 	ID.birth_delay = 5
 	ID.text_halign = fa_center
 	ID.text_valign = fa_middle
-	ID.header_font = fnt_hud_big
-	ID.font = fnt_title
-	ID.text_yoff = -32
-	ID.highlightable = false
+	ID.header_font = fnt_hud_small
+	ID.header_text = "Bot Difficulty:"
+	ID.header_yoff = 6
+	
+	ID.font = fnt_hud
+	ID.text_yoff = 43
+	
+	ID.alpha_max = 0.8
+	ID.scale = 0.2
+	ID.scale_highlighted = 1.05
+	ID.scale_lerp_real = 0.4
+	ID.highlightable = true
 	ID.draw_gradient = false
 	ID.draw_rect = false
 	ID.image_halign = fa_center
 	ID.image_valign = fa_middle
-	ID.img_xscale = 0.3
-	ID.img_yscale = 0.3
+	ID.img_yoff = -32
+	ID.img_xscale = 0.2
+	ID.img_yscale = 0.2
 	
 	var bot_lvl = net_manager.bot_diff_ind
 	ID.text = global.bot_diff_names[bot_lvl]

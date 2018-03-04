@@ -26,7 +26,7 @@ for (var i=0; i<2; i++)
 		ID.bot_diff_level = global.bot_diff_levels[mode_ind]
 		ID.image = global.bot_diff_icons[mode_ind]
 		ID.text = global.bot_diff_subtitles[mode_ind]
-
+		ID.header_font = fnt_hud_big
 	    ID.header_text = ID.label //ID.label_subtitle
 	    ID.header_height = ID.height*1/4
 	    ID.header_color = c_black
