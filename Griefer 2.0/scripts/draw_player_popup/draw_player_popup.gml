@@ -9,7 +9,7 @@ if xdraw = mouse_x and ydraw = mouse_y and global.using_gamepad
     ydraw = cursor.y
 }
 
-if not instance_exists(av) or not av.object_index = avatar
+if not instance_exists(av) or av.object_index != avatar
 {
     printf("ERROR: cannot draw player object. BAD AVATAR HANDLE")
     return false

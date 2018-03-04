@@ -58,9 +58,24 @@ head_x = varRead("animation_scale")*varRead("animation_xscale")*head_xs[floor(va
 head_y = varRead("animation_scale")*head_ys[floor(varRead("animation_index"))]
 head_rot = head_rots[floor(varRead("animation_index"))]
 
-hat_x = varRead("animation_scale")*varRead("animation_xscale")*hat_xs[floor(varRead("animation_index"))]
-hat_y = varRead("animation_scale")*hat_ys[floor(varRead("animation_index"))]
+var helm = varRead("helmet0") 
+var hat_xoff_extra = get_hat_xoff(helm)
+var hat_yoff_extra = get_hat_yoff(helm)
+
 hat_rot = hat_rots[floor(varRead("animation_index"))]
+
+var adjusted_hat_xoff_extra = trigx(hat_xoff_extra,hat_rot-9)
+var adjusted_hat_yoff_extra = trigx(hat_yoff_extra,hat_rot-9)
+
+if nth_frame(4) {
+	printf("::: helm = "+sprite_get_name(helm)+", hat_rot = "+string(hat_rot)+", hat_xoff_extra = "+string(hat_xoff_extra)+", hat_yoff_extra = "+string(hat_yoff_extra))
+	printf("::: trigx = "+string(adjusted_hat_xoff_extra))
+	printf("::: trigy = "+string(adjusted_hat_yoff_extra))
+}
+
+hat_x = varRead("animation_scale")*varRead("animation_xscale")*(hat_xs[floor(varRead("animation_index"))]+adjusted_hat_xoff_extra)
+hat_y = varRead("animation_scale")*(hat_ys[floor(varRead("animation_index"))]+adjusted_hat_yoff_extra)
+
 
 //ARM POSES VS FULL-BODY ANIMATIONS
 if (varRead("arms_posing"))

@@ -1,5 +1,7 @@
 /// @description create_master_bparts_map
 global.hatless = ds_list_create()
+//global.hat_xoffs = ds_list_create()
+//global.hat_yoffs = ds_list_create()
 
 global.src_lotto = "Armor Lottery" //will the space break anything?
 global.src_challenge = "Challenge"
