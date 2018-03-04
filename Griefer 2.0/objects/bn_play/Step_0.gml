@@ -3,7 +3,7 @@
 if net_manager.menu_mode == "lobby" and not instance_exists(modal_bot_diff)
 {
 	var left = 32
-	var top = 120
+	var top = 114
 	var width = 96
 	var height = 96
 	ID = instance_create(left,top,modal_bot_diff)
@@ -21,9 +21,9 @@ if net_manager.menu_mode == "lobby" and not instance_exists(modal_bot_diff)
 	
 	ID.alpha_max = 0.8
 	ID.scale = 0.2
-	ID.scale_highlighted = 1.05
+	ID.scale_highlighted = 1.02
 	ID.scale_lerp_real = 0.4
-	ID.highlightable = true
+	ID.highlightable = false
 	ID.draw_gradient = false
 	ID.draw_rect = false
 	ID.image_halign = fa_center
