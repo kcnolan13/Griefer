@@ -1488,6 +1488,14 @@
             }
         },
         {
+            "Key": "17e314fa-84a4-4754-a034-8e129b4d52bd",
+            "Value": {
+                "id": "20244786-8d6d-4f4a-b45d-953b56583fdc",
+                "resourcePath": "scripts\\get_hat_yoff\\get_hat_yoff.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "17ee7293-fc9a-4fdf-9c38-23efd83318b5",
             "Value": {
                 "id": "888e0650-7cea-4bfa-a92b-2fb30b11d56f",
@@ -10064,6 +10072,14 @@
             }
         },
         {
+            "Key": "a2faabe0-8bcb-4865-8cbb-9e3e409d27ad",
+            "Value": {
+                "id": "152feabd-6eb6-4bba-93b2-99712ce5651d",
+                "resourcePath": "scripts\\get_hat_xoff\\get_hat_xoff.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "a30b8bd6-9574-49d4-ac8d-1d2053c00128",
             "Value": {
                 "id": "570ac9a6-332d-442b-83dc-cb2abcf6527e",
@@ -14971,6 +14987,14 @@
             }
         },
         {
+            "Key": "f0a70474-0fe8-4b9f-9252-2d7bcbf7af21",
+            "Value": {
+                "id": "dc678519-7c8b-432f-942f-fc5086cbd638",
+                "resourcePath": "scripts\\set_hat_offsets\\set_hat_offsets.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "f0d290a4-bef8-4461-9986-7590ca3b6d1a",
             "Value": {
                 "id": "29ebb0c3-bbb4-462c-a69f-aebeabb9114a",
@@ -16074,6 +16098,9 @@
         "275845b6-2544-4448-8e0d-d7303207ea92",
         "2d4d9866-366b-4edf-be55-6e4b2ca94d7e",
         "b8d67dbe-f713-4ebb-bf7a-93f1a3620633",
+        "f0a70474-0fe8-4b9f-9252-2d7bcbf7af21",
+        "a2faabe0-8bcb-4865-8cbb-9e3e409d27ad",
+        "17e314fa-84a4-4754-a034-8e129b4d52bd",
         "51d5a414-4df2-41b8-b107-71ed94811ff1",
         "4cff52d7-6fd2-4f96-bff6-5f9d273f008a",
         "82076148-d5ab-4e10-b715-bb4bf1bb20ad",

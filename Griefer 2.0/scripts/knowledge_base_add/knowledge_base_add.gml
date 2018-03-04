@@ -38,4 +38,8 @@ var limb_type = argument6
     {
         global.knowledge_base[sprite,j] = myList[j]
     }
+	
+	global.hat_offsets[sprite,0] = 0
+	global.hat_offsets[sprite,1] = 0
+	
 }
