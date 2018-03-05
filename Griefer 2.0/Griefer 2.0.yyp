@@ -2200,6 +2200,14 @@
             }
         },
         {
+            "Key": "2196f4af-ebfe-4f3b-985f-30f27d1b648f",
+            "Value": {
+                "id": "7f8a7a11-ef3b-46ee-8377-00570544cdbf",
+                "resourcePath": "scripts\\get_challenge_grid_index\\get_challenge_grid_index.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "21c3ec83-7de1-493e-be46-0de78ce56b30",
             "Value": {
                 "id": "b845fb9d-d28c-4230-94b3-26d2e3dd0544",
@@ -16091,6 +16099,7 @@
         "9633cdce-85ca-4eea-9122-b167a8ea4806",
         "4fe0f4cf-0477-4ca4-b383-163d71dc62cf",
         "dadd3353-6a37-4885-ac0d-61317823bb2f",
+        "2196f4af-ebfe-4f3b-985f-30f27d1b648f",
         "72f9d274-7788-4deb-8e70-03f99aa8752f",
         "be549359-8765-4181-a15e-c98bdad4eb96",
         "aec2ebb9-aaaf-4bb2-a3d5-604d11556957",

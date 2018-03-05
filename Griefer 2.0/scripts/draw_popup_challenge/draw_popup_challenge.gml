@@ -124,7 +124,10 @@ draw_set_alpha(alpha)
 
 //draw the icon
 //draw_bpart_icon_ext(icon, left+13, top+10, icon_scale, alpha)
+if (hover_counter > hover_delay and instance_place(x,y,cursor))
+	draw_ignore_incomplete = true
 draw_bpart_slot_complete_ext(id, left+icon_pad*scale, top+icon_pad*scale, ((height-height_less)-2*icon_pad*scale)/(72), alpha)
+draw_ignore_incomplete = false
 
 draw_set_font(fnt_hud_big)
 draw_set_halign(fa_left)

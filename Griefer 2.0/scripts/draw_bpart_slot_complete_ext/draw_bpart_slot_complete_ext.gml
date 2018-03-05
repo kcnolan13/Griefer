@@ -29,7 +29,7 @@ else
         if object_index = xp_bar or object_index = action_word
             dalph = bpart_alpha
             
-        if bpart_obj.object_index = challenge_generic and surface_exists(surf_slot) and bpart_obj.completed
+        if bpart_obj.object_index = challenge_generic and surface_exists(surf_slot) and (bpart_obj.completed or bpart_obj.draw_ignore_incomplete)
         {
             draw_enable_alphablend(false)
             draw_surface_ext(surf_slot,bpart_x,bpart_y,scale/2,scale/2,0,c_white,1)  
@@ -56,7 +56,7 @@ else
         
         if bpart_obj.object_index = challenge_generic
         {
-            if not bpart_obj.completed
+            if not bpart_obj.completed and not bpart_obj.draw_ignore_incomplete
             {
                 //draw_set_alpha(0.75)
                 draw_sprite_ext(spr_bpart_generic,-1,bpart_x,bpart_y,scale,scale,0,c_black,4/5*dalph)

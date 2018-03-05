@@ -13,6 +13,10 @@
 #macro BAD_READ -99.1234
 #macro BOT_XP_SCALER 0.25
 #macro BOUNCE_MINSPEED 8
+#macro BOT_EASY 0
+#macro BOT_MEDIUM 1
+#macro BOT_DIFFICULT 2
+#macro BOT_EXTREME 3
 #macro C_CROUCH 3
 #macro C_DROP 16
 #macro C_EVADE 4

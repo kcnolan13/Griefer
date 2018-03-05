@@ -5,6 +5,7 @@ is_challenge = true
 is_competitive = false
 is_bot_mode = false
 dat_blend_mode = bm_normal
+draw_ignore_incomplete = false
 
 completed_quietly = false
 

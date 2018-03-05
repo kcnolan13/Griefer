@@ -18,7 +18,8 @@
         "a44ce11b-a1d8-49c8-ad1c-9ad0210cd1f6",
         "9633cdce-85ca-4eea-9122-b167a8ea4806",
         "4fe0f4cf-0477-4ca4-b383-163d71dc62cf",
-        "dadd3353-6a37-4885-ac0d-61317823bb2f"
+        "dadd3353-6a37-4885-ac0d-61317823bb2f",
+        "2196f4af-ebfe-4f3b-985f-30f27d1b648f"
     ],
     "filterType": "GMScript",
     "folderName": "challenges",

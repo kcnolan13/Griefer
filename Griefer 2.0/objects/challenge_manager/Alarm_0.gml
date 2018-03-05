@@ -7,5 +7,6 @@ if not in_match()
     snap_challenges_to_grid(FL_PROGRESSION)
     snap_challenges_to_grid(FL_COMPETITIVE)
     snap_challenges_to_grid(FL_CHALLENGES)
+	snap_challenges_to_grid(FL_BOT)
 }
 
