@@ -1,1 +1,0 @@
-Start-Process '.\pscp.exe' -ArgumentList ("-scp -pw m@ntadiabl0 .\GrieferLauncher.exe kyle@griefer.cloudapp.net:/home/kyle/html/Shared")
