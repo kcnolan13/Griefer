@@ -5,7 +5,7 @@ global.challenge_popup_width = 72*5.5
 global.challenge_popup_height = 1.5*72+ 2*net_manager.armory_ysep
 global.challenge_color_incomplete = make_color_rgb(10,10,10)
 global.challenge_slot_width = 72
-global.challenge_grid_xstart = 40
+global.challenge_grid_xstart = 16
 global.challenge_grid_ystart = 72*2-13
 global.challenge_grid_sep = net_manager.armory_ysep-2
 global.challenge_grid_widths[get_challenge_grid_index(FL_PROGRESSION)] = 3
@@ -13,7 +13,7 @@ global.challenge_grid_widths[get_challenge_grid_index(FL_COMPETITIVE)] = 4
 global.challenge_grid_widths[get_challenge_grid_index(FL_BOT)] = 4
 global.challenge_grid_widths[get_challenge_grid_index(FL_CHALLENGES)] = 4
 
-global.challenge_grids_xsep = 12
+global.challenge_grids_xsep = 18
 
 global.challenge_grid_names[get_challenge_grid_index(FL_PROGRESSION)] = "Progression"
 global.challenge_grid_names[get_challenge_grid_index(FL_COMPETITIVE)] = global.cmode+" Challenges"

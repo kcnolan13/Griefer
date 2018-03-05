@@ -7,7 +7,6 @@ var xst = global.challenge_grid_xstart
 var yst = global.challenge_grid_ystart
 
 var challenge_grid_index = get_challenge_grid_index(fl)
-var xst = 0
 for (var i=0; i<challenge_grid_index; i++) {
 	xst += global.challenge_grid_widths[i]*(global.challenge_grid_sep+global.challenge_slot_width)+global.challenge_grids_xsep
 }
