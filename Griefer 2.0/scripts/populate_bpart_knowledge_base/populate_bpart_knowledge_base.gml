@@ -64,7 +64,7 @@ knowledge_base_add(spr_wraith_helmet, "Wraith Helmet", 1, global.default_scale, 
 knowledge_base_add(spr_ahunch_helmet, "War Mongrel", 5, global.default_scale, true, global.src_challenge,"helmet")
     set_hat_offsets(spr_ahunch_helmet,0,-5,-9)
 knowledge_base_add(spr_bhunch_helmet, "Hell Hound", 5, global.default_scale, true, global.src_challenge,"helmet")
-    set_hat_offsets(spr_bhunch_helmet,0,-3,-12)
+    set_hat_offsets(spr_bhunch_helmet,-5,-4,-15)
 global.mantel2_name = "Nova Helmet"
 knowledge_base_add(spr_mantel2_helmet, global.mantel2_name, 3, global.default_scale, true, global.src_challenge,"helmet")
 global.mantel_name = "Mantle Helmet"
