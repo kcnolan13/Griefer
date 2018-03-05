@@ -18,12 +18,13 @@ if not (string_length(bpart_string) > 4)
     return false   
 }
 
-var cpy = ""
+var underscore_pos = string_pos("_",string(bpart_string))
+if underscore_pos < 1 {
+	printf("ERROR: could not extract bpart source --> string_pos of '_' in '"+string(bpart_string)+"' was "+string(underscore_pos))
+	return false
+}
 
-if string_length(bpart_string) > 0 and is_string(bpart_string)
-    cpy = string_copy(bpart_string,min(string_length(bpart_string)-1,6),max(0,string_length(bpart_string)-5))
-
-var source_name = cpy
+var source_name = string_copy(string(bpart_string),min(string_length(bpart_string)-1,underscore_pos),max(0,string_length(bpart_string)-underscore_pos))
 
 if SUPER_DEBUG
     printf("extracted bpart source: "+source_name)

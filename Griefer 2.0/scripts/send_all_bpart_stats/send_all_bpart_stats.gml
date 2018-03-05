@@ -35,7 +35,7 @@ for (var i=0; i<NUM_LIMBS; i++)
             if instance_exists(part) and part.object_index = bpart_generic
             {
                 //printf("-----"+i+": sending "+handle[| j].icon+" at limb "+i+", position "+j)
-                statement += string(var_strs[i]+string(j))+"='"+string(num2string_digits(part.icon,4))+"_"+string(part.source)+"'"
+                statement += string(var_strs[i]+string(j))+"='"+string_replace_all(sprite_get_name(part.icon),"_",global.bpart_underscore_replacement)+"_"+string(part.source)+"'"
                 if i<NUM_LIMBS-1 or j<NUM_BPARTS-1
                     statement += ", "
                 //stat_update_string(var_strs[i]+j,num2string_digits(handle[| j].icon,4)+"_"+handle[| j].source,FL_NORMAL)

@@ -5,6 +5,8 @@ global.tskill = "Skill Rating"
 global.accolade_name = "Medal"
 global.time_played = "Career Time"
 
+global.bpart_underscore_replacement = "{-}"
+
 global.tut_bdelay = 60
 global.tut_wait = 18
 

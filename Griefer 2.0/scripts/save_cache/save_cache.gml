@@ -14,7 +14,7 @@ if room != rm_login and server_found
     var item = global.cache[| i]
     if instance_exists(item) and item.object_index = bpart_generic
     {
-        cache_str += string(num2string_digits(item.icon,4))+"_"+string(item.source)
+        cache_str += string_replace_all(sprite_get_name(item.icon),"_",global.bpart_underscore_replacement)+"_"+string(item.source)
         if i < len-1
             cache_str += ","
     }
