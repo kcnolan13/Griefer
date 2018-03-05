@@ -41,6 +41,14 @@ if limb = "forearm0" or limb = "shoulder0" or limb = "active_weapon_sprite"
     xscaler = varRead("animation_xscale")
     yscaler = 1
     angle = rot*varRead("animation_xscale")
+	if limb == "hat0" {
+		var helm = varRead("helmet0")
+		angle = (rot - get_hat_rot(helm))*varRead("animation_xscale")
+		//correct for weird hat rotation thing
+		if varRead("animation_xscale") = -1 {
+			angle -= 6
+		}
+	}
 }
 
 if limb = "active_weapon_sprite"

@@ -11792,6 +11792,14 @@
             }
         },
         {
+            "Key": "bfb491a9-666b-4cec-8083-e61869345b37",
+            "Value": {
+                "id": "0784f37e-70fa-426b-b9c8-9fd7881ffd14",
+                "resourcePath": "scripts\\get_hat_rot\\get_hat_rot.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "bfc71a4f-7d60-4273-b9c6-de3c8d33ee48",
             "Value": {
                 "id": "51e37a76-218c-4381-b3a1-76a62131457e",
@@ -16101,6 +16109,7 @@
         "f0a70474-0fe8-4b9f-9252-2d7bcbf7af21",
         "a2faabe0-8bcb-4865-8cbb-9e3e409d27ad",
         "17e314fa-84a4-4754-a034-8e129b4d52bd",
+        "bfb491a9-666b-4cec-8083-e61869345b37",
         "51d5a414-4df2-41b8-b107-71ed94811ff1",
         "4cff52d7-6fd2-4f96-bff6-5f9d273f008a",
         "82076148-d5ab-4e10-b715-bb4bf1bb20ad",

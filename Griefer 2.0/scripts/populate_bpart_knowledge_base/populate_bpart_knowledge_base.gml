@@ -59,11 +59,12 @@ knowledge_base_add(spr_scanner_helmet, "Scanner Helmet", 2, global.default_scale
 knowledge_base_add(spr_breather_helmet, "Rebreather Helmet", 1, global.default_scale, true, global.src_lotto,"helmet")
 knowledge_base_add(spr_exgol_helmet, "Exgol Helmet", 1, global.default_scale, true, global.src_lotto,"helmet")
 knowledge_base_add(spr_grenadier_helmet, "Gol Grenadier Helmet", 3, global.default_scale, true, global.src_lotto,"helmet")
+	set_hat_offsets(spr_grenadier_helmet,0,-3,0)
 knowledge_base_add(spr_wraith_helmet, "Wraith Helmet", 1, global.default_scale, true, global.src_lotto,"helmet")
 knowledge_base_add(spr_ahunch_helmet, "War Mongrel", 5, global.default_scale, true, global.src_challenge,"helmet")
-    set_hat_offsets(spr_ahunch_helmet,0,-20)
+    set_hat_offsets(spr_ahunch_helmet,0,-5,-9)
 knowledge_base_add(spr_bhunch_helmet, "Hell Hound", 5, global.default_scale, true, global.src_challenge,"helmet")
-    set_hat_offsets(spr_bhunch_helmet,0,-20)
+    set_hat_offsets(spr_bhunch_helmet,0,-3,-12)
 global.mantel2_name = "Nova Helmet"
 knowledge_base_add(spr_mantel2_helmet, global.mantel2_name, 3, global.default_scale, true, global.src_challenge,"helmet")
 global.mantel_name = "Mantle Helmet"
@@ -83,8 +84,8 @@ knowledge_base_add(spr_emile_helmet, "Ghostronaut Helmet", 2, global.default_sca
 knowledge_base_add(spr_hound_helmet, "Hound Helmet", 3, global.default_scale, true, global.src_challenge,"helmet")
 global.hound2_name = "Black Hound Helmet"
 knowledge_base_add(spr_hound2_helmet, global.hound2_name, 4, global.default_scale, true, global.src_challenge,"helmet")
-	set_hat_offsets(spr_hound_helmet,0,-20)
-	set_hat_offsets(spr_hound2_helmet,0,-20)
+	set_hat_offsets(spr_hound_helmet,0,-4,0)
+	set_hat_offsets(spr_hound2_helmet,0,-7,0)
 global.fanatic_name = "Fanatic Helmet"
 knowledge_base_add(spr_rvisor2_helmet, global.fanatic_name, 4, global.default_scale, true, global.src_challenge,"helmet")
 global.pvisor_name = "Deadshot Helmet"
@@ -93,13 +94,13 @@ global.pvisor2_name = "Headhunter Helmet"
 knowledge_base_add(spr_pvisor2_helmet, global.pvisor2_name, 3, global.default_scale, true, global.src_challenge,"helmet")
 global.roman_name = "Roman Helmet"
 knowledge_base_add(spr_roman_helmet, global.roman_name, 4, global.default_scale, true, global.src_challenge,"helmet")
-	set_hat_offsets(spr_roman_helmet,0,-20)
+	set_hat_offsets(spr_roman_helmet,0,-20,0)
 global.smallvisor2_name = "Candy-Cane Helmet"
 knowledge_base_add(spr_smallvisor_helmet, "Smallvisor Helmet", 2, global.default_scale, true, global.src_lotto,"helmet")
 knowledge_base_add(spr_smallvisor2_helmet, global.smallvisor2_name, 3, global.default_scale, true, global.src_lotto,"helmet")
 
 knowledge_base_add(spr_pyramid_helmet, "Pyramid Head", 5, global.default_scale, true, global.src_challenge,"helmet")
-    set_hat_offsets(spr_pyramid_helmet,0,-20)
+    set_hat_offsets(spr_pyramid_helmet,-4,+6,0)
 
 global.rvisor_name = "Crimson Helmet"
 knowledge_base_add(spr_rvisor_helmet, global.rvisor_name, 3, global.default_scale, true, global.src_challenge,"helmet")

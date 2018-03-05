@@ -31,9 +31,9 @@ var bary = 0
 var heady = -4
 var headx = 0
 
-var hat_xoff = 4.6
-var hat_yoff = -36
-var hat_rot = 12*flip*-1
+var hat_xoff = 4.6+get_hat_xoff(head_spr)
+var hat_yoff = -36+get_hat_yoff(head_spr)
+var hat_rot = (12+get_hat_rot(head_spr)/4)*flip*-1
 
 if flip = 1
 {

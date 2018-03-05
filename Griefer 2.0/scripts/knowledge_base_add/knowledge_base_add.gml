@@ -39,7 +39,11 @@ var limb_type = argument6
         global.knowledge_base[sprite,j] = myList[j]
     }
 	
+	//hat_xoff
 	global.hat_offsets[sprite,0] = 0
+	//hat_yoff
 	global.hat_offsets[sprite,1] = 0
+	//rot
+	global.hat_offsets[sprite,2] = 0
 	
 }

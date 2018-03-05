@@ -14,7 +14,8 @@
         "b8d67dbe-f713-4ebb-bf7a-93f1a3620633",
         "f0a70474-0fe8-4b9f-9252-2d7bcbf7af21",
         "a2faabe0-8bcb-4865-8cbb-9e3e409d27ad",
-        "17e314fa-84a4-4754-a034-8e129b4d52bd"
+        "17e314fa-84a4-4754-a034-8e129b4d52bd",
+        "bfb491a9-666b-4cec-8083-e61869345b37"
     ],
     "filterType": "GMScript",
     "folderName": "bparts_lists",

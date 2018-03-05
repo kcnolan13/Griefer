@@ -58,8 +58,9 @@ head_x = varRead("animation_scale")*varRead("animation_xscale")*head_xs[floor(va
 head_y = varRead("animation_scale")*head_ys[floor(varRead("animation_index"))]
 head_rot = head_rots[floor(varRead("animation_index"))]
 
-hat_rot = hat_rots[floor(varRead("animation_index"))]
 var helm = varRead("helmet0")
+hat_rot = hat_rots[floor(varRead("animation_index"))]// + get_hat_rot(helm)
+//if nth_frame(10) printf("::: hat_rot = "+string(hat_rot)+", animation_xscale = "+string(varRead("animation_xscale")))
 var hat_xoff_extra = get_hat_xoff(helm)
 var hat_yoff_extra = get_hat_yoff(helm)
 var hat_xoff_extra_trig = trigx(hat_xoff_extra,hat_rot-9)
