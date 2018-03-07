@@ -43,7 +43,7 @@ if limb = "forearm0" or limb = "shoulder0" or limb = "active_weapon_sprite"
     angle = rot*varRead("animation_xscale")
 	if limb == "hat0" {
 		var helm = varRead("helmet0")
-		angle = (rot - get_hat_rot(helm))*varRead("animation_xscale")
+		angle = rot*varRead("animation_xscale")
 		//correct for weird hat rotation thing
 		if varRead("animation_xscale") = -1 {
 			angle -= 6

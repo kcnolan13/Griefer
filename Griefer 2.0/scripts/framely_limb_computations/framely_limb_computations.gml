@@ -59,18 +59,14 @@ head_y = varRead("animation_scale")*head_ys[floor(varRead("animation_index"))]
 head_rot = head_rots[floor(varRead("animation_index"))]
 
 var helm = varRead("helmet0")
-hat_rot = hat_rots[floor(varRead("animation_index"))]// + get_hat_rot(helm)
+hat_rot = hat_rots[floor(varRead("animation_index"))] - get_hat_rot(helm)
 //if nth_frame(10) printf("::: hat_rot = "+string(hat_rot)+", animation_xscale = "+string(varRead("animation_xscale")))
-var hat_xoff_extra = get_hat_xoff(helm)
-var hat_yoff_extra = get_hat_yoff(helm)
-var hat_xoff_extra_trig = trigx(hat_xoff_extra,hat_rot-9)
-var hat_yoff_extra_trig = trigx(hat_yoff_extra,hat_rot-9)
 /*if nth_frame(4) and object_index == avatar {
 	printf("::: helm = "+sprite_get_name(helm)+", hat_xoff_extra = "+string(hat_xoff_extra)+", hat_yoff_extra = "+string(hat_yoff_extra)+", trigx = "+string(hat_xoff_extra_trig)+", trigy = "+string(hat_yoff_extra_trig))	
 }*/
 
-hat_x = varRead("animation_scale")*varRead("animation_xscale")*(hat_xs[floor(varRead("animation_index"))]+hat_xoff_extra_trig)
-hat_y = varRead("animation_scale")*(hat_ys[floor(varRead("animation_index"))]+hat_yoff_extra_trig)
+hat_x = varRead("animation_scale")*varRead("animation_xscale")*hat_xs[floor(varRead("animation_index"))]
+hat_y = varRead("animation_scale")*hat_ys[floor(varRead("animation_index"))]
 
 
 //ARM POSES VS FULL-BODY ANIMATIONS
@@ -165,34 +161,27 @@ if (varRead("arms_posing"))
         {
             head_roti = head_rot
             hat_roti = hat_rot
-            
-            if (rot_true < 90)
+			head_rot_true = rot_true
+			
+			if varRead("animation_xscale") = -1
             {
-                head_rot -= (rot_true-head_rot)/stiff_neck
-                hat_adjust = (rot_true-hat_rot)/stiff_neck
-                hat_rot  -= hat_adjust
-            }
-            else
-            {
-                head_rot -= (rot_true-360-head_rot)/stiff_neck
-                hat_adjust = (rot_true-360-hat_rot)/stiff_neck
-                hat_rot -= hat_adjust
-            }
+                head_rot_true = 180 - head_rot_true mod 360	
+				rot_true = (rot_true+180) mod 360
+            } else {
+				head_rot_true = head_rot_true mod 360	
+			}
+			
+			if head_rot_true > 90
+				head_rot_true = head_rot_true - 360
+			
+            printf("::: rot_true = "+string(head_rot_true)+", head_rot = "+string(head_rot_true))
+            head_rot -= (head_rot_true-head_rot)/stiff_neck
+            hat_rot -= (head_rot_true-hat_rot)/stiff_neck
             
-            if varRead("animation_xscale") = -1
-            {
-                rot_true = (rot_true+180) mod 360
-                head_rot = (90 - head_rot) mod 360 + head_roti
-                hat_rot = (90 - hat_rot) mod 360 + hat_roti
-            }
-            
-            //printf("rot_true = "+rot_true)
-            //printf("head_rot = "+head_rot)
-            
-            mag = point_distance(head_xoffset,head_yoffset,hat_xoffset,hat_yoffset)
-            dir = point_direction(head_xoffset,head_yoffset,hat_xoffset,hat_yoffset)
+			var helm = varRead("helmet0")
+            mag = point_distance(head_xoffset,head_yoffset,hat_xoffset+get_hat_xoff(helm),hat_yoffset+get_hat_yoff(helm))
+            dir = point_direction(head_xoffset,head_yoffset,hat_xoffset+get_hat_xoff(helm),hat_yoffset+get_hat_yoff(helm))
             ang = dir-hat_rot
-            
             
             hat_xoffset_temp = head_xoffset+trigx(mag,ang)
             hat_yoffset_temp = head_yoffset+trigy(mag,ang)
