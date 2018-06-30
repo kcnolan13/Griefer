@@ -150,7 +150,7 @@ if room = rm_menu or room = rm_lobby
     {
         var handle = armory_lists[| i]
         var check = handle[| 0]
-        if instance_exists(check)
+        if not is_undefined(check) and instance_exists(check)
         {
             if ds_list_size(handle) > 1 or not check.disabled //will be one for the empty slot
                 no_armor = false

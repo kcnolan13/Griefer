@@ -268,6 +268,15 @@ if not surface_exists(surface)
                 draw_text_ext_transformed(xpos+header_xoff,top+header_yoff+header_height*scale*master_scale/2,string_hash_to_newline(header_text),text_linesep,width-text_pad*2-text_xoff,scale*master_scale,scale*master_scale,0)
             }
 			
+			if text2 != ""
+			{
+                draw_set_font(text2_font)
+                draw_set_color(text2_color)
+                draw_set_halign(text2_halign)
+                draw_set_valign(text2_valign)
+                draw_text_ext_transformed(xpos+text2_xoff*scale*master_scale,top+text2_yoff*scale*master_scale,string_hash_to_newline(text2),text2_linesep,width-text2_pad*2,scale*master_scale,scale*master_scale,0)
+            }
+			
 			if tooltip != "" and show_popup
 			{
                 draw_set_font(tooltip_font)

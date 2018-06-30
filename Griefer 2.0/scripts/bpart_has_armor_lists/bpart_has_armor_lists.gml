@@ -12,7 +12,7 @@ for (var i=0; i<NUM_LIMBS; i++)
         for (j=0; j<len; j++)
         {
             var bpart = ds_list_find_value(list,j)
-            if instance_exists(bpart)
+            if not is_undefined(bpart) and instance_exists(bpart)
             {
                 if bpart.object_index = bpart_generic
                 {

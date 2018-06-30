@@ -7936,6 +7936,14 @@
             }
         },
         {
+            "Key": "802c3603-bd8b-4ad6-9128-a113b6ed28bb",
+            "Value": {
+                "id": "3cc8974a-d202-4b49-bc1f-0cc594d6a37e",
+                "resourcePath": "scripts\\bot_xp_scaler\\bot_xp_scaler.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "806fc43b-57ac-4be0-bba2-88e47bc0167d",
             "Value": {
                 "id": "49c4952f-e38a-47a1-89e1-927fbeadc7cc",
@@ -16078,6 +16086,7 @@
         "71ce6ec4-bf76-42d7-83d2-87b611d7a789",
         "99fa8678-2686-451a-a6c6-600063cf50ac",
         "ac54e8e5-3290-4e91-a929-58047b047c04",
+        "802c3603-bd8b-4ad6-9128-a113b6ed28bb",
         "97cf9c83-e7ea-4c5c-82f9-9435003c8604",
         "7ca8292b-5aff-4a14-aa56-46d85f551902",
         "91014b80-b272-4426-bccc-63eb0c906a09",

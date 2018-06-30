@@ -62,15 +62,16 @@ knowledge_base_add(spr_grenadier_helmet, "Gol Grenadier Helmet", 3, global.defau
 	set_hat_offsets(spr_grenadier_helmet,0,-3,0)
 knowledge_base_add(spr_wraith_helmet, "Wraith Helmet", 1, global.default_scale, true, global.src_lotto,"helmet")
 knowledge_base_add(spr_ahunch_helmet, "War Mongrel", 5, global.default_scale, true, global.src_challenge,"helmet")
-    set_hat_offsets(spr_ahunch_helmet,0,-5,-9)
+    set_hat_offsets(spr_ahunch_helmet,0,-5,+9)
 knowledge_base_add(spr_bhunch_helmet, "Hell Hound", 5, global.default_scale, true, global.src_challenge,"helmet")
-    set_hat_offsets(spr_bhunch_helmet,-5,-4,-15)
+    set_hat_offsets(spr_bhunch_helmet,-5,-4,+15)
 global.mantel2_name = "Nova Helmet"
 knowledge_base_add(spr_mantel2_helmet, global.mantel2_name, 3, global.default_scale, true, global.src_challenge,"helmet")
 global.mantel_name = "Mantle Helmet"
 knowledge_base_add(spr_mantel_helmet, global.mantel_name, 3, global.default_scale, true, global.src_challenge,"helmet")
 global.dred_name = "Dread Helmet"
 knowledge_base_add(spr_dred_helmet, global.dred_name, 4, global.default_scale, true, global.src_challenge,"helmet")
+	set_hat_offsets(spr_dred_helmet,-3,-5,0)
 global.tadpole_name = "Tadpole Helmet"
 knowledge_base_add(spr_tadpole_helmet, global.tadpole_name, 3, global.default_scale, true, global.src_challenge,"helmet")
 
@@ -94,7 +95,7 @@ global.pvisor2_name = "Headhunter Helmet"
 knowledge_base_add(spr_pvisor2_helmet, global.pvisor2_name, 3, global.default_scale, true, global.src_challenge,"helmet")
 global.roman_name = "Roman Helmet"
 knowledge_base_add(spr_roman_helmet, global.roman_name, 4, global.default_scale, true, global.src_challenge,"helmet")
-	set_hat_offsets(spr_roman_helmet,0,-20,0)
+	set_hat_offsets(spr_roman_helmet,0,-24,0)
 global.smallvisor2_name = "Candy-Cane Helmet"
 knowledge_base_add(spr_smallvisor_helmet, "Smallvisor Helmet", 2, global.default_scale, true, global.src_lotto,"helmet")
 knowledge_base_add(spr_smallvisor2_helmet, global.smallvisor2_name, 3, global.default_scale, true, global.src_lotto,"helmet")

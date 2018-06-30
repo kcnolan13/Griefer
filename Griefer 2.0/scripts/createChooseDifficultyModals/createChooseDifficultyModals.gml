@@ -40,6 +40,18 @@ for (var i=0; i<2; i++)
 	    ID.img_xscale = 0.3
 	    ID.img_yscale = 0.3
 	    ID.text_color = c_ltgray
+		
+		ID.text = global.bot_xp_scaler_words[mode_ind]
+		ID.text_color = c_white
+		//ID.text_color = c_yellow
+		ID.image = global.bot_diff_icons[mode_ind]
+		/*ID.text2 = global.bot_xp_scaler_words[mode_ind]
+		ID.text2_halign = fa_center
+		ID.text2_valign = fa_middle
+		ID.text2_xoff = -1*nwidth/3
+		ID.text2_yoff = nheight/2
+		ID.text2_color = c_yellow*/
+		
 	    //ID.image_yoff = 12
 
 	    ID.halign = halign

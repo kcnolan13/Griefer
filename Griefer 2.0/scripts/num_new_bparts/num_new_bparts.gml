@@ -5,7 +5,7 @@ var num_new = 0
 for (var i=0; i<ds_list_size(global.cache); i++)
 {
     var bpart = global.cache[| i]
-    if instance_exists(bpart)
+    if not is_undefined(bpart) and instance_exists(bpart)
     {
         if bpart.object_index = bpart_generic
         {

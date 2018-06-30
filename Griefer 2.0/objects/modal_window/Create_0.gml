@@ -165,6 +165,17 @@ text_yoff = 0
 text_linesep = 20
 text_pad = 0
 
+text2 = ""
+text2_font = font
+text2_color = c_white
+text2_alpha_override = true
+text2_halign = fa_center
+text2_valign = fa_middle
+text2_xoff = 0
+text2_yoff = 0
+text2_linesep = 20
+text2_pad = 0
+
 tooltip = ""
 tooltip_font = font
 tooltip_color = c_white

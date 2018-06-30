@@ -59,7 +59,7 @@ head_y = varRead("animation_scale")*head_ys[floor(varRead("animation_index"))]
 head_rot = head_rots[floor(varRead("animation_index"))]
 
 var helm = varRead("helmet0")
-hat_rot = hat_rots[floor(varRead("animation_index"))] - get_hat_rot(helm)
+hat_rot = hat_rots[floor(varRead("animation_index"))] + get_hat_rot(helm)
 //if nth_frame(10) printf("::: hat_rot = "+string(hat_rot)+", animation_xscale = "+string(varRead("animation_xscale")))
 /*if nth_frame(4) and object_index == avatar {
 	printf("::: helm = "+sprite_get_name(helm)+", hat_xoff_extra = "+string(hat_xoff_extra)+", hat_yoff_extra = "+string(hat_yoff_extra)+", trigx = "+string(hat_xoff_extra_trig)+", trigy = "+string(hat_yoff_extra_trig))	
@@ -174,7 +174,6 @@ if (varRead("arms_posing"))
 			if head_rot_true > 90
 				head_rot_true = head_rot_true - 360
 			
-            printf("::: rot_true = "+string(head_rot_true)+", head_rot = "+string(head_rot_true))
             head_rot -= (head_rot_true-head_rot)/stiff_neck
             hat_rot -= (head_rot_true-hat_rot)/stiff_neck
             

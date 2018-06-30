@@ -43,7 +43,8 @@ fanatic_kills = 3
 fanatic_kills_needed = 3
 
 //santa_hat
-santa_assists = 3
+santa_assists = 10
+halo_assists = 3
 
 //iron
 iron_assists = 5

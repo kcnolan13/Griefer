@@ -17,7 +17,7 @@ if visible and not net_manager.lock_armory and alpha > 0.5
 		{
 			bpart = global.cache[| i]
 			printf("::: import_all iteration"+string(i))
-			if instance_exists(bpart) and bpart.object_index = bpart_generic {
+			if not is_undefined(bpart) and instance_exists(bpart) and bpart.object_index = bpart_generic {
 				printf("::: Import All -- importing bpart #"+string(i))
 				//add to the list this belongs in if you can
 		        handle2 = get_bpart_list(bpart.limb_type)

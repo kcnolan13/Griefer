@@ -19,7 +19,7 @@ if auto_frame_counter < 1
             else if is_challenge
                 progress = acc_data(progress_varname,COL_TOTAL) + acc_data(progress_varname,COL_BOT_TOTAL)
             
-            progress_max = acc_data(progress_varname,COL_CHAL_NEEDED)
+            progress_max = acc_needed //acc_data(progress_varname,COL_CHAL_NEEDED)
             
             if progress > progress_max or completed
                 progress = progress_max
@@ -47,7 +47,7 @@ if nth_frame(120) and room = rm_lobby or room = rm_menu and progress_varname != 
         else if is_challenge
             progress = acc_data(progress_varname,COL_TOTAL) + acc_data(progress_varname,COL_BOT_TOTAL)
         
-        progress_max = acc_data(progress_varname,COL_CHAL_NEEDED)
+        progress_max = acc_needed //acc_data(progress_varname,COL_CHAL_NEEDED)
         
         if progress > progress_max or completed
             progress = progress_max   

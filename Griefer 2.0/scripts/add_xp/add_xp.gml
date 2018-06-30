@@ -10,7 +10,7 @@ var show_bbp = argument2
 var blah = argument3
 
 if net_manager.bot_match and string(blah) != "no scaling"
-    amt *= BOT_XP_SCALER
+    amt *= bot_xp_scaler()
     
 amt = ceil(amt)
 

@@ -127,7 +127,7 @@ for (var i=0; i<num_slots; i++)
     bpart = list[| index]
     
     //INTERACT CODE
-    if instance_exists(bpart) and bpart.object_index = bpart_generic
+    if not is_undefined(bpart) and instance_exists(bpart) and bpart.object_index = bpart_generic
     with bpart
     {
         if instance_place(x,y,cursor) and not popup_exists()  and click_pressed() and not swap_counter and dis_slot_alpha > 0.2 
@@ -208,7 +208,7 @@ for (var i=0; i<num_slots; i++)
     } //end interact code
     
     //NOW ACTUALLY DRAW STUFF
-    if instance_exists(bpart) and index < ds_list_size(list)
+    if not is_undefined(bpart) and instance_exists(bpart) and index < ds_list_size(list)
     {
         //SLOTS THAT HAVE REAL ITEMS IN THEM
         bpart.x = dis_slot_x

@@ -14,6 +14,7 @@ var description = argument2
     cID.name = name
     cID.description = description
     cID.challenge_index = global.challenge_index
+	cID.acc_needed = acc_chal_needed(sprite_get_name(icon))
     global.challenge_index++
     
     cID.icon_scale = min(0.05,real(bpart_lookup(icon, global.BPART_SCALE)))

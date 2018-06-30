@@ -28,7 +28,7 @@ for (var i=0; i<NUM_PROPS-1; i++)
     bpart = list[| index]
     
     //get clicked, son
-    if instance_exists(bpart) and bpart.object_index = bpart_generic
+    if not is_undefined(bpart) and instance_exists(bpart) and bpart.object_index = bpart_generic
     with bpart
     {
         if instance_place(x,y,cursor)
@@ -90,7 +90,7 @@ for (var i=0; i<NUM_PROPS-1; i++)
         }
     }
     
-    if instance_exists(bpart) and index < ds_list_size(list)
+    if not is_undefined(bpart) and instance_exists(bpart) and index < ds_list_size(list)
     {
         if (i%2=0)
             bpart.x = xs+((i/2)+1)*(sl+padding)

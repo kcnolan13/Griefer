@@ -1,0 +1,498 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"delet",
+				"deleteResumePassword"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 221.0,
+		"last_filter": "install",
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"disable",
+				"Package Control: Disable Package"
+			],
+			[
+				"aligntab",
+				"AlignTab: Table Mode"
+			],
+			[
+				"Package Control: install",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 432.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Users/Kyle/Games/Griefer/Griefer 2.0"
+	],
+	"file_history":
+	[
+		"/C/Users/Kyle/PuddleSquid/js/global.js",
+		"/C/Users/Kyle/PuddleSquid/Gruntfile.js",
+		"/C/Users/Kyle/PuddleSquid/js/build/production.js",
+		"/C/Users/Kyle/PuddleSquid/js/plugins/angular.lightbox.js",
+		"/C/Users/Kyle/PuddleSquid/js/services/services.js",
+		"/C/Users/Kyle/PuddleSquid/js/directives/directives.js",
+		"/C/Windows/System32/drivers/etc/hosts",
+		"/C/Users/Kyle/PuddleSquid/js/plugins/SmoothScroll.js",
+		"/C/Users/Kyle/PuddleSquid/views/resume_builder.html",
+		"/C/boost_1_67_0/bootstrap.log",
+		"/C/Users/Kyle/PuddleSquid/views/resume.html",
+		"/C/Users/Kyle/PuddleSquid/resume/index.less",
+		"/C/Users/Kyle/PuddleSquid/js/controllers/customResumeController.js",
+		"/C/Users/Kyle/PuddleSquid/js/controllers/resumeController.js",
+		"/C/Users/Kyle/PuddleSquid/js/controllers/resumeBuilderController.js",
+		"/C/Users/Kyle/PuddleSquid/js/controllers/mainController.js",
+		"/C/Users/Kyle/PuddleSquid/views/fishing.html",
+		"/C/Users/Kyle/PuddleSquid/views/games.html",
+		"/C/Users/Kyle/PuddleSquid/js/controllers/gamesController.js",
+		"/C/Users/Kyle/PuddleSquid/js/controllers/divingController.js",
+		"/C/Users/Kyle/PuddleSquid/js/controllers/fishingController.js",
+		"/C/Users/Kyle/PuddleSquid/js/controllers/photographyController.js",
+		"/C/Users/Kyle/PuddleSquid/backend/nodeserver.js",
+		"/C/Users/Kyle/PuddleSquid/js/controllers/musicController.js",
+		"/C/Users/Kyle/PuddleSquid/views/photography.html",
+		"/C/Users/Kyle/PuddleSquid/views/diving.html",
+		"/C/Users/Kyle/PuddleSquid/views/music.html",
+		"/C/Users/Kyle/PuddleSquid/less/plugins/grayscale.less",
+		"/C/Users/Kyle/PuddleSquid/less/global.less",
+		"/C/Users/Kyle/PuddleSquid/views/home.html",
+		"/C/Users/Kyle/PuddleSquid/index.html",
+		"/C/Users/Kyle/Downloads/GMS-DLL/ReadMe.txt",
+		"/C/Users/Kyle/PuddleSquid/cert/.gitignore",
+		"/C/Users/Kyle/PuddleSquid/cert/kylenolan_net.key",
+		"/C/Users/Kyle/PuddleSquid/cert/kylenolan_net.pem",
+		"/C/Users/Kyle/PuddleSquid/node_modules/grunt/node_modules/coffee-script/lib/coffee-script/browser.js",
+		"/C/Users/Kyle/PuddleSquid/js/libs/1angular.js",
+		"/C/Users/Kyle/PuddleSquid/cert/kylenolan_net.crt",
+		"/C/Users/Kyle/PuddleSquid/cert/kylenolan_net.cer",
+		"/C/Users/Kyle/PuddleSquid/cert/kylenolan_net.pfx",
+		"/C/Users/Kyle/PuddleSquid/kylenolan_net.cer",
+		"/C/Users/Kyle/Games/Griefer/GriefNode/griefer.js",
+		"/C/Users/Kyle/Games/Griefer/GriefNode/lib/cupid.js",
+		"/C/Users/Kyle/PuddleSquid/less/plugins/angular.lightbox.less",
+		"/C/Users/Kyle/PuddleSquid/js/plugins/featherlight.gallery.js",
+		"/C/Users/Kyle/PuddleSquid/less/libs/bootstrap.less",
+		"/C/Users/Kyle/PuddleSquid/js/controllers/downloadsController.js",
+		"/C/Users/Kyle/PuddleSquid/kyle.json",
+		"/C/Users/Kyle/PuddleSquid/aaron.json",
+		"/C/Users/Kyle/PuddleSquid/test.html",
+		"/C/Users/Kyle/PuddleSquid/standalone-libs/data-table.css",
+		"/C/Users/Kyle/PuddleSquid/.gitignore",
+		"/C/Users/Kyle/PuddleSquid/backend/.gitignore",
+		"/C/Users/Kyle/Games/Griefer/GriefNode/log/std.log1",
+		"/C/Users/Kyle/Games/Griefer/GriefNode/log/std.log",
+		"/C/Users/Kyle/PuddleSquid/node_modules/grunt-contrib-less/node_modules/less/dist/less.js",
+		"/C/Users/Kyle/PuddleSquid/package.json",
+		"/C/Users/Kyle/PuddleSquid/backend/out.txt",
+		"/C/Users/Kyle/PuddleSquid/backend/node_modules/socket.io/node_modules/socket.io-adapter/node_modules/socket.io-parser/node_modules/debug/lib/debug.js",
+		"/C/Users/Kyle/PuddleSquid/views/musiczz.html",
+		"/C/Users/Kyle/PuddleSquid/views/downloads.html",
+		"/C/Users/Kyle/PuddleSquid/js/libs/ngtable.js",
+		"/C/Users/Kyle/PuddleSquid/less/plugins/ngtable.less",
+		"/C/Users/Kyle/PuddleSquid/less/plugins/owl.carousel.less",
+		"/C/Users/Kyle/PuddleSquid/less/plugins/featherlight.gallery.less",
+		"/C/Users/Kyle/PuddleSquid/less/plugins/featherlight.less",
+		"/C/Users/Kyle/PuddleSquid/less/variables.less",
+		"/C/Users/Kyle/PuddleSquid/css/global.css",
+		"/C/Users/Kyle/Installation/MakeMusic Finale 2014c Build 2014.3.4876 (keygen R2R) [ChingLiu]/How.To.Install.R2R.txt",
+		"/C/Users/Kyle/Installation/MakeMusic Finale 2014c Build 2014.3.4876 (keygen R2R) [ChingLiu]/Keygen R2R/R2R.txt",
+		"/C/Users/Kyle/Installation/Galaxy Vintage D/Galaxy_Vintage_D_1.2.1/Galaxy Vintage D Library/Documentation/Galaxy Pianos Update 1.2.1 Readme.txt",
+		"/C/Users/Kyle/PuddleSquid/backend/aaron.json",
+		"/C/Users/Kyle/PuddleSquid/less/mixins.less",
+		"/C/Users/Kyle/PuddleSquid/resume/main/main.html",
+		"/C/Users/Kyle/Games/Griefer/GriefNode/lib/logger.js",
+		"/C/Users/Kyle/Games/Griefer/GriefNode/lib/globals.js",
+		"/C/Program Files/Redis/redis.windows-service.conf",
+		"/C/Users/Kyle/Games/Griefer/GriefNode/log/sql.log1",
+		"/C/Users/Kyle/Downloads/Splunk_TA_windows/README.txt",
+		"/C/Users/Kyle/Games/Griefer/GriefNode/log/sockets.log",
+		"/C/Users/Kyle/Games/Griefer/GriefNode/log/sockets.log1",
+		"/C/Program Files/Redis/server_log.txt",
+		"/C/Users/Kyle/Installation/Redis/redis.windows.conf",
+		"/C/Users/Kyle/Installation/Redis/redis.windows-service.conf",
+		"/C/Users/Kyle/Games/Griefer/GriefNode/log/verbose.log1",
+		"/C/Users/Kyle/Games/Griefer/GriefNode/log/cupid.log8",
+		"/C/Users/Kyle/Games/Griefer/GriefNode/log/verbose.log4",
+		"/C/Users/Kyle/Games/Griefer/GriefNode/log/critical.log1",
+		"/C/Users/Kyle/PuddleSquid/1A9D245FF0D1A7939C04A7F3EAF24574.txt",
+		"/C/Users/Kyle/phisherman/client/main.css",
+		"/C/Users/Kyle/phisherman/client/main.html",
+		"/C/Users/Kyle/phisherman/client/main.js",
+		"/C/Users/Kyle/phisherman/server/main.js",
+		"/C/Users/Kyle/script.sh",
+		"/C/Program Files/SpiderSense/WebLab.exe.config",
+		"/C/Users/Kyle/phisherman/package.json",
+		"/C/Users/Kyle/phisherman/.gitignore",
+		"/C/Users/Kyle/fun/install.ps1",
+		"/C/Users/Kyle/Desktop/.gitignore",
+		"/C/Users/Kyle/PuddleSquid/css/build/resume.min.css",
+		"/C/Users/Kyle/Documents/aaron resume config",
+		"/C/Users/Kyle/fun/root/cache/fun.ps1",
+		"/C/Users/Kyle/PuddleSquid/resume/vendor.less",
+		"/C/Users/Kyle/Desktop/csr.txt",
+		"/C/Users/Kyle/Documents/kylenolan_csr.txt",
+		"/C/Users/Kyle/PuddleSquid/css/build/vendor.min.css",
+		"/C/Users/Kyle/Games/Griefer/GriefNode/lib/dbman.js",
+		"/C/Users/Kyle/scripts/dont click this in class.vbs",
+		"/C/Users/Kyle/PuddleSquid/js/libs/underscore.js",
+		"/C/Users/Kyle/PuddleSquid/resume/main/main.controller.js",
+		"/C/Users/Kyle/Downloads/Smashing UX Design V413HAV/Read Me.txt",
+		"/C/Users/Kyle/PuddleSquid/audio/audioplayer/amazingaudioplayer.js",
+		"/C/Users/Kyle/PuddleSquid/js/build/production.min.js",
+		"/C/Users/Kyle/PuddleSquid/subpages/sitd.html",
+		"/C/Users/Kyle/PuddleSquid/subpages/griefer.html",
+		"/C/Users/Kyle/Games/Griefer/GriefNode/keepup_home.js",
+		"/C/inetpub/wwwroot/griefer/release/constants.txt",
+		"/C/Users/Kyle/Games/Griefer/GriefNode/.gitignore",
+		"/C/Users/Kyle/Games/Griefer/GriefNode/keepup.js",
+		"//ExpanDrive/griefer.cloudapp.net/html/Griefer/GriefNode/lib/cupid.js",
+		"/C/Users/Kyle/Games/Griefer/GriefNode/LaunchServer.ps1",
+		"/Z/html/Griefer/griefer.sql",
+		"/Z/html/Griefer/GriefNode/lib/dbman.js",
+		"/C/Users/Kyle/Games/Griefer/GriefNode/lib/composer.js",
+		"/C/Users/Kyle/Games/Griefer/.gitignore",
+		"/C/Users/Kyle/Games/Griefer/constants.txt",
+		"/C/Users/Kyle/Games/Griefer/GriefNode/node_modules/.gitignore",
+		"/C/Users/Kyle/Games/Griefer/GriefNode/log/critical.log"
+	],
+	"find":
+	{
+		"height": 81.0
+	},
+	"find_in_files":
+	{
+		"height": 90.0,
+		"where_history":
+		[
+			"C:\\Users\\Kyle\\PuddleSquid\\less,C:\\Users\\Kyle\\PuddleSquid\\less",
+			"C:\\Users\\Kyle\\PuddleSquid\\less,C:\\Users\\Kyle\\PuddleSquid\\js",
+			"C:\\Users\\Kyle\\PuddleSquid\\less,C:\\Users\\Kyle\\PuddleSquid\\views",
+			"C:\\Users\\Kyle\\PuddleSquid\\less,C:\\Users\\Kyle\\PuddleSquid\\less",
+			"C:\\Users\\Kyle\\PuddleSquid\\less,C:\\Users\\Kyle\\PuddleSquid\\resume",
+			"C:\\Users\\Kyle\\PuddleSquid\\,C:\\Users\\Kyle\\PuddleSquid\\resume",
+			"C:\\Users\\Kyle\\PuddleSquid\\",
+			"C:\\Users\\Kyle\\PuddleSquid\\css",
+			"C:\\Users\\Kyle\\PuddleSquid\\less",
+			"C:\\Users\\Kyle\\PuddleSquid\\js",
+			"C:\\Users\\Kyle\\PuddleSquid",
+			"",
+			"./"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"http://",
+			"http",
+			"http://",
+			"http:",
+			"ht",
+			"http:",
+			"http",
+			"http:",
+			"allowOriginJson",
+			"url: 'http",
+			"url: \"http",
+			"bullet",
+			"before",
+			"icomoon",
+			"ico",
+			"hash",
+			".exe",
+			"::before",
+			"width:",
+			"display: block;",
+			"::before",
+			"before",
+			"li::before",
+			"editResumeForm",
+			"editResumeForm1",
+			"editResumePassword",
+			"http",
+			"http://",
+			"with",
+			"width",
+			"modal-dialog",
+			".intro",
+			"intro",
+			"para",
+			"parallax",
+			"header",
+			".intro",
+			"foodNum",
+			"fishNum",
+			"contact",
+			"subsec",
+			"subsection",
+			"caption: \"(.*)\"",
+			"fishNum",
+			"fishRaw",
+			"fishPics",
+			"intro",
+			"intro'",
+			"intro",
+			"snorkelingNum",
+			"divingNum",
+			"foodNum",
+			"fishNum",
+			"fishnum",
+			"foodRaw",
+			"fishRaw",
+			"foodPics",
+			"fishPics",
+			"foodPics",
+			"fishPics",
+			"resume",
+			"onViewLoaded",
+			"fadeOutLoader",
+			"fading loader",
+			"fading",
+			"menu",
+			"intro",
+			"vm",
+			"min",
+			"about",
+			"contact",
+			"img-wrapper",
+			"col",
+			"%",
+			"lightbox",
+			"load",
+			"diving",
+			"void",
+			"scroll",
+			"ease",
+			".",
+			"img/",
+			"img/build",
+			"btn-circle-bottom",
+			"uploadimage",
+			"ctrl.uploadimage",
+			"upload",
+			"addnew",
+			"viewUrl",
+			"viewUrl]",
+			"url",
+			"award",
+			"mail",
+			"bullet",
+			"scholarship",
+			"bullet-class",
+			"bulletclass",
+			"bullet-class",
+			"awards",
+			"github",
+			"link2",
+			"imageurl",
+			"hover",
+			"getresumedata",
+			"ng-submit",
+			"close",
+			"hover",
+			"click",
+			"hide",
+			"hide\\",
+			"hide",
+			"password",
+			"alert",
+			"get",
+			"getresumedata",
+			"i=0",
+			"var row",
+			"bad modal",
+			".then",
+			"http://",
+			"file",
+			"name",
+			"console.log",
+			"btn",
+			".",
+			"vm",
+			"ng-repeat",
+			"addpost"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+			"FontAwesome",
+			"index",
+			"caption: \"\"",
+			"caption: $1",
+			"index",
+			"photosRaw",
+			"photoPics",
+			"index",
+			"snorkelingNum",
+			"divingNum",
+			"snorkelingRaw",
+			"divingRaw",
+			"snorkelPics",
+			"divePics",
+			"vm.foodPics",
+			"vm.fishPics",
+			"bulletClass",
+			"everythingRaw",
+			"colors",
+			"colorsRaw",
+			"padding-bottom: 20px; padding-top: 20px;",
+			"",
+			"assets/img",
+			"io.sockets.sockets.forEach",
+			" cupid.ds_find",
+			" ds_find",
+			"cupid.fsocket_emit",
+			"\\scupid.fsocket_emit",
+			"io.emit('obj_update',composer.objUpdate(netManObjIndex, -1, "
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 55.0
+	},
+	"input":
+	{
+		"height": 36.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "griefer-sublime.sublime-project",
+	"replace":
+	{
+		"height": 158.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"nodeser",
+				"backend\\nodeserver.js"
+			],
+			[
+				"music",
+				"js\\controllers\\musicController.js"
+			],
+			[
+				"m",
+				"js\\controllers\\musicController.js"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 231.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
