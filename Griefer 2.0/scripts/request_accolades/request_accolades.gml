@@ -11,5 +11,8 @@ if object_index != bn_challenges
 printf("::: sent accolades request")
 clear_accolade_totals(TOTAL)
 clear_accolade_totals(COL_BOT_TOTAL)
+clear_accolade_totals(COL_BOT2_TOTAL)
+clear_accolade_totals(COL_BOT3_TOTAL)
+clear_accolade_totals(COL_BOT4_TOTAL)
 
 sendBigMessageStrReal("get_accolades",username,fl,FL_NORMAL)

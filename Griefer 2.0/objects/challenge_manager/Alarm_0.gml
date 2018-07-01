@@ -10,3 +10,5 @@ if not in_match()
 	snap_challenges_to_grid(FL_BOT)
 }
 
+alarm[0] = room_speed*3
+

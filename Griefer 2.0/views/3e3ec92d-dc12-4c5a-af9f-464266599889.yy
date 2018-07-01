@@ -23,7 +23,8 @@
         "7c74ca14-fc99-400c-be32-f3983420a525",
         "6d722a2b-f9e6-4e8e-8fa0-9e9d5f418212",
         "8578fef8-ee3a-4345-b70a-da24769c305e",
-        "de8cda17-36a9-4b3a-8d3d-db9ef05118d8"
+        "de8cda17-36a9-4b3a-8d3d-db9ef05118d8",
+        "de07c6d4-122c-467b-b108-9c8a851c5607"
     ],
     "filterType": "GMScript",
     "folderName": "accolades",

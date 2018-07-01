@@ -50,7 +50,10 @@ if (cluster.isMaster)
 
   //establish a Connection to the griefer users database
   dbman.connect(conn, function() {
-    dbman.delete_users(users_2kill)
+    if (users_2kill.length > 0) {
+      console.log("Deleting Users: "+users_2kill)
+      dbman.delete_users(users_2kill)
+    }
     for (var i=0; i<random_users_2create; i++)
     {
       var name = composer.generateName();
@@ -191,7 +194,7 @@ if (cluster.isMaster)
   cluster.on('exit', function(worker, code, signal) {
 
     console.log('worker ' + worker.id+ ' died [pid '+worker.process.pid + ']');
-    process.send({id:"worker_died"});
+    //process.send({id:"worker_died"});
   });
 
   //initialize all of the socket rooms
@@ -203,6 +206,10 @@ if (cluster.isMaster)
   setInterval(cupid.syncPlayersConnected,4*5010);
   setInterval(cupid.makeMatches,5000);
   setInterval(cupid.syncVersionHash,30000);
+
+  dbman.connect(conn, function() {
+    //dbman.initBotAccolades("Kyle",5000);
+  });
 
 }
 

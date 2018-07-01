@@ -192,7 +192,7 @@ var updateStat = function(username, stat, value, flag)
 
 	var table = "stats"
 
-	if (flag==FL_BOT)
+	if (flag==FL_BOT || flag==FL_BOT2 || flag==FL_BOT3 || flag==FL_BOT4)
 		table = "bot_stats"
 
 	if (typeof value == "string")
@@ -238,8 +238,15 @@ var updateAccolade = function(username, accolade, value, flag)
 	var statement;
 	var table = "accolades"
 
-	if (flag==FL_BOT)
-		table = "bot_accolades"
+	if (flag==FL_BOT) {
+		table = "bot_accolades";
+	} else if (flag==FL_BOT2) {
+		table="bot_accolades2";
+	} else if (flag==FL_BOT3) {
+		table="bot_accolades3";
+	} else if (flag==FL_BOT4) {
+		table="bot_accolades4";
+	}
 	statement = "UPDATE "+table+" SET "+accolade+" = '"+value+"' WHERE username="+conn.escape(username);
 
 	if (flag==FL_SQL)
@@ -391,7 +398,7 @@ var userDelete = function(username)
 		}
 	else
 	{
-		var tables = ['users','stats','bot_stats','challenges','controls','accolades','bot_accolades','settings'];
+		var tables = ['users','stats','bot_stats','challenges','controls','accolades','bot_accolades','bot_accolades2','bot_accolades3','bot_accolades4','settings'];
 		for (var i=0; i<tables.length; i++)
 		{
 			var where = " where username="+conn.escape(username);
@@ -485,6 +492,25 @@ var performEvents = function(socket, and_filter, wipe_events)
 }
 exports.performEvents = performEvents;
 
+var initBotAccolades = function(username) {
+	log.log(STD,"Initializing bot accolades for "+username);
+	//bot accolades
+	statement = "INSERT INTO bot_accolades2 ("+"username, "+accolades+") VALUES ("+conn.escape(username)+', '+accolades_init+')';
+	log.log(SQL,"user create:\n"+statement+"\n\n");
+	execute(statement);
+
+	//bot accolades
+	statement = "INSERT INTO bot_accolades3 ("+"username, "+accolades+") VALUES ("+conn.escape(username)+', '+accolades_init+')';
+	log.log(SQL,"user create:\n"+statement+"\n\n");
+	execute(statement);
+
+	//bot accolades
+	statement = "INSERT INTO bot_accolades4 ("+"username, "+accolades+") VALUES ("+conn.escape(username)+', '+accolades_init+')';
+	log.log(SQL,"user create:\n"+statement+"\n\n");
+	execute(statement);
+}
+exports.initBotAccolades = initBotAccolades;
+
 var userCreate = function(socket, username, password)
 {
 	//compose the query
@@ -546,6 +572,21 @@ var userCreate = function(socket, username, password)
 	log.log(SQL,"user create:\n"+statement+"\n\n");
 	execute(statement);
 
+	//bot accolades
+	statement = "INSERT INTO bot_accolades2 ("+"username, "+accolades+") VALUES ("+conn.escape(username)+', '+accolades_init+')';
+	log.log(SQL,"user create:\n"+statement+"\n\n");
+	execute(statement);
+
+	//bot accolades
+	statement = "INSERT INTO bot_accolades3 ("+"username, "+accolades+") VALUES ("+conn.escape(username)+', '+accolades_init+')';
+	log.log(SQL,"user create:\n"+statement+"\n\n");
+	execute(statement);
+
+	//bot accolades
+	statement = "INSERT INTO bot_accolades4 ("+"username, "+accolades+") VALUES ("+conn.escape(username)+', '+accolades_init+')';
+	log.log(SQL,"user create:\n"+statement+"\n\n");
+	execute(statement);
+
 	//new user event
 	createEvent(username,"new_user","","",FL_NORMAL);
 
@@ -591,7 +632,7 @@ var appendHistoryStat = function(pName,stat,val,flag)
 	var history_max = 100
 	var table = "bot_stats"
 
-	if (flag != FL_BOT)
+	if (flag != FL_BOT && flag != FL_BOT2 && flag != FL_BOT3 && flag != FL_BOT4)
 		table = "stats"
 
 	var select = "SELECT "+stat+" from "+table+" where username="+username;
@@ -739,24 +780,33 @@ var getGravatarAccolades = function(socket, username, flag, retransmit)
 	var theDude = socket.myPlayer;
 
 	var table = "accolades";
-	var retransmit_flag = FL_BOT
-
-	if (flag == FL_BOT)
-	{
+	var retransmit_flag = -1
+	if (flag == FL_NORMAL) {
+		retransmit_flag = FL_BOT
+	} else if (flag == FL_BOT) {
 		table = "bot_accolades";
-		retransmit_flag = FL_NORMAL
-	}
-
-	if (retransmit)
-	{
-		log.log(SQL,"sending the other half of the accolades as well")
-		getGravatarAccolades(socket, username, retransmit_flag, false);
+		retransmit_flag = FL_BOT2
+	} else if (flag == FL_BOT2) {
+		table = "bot_accolades2";
+		retransmit_flag = FL_BOT3
+	} else if (flag == FL_BOT3) {
+		table = "bot_accolades3";
+		retransmit_flag = FL_BOT4
+	} else if (flag == FL_BOT4) {
+		table = "bot_accolades4"; 
+		retransmit_flag = -1;
 	}
 
 	var statement = "SELECT * from "+table+" WHERE username='"+username+"'";
 
-	conn.query(statement, function(err,rows) {
+	if (retransmit && retransmit_flag > 0)
+	{
+		log.log(SQL,"sending the other half of the accolades as well")
+		getGravatarAccolades(socket, username, retransmit_flag, true);
+	}
 
+	conn.query(statement, function(err,rows) {
+			console.log("running query: "+statement);
 			var pkgDude = new composer.createPkg();
 
 			//log any errors
@@ -914,7 +964,7 @@ var getGravatarStats = function(socket, username, flag)
 	var pstats = ['ppl','kdr','wl','points','kills','deaths','assists','wins','losses','kill_streak','win_streak','kdr_history','ppl_history','win_history'];
 	var table = "bot_stats";
 
-	if (flag != FL_BOT)
+	if (flag != FL_BOT && flag != FL_BOT2 && flag != FL_BOT3 && flag != FL_BOT4)
 	{
 		pstats.push('rank');
 		pstats.push('xp');

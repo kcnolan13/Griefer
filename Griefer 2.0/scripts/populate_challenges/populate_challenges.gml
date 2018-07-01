@@ -88,36 +88,40 @@ blah = instantiate_challenge(spr_stomper, global.stomper, "Get "+string(acc_chal
 blah.progress_varname = "spr_stomper" blah.is_competitive = true blah.is_challenge = false
 blah.xp = wep_chal_scaler*acc_chal_needed("spr_stomper")
 
-blah = instantiate_challenge(spr_dred_helmet, global.dred_name, "Earn "+string(1)+" \""+acc_name("12gibs")+"\" "+global.accolade_name)
+needed = 1
+blah = instantiate_challenge(spr_dred_helmet, global.dred_name, "Earn "+string(needed)+" \""+acc_name("12gibs")+"\" "+global.accolade_name)
 blah.is_competitive = true blah.is_challenge = false
 blah.progress_varname = "12gibs"
 blah.xp = 7500*chal_scaler
-update_acc_chal_needed("12gibs",1)
+blah.acc_needed = needed
 
-blah = instantiate_challenge(spr_tadpole_helmet, global.tadpole_name, "Earn "+string(30)+" \""+acc_name("stick_kill")+"\" "+global.accolade_name+"s")
+needed = 30
+blah = instantiate_challenge(spr_tadpole_helmet, global.tadpole_name, "Earn "+string(needed)+" \""+acc_name("stick_kill")+"\" "+global.accolade_name+"s")
 blah.is_competitive = true blah.is_challenge = false
 blah.progress_varname = "stick_kill"
 blah.xp = 7500*chal_scaler
-update_acc_chal_needed("stick_kill",30)
+blah.acc_needed = needed
 
-blah = instantiate_challenge(spr_rvisor2_helmet, global.fanatic_name, "Earn "+string(10)+" \""+acc_name("cant_touch_dis")+"\" "+global.accolade_name+"s")
+needed = 10
+blah = instantiate_challenge(spr_rvisor2_helmet, global.fanatic_name, "Earn "+string(needed)+" \""+acc_name("cant_touch_dis")+"\" "+global.accolade_name+"s")
 blah.is_competitive = true blah.is_challenge = false
 blah.progress_varname = "cant_touch_dis"
 blah.xp = 7500*chal_scaler
-update_acc_chal_needed("cant_touch_dis",10)
+blah.acc_needed = needed
 
-blah = instantiate_challenge(spr_pyramid_helmet, "Pyramid Head", "Earn "+string(1)+" \""+acc_name("25ks")+"\" "+global.accolade_name)
+needed = 1
+blah = instantiate_challenge(spr_pyramid_helmet, "Pyramid Head", "Earn "+string(needed)+" \""+acc_name("25ks")+"\" "+global.accolade_name)
 blah.is_competitive = true blah.is_challenge = false
 blah.progress_varname = "25ks"
 blah.xp = 10000*chal_scaler
-update_acc_chal_needed("25ks",1)
+blah.acc_needed = needed
 
-blah = instantiate_challenge(spr_pimp_hat, "Pimp Hat", "Earn "+string(10)+" \""+acc_name("mvp")+"\" "+global.accolade_name+"s")
+needed = 10
+blah = instantiate_challenge(spr_pimp_hat, "Pimp Hat", "Earn "+string(needed)+" \""+acc_name("mvp")+"\" "+global.accolade_name+"s")
 blah.is_competitive = true blah.is_challenge = false
 blah.progress_varname = "mvp"
 blah.xp = 10000*chal_scaler
-update_acc_chal_needed("mvp",10)
-
+blah.acc_needed = needed
 //GENERAL CHALLENGES (COMP OR BOT)
 
 und = instantiate_challenge(spr_underwear_helmet, global.underwear_name, "Die "+string(underwear_deaths)+" Times In A Row")
@@ -128,6 +132,7 @@ und.rewards[4] = spr_underwear_foot
 und.rewards[5] = spr_underwear_shoulder
 und.rewards[6] = spr_underwear_forearm
 und.xp = 10
+und.acc_needed = underwear_deaths
 
 needed = halo_assists
 blah = instantiate_challenge(spr_halo_hat, "Halo", "Earn "+string(needed)+" \""+acc_name("3ass")+"\" "+global.accolade_name)
@@ -157,7 +162,8 @@ ass.progress_varname = "3ks"
 ass.xp = 3000*chal_scaler
 ass.acc_needed = assassin_spree_needed
 
-iron = instantiate_challenge(spr_iron_helmet, "Iron", "Earn "+string(iron_assists)+" \""+acc_name("3gibs")+"\" "+global.accolade_name+"s")
+needed = 5
+iron = instantiate_challenge(spr_iron_helmet, "Iron", "Earn "+string(needed)+" \""+acc_name("3gibs")+"\" "+global.accolade_name+"s")
 iron.rewards[1] = spr_iron_torso
 iron.rewards[2] = spr_iron_leg
 iron.rewards[3] = spr_iron_shin
@@ -166,7 +172,7 @@ iron.rewards[5] = spr_iron_shoulder
 iron.rewards[6] = spr_iron_forearm
 iron.progress_varname = "3gibs"
 iron.xp = 5000*chal_scaler
-iron.acc_needed = iron_assists
+iron.acc_needed = needed
 
 muscle = instantiate_challenge(spr_muscle_helmet, global.muscle_name, "Earn "+string(near_deaths_needed)+" \""+acc_name("survivor")+"\" "+global.accolade_name+"s")
 muscle.rewards[1] = spr_muscle_torso
@@ -177,7 +183,7 @@ muscle.rewards[5] = spr_muscle_shoulder
 muscle.rewards[6] = spr_muscle_forearm
 muscle.progress_varname = "survivor"
 muscle.xp = 5000*chal_scaler
-update_acc_chal_needed("survivor",near_deaths_needed)
+muscle.acc_needed = near_deaths_needed
 
 ninja = instantiate_challenge(spr_ninja_helmet, global.ninja_name, "Earn "+string(ninjas_needed)+" \""+acc_name("ninja")+"\" "+global.accolade_name+"s")
 ninja.rewards[1] = spr_ninja_torso
@@ -188,7 +194,7 @@ ninja.rewards[5] = spr_ninja_shoulder
 ninja.rewards[6] = spr_ninja_forearm
 ninja.progress_varname = "ninja"
 ninja.xp = 2500*chal_scaler
-update_acc_chal_needed("ninja",ninjas_needed)
+ninja.acc_needed = ninjas_needed
 
 needed = 3
 blah = instantiate_challenge(spr_roman_helmet, global.roman_name, "Earn "+string(needed)+" \""+acc_name("10ks")+"\" "+global.accolade_name)
@@ -206,18 +212,21 @@ samurai.rewards[6] = spr_samurai_forearm
 samurai.progress_varname = "15ks"
 samurai.xp = 10000*chal_scaler
 samurai.acc_needed = 1
+blah.is_challenge = false
+blah.is_bot_mode = true
+blah.bot_diff_ind = 2
 
 needed = 5
 blah = instantiate_challenge(spr_gashog_helmet, global.gashog_name, "Earn "+string(needed)+" \""+acc_name("3gibs")+"\" "+global.accolade_name+"s")
 blah.progress_varname = "3gibs"
 blah.xp = 5000*chal_scaler
 blah.acc_needed = needed
-update_acc_chal_needed("3gibs",10)
 
-blah = instantiate_challenge(spr_hound_helmet, "Hound Helmet", "Earn "+string(hound_kills_needed)+" \""+acc_name("dub_kill")+"\" "+global.accolade_name+"s")
+needed = 5
+blah = instantiate_challenge(spr_hound_helmet, "Hound Helmet", "Earn "+string(needed)+" \""+acc_name("dub_kill")+"\" "+global.accolade_name+"s")
 blah.progress_varname = "dub_kill"
 blah.xp = 7500*chal_scaler
-update_acc_chal_needed("dub_kill",hound_kills_needed)
+blah.acc_needed = needed
 
 needed = 10
 blah = instantiate_challenge(spr_hound2_helmet, global.hound2_name, "Earn "+string(needed)+" \""+acc_name("dub_kill")+"\" "+global.accolade_name+"s")
@@ -225,27 +234,38 @@ blah.acc_needed = needed
 blah.progress_varname = "dub_kill"
 blah.xp = 10000*chal_scaler
 
-blah = instantiate_challenge(spr_bhunch_helmet, "Hell Hound", "Earn "+string(bhunch_kills)+" \""+acc_name("6heads")+"\" "+global.accolade_name+"s")
-blah.progress_varname = "6heads"
+needed = 5
+blah = instantiate_challenge(spr_bhunch_helmet, "Hell Hound", "Earn "+string(needed)+" \""+acc_name("5ks")+"\" "+global.accolade_name+"s")
+blah.progress_varname = "5ks"
 blah.xp = 10000*chal_scaler
-update_acc_chal_needed("6heads",bhunch_kills)
+blah.acc_needed = needed
+blah.is_challenge = false
+blah.is_bot_mode = true
+blah.bot_diff_ind = 3
 
-blah = instantiate_challenge(spr_ahunch_helmet, "War Mongrel", "Earn "+string(ahunch_kills)+" \""+acc_name("6gibs")+"\" "+global.accolade_name+"s")
-blah.progress_varname = "6gibs"
+needed = 5
+blah = instantiate_challenge(spr_ahunch_helmet, "War Mongrel", "Earn "+string(needed)+" \""+acc_name("5ks")+"\" "+global.accolade_name+"s")
+blah.progress_varname = "5ks"
 blah.xp = 10000*chal_scaler
-update_acc_chal_needed("6gibs",ahunch_kills)
+blah.acc_needed = needed
+blah.is_challenge = false
+blah.is_bot_mode = true
+blah.bot_diff_ind = 2
 
-blah = instantiate_challenge(spr_mantel_helmet, global.mantel_name, "Earn "+string(10)+" \""+acc_name("highest_kd")+"\" "+global.accolade_name+"s")
+needed = 10
+blah = instantiate_challenge(spr_mantel_helmet, global.mantel_name, "Earn "+string(needed)+" \""+acc_name("highest_kd")+"\" "+global.accolade_name+"s")
 blah.progress_varname = "highest_kd"
 blah.xp = 5000*chal_scaler
-update_acc_chal_needed("highest_kd",10)
+blah.acc_needed = needed
 
-blah = instantiate_challenge(spr_mantel2_helmet, global.mantel2_name, "Earn "+string(1)+" \""+acc_name("20ks")+"\" "+global.accolade_name)
+needed = 1
+blah = instantiate_challenge(spr_mantel2_helmet, global.mantel2_name, "Earn "+string(needed)+" \""+acc_name("20ks")+"\" "+global.accolade_name)
 blah.progress_varname = "20ks"
 blah.xp = 5000*chal_scaler
-update_acc_chal_needed("20ks",1)
+blah.acc_needed = needed
 
-helm = instantiate_challenge(spr_glow_helmet, global.glow_name, "Earn "+string(10)+" \""+acc_name("5ks")+"\" "+global.accolade_name+"s")
+needed = 10
+helm = instantiate_challenge(spr_glow_helmet, global.glow_name, "Earn "+string(needed)+" \""+acc_name("5ks")+"\" "+global.accolade_name+"s")
 helm.rewards[1] = spr_glow_torso
 helm.rewards[2] = spr_glow_leg
 helm.rewards[3] = spr_glow_foot
@@ -253,16 +273,22 @@ helm.rewards[4] = spr_glow_shoulder
 helm.rewards[5] = spr_glow_forearm
 helm.progress_varname = "5ks"
 helm.xp = 10000*chal_scaler
-update_acc_chal_needed("5ks",10)
+helm.acc_needed = needed
 
-needed = 5
-blah = instantiate_challenge(spr_pvisor2_helmet, global.pvisor2_name, "Earn "+string(needed)+" \""+acc_name("3heads")+"\" "+global.accolade_name+"s")
-blah.progress_varname = "3heads"
+needed = 2
+blah = instantiate_challenge(spr_pvisor2_helmet, global.pvisor2_name, "Earn "+string(needed)+" \""+acc_name("3ks")+"\" "+global.accolade_name+"s")
+blah.progress_varname = "3ks"
 blah.xp = 4500*chal_scaler
 blah.acc_needed = needed
+blah.is_challenge = false
+blah.is_bot_mode = true
+blah.bot_diff_ind = 1
 
-needed = 10
-blah = instantiate_challenge(spr_pvisor_helmet, global.pvisor_name, "Earn "+string(needed)+" \""+acc_name("3heads")+"\" "+global.accolade_name)
-blah.progress_varname = "3heads"
+needed = 2
+blah = instantiate_challenge(spr_pvisor_helmet, global.pvisor_name, "Earn "+string(needed)+" \""+acc_name("3ks")+"\" "+global.accolade_name+"s")
+blah.progress_varname = "3ks"
 blah.xp = 7500*chal_scaler
 blah.acc_needed = needed
+blah.is_challenge = false
+blah.is_bot_mode = true
+blah.bot_diff_ind = 2

@@ -14,10 +14,18 @@ if auto_frame_counter < 1
         {
             if is_competitive
                 progress = acc_data(progress_varname,COL_TOTAL)
-            else if is_bot_mode
-                progress = acc_data(progress_varname,COL_BOT_TOTAL)
+            else if is_bot_mode {
+                if bot_diff_ind > 2
+                    progress = acc_data(progress_varname,COL_BOT4_TOTAL)
+                else if bot_diff_ind > 1
+                    progress = acc_data(progress_varname,COL_BOT3_TOTAL)
+                else if bot_diff_ind > 0
+                    progress = acc_data(progress_varname,COL_BOT2_TOTAL)
+                else
+                    progress = acc_data(progress_varname,COL_BOT_TOTAL)
+            }
             else if is_challenge
-                progress = acc_data(progress_varname,COL_TOTAL) + acc_data(progress_varname,COL_BOT_TOTAL)
+                progress = acc_data(progress_varname,COL_TOTAL) + acc_data(progress_varname,COL_BOT_TOTAL) + acc_data(progress_varname,COL_BOT2_TOTAL) + acc_data(progress_varname,COL_BOT3_TOTAL) + acc_data(progress_varname,COL_BOT4_TOTAL)
             
             progress_max = acc_needed //acc_data(progress_varname,COL_CHAL_NEEDED)
             
@@ -27,8 +35,8 @@ if auto_frame_counter < 1
             if progress >= progress_max and not completed and progress_max > 0
             {
                 printf("::: auto completing challenge: "+string(name))
-                if abs(rtime() - net_manager.starting_match_delay) < auto_frame_offset*3
-                    completed_quietly = true
+                //if abs(rtime() - net_manager.starting_match_delay) < auto_frame_offset*3
+                //    completed_quietly = true
                 complete_challenge(name)
             }
         }
@@ -42,10 +50,18 @@ if nth_frame(120) and room = rm_lobby or room = rm_menu and progress_varname != 
     {
         if is_competitive
             progress = acc_data(progress_varname,COL_TOTAL)
-        else if is_bot_mode
-            progress = acc_data(progress_varname,COL_BOT_TOTAL)
+        else if is_bot_mode {
+				if bot_diff_ind > 2
+					progress = acc_data(progress_varname,COL_BOT4_TOTAL)
+				else if bot_diff_ind > 1
+					progress = acc_data(progress_varname,COL_BOT3_TOTAL)
+				else if bot_diff_ind > 0
+					progress = acc_data(progress_varname,COL_BOT2_TOTAL)
+				else
+					progress = acc_data(progress_varname,COL_BOT_TOTAL)
+			}
         else if is_challenge
-            progress = acc_data(progress_varname,COL_TOTAL) + acc_data(progress_varname,COL_BOT_TOTAL)
+            progress = acc_data(progress_varname,COL_TOTAL) + acc_data(progress_varname,COL_BOT_TOTAL) + acc_data(progress_varname,COL_BOT2_TOTAL) + acc_data(progress_varname,COL_BOT3_TOTAL) + acc_data(progress_varname,COL_BOT4_TOTAL)
         
         progress_max = acc_needed //acc_data(progress_varname,COL_CHAL_NEEDED)
         

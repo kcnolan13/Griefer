@@ -4,6 +4,7 @@ is_progression = false
 is_challenge = true
 is_competitive = false
 is_bot_mode = false
+bot_diff_ind = -1
 dat_blend_mode = bm_normal
 draw_ignore_incomplete = false
 

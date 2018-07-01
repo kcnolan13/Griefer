@@ -45,7 +45,7 @@ sindex_max = 0
 sspeed = 4
 
 //accolade grid ---> | name | text | description | image | points | match_total | competitive_total | bot_mode_total | needed | challenge_needed | challenge_stat_flag | sound
-grid = ds_grid_create(12,num_accolades+91-65+1)
+grid = ds_grid_create(15,num_accolades+91-65+1)
 
 var row_num = 0
 init_grid_row("dub_kill","Double Kill","2 Kills Back-to-Back",acc_dub_kill,                     50,2,99,FL_NORMAL,snd_dub_kill,row_num) row_num++

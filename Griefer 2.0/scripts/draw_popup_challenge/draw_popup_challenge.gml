@@ -33,7 +33,7 @@ if string_count("Click",descr) < 1
 {
     if is_bot_mode
     {
-        descr += " in "+global.bmode
+        descr += " against "+global.bot_diff_names[bot_diff_ind]+" bots"
     }
     else if is_competitive
     {

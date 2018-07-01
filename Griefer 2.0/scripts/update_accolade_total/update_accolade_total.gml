@@ -21,6 +21,21 @@ if col_num = COL_BOT_TOTAL or col_num = FL_BOT
     stat_fl = FL_BOT
     col_num = COL_BOT_TOTAL
 }
+if col_num = COL_BOT2_TOTAL or col_num = FL_BOT2
+{
+    stat_fl = FL_BOT2
+    col_num = COL_BOT2_TOTAL
+}
+if col_num = COL_BOT3_TOTAL or col_num = FL_BOT3
+{
+    stat_fl = FL_BOT3
+    col_num = COL_BOT3_TOTAL
+}
+if col_num = COL_BOT4_TOTAL or col_num = FL_BOT4
+{
+    stat_fl = FL_BOT4
+    col_num = COL_BOT4_TOTAL
+}
 if col_num = MATCH_TOTAL
 {
     col_num = COL_MATCH_TOTAL
@@ -34,7 +49,7 @@ if update_server
     accolade_update_real(name,val,stat_fl)
 }
     
-if col_num != COL_MATCH_TOTAL and col_num != COL_TOTAL and col_num != COL_BOT_TOTAL
+if col_num != COL_MATCH_TOTAL and col_num != COL_TOTAL and col_num != COL_BOT_TOTAL and col_num != COL_BOT2_TOTAL and col_num != COL_BOT3_TOTAL and col_num != COL_BOT4_TOTAL
 {
     printf("ERROR: bad col_num passed to update_accolade_total")
     return false

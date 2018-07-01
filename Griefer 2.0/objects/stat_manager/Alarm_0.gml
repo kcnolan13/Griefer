@@ -1,7 +1,14 @@
 /// @description set stat flag
 
 if in_match() and net_manager.bot_match
-    stat_flag = FL_BOT
+	if net_manager.bot_diff_ind == 0 
+    	stat_flag = FL_BOT
+    else if net_manager.bot_diff_ind == 1
+    	stat_flag = FL_BOT2
+    else if net_manager.bot_diff_ind == 2
+    	stat_flag = FL_BOT3
+    else if net_manager.bot_diff_ind == 3
+    	stat_flag = FL_BOT4
 else
     stat_flag = FL_COMPETITIVE
     
