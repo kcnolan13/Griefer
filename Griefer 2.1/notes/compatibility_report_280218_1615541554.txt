@@ -1,0 +1,23 @@
+Converting GML script: nsfs.gml
+Converted description /// @description  ()/// @function
+
+Converting GML script: nsfs.gml
+Converted description /// @description  (path):/// @function  
+/// @param path
+
+Converting GML script: nsfs.gml
+Converted description /// @description  (buffer, path):/// @function  
+/// @param buffer
+/// @param  path
+
+Converting GML script: nsfs.gml
+Converted description /// @description  (buffer, path, offset, size):/// @function  
+/// @param buffer
+/// @param  path
+/// @param  offset
+/// @param  size
+
+Converting GML script: ${project_dir}\scripts\demo_sfmt\demo_sfmt.gml
+Converted description /// @description  sfmt(format, ...)/// @function  sfmt
+/// @param format
+/// @param  ...

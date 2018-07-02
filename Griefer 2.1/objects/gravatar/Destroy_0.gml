@@ -1,0 +1,2 @@
+printf("GRAVATAR DESTROY TRIGGERED")
+

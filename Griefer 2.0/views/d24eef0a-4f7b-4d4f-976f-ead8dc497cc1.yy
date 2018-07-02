@@ -23,7 +23,8 @@
         "17ad6a5e-499d-4e02-88df-c9a63dc767f4",
         "d0dc0443-f533-4c89-917d-d6dec93be534",
         "1a18f2bc-7e80-4632-ba28-fe611465110d",
-        "e6b28ac7-3d34-47ff-87dc-cc427fa884f1"
+        "e6b28ac7-3d34-47ff-87dc-cc427fa884f1",
+        "528630a2-3f24-495d-a0d8-0307ce308911"
     ],
     "filterType": "GMScript",
     "folderName": "meta draw",

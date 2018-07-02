@@ -440,6 +440,14 @@
             }
         },
         {
+            "Key": "0774fe13-2764-47b8-9a34-3601dd07cb7b",
+            "Value": {
+                "id": "7f41577c-4a0c-4dd5-adf0-6c38d5ec9efc",
+                "resourcePath": "sprites\\spr_longhorn_hat\\spr_longhorn_hat.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
             "Key": "07a2f439-2627-4b5d-bd3c-ef0bc3d9c9c0",
             "Value": {
                 "id": "ac0887b7-d712-4d97-85d3-4fb0bd45d79b",
@@ -5213,6 +5221,14 @@
                 "id": "322008c8-745d-46c5-9bec-dd4a2ce35183",
                 "resourcePath": "objects\\splosion_flame_instant\\splosion_flame_instant.yy",
                 "resourceType": "GMObject"
+            }
+        },
+        {
+            "Key": "528630a2-3f24-495d-a0d8-0307ce308911",
+            "Value": {
+                "id": "2d071b9c-9287-4075-b79c-c4bc8456000d",
+                "resourcePath": "scripts\\draw_bpart_slot_complete_ext2\\draw_bpart_slot_complete_ext2.yy",
+                "resourceType": "GMScript"
             }
         },
         {
@@ -16278,7 +16294,6 @@
         "7d0ce108-cc51-4d31-a3a2-b1274f519e0f",
         "75e886aa-e361-483e-a0c4-921b07086362",
         "fa59aeba-b442-4008-a9de-0b789fc2cb5b",
-        "9d7434c8-3477-499d-9311-11012f5e6bd2",
         "4f216b23-22cf-4ecc-a8bb-de45a5630845",
         "55fd42a1-1576-4b28-9df8-cc5cd1458b1b",
         "79b4fcfe-af59-4e01-ab75-8e32aaff8f15",
@@ -16287,6 +16302,7 @@
         "d0dc0443-f533-4c89-917d-d6dec93be534",
         "1a18f2bc-7e80-4632-ba28-fe611465110d",
         "e6b28ac7-3d34-47ff-87dc-cc427fa884f1",
+        "528630a2-3f24-495d-a0d8-0307ce308911",
         "fe700091-28a8-426c-b203-bac5e042cea6",
         "97e7b0ac-22ab-4e57-a00e-161b86d02041",
         "c09c4021-3d56-4685-941f-395f87cf190d",

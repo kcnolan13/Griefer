@@ -14,7 +14,7 @@ var conn;
 var MULTITHREAD = global.MULTITHREAD;
 
 //WIPE DB AS DESIRED
-var users_2kill = [];
+var users_2kill = ['fruity pebbles', 'kissing lizard', 'a 70s porn star'];
 //users_2kill.push("sex redneck burglar");
 //users_2kill.push(FL_WIPE);
 //users_2kill.push(global.FL_EMPTY_USERS);
