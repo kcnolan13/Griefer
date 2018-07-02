@@ -7,7 +7,8 @@ if room = rm_menu or room = rm_lobby
     image_xscale =2 
     image_yscale =2
     //printf(net_manager.menu_mode)
-    if net_manager.menu_mode = "challenges"
+    //if net_manager.menu_mode = "challenges"
+	if loading_alpha > 0.05
     {
         txt_show = true
         //printf("drawing bpart_slot_complete @ "+x+", "+y)
@@ -16,7 +17,7 @@ if room = rm_menu or room = rm_lobby
         //if draw_allow = 1
 		if icon == spr_longhorn_hat and loading_alpha < 0.9 and loading_alpha > 0.1
 			printf("::: drawing longhorn_hat challenge with loading alpha"+string(loading_alpha))
-        draw_bpart_slot_complete_ext2(id, x-off, y-off, txt_scale, txt_alpha*loading_alpha)
+        draw_bpart_slot_complete_ext2(id, x-off, y-off, txt_scale*loading_alpha, txt_alpha*loading_alpha)
 		//draw_bpart_slot_complete_ext(id, x, y, 1, 1)
             
         if new

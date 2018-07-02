@@ -171,9 +171,9 @@ samurai.rewards[6] = spr_samurai_forearm
 samurai.progress_varname = "15ks"
 samurai.xp = 10000*chal_scaler
 samurai.acc_needed = 1
-blah.is_challenge = false
-blah.is_bot_mode = true
-blah.bot_diff_ind = 2
+samurai.is_challenge = false
+samurai.is_bot_mode = true
+samurai.bot_diff_ind = 2
 
 needed = 5
 blah = instantiate_challenge(spr_ahunch_helmet, "War Mongrel", "Earn "+string(needed)+" \""+acc_name("5ks")+"\" "+global.accolade_name+"s")

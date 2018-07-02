@@ -44,11 +44,16 @@ for (var i=0; i<instance_number(challenge_generic); i++)
 	    cID.xtarget = xst
 	    cID.ytarget = yst
 		cID.loading_alpha_target = 1
+		cID.loading_alpha_lerp_delay = ceil(0.5*challenge_manager.challenge_index)
+		cID.loading_alpha_lerp = 0.4
 	} else {
 		cID.xtarget = xst
 		cID.ytarget = yst// + off_screen_xoff
 		cID.loading_alpha_target = 0
+		cID.loading_alpha = 0
+		cID.loading_alpha_lerp = 1
 	}
+	challenge_manager.challenge_index++
     printf("placing challenge @ "+string(cID.x)+", "+string(cID.y))
     xst += global.challenge_slot_width+global.challenge_grid_sep
     if xst >= grid_left+global.challenge_grid_widths[challenge_grid_index]*(global.challenge_grid_sep+global.challenge_slot_width)

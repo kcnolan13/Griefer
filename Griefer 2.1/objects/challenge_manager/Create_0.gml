@@ -176,6 +176,7 @@ double_spree_needed = 2
 //frag prop
 frag_kills_needed = 2   //simultaneously
 
-populate_challenges()
-populate_progression_challenges()
+challenge_index = 0
 
+populate_progression_challenges()
+populate_challenges()

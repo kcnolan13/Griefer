@@ -118,7 +118,9 @@ if menmode() = "challenges"
     {
         if room = rm_menu or room = rm_lobby
         {
-            draw_mod_notification(x+72-global.moffset,y+global.moffset,icon)
+            if loading_alpha > 0.9 {
+                draw_mod_notification(x+72-global.moffset,y+global.moffset,icon)
+            }
         }
     }
     

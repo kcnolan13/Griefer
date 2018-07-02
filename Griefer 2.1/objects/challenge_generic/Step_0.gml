@@ -215,8 +215,12 @@ if ytarget != y
 	if abs(y - ytarget) < 0.1
 		y = ytarget
 }
-if loading_alpha != loading_alpha_target {
+if loading_alpha != loading_alpha_target and loading_alpha_lerp_delay < 1 {
 	loading_alpha = lerp_real(loading_alpha, loading_alpha_target, loading_alpha_lerp)	
+}
+
+if loading_alpha_lerp_delay > 0 {
+	loading_alpha_lerp_delay --
 }
 
 if not in_match() and menmode() == "challenges" {

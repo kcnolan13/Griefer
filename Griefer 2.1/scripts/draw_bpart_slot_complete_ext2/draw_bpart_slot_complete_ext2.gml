@@ -28,18 +28,20 @@ else
         var dalph = 1
         if object_index = xp_bar or object_index = action_word
             dalph = bpart_alpha
+		//if object_index == challenge_generic
+		//	dalph = loading_alpha
             
         if bpart_obj.object_index = challenge_generic and surface_exists(bpart_obj.surf_slot) and (bpart_obj.completed or bpart_obj.draw_ignore_incomplete)
         {
+			draw_set_alpha(loading_alpha)
             draw_enable_alphablend(false)
             draw_surface_ext(bpart_obj.surf_slot,bpart_x,bpart_y,scale/2,scale/2,0,c_white,loading_alpha)  
-			draw_set_alpha(loading_alpha)
             for (var i=0; i<2; i ++)
             {
                 draw_rectangle(bpart_x-1+i,bpart_y-1+i,bpart_x+net_manager.armory_sl*scale+1-i,bpart_y+net_manager.armory_sl*scale+1-i,true)
             }
-			draw_set_alpha(1)
             draw_enable_alphablend(true)
+			draw_set_alpha(1)
         }
         else
         {

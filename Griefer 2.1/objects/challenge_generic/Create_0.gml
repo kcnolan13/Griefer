@@ -94,4 +94,5 @@ xtarget = x
 ytarget = y
 loading_alpha_target = 0
 loading_alpha = txt_alpha
-loading_alpha_lerp = 0.05
+loading_alpha_lerp = 0.5
+loading_alpha_lerp_delay = 0
