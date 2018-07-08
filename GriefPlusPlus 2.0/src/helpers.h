@@ -18,15 +18,14 @@
 #include <iostream>
 #include <condition_variable>
 #include <deque>
+# include <tchar.h>
 
 #define GENVAL_DNULL -9999
 
 #if defined(_WIN32)
 # define WIN32_LEAN_AND_MEAN
-#define GMEXPORT extern "C" __declspec ( dllexport )
+# define GMEXPORT extern "C" __declspec ( dllexport )
 # include <windows.h>
-# include <stdio.h>
-# include <tchar.h>
 #else
 # define GMEXPORT extern "C"
 #endif

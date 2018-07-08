@@ -11,7 +11,6 @@
 #include "receivers.h"
 #include <string>
 #include <functional>
-#include <windows.h>
 #include <thread>
 #include <mutex>
 #include <string>
@@ -20,6 +19,10 @@
 #include <iostream>
 #include <condition_variable>
 #include <deque>
+
+#if defined(_WIN32)
+#include <windows.h>
+#endif
 
 void pkgOrSend(string emitString, string msgJSON);
 

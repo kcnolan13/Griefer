@@ -2,5 +2,7 @@
 *.log
 *.au
 *.aup
+GriefPlusPlus 2.0/GriefPlusPlus/Debug
+GriefPlusPlus 2.0/GriefPlusPlus/Release
 GriefPlusPlus 2.0/GriefPlusPlus/.vs
 Docs/yoyo*

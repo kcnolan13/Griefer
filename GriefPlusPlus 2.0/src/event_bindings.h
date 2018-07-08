@@ -12,7 +12,6 @@
 #include "gm_transmitters.h"
 #include <string>
 #include <functional>
-#include <windows.h>
 #include <thread>
 #include <mutex>
 #include <string>
@@ -20,6 +19,10 @@
 #include <stdio.h>
 #include <iostream>
 #include <condition_variable>
+
+#if defined(_WIN32)
+#include <windows.h>
+#endif
 
 //---- GLOBALS ----//
 using namespace sio;
