@@ -3,6 +3,7 @@ show_cout = false
 cout_str = ""
 cout_maxchars = 2000
 control_tips = noone
+bot_diff_ind = -1
 
 grieferURL = string_copy(working_directory,0,string_pos("AppData",working_directory)) + "ppData\\Local\\Griefer\\"
 launcherURL = string_copy(working_directory,0,string_pos("AppData",working_directory)) + "ppData\\Local\\GrieferLauncher\\"

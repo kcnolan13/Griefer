@@ -1,12 +1,18 @@
 /// @description create all sorts of modals
 
-if net_manager.menu_mode == "lobby" and not instance_exists(modal_bot_diff)
+if net_manager.menu_mode == "lobby" and net_manager.bot_match and not instance_exists(modal_bot_diff)
 {
 	var left = 32
 	var top = 114
 	var width = 96
 	var height = 96
 	var bot_lvl = net_manager.bot_diff_ind
+	
+	if (bot_lvl < 0)
+	{
+		printf("ERROR: net_manager.bot_diff_ind < 0");
+		return false;
+	}
 	
 	ID = instance_create(left,top,modal_bot_diff)
 	ID.width = width
@@ -47,7 +53,7 @@ if net_manager.menu_mode == "lobby" and not instance_exists(modal_bot_diff)
 	//ID.header_text = global.bot_diff_subtitles[bot_lvl]
 }
 
-if net_manager.menu_mode = "play" and not instance_exists(bn_play_modal) and not instance_exists(bn_choose_difficulty) and not instance_exists(bn_start_matchmaking) and net_manager.room_counter > 30*1.5
+if net_manager.menu_mode == "play" and not instance_exists(bn_play_modal) and not instance_exists(bn_choose_difficulty) and not instance_exists(bn_start_matchmaking) and net_manager.room_counter > 30*1.5
 {
 	//printf("::: creating bn_play_modals .... instance_exists(bn_choose_difficulty) = "+string(instance_exists(bn_choose_difficulty)))
     hspacer = 128
@@ -93,7 +99,7 @@ if net_manager.menu_mode = "play" and not instance_exists(bn_play_modal) and not
     //ID.image_valign = fa_center
 }
 
-if net_manager.menu_mode = "play"
+if net_manager.menu_mode == "play"
     play_counter ++
 
 if net_manager.menu_mode != "play" and (instance_exists(bn_play_modal) or instance_exists(bn_start_matchmaking) or instance_exists(bn_choose_difficulty))
@@ -181,7 +187,7 @@ if net_manager.menu_mode != "lottery_steal" and not instance_exists(bn_tab) and 
         ID.height = height
         ID.birth_delay = birth_delay
         
-        if i=6
+        if i==6
         {
             val = 235
             sat = 0
@@ -219,7 +225,7 @@ if net_manager.menu_mode != "lottery_steal" and not instance_exists(bn_tab) and 
     }
 }
 
-if net_manager.menu_mode = "lottery_steal" and instance_exists(bn_tab)
+if net_manager.menu_mode == "lottery_steal" and instance_exists(bn_tab)
 {
     for (var i=0; i<instance_number(bn_tab); i++)
     {
@@ -231,7 +237,7 @@ if net_manager.menu_mode = "lottery_steal" and instance_exists(bn_tab)
 }
 
 ///create randomize modal and post-match modal
-if net_manager.menu_mode = "armory" and not instance_exists(bn_randomize)
+if net_manager.menu_mode == "armory" and not instance_exists(bn_randomize)
 {
     tab = bn_randomize
     
@@ -260,7 +266,7 @@ if net_manager.menu_mode = "armory" and not instance_exists(bn_randomize)
 }
 
 ///create import all
-if net_manager.menu_mode = "armory" and not instance_exists(bn_import_all)
+if net_manager.menu_mode == "armory" and not instance_exists(bn_import_all)
 {
     tab = bn_import_all
     
@@ -295,7 +301,7 @@ if net_manager.menu_mode = "armory" and not instance_exists(bn_import_all)
 	ID.tooltip_width = 96
 }
 
-if net_manager.menu_mode = "armory" and ds_list_size(global.cache) < 1 and instance_exists(bn_import_all)
+if net_manager.menu_mode == "armory" and ds_list_size(global.cache) < 1 and instance_exists(bn_import_all)
 {
 	with bn_import_all {
 		alpha = 0
@@ -315,7 +321,7 @@ if net_manager.menu_mode != "armory" and instance_exists(bn_import_all)
 
 /*
 
-if room = rm_lobby and net_manager.menu_mode = "lobby"  and net_manager.came_from_match and not instance_exists(bn_postmatch) and instance_exists(bn_settings)
+if room = rm_lobby and net_manager.menu_mode == "lobby"  and net_manager.came_from_match and not instance_exists(bn_postmatch) and instance_exists(bn_settings)
 {
     if bn_settings.popped_in
     {
@@ -362,12 +368,12 @@ timer --
 if clicked
 clicked --
 
-if room = rm_menu
+if room == rm_menu
     label = txt_menu
 else
     label = txt_lobby
 
-if label = txt_menu
+if label == txt_menu
 {
     if net_manager.menu_mode = "play"
         active = true
@@ -379,7 +385,7 @@ if label = txt_menu
     }
 }
 
-if net_manager.menu_mode = "lottery_steal"
+if net_manager.menu_mode == "lottery_steal"
 {
     visible = false
 } else visible = true
@@ -399,7 +405,7 @@ if notif_pauser
     notif_pauser --
     if not notif_pauser
     {
-        if notif_target = notif_scale_min
+        if notif_target == notif_scale_min
             notif_target = notif_scale_max
         else
             notif_target = notif_scale_min
