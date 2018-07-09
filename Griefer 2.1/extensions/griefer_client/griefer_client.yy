@@ -9,7 +9,7 @@
     "androidPermissions": [
         
     ],
-    "androidProps": true,
+    "androidProps": false,
     "androidactivityinject": "",
     "androidclassname": "",
     "androidinject": "",
@@ -17,7 +17,7 @@
     "androidsourcedir": "",
     "author": "",
     "classname": "",
-    "copyToTargets": -1,
+    "copyToTargets": 66,
     "date": "2018-49-27 11:02:54",
     "description": "",
     "extensionName": "",
@@ -27,12 +27,18 @@
             "modelName": "GMExtensionFile",
             "mvc": "1.0",
             "ProxyFiles": [
-                
+                {
+                    "id": "7548272e-f095-4584-b09c-10ab8edc3e1f",
+                    "modelName": "GMProxyFile",
+                    "mvc": "1.0",
+                    "TargetMask": 1,
+                    "proxyName": "GriefPlusPlus.dylib"
+                }
             ],
             "constants": [
                 
             ],
-            "copyToTargets": 17593040736494,
+            "copyToTargets": 66,
             "filename": "GriefPlusPlus.dll",
             "final": "",
             "functions": [
@@ -1008,7 +1014,7 @@
             "constants": [
                 
             ],
-            "copyToTargets": 9223372036854775807,
+            "copyToTargets": 64,
             "filename": "msvcp120.dll",
             "final": "",
             "functions": [
@@ -1032,7 +1038,7 @@
             "constants": [
                 
             ],
-            "copyToTargets": 9223372036854775807,
+            "copyToTargets": 64,
             "filename": "msvcr120.dll",
             "final": "",
             "functions": [
@@ -1050,7 +1056,7 @@
     "gradleinject": "",
     "helpfile": "",
     "installdir": "",
-    "iosProps": true,
+    "iosProps": false,
     "iosSystemFrameworkEntries": [
         
     ],
