@@ -56,10 +56,17 @@ void console(string output)
 		cout << output << endl;
 }
 
-void popup( string output)
-{
-	::MessageBoxA(NULL, output.c_str(), "GriefPlusPlus", MB_ICONINFORMATION);
-}
+#if defined(_WIN32)
+	void popup( string output)
+	{
+		::MessageBoxA(NULL, output.c_str(), "GriefPlusPlus", MB_ICONINFORMATION);
+	}
+#else
+	void popup( string output)
+	{
+		console(output);
+	}
+#endif
 
 string dubString(double val)
 {
