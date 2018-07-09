@@ -6,7 +6,7 @@
 #include "./src/gm_transmitters.h"
 #include "./src/helpers.h"
 //#include "./src/updater.cpp"
-
+#include <boost/algorithm/string/replace.hpp>
 #include <functional>
 #include <iostream>
 #include <thread>
@@ -14,9 +14,12 @@
 #include <condition_variable>
 #include <string>
 #include <stdlib.h>
-#include <windows.h>
 #include <deque>
-#include <boost/algorithm/string/replace.hpp>
+
+#if defined(_WIN32)
+# include <windows.h>
+#endif
+
 
 string working_directory = "";
 
@@ -97,109 +100,114 @@ GMEXPORT const char * getGreeting() {
 	return retString.c_str();
 }
 
-string ExePath() {
-	wchar_t buffer[MAX_PATH];
-	GetModuleFileName(NULL, buffer, MAX_PATH);
-	wstring ws(buffer);
-	string ret(ws.begin(), ws.end());
-
-	/*size_t found = ret.find("AppData");
-	ret = ret.substr(0, found + 7);*/
-
-	return ret;
-}
-
-GMEXPORT const char *getExecPath() {
-	return ExePath().c_str();
-}
-
 GMEXPORT const double setWorkingDir(char *wdir) {
 	working_directory = string(wdir);
 	console("::: set working directory: " + working_directory);
 	return 0;
 }
 
-GMEXPORT const double updateGame(char *dir_newgame) {
-	string exepath = ExePath();
-	size_t found = exepath.find_last_of("\\");
-	exepath = exepath.substr(0, found+1) + "Griefer.exe";
+#if defined(_WIN32)
+	string ExePath() {
+		wchar_t buffer[MAX_PATH];
+		GetModuleFileName(NULL, buffer, MAX_PATH);
+		wstring ws(buffer);
+		string ret(ws.begin(), ws.end());
 
-	boost::replace_all(exepath, "\\", "/");
-	const char *savepath = exepath.c_str();
+		/*size_t found = ret.find("AppData");
+		ret = ret.substr(0, found + 7);*/
 
-	console("::: working_dir = " + string(savepath));
-	console("::: received dir_newgame = " + string(dir_newgame));
-
-	wchar_t wsavepath[250];
-	wchar_t wdownloadpath[250];
-	mbstowcs(wdownloadpath, dir_newgame, strlen(dir_newgame) + 1);
-	mbstowcs(wsavepath, savepath, strlen(savepath) + 1);
-	bool success = true;
-
-	//MessageBox(NULL, L"SavePath", wsavepath, NULL);
-
-	if (MoveFileEx(L"Griefer.exe", L"Deprecated/Griefer_old.exe", MOVEFILE_REPLACE_EXISTING)) {
-		console("::: current Griefer.exe renamed to Deprecated/Griefer_old.exe");
+		return ret;
 	}
 
-	if (MoveFileEx(wdownloadpath, wsavepath, MOVEFILE_REPLACE_EXISTING)) {
-		console("::: new Griefer.exe copied to Griefer.exe");
-	}
-	else {
-		success = false;
+	GMEXPORT const char *getExecPath() {
+		return ExePath().c_str();
 	}
 
-	if (success) {
-		console("::: FILES COPIED. GAME UPDATE COMPLETE");
-	}
-	else {
-		console("::: UPDATE FAILED.");
-	}
 
-	return 0;
-}
 
-GMEXPORT const double launchGame(char *gUrl) {
-	wchar_t wgamePath[500];
-	mbstowcs(wgamePath, gUrl, strlen(gUrl) + 1);
+	GMEXPORT const double updateGame(char *dir_newgame) {
+		string exepath = ExePath();
+		size_t found = exepath.find_last_of("\\");
+		exepath = exepath.substr(0, found+1) + "Griefer.exe";
 
-	// additional information
-	STARTUPINFO si;
-	PROCESS_INFORMATION pi;
+		boost::replace_all(exepath, "\\", "/");
+		const char *savepath = exepath.c_str();
 
-	// set the size of the structures
-	ZeroMemory(&si, sizeof(si));
-	si.cb = sizeof(si);
-	ZeroMemory(&pi, sizeof(pi));
+		console("::: working_dir = " + string(savepath));
+		console("::: received dir_newgame = " + string(dir_newgame));
 
-	// start the program up
-	CreateProcess(wgamePath,   // the path
-		NULL,			// Command line
-		NULL,           // Process handle not inheritable
-		NULL,           // Thread handle not inheritable
-		FALSE,          // Set handle inheritance to FALSE
-		0,              // No creation flags
-		NULL,           // Use parent's environment block
-		NULL,           // Use parent's starting directory 
-		&si,            // Pointer to STARTUPINFO structure
-		&pi);           // Pointer to PROCESS_INFORMATION structure
+		wchar_t wsavepath[250];
+		wchar_t wdownloadpath[250];
+		mbstowcs(wdownloadpath, dir_newgame, strlen(dir_newgame) + 1);
+		mbstowcs(wsavepath, savepath, strlen(savepath) + 1);
+		bool success = true;
 
-	// Close process and thread handles. 
-	CloseHandle(pi.hProcess);
-	CloseHandle(pi.hThread);
-	return 0;
-}
+		//MessageBox(NULL, L"SavePath", wsavepath, NULL);
 
-GMEXPORT const double moveFile(char *file1, char *file2) {
-	wchar_t fpath1[500];
-	wchar_t fpath2[500];
-	mbstowcs(fpath1, file1, strlen(file1) + 1);
-	mbstowcs(fpath2, file2, strlen(file2) + 1);
+		if (MoveFileEx(L"Griefer.exe", L"Deprecated/Griefer_old.exe", MOVEFILE_REPLACE_EXISTING)) {
+			console("::: current Griefer.exe renamed to Deprecated/Griefer_old.exe");
+		}
 
-	if (MoveFileEx(fpath1, fpath2, MOVEFILE_REPLACE_EXISTING)) {
-		console("::: FILE MOVED: "+string(file1)+" --> "+string(file2));
-		return 1;
+		if (MoveFileEx(wdownloadpath, wsavepath, MOVEFILE_REPLACE_EXISTING)) {
+			console("::: new Griefer.exe copied to Griefer.exe");
+		}
+		else {
+			success = false;
+		}
+
+		if (success) {
+			console("::: FILES COPIED. GAME UPDATE COMPLETE");
+		}
+		else {
+			console("::: UPDATE FAILED.");
+		}
+
+		return 0;
 	}
 
-	return 0;
-}
+	GMEXPORT const double launchGame(char *gUrl) {
+		wchar_t wgamePath[500];
+		mbstowcs(wgamePath, gUrl, strlen(gUrl) + 1);
+
+		// additional information
+		STARTUPINFO si;
+		PROCESS_INFORMATION pi;
+
+		// set the size of the structures
+		ZeroMemory(&si, sizeof(si));
+		si.cb = sizeof(si);
+		ZeroMemory(&pi, sizeof(pi));
+
+		// start the program up
+		CreateProcess(wgamePath,   // the path
+			NULL,			// Command line
+			NULL,           // Process handle not inheritable
+			NULL,           // Thread handle not inheritable
+			FALSE,          // Set handle inheritance to FALSE
+			0,              // No creation flags
+			NULL,           // Use parent's environment block
+			NULL,           // Use parent's starting directory 
+			&si,            // Pointer to STARTUPINFO structure
+			&pi);           // Pointer to PROCESS_INFORMATION structure
+
+		// Close process and thread handles. 
+		CloseHandle(pi.hProcess);
+		CloseHandle(pi.hThread);
+		return 0;
+	}
+
+	GMEXPORT const double moveFile(char *file1, char *file2) {
+		wchar_t fpath1[500];
+		wchar_t fpath2[500];
+		mbstowcs(fpath1, file1, strlen(file1) + 1);
+		mbstowcs(fpath2, file2, strlen(file2) + 1);
+
+		if (MoveFileEx(fpath1, fpath2, MOVEFILE_REPLACE_EXISTING)) {
+			console("::: FILE MOVED: "+string(file1)+" --> "+string(file2));
+			return 1;
+		}
+
+		return 0;
+	}
+
+#endif

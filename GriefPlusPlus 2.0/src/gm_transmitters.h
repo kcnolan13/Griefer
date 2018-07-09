@@ -21,7 +21,7 @@
 #include <deque>
 
 #if defined(_WIN32)
-#include <windows.h>
+# include <windows.h>
 #endif
 
 void pkgOrSend(string emitString, string msgJSON);

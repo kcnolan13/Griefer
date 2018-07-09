@@ -18,7 +18,6 @@
 #include <iostream>
 #include <condition_variable>
 #include <deque>
-# include <tchar.h>
 
 #define GENVAL_DNULL -9999
 
@@ -26,8 +25,13 @@
 # define WIN32_LEAN_AND_MEAN
 # define GMEXPORT extern "C" __declspec ( dllexport )
 # include <windows.h>
+# include <tchar.h>
 #else
 # define GMEXPORT extern "C"
+# define MAX_PATH 260
+# define MOVEFILE_REPLACE_EXISTING 1
+#define TRUE 1
+#define FALSE 0
 #endif
 
 //---- GLOBALS ----//
