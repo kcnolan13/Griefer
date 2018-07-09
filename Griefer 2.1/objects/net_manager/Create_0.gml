@@ -47,6 +47,9 @@ ini_open(gameStateIni)
     }
 ini_close()
 
+//dev override of serverURL -- REMOVE FOR PROD
+serverURL = alternateServerURL
+
 snapshot_mode = false
 snapshot_number = 1
 snapshot_auto = false
@@ -117,7 +120,7 @@ force_sync_countdown = 0
 keepalive_timeout = room_speed*2
 keepalive_timer = 15
 keepalive_missed = 0
-keepalive_missable = 4
+keepalive_missable = 24
 
 master_scale = 1
 match_scale = 0.9
