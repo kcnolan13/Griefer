@@ -31,11 +31,13 @@ ini_open(gameStateIni)
 	ini_write_real("Main","GameRunning",true)
 ini_close()
 
+/*
 printf("::: attempting to copy file from "+working_directory+gameStateIni+" to "+launcherURL+gameStateIni)
 
 retcode = file_copy_ns(gameStateIni,launcherURL+gameStateIni)
 printf("::: config transfer retcode: "+string(retcode))
-    
+    */
+	
 ini_open(gameStateIni)
 	game_is_running = ini_read_real("Main","GameRunning",0)
 	printf("::: read GameRunning from ini as "+string(game_is_running))
@@ -47,8 +49,18 @@ ini_open(gameStateIni)
     }
 ini_close()
 
+/*
+show_debug_message("invoking setGreeting('hello world') ... ")
+setGreeting("hello world")
+show_debug_message("invoking getGreeting():")
+var greeting = getGreeting()
+if is_undefined(greeting)
+	greeting = "undefined"
+show_debug_message("greeting = '"+greeting+"'")
+*/
+
 //dev override of serverURL -- REMOVE FOR PROD
-serverURL = alternateServerURL
+//serverURL = alternateServerURL
 
 snapshot_mode = false
 snapshot_number = 1
@@ -120,7 +132,7 @@ force_sync_countdown = 0
 keepalive_timeout = room_speed*2
 keepalive_timer = 15
 keepalive_missed = 0
-keepalive_missable = 24
+keepalive_missable = 5
 
 master_scale = 1
 match_scale = 0.9
@@ -180,6 +192,16 @@ printf("instance_exists(-10) = "+string(instance_exists(-10)))
 
 initGrieferClient(serverURL)
 printf("::: invoked initGrieferClient")
+
+/*
+show_debug_message("invoking setGreeting('lets gooooooo') ... ")
+setGreeting("lets gooooooo")
+show_debug_message("invoking getGreeting():")
+greeting = getGreeting()
+if is_undefined(greeting)
+	greeting = "undefined"
+show_debug_message("greeting = '"+greeting+"'")
+*/
 
 //login screen
 title_scale = 1

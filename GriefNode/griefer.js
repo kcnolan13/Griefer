@@ -207,9 +207,9 @@ if (cluster.isMaster)
   setInterval(cupid.makeMatches,5000);
   setInterval(cupid.syncVersionHash,30000);
 
-  dbman.connect(conn, function() {
+  /*dbman.connect(conn, function() {
     //dbman.initBotAccolades("Kyle",5000);
-  });
+  });*/
 
 }
 

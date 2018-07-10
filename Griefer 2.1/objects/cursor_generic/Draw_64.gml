@@ -4,7 +4,6 @@ if active and in_match() and not match_starting() and not match_ending() and not
     var draw_x = (cursor.x-__view_get( e__VW.XView, 0 ))*WVIEW/__view_get( e__VW.WView, 0 )
     var draw_y = (cursor.y-__view_get( e__VW.YView, 0 ))*HVIEW/__view_get( e__VW.HView, 0 )
     
-    depth = -999999999
     if core_active
     {
         draw_set_color(core_color)

@@ -19,7 +19,7 @@
     "androidPermissions": [
         
     ],
-    "androidProps": true,
+    "androidProps": false,
     "androidactivityinject": "",
     "androidclassname": "",
     "androidinject": "",
@@ -27,7 +27,7 @@
     "androidsourcedir": "",
     "author": "",
     "classname": "",
-    "copyToTargets": 113497714299118,
+    "copyToTargets": 64,
     "date": "2018-15-28 04:02:50",
     "description": "",
     "extensionName": "",
@@ -42,7 +42,7 @@
             "constants": [
                 
             ],
-            "copyToTargets": 113497714299118,
+            "copyToTargets": 64,
             "filename": "nsfs.dll",
             "final": "",
             "functions": [
@@ -623,7 +623,7 @@
                     "value": "global.g_nsfs_is_available"
                 }
             ],
-            "copyToTargets": 113497714299118,
+            "copyToTargets": 64,
             "filename": "nsfs.gml",
             "final": "",
             "functions": [
@@ -707,7 +707,7 @@
     "gradleinject": "",
     "helpfile": "",
     "installdir": "",
-    "iosProps": true,
+    "iosProps": false,
     "iosSystemFrameworkEntries": [
         
     ],
