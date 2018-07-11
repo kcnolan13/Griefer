@@ -24,7 +24,7 @@ if underscore_pos < 1 {
 	return false
 }
 
-var source_name = string_copy(string(bpart_string),min(string_length(bpart_string)-1,underscore_pos),max(0,string_length(bpart_string)-underscore_pos))
+var source_name = string_copy(string(bpart_string),min(string_length(bpart_string)-1,underscore_pos+1),max(0,string_length(bpart_string)-underscore_pos))
 
 if SUPER_DEBUG
     printf("extracted bpart source: "+source_name)

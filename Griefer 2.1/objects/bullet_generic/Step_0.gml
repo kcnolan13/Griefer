@@ -1,4 +1,5 @@
 /// @description jump to net x y and transform
+depth = -96
 
 image_angle = varRead("direction")
 counter ++

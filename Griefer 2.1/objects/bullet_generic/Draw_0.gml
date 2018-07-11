@@ -1,7 +1,6 @@
 /// @description draw sprite + direction + trajectory (maybe)
 /// @function draw sprite + direction + trajectory 
 /// @param maybe
-depth = -96
 
 if no_from_player
 {

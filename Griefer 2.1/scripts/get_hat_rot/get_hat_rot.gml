@@ -2,7 +2,12 @@
 /// @function get_hat_rot
 /// @param spr_helmet
 var spr_helmet = argument0
-return global.hat_offsets[spr_helmet,2]
+if spr_helmet > 0 {
+	return global.hat_offsets[spr_helmet,2]
+} else {
+	printf("ERROR: get_hat_rot requested index"+string(spr_helmet))
+	return 0
+}
 /*
 var hat_yoff = 0
 

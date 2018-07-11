@@ -28,7 +28,7 @@
             "mvc": "1.0",
             "ProxyFiles": [
                 {
-                    "id": "7548272e-f095-4584-b09c-10ab8edc3e1f",
+                    "id": "c314de0d-6ffa-4f00-b7dc-83f068836dd3",
                     "modelName": "GMProxyFile",
                     "mvc": "1.0",
                     "TargetMask": 1,
@@ -938,6 +938,36 @@
                     "kind": 12,
                     "name": "launchGame",
                     "returnType": 2
+                },
+                {
+                    "id": "cf90e9b1-7132-496e-ba47-ec0b3b3c715d",
+                    "modelName": "GMExtensionFunction",
+                    "mvc": "1.0",
+                    "argCount": 0,
+                    "args": [
+                        1
+                    ],
+                    "externalName": "setGreeting",
+                    "help": "",
+                    "hidden": false,
+                    "kind": 1,
+                    "name": "setGreeting",
+                    "returnType": 2
+                },
+                {
+                    "id": "69b2f8b6-f7aa-4908-957a-6ffc86c1d131",
+                    "modelName": "GMExtensionFunction",
+                    "mvc": "1.0",
+                    "argCount": 0,
+                    "args": [
+                        
+                    ],
+                    "externalName": "getGreeting",
+                    "help": "",
+                    "hidden": false,
+                    "kind": 1,
+                    "name": "getGreeting",
+                    "returnType": 1
                 }
             ],
             "init": "",
@@ -999,7 +1029,9 @@
                 "cf6aefc1-7b0d-4ca9-9a7d-365643c08621",
                 "f1b19997-cb7f-4668-926d-2645c59fbbe3",
                 "4b2bf5fe-2ec6-4bb8-b324-b2ba88410ffc",
-                "9466732a-1648-4137-8d49-13213a2b1a7e"
+                "9466732a-1648-4137-8d49-13213a2b1a7e",
+                "cf90e9b1-7132-496e-ba47-ec0b3b3c715d",
+                "69b2f8b6-f7aa-4908-957a-6ffc86c1d131"
             ],
             "origname": "extensions\\GriefPlusPlus.dll",
             "uncompress": false
