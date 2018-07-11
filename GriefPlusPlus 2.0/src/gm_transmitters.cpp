@@ -59,12 +59,12 @@ GMEXPORT const double pkgCreate()
 	if (bigPkg != NULL)
 	{
 		console("ERROR: PKG CREATE: pkg already exists");
-		return 0;
 	}
 	else {
 		//console("creating pkg!");
 		bigPkg = new pkg();
 	}
+	return 0;
 	_lock.unlock();
 }
 GMEXPORT const double pkgSend()

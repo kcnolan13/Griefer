@@ -107,6 +107,7 @@ GMEXPORT const double setWorkingDir(char *wdir) {
 }
 
 #if defined(_WIN32)
+
 	string ExePath() {
 		wchar_t buffer[MAX_PATH];
 		GetModuleFileName(NULL, buffer, MAX_PATH);
@@ -122,8 +123,6 @@ GMEXPORT const double setWorkingDir(char *wdir) {
 	GMEXPORT const char *getExecPath() {
 		return ExePath().c_str();
 	}
-
-
 
 	GMEXPORT const double updateGame(char *dir_newgame) {
 		string exepath = ExePath();
@@ -207,6 +206,14 @@ GMEXPORT const double setWorkingDir(char *wdir) {
 			return 1;
 		}
 
+		return 0;
+	}
+
+#else
+
+	GMEXPORT const double launchGame(char *gUrl) {
+		string command = "open -n " + string(gUrl);
+		system(command.c_str());
 		return 0;
 	}
 
