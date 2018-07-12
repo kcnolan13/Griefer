@@ -211,6 +211,12 @@ GMEXPORT const double setWorkingDir(char *wdir) {
 
 #else
 
+	GMEXPORT const double unzipGame(char *zUrl) {
+		string command = "unzip " + string(zUrl);
+		system(command.c_str());
+		return 0;
+	}
+
 	GMEXPORT const double launchGame(char *gUrl) {
 		string command = "open -n " + string(gUrl);
 		system(command.c_str());
@@ -218,3 +224,9 @@ GMEXPORT const double setWorkingDir(char *wdir) {
 	}
 
 #endif
+
+GMEXPORT const double execSystemCmd(char *cmd) {
+		string command = string(cmd);
+		system(command.c_str());
+		return 0;
+	}
